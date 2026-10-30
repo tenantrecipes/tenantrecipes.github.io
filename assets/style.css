@@ -573,3 +573,10 @@ header.sh:focus{outline:none}
 .btt svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 @media (prefers-reduced-motion:reduce){.btt{transition:none}}
 @media print{.btt{display:none!important}}
+
+/* Meta line separators: dot sits BEFORE each item and is clipped at the start of every wrapped line, so no line ends or starts with a stray "·" */
+.vw-r2{margin-left:-18px;clip-path:inset(-4px -4px -4px 18px)}
+.vw-r2>*:not(:last-child)::after{content:none}
+.vw-r2>*{position:relative;padding-left:18px}
+.vw-r2>*::before{content:"·";position:absolute;left:5px;color:#aab}
+@media (max-width:560px){.vw-r2{margin-left:0;clip-path:none}.vw-r2>*{padding-left:0}.vw-r2>*::before{display:none}}

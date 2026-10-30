@@ -1,12 +1,12 @@
 {
- "acceptable-use-policy": "abcf4b23f1b47be9",
- "access-management-policy": "bbfe89cb328108f6",
- "ai-copilot-use-policy": "4dcf4f4627716460",
- "backup-recovery-policy": "65b960a342b2f17b",
- "byod-mobile-device-policy": "eee75ce5abbf54f8",
- "incident-response-policy": "04ff5f35d9fa5541",
- "information-classification-policy": "1b1d8e7ba57ac456",
- "password-mfa-policy": "d28a645a7e87a644",
- "patch-management-policy": "761ca5a233183e34",
- "third-party-security-policy": "495c3fd22afa6f2e"
+ "acceptable-use-policy": "83264b5c893db6b6",
+ "access-management-policy": "3fdb9d6d49915c0e",
+ "ai-copilot-use-policy": "8f6b9033aef47d58",
+ "backup-recovery-policy": "ce320595bf93ac36",
+ "byod-mobile-device-policy": "1d94aca8d0897bd9",
+ "incident-response-policy": "552740980486ecde",
+ "information-classification-policy": "955288414947e755",
+ "password-mfa-policy": "966df278866ee114",
+ "patch-management-policy": "bfa73af87ba64322",
+ "third-party-security-policy": "8d6603766092c401"
 }

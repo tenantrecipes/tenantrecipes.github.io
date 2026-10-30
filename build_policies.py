@@ -11,7 +11,7 @@ import build_trust as T
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC = ROOT / "data" / "policies"
 OUT = ROOT / "downloads" / "policies"
-GEN_VERSION = "1"
+GEN_VERSION = "4"
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 PH = re.compile(r"\{\{([A-Z_]+)\}\}")
 COMMON_PH = {
@@ -159,15 +159,34 @@ def to_docx(e, path):
         return p
     d.add_heading(e["title"], 0)
     n = para(NOTICE, bold=True); n.runs[0].font.color.rgb = RGBColor(0x9A, 0x34, 0x12)
-    t = d.add_table(rows=0, cols=2); t.style = "Light Grid Accent 1"
+    from docx.shared import Cm
+    from docx.oxml.ns import qn
+    from docx.oxml import OxmlElement
+    t = d.add_table(rows=0, cols=2); t.style = "Light Grid Accent 1"; t.autofit = False
+    W = (Cm(4.2), Cm(11.8))  # fixed label/value columns (A4 text width ~16 cm)
     for k, v in [("Purpose", e["purpose"]), ("Audience", e["audience"]), ("Review cadence", e["review"]), ("Policy owner", "{{OWNER}}"),
                  ("Approved by", "{{APPROVER}}"), ("Effective date", "{{EFFECTIVE_DATE}}"), ("Next review", "{{REVIEW_DATE}}")]:
         c = t.add_row().cells; c[0].text = k
+        for cell, w in zip(c, W):
+            cell.width = w
         c[1].paragraphs[0].text = ""
         for i, part in enumerate(PH.split(v)):
             r = c[1].paragraphs[0].add_run("{{" + part + "}}" if i % 2 else part)
             if i % 2:
                 r.font.highlight_color = WD_COLOR_INDEX.YELLOW
+    grid = t._tbl.tblGrid
+    for gc, w in zip(grid.findall(qn("w:gridCol")), W):
+        gc.set(qn("w:w"), str(int(w.twips)))
+    tp = t._tbl.tblPr
+    lay = OxmlElement("w:tblLayout"); lay.set(qn("w:type"), "fixed"); tp.append(lay)
+    look = tp.find(qn("w:tblLook"))
+    if look is None:
+        look = OxmlElement("w:tblLook"); tp.append(look)
+    look.set(qn("w:firstRow"), "0"); look.set(qn("w:val"), "0420")  # no header-row styling: every row is label | value
+    for row in t.rows:
+        row.cells[0].paragraphs[0].runs[0].bold = True
+        for r in row.cells[1].paragraphs[0].runs:
+            r.bold = False
     for i, s in enumerate(e["body"], 1):
         d.add_heading(f"{i}. {s['h']}", 1)
         for p in s.get("p", []):

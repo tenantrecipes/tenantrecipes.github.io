@@ -30,7 +30,7 @@ return{c:concepts,corr:corr,changed:changed,raw:ws}}
 function search(q){if(!IDX)return null;var P=parse(q);if(!P.c.length)return{p:P,r:[]};var n=P.c.length,need=n<=2?n:Math.ceil(n*0.6),qn=norm(q),out=[];
 var best={};QS.forEach(function(x){var ov=0;P.c.forEach(function(c){if(c.alts.some(function(a){return x.q.indexOf(a)>=0}))ov++});if(n>=2&&ov>=Math.max(2,Math.ceil(n*0.6))&&ov/Math.max(1,x.w.length)>=0.5)best[x.u]=(best[x.u]||0)+ov*8});
 DOCS.forEach(function(D){var sc=0,hit=0;P.c.forEach(function(c){var m=0;c.alts.forEach(function(a,i){var f=i===0?1:0.7,v=0;if(D.t.indexOf(a)>=0)v=6;else if(D.strong.indexOf(a)>=0)v=4;else if(D.hay.indexOf(a)>=0)v=1.5;if(D.cve.indexOf(a)>=0)v=20;m=Math.max(m,v*f)});if(m){hit++;sc+=m}});
-if(hit<need)return;if(D.t.indexOf(qn)===0)sc+=8;var b=best[D.d.u];if(b)sc+=30+b;out.push({s:sc,D:D,best:!!b})});
+if(hit<need&&!best[D.d.u])return;if(D.t.indexOf(qn)===0)sc+=8;var b=best[D.d.u];if(b)sc+=30+b;out.push({s:sc,D:D,best:!!b})});
 out.sort(function(a,b){return b.s-a.s||(b.D.d.d||"").localeCompare(a.D.d.d||"")});return{p:P,r:out}}
 function suggest(q,P){var qn=norm(q);if(qn.length<2)return[];var last=P?P.corr:qn,res=[],qw=words(qn),cw=P?words(P.corr):qw;
 SUG.forEach(function(x){var sc=0;if(x.n.indexOf(qn)===0)sc=100-x.n.length/4;else{var sw=x.n.split(/[^a-z0-9\-\.']+/);
@@ -57,7 +57,7 @@ function close(){pop.hidden=true;inp.setAttribute("aria-expanded","false");inp.r
 function go(href){location.href=href}
 function all(){return ROOT+"search/index.html?q="+encodeURIComponent(inp.value.trim())}
 function render(){var q=inp.value.trim();if(!q){close();return}
-load().then(function(){var R=search(q),sugs=suggest(q,R&&R.p),h="",k=0;copyFont();setGhost(sugs);
+load().then(function(){var R=search(q),sugs=suggest(q,R&&R.p),h="",k=0;if(R&&!R.r.length&&sugs.length){var R2=search(sugs[0]);if(R2&&R2.r.length)R=R2}copyFont();setGhost(sugs);
 if(R&&R.p.changed)h+='<p class="sx-fix">Showing results for <strong>'+esc(R.p.corr)+"</strong></p>";
 if(sugs.length){h+='<div class="sx-sec" role="group" aria-label="Suggestions"><p class="sx-h" aria-hidden="true">Suggestions</p>';
 sugs.forEach(function(s){h+='<div class="sx-o sx-sug" role="option" id="'+id+"-"+(k++)+'" data-q="'+esc(s)+'" aria-selected="false"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg><span>'+hl(s,R&&R.p)+"</span></div>"});h+="</div>"}
