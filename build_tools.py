@@ -71,6 +71,22 @@ def cost_badge(e):
     return f'<span class="tl-cost tl-c-{cat_slug(e["cost"])}">{T.esc(e["cost"].capitalize())}</span>'
 
 
+TITLE_USE = {
+    "Active Directory": "Active Directory attack-path testing", "Client hardening": "Windows hardening audits",
+    "Cloud assessment": "cloud security assessment", "Credential access": "authorized credential testing",
+    "Domain & email": "DNS and mail security checks", "External exposure": "external attack-surface checks",
+    "Lateral movement": "lateral movement in authorized tests", "Leaks & threat intel": "breach and leak checks",
+    "M365 & Entra": "Microsoft 365 and Entra ID security testing", "Pivoting": "network pivoting in pentests",
+    "Vulnerability scanning": "vulnerability scanning", "Web apps": "web application testing",
+}
+
+
+def tool_title(e):
+    """'<Tool> for <use>: usage, examples and pitfalls' (category-based, so it stays factual)."""
+    use = TITLE_USE.get(e["category"])
+    return f'{e["name"]} for {use}: usage and pitfalls' if use else f'{e["name"]}: usage, examples and pitfalls'
+
+
 def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME):
     ents = load()
     tools = [e for e in ents if e["kind"] == "tool"]
@@ -149,8 +165,8 @@ def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME):
                     + T.trust_bottom(rel, path, e["name"], e, "Verified against (official sources)") + '</article>'
                     + T.side_nav(rel, toc, rel_items, f'More in {e["category"]}')
                     + '</div>' + signup(rel, "tools-" + e["id"]) + '</main>')
-        title = e["name"] if e["kind"] == "method" else f'{e["name"]}: what it does and how to use it'
-        desc = e["what"] if len(e["what"]) <= 160 else e["what"][:157].rsplit(" ", 1)[0] + "…"
+        title = e["name"] if e["kind"] == "method" else tool_title(e)
+        desc = e["what"]  # page() trims to <=158 chars, preferring a sentence end
         pages.append(page(f'tools/{e["id"]}.html', f'{title} | {SITE_NAME}', desc, body, "article"))
     print(f"Tools section: {len(tools)} tools, {len(methods)} methods, {len(pages)} pages")
     return pages

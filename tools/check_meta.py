@@ -21,6 +21,11 @@ for f in sorted(DIST.rglob("*.html")):
     for tag in ('property="og:title"', 'property="og:description"', 'property="og:image"', 'name="twitter:card"', 'property="og:url"'):
         if tag not in h:
             errs.append(f"{p}: missing {tag}")
+    can = re.search(r'rel="canonical" href="([^"]+)"', h)
+    if SITE and (not can or not can.group(1).startswith(SITE) or can.group(1).endswith("index.html")):
+        errs.append(f"{p}: canonical missing, not absolute on SITE_URL, or ends in index.html")
+    if 'name="robots" content="noindex"' in h and p not in ("search.html", "changelog.html"):
+        errs.append(f"{p}: unexpected noindex")
     img = re.search(r'property="og:image" content="([^"]+)"', h)
     if img and SITE and img.group(1).startswith(SITE) and not (DIST / img.group(1)[len(SITE) + 1:]).exists():
         errs.append(f"{p}: og:image not found: {img.group(1)}")

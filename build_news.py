@@ -133,7 +133,7 @@ def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME, CY):
                     + f'<h2 id="related">Related</h2><ul>{rel_links}</ul>'
                     + T.trust_bottom(rel, path, e["title"], e, "Verified against (official sources)") + '</article>'
                     + T.side_nav(rel, toc, others, "More news") + '</div>' + signup(rel, "news-" + e["id"]) + '</main>')
-        desc = e["summary"] if len(e["summary"]) <= 160 else e["summary"][:157].rsplit(" ", 1)[0] + "…"
+        desc = e["summary"]  # page() trims to <=158 chars, preferring a sentence end
         pages.append(page(e["u"], f'{e["title"]} | {SITE_NAME}', desc, body, "article"))
     print(f"News: {len(its)} items ({sum(1 for e in its if e['kind'] == 'news')} curated, {sum(1 for e in its if e['kind'] == 'vuln')} exploited vulnerabilities), {len(pages)} pages")
     return pages

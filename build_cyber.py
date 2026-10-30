@@ -258,7 +258,9 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                          f'Security area · last verified {fmt_date(last)}', esc(t), esc(b),
                          [("Entries" if k != "cloud" else "Recipes", n), ("Exploited", sum(1 for e in av if e.get("exploited")))])
                     + f'<main class="wrap">{disclaimer()}{body}{signup(rel, "security-" + k)}</main>')
-        pages.append(page(f"security/{k}.html", f"{t} security | {SITE_NAME}", b, area_body))
+        pages.append(page(f"security/{k}.html", f"{t} security: " + ("identity hardening recipes" if k == "cloud" else "exploited CVEs and hardening") + f" | {SITE_NAME}",
+                          ("Entra ID, Conditional Access and Microsoft 365 hardening recipes: exact steps, pitfalls and links to Microsoft Learn." if k == "cloud"
+                           else b + " Exploited CVEs with fixed versions, plus hardening recipes linked to vendor advisories."), area_body))
 
     # ---------- entry pages ----------
     for e in ents:

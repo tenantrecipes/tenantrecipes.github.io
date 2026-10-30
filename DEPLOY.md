@@ -52,3 +52,17 @@ See `README.md` ("Ad slots"). `ADS_ENABLED = False` in `site_config.py` (default
 - Newsletter drafts: `python3 tools/newsletter_draft.py --issue 2 --recipes id1,id2` writes
   `newsletters/drafts/issue-002.md` with teaser links + UTM tags. Drafts are never sent automatically;
   KP approves and sends from Buttondown.
+
+## SEO (technical)
+
+- `robots.txt` (generated) allows everything and points to `https://<SITE_URL>/sitemap.xml`.
+- `sitemap.xml` (generated) lists every indexable page with clean canonical URLs (directory pages end in `/`,
+  not `index.html`) and `<lastmod>` from the page's `updated`/`last_verified` date where one exists.
+  Redirect stubs (`search.html`, `changelog.html`) and `404.html` carry `noindex` and are left out.
+- Every page gets `<link rel="canonical">` + `og:url` from `canon()` in `build_site.py`, built from
+  `site_config.SITE_URL`. When the custom domain is live: change `SITE_URL`, rebuild, push. Nothing else.
+- JSON-LD: `WebSite` + `SearchAction` (`/search/?q=`) on the home page, `TechArticle` on recipes, guides,
+  news, security entries, tools and templates, `BreadcrumbList` wherever breadcrumbs are shown.
+- `tools/check_meta.py` fails the build on missing/duplicate titles or descriptions, missing OG tags or canonical.
+- Search Console (needs the site owner): add the property for the live domain, verify it, then submit
+  `sitemap.xml`. Redo this after the move to the custom domain (plus a change-of-address if available).

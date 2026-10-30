@@ -83,7 +83,9 @@ def crumbs(rel, path, items):
     for i, (t, h) in enumerate(items, 1):
         el = {"@type": "ListItem", "position": i, "name": t}
         if h and SITE:
-            el["item"] = SITE + "/" + _abs(path, h)
+            a = _abs(path, h).split("#")[0]
+            a = a[:-len("index.html")] if a == "index.html" or a.endswith("/index.html") else a
+            el["item"] = SITE + "/" + a
         ld["itemListElement"].append(el)
     return (f'<div class="crumb" role="navigation" aria-label="Breadcrumb">{vis}</div>'
             f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>')

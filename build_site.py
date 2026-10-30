@@ -51,8 +51,75 @@ def step_html(s):
     return "".join(out)
 
 
+def canon(path):
+    """Clean absolute URL for canonical/og:url/sitemap/JSON-LD: directory indexes end in '/', not 'index.html'.
+    Built from SITE_URL, so switching to a custom domain only needs site_config.SITE_URL changed."""
+    if not SITE:
+        return ""
+    p = path[:-len("index.html")] if path == "index.html" or path.endswith("/index.html") else path
+    return f"{SITE}/{p}"
+
+
+def _load_dates():
+    """Published/updated dates for data-driven pages (tools, policies, news) -> {path: (published, updated)}."""
+    out = {}
+    for folder, pub in (("tools", "created"), ("policies", "created"), ("news", "date")):
+        for f in sorted((ROOT / "data" / folder).glob("*.json")):
+            try:
+                e = json.load(open(f))
+            except Exception:
+                continue
+            if isinstance(e, dict) and e.get("id") and e.get("status", "published") == "published":
+                out[f'{folder}/{e["id"]}.html'] = (e.get(pub) or e.get("created"), e.get("updated") or e.get("last_verified"))
+    return out
+
+
+DATES = _load_dates()
+LASTMOD = {}
+
+
+def page_dates(path):
+    """(published, modified) ISO dates for a page, or (None, None)."""
+    if path.startswith("recipes/") and path[8:-5] in RID:
+        r = RID[path[8:-5]]
+        return r.get("created"), r.get("updated") or r.get("last_verified")
+    if path.startswith("security/") and path[9:-5] in CYD:
+        e = CYD[path[9:-5]]
+        return e.get("created") or e.get("published") or e.get("kev_added"), e.get("updated") or e.get("last_verified")
+    for g in GUIDES + [Q]:
+        if path == f"guides/{g.SLUG}.html":
+            return None, g.VERIFIED
+    return DATES.get(path, (None, None))
+
+
+def json_ld(path, title, desc, og_type):
+    """Light schema.org markup: WebSite + SearchAction on the home page, TechArticle on article pages."""
+    if not SITE:
+        return ""
+    org = {"@type": "Organization", "name": C.SITE_NAME, "url": SITE + "/"}
+    if path == "index.html":
+        ld = {"@context": "https://schema.org", "@type": "WebSite", "name": C.SITE_NAME, "url": SITE + "/",
+              "description": desc, "publisher": org,
+              "potentialAction": {"@type": "SearchAction", "target": f"{SITE}/search/?q={{search_term_string}}",
+                                  "query-input": "required name=search_term_string"}}
+    elif og_type == "article":
+        pub, mod = page_dates(path)
+        ld = {"@context": "https://schema.org", "@type": "TechArticle", "headline": title.split(" | ")[0][:110],
+              "description": desc, "url": canon(path), "mainEntityOfPage": canon(path), "inLanguage": "en",
+              "author": {"@type": "Organization", "name": f"{C.SITE_NAME} editor", "url": canon("author/index.html")},
+              "publisher": org, "image": f"{SITE}/assets/{UX.og_image(path, RID)[0]}"}
+        if pub:
+            ld["datePublished"] = pub
+        if mod:
+            ld["dateModified"] = mod
+            ld.setdefault("datePublished", mod)
+    else:
+        return ""
+    return '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + '</script>'
+
+
 def head(title, desc, rel, path, og_type="website"):
-    url = f"{SITE}/{path}" if SITE else ""
+    url = canon(path)
     og, og_alt = UX.og_image(path, RID)
     img = f"{SITE}/assets/{og}" if SITE else f"{rel}assets/{og}"
     tags = [
@@ -80,6 +147,7 @@ def head(title, desc, rel, path, og_type="website"):
     ]
     if url:
         tags += [f'<meta property="og:url" content="{url}">', f'<link rel="canonical" href="{url}">']
+    tags.append(json_ld(path, title, desc, og_type))
     tags.append(f'<link rel="alternate" type="application/atom+xml" title="{esc(C.SITE_NAME)}" href="{rel}feed.xml">')
     tags.append(f'<link rel="stylesheet" href="{rel}assets/style.css">')
     tags.append(f'<script src="{rel}assets/ui.js" defer></script>')
@@ -101,21 +169,25 @@ def meta_desc(s, n=158):
     if len(s) <= n:
         return s
     cut = s[:n - 1]
+    end = max(cut.rfind(". "), cut.rfind("! "), cut.rfind("? "))
+    if end >= 90:  # end on a full sentence when one fits
+        return cut[:end + 1]
     cut = cut[:cut.rfind(" ")] if " " in cut else cut
     return cut.rstrip(",;:—-") + "…"
 
 
+def recipe_desc(r):
+    """Problem + what the reader gets (the problem line alone is often < 90 chars)."""
+    p = r["problem"].strip()
+    p = p if p.endswith((".", "?", "!")) else p + "."
+    for get in (" Exact steps, pitfalls and a done-when check, linked to official sources.", " Exact steps, pitfalls and official sources."):
+        if len(p + get) <= 158:
+            return p + get
+    return p
+
+
 def page_updated(path):
-    if path.startswith("recipes/") and path[8:-5] in RID:
-        r = RID[path[8:-5]]
-        return r.get("updated") or r.get("last_verified")
-    if path.startswith("security/") and path[9:-5] in CYD:
-        e = CYD[path[9:-5]]
-        return e.get("updated") or e.get("last_verified")
-    for g in GUIDES + [Q]:
-        if path == f"guides/{g.SLUG}.html":
-            return g.VERIFIED
-    return None
+    return page_dates(path)[1]
 
 
 def ad_slot(name):
@@ -151,6 +223,7 @@ def page(path, title, desc, body, og_type="website"):
     out = DIST / path
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html)
+    LASTMOD[path] = page_dates(path)[1]
     return path
 
 
@@ -338,7 +411,8 @@ def build():
     pages = []
     n = len(R)
 
-    pages.append(page("index.html", f"{C.SITE_NAME}: fact-checked Copilot, Intune and security recipes for Microsoft 365 admins", C.SITE_DESCRIPTION, lambda rel: (
+    pages.append(page("index.html", f"{C.SITE_NAME}: Microsoft 365, Copilot & security playbooks for admins",
+                      "Fact-checked playbooks for Microsoft 365 admins: Copilot rollout, Conditional Access, Intune, Purview, exploited CVEs, pentest tools and policy templates.", lambda rel: (
         UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
                     CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1),
                     UX.search_bar(rel, R, len(CY.load())) + BST.pill(rel) + f'<script src="{rel}assets/status.js" defer></script>')
@@ -357,8 +431,8 @@ def build():
     pages.append(page("author/index.html", f"About the editor: who writes and reviews Tenant Recipes | {C.SITE_NAME}",
                       "Tenant Recipes is written and technically reviewed by an anonymous editor: IT professional since 1999, Microsoft-focused since 2013. Focus areas, fact-checking and principles.",
                       T.author_body))
-    pages.append(page("methodology.html", f"Methodology: how we fact-check | {C.SITE_NAME}",
-                      "Source hierarchy and verification process behind every Tenant Recipes page.", T.methodology_body))
+    pages.append(page("methodology.html", f"Methodology: how every page is fact-checked | {C.SITE_NAME}",
+                      "The source hierarchy, verification steps and re-check schedule behind every Tenant Recipes recipe, guide, CVE entry and template.", T.methodology_body))
     pages.append(page("changelog/index.html", f"What's new: changelog of recipes, guides and security entries | {C.SITE_NAME}", "Every new recipe, guide and security entry, every re-verification and every correction on Tenant Recipes, newest first.",
                       lambda rel: T.changelog_body(rel, T.changelog_entries(R, CY.load(), GUIDES, rel))))
     # old URL: redirect stub (not in sitemap)
@@ -449,7 +523,7 @@ def build():
                     + T.trust_bottom(rel, path, r["title"], r, "Verified against") + '</article>'
                     + T.side_nav(rel, toc, [(x["title"], f'{rel}recipes/{x["id"]}.html') for x in same], f'More in {r["category"]}', promo)
                     + '</div>' + signup(rel, "recipe-" + r["id"]) + '</main>')
-        pages.append(page(f'recipes/{r["id"]}.html', f'{r["title"]} | {C.SITE_NAME}', r["problem"], body, "article"))
+        pages.append(page(f'recipes/{r["id"]}.html', f'{r["title"]} | {C.SITE_NAME}', recipe_desc(r), body, "article"))
 
     # Quick guide + sample newsletter issue
     pages.append(page(f"guides/{Q.SLUG}.html", f"{Q.TITLE} | {C.SITE_NAME}", Q.DESC,
@@ -470,7 +544,7 @@ def build():
     home = (SITE + "/") if SITE else "/"
     (DIST / "404.html").write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<title>Not found | Tenant Recipes</title><style>body{font-family:system-ui,Segoe UI,sans-serif;text-align:center;padding:80px 20px;'
+        '<title>Not found | Tenant Recipes</title><meta name="robots" content="noindex"><style>body{font-family:system-ui,Segoe UI,sans-serif;text-align:center;padding:80px 20px;'
         'color:#1b1b1f}a{color:#0f6cbd}</style></head><body><h1>Page not found</h1>'
         f'<p>That recipe may have moved. <a href="{home}">Browse all recipes</a>.</p></body></html>\n')
 
@@ -493,7 +567,8 @@ def build():
     robots = "User-agent: *\nAllow: /\n" + (f"Sitemap: {SITE}/sitemap.xml\n" if SITE else "")
     (DIST / "robots.txt").write_text(robots)
     if SITE:
-        urls = "".join(f"<url><loc>{SITE}/{p}</loc></url>" for p in pages)
+        urls = "".join(f"<url><loc>{canon(p)}</loc>" + (f"<lastmod>{LASTMOD[p]}</lastmod>" if LASTMOD.get(p) else "") + "</url>"
+                       for p in dict.fromkeys(pages))
         (DIST / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>'
             f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     print(f"Built {len(pages)} pages into {DIST.relative_to(ROOT)}/"

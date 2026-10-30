@@ -356,8 +356,8 @@ def build(page, esc, signup, fmt_date, E, SITE_NAME):
                     + T.trust_bottom(rel, path, e["title"], e, "Microsoft Learn and framework sources checked" if e["type"] == "checklist" else "Framework references checked against") + '</article>'
                     + T.side_nav(rel, toc, rel_items, "More policy templates")
                     + '</div>' + signup(rel, "policies-" + e["id"]) + '</main>')
-        desc = (f'Free IT {e["short"].lower()} in plain English: ' if e["type"] == "checklist" else f'Free {e["short"].lower()} policy template in plain English: ') + PH.sub(lambda m: "your company" if m.group(1) == "COMPANY" else m.group(1).lower(), e["purpose"])
-        desc = desc if len(desc) <= 160 else desc[:157].rsplit(" ", 1)[0] + "…"
+        sh = e["short"] if e["short"].split()[0].isupper() else e["short"][0].lower() + e["short"][1:]
+        desc = (f'Free IT {sh} (Word + Markdown): ' if e["type"] == "checklist" else f'Free {sh} policy template (Word + Markdown): ') + PH.sub(lambda m: "your company" if m.group(1) == "COMPANY" else m.group(1).lower(), e["purpose"])
         pages.append(page(f'policies/{e["id"]}.html', f'{e["title"]} template | {SITE_NAME}', desc, body, "article"))
     print(f"Policy templates: {len(ents)} templates, {len(pages)} pages")
     return pages
