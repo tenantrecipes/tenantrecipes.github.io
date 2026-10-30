@@ -28,7 +28,7 @@ NAV_LINKS = [("Recipes", "index.html#library"), ("Guides", "guides/index.html"),
 
 def nav(rel):
     """Header: logo mark + wordmark left; inline links on wide screens; search + menu button right.
-    The menu is a <details> so it works without JS; assets/ui.js adds Escape / outside-tap close and focus handling."""
+    The menu panel sits in normal flow under the nav (no fixed positioning, no backdrop-filter ancestor: iOS Safari hit-testing); assets/ui.js toggles it."""
     links = "".join(f'<a href="{rel}{u}">{esc(t)}</a>' for t, u in NAV_LINKS)
     menu = "".join(f'<a href="{rel}{u}">{esc(t)}</a>' for t, u in NAV_LINKS if t != "About") \
         + f'<a href="{rel}newsletter.html">Newsletter</a><a href="{rel}about.html">About</a>'
@@ -38,9 +38,10 @@ def nav(rel):
             f'<div class="nv"><div class="nv-l">{links}</div>'
             f'<a class="nv-sb" href="{rel}search/index.html" data-sx-open aria-label="Search" title="Search (press /)">{icon("search")}<span class="nv-sbl">Search</span><kbd>/</kbd></a>'
             f'<a class="nv-cta" href="{rel}newsletter.html">Newsletter</a>'
-            f'<details class="nv-m"><summary aria-label="Menu" aria-controls="nv-menu"><svg class="ic ic-o" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
-            f'<svg class="ic ic-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></summary>'
-            f'<div class="nv-md" id="nv-menu" role="navigation" aria-label="All sections">{menu}</div></details></div></nav></header>')
+            f'<button type="button" class="nv-mb" aria-expanded="false" aria-controls="nv-menu" aria-label="Menu">'
+            f'<svg class="ic ic-o" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
+            f'<svg class="ic ic-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></nav>'
+            f'<div class="nv-md" id="nv-menu" role="navigation" aria-label="All sections" hidden>{menu}</div></header>')
 
 
 def ad_slot(name):
