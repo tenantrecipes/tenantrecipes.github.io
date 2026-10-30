@@ -39,7 +39,7 @@ def footer(rel, guide_slug):
             '<p>Fact-checked AI &amp; security recipes for Microsoft 365 admins. An independent project — not affiliated with Microsoft or any vendor.</p>'
             f'<p class="sf-ed">{EDITOR}</p></div>'
             + col("Content", [("Recipes", f"{rel}index.html#library"), ("Guides", f"{rel}guides/index.html"),
-                              ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"),
+                              ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Windows 11 CIS hardening", f"{rel}guides/windows-11-cis-hardening.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"),
                               ("Search", f"{rel}search.html")])
             + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("Changelog", f"{rel}changelog.html"),
                             ("Report an issue", f"{REPO}/issues/new/choose")])
@@ -390,8 +390,8 @@ def guide_verify_card(rel, g):
             f'<div class="vc-p"><span class="vc-l">Most-cited source ({n} steps)</span><a href="{E(u)}">{esc(t)}</a>'
             f'<span class="vc-w">checked on <time datetime="{g.VERIFIED}">{fmt(g.VERIFIED)}</time></span></div>'
             f'<dl class="vc-s"><div><dt>Last verified</dt><dd>{fmt(g.VERIFIED)}</dd></div>'
-            f'<div><dt>Sources checked</dt><dd><a href="#verified">{len(cnt)} Microsoft sources</a></dd></div>'
-            f'<div><dt>Per step</dt><dd>Open “Microsoft sources” under each step</dd></div></dl></section>')
+            f'<div><dt>Sources checked</dt><dd><a href="#verified">{len(cnt)} {getattr(g, "SRC_LABEL", "Microsoft sources")}</a></dd></div>'
+            f'<div><dt>Per step</dt><dd>Open “{getattr(g, "SRC_LABEL", "Microsoft sources")}” under each step</dd></div></dl></section>')
 
 
 def card_meta(item, nsteps=True):

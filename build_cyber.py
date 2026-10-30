@@ -161,6 +161,8 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 'Dates are the CISA KEV addition date, or the advisory date when not in KEV.</p>'
                 f'{vuln_rows(rel, vulns)}</section>'
                 f'<section class="sec" id="hardening" aria-labelledby="hard-h"><p class="sec-k">Hardening</p><h2 id="hard-h">Close the doors attackers use most</h2>'
+                f'<a class="cy-promo" href="{rel}guides/windows-11-cis-hardening.html"><span class="cy-promo-k">New guide</span><strong>How to harden Windows 11 with the CIS Benchmark:</strong> '
+                f'a phased playbook from Level 1 to compliance scans →</a>'
                 f'<div class="grid">{hard_cards(rel, hards)}</div></section>'
                 f'{signup(rel, "security-index")}</main>')
     pages.append(page("security/index.html", f"Cybersecurity: vulnerability watch & hardening | {SITE_NAME}",
@@ -177,6 +179,11 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 body += f'<section class="sec"><p class="sec-k">Vulnerability watch</p><h2>Exploited and critical in {esc(t)}</h2>{vuln_rows(rel, av)}</section>'
             if ah:
                 body += f'<section class="sec"><p class="sec-k">Hardening</p><h2>Hardening recipes</h2><div class="grid">{hard_cards(rel, ah)}</div></section>'
+            if k == "endpoint":
+                import windows_11_cis_hardening as GW
+                body = (f'<section class="sec"><p class="sec-k">Pillar guide</p><h2>Harden the whole Windows 11 baseline</h2>'
+                        f'<a class="cy-promo" href="{rel}guides/{GW.SLUG}.html"><span class="cy-promo-k">Guide</span><strong>{esc(GW.TITLE)}:</strong> '
+                        f'{len(GW.PHASES)} phases · CIS Level 1 vs 2, Intune vs GPO, rollout rings, exceptions and compliance scans →</a></section>') + body
             if k == "cloud":
                 body += (f'<section class="sec"><p class="sec-k">Tenant recipes</p><h2>Identity and Conditional Access recipes for Microsoft 365</h2>'
                          f'<div class="grid">{recipe_cards(rel, cloud_recipes)}</div></section>')

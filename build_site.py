@@ -8,7 +8,8 @@ sys.path.insert(0, str(ROOT))
 import site_config as C
 sys.path.insert(0, str(ROOT / "data" / "guides"))
 import secure_copilot_rollout as G1
-GUIDES = [G1]
+import windows_11_cis_hardening as G2
+GUIDES = [G1, G2]
 import build_cyber as CY
 import build_trust as T
 
@@ -173,7 +174,9 @@ def hero(rel):
         f'<h2 id="sec-title">AI is only as safe as your tenant. {sec_total} recipes to harden it first.</h2>'
         f'<div class="sec-grid">{tiles}</div>'
         f'<a class="cy-promo" href="security/index.html"><span class="cy-promo-k">New</span><strong>Cybersecurity beyond the tenant:</strong> '
-        f'vulnerability watch for exploited CVEs, plus hardening for network, servers and VMware →</a></section>'
+        f'vulnerability watch for exploited CVEs, plus hardening for network, servers and VMware →</a>'
+        f'<a class="cy-promo" href="guides/{G2.SLUG}.html"><span class="cy-promo-k">New guide</span><strong>{esc(G2.TITLE)}:</strong> '
+        f'{len(G2.PHASES)} phases from CIS Level 1 vs Level 2 to Credential Guard, ASR, BitLocker and compliance scans →</a></section>'
     )
 
 
@@ -183,14 +186,19 @@ def _txt(s):
 
 def guide_page(g):
     RID = {r["id"]: r for r in R}
+    SEC = {e["id"]: e for e in CY.load()}
+    SL = getattr(g, "SRC_LABEL", "Microsoft sources")
     for ph in g.PHASES:
         for st in ph["steps"]:
             for rid in st["rec"]:
                 if rid not in RID:
                     sys.exit(f"Guide {g.SLUG}: unknown recipe id {rid}")
+            for sid in st.get("sec", []):
+                if sid not in SEC:
+                    sys.exit(f"Guide {g.SLUG}: unknown security entry id {sid}")
     nsteps = sum(len(p["steps"]) for p in g.PHASES)
     nsrc = len({u for p in g.PHASES for s in p["steps"] for _, u in s["src"]})
-    nrec = len({r for p in g.PHASES for s in p["steps"] for r in s["rec"]})
+    nrec = len({r for p in g.PHASES for s in p["steps"] for r in s["rec"] + s.get("sec", [])})
 
     def body(rel):
         toc, phases, strip = "", "", ""
@@ -203,14 +211,15 @@ def guide_page(g):
             toc += f'<li class="{deep.strip()}"><a href="#{pid}">{i}. {esc(ph["title"])}</a>' + (f'<ul>{sub}</ul>' if sub else "") + '</li>'
             steps = ""
             for j, st in enumerate(ph["steps"], 1):
-                recs = "".join(f'<a class="gd-chip" href="{rel}recipes/{rid}.html">{esc(RID[rid]["title"])}</a>' for rid in st["rec"])
+                recs = ("".join(f'<a class="gd-chip" href="{rel}recipes/{rid}.html">{esc(RID[rid]["title"])}</a>' for rid in st["rec"])
+                        + "".join(f'<a class="gd-chip" href="{rel}security/{sid}.html">{esc(SEC[sid]["title"])}</a>' for sid in st.get("sec", [])))
                 srcs = "".join(f'<li><a href="{E(u)}">{esc(t)}</a></li>' for t, u in st["src"])
                 steps += (f'<div class="gd-step" id="{pid}-s{j}"><h3><span>{i}.{j}</span> {esc(st["t"])}</h3>'
                           f'<p class="gd-done"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 6.8"/></svg>Done when: {_txt(st["check"])}</p>'
                           '<h4>Do this</h4><ul class="gd-do">' + "".join(f'<li>{_txt(x)}</li>' for x in st["do"]) + '</ul>'
                           + ('<div class="gd-pit"><h4>Pitfalls</h4><ul>' + "".join(f'<li>{_txt(x)}</li>' for x in st["pit"]) + '</ul></div>' if st["pit"] else "")
                           + (f'<div class="gd-recs"><h4>Hands-on recipes</h4>{recs}</div>' if recs else "")
-                          + (f'<details class="gd-src"><summary>Microsoft sources ({len(st["src"])})</summary><ul>{srcs}</ul></details>' if srcs else "")
+                          + (f'<details class="gd-src"><summary>{SL} ({len(st["src"])})</summary><ul>{srcs}</ul></details>' if srcs else "")
                           + '</div>')
             phases += (f'<section class="gd-phase{deep}" id="{pid}" aria-labelledby="{pid}-h"><div class="gd-ph-h"><span class="gd-num">Phase {i}</span>'
                        f'<h2 id="{pid}-h">{esc(ph["title"])}</h2><span class="gd-time" title="Our planning estimate">≈ {esc(ph["time"])}</span></div>'
@@ -227,23 +236,23 @@ def guide_page(g):
         return (
             f'<section class="gd-hero"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i></div><div class="wrap">'
             + T.crumbs_dark(rel, f"guides/{g.SLUG}.html", [("Home", rel + "index.html"), ("Guides", rel + "guides/index.html"), (g.SHORT, None)]) +
-            f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>Pillar guide · fact-checked against Microsoft Learn on {fmt_date(g.VERIFIED)}</p>'
+            f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>Pillar guide · {getattr(g, "BADGE", "fact-checked against Microsoft Learn")} on {fmt_date(g.VERIFIED)}</p>'
             f'<h1>{esc(g.TITLE)}</h1><p class="hx-lead">{esc(g.DESC)}</p>'
             f'<div class="hx-cta"><a class="btn hx-p" href="#phase-1-{g.PHASES[0]["id"]}">Start with phase 1 →</a>'
             f'<a class="btn hx-g" href="#checklist">Printable checklist</a></div>'
             f'<dl class="hx-stats"><div><dt>Phases</dt><dd>{len(g.PHASES)}</dd></div><div><dt>Steps</dt><dd>{nsteps}</dd></div>'
-            f'<div><dt>Linked recipes</dt><dd>{nrec}</dd></div><div><dt>Microsoft sources</dt><dd>{nsrc}</dd></div></dl>'
+            f'<div><dt>Linked recipes</dt><dd>{nrec}</dd></div><div><dt>{SL}</dt><dd>{nsrc}</dd></div></dl>'
             f'<ol class="gd-strip">{strip}</ol></div></section>'
             f'<div class="wrap gd-grid"><aside class="gd-toc" aria-label="Table of contents"><p>On this page</p><ol>{toc}'
             f'<li><a href="#checklist">Printable checklist</a></li></ol></aside>'
-            f'<div class="gd-body">{T.guide_verify_card(rel, g)}<div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers.</p></div>'
+            f'<div class="gd-body">{T.guide_verify_card(rel, g)}<div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} {esc(getattr(g, "TIME_NOTE", "Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers."))}</p></div>'
             f'{phases}'
             f'<section class="gd-check" id="checklist" aria-labelledby="ck-h"><div class="gd-ph-h"><span class="gd-num">Checklist</span><h2 id="ck-h">The printable checklist</h2></div>'
             f'<p>Tick items as you go (saved in this browser only), then print or save as PDF for your change board.</p>'
             f'<p class="gd-ck-btns"><button class="btn p" type="button" id="ck-print">Print checklist</button> <button class="btn" type="button" id="ck-reset">Clear ticks</button> <span id="ck-n" class="fine"></span></p>'
             f'<ol class="gd-ck">{check}</ol><p class="fine">{esc(g.TITLE)} · {C.SITE_NAME} · verified {g.VERIFIED} · {SITE}/guides/{g.SLUG}.html</p></section>'
-            f'<section class="vs" id="verified"><h2>Verification &amp; corrections</h2><p class="fine">Every step above lists the Microsoft sources it was checked against '
-            f'(open “Microsoft sources” under each step). Guide last verified <strong>{fmt_date(g.VERIFIED)}</strong>. '
+            f'<section class="vs" id="verified"><h2>Verification &amp; corrections</h2><p class="fine">Every step above lists the {SL.lower()} it was checked against '
+            f'(open “{SL}” under each step). Guide last verified <strong>{fmt_date(g.VERIFIED)}</strong>. '
             f'<a href="{rel}methodology.html">How we verify</a> · <a href="{rel}changelog.html">Changelog</a></p>'
             f'<div class="vs-f"><p>Spotted something wrong or outdated?</p>{T.report_link(f"guides/{g.SLUG}.html", g.TITLE, "rp btn")}</div></section>'
             f'{signup(rel, "guide-" + g.SLUG)}</div></div>'
@@ -264,9 +273,9 @@ def guides_index():
             f'<span class="cm"><span class="cm-ok">{T.icon("check")}Verified {fmt_date(g.VERIFIED)}</span><span>Printable checklist</span></span></a>'
             for g in GUIDES)
         return (T.page_hero(rel, T.crumbs_dark(rel, "guides/index.html", [("Home", rel + "index.html"), ("Guides", None)]), "Guides",
-                            "Long-form playbooks", "Phased, fact-checked guides that tie the recipes together. Every claim links to Microsoft Learn.", kind="page")
+                            "Long-form playbooks", "Phased, fact-checked guides that tie the recipes together. Every claim links to its official source.", kind="page")
                 + f'<main class="wrap pg"><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
-    return page("guides/index.html", f"Guides | {C.SITE_NAME}", "Long-form, fact-checked playbooks for Microsoft 365 admins.", body)
+    return page("guides/index.html", f"Guides | {C.SITE_NAME}", "Long-form, fact-checked playbooks for Microsoft 365 and Windows admins.", body)
 
 
 def build():
@@ -342,8 +351,9 @@ def build():
                      + T.chip("link", f'{len(r["sources"])} Microsoft source{"s" if len(r["sources"]) != 1 else ""}')
                      + (T.chip("clock", f'First published {fmt_date(r["created"])}') if r.get("created") else ""))
             toc = [("problem", "The problem"), ("steps", "Steps")] + ([("pitfalls", "Pitfalls")] if r["pitfalls"] else []) + [("verified", "Sources & corrections")]
-            promo = (f'<a class="ps-promo" href="{rel}guides/{G1.SLUG}.html"><span class="ps-k">Pillar guide</span><strong>{esc(G1.SHORT)}</strong>'
-                     f'<span>{len(G1.PHASES)} phases · printable checklist {T.icon("arrow")}</span></a>')
+            pg = G2 if r["id"] in {x for p in G2.PHASES for st in p["steps"] for x in st["rec"]} else G1
+            promo = (f'<a class="ps-promo" href="{rel}guides/{pg.SLUG}.html"><span class="ps-k">Pillar guide</span><strong>{esc(pg.SHORT)}</strong>'
+                     f'<span>{len(pg.PHASES)} phases · printable checklist {T.icon("arrow")}</span></a>')
             return (T.page_hero(rel, T.crumbs_dark(rel, path, [("Home", rel + "index.html"), ("Recipes", rel + "index.html#library"), (r["category"], None)]),
                                 f'{T.icon("layers")}{esc(r["category"])}', esc(r["title"]), "", chips, kind="recipe")
                     + '<main class="wrap pg"><div class="pg-grid"><article class="doc">'
