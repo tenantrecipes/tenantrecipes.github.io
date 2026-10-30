@@ -2,6 +2,11 @@
  {
   "kind": "site",
   "date": "2026-10-30",
+  "text": "Security: eight new exploited vulnerabilities from the CISA KEV catalog: the Ivanti Connect Secure zero-day chain (CVE-2026-104935, CVE-2026-111357, CVE-2026-118527), GitLab CI/CD regex RCE (CVE-2026-97229), the Brotli decoder flaw in Node.js and other products (CVE-2026-111497), PAN-OS management RCE (CVE-2026-0322), BeyondTrust Remote Support (CVE-2026-102764), VeloCloud Orchestrator (CVE-2026-114625), Collabora CODE for Nextcloud (CVE-2026-110447) and Adobe Commerce (CVE-2026-48356)."
+ },
+ {
+  "kind": "site",
+  "date": "2026-10-30",
   "text": "Easier to find, use and share: search and topic filters on the homepage, Start-here cards, Copy steps and Download checklist buttons plus Done-when criteria on every recipe, related recipes and back-to-guide links, a one-page quick guide (5 things to check before assigning Copilot licenses), PDF checklists for both pillar guides, a sample newsletter issue and link-preview images."
  },
  {
