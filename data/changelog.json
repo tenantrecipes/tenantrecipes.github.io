@@ -2,6 +2,16 @@
  {
   "kind": "site",
   "date": "2026-10-30",
+  "text": "Security: category filter (Client, Server, Network, Web/Runtime, Virtualization), the vulnerability watch as easy-to-scan cards with a one-line 'What to do', a Patch Tuesday countdown, and four more exploited vulnerabilities (Cisco Secure Email Gateway, Fortinet, Atlassian Data Center, Citrix NetScaler)."
+ },
+ {
+  "kind": "site",
+  "date": "2026-10-30",
+  "text": "Easier reading and finding: search at the top of the homepage with News & retirements and What's new shortcuts, more readable text and spacing across the site, and this What's new page."
+ },
+ {
+  "kind": "site",
+  "date": "2026-10-30",
   "text": "Security: eight new exploited vulnerabilities from the CISA KEV catalog: the Ivanti Connect Secure zero-day chain (CVE-2026-104935, CVE-2026-111357, CVE-2026-118527), GitLab CI/CD regex RCE (CVE-2026-97229), the Brotli decoder flaw in Node.js and other products (CVE-2026-111497), PAN-OS management RCE (CVE-2026-0322), BeyondTrust Remote Support (CVE-2026-102764), VeloCloud Orchestrator (CVE-2026-114625), Collabora CODE for Nextcloud (CVE-2026-110447) and Adobe Commerce (CVE-2026-48356)."
  },
  {

@@ -215,13 +215,26 @@ def finder(rel, R, guides, quick, n_sec):
         f'<span class="sh-go">Open security {T.icon("arrow")}</span></a>'
         f'<div class="sh-c sh-4"><span class="sh-k">{T.icon("clock")}Newest recipes</span><ul>{new_li}</ul>'
         f'<a class="sh-go" href="{rel}guides/{quick.SLUG}.html">Quick guide: {esc(quick.SHORT.split(": ", 1)[-1])} {T.icon("arrow")}</a></div>')
-    return (f'<section class="fd wrap" id="find" aria-labelledby="fd-h"><h2 id="fd-h" class="sr">Find a recipe</h2>'
-            f'<form class="fd-s" action="{rel}search.html" method="get" role="search">{T.icon("search")}'
+    return (f'<section class="fd wrap" id="find" aria-labelledby="fd-k"><p class="sec-k fd-k" id="fd-k">Start here</p><div class="sh">{cards}</div></section>')
+
+
+def search_bar(rel, R, n_sec):
+    """Prominent search + topic filter at the top of the homepage hero, with News/retirements and What's new entry points."""
+    news = [t for t, _ in tag_counts(R) if t.lower().startswith("news")]
+    chips = "".join(f'<a class="chip" href="?t={E(t.replace(" ", "+"))}#library" data-tag="{esc(t)}">{esc(t)} <span>{n}</span></a>'
+                    for t, n in tag_counts(R) if t not in news)
+    lead = ""
+    if news:
+        nt = news[0]
+        lead += f'<a class="chip chip-hi" href="?t={E(nt.replace(" ", "+"))}#library">{T.icon("alert")}News &amp; retirements</a>'
+    lead += f'<a class="chip chip-hi" href="{rel}changelog/">{T.icon("clock")}What\'s new</a>'
+    lead += f'<a class="chip chip-hi" href="{rel}security/index.html#watch">{T.icon("shield")}Vulnerability watch</a>'
+    return (f'<div class="hx-find"><form class="fd-s" action="{rel}search.html" method="get" role="search">{T.icon("search")}'
             f'<label class="sr" for="fd-q">Search all recipes, guides and security entries</label>'
-            f'<input id="fd-q" name="q" type="search" placeholder="Search {len(R)} recipes, guides and CVEs: e.g. MFA, DLP, LAPS, agents" autocomplete="off">'
+            f'<input id="fd-q" name="q" type="search" placeholder="Search recipes, guides, CVEs: e.g. MFA, DLP, LAPS" autocomplete="off">'
             f'<button class="btn p" type="submit">Search</button></form>'
-            f'<nav class="fd-tags" aria-label="Browse by topic"><span class="fd-l">Browse by topic:</span>{chips}</nav>'
-            f'<p class="sec-k fd-k">Start here</p><div class="sh">{cards}</div></section>')
+            f'<div class="fd-tags fd-quick" role="navigation" aria-label="Quick links">{lead}</div>'
+            f'<div class="fd-tags fd-topics" role="navigation" aria-label="Browse recipes by topic"><span class="fd-l">Topics:</span>{chips}</div></div>')
 
 
 # ---------------------------------------------------------------- quick guide page
@@ -408,7 +421,7 @@ def featured(R, CY, guides, Q):
     return slides
 
 
-def carousel(rel, slides, n_recipes, last_verified, top=""):
+def carousel(rel, slides, n_recipes, last_verified, top="", lead=""):
     n = len(slides)
     items, dots = "", ""
     for i, s in enumerate(slides):
@@ -421,7 +434,7 @@ def carousel(rel, slides, n_recipes, last_verified, top=""):
         dots += f'<button type="button" class="car-dot" aria-controls="car-s{i}" aria-label="Show slide {i + 1}: {esc(s["t"])}"{" aria-current=true" if i == 0 else ""}></button>'
     arrow = lambda d: f'<svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path d="{"M15 5l-7 7 7 7" if d < 0 else "M9 5l7 7-7 7"}"/></svg>'
     return (f'<section class="hx car" aria-labelledby="hx-title"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>'
-            f'<div class="wrap"><h1 id="hx-title" class="car-h1">Fact-checked Copilot, Intune &amp; security recipes for Microsoft 365 admins</h1>'
+            f'<div class="wrap"><h1 id="hx-title" class="car-h1">Fact-checked Copilot, Intune &amp; security recipes for Microsoft 365 admins</h1>{lead}'
             f'<p class="hx-badge car-badge"><span class="dot" aria-hidden="true"></span>{n_recipes} recipes, every one checked against its sources · last verified {T.fmt(last_verified)}</p>{top}'
             f'<div class="car-box" aria-roledescription="carousel" aria-label="Featured articles" role="region">'
             f'<div class="car-vp" id="car-vp" aria-live="off" tabindex="-1">{items}</div>'

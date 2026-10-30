@@ -113,10 +113,7 @@ def page_updated(path):
 
 
 def ad_slot(name):
-    """Empty sponsor slot. Hidden unless SHOW_AD_SLOTS = True in site_config.py. No ad code."""
-    hidden = "" if C.SHOW_AD_SLOTS else " hidden"
-    inner = '<span class="slot-label">Sponsor</span>' if C.SHOW_AD_SLOTS else ""
-    return f'<aside class="sponsor-slot" data-slot="{name}" aria-label="Sponsor"{hidden}><!-- sponsor slot: {name} (empty) -->{inner}</aside>'
+    return T.ad_slot(name)
 
 
 def signup(rel, source, heading=True):
@@ -257,8 +254,12 @@ def guide_page(g):
                           + (f'<div class="gd-recs"><h4>Hands-on recipes</h4>{recs}</div>' if recs else "")
                           + (f'<details class="gd-src"><summary>{SL} ({len(st["src"])})</summary><ul>{srcs}</ul></details>' if srcs else "")
                           + '</div>')
+            if i == 2:
+                phases += ad_slot("guide-after-intro")
             if i == len(g.PHASES) // 2 + 1:
                 phases += UX.news_mid(rel, "guide-" + g.SLUG)
+            elif i > 2 and i % 3 == 0:
+                phases += ad_slot(f"guide-between-phases-{i}")
             phases += (f'<section class="gd-phase{deep}" id="{pid}" aria-labelledby="{pid}-h"><div class="gd-ph-h"><span class="gd-num">Phase {i}</span>'
                        f'<h2 id="{pid}-h">{esc(ph["title"])}</h2><span class="gd-time" title="Our planning estimate">≈ {esc(ph["time"])}</span></div>'
                        + ('<p class="gd-flag">Deepest phase: most of the risk lives here</p>' if deep else "")
@@ -295,7 +296,7 @@ def guide_page(g):
             f'<ol class="gd-ck">{check}</ol><p class="fine">{esc(g.TITLE)} · {C.SITE_NAME} · verified {g.VERIFIED} · {SITE}/guides/{g.SLUG}.html</p></section>'
             f'<section class="vs" id="verified"><h2>Verification &amp; corrections</h2><p class="fine">Every step above lists the {SL.lower()} it was checked against '
             f'(open “{SL}” under each step). Guide last verified <strong>{fmt_date(g.VERIFIED)}</strong>. '
-            f'<a href="{rel}methodology.html">How we verify</a> · <a href="{rel}changelog.html">Changelog</a></p>'
+            f'<a href="{rel}methodology.html">How we verify</a> · <a href="{rel}changelog/index.html">Changelog</a></p>'
             f'<div class="vs-f"><p>Spotted something wrong or outdated?</p>{T.report_link(f"guides/{g.SLUG}.html", g.TITLE, "rp btn")}</div></section>'
             f'{signup(rel, "guide-" + g.SLUG)}</div></div>'
             '<script>(function(){var b=document.querySelectorAll(".gd-ck input"),n=document.getElementById("ck-n");'
@@ -333,7 +334,8 @@ def build():
 
     pages.append(page("index.html", f"{C.SITE_NAME}: fact-checked Copilot, Intune and security recipes for Microsoft 365 admins", C.SITE_DESCRIPTION, lambda rel: (
         UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
-                    CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1))
+                    CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1),
+                    UX.search_bar(rel, R, len(CY.load())))
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
         + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):] +
         f'<main class="wrap" id="library">{ad_slot("index-top")}<h2 class="lib-h">The recipe library</h2><div class="controls"><input id="q" aria-label="Search recipes" '
@@ -348,8 +350,13 @@ def build():
                       lambda rel: T.about_body(rel, stats)))
     pages.append(page("methodology.html", f"Methodology: how we fact-check | {C.SITE_NAME}",
                       "Source hierarchy and verification process behind every Tenant Recipes page.", T.methodology_body))
-    pages.append(page("changelog.html", f"Changelog: new recipes, updates and corrections | {C.SITE_NAME}", "Every new recipe, guide and security entry, every re-verification and every correction on Tenant Recipes, newest first.",
-                      lambda rel: T.changelog_body(rel, T.changelog_entries(R, CY.load(), GUIDES))))
+    pages.append(page("changelog/index.html", f"What's new: changelog of recipes, guides and security entries | {C.SITE_NAME}", "Every new recipe, guide and security entry, every re-verification and every correction on Tenant Recipes, newest first.",
+                      lambda rel: T.changelog_body(rel, T.changelog_entries(R, CY.load(), GUIDES, rel))))
+    # old URL: redirect stub (not in sitemap)
+    (DIST / "changelog.html").write_text(
+        f'<!doctype html><html lang="en"><head>{head("Changelog moved | " + C.SITE_NAME, "The Tenant Recipes changelog has moved to the What is new page, which lists every new and updated page.", "", "changelog/index.html")}'
+        '<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=changelog/index.html"></head>'
+        '<body><p>The changelog has moved to <a href="changelog/index.html">What\'s new</a>.</p></body></html>\n')
     pages.append(page("search.html", f"Search recipes, guides and CVEs | {C.SITE_NAME}", "Search every Tenant Recipes recipe, guide phase and security entry in your browser: Copilot, Conditional Access, Intune, Purview, LAPS, VMware and more.", T.search_body))
 
     pages.append(page("newsletter.html", f"The weekly Tenant Recipes brief (free newsletter) | {C.SITE_NAME}",
@@ -413,16 +420,16 @@ def build():
                     + T.verify_card(rel, r, "Microsoft sources")
                     + UX.back_to_guide(rel, r, refs, pg)
                     + f'<section id="problem" class="co co-info"><p class="co-h">{T.icon("target")}The problem</p><p>{esc(r["problem"])}</p></section>'
-                    + UX.toolbar(rel, r)
+                    + UX.toolbar(rel, r) + ad_slot("recipe-after-intro")
                     + f'<h2 id="steps" class="h-ic">{T.icon("list")}Steps</h2><ol class="steps">' + "".join(f'<li><div>{step_html(s)}</div></li>' for s in r["steps"]) + '</ol>'
                     + UX.screenshots(r, rel)
                     + UX.done_when(r, step_html)
                     + (f'<section id="pitfalls" class="co co-warn"><p class="co-h">{T.icon("alert")}Pitfalls</p><ul>' + "".join(f'<li>{step_html(p)}</li>' for p in r["pitfalls"]) + '</ul></section>' if r["pitfalls"] else "")
-                    + UX.news_mid(rel, "recipe-" + r["id"])
+                    + UX.news_mid(rel, "recipe-" + r["id"]) + ad_slot("recipe-before-related")
                     + f'<section id="next" class="nx" aria-labelledby="nx-h"><h2 id="nx-h">Related recipes &amp; next steps</h2>'
                     + (f'<p class="tgs"><span class="fine">Topics:</span> {tags}</p>' if tags else "")
                     + f'<div class="grid nx-g">{UX.related_cards(rel, rel_items)}</div>{UX.back_to_guide(rel, r, refs, pg)}</section>'
-                    + ad_slot("recipe-inline") + T.trust_bottom(rel, path, r["title"], r, "Verified against") + '</article>'
+                    + T.trust_bottom(rel, path, r["title"], r, "Verified against") + '</article>'
                     + T.side_nav(rel, toc, [(x["title"], f'{rel}recipes/{x["id"]}.html') for x in same], f'More in {r["category"]}', promo)
                     + '</div>' + signup(rel, "recipe-" + r["id"]) + '</main>')
         pages.append(page(f'recipes/{r["id"]}.html', f'{r["title"]} | {C.SITE_NAME}', r["problem"], body, "article"))

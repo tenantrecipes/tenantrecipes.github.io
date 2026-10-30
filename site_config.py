@@ -22,8 +22,10 @@ OWNER_COUNTRY = "Sweden"
 # Where the site is hosted (named in the privacy policy). "Netlify" or "GitHub Pages".
 HOSTING_PROVIDER = "GitHub Pages"
 
-# Sponsor/ad slots: empty containers in index and recipe layouts. False = not rendered visibly (hidden).
-SHOW_AD_SLOTS = False
+# Ad slots. False = NOTHING is rendered (no markup, no ad code). True = empty, labelled placeholders appear at the
+# natural break points (homepage, after a recipe's intro and before related recipes, between guide phases, between
+# the vulnerability watch and hardening on /security/). Ad network code is never added automatically; see README.md.
+ADS_ENABLED = False
 
 # UTM parameters added to links in newsletter drafts.
 UTM_SOURCE = "newsletter"

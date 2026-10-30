@@ -223,6 +223,7 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 '<p class="fine">Severity is the vendor\'s own rating. "Exploited" means the vendor or CISA reports exploitation in the wild. '
                 'Dates are the CISA KEV addition date, or the advisory date when not in KEV.</p>'
                 f'{vuln_rows(rel, vulns)}<p class="fine cy-empty" hidden>No vulnerabilities in this category yet.</p></section>'
+                + T.ad_slot("security-between-sections") +
                 f'<section class="sec" id="hardening" aria-labelledby="hard-h"><p class="sec-k">Hardening</p><h2 id="hard-h">Close the doors attackers use most</h2>'
                 f'<a class="cy-promo" href="{rel}guides/windows-11-cis-hardening.html"><span class="cy-promo-k">New guide</span><strong>How to harden Windows 11 with the CIS Benchmark:</strong> '
                 f'a phased playbook from Level 1 to compliance scans →</a>'

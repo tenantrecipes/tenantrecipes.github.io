@@ -1,7 +1,7 @@
 """Trust & navigation layer: header/footer, breadcrumbs, verification panels, "Report an error" links,
 About / Methodology / Changelog / Search pages, the site-wide search index and the Atom feed.
 Everything shown is computed from data (recipes, cyber entries, guides, data/changelog.json) at build time."""
-import json, datetime, pathlib
+import json, re, datetime, pathlib, subprocess
 from html import escape as E
 from urllib.parse import quote
 import site_config as C
@@ -26,10 +26,18 @@ def nav(rel):
     return (f'<header class="sh"><nav><a class="logo" href="{rel}index.html"><img src="{rel}assets/logo.svg" alt="Tenant Recipes" width="158" height="36"></a>'
             f'<div class="nv">'
             f'<a href="{rel}index.html#library">Recipes</a><a href="{rel}guides/index.html">Guides</a>'
-            f'<a href="{rel}security/index.html">Security</a><a href="{rel}about.html">About</a>'
+            f'<a href="{rel}security/index.html">Security</a><a href="{rel}changelog/index.html">What\'s new</a><a href="{rel}about.html">About</a>'
             f'<form class="nv-s" action="{rel}search.html" method="get" role="search"><label class="sr" for="nv-q">Search the site</label>'
             f'<input id="nv-q" name="q" type="search" placeholder="Search…" autocomplete="off"></form>'
             f'<a class="nv-cta" href="{rel}newsletter.html">Newsletter</a></div></nav></header>')
+
+
+def ad_slot(name):
+    """Ad placeholder at a natural break point. Renders nothing unless site_config.ADS_ENABLED is True."""
+    if not getattr(C, "ADS_ENABLED", False):
+        return ""
+    return (f'<aside class="sponsor-slot" data-slot="{name}" aria-label="Advertisement"><!-- ad slot: {name} -->'
+            '<span class="slot-label">Advertisement</span></aside>')
 
 
 def footer(rel, guide_slug, path="", title="", updated=None):
@@ -45,12 +53,13 @@ def footer(rel, guide_slug, path="", title="", updated=None):
             + col("Content", [("Recipes", f"{rel}index.html#library"), ("Guides", f"{rel}guides/index.html"),
                               ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Windows 11 CIS hardening", f"{rel}guides/windows-11-cis-hardening.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"), ("Quick guide: 5 Copilot license checks", f"{rel}guides/copilot-license-checks.html"),
                               ("Search", f"{rel}search.html")])
-            + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("Changelog", f"{rel}changelog.html"),
+            + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("What's new (changelog)", f"{rel}changelog/index.html"),
                             ("Report an issue", f"{REPO}/issues/new/choose")])
             + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Sample issue", f"{rel}newsletter-sample.html"), (f"X (@{C.X_HANDLE})", f"https://x.com/{C.X_HANDLE}"), ("Atom / RSS feed", f"{rel}feed.xml"),
                                    ("Suggest a recipe", f"{REPO}/issues/new?template=suggest-recipe.yml")])
             + col("Legal", [("Privacy policy", f"{rel}privacy.html"), ("Disclaimer", f"{rel}about.html#disclaimer")])
-            + f'</div><p class="sf-b">© {TODAY.year} Tenant Recipes · Microsoft, Microsoft 365, Copilot, Entra, Intune and Purview are trademarks of the Microsoft group of companies. '
+            + f'</div><p class="sf-ind">{icon("shield")}<strong>Independent, not affiliated with Microsoft.</strong> No sponsors, no affiliate links; every claim links to its source.</p>'
+            f'<p class="sf-b">© {TODAY.year} Tenant Recipes · Microsoft, Microsoft 365, Copilot, Entra, Intune and Purview are trademarks of the Microsoft group of companies. '
             'Other product names belong to their owners.</p></footer>')
 
 
@@ -124,7 +133,7 @@ def trust_bottom(rel, path, title, item, heading):
             + (f'Page last verified <strong>{fmt(last)}</strong>' if last else 'Not yet verified')
             + (f' · last updated {fmt(item["updated"])}' if item.get("updated") else "") + '.</p>'
             f'<ul class="vs-l">{rows}</ul>'
-            f'<div class="vs-f"><p>Spotted something wrong or outdated? Corrections are public and logged in the <a href="{rel}changelog.html">changelog</a>.</p>'
+            f'<div class="vs-f"><p>Spotted something wrong or outdated? Corrections are public and logged in the <a href="{rel}changelog/index.html">changelog</a>.</p>'
             f'{report_link(path, title, "rp btn")}</div></section>')
 
 
@@ -136,6 +145,9 @@ def about_body(rel, stats):
                   "About Tenant Recipes", 'Practical, fact-checked recipes for the people who actually click through the Microsoft 365 admin portals: '
                   'the exact steps, the pitfalls and a link to the primary source for every claim.', kind="page")
         + f'<main class="wrap pg"><article class="prose doc">'
+        + '<aside class="co co-ok ind-note" role="note"><p class="co-h">' + icon("shield") + 'Independent, not affiliated with Microsoft</p>'
+        '<p>Tenant Recipes is an independent project. It is not affiliated with, sponsored by or endorsed by Microsoft or any other vendor we cover, '
+        'has no sponsors and uses no affiliate links. Product names are trademarks of their owners.</p></aside>'
         f'<dl class="ab-stats"><div><dt>Tenant recipes</dt><dd>{n_rec}</dd></div><div><dt>Security entries</dt><dd>{n_cy}</dd></div>'
         f'<div><dt>Guides</dt><dd>{n_g}</dd></div><div><dt>Primary sources linked</dt><dd>{n_src}</dd></div></dl>'
         '<h2>Who it is for</h2><p>Microsoft 365, Entra and Intune administrators, security engineers and IT leads who have been asked to '
@@ -165,7 +177,7 @@ def about_body(rel, stats):
         f'{C.REVERIFY_DAYS} days; pages past that age show a "due for re-verification" notice.</p>'
         '<h2>Corrections</h2><p>Found an error? Every recipe, guide and security page has a <em>Report an error on this page</em> link that opens a '
         f'pre-filled <a href="{REPO}/issues">GitHub issue</a>. Confirmed errors are fixed, the page\'s "last updated" date changes, and the fix is '
-        f'listed in the <a href="{rel}changelog.html">changelog</a>. You can also <a href="{REPO}/issues/new?template=suggest-recipe.yml">suggest a recipe</a>.</p>'
+        f'listed in the <a href="{rel}changelog/index.html">changelog</a>. You can also <a href="{REPO}/issues/new?template=suggest-recipe.yml">suggest a recipe</a>.</p>'
         '<h2>Contact</h2><p>' + contact_html() + '</p>'
         '<h2 id="disclaimer">Disclaimer</h2><p class="fine">Recipes are provided as-is for information. Settings, licensing and portal labels change; '
         'always confirm against the linked official documentation and test in a non-production tenant or pilot group first. '
@@ -189,6 +201,9 @@ def methodology_body(rel):
                   "Editorial standards", "How we fact-check", 'Every recipe is only as good as its sources. This page explains which sources we trust, in what order, '
                   'how a claim gets onto the site, and what happens when it turns out to be wrong.', kind="page")
         + '<main class="wrap pg"><article class="prose doc">'
+        + '<aside class="co co-ok ind-note" role="note"><p class="co-h">' + icon("shield") + 'Independent, not affiliated with Microsoft</p>'
+        '<p>Tenant Recipes is an independent project. It is not affiliated with, sponsored by or endorsed by Microsoft or any other vendor we cover, '
+        'has no sponsors and uses no affiliate links. Product names are trademarks of their owners.</p></aside>'
         '<h2>Source hierarchy — Microsoft 365 recipes and guides</h2>'
         '<p>When sources disagree, the higher tier wins, and we say so on the page if the difference matters.</p>'
         '<div class="cy-tw"><table class="mt-t"><thead><tr><th></th><th>Source</th><th>Used for</th></tr></thead><tbody>'
@@ -226,15 +241,36 @@ def methodology_body(rel):
         '<h2>Corrections policy</h2><p>Anyone can report an error with the <em>Report an error on this page</em> link at the bottom of every page, '
         f'which opens a pre-filled <a href="{REPO}/issues">public GitHub issue</a>. Please include the source that shows the correct information. '
         'Confirmed errors are corrected on the page, the "last updated" date changes, and significant corrections are listed in the '
-        f'<a href="{rel}changelog.html">changelog</a>. We do not silently rewrite history: if a recipe turns out to be wrong in a way that could have caused harm, '
+        f'<a href="{rel}changelog/index.html">changelog</a>. We do not silently rewrite history: if a recipe turns out to be wrong in a way that could have caused harm, '
         'we say so on the page.</p>'
         '<h2>Independence</h2><p>Tenant Recipes is not affiliated with Microsoft or any vendor, has no sponsors today and uses no affiliate links. '
         'The site sets no cookies and runs no analytics or ad trackers (see the <a href="' + rel + 'privacy.html">privacy policy</a>).</p>'
         '</article></main>')
 
 
-def changelog_entries(R, CY, guides):
-    """Group additions/updates by date, plus curated site entries from data/changelog.json."""
+def git_history():
+    """{date: [commit subjects]} from git log (Stockholm dates). Empty if git/history is unavailable (e.g. shallow CI checkout)."""
+    try:
+        out = subprocess.run(["git", "log", "--no-merges", "--date=format-local:%Y-%m-%d", "--format=%ad%x09%s"], cwd=ROOT,
+                             capture_output=True, text=True, timeout=20, env={"TZ": "Europe/Stockholm", "PATH": "/usr/bin:/bin:/usr/local/bin"}).stdout
+    except Exception:
+        return {}
+    days = {}
+    for line in out.splitlines():
+        d, _, subj = line.partition("\t")
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", d) and subj:
+            days.setdefault(d, []).append(subj)
+    return days
+
+
+def _subj(s, n=150):
+    s = " ".join(s.split())
+    return s if len(s) <= n else s[:n].rsplit(" ", 1)[0] + "…"
+
+
+def changelog_entries(R, CY, guides, rel=""):
+    """Group additions/updates by date: curated notes (data/changelog.json), data dates of recipes, guides and
+    security entries, and the git history of the site (one collapsible line per day)."""
     days = {}
     def add(d, html):
         days.setdefault(d, []).append(html)
@@ -244,7 +280,7 @@ def changelog_entries(R, CY, guides):
     upd = {}
     for kind, items, pre in (("Recipe", R, "recipes/"), ("Security", CY, "security/")):
         for it in items:
-            u = f'{pre}{it["id"]}.html'
+            u = f'{rel}{pre}{it["id"]}.html'
             if it.get("created"):
                 add(it["created"], f'<li><span class="cl-k cl-new">New {kind.lower()}</span><a href="{u}">{esc(it["title"])}</a></li>')
             if it.get("updated") and it.get("updated") != it.get("created"):
@@ -253,16 +289,20 @@ def changelog_entries(R, CY, guides):
         add(d, f'<li><span class="cl-k cl-upd">Updated</span>{len(lis)} page{"s" if len(lis) != 1 else ""} updated and re-verified'
                f'<details><summary>Show pages</summary><ul>{"".join(lis)}</ul></details></li>')
     for g in guides:
-        add(g.VERIFIED, f'<li><span class="cl-k cl-new">Guide</span><a href="guides/{g.SLUG}.html">{esc(g.TITLE)}</a> (verified)</li>')
+        add(g.VERIFIED, f'<li><span class="cl-k cl-new">Guide</span><a href="{rel}guides/{g.SLUG}.html">{esc(g.TITLE)}</a> (verified)</li>')
+    for d, subs in git_history().items():
+        add(d, f'<li><span class="cl-k cl-git">Changes</span>{len(subs)} published change{"s" if len(subs) != 1 else ""} to the site'
+               f'<details><summary>Show change log</summary><ul>{"".join(f"<li>{esc(_subj(x))}</li>" for x in subs)}</ul></details></li>')
     return sorted(days.items(), reverse=True)
 
 
 def changelog_body(rel, entries):
     out = ""
     for d, items in entries:
-        out += f'<section class="cl-day"><h2 id="d-{d}">{fmt(d)}</h2><ul class="cl">{"".join(items)}</ul></section>'
-    return (page_hero(rel, crumbs_dark(rel, "changelog.html", [("Home", rel + "index.html"), ("Changelog", None)]), "What changed", "Changelog",
-                      'Every new page, update and correction, newest first. Generated automatically from the site data at each build. '
+        out += f'<section class="cl-day"><h2 id="d-{d}"><time datetime="{d}">{fmt(d)}</time></h2><ul class="cl">{"".join(items)}</ul></section>'
+    return (page_hero(rel, crumbs_dark(rel, "changelog/index.html", [("Home", rel + "index.html"), ("What's new", None)]), "Changelog", "What's new",
+                      'Every new recipe, guide and security entry, every update and correction, newest first. Generated automatically at each build '
+                      'from the content dates and the site\'s publishing history. '
                       f'Also available as an <a href="{rel}feed.xml">Atom feed</a>.', kind="page")
             + f'<main class="wrap pg"><article class="prose doc">{out}</article></main>')
 

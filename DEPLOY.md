@@ -42,9 +42,8 @@ Netlify Drop never uploads anything except `dist/`.
 Netlify: Domain management > Add a domain. GitHub Pages: Settings > Pages > Custom domain.
 Then update `SITE_URL` and rebuild. Nothing else changes.
 
-## Sponsor slots
-`SHOW_AD_SLOTS = True` in `site_config.py` makes the (empty) sponsor slots on the home page and
-recipe pages visible. No ad code is included.
+## Ad slots
+See `README.md` ("Ad slots"). `ADS_ENABLED = False` in `site_config.py` (default) renders nothing.
 
 ## Automation hooks (for the future weekly pipeline)
 - New recipe = new file `data/recipes/<id>.json` (schema in `RECIPES.md`), then `python3 build.py`.
