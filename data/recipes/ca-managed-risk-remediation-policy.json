@@ -1,0 +1,49 @@
+{
+ "id": "ca-managed-risk-remediation-policy",
+ "status": "published",
+ "order": 420,
+ "category": "Identity & threat protection",
+ "title": "Check the Microsoft-managed 'Require risk remediation for high-risk users' policy that just switched on",
+ "problem": "In Entra ID P2 tenants Microsoft created a managed Conditional Access policy in report-only mode the week of 28 September 2026. If nobody touched it, it switched to On automatically the week of 28 October 2026, so high-risk users are now forced to self-remediate.",
+ "steps": [
+  "Entra admin center > Entra ID > Conditional Access > Policies: open 'Require risk remediation for high-risk users' (Microsoft-managed) and note the security group that was created with it.",
+  "Open the Policy impact tab to see which sign-ins the policy affected while it was in report-only.",
+  "Exclude your break-glass/emergency access accounts, or narrow the scope by changing the membership of the policy's security group.",
+  "Make sure the users in scope are registered for MFA so they can self-remediate. In hybrid tenants, self-remediation by secure password change relies on password hash sync.",
+  "Decide on the state: leave it On, or set it to Off if you already run your own user-risk policy. If you need more changes than exclusions and state, use Duplicate and build your own copy.",
+  "Afterwards, check Entra ID > Monitoring & health > Sign-in logs, filtered on Conditional Access, for users stuck in remediation."
+ ],
+ "pitfalls": [
+  "It remediates user risk, not sign-in risk.",
+  "Precedence: Require risk remediation overrides Require password change, and Block overrides all others. Check how it overlaps with your existing risk policies.",
+  "The policy isn't supported for external and guest users.",
+  "Microsoft-managed policies can't be renamed or deleted, only scoped (exclusions) and switched On or Off.",
+  "The grant controls automatically add authentication strength and sign-in frequency 'Every time', so after their sessions are revoked users have to sign in again."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft-managed Conditional Access policies",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/managed-policies",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Message center MC1476122: Require risk remediation for high-risk users (archive)",
+   "url": "https://mc.merill.net/message/MC1476122",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Self-remediation experience with ID Protection and Conditional Access",
+   "url": "https://learn.microsoft.com/en-us/entra/id-protection/concept-identity-protection-user-experience",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Conditional Access report-only mode",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-report-only",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

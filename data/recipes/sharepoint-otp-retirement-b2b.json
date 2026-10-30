@@ -1,0 +1,65 @@
+{
+ "id": "sharepoint-otp-retirement-b2b",
+ "status": "published",
+ "order": 430,
+ "category": "Identity & threat protection",
+ "title": "Stop 'access denied' for external users as SharePoint one-time passcode retires",
+ "problem": "SharePoint Online one-time passcode (OTP) authentication began retiring in commercial tenants in mid-October 2026, and the retirement should be complete by the end of November 2026. External users without a matching Entra B2B guest account then get 'access denied' on previously shared 'Specific people' links.",
+ "steps": [
+  "Find who is affected: run the sharing report on key sites (Settings > Site usage > Shared with external users > Run report) or in OneDrive, and use sharing auditing in the audit log. Microsoft Graph Data Connect site sharing reports work at larger scale.",
+  "Create the missing guest accounts in advance: Entra ID > Users > Invite external user, using the same email address as the original sharing link (needs at least Guest Inviter or User Administrator).",
+  "Alternatively, a user with sharing permissions can share or reshare one file, folder or site with the person. That creates the guest account and restores access to everything shared before, so items don't need to be reshared one by one.",
+  "Check Entra ID > External Identities > External collaboration settings so the people who share are allowed to invite guests. Assign the Guest Inviter role where needed.",
+  "Keep Entra B2B email one-time passcode enabled as the fallback for guests without another sign-in method. It is not being retired.",
+  "Compare your SharePoint domain allow/deny lists with the Entra B2B allow/deny list, since the Entra list now applies to SharePoint sharing too.",
+  "Warn the help desk: older links can now fail for external partners."
+ ],
+ "pitfalls": [
+  "There is no opt-out, you can't choose the date, and the change can't be scoped to individual sites.",
+  "Anyone (anonymous) links are not affected.",
+  "Guests are now Entra B2B users, so your Conditional Access and MFA policies for guests apply to them, including the SMS and voice retirement.",
+  "If an Entra setting is more restrictive than the SharePoint or OneDrive setting, the Entra setting wins.",
+  "The retirement covers commercial tenants. Microsoft will announce dates for GCC, GCC High and DoD separately."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Entra B2B integration for SharePoint and OneDrive",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/sharepoint-azureb2b-integration",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "FAQ: Improvements to external sharing in OneDrive and SharePoint",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/faqs-odspintegrationwithentrab2b",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Message center MC1243549: Retirement of SharePoint One-Time Passcode (archive)",
+   "url": "https://mc.merill.net/message/MC1243549",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Report on file and folder sharing in a SharePoint site",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/sharing-reports",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Add B2B collaboration users in the Microsoft Entra admin center",
+   "url": "https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-add-guest-users-portal",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Email one-time passcode authentication",
+   "url": "https://learn.microsoft.com/en-us/entra/external-id/one-time-passcode",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Configure external collaboration settings",
+   "url": "https://learn.microsoft.com/en-us/entra/external-id/external-collaboration-settings-configure",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

@@ -40,6 +40,7 @@ CATEGORY_ORDER = [
     "Conditional Access for AI",
     "Intune & devices for AI",
     "Purview, DLP & data security for Copilot",
+    "Identity & threat protection",
     "Agents & Copilot Studio governance",
     "Licensing & reporting",
     "Admin prompt templates",

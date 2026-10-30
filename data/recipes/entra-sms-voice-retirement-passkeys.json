@@ -1,0 +1,69 @@
+{
+ "id": "entra-sms-voice-retirement-passkeys",
+ "status": "published",
+ "order": 410,
+ "category": "Identity & threat protection",
+ "title": "Move users off SMS and voice MFA before Microsoft-provided SMS and voice retire on 1 February 2027",
+ "problem": "Microsoft-provided SMS and voice authentication retires on 1 February 2027 (1 July 2027 for Global Administrators and external users). After that date, users whose only MFA method is SMS or voice get a blocking prompt to register a passkey before they can sign in.",
+ "steps": [
+  "Find who still depends on SMS or voice: run the PowerShell script or the SMS/voice usage analyzer linked from Microsoft's retirement guide (needs Global Reader, Authentication Policy Administrator or Security Reader).",
+  "Put those users in a security group so every following step can target them.",
+  "Entra admin center > Entra ID > (Security >) Authentication methods > Policies: make sure Passkey (FIDO2) is enabled and that the group is in scope. Synced passkeys and device-bound passkeys (Microsoft Authenticator, FIDO2 keys, Windows) are both supported.",
+  "Entra ID > Authentication methods > Registration campaign: set State to Microsoft managed and target the group, so users are nudged to register a passkey the next time they complete MFA. Choose Enabled instead if you need to control the targeted method or how often users can snooze.",
+  "Only for user segments with a documented regulatory or operational need, pick a telephony provider in Microsoft Security Store (selectable from 30 October 2026) and pilot it. Microsoft recommends finishing setup at least 4 weeks before 1 February 2027.",
+  "Tell users what is coming: since 1 September 2026, users enabled for SMS or voice are auto-enabled for passkeys and prompted to register one at MFA sign-in. They can skip the prompt until their retirement date, but not after it.",
+  "Do Global Administrators first even though their deadline is later: your most privileged accounts should be on phishing-resistant MFA anyway."
+ ],
+ "pitfalls": [
+  "Self-service password reset is in scope too: native SMS and voice retire across Microsoft Entra, including SSPR.",
+  "Internal guest users follow the 1 February 2027 date. Only Global Administrators and external users get until 1 July 2027.",
+  "The temporary opt-out (setting passkeyDynamicMigration in the authentication methods policy via Microsoft Graph) only delays the automatic passkey enablement and registration campaign. There is no opt-out from enforcement.",
+  "B2B guests are affected as well: passkey support for B2B users is rolling out from late October 2026 (MC1459133), and guests enabled for SMS or voice are auto-enabled for all passkey types. Excluding them from the passkey policy alone doesn't stop that; move them off SMS and voice instead."
+ ],
+ "sources": [
+  {
+   "title": "Passkeys by default and retirement of Microsoft-provided SMS and voice authentication",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "SMS and voice retirement FAQ",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement-faq",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Message center MC1426371: Passkeys by default and retirement of SMS and voice (archive)",
+   "url": "https://mc.merill.net/message/MC1426371",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Enable passkeys (FIDO2) for your organization",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-authentication-passkeys-fido2",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Run a registration campaign to set up authentication methods",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-mfa-registration-campaign",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Deploy phishing-resistant passwordless authentication",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-deploy-phishing-resistant-passwordless-authentication",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Choose a telephony provider for SMS and voice authentication",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-phone-providers",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Message center MC1459133: Passkey support for B2B users (archive)",
+   "url": "https://mc.merill.net/message/MC1459133",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

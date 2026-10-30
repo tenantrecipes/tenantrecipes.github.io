@@ -829,6 +829,242 @@
   "updated": "2026-10-30"
  },
  {
+  "id": "entra-sms-voice-retirement-passkeys",
+  "status": "published",
+  "order": 410,
+  "category": "Identity & threat protection",
+  "title": "Move users off SMS and voice MFA before Microsoft-provided SMS and voice retire on 1 February 2027",
+  "problem": "Microsoft-provided SMS and voice authentication retires on 1 February 2027 (1 July 2027 for Global Administrators and external users). After that date, users whose only MFA method is SMS or voice get a blocking prompt to register a passkey before they can sign in.",
+  "steps": [
+   "Find who still depends on SMS or voice: run the PowerShell script or the SMS/voice usage analyzer linked from Microsoft's retirement guide (needs Global Reader, Authentication Policy Administrator or Security Reader).",
+   "Put those users in a security group so every following step can target them.",
+   "Entra admin center > Entra ID > (Security >) Authentication methods > Policies: make sure Passkey (FIDO2) is enabled and that the group is in scope. Synced passkeys and device-bound passkeys (Microsoft Authenticator, FIDO2 keys, Windows) are both supported.",
+   "Entra ID > Authentication methods > Registration campaign: set State to Microsoft managed and target the group, so users are nudged to register a passkey the next time they complete MFA. Choose Enabled instead if you need to control the targeted method or how often users can snooze.",
+   "Only for user segments with a documented regulatory or operational need, pick a telephony provider in Microsoft Security Store (selectable from 30 October 2026) and pilot it. Microsoft recommends finishing setup at least 4 weeks before 1 February 2027.",
+   "Tell users what is coming: since 1 September 2026, users enabled for SMS or voice are auto-enabled for passkeys and prompted to register one at MFA sign-in. They can skip the prompt until their retirement date, but not after it.",
+   "Do Global Administrators first even though their deadline is later: your most privileged accounts should be on phishing-resistant MFA anyway."
+  ],
+  "pitfalls": [
+   "Self-service password reset is in scope too: native SMS and voice retire across Microsoft Entra, including SSPR.",
+   "Internal guest users follow the 1 February 2027 date. Only Global Administrators and external users get until 1 July 2027.",
+   "The temporary opt-out (setting passkeyDynamicMigration in the authentication methods policy via Microsoft Graph) only delays the automatic passkey enablement and registration campaign. There is no opt-out from enforcement.",
+   "B2B guests are affected as well: passkey support for B2B users is rolling out from late October 2026 (MC1459133), and guests enabled for SMS or voice are auto-enabled for all passkey types. Excluding them from the passkey policy alone doesn't stop that; move them off SMS and voice instead."
+  ],
+  "sources": [
+   {
+    "title": "Passkeys by default and retirement of Microsoft-provided SMS and voice authentication",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "SMS and voice retirement FAQ",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement-faq",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Message center MC1426371: Passkeys by default and retirement of SMS and voice (archive)",
+    "url": "https://mc.merill.net/message/MC1426371",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Enable passkeys (FIDO2) for your organization",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-authentication-passkeys-fido2",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Run a registration campaign to set up authentication methods",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-mfa-registration-campaign",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Deploy phishing-resistant passwordless authentication",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-deploy-phishing-resistant-passwordless-authentication",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Choose a telephony provider for SMS and voice authentication",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-phone-providers",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Message center MC1459133: Passkey support for B2B users (archive)",
+    "url": "https://mc.merill.net/message/MC1459133",
+    "checked": "2026-10-30"
+   }
+  ],
+  "last_verified": "2026-10-30",
+  "verified_by": "Pascal",
+  "created": "2026-10-30",
+  "updated": "2026-10-30"
+ },
+ {
+  "id": "ca-managed-risk-remediation-policy",
+  "status": "published",
+  "order": 420,
+  "category": "Identity & threat protection",
+  "title": "Check the Microsoft-managed 'Require risk remediation for high-risk users' policy that just switched on",
+  "problem": "In Entra ID P2 tenants Microsoft created a managed Conditional Access policy in report-only mode the week of 28 September 2026. If nobody touched it, it switched to On automatically the week of 28 October 2026, so high-risk users are now forced to self-remediate.",
+  "steps": [
+   "Entra admin center > Entra ID > Conditional Access > Policies: open 'Require risk remediation for high-risk users' (Microsoft-managed) and note the security group that was created with it.",
+   "Open the Policy impact tab to see which sign-ins the policy affected while it was in report-only.",
+   "Exclude your break-glass/emergency access accounts, or narrow the scope by changing the membership of the policy's security group.",
+   "Make sure the users in scope are registered for MFA so they can self-remediate. In hybrid tenants, self-remediation by secure password change relies on password hash sync.",
+   "Decide on the state: leave it On, or set it to Off if you already run your own user-risk policy. If you need more changes than exclusions and state, use Duplicate and build your own copy.",
+   "Afterwards, check Entra ID > Monitoring & health > Sign-in logs, filtered on Conditional Access, for users stuck in remediation."
+  ],
+  "pitfalls": [
+   "It remediates user risk, not sign-in risk.",
+   "Precedence: Require risk remediation overrides Require password change, and Block overrides all others. Check how it overlaps with your existing risk policies.",
+   "The policy isn't supported for external and guest users.",
+   "Microsoft-managed policies can't be renamed or deleted, only scoped (exclusions) and switched On or Off.",
+   "The grant controls automatically add authentication strength and sign-in frequency 'Every time', so after their sessions are revoked users have to sign in again."
+  ],
+  "sources": [
+   {
+    "title": "Microsoft-managed Conditional Access policies",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/managed-policies",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Message center MC1476122: Require risk remediation for high-risk users (archive)",
+    "url": "https://mc.merill.net/message/MC1476122",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Self-remediation experience with ID Protection and Conditional Access",
+    "url": "https://learn.microsoft.com/en-us/entra/id-protection/concept-identity-protection-user-experience",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Conditional Access report-only mode",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-report-only",
+    "checked": "2026-10-30"
+   }
+  ],
+  "last_verified": "2026-10-30",
+  "verified_by": "Pascal",
+  "created": "2026-10-30",
+  "updated": "2026-10-30"
+ },
+ {
+  "id": "sharepoint-otp-retirement-b2b",
+  "status": "published",
+  "order": 430,
+  "category": "Identity & threat protection",
+  "title": "Stop 'access denied' for external users as SharePoint one-time passcode retires",
+  "problem": "SharePoint Online one-time passcode (OTP) authentication began retiring in commercial tenants in mid-October 2026, and the retirement should be complete by the end of November 2026. External users without a matching Entra B2B guest account then get 'access denied' on previously shared 'Specific people' links.",
+  "steps": [
+   "Find who is affected: run the sharing report on key sites (Settings > Site usage > Shared with external users > Run report) or in OneDrive, and use sharing auditing in the audit log. Microsoft Graph Data Connect site sharing reports work at larger scale.",
+   "Create the missing guest accounts in advance: Entra ID > Users > Invite external user, using the same email address as the original sharing link (needs at least Guest Inviter or User Administrator).",
+   "Alternatively, a user with sharing permissions can share or reshare one file, folder or site with the person. That creates the guest account and restores access to everything shared before, so items don't need to be reshared one by one.",
+   "Check Entra ID > External Identities > External collaboration settings so the people who share are allowed to invite guests. Assign the Guest Inviter role where needed.",
+   "Keep Entra B2B email one-time passcode enabled as the fallback for guests without another sign-in method. It is not being retired.",
+   "Compare your SharePoint domain allow/deny lists with the Entra B2B allow/deny list, since the Entra list now applies to SharePoint sharing too.",
+   "Warn the help desk: older links can now fail for external partners."
+  ],
+  "pitfalls": [
+   "There is no opt-out, you can't choose the date, and the change can't be scoped to individual sites.",
+   "Anyone (anonymous) links are not affected.",
+   "Guests are now Entra B2B users, so your Conditional Access and MFA policies for guests apply to them, including the SMS and voice retirement.",
+   "If an Entra setting is more restrictive than the SharePoint or OneDrive setting, the Entra setting wins.",
+   "The retirement covers commercial tenants. Microsoft will announce dates for GCC, GCC High and DoD separately."
+  ],
+  "sources": [
+   {
+    "title": "Microsoft Entra B2B integration for SharePoint and OneDrive",
+    "url": "https://learn.microsoft.com/en-us/sharepoint/sharepoint-azureb2b-integration",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "FAQ: Improvements to external sharing in OneDrive and SharePoint",
+    "url": "https://learn.microsoft.com/en-us/sharepoint/faqs-odspintegrationwithentrab2b",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Message center MC1243549: Retirement of SharePoint One-Time Passcode (archive)",
+    "url": "https://mc.merill.net/message/MC1243549",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Report on file and folder sharing in a SharePoint site",
+    "url": "https://learn.microsoft.com/en-us/sharepoint/sharing-reports",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Add B2B collaboration users in the Microsoft Entra admin center",
+    "url": "https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-add-guest-users-portal",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Email one-time passcode authentication",
+    "url": "https://learn.microsoft.com/en-us/entra/external-id/one-time-passcode",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Configure external collaboration settings",
+    "url": "https://learn.microsoft.com/en-us/entra/external-id/external-collaboration-settings-configure",
+    "checked": "2026-10-30"
+   }
+  ],
+  "last_verified": "2026-10-30",
+  "verified_by": "Pascal",
+  "created": "2026-10-30",
+  "updated": "2026-10-30"
+ },
+ {
+  "id": "defender-teams-zap-qr-phishing",
+  "status": "published",
+  "order": 440,
+  "category": "Identity & threat protection",
+  "title": "Catch phishing in Teams chats: ZAP for Teams, QR-code URL detection and user reporting",
+  "problem": "Since early October 2026 (rollout completes early November), Defender for Office 365 also extracts the URLs hidden in QR codes in Teams messages after delivery and puts a warning on malicious ones. With ZAP for Teams on, eligible malicious internal messages can be blocked.",
+  "steps": [
+   "Microsoft Defender portal > Settings > Email & collaboration > Microsoft Teams protection (security.microsoft.com/securitysettings/teamsProtectionPolicy): check that the Zero-hour auto purge (ZAP) toggle is On.",
+   "On the same page, pick the quarantine policies for malware and high-confidence phishing, and add exclusions only if you really need them. Exclusions apply to recipients, not senders.",
+   "PowerShell alternative: `Get-TeamsProtectionPolicy | Format-List Name,ZapEnabled` and `Set-TeamsProtectionPolicy -Identity \"Teams Protection Policy\" -ZapEnabled $true`.",
+   "Turn on user reporting in two places: 'Report a security concern' in the Teams admin center messaging policies (plus calling and meeting reporting if you want them), and 'Monitor reported items in Microsoft Teams' on the Teams user reported settings page (security.microsoft.com/securitysettings/teamsUserSubmission). Existing tenants need to enable the Defender setting themselves.",
+   "Hunt for QR-code detections in Advanced Hunting: `MessageUrlInfo | where UrlLocation == \"QRCode\"`.",
+   "Tell the SOC that users can now also report Teams calls, meetings and meeting participants, so these reports show up on the Submissions page."
+  ],
+  "pitfalls": [
+   "ZAP for Teams and Safe Links for Teams need Defender for Office 365 Plan 1 or higher, which Microsoft 365 E3 has included since July 2026. Advanced hunting on Teams messages needs Plan 2 or Microsoft 365 E5.",
+   "ZAP for Teams quarantines only internal chats and channels, and only for malware and high-confidence phishing.",
+   "Quarantined Teams messages are currently admin-only, and users get no quarantine notifications.",
+   "User reporting in Teams isn't supported in GCC, GCC High and DoD."
+  ],
+  "sources": [
+   {
+    "title": "Microsoft Defender for Office 365 support for Microsoft Teams",
+    "url": "https://learn.microsoft.com/en-us/defender-office-365/mdo-support-teams-about",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Message center MC1490905: Post-delivery protection for malicious QR codes in Teams (archive)",
+    "url": "https://mc.merill.net/message/MC1490905",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "What's new in Microsoft Defender for Office 365",
+    "url": "https://learn.microsoft.com/en-us/defender-office-365/defender-for-office-365-whats-new",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "User reported settings for Microsoft Teams",
+    "url": "https://learn.microsoft.com/en-us/defender-office-365/submissions-teams",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Zero-hour auto purge (ZAP) in Defender for Office 365",
+    "url": "https://learn.microsoft.com/en-us/defender-office-365/zero-hour-auto-purge",
+    "checked": "2026-10-30"
+   }
+  ],
+  "last_verified": "2026-10-30",
+  "verified_by": "Pascal",
+  "created": "2026-10-30",
+  "updated": "2026-10-30"
+ },
+ {
   "id": "copilot-studio-environment-strategy",
   "status": "published",
   "order": 270,
@@ -975,6 +1211,48 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
+  "updated": "2026-10-30"
+ },
+ {
+  "id": "agents-restrict-blueprint-creation",
+  "status": "published",
+  "order": 305,
+  "category": "Agents & Copilot Studio governance",
+  "title": "Decide who can create agents in Entra before default users get the right on 4 November 2026",
+  "problem": "From 4 November 2026 (rollout through late November), users without any Entra role can create agent identity blueprints, and the agents built from them, unless you set 'Users can create agent blueprints' to No.",
+  "steps": [
+   "Sign in to the Entra admin center as at least a Cloud Application Administrator.",
+   "Entra ID > Users > User settings > Default user role permissions: set 'Users can create agent blueprints' to No and save. You can do this now; it takes effect when the rollout reaches your tenant.",
+   "Give named builders the Agent ID Developer role, which lets them create blueprints and blueprint principals. Reserve Agent ID Administrator for people who must add a secret or certificate to a blueprint.",
+   "Review 'Users can register applications' at the same time. The new setting is independent of it.",
+   "Review blueprint owners regularly: owners can create agent identities from their blueprint without an Agent ID role."
+  ],
+  "pitfalls": [
+   "The toggle doesn't change or remove existing blueprints, or change who can create agent identities from existing blueprints.",
+   "It doesn't block an app or an agent from creating identities, so review which apps hold Graph permissions for that.",
+   "The label may read slightly differently in the portal while the feature rolls out. It is under Default user role permissions.",
+   "It doesn't change the requirements in Microsoft Foundry or Security Copilot, such as licenses and Azure subscriptions."
+  ],
+  "sources": [
+   {
+    "title": "Message center MC1506733: Review who can create agents in Microsoft Entra (archive)",
+    "url": "https://mc.merill.net/message/MC1506733",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Delegate app and agent management permissions",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/delegate-app-roles",
+    "checked": "2026-10-30"
+   },
+   {
+    "title": "Create an agent identity blueprint",
+    "url": "https://learn.microsoft.com/en-us/entra/agent-id/create-blueprint",
+    "checked": "2026-10-30"
+   }
+  ],
+  "last_verified": "2026-10-30",
+  "verified_by": "Pascal",
+  "created": "2026-10-30",
   "updated": "2026-10-30"
  },
  {

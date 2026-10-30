@@ -1,0 +1,42 @@
+{
+ "id": "agents-restrict-blueprint-creation",
+ "status": "published",
+ "order": 305,
+ "category": "Agents & Copilot Studio governance",
+ "title": "Decide who can create agents in Entra before default users get the right on 4 November 2026",
+ "problem": "From 4 November 2026 (rollout through late November), users without any Entra role can create agent identity blueprints, and the agents built from them, unless you set 'Users can create agent blueprints' to No.",
+ "steps": [
+  "Sign in to the Entra admin center as at least a Cloud Application Administrator.",
+  "Entra ID > Users > User settings > Default user role permissions: set 'Users can create agent blueprints' to No and save. You can do this now; it takes effect when the rollout reaches your tenant.",
+  "Give named builders the Agent ID Developer role, which lets them create blueprints and blueprint principals. Reserve Agent ID Administrator for people who must add a secret or certificate to a blueprint.",
+  "Review 'Users can register applications' at the same time. The new setting is independent of it.",
+  "Review blueprint owners regularly: owners can create agent identities from their blueprint without an Agent ID role."
+ ],
+ "pitfalls": [
+  "The toggle doesn't change or remove existing blueprints, or change who can create agent identities from existing blueprints.",
+  "It doesn't block an app or an agent from creating identities, so review which apps hold Graph permissions for that.",
+  "The label may read slightly differently in the portal while the feature rolls out. It is under Default user role permissions.",
+  "It doesn't change the requirements in Microsoft Foundry or Security Copilot, such as licenses and Azure subscriptions."
+ ],
+ "sources": [
+  {
+   "title": "Message center MC1506733: Review who can create agents in Microsoft Entra (archive)",
+   "url": "https://mc.merill.net/message/MC1506733",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Delegate app and agent management permissions",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/delegate-app-roles",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Create an agent identity blueprint",
+   "url": "https://learn.microsoft.com/en-us/entra/agent-id/create-blueprint",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

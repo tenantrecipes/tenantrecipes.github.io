@@ -113,6 +113,7 @@ SECURITY_TRACK = [  # (category, headline, blurb, preferred first recipe id) —
     ("Conditional Access for AI", "Lock down sign-ins", "Phishing-resistant MFA, risk-based blocks and break-glass hygiene before AI scales.", "ca-require-mfa-copilot"),
     ("Purview, DLP & data security for Copilot", "Stop oversharing", "Find what Copilot can see, then fence it with labels, DLP and audit.", "purview-oversharing-assessment"),
     ("Intune & devices for AI", "Harden devices", "Compliant devices and app protection so AI only runs where it should.", "intune-compliance-baseline"),
+    ("Identity & threat protection", "Stop identity attacks", "Passkeys before SMS retires, Microsoft-managed risk policies, guest access and Teams phishing.", "entra-sms-voice-retirement-passkeys"),
 ]
 
 

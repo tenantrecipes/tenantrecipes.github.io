@@ -1,0 +1,53 @@
+{
+ "id": "defender-teams-zap-qr-phishing",
+ "status": "published",
+ "order": 440,
+ "category": "Identity & threat protection",
+ "title": "Catch phishing in Teams chats: ZAP for Teams, QR-code URL detection and user reporting",
+ "problem": "Since early October 2026 (rollout completes early November), Defender for Office 365 also extracts the URLs hidden in QR codes in Teams messages after delivery and puts a warning on malicious ones. With ZAP for Teams on, eligible malicious internal messages can be blocked.",
+ "steps": [
+  "Microsoft Defender portal > Settings > Email & collaboration > Microsoft Teams protection (security.microsoft.com/securitysettings/teamsProtectionPolicy): check that the Zero-hour auto purge (ZAP) toggle is On.",
+  "On the same page, pick the quarantine policies for malware and high-confidence phishing, and add exclusions only if you really need them. Exclusions apply to recipients, not senders.",
+  "PowerShell alternative: `Get-TeamsProtectionPolicy | Format-List Name,ZapEnabled` and `Set-TeamsProtectionPolicy -Identity \"Teams Protection Policy\" -ZapEnabled $true`.",
+  "Turn on user reporting in two places: 'Report a security concern' in the Teams admin center messaging policies (plus calling and meeting reporting if you want them), and 'Monitor reported items in Microsoft Teams' on the Teams user reported settings page (security.microsoft.com/securitysettings/teamsUserSubmission). Existing tenants need to enable the Defender setting themselves.",
+  "Hunt for QR-code detections in Advanced Hunting: `MessageUrlInfo | where UrlLocation == \"QRCode\"`.",
+  "Tell the SOC that users can now also report Teams calls, meetings and meeting participants, so these reports show up on the Submissions page."
+ ],
+ "pitfalls": [
+  "ZAP for Teams and Safe Links for Teams need Defender for Office 365 Plan 1 or higher, which Microsoft 365 E3 has included since July 2026. Advanced hunting on Teams messages needs Plan 2 or Microsoft 365 E5.",
+  "ZAP for Teams quarantines only internal chats and channels, and only for malware and high-confidence phishing.",
+  "Quarantined Teams messages are currently admin-only, and users get no quarantine notifications.",
+  "User reporting in Teams isn't supported in GCC, GCC High and DoD."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Defender for Office 365 support for Microsoft Teams",
+   "url": "https://learn.microsoft.com/en-us/defender-office-365/mdo-support-teams-about",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Message center MC1490905: Post-delivery protection for malicious QR codes in Teams (archive)",
+   "url": "https://mc.merill.net/message/MC1490905",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "What's new in Microsoft Defender for Office 365",
+   "url": "https://learn.microsoft.com/en-us/defender-office-365/defender-for-office-365-whats-new",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "User reported settings for Microsoft Teams",
+   "url": "https://learn.microsoft.com/en-us/defender-office-365/submissions-teams",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Zero-hour auto purge (ZAP) in Defender for Office 365",
+   "url": "https://learn.microsoft.com/en-us/defender-office-365/zero-hour-auto-purge",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

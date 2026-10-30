@@ -58,7 +58,7 @@ footer a{color:#777}.sponsor-slot{min-height:90px;border:1px dashed #cfd3de;bord
 @keyframes tick{to{transform:translateX(-100%)}}
 .sec{padding-top:44px}.sec-k{margin:0;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6a3fd1}
 .sec h2{font-size:clamp(1.4rem,2.6vw,1.9rem);line-height:1.2;margin:6px 0 20px;max-width:760px}
-.sec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
 .sec-tile{position:relative;display:block;background:#0b1538;color:#dfe6ff;border-radius:14px;padding:22px;text-decoration:none;overflow:hidden;transition:transform .15s,box-shadow .15s}
 .sec-tile::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(#6b3fd4aa,transparent 70%)}
 .sec-tile:hover{transform:translateY(-3px);box-shadow:0 14px 34px #0b153855}
