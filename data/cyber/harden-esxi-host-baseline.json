@@ -1,0 +1,47 @@
+{
+ "id": "harden-esxi-host-baseline",
+ "status": "published",
+ "order": 90,
+ "type": "hardening",
+ "area": "virtualization",
+ "title": "ESXi host hardening baseline: lockdown mode, no SSH, execInstalledOnly, remote audit logs",
+ "summary": "Ransomware crews go after hypervisors because one host holds many servers. These are the highest-impact controls from Broadcom's vSphere 8 security configuration guide, with PowerCLI to check and set each one.",
+ "steps": [
+  "Patch first: Broadcom's baseline includes keeping ESXi current and updating vCenter first when an update is available. See VMSA-2026-0006 in the vulnerability watch.",
+  "Normal lockdown mode, so all management goes through vCenter: `(Get-View (Get-VMHost -Name $ESXi | Get-View).ConfigManager.HostAccessManager).ChangeLockdownMode('lockdownNormal')`. Review the Exception Users list (`QueryLockdownExceptions()`) first.",
+  "Keep SSH and the ESXi Shell stopped and set to manual: `Get-VMHostService -VMHost $ESXi | where {$_.Key -eq 'TSM-SSH'} | Set-VMHostService -Policy Off` (and the same for 'TSM'). Set `UserVars.ESXiShellTimeOut` to 600 and `UserVars.ESXiShellInteractiveTimeOut` to 900.",
+  "Only run binaries that come from installed VIBs: `Get-AdvancedSetting VMkernel.Boot.execInstalledOnly | Set-AdvancedSetting -Value True`.",
+  "Send logs and audit records off the host: set `Syslog.global.logHost`, `Syslog.global.auditRecord.storageEnable` = True and `Syslog.global.auditRecord.remoteEnable` = True, and use persistent storage rather than /tmp/scratch.",
+  "Restrict the ESXi firewall so management services only accept authorized admin networks, and enable management traffic only on management VMkernel adapters (not on vMotion or vSAN).",
+  "Turn off services you don't use (SNMP, CIM 'sfcbd-watchdog', SLP 'slpd'). Set Forged Transmits and MAC Address Changes to Reject on standard switches, and require Secure Boot with TPM configuration encryption where the hardware supports it."
+ ],
+ "pitfalls": [
+  "Strict lockdown mode means that if the host loses contact with vCenter and you can't restore it, you must rebuild the host. Broadcom says Normal usually suffices.",
+  "Backup and monitoring tools may need lockdown exception users or temporary unlocks.",
+  "execInstalledOnly can stop unsigned third-party software from running.",
+  "Secure Boot plus TPM configuration encryption makes traditional root password recovery impossible, so keep a protected admin account.",
+  "Some clustered or network workloads legitimately need Forged Transmits or MAC changes, so give them their own port group."
+ ],
+ "sources": [
+  {
+   "title": "Broadcom: ESXi Security Controls Reference (vSphere 8)",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-security/understanding-vsphere-hardening-and-compliance/understanding-vsphere-security-configuration-guide/esxi-security-controls-reference.html",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Broadcom: Configuring and managing lockdown mode on ESXi hosts",
+   "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-security/securing-esxi-hosts/customizing-hosts-with-the-security-profile/lockdown-mode.html",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Broadcom VMSA-2026-0006 Questions & Answers",
+   "url": "https://github.com/vmware/vcf-security-and-compliance-guidelines/blob/main/security-advisories/vmsa-2026-0006/README.md",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "severity": null
+}

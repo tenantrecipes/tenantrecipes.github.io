@@ -9,6 +9,7 @@ import site_config as C
 sys.path.insert(0, str(ROOT / "data" / "guides"))
 import secure_copilot_rollout as G1
 GUIDES = [G1]
+import build_cyber as CY
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -59,13 +60,13 @@ def head(title, desc, rel, path, og_type="website"):
 
 def nav(rel):
     return (f'<header><nav><a class="logo" href="{rel}index.html"><img src="{rel}assets/logo.svg" alt="Tenant Recipes" width="158" height="36"></a><div>'
-            f'<a href="{rel}guides/index.html">Guides</a><a href="{rel}index.html#library">Recipes</a><a href="{rel}newsletter.html">Newsletter</a>'
+            f'<a href="{rel}guides/index.html">Guides</a><a href="{rel}index.html#library">Recipes</a><a href="{rel}security/index.html">Security</a><a href="{rel}newsletter.html">Newsletter</a>'
             f'<a href="{rel}about.html">About</a></div></nav></header>')
 
 
 def footer(rel):
     return (f'<footer>Tenant Recipes · Practical AI recipes for Microsoft 365 admins · Not affiliated with Microsoft<br>'
-            f'<a href="{rel}guides/{G1.SLUG}.html">Secure Copilot rollout guide</a> · <a href="{rel}newsletter.html">Newsletter</a> · <a href="{rel}about.html">About</a> · '
+            f'<a href="{rel}guides/{G1.SLUG}.html">Secure Copilot rollout guide</a> · <a href="{rel}security/index.html">Vulnerability watch</a> · <a href="{rel}newsletter.html">Newsletter</a> · <a href="{rel}about.html">About</a> · '
             f'<a href="{rel}privacy.html">Privacy policy</a></footer>')
 
 
@@ -165,7 +166,9 @@ def hero(rel):
         f'</section>'
         f'<section class="sec wrap" aria-labelledby="sec-title"><p class="sec-k">Security track</p>'
         f'<h2 id="sec-title">AI is only as safe as your tenant. {sec_total} recipes to harden it first.</h2>'
-        f'<div class="sec-grid">{tiles}</div></section>'
+        f'<div class="sec-grid">{tiles}</div>'
+        f'<a class="cy-promo" href="security/index.html"><span class="cy-promo-k">New</span><strong>Cybersecurity beyond the tenant:</strong> '
+        f'vulnerability watch for exploited CVEs, plus hardening for network, servers and VMware →</a></section>'
     )
 
 
@@ -312,6 +315,7 @@ def build():
     for g in GUIDES:
         pages.append(guide_page(g))
     pages.append(guides_index())
+    pages += CY.build(page, R, esc, step_html, signup, fmt_date, E, C.SITE_NAME)
 
     for r in R:
         def body(rel, r=r):

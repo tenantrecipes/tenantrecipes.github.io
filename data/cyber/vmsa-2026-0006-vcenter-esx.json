@@ -1,0 +1,119 @@
+{
+ "id": "vmsa-2026-0006-vcenter-esx",
+ "status": "published",
+ "order": 20,
+ "type": "vulnerability",
+ "area": "virtualization",
+ "title": "VMSA-2026-0006: vCenter auth bypass and code execution, ESX VM escape (patch vCenter and ESX)",
+ "summary": "Broadcom's critical advisory VMSA-2026-0006 fixes five flaws. Two in vCenter let an unauthenticated attacker with network access bypass authentication (CVE-2026-59309) and execute code (CVE-2026-59310). One in ESX lets an admin inside a VM with a VMXNET3 adapter run code on the host (CVE-2026-47876). CISA lists CVE-2026-59310 and the ESX logging flaw CVE-2026-41709 as known exploited.",
+ "vendor": "Broadcom (VMware)",
+ "product": "VMware vCenter, ESX, Workstation, Fusion, Cloud Foundation, vSphere Foundation, Telco Cloud",
+ "cves": [
+  {
+   "id": "CVE-2026-59309",
+   "cvss": 9.8,
+   "cvss_version": "3.1",
+   "cvss_source": "Broadcom",
+   "severity": "Critical",
+   "note": "vCenter authentication bypass (VMware Directory Service)"
+  },
+  {
+   "id": "CVE-2026-59310",
+   "cvss": 9.8,
+   "cvss_version": "3.1",
+   "cvss_source": "Broadcom",
+   "severity": "Critical",
+   "note": "vCenter syslog server directory traversal, code execution. CISA KEV since 18 Aug 2026; CISA marks ransomware use as Known."
+  },
+  {
+   "id": "CVE-2026-47876",
+   "cvss": 9.3,
+   "cvss_version": "3.1",
+   "cvss_source": "Broadcom",
+   "severity": "Critical",
+   "note": "ESX VMXNET3 out-of-bounds write, VM escape"
+  },
+  {
+   "id": "CVE-2026-41703",
+   "cvss": 7.6,
+   "cvss_version": "3.1",
+   "cvss_source": "Broadcom",
+   "severity": "Important",
+   "note": "ESX/Workstation/Fusion out-of-bounds read"
+  },
+  {
+   "id": "CVE-2026-41709",
+   "cvss": 2.7,
+   "cvss_version": "3.1",
+   "cvss_source": "Broadcom",
+   "severity": "Low",
+   "note": "ESX insufficient logging: an admin can act without being logged. CISA KEV since 28 Oct 2026."
+  }
+ ],
+ "severity": "Critical",
+ "exploited": true,
+ "kev_added": "2026-10-28",
+ "advisory_date": "2026-07-29",
+ "advisory_id": "VMSA-2026-0006.2",
+ "impact": "Unauthenticated access to and code execution on vCenter; code execution on the ESX host from a VM; operations on ESX that are not logged.",
+ "affected": [
+  "Any VMware ESX, vCenter, Workstation or Fusion version earlier than the fixed versions in the VMSA, including ESX and vCenter inside VCF, VVF and Telco Cloud.",
+  "VMXNET3 issue: only VMs with a VMXNET3 adapter. Broadcom advises updating ESX rather than switching adapter types.",
+  "vSphere 6.5/6.7 are not evaluated: Broadcom says to presume they are affected. vSphere 7.0 (End of General Support 2 Oct 2025): patches only via extended support."
+ ],
+ "fixed": [
+  "vCenter: 9.1.0.0300, 9.0.2.0100, 8.0 U3k or 8.0 U2f. VCF 5.x: async patch to 8.0 U3k (KB 88287).",
+  "ESX (CVE-2026-47876): ESXi-9.1.0.0200-25557999, ESXi-9.0.2.0100-25595025, ESXi80U3k-25595708 or ESXi80U2f-25626445.",
+  "Workstation and Fusion: 26H1 (fixes CVE-2026-41703 only, rated Low there).",
+  "Patches are cumulative: newer versions also contain the fixes. There are no workarounds."
+ ],
+ "steps": [
+  "Inventory versions with PowerCLI: `Get-VMHost | Select-Object Name,Version,Build`, and for vCenter `$global:DefaultVIServer.Version` / `.Build` after `Connect-VIServer`.",
+  "Patch vCenter first if you can: the two Critical vCenter flaws need only network access. You can use the VAMI or the normal update mechanism; vCenter Quick Patch is not available for these updates.",
+  "Restrict network access to vCenter to admin networks while you patch (Broadcom leaves compensating controls to you).",
+  "Roll the ESX update through clusters with vMotion. Broadcom says these updates are compatible with ESX Live Patch where your environment supports it. Run a depot sync in vCenter if the new versions don't show up in vSphere Lifecycle Manager.",
+  "Check the vCenter/ESX combination in the VMware Interoperability Matrix before mixing patch levels."
+ ],
+ "pitfalls": [
+  "'Back-in-time' restriction: the 8.0 and 9.0 updates block upgrades to some VCF 9.x versions until a later release (for example 8.0 U3k can't go directly to 9.1, but can go to 9.1.1). Check KB 67077 before patching mid-upgrade.",
+  "Not using Enhanced Linked Mode or Integrated Windows Authentication does not protect you.",
+  "Engineered systems (VxRail, SimpliVity and similar) must follow their vendor's own patch guidance.",
+  "Broadcom's FAQ (last updated 19 Aug) says it has no information about exploitation, but CISA's KEV catalog lists CVE-2026-59310 and CVE-2026-41709 as exploited. Treat it as exploited."
+ ],
+ "sources": [
+  {
+   "title": "Broadcom VMSA-2026-0006.2 security advisory",
+   "url": "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/38017",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Broadcom VMSA-2026-0006 Questions & Answers (official repository)",
+   "url": "https://github.com/vmware/vcf-security-and-compliance-guidelines/blob/main/security-advisories/vmsa-2026-0006/README.md",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Broadcom KB 454369: VMSA-2026-0006.1 impact on upgrade paths",
+   "url": "https://knowledge.broadcom.com/external/article/454369",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "CISA Known Exploited Vulnerabilities Catalog",
+   "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "NIST NVD: CVE-2026-59310",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-59310",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "NIST NVD: CVE-2026-41709",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41709",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

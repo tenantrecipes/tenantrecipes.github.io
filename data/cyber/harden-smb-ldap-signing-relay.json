@@ -1,0 +1,61 @@
+{
+ "id": "harden-smb-ldap-signing-relay",
+ "status": "published",
+ "order": 70,
+ "type": "hardening",
+ "area": "server",
+ "title": "Stop NTLM relay on-prem: require SMB signing and LDAP signing plus channel binding",
+ "summary": "Unsigned SMB and LDAP let an attacker in the middle relay credentials. Windows 11 24H2 and Windows Server 2025 now require SMB signing by default, and new Windows Server 2025 AD deployments require LDAP signing. Older or upgraded environments often don't. Here's how to audit first and then enforce.",
+ "steps": [
+  "SMB: check the current state with `Get-SmbServerConfiguration | Format-List RequireSecuritySignature` and `Get-SmbClientConfiguration | Format-List RequireSecuritySignature`.",
+  "SMB: on Windows 11 24H2 / Server 2025, turn on auditing first to find devices that can't sign: `Set-SmbClientConfiguration -AuditServerDoesNotSupportSigning $true` and `Set-SmbServerConfiguration -AuditClientDoesNotSupportSigning $true`. Then watch events 31998/31999 (SMBClient\\Audit) and 3021/3022 (SMBServer\\Audit).",
+  "SMB: enforce with Group Policy: Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options > 'Microsoft network server: Digitally sign communications (always)' and 'Microsoft network client: Digitally sign communications (always)'.",
+  "LDAP: on domain controllers, look for Event 2887 (a 24-hour summary of unsigned binds). Set the '16 LDAP Interface Events' diagnostic level to 2 to get Event 2889 with the IP and identity of each client that does an unsigned bind.",
+  "LDAP: fix or replace those clients, then set 'Domain controller: LDAP server signing requirements' to Require signing in the Default Domain Controllers Policy. On Windows Server 2025, 'Domain controller: LDAP server signing requirements enforcement' takes precedence.",
+  "LDAP over TLS: set 'Domain controller: LDAP server channel binding token requirements' to When Supported, per Microsoft advisory ADV190023, to bind authentication to the TLS session."
+ ],
+ "pitfalls": [
+  "Requiring SMB signing also blocks guest access to shares, and third-party NAS devices that don't sign fail with STATUS_INVALID_SIGNATURE. Microsoft doesn't recommend disabling signing as a workaround.",
+  "Connecting to shares by IP address or a DNS CNAME falls back to NTLM instead of Kerberos. Use names, or set up aliases with `netdom`.",
+  "Upgrading a DC to Windows Server 2025 keeps your existing LDAP signing policy. It doesn't silently start enforcing if you had a policy set.",
+  "The EnableSecuritySignature registry value is ignored for SMB2 and later; only RequireSecuritySignature matters.",
+  "Microsoft's pages differ on Windows Server 2025 SMB defaults: 'Control SMB signing behavior' says Server 2025 requires outbound signing only, while the hardening overview says both directions. Check with Get-SmbServerConfiguration rather than assuming."
+ ],
+ "sources": [
+  {
+   "title": "Overview of SMB signing in Windows",
+   "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Control SMB signing behavior",
+   "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "SMB security hardening",
+   "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-security-hardening",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "LDAP signing overview for Active Directory",
+   "url": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/ldap-signing",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Configure LDAP signing by using Group Policy",
+   "url": "https://learn.microsoft.com/en-us/windows-server/identity/manage-ldap-signing-group-policy",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "ADV190023: Guidance for enabling LDAP channel binding and LDAP signing",
+   "url": "https://msrc.microsoft.com/update-guide/en-us/advisory/ADV190023",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "severity": null
+}

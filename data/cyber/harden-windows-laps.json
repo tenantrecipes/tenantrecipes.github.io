@@ -1,0 +1,46 @@
+{
+ "id": "harden-windows-laps",
+ "status": "published",
+ "order": 80,
+ "type": "hardening",
+ "area": "endpoint",
+ "title": "Kill shared local admin passwords with Windows LAPS (Entra ID or AD)",
+ "summary": "When every device has the same local administrator password, one stolen hash opens them all. Windows LAPS, built into Windows, rotates a unique password per device and backs it up to Microsoft Entra ID or Active Directory. It's free, and the legacy Microsoft LAPS is deprecated.",
+ "steps": [
+  "Entra ID: first enable LAPS at tenant level in the Microsoft Entra device settings. Microsoft Entra ID doesn't accept LAPS passwords until you do.",
+  "Deploy policy. For Entra-joined devices Microsoft prefers Intune with the Windows LAPS CSP; hybrid devices can use Windows LAPS Group Policy. For Entra ID, set at minimum BackupDirectory = 1.",
+  "Leave AdministratorAccountName empty to manage the built-in administrator, which LAPS finds by its well-known RID. If you set a custom account name, create that account yourself (for example with the Accounts CSP), because LAPS doesn't create it.",
+  "Test on a device: `Invoke-LapsPolicyProcessing`, then look for Event 10029 (password backed up to Entra ID).",
+  "Retrieve passwords through the Entra or Intune portal, or with `Get-LapsAADPassword -DeviceIds <device> -IncludePasswords` (Entra) or `Get-LapsADPassword` (AD). Force a rotation after use with `Reset-LapsPassword`.",
+  "AD mode: extend the schema with `Update-LapsADSchema`, let computers write their own password with `Set-LapsADComputerSelfPermission`, and check who can read passwords with `Find-LapsADExtendedRights`."
+ ],
+ "pitfalls": [
+  "The built-in Entra roles that can read LAPS passwords are highly privileged, so review who holds them.",
+  "A device backs up to Entra ID or to AD, never both. Workplace-joined (registered) devices aren't supported.",
+  "Legacy LAPS emulation mode stores passwords in AD in clear text, so treat it only as a migration step.",
+  "Avoid running Reset-LapsPassword too often, because Entra ID may throttle it.",
+  "Windows LAPS is free; Entra ID backup works with Microsoft Entra ID Free or higher. The Automatic Account Management settings need Windows 11 24H2 or Server 2025."
+ ],
+ "sources": [
+  {
+   "title": "Windows LAPS overview",
+   "url": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Get started with Windows LAPS and Microsoft Entra ID",
+   "url": "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-scenarios-azure-active-directory",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "LAPS PowerShell module reference",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/laps/",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "severity": null
+}

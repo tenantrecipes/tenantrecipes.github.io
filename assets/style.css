@@ -111,3 +111,23 @@ footer a{color:#777}.sponsor-slot{min-height:90px;border:1px dashed #cfd3de;bord
 @media print{header,footer,.gd-hero,.gd-toc,.news,.sponsor-slot,.gd-ck-btns{display:none!important}body{background:#fff}.gd-grid{display:block;margin:0}
 .gd-intro,.gd-phase,.gd-check{border:0;box-shadow:none;padding:0 0 12px}.gd-src[open] ul,.gd-src ul{display:block}.gd-step{break-inside:avoid}
 body.print-ck .gd-intro,body.print-ck .gd-phase{display:none!important}.gd-ck label{padding:3px 0}.gd-ck-h{break-after:avoid}a{color:#000}}
+/* ---- Cybersecurity section ---- */
+.cy-hero h1{font-size:clamp(1.9rem,4.2vw,3.2rem)}.cy-hero .hx-stats{margin-top:6px}
+.cy-disc{margin:24px 0 0;padding:12px 16px;border:1px solid #f0c36d;background:#fff8e6;border-radius:10px;font-size:.9rem;color:#5c4400}
+.cy-areas .sec-tile{min-height:170px}
+.cy-tw{overflow-x:auto;background:#fff;border:1px solid #e3e5ec;border-radius:12px}
+.cy-t{width:100%;border-collapse:collapse;font-size:.92rem}.cy-t th{text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#666;background:#f6f7fb;padding:10px 14px;border-bottom:1px solid #e3e5ec;white-space:nowrap}
+.cy-t td{padding:12px 14px;border-bottom:1px solid #eef0f5;vertical-align:top}.cy-t tr:last-child td{border-bottom:0}.cy-t td a{text-decoration:none}.cy-t td a:hover strong{text-decoration:underline}
+.cy-meta{display:block;margin-top:4px;font-size:.8rem;color:#666;font-family:Consolas,monospace}.cy-d{white-space:nowrap;color:#555}
+.cy-sev{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.75rem;font-weight:800;letter-spacing:.03em;white-space:nowrap;background:#eef1f8;color:#334}
+.cy-critical{background:#b3261e;color:#fff}.cy-high{background:#e8590c;color:#fff}.cy-important{background:#f59f00;color:#2b1d00}.cy-medium,.cy-moderate{background:#ffe08a;color:#3d2c00}.cy-low{background:#d3e4fd;color:#0f2f6b}
+.cy-kev{display:inline-block;padding:2px 10px;border-radius:6px;font-size:.75rem;font-weight:700;background:#ffe3e3;color:#a61e1e;white-space:nowrap}
+.cy-area{display:inline-block;font-size:.8rem;color:#6a3fd1;font-weight:700;white-space:nowrap}
+.cy-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px 0}.cy-facts div{background:#f6f7fb;border-radius:10px;padding:10px 14px}
+.cy-facts dt{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#666}.cy-facts dd{margin:4px 0 0;font-weight:600}
+.cy-fix li{margin:4px 0}.cy-crumb a{color:#0f6cbd}article .cy-disc{margin:12px 0}
+.cy-promo{display:block;margin-top:16px;padding:16px 20px;border-radius:12px;background:linear-gradient(90deg,#0b1538,#2a1360);color:#dfe6ff;text-decoration:none;font-size:.98rem}
+.cy-promo:hover{box-shadow:0 10px 26px #0b153855}.cy-promo strong{color:#fff}.cy-promo-k{display:inline-block;margin-right:10px;padding:2px 8px;border-radius:6px;background:#5ee6c8;color:#06221c;font-size:.72rem;font-weight:800;text-transform:uppercase}
+@media (max-width:700px){nav a{margin-left:10px;font-size:.9rem}.cy-t th:nth-child(4),.cy-t td:nth-child(4){display:none}}
+@media (max-width:560px){nav{height:auto;flex-wrap:wrap;padding:10px 20px;gap:6px}nav>div{display:flex;flex-wrap:wrap;gap:4px 14px}nav>div a{margin-left:0;font-size:.9rem}}
+.cy-t a[href^="https://nvd"]{white-space:nowrap}

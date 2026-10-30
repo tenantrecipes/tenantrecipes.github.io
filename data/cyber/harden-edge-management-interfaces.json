@@ -1,0 +1,43 @@
+{
+ "id": "harden-edge-management-interfaces",
+ "status": "published",
+ "order": 100,
+ "type": "hardening",
+ "area": "network",
+ "title": "Get firewall, VPN and iLO/iDRAC management interfaces off the internet",
+ "summary": "This month's exploited flaws in Cisco ASA/FTD and FortiMail hit internet-facing edge devices. CISA's directive BOD 23-02 sets a clear baseline: management interfaces of routers, switches, firewalls, VPN concentrators, proxies, load balancers and out-of-band server management (iLO, iDRAC) should not be reachable from the public internet.",
+ "steps": [
+  "Build an inventory of edge and management interfaces. Scan your public IP ranges from outside for management protocols (HTTPS/HTTP, SSH, Telnet, SNMP, RDP, SMB, VNC and similar), as BOD 23-02 lists.",
+  "For each exposed interface, either make it reachable only from an internal, preferably isolated, management network, or put it behind an access-control enforcement point that is separate from the device itself (Zero Trust). CISA prefers the second option.",
+  "Make it stick: add a control so that newly deployed devices can't come up with management exposed. Use a change-template check plus recurring external scans.",
+  "Subscribe to your edge vendors' PSIRT feeds and to the CISA KEV catalog, and treat KEV entries for edge devices as emergency changes.",
+  "Separate the VPN user service from device management. A VPN portal has to be public; its admin interface doesn't."
+ ],
+ "pitfalls": [
+  "BOD 23-02 is mandatory only for US federal civilian agencies, but CISA publishes it as guidance others can use.",
+  "The directive doesn't cover cloud provider management portals and APIs. Protect those with identity controls instead.",
+  "The 14-day remediation window in BOD 23-02 is a federal requirement, not a vendor recommendation. Use it as a benchmark."
+ ],
+ "sources": [
+  {
+   "title": "CISA BOD 23-02: Mitigating the Risk from Internet-Exposed Management Interfaces",
+   "url": "https://www.cisa.gov/news-events/directives/binding-operational-directive-23-02",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "CISA BOD 23-02 implementation guidance",
+   "url": "https://www.cisa.gov/news-events/directives/bod-23-02-implementation-guidance-mitigating-risk-internet-exposed-management-interfaces",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "CISA Known Exploited Vulnerabilities Catalog",
+   "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "severity": null
+}
