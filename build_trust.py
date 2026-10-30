@@ -47,7 +47,7 @@ def footer(rel, guide_slug, path="", title="", updated=None):
                               ("Search", f"{rel}search.html")])
             + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("Changelog", f"{rel}changelog.html"),
                             ("Report an issue", f"{REPO}/issues/new/choose")])
-            + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Sample issue", f"{rel}newsletter-sample.html"), ("Atom / RSS feed", f"{rel}feed.xml"),
+            + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Sample issue", f"{rel}newsletter-sample.html"), (f"X (@{C.X_HANDLE})", f"https://x.com/{C.X_HANDLE}"), ("Atom / RSS feed", f"{rel}feed.xml"),
                                    ("Suggest a recipe", f"{REPO}/issues/new?template=suggest-recipe.yml")])
             + col("Legal", [("Privacy policy", f"{rel}privacy.html"), ("Disclaimer", f"{rel}about.html#disclaimer")])
             + f'</div><p class="sf-b">© {TODAY.year} Tenant Recipes · Microsoft, Microsoft 365, Copilot, Entra, Intune and Purview are trademarks of the Microsoft group of companies. '

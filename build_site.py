@@ -68,6 +68,7 @@ def head(title, desc, rel, path, og_type="website"):
         f'<meta property="og:image:alt" content="{esc(og_alt)}">',
         f'<meta name="twitter:image:alt" content="{esc(og_alt)}">',
         '<meta name="twitter:card" content="summary_large_image">',
+        f'<meta name="twitter:site" content="@{C.X_HANDLE}">',
         f'<meta name="twitter:title" content="{esc(title)}">',
         f'<meta name="twitter:description" content="{esc(desc)}">',
         f'<meta name="twitter:image" content="{img}">',

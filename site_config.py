@@ -51,3 +51,6 @@ GITHUB_REPO = "tenantrecipes/tenantrecipes.github.io"
 
 # Pages whose last verification is older than this many days show a "due for re-check" notice.
 REVERIFY_DAYS = 90
+
+# Social profiles (brand accounts only). Shown in the footer; X handle is also used for the twitter:site meta tag.
+X_HANDLE = "TenantRecipes"
