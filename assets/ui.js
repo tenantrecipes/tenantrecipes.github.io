@@ -48,3 +48,11 @@ if(c&&el._fl){c.hidden=false;var lab="Next Patch Tuesday in "+pl(d,"day")+", "+p
 set(el._fl.d,p2(Math.min(d,99)));set(el._fl.h,p2(h));set(el._fl.m,p2(m));set(el._fl.s,p2(s))}})}
 tick();setInterval(tick,1000)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init()})();
+
+/* Mobile menu: close on Escape, outside tap or link tap */
+(function(){var m=document.querySelector("details.nv-m");if(!m)return;var sm=m.querySelector("summary");
+sm.setAttribute("aria-haspopup","true");sm.setAttribute("aria-expanded","false");
+m.addEventListener("toggle",function(){sm.setAttribute("aria-expanded",m.open?"true":"false")});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&m.open){m.open=false;sm.focus()}});
+document.addEventListener("click",function(e){if(m.open&&!m.contains(e.target))m.open=false});
+m.addEventListener("click",function(e){if(e.target.closest(".nv-md a"))m.open=false});})();

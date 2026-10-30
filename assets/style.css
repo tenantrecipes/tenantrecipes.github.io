@@ -304,7 +304,7 @@ pre.cb code{background:none;border:0;padding:0;color:inherit;font-size:inherit}
 .fd-l{font-size:.86rem;color:var(--ink-3);font-weight:600;margin-right:2px}
 a.chip{text-decoration:none;display:inline-block}.chip span{color:var(--ink-3);font-weight:500;font-size:.8em}.chip.on span{color:#c9d4f5}
 .fd-k{margin-top:30px}
-.sh{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+div.sh{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .sh-c{display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:var(--r-l);background:#fff;border:1px solid var(--line);color:var(--ink);text-decoration:none;box-shadow:var(--sh-1);transition:transform .12s,box-shadow .12s}
 a.sh-c:hover{transform:translateY(-2px);box-shadow:var(--sh-3)}
 .sh-1{background:linear-gradient(135deg,#0b1538,#2a1360);color:#dfe6ff;border:0}.sh-1 strong{color:#fff}.sh-1 .sh-k,.sh-1 .sh-go{color:#b9c6ff}
@@ -314,8 +314,8 @@ a.sh-c:hover{transform:translateY(-2px);box-shadow:var(--sh-3)}
 .sh-go{margin-top:auto;font-weight:650;font-size:.9rem;color:var(--brand);display:inline-flex;align-items:center;gap:4px;text-decoration:none}
 .sh-go .ic{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
 .sh-4 ul{margin:0;padding-left:18px;font-size:.92rem}.sh-4 li{margin:4px 0}
-@media (max-width:980px){.sh{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.sh{grid-template-columns:1fr}.fd-s{padding-left:12px}.fd-s .btn{padding:10px 14px}.fd-s input{font-size:1rem}}
+@media (max-width:980px){div.sh{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){div.sh{grid-template-columns:1fr}.fd-s{padding-left:12px}.fd-s .btn{padding:10px 14px}.fd-s input{font-size:1rem}}
 .rx{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px}
 .btn.rx-b{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;font-size:.9rem;background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--sh-1)}
 .btn.rx-b:hover{border-color:#b9c6e4}.btn.rx-b.ok{border-color:var(--ok);color:var(--ok)}
@@ -530,3 +530,7 @@ html.sx-lock{overflow:hidden}
 .tl-c-open-source{background:#e8f0fe;color:#1a4fb5}
 .tl-c-freemium{background:#f3ecfd;color:#6b2fb3}
 .tl-card[hidden]{display:none}
+
+/* Mobile menu fix: header must stay above the hero so the dropdown is visible and tappable */
+header.sh{display:block}
+@media (max-width:760px){header.sh{position:relative;z-index:50}}
