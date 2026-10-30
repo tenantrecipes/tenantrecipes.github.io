@@ -22,14 +22,18 @@ def fmt(iso):
 
 
 # ---------------------------------------------------------------- header / footer
+NAV_LINKS = [("Recipes", "index.html#library"), ("Guides", "guides/index.html"), ("Security", "security/index.html"),
+             ("What's new", "changelog/index.html"), ("About", "about.html")]
+
+
 def nav(rel):
+    links = "".join(f'<a href="{rel}{u}">{esc(t)}</a>' for t, u in NAV_LINKS)
     return (f'<header class="sh"><nav><a class="logo" href="{rel}index.html"><img src="{rel}assets/logo.svg" alt="Tenant Recipes" width="158" height="36"></a>'
-            f'<div class="nv">'
-            f'<a href="{rel}index.html#library">Recipes</a><a href="{rel}guides/index.html">Guides</a>'
-            f'<a href="{rel}security/index.html">Security</a><a href="{rel}changelog/index.html">What\'s new</a><a href="{rel}about.html">About</a>'
-            f'<form class="nv-s" action="{rel}search.html" method="get" role="search"><label class="sr" for="nv-q">Search the site</label>'
-            f'<input id="nv-q" name="q" type="search" placeholder="Search…" autocomplete="off"></form>'
-            f'<a class="nv-cta" href="{rel}newsletter.html">Newsletter</a></div></nav></header>')
+            f'<div class="nv"><div class="nv-l">{links}</div>'
+            f'<a class="nv-sb" href="{rel}search/index.html" data-sx-open title="Search (press /)">{icon("search")}<span class="nv-sbl">Search</span><kbd>/</kbd></a>'
+            f'<a class="nv-cta" href="{rel}newsletter.html">Newsletter</a>'
+            f'<details class="nv-m"><summary aria-label="Menu"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>'
+            f'<div class="nv-md">{links}<a class="nv-mc" href="{rel}newsletter.html">Newsletter</a></div></details></div></nav></header>')
 
 
 def ad_slot(name):
@@ -52,7 +56,7 @@ def footer(rel, guide_slug, path="", title="", updated=None):
             f'<p class="sf-ed">{EDITOR}</p></div>'
             + col("Content", [("Recipes", f"{rel}index.html#library"), ("Guides", f"{rel}guides/index.html"),
                               ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Windows 11 CIS hardening", f"{rel}guides/windows-11-cis-hardening.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"), ("Quick guide: 5 Copilot license checks", f"{rel}guides/copilot-license-checks.html"),
-                              ("Search", f"{rel}search.html")])
+                              ("Search", f"{rel}search/index.html")])
             + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("What's new (changelog)", f"{rel}changelog/index.html"),
                             ("Report an issue", f"{REPO}/issues/new/choose")])
             + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Sample issue", f"{rel}newsletter-sample.html"), (f"X (@{C.X_HANDLE})", f"https://x.com/{C.X_HANDLE}"), ("Atom / RSS feed", f"{rel}feed.xml"),

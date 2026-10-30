@@ -14,6 +14,7 @@ GUIDES = [G1, G2]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
+import build_search as BS
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -78,6 +79,7 @@ def head(title, desc, rel, path, og_type="website"):
     tags.append(f'<link rel="alternate" type="application/atom+xml" title="{esc(C.SITE_NAME)}" href="{rel}feed.xml">')
     tags.append(f'<link rel="stylesheet" href="{rel}assets/style.css">')
     tags.append(f'<script src="{rel}assets/ui.js" defer></script>')
+    tags.append(f'<script src="{rel}assets/search.js" defer></script>')
     return "".join(tags)
 
 
@@ -338,8 +340,7 @@ def build():
                     UX.search_bar(rel, R, len(CY.load())))
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
         + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):] +
-        f'<main class="wrap" id="library">{ad_slot("index-top")}<h2 class="lib-h">The recipe library</h2><div class="controls"><input id="q" aria-label="Search recipes" '
-        f'placeholder="Search recipes: e.g. DLP, MFA, license, agent…"></div><div id="chips" class="chips"></div>'
+        f'<main class="wrap" id="library">{ad_slot("index-top")}<h2 class="lib-h">The recipe library</h2><p class="lib-hint fine">Filter by topic, or use the search at the top to search everything.</p><div id="chips" class="chips" role="group" aria-label="Filter recipes by topic"></div>'
         f'<p id="count" class="fine" aria-live="polite"></p><div class="grid" id="grid"></div>'
         f'<noscript><ul>' + "".join(f'<li><a href="recipes/{r["id"]}.html">{esc(r["title"])}</a></li>' for r in R) + '</ul></noscript>'
         f'{ad_slot("index-bottom")}{signup(rel, "index")}</main>'
@@ -357,7 +358,11 @@ def build():
         f'<!doctype html><html lang="en"><head>{head("Changelog moved | " + C.SITE_NAME, "The Tenant Recipes changelog has moved to the What is new page, which lists every new and updated page.", "", "changelog/index.html")}'
         '<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=changelog/index.html"></head>'
         '<body><p>The changelog has moved to <a href="changelog/index.html">What\'s new</a>.</p></body></html>\n')
-    pages.append(page("search.html", f"Search recipes, guides and CVEs | {C.SITE_NAME}", "Search every Tenant Recipes recipe, guide phase and security entry in your browser: Copilot, Conditional Access, Intune, Purview, LAPS, VMware and more.", T.search_body))
+    pages.append(page("search/index.html", f"Search recipes, guides, CVEs and news | {C.SITE_NAME}", "Search every Tenant Recipes recipe, guide, vulnerability, hardening recipe and news item in your browser, with suggestions and typo tolerance.", BS.search_body))
+    (DIST / "search.html").write_text(
+        f'<!doctype html><html lang="en"><head>{head("Search moved | " + C.SITE_NAME, "Tenant Recipes search has moved to a new page that searches recipes, guides, vulnerabilities and news.", "", "search/index.html")}'
+        '<meta name="robots" content="noindex"><script>location.replace("search/index.html"+location.search)</script>'
+        '<meta http-equiv="refresh" content="0; url=search/index.html"></head><body><p>Search has moved to <a href="search/index.html">the new search page</a>.</p></body></html>\n')
 
     pages.append(page("newsletter.html", f"The weekly Tenant Recipes brief (free newsletter) | {C.SITE_NAME}",
                       "A free weekly 5-minute brief on what changed in Copilot, Intune, Entra and Purview, and what admins should do about it.",
@@ -462,9 +467,10 @@ def build():
     shutil.copytree(ROOT / "downloads", DIST / "downloads", ignore=shutil.ignore_patterns("manifest.json"))
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
-    (DIST / "data" / "search.js").write_text(T.search_index(R, CY.load(), GUIDES, CY.AREA, extra=[
-        {"k": "Guide", "c": "Quick guide", "t": Q.TITLE, "u": f"guides/{Q.SLUG}.html", "s": Q.DESC, "x": " ".join(c["t"] + " " + c["why"] for c in Q.CHECKS)},
-        {"k": "Page", "c": "Site", "t": "Sample newsletter issue", "u": "newsletter-sample.html", "s": "What the weekly brief looks like.", "x": ""}]))
+    idx = BS.build_index(R, CY.load(), GUIDES, Q, CY.AREA, UX.tags_for, json.load(open(ROOT / "data" / "changelog.json")))
+    (DIST / "search").mkdir(exist_ok=True)
+    (DIST / "search" / "index.json").write_text(json.dumps(idx, ensure_ascii=False, separators=(",", ":")))
+    print(f"Search index: {len(idx['docs'])} docs, {len(idx['sug'])} suggestions, {len(idx['syn'])} synonym groups, {len(idx['q'])} questions")
     fingerprint_assets()
     if SITE:
         (DIST / "feed.xml").write_text(T.atom(R, CY.load(), GUIDES))

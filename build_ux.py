@@ -229,9 +229,9 @@ def search_bar(rel, R, n_sec):
         lead += f'<a class="chip chip-hi" href="?t={E(nt.replace(" ", "+"))}#library">{T.icon("alert")}News &amp; retirements</a>'
     lead += f'<a class="chip chip-hi" href="{rel}changelog/">{T.icon("clock")}What\'s new</a>'
     lead += f'<a class="chip chip-hi" href="{rel}security/index.html#watch">{T.icon("shield")}Vulnerability watch</a>'
-    return (f'<div class="hx-find"><form class="fd-s" action="{rel}search.html" method="get" role="search">{T.icon("search")}'
+    return (f'<div class="hx-find"><form class="fd-s" action="{rel}search/index.html" method="get" role="search">{T.icon("search")}'
             f'<label class="sr" for="fd-q">Search all recipes, guides and security entries</label>'
-            f'<input id="fd-q" name="q" type="search" placeholder="Search recipes, guides, CVEs: e.g. MFA, DLP, LAPS" autocomplete="off">'
+            f'<input id="fd-q" name="q" type="search" placeholder="Search recipes, CVEs…" data-ph-wide="Search recipes, guides, CVEs and news: e.g. MFA, Citrix, oversharing" autocomplete="off" data-sx>'
             f'<button class="btn p" type="submit">Search</button></form>'
             f'<div class="fd-tags fd-quick" role="navigation" aria-label="Quick links">{lead}</div>'
             f'<div class="fd-tags fd-topics" role="navigation" aria-label="Browse recipes by topic"><span class="fd-l">Topics:</span>{chips}</div></div>')

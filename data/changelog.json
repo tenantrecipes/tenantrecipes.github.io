@@ -2,6 +2,11 @@
  {
   "kind": "site",
   "date": "2026-10-30",
+  "text": "One search for everything: instant results for recipes, guides, vulnerabilities, hardening and news, with suggestions as you type, typo tolerance and common questions. Open it from the header on any page or press /."
+ },
+ {
+  "kind": "site",
+  "date": "2026-10-30",
   "text": "Security: category filter (Client, Server, Network, Web/Runtime, Virtualization), the vulnerability watch as easy-to-scan cards with a one-line 'What to do', a Patch Tuesday countdown, and four more exploited vulnerabilities (Cisco Secure Email Gateway, Fortinet, Atlassian Data Center, Citrix NetScaler)."
  },
  {
