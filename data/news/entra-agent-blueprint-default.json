@@ -1,0 +1,41 @@
+{
+ "id": "entra-agent-blueprint-default",
+ "title": "Regular users can create agents in Microsoft Entra from 4 November 2026 unless you opt out",
+ "date": "2026-10-30",
+ "category": "Copilot/AI",
+ "summary": "Microsoft Entra is adding a default user permission called 'Users can create agent blueprints'. From 4 November 2026, with rollout continuing through late November, users without an admin role can create agent identity blueprints and the agents built from them unless the setting is turned off.",
+ "why": "Agents can act with their own identity and permissions. Letting every user create them makes it harder to keep track of what exists and who owns it.",
+ "todo": [
+  "Set 'Users can create agent blueprints' to No if you want to control agent creation.",
+  "Give named builders the Agent ID Developer role instead.",
+  "Review blueprint owners regularly, because owners can create agents from their blueprints."
+ ],
+ "effective": "2026-11-04",
+ "effective_note": "Rollout through late November 2026",
+ "recipe": "agents-restrict-blueprint-creation",
+ "sources": [
+  {
+   "title": "Message center MC1506733: Review who can create agents in Microsoft Entra (archive)",
+   "url": "https://mc.merill.net/message/MC1506733",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Delegate app and agent management permissions",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/delegate-app-roles",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "primary": {
+  "title": "Message center MC1506733: Review who can create agents in Microsoft Entra (archive)",
+  "url": "https://mc.merill.net/message/MC1506733",
+  "checked": "2026-10-30"
+ },
+ "related": [
+  {
+   "title": "Decide who can create agents in Entra before default users get the right on 4 November 2026",
+   "url": "recipes/agents-restrict-blueprint-creation.html"
+  }
+ ]
+}

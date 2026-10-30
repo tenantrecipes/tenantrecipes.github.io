@@ -17,6 +17,7 @@ import build_ux as UX
 import build_search as BS
 import build_tools as TL
 import build_policies as PL
+import build_news as NW
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -340,6 +341,7 @@ def build():
         UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
                     CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1),
                     UX.search_bar(rel, R, len(CY.load())))
+        + NW.latest_strip(rel, esc, fmt_date, CY.load())
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
         + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):] +
         f'<main class="wrap" id="library">{ad_slot("index-top")}<h2 class="lib-h">The recipe library</h2><p class="lib-hint fine">Filter by topic, or use the search at the top to search everything.</p><div id="chips" class="chips" role="group" aria-label="Filter recipes by topic"></div>'
@@ -407,6 +409,7 @@ def build():
     pages += CY.build(page, R, esc, step_html, signup, fmt_date, E, C.SITE_NAME)
     pages += TL.build(page, esc, step_html, signup, fmt_date, E, C.SITE_NAME)
     pages += PL.build(page, esc, signup, fmt_date, E, C.SITE_NAME)
+    pages += NW.build(page, esc, step_html, signup, fmt_date, E, C.SITE_NAME, CY.load())
 
     refs = UX.guide_refs(GUIDES)
     for r in R:
@@ -472,13 +475,14 @@ def build():
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
     idx = BS.build_index(R, CY.load(), GUIDES, Q, CY.AREA, UX.tags_for, json.load(open(ROOT / "data" / "changelog.json")),
-                         TL.search_docs() + PL.search_docs())
+                         TL.search_docs() + PL.search_docs() + NW.search_docs(CY.load()))
     (DIST / "search").mkdir(exist_ok=True)
     (DIST / "search" / "index.json").write_text(json.dumps(idx, ensure_ascii=False, separators=(",", ":")))
     print(f"Search index: {len(idx['docs'])} docs, {len(idx['sug'])} suggestions, {len(idx['syn'])} synonym groups, {len(idx['q'])} questions")
     fingerprint_assets()
     if SITE:
         (DIST / "feed.xml").write_text(T.atom(R, CY.load(), GUIDES))
+        (DIST / "news" / "feed.xml").write_text(NW.feed(SITE, C.SITE_NAME, CY.load()))
     shutil.copy(ROOT / "favicon.ico", DIST / "favicon.ico")
     (DIST / ".nojekyll").write_text("")  # GitHub Pages: serve files as-is
     robots = "User-agent: *\nAllow: /\n" + (f"Sitemap: {SITE}/sitemap.xml\n" if SITE else "")

@@ -2,6 +2,11 @@
  {
   "kind": "site",
   "date": "2026-10-30",
+  "text": "New: a News section with Microsoft 365 changes and retirements (effective dates, why it matters, what to do, primary source) and exploited vulnerabilities, a category filter, a Latest news strip on the homepage and an Atom feed at /news/feed.xml."
+ },
+ {
+  "kind": "site",
+  "date": "2026-10-30",
   "text": "New: IT checklists for onboarding, offboarding (planned and immediate) and role changes, with Microsoft Learn links for each Microsoft 365 step, Word and Markdown downloads, and a Policies / Checklists filter on the policy templates page."
  },
  {

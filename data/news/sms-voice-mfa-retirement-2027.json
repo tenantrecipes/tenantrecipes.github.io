@@ -1,0 +1,46 @@
+{
+ "id": "sms-voice-mfa-retirement-2027",
+ "title": "Microsoft-provided SMS and voice MFA retires on 1 February 2027",
+ "date": "2026-10-30",
+ "category": "Entra",
+ "summary": "Microsoft is retiring the SMS and voice authentication methods it provides in Microsoft Entra ID and is moving users to passkeys by default. From 1 February 2027, users whose only MFA method is SMS or voice will be asked to register a passkey before they can sign in. Global Administrators and external users follow on 1 July 2027.",
+ "why": "If many users still rely on text messages or phone calls, they will all hit a blocking registration prompt on the same day, and your service desk will feel it. Passkeys are also phishing-resistant, so moving early improves security.",
+ "todo": [
+  "Find who still depends on SMS or voice with the usage tools linked from Microsoft's retirement guide.",
+  "Enable passkeys (FIDO2) for those users and run a registration campaign well before the date.",
+  "Plan separately for admins and external users, who have until 1 July 2027."
+ ],
+ "effective": "2027-02-01",
+ "effective_note": "1 July 2027 for Global Administrators and external users",
+ "recipe": "entra-sms-voice-retirement-passkeys",
+ "sources": [
+  {
+   "title": "Passkeys by default and retirement of Microsoft-provided SMS and voice authentication",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "SMS and voice retirement FAQ",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement-faq",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Message center MC1426371: Passkeys by default and retirement of SMS and voice (archive)",
+   "url": "https://mc.merill.net/message/MC1426371",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "primary": {
+  "title": "Passkeys by default and retirement of Microsoft-provided SMS and voice authentication",
+  "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement",
+  "checked": "2026-10-30"
+ },
+ "related": [
+  {
+   "title": "Move users off SMS and voice MFA before Microsoft-provided SMS and voice retire on 1 February 2027",
+   "url": "recipes/entra-sms-voice-retirement-passkeys.html"
+  }
+ ]
+}

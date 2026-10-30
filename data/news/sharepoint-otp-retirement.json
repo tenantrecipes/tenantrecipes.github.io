@@ -1,0 +1,46 @@
+{
+ "id": "sharepoint-otp-retirement",
+ "title": "SharePoint one-time passcode sign-in for external users is being retired",
+ "date": "2026-10-30",
+ "category": "Retirements",
+ "summary": "SharePoint Online and OneDrive are retiring their own one-time passcode (OTP) sign-in for external users and moving to Microsoft Entra B2B guest accounts. The retirement started in commercial tenants in mid-October 2026 and is expected to be complete by the end of November 2026. External people without a matching guest account can then see 'access denied' on links shared with them earlier.",
+ "why": "Partners and customers may suddenly lose access to files you shared with them, and the support calls land with your team rather than theirs.",
+ "todo": [
+  "Run sharing reports on key sites to find external people who rely on OTP links.",
+  "Create guest accounts for them in advance, or reshare one item to create the account.",
+  "Check that external collaboration settings allow the right people to invite guests."
+ ],
+ "effective": null,
+ "effective_note": "Rolling out from mid-October; expected complete by end of November 2026",
+ "recipe": "sharepoint-otp-retirement-b2b",
+ "sources": [
+  {
+   "title": "Microsoft Entra B2B integration for SharePoint and OneDrive",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/sharepoint-azureb2b-integration",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "FAQ: Improvements to external sharing in OneDrive and SharePoint",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/faqs-odspintegrationwithentrab2b",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Message center MC1243549: Retirement of SharePoint One-Time Passcode (archive)",
+   "url": "https://mc.merill.net/message/MC1243549",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "primary": {
+  "title": "Microsoft Entra B2B integration for SharePoint and OneDrive",
+  "url": "https://learn.microsoft.com/en-us/sharepoint/sharepoint-azureb2b-integration",
+  "checked": "2026-10-30"
+ },
+ "related": [
+  {
+   "title": "Stop 'access denied' for external users as SharePoint one-time passcode retires",
+   "url": "recipes/sharepoint-otp-retirement-b2b.html"
+  }
+ ]
+}

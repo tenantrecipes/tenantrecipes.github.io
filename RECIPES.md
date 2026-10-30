@@ -62,3 +62,26 @@ https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.j
 If a value can't be verified, leave it null or out. Never estimate a CVSS score.
 A Patch Tuesday summary entry should use an id starting with `patch-tuesday-` (or set `"patch_tuesday": true`);
 the countdown widget then links to the newest one during the 24 hours after release.
+
+## News items (`data/news/<id>.json`)
+
+Shown at `/news/` (newest first, category filter), on the homepage "Latest news" strip, in search (group "News") and in the Atom feed `/news/feed.xml`. Built by `build_news.py`; the build stops on invalid data.
+
+| Field | Required | Notes |
+|---|---|---|
+| `id` | yes | Equals the file name. Page URL is `/news/<id>.html`. |
+| `status` | yes | `published` or `draft`. |
+| `title` | yes | Plain statement of the change. |
+| `date` | yes | `YYYY-MM-DD`, the date we published the item. |
+| `category` | yes | One of: M365, Entra, Intune, Copilot/AI, Purview, Defender, Windows, Security incidents, Regulation, Retirements. |
+| `summary` | yes | 2–4 sentences in our own words (checked by the build). |
+| `why` | yes | Why it matters to an admin. |
+| `todo` | yes | List of short actions ("What to do"). Backticks render as code. |
+| `effective` | no | `YYYY-MM-DD` when the change takes effect; `null` if no single date. |
+| `effective_note` | no | Free text for rollout windows or a second date. |
+| `primary` | yes | `{title, url}`: the primary source (Microsoft Learn, message center, vendor advisory). |
+| `related` | no | `[{title, url}]`; relative URLs are site pages, usually the recipe with the full how-to. |
+| `recipe` | no | Id of the related recipe. Recipes keep their own URLs; news items link to them. |
+| `sources` | yes | `[{title, url, checked}]` as for recipes; `last_verified` is required. |
+
+Exploited vulnerabilities (`data/cyber`, `type: vulnerability`, `exploited: true`) appear automatically as category "Security incidents" and link to their `/security/<id>.html` page; do not duplicate them in `data/news`.

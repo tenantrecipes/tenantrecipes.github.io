@@ -226,7 +226,7 @@ def search_bar(rel, R, n_sec):
     lead = ""
     if news:
         nt = news[0]
-        lead += f'<a class="chip chip-hi" href="?t={E(nt.replace(" ", "+"))}#library">{T.icon("alert")}News &amp; retirements</a>'
+        lead += f'<a class="chip chip-hi" href="{rel}news/index.html">{T.icon("alert")}News &amp; retirements</a>'
     lead += f'<a class="chip chip-hi" href="{rel}changelog/">{T.icon("clock")}What\'s new</a>'
     lead += f'<a class="chip chip-hi" href="{rel}security/index.html#watch">{T.icon("shield")}Vulnerability watch</a>'
     lead += f'<a class="chip chip-hi" href="{rel}tools/index.html">{T.icon("target")}Security tools</a>'

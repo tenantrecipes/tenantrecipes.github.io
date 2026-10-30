@@ -1,0 +1,41 @@
+{
+ "id": "managed-ca-risk-remediation-on",
+ "title": "Microsoft-managed Conditional Access policy for high-risk users is now switched on",
+ "date": "2026-10-30",
+ "category": "Entra",
+ "summary": "In tenants with Microsoft Entra ID P2, Microsoft created a managed Conditional Access policy called 'Require risk remediation for high-risk users' in report-only mode in late September 2026. Where admins did not change it, the policy moved to On in the week of 28 October 2026. High-risk users are now required to remediate their risk, for example with a secure password change.",
+ "why": "A policy you did not create is now enforcing sign-in requirements. Users who are not registered for MFA cannot self-remediate, and emergency access accounts may be in scope.",
+ "todo": [
+  "Open the policy, check its impact data and the security group it uses.",
+  "Exclude break-glass accounts and confirm the users in scope can complete MFA.",
+  "Decide whether to keep it on or turn it off in favour of your own user-risk policy."
+ ],
+ "effective": "2026-10-28",
+ "effective_note": "Week of 28 October 2026, if left unchanged",
+ "recipe": "ca-managed-risk-remediation-policy",
+ "sources": [
+  {
+   "title": "Microsoft-managed Conditional Access policies",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/managed-policies",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Message center MC1476122: Require risk remediation for high-risk users (archive)",
+   "url": "https://mc.merill.net/message/MC1476122",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "primary": {
+  "title": "Microsoft-managed Conditional Access policies",
+  "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/managed-policies",
+  "checked": "2026-10-30"
+ },
+ "related": [
+  {
+   "title": "Check the Microsoft-managed 'Require risk remediation for high-risk users' policy that just switched on",
+   "url": "recipes/ca-managed-risk-remediation-policy.html"
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "id": "defender-teams-qr-code-protection",
+ "title": "Defender for Office 365 now checks QR codes in Teams messages after delivery",
+ "date": "2026-10-30",
+ "category": "Defender",
+ "summary": "Microsoft Defender for Office 365 has started extracting web addresses hidden in QR codes in Microsoft Teams messages and warning users when they are malicious. The rollout began in early October 2026 and is expected to finish in early November. Combined with zero-hour auto purge (ZAP) for Teams, eligible malicious messages can be blocked after delivery.",
+ "why": "Attackers increasingly use QR codes and Teams chats to get around email filters. The new protection only helps if ZAP for Teams and user reporting are turned on.",
+ "todo": [
+  "Check that ZAP is on in the Teams protection settings in the Defender portal.",
+  "Choose quarantine policies for malware and high-confidence phishing.",
+  "Turn on user reporting of suspicious Teams messages in both the Teams admin center and Defender."
+ ],
+ "effective": null,
+ "effective_note": "Rollout completes early November 2026",
+ "recipe": "defender-teams-zap-qr-phishing",
+ "sources": [
+  {
+   "title": "Microsoft Defender for Office 365 support for Microsoft Teams",
+   "url": "https://learn.microsoft.com/en-us/defender-office-365/mdo-support-teams-about",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Message center MC1490905: Post-delivery protection for malicious QR codes in Teams (archive)",
+   "url": "https://mc.merill.net/message/MC1490905",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "primary": {
+  "title": "Microsoft Defender for Office 365 support for Microsoft Teams",
+  "url": "https://learn.microsoft.com/en-us/defender-office-365/mdo-support-teams-about",
+  "checked": "2026-10-30"
+ },
+ "related": [
+  {
+   "title": "Catch phishing in Teams chats: ZAP for Teams, QR-code URL detection and user reporting",
+   "url": "recipes/defender-teams-zap-qr-phishing.html"
+  }
+ ]
+}

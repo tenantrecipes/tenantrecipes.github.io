@@ -34,7 +34,7 @@ def build_index(R, CY, guides, Q, AREA, tags_for, site_notes, extra=()):
 
     for r in R:
         tg = tags_for(r)
-        doc(t=r["title"], k="News" if any(t.startswith("News") for t in tg) else "Recipe", c=r["category"], g=tg,
+        doc(t=r["title"], k="Recipe", c=r["category"], g=tg,
             s=_clip(r["problem"], 220), x=_clip(" ".join(r["steps"]), 420), u=f'recipes/{r["id"]}.html', d=r.get("updated") or r.get("created"))
         w = r["title"].split(" ", 1)
         if w[0].lower() in VERBS and len(w) > 1:
@@ -64,7 +64,7 @@ def build_index(R, CY, guides, Q, AREA, tags_for, site_notes, extra=()):
     sug += [c["t"] for c in Q.CHECKS]
     for n in site_notes[:20]:
         t = n["text"].split(":", 1)[0] if ":" in n["text"][:60] else _clip(n["text"], 60)
-        doc(t=f"What's new: {t}", k="News", c="What's new", s=_clip(n["text"], 220), u=f'changelog/index.html#d-{n["date"]}', d=n["date"])
+        doc(t=f"What's new: {t}", k="Update", c="What's new", s=_clip(n["text"], 220), u=f'changelog/index.html#d-{n["date"]}', d=n["date"])
     for t, u, s in (("Vulnerability watch: what to patch first", "security/index.html", "Exploited CVEs, newest first, with a one-line action for each, plus hardening recipes."),
                     ("What's new (changelog)", "changelog/index.html", "Every new and updated page, newest first."),
                     ("About Tenant Recipes", "about.html", "Independence, editorial standards, corrections and contact."),
@@ -80,7 +80,7 @@ def build_index(R, CY, guides, Q, AREA, tags_for, site_notes, extra=()):
     if bad:
         print(f"search_synonyms.json: question targets not in the index: {bad}", file=sys.stderr)
         sys.exit(1)
-    sug += [d["t"] for d in docs if d["k"] != "News" or d["c"] != "What's new"]
+    sug += [d["t"] for d in docs if d["k"] != "Update"]
     sug += sorted({c for d in docs for c in d.get("g", []) + [d.get("c", "")] if c and not c.startswith("Phase")})
     sug += [q for q, _ in syn["questions"]]
     seen, phrases = set(), []
