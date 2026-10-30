@@ -14,6 +14,11 @@
  "pitfalls": [
   "The legacy 'Turn off Windows Copilot' policy (TurnOffWindowsCopilot) is slated for deprecation — Microsoft recommends AppLocker instead."
  ],
+ "done_when": [
+  "The Copilot key (or Win+C) opens the app you chose on a test device.",
+  "The consumer Copilot app is blocked or removed where you decided it should be.",
+  "Users have been told what the key opens."
+ ],
  "sources": [
   {
    "title": "Manage Copilot on Windows",
@@ -24,5 +29,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

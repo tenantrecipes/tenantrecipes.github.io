@@ -16,6 +16,10 @@
   "Policies are applied via Cloud Policy and can take time to reach clients.",
   "The DPA and EU Data Boundary don't apply to the generated Bing queries."
  ],
+ "done_when": [
+  "The 'Allow web search in Copilot' policy is set to the value you chose, in the Cloud Policy service, and assigned to the right groups.",
+  "The decision (and any DLP rule for sensitive prompts) is documented and has been shared with users."
+ ],
  "sources": [
   {
    "title": "Manage web search in Microsoft Copilot and Microsoft Copilot Chat",
@@ -31,5 +35,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

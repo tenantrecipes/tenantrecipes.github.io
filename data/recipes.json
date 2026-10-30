@@ -17,6 +17,12 @@
    "Since July 2026 (version 2606) Semi-Annual Enterprise Channel is unified with Monthly Enterprise Channel, so SAEC devices get the MEC experience — but reports may still show SAEC.",
    "Proxies or TLS inspection that break WebSockets make Copilot in apps fail."
   ],
+  "done_when": [
+   "Every pilot user has a qualifying base license, an Entra ID account, an Exchange Online mailbox and OneDrive.",
+   "Pilot devices report Microsoft 365 Apps on Current Channel or Monthly Enterprise Channel.",
+   "Your network team has confirmed *.cloud.microsoft is allowed in full and WSS traffic is not broken by TLS inspection.",
+   "The Copilot License Details diagnostic shows no blocking issues for your pilot users."
+  ],
   "sources": [
    {
     "title": "Microsoft Copilot requirements",
@@ -37,7 +43,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-pilot-group-licensing",
@@ -56,6 +63,11 @@
    "Group-based licensing requires Microsoft Entra ID P1 or Office 365 E3 or higher.",
    "Removing a user from the group removes the license — when moving users, add to the new group first, then remove from the old one."
   ],
+  "done_when": [
+   "The pilot security group shows the Microsoft Copilot license under Billing > Licenses with no nested groups inside it.",
+   "A newly added test user receives the license automatically, without a manual assignment.",
+   "Errors & issues for the product is empty, or every listed error has an owner."
+  ],
   "sources": [
    {
     "title": "Assign or unassign licenses to a group in the Microsoft 365 admin center",
@@ -71,7 +83,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-assign-license-graph",
@@ -90,6 +103,11 @@
    "Licenses cannot be assigned without UsageLocation.",
    "Look up the SkuPartNumber in your tenant rather than hard-coding it."
   ],
+  "done_when": [
+   "`Get-MgUserLicenseDetail -UserId <user>` lists the Copilot SKU for every user in your list.",
+   "Every target user has a UsageLocation set.",
+   "Your script reads the SkuId from Get-MgSubscribedSku instead of a hard-coded value."
+  ],
   "sources": [
    {
     "title": "Assign licenses with Microsoft Graph PowerShell",
@@ -105,7 +123,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-adoption-hub",
@@ -125,6 +144,11 @@
    "Skipping manager enablement — managers drive adoption.",
    "Group-level (scoped) data in the Copilot Dashboard requires at least 50 Copilot or Viva Insights licenses; smaller tenants get tenant-level data."
   ],
+  "done_when": [
+   "Each pilot department has 3–5 named scenarios written down.",
+   "A champions group exists, has early access and a recurring session in the calendar.",
+   "Someone owns the Copilot Dashboard in Viva Insights and reviews it on a fixed schedule."
+  ],
   "sources": [
    {
     "title": "Microsoft Copilot adoption",
@@ -140,7 +164,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-web-grounding-control",
@@ -160,6 +185,10 @@
    "Policies are applied via Cloud Policy and can take time to reach clients.",
    "The DPA and EU Data Boundary don't apply to the generated Bing queries."
   ],
+  "done_when": [
+   "The 'Allow web search in Copilot' policy is set to the value you chose, in the Cloud Policy service, and assigned to the right groups.",
+   "The decision (and any DLP rule for sensitive prompts) is documented and has been shared with users."
+  ],
   "sources": [
    {
     "title": "Manage web search in Microsoft Copilot and Microsoft Copilot Chat",
@@ -175,7 +204,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-teams-meeting-transcription",
@@ -195,6 +225,10 @@
    "The Copilot default comes from the organizer's meeting policy; transcription can be started by any participant whose own policy allows it.",
    "Copilot isn't available in end-to-end encrypted meetings."
   ],
+  "done_when": [
+   "The meeting policy for pilot users allows transcription and has the Copilot setting you chose.",
+   "In a test meeting where a transcript was started, Copilot can still be used on that meeting after it ends."
+  ],
   "sources": [
    {
     "title": "Manage Microsoft Copilot in Teams meetings and events",
@@ -205,7 +239,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "ca-require-mfa-copilot",
@@ -225,6 +260,11 @@
    "Don't lock out break-glass accounts — always exclude them.",
    "Users without a phishing-resistant method (passkey/FIDO2, Windows Hello for Business, certificate-based authentication or macOS Platform SSO) will be blocked once enforced."
   ],
+  "done_when": [
+   "A Conditional Access policy targets Office 365 for the Copilot license group with the Phishing-resistant MFA authentication strength.",
+   "Break-glass accounts are excluded.",
+   "Report-only results were reviewed in the sign-in logs and the policy is now On."
+  ],
   "sources": [
    {
     "title": "Conditional Access authentication strengths",
@@ -240,7 +280,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "ca-report-only-first",
@@ -259,6 +300,11 @@
    "The insights and reporting workbook needs sign-in logs streamed to a Log Analytics workspace.",
    "Report-only policies that require a compliant device can prompt users on macOS, iOS and Android to pick a device certificate — exclude those platforms from report-only device compliance policies."
   ],
+  "done_when": [
+   "The policy has run in Report-only for at least 1–2 weeks and you have reviewed its impact.",
+   "What If has been run for guests and service accounts, with the result recorded.",
+   "The policy was switched to On in an agreed maintenance window."
+  ],
   "sources": [
    {
     "title": "Conditional Access report-only mode",
@@ -274,7 +320,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "ca-compliant-device-ai",
@@ -294,6 +341,11 @@
    "Device compliance requires the device to be enrolled in Intune (or a supported compliance partner).",
    "In report-only, compliant-device policies can prompt macOS, iOS and Android users for a device certificate — exclude those platforms while testing."
   ],
+  "done_when": [
+   "The policy targets Office 365 for the Copilot users group and grants access with 'Require one of the selected controls' (compliant OR hybrid joined).",
+   "Break-glass accounts and, if you sync, the Directory Synchronization Accounts are excluded.",
+   "Report-only results show no unexpected blocks for managed devices."
+  ],
   "sources": [
    {
     "title": "Require a compliant device, hybrid joined device or MFA",
@@ -309,7 +361,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "ca-block-legacy-auth",
@@ -327,6 +380,10 @@
    "Old multifunction printers and scripts using SMTP AUTH break — inventory them first.",
    "Without Conditional Access licenses (Entra ID P1), use security defaults to block legacy authentication instead."
   ],
+  "done_when": [
+   "Sign-in logs (interactive and non-interactive) show no remaining legacy-protocol sign-ins you still need.",
+   "A policy for All users / All resources, client apps Exchange ActiveSync + Other clients, Block access, is On with break-glass excluded."
+  ],
   "sources": [
    {
     "title": "Block legacy authentication with Conditional Access",
@@ -337,7 +394,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "ca-sign-in-frequency-ai",
@@ -354,6 +412,11 @@
   "pitfalls": [
    "Too frequent prompts cause MFA fatigue — balance with phishing-resistant methods."
   ],
+  "done_when": [
+   "The exec group has a sign-in frequency policy on Office 365.",
+   "A separate policy sets Never persistent browser session, scoped with a device filter or to unmanaged devices.",
+   "'Remember MFA on trusted devices' is off."
+  ],
   "sources": [
    {
     "title": "Conditional Access adaptive session lifetime",
@@ -369,7 +432,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "ca-risk-based-ai",
@@ -388,6 +452,11 @@
    "Risk policies need P2 licenses for covered users.",
    "Users who aren't registered for MFA are blocked on risky sign-ins (AADSTS53004) — drive MFA registration first."
   ],
+  "done_when": [
+   "The tenant has Entra ID P2, and two separate policies exist: one for sign-in risk (High, Medium) and one for user risk (High).",
+   "Break-glass accounts are excluded from both, and both have been reviewed in report-only before being turned On.",
+   "Someone owns a weekly review of the Risky users report."
+  ],
   "sources": [
    {
     "title": "Require MFA for elevated sign-in risk",
@@ -403,7 +472,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "ca-break-glass",
@@ -422,6 +492,11 @@
   "pitfalls": [
    "Don't tie them to a single person's phone for MFA — store FIDO2 keys securely in separate locations."
   ],
+  "done_when": [
+   "Two cloud-only emergency accounts exist with a permanent Global Administrator assignment and a phishing-resistant method that differs from your normal admins.",
+   "Their group is excluded from every enforced policy that blocks or restricts sign-in.",
+   "Sign-ins by these accounts trigger an alert, and the last test sign-in is less than 90 days old."
+  ],
   "sources": [
    {
     "title": "Manage emergency access accounts in Microsoft Entra ID",
@@ -432,7 +507,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "intune-deploy-m365-apps-channel",
@@ -450,6 +526,10 @@
   "pitfalls": [
    "Changing channel on existing installs may require a separate policy (Office cloud policy or administrative template) — avoid conflicting settings catalog policies, which can trigger reinstalls.",
    "Since version 2606 (July 2026) Semi-Annual Enterprise Channel devices receive the Monthly Enterprise Channel experience, but some reports still show SAEC."
+  ],
+  "done_when": [
+   "A Microsoft 365 Apps app in Intune with Current Channel or Monthly Enterprise Channel is assigned to the pilot group.",
+   "The Microsoft 365 Apps admin center inventory shows pilot devices on the chosen channel."
   ],
   "sources": [
    {
@@ -471,7 +551,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "intune-compliance-baseline",
@@ -490,6 +571,11 @@
    "Newly enrolled devices may appear noncompliant until first evaluation — use a grace period.",
    "BitLocker and Secure Boot are measured via Device Health Attestation at boot — a reboot is needed after encryption before the device shows compliant."
   ],
+  "done_when": [
+   "A Windows compliance policy requiring BitLocker, Secure Boot, a minimum OS version and Defender Antimalware is assigned.",
+   "Noncompliance actions with a grace period are set.",
+   "Test devices report Compliant in Intune before any Conditional Access policy relies on the result."
+  ],
   "sources": [
    {
     "title": "Create a compliance policy in Intune",
@@ -505,7 +591,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "intune-app-protection-copilot",
@@ -523,6 +610,11 @@
   "pitfalls": [
    "Only apps that integrate the Intune SDK/are listed as protected apps are covered — check the protected apps list.",
    "Devices must be registered in Microsoft Entra ID (via Authenticator or Company Portal) for the CA grant to work."
+  ],
+  "done_when": [
+   "iOS/iPadOS and Android app protection policies cover the Microsoft Copilot app and the Microsoft 365 apps your users run.",
+   "Copy/paste to unmanaged apps and saving to personal storage are blocked on a test phone.",
+   "A Conditional Access policy requires app protection (or an approved client app) on iOS/Android."
   ],
   "sources": [
    {
@@ -544,7 +636,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "intune-copilot-key-windows",
@@ -562,6 +655,11 @@
   "pitfalls": [
    "The legacy 'Turn off Windows Copilot' policy (TurnOffWindowsCopilot) is slated for deprecation — Microsoft recommends AppLocker instead."
   ],
+  "done_when": [
+   "The Copilot key (or Win+C) opens the app you chose on a test device.",
+   "The consumer Copilot app is blocked or removed where you decided it should be.",
+   "Users have been told what the key opens."
+  ],
   "sources": [
    {
     "title": "Manage Copilot on Windows",
@@ -572,7 +670,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "intune-windows-autopatch",
@@ -589,6 +688,11 @@
   "pitfalls": [
    "Autopatch features require Business Premium, A3+, E3+ or F3 licenses — check eligibility first."
   ],
+  "done_when": [
+   "Devices are registered in Windows Autopatch and appear in your Autopatch groups.",
+   "Microsoft 365 Apps, Edge and Teams updates are included.",
+   "Someone checks the Intune update reports for devices falling behind on a fixed schedule."
+  ],
   "sources": [
    {
     "title": "What is Windows Autopatch?",
@@ -599,7 +703,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "intune-edge-policies-ai",
@@ -616,6 +721,10 @@
   "pitfalls": [
    "Policy names change between Edge versions — always check the current Edge policy reference."
   ],
+  "done_when": [
+   "A settings catalog policy with your chosen Edge Copilot settings is assigned to device groups.",
+   "edge://policy on a test device lists the policies with status OK."
+  ],
   "sources": [
    {
     "title": "Microsoft Edge browser policy documentation",
@@ -631,7 +740,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "purview-oversharing-assessment",
@@ -649,6 +759,11 @@
   "pitfalls": [
    "Assessment results are a snapshot — rerun after remediation."
   ],
+  "done_when": [
+   "You have reviewed the latest oversharing data risk assessment (default or custom).",
+   "Each top site with broadly shared sensitive content has an owner and a remediation decision (restrict, label or Restricted Content Discovery).",
+   "The assessment has been run again after remediation."
+  ],
   "sources": [
    {
     "title": "Microsoft Purview data security and compliance protections for generative AI apps",
@@ -664,7 +779,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "sharepoint-restricted-content-discovery",
@@ -684,6 +800,10 @@
    "Works only on SharePoint sites, not OneDrive, and also hides Copilot entry points on the site.",
    "Use it selectively — overuse reduces what search and Copilot can find."
   ],
+  "done_when": [
+   "The selected sites show 'Restrict content from Microsoft Copilot' as on (or RestrictContentOrgWideSearch is $true).",
+   "After reindexing, a test user who has access no longer gets that site's content in Copilot or org-wide search, but can still open the site directly."
+  ],
   "sources": [
    {
     "title": "Restrict discovery of SharePoint sites and content",
@@ -699,7 +819,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "purview-sensitivity-labels-copilot",
@@ -718,6 +839,10 @@
    "Content without the EXTRACT right won't be summarized — expected behavior, not a bug.",
    "Container labels (sites, teams) aren't inherited by items, so Copilot won't show them for that content."
   ],
+  "done_when": [
+   "Sensitivity labels are published to the pilot users.",
+   "A pilot test confirms how Copilot handles a file with an encryption label that lacks the EXTRACT right, and the result matches your intent."
+  ],
   "sources": [
    {
     "title": "Use sensitivity labels with Microsoft 365 Copilot",
@@ -733,7 +858,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "purview-dlp-copilot-location",
@@ -753,6 +879,11 @@
    "Email is covered only for messages sent on or after 1 January 2025; calendar invites aren't supported.",
    "You can't combine sensitive information types and sensitivity labels in the same rule — create separate rules."
   ],
+  "done_when": [
+   "A DLP policy with the 'Microsoft 365 Copilot and Copilot Chat' location and a 'Highly Confidential' label condition exists.",
+   "Simulation results were reviewed before the policy was turned on.",
+   "A test user cannot get Copilot to process a file with that label."
+  ],
   "sources": [
    {
     "title": "Learn about the Microsoft 365 Copilot and Copilot Chat DLP location",
@@ -763,7 +894,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "purview-audit-copilot",
@@ -782,6 +914,10 @@
    "Audit records contain metadata (who, when, where, resources), not the prompt text — use eDiscovery or DSPM activity explorer for content.",
    "Other AI apps use different record types (e.g. ConnectedAIAppInteraction, AIAppInteraction)."
   ],
+  "done_when": [
+   "UnifiedAuditLogIngestionEnabled returns True.",
+   "An audit search for CopilotInteraction returns recent events, and the export shows which resources Copilot accessed."
+  ],
   "sources": [
    {
     "title": "Audit logs for Copilot and AI applications",
@@ -797,7 +933,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "purview-retention-copilot",
@@ -816,6 +953,10 @@
    "Retention for Copilot was separated from Teams chats — older 'Teams chats and Copilot interactions' policies need review.",
    "Deletion runs via a timer job (typically 1–7 days) and is suspended by any hold on the mailbox."
   ],
+  "done_when": [
+   "A retention policy for the 'Microsoft Copilot experiences' location exists with the period and scope compliance asked for.",
+   "The policy is listed in your records management plan."
+  ],
   "sources": [
    {
     "title": "Learn about retention for Copilot & AI apps",
@@ -826,7 +967,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "entra-sms-voice-retirement-passkeys",
@@ -849,6 +991,11 @@
    "Internal guest users follow the 1 February 2027 date. Only Global Administrators and external users get until 1 July 2027.",
    "The temporary opt-out (setting passkeyDynamicMigration in the authentication methods policy via Microsoft Graph) only delays the automatic passkey enablement and registration campaign. There is no opt-out from enforcement.",
    "B2B guests are affected as well: passkey support for B2B users is rolling out from late October 2026 (MC1459133), and guests enabled for SMS or voice are auto-enabled for all passkey types. Excluding them from the passkey policy alone doesn't stop that; move them off SMS and voice instead."
+  ],
+  "done_when": [
+   "You have a list (and a security group) of every user who still relies only on SMS or voice.",
+   "Passkey (FIDO2) is enabled for that group and a registration campaign targets it.",
+   "Global Administrators are on phishing-resistant methods, and users have been told about the 1 February 2027 deadline."
   ],
   "sources": [
    {
@@ -895,7 +1042,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-30",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "ca-managed-risk-remediation-policy",
@@ -918,6 +1066,11 @@
    "The policy isn't supported for external and guest users.",
    "Microsoft-managed policies can't be renamed or deleted, only scoped (exclusions) and switched On or Off.",
    "The grant controls automatically add authentication strength and sign-in frequency 'Every time', so after their sessions are revoked users have to sign in again."
+  ],
+  "done_when": [
+   "You know the state and the security group of the Microsoft-managed 'Require risk remediation for high-risk users' policy.",
+   "Break-glass accounts are excluded.",
+   "You have made a deliberate decision to keep it On or turn it Off, and the sign-in logs show no users stuck in remediation."
   ],
   "sources": [
    {
@@ -944,7 +1097,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-30",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "sharepoint-otp-retirement-b2b",
@@ -968,6 +1122,11 @@
    "Guests are now Entra B2B users, so your Conditional Access and MFA policies for guests apply to them, including the SMS and voice retirement.",
    "If an Entra setting is more restrictive than the SharePoint or OneDrive setting, the Entra setting wins.",
    "The retirement covers commercial tenants. Microsoft will announce dates for GCC, GCC High and DoD separately."
+  ],
+  "done_when": [
+   "External users on key sites have matching Entra B2B guest accounts.",
+   "External collaboration settings let your sharers invite guests, and Entra B2B email one-time passcode is still enabled.",
+   "The help desk has been briefed."
   ],
   "sources": [
    {
@@ -1009,7 +1168,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-30",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "defender-teams-zap-qr-phishing",
@@ -1031,6 +1191,11 @@
    "ZAP for Teams quarantines only internal chats and channels, and only for malware and high-confidence phishing.",
    "Quarantined Teams messages are currently admin-only, and users get no quarantine notifications.",
    "User reporting in Teams isn't supported in GCC, GCC High and DoD."
+  ],
+  "done_when": [
+   "`Get-TeamsProtectionPolicy` shows ZapEnabled True.",
+   "'Report a security concern' is on in Teams messaging policies and 'Monitor reported items in Microsoft Teams' is on in Defender.",
+   "The SOC has a saved hunting query for QR-code URLs in Teams."
   ],
   "sources": [
    {
@@ -1062,7 +1227,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-30",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-studio-environment-strategy",
@@ -1080,6 +1246,10 @@
    "Leaving the default environment wide open is the most common mistake.",
    "Environment routing is a premium (Managed Environments) governance feature and the routed developer environments are managed."
   ],
+  "done_when": [
+   "Your environment strategy (Default vs Dev/Test/Prod) is written down.",
+   "Environment routing is on and environment creation is restricted to named admins."
+  ],
   "sources": [
    {
     "title": "Environment routing",
@@ -1095,7 +1265,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-studio-dlp",
@@ -1113,6 +1284,10 @@
   "pitfalls": [
    "Data policies only apply to Power Platform; agents in other platforms need other controls.",
    "New Copilot Studio connectors often land in the default Non-business group — check before you block that group."
+  ],
+  "done_when": [
+   "A data policy classifies the Copilot Studio connectors and blocks the risky ones.",
+   "It applies to all environments, with any dev exceptions documented."
   ],
   "sources": [
    {
@@ -1134,7 +1309,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "agents-inventory-admin-center",
@@ -1152,6 +1328,11 @@
   "pitfalls": [
    "The admin experience (Microsoft Agent 365) is evolving fast — page names differ between tenants and Frontier program members.",
    "Agents built with the Microsoft 365 Agents Toolkit can show up under Integrated apps rather than in the agent registry until they are published through the agent flow."
+  ],
+  "done_when": [
+   "Every agent in the registry has an owner.",
+   "No requests are left pending without a decision.",
+   "Day-to-day agent admins use the AI Administrator role instead of Global Administrator."
   ],
   "sources": [
    {
@@ -1173,7 +1354,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "agents-integrated-apps",
@@ -1190,6 +1372,11 @@
   "pitfalls": [
    "Blocking all apps without an approval process drives shadow IT.",
    "Teams app permission policies are deprecated; tenants were migrated to app centric management from April 2025, so old guidance about permission policies no longer applies."
+  ],
+  "done_when": [
+   "You have reviewed Integrated apps and the Requested apps tab.",
+   "In the Teams admin center, third-party apps are allowed or blocked per app, by decision.",
+   "User consent is restricted and the admin consent workflow is on."
   ],
   "sources": [
    {
@@ -1211,7 +1398,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "agents-restrict-blueprint-creation",
@@ -1233,6 +1421,10 @@
    "The label may read slightly differently in the portal while the feature rolls out. It is under Default user role permissions.",
    "It doesn't change the requirements in Microsoft Foundry or Security Copilot, such as licenses and Azure subscriptions."
   ],
+  "done_when": [
+   "'Users can create agent blueprints' shows No under Default user role permissions.",
+   "Named builders hold the Agent ID Developer role, and a blueprint owner review is scheduled."
+  ],
   "sources": [
    {
     "title": "Message center MC1506733: Review who can create agents in Microsoft Entra (archive)",
@@ -1253,7 +1445,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-30",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "entra-user-consent-restrict",
@@ -1271,6 +1464,10 @@
    "Existing grants remain — review them separately.",
    "Changing the setting in the portal needs Global Administrator; via Graph PowerShell a Privileged Role Administrator is enough."
   ],
+  "done_when": [
+   "User consent is set to 'Do not allow' or to verified publishers with selected permissions.",
+   "The admin consent workflow is enabled, with reviewers assigned."
+  ],
   "sources": [
    {
     "title": "Configure how users consent to applications",
@@ -1286,7 +1483,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-studio-auth",
@@ -1303,6 +1501,11 @@
   "pitfalls": [
    "'No authentication' agents are accessible to anyone with the link and can only use public information."
   ],
+  "done_when": [
+   "Internal agents use 'Authenticate with Microsoft'.",
+   "The 'Chat without Microsoft Entra ID authentication in Copilot Studio' connector is blocked by a data policy.",
+   "Unused publishing channels are turned off."
+  ],
   "sources": [
    {
     "title": "Configure user authentication in Copilot Studio",
@@ -1318,7 +1521,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-usage-report",
@@ -1335,6 +1539,10 @@
   "pitfalls": [
    "User names are concealed by default — change it under Settings > Org settings > Services > Reports (Global Administrator)."
   ],
+  "done_when": [
+   "You have a dated export of enabled vs active Copilot users.",
+   "Licenses for users inactive for 30+ days have been reviewed with their managers."
+  ],
   "sources": [
    {
     "title": "Microsoft Copilot usage report",
@@ -1350,7 +1558,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-usage-graph",
@@ -1368,6 +1577,9 @@
    "The API only covers users with a Copilot license — unlicensed Copilot Chat usage isn't in Graph reports; use the admin center Copilot Chat report or the audit log.",
    "Usernames are concealed unless the reports privacy setting is changed."
   ],
+  "done_when": [
+   "A scheduled job calls the Copilot usage report API with Reports.Read.All and stores the results where Power BI (or your report) can read them."
+  ],
   "sources": [
    {
     "title": "copilotReportRoot resource type",
@@ -1383,7 +1595,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "license-inventory-script",
@@ -1400,6 +1613,10 @@
   "pitfalls": [
    "Use -All, otherwise only the first page is returned."
   ],
+  "done_when": [
+   "licenses.csv contains every user with their SKU part numbers.",
+   "SKU totals (enabled vs consumed) have been reviewed for unused licenses."
+  ],
   "sources": [
    {
     "title": "Get-MgSubscribedSku",
@@ -1415,7 +1632,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "copilot-chat-pay-as-you-go",
@@ -1434,6 +1652,10 @@
   "pitfalls": [
    "Pay-as-you-go needs a billing policy (Azure subscription + users) connected to the Copilot service — set a budget with email alerts. It's off by default."
   ],
+  "done_when": [
+   "Each planned scenario is mapped to Copilot Chat (included), pay-as-you-go agents or the Microsoft Copilot add-on license.",
+   "Leadership has signed off on that mapping before any licenses are bought."
+  ],
   "sources": [
    {
     "title": "Overview of Microsoft Copilot Chat",
@@ -1449,7 +1671,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "prompt-1",
@@ -1467,6 +1690,9 @@
    "Never paste secrets, tenant IDs or personal data into tools not approved for that data.",
    "AI output can be wrong — treat it as a draft."
   ],
+  "done_when": [
+   "You have a policy table plus a list of gaps, and every gap has been checked against the actual policy in the Entra admin center."
+  ],
   "sources": [
    {
     "title": "Get started writing prompts in Microsoft Copilot",
@@ -1477,7 +1703,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "prompt-2",
@@ -1495,6 +1722,9 @@
    "Never paste secrets, tenant IDs or personal data into tools not approved for that data.",
    "AI output can be wrong — treat it as a draft."
   ],
+  "done_when": [
+   "The announcement has been reviewed for accuracy and approved by the owner of internal communications."
+  ],
   "sources": [
    {
     "title": "Get started writing prompts in Microsoft Copilot",
@@ -1505,7 +1735,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "prompt-3",
@@ -1523,6 +1754,9 @@
    "Never paste secrets, tenant IDs or personal data into tools not approved for that data.",
    "AI output can be wrong — treat it as a draft."
   ],
+  "done_when": [
+   "The help-desk explanation has been checked against Microsoft documentation and saved in your knowledge base."
+  ],
   "sources": [
    {
     "title": "Get started writing prompts in Microsoft Copilot",
@@ -1533,7 +1767,8 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  },
  {
   "id": "prompt-4",
@@ -1551,6 +1786,9 @@
    "Never paste secrets, tenant IDs or personal data into tools not approved for that data.",
    "AI output can be wrong — treat it as a draft."
   ],
+  "done_when": [
+   "The draft policy has been reviewed by legal or HR and adapted to your approved tools."
+  ],
   "sources": [
    {
     "title": "Get started writing prompts in Microsoft Copilot",
@@ -1561,6 +1799,7 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30"
+  "updated": "2026-10-30",
+  "screenshots": []
  }
 ]

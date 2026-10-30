@@ -15,6 +15,10 @@
   "Changing channel on existing installs may require a separate policy (Office cloud policy or administrative template) — avoid conflicting settings catalog policies, which can trigger reinstalls.",
   "Since version 2606 (July 2026) Semi-Annual Enterprise Channel devices receive the Monthly Enterprise Channel experience, but some reports still show SAEC."
  ],
+ "done_when": [
+  "A Microsoft 365 Apps app in Intune with Current Channel or Monthly Enterprise Channel is assigned to the pilot group.",
+  "The Microsoft 365 Apps admin center inventory shows pilot devices on the chosen channel."
+ ],
  "sources": [
   {
    "title": "Add Microsoft 365 Apps to Windows devices with Intune",
@@ -35,5 +39,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

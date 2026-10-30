@@ -13,6 +13,10 @@
  "pitfalls": [
   "User names are concealed by default — change it under Settings > Org settings > Services > Reports (Global Administrator)."
  ],
+ "done_when": [
+  "You have a dated export of enabled vs active Copilot users.",
+  "Licenses for users inactive for 30+ days have been reviewed with their managers."
+ ],
  "sources": [
   {
    "title": "Microsoft Copilot usage report",
@@ -28,5 +32,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

@@ -15,6 +15,10 @@
   "Data policies only apply to Power Platform; agents in other platforms need other controls.",
   "New Copilot Studio connectors often land in the default Non-business group — check before you block that group."
  ],
+ "done_when": [
+  "A data policy classifies the Copilot Studio connectors and blocks the risky ones.",
+  "It applies to all environments, with any dev exceptions documented."
+ ],
  "sources": [
   {
    "title": "Configure data policies for agents (Copilot Studio)",
@@ -35,5 +39,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

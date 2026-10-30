@@ -15,6 +15,11 @@
   "Risk policies need P2 licenses for covered users.",
   "Users who aren't registered for MFA are blocked on risky sign-ins (AADSTS53004) — drive MFA registration first."
  ],
+ "done_when": [
+  "The tenant has Entra ID P2, and two separate policies exist: one for sign-in risk (High, Medium) and one for user risk (High).",
+  "Break-glass accounts are excluded from both, and both have been reviewed in report-only before being turned On.",
+  "Someone owns a weekly review of the Risky users report."
+ ],
  "sources": [
   {
    "title": "Require MFA for elevated sign-in risk",
@@ -30,5 +35,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

@@ -13,6 +13,10 @@
  "pitfalls": [
   "Policy names change between Edge versions — always check the current Edge policy reference."
  ],
+ "done_when": [
+  "A settings catalog policy with your chosen Edge Copilot settings is assigned to device groups.",
+  "edge://policy on a test device lists the policies with status OK."
+ ],
  "sources": [
   {
    "title": "Microsoft Edge browser policy documentation",
@@ -28,5 +32,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

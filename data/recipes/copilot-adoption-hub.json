@@ -16,6 +16,11 @@
   "Skipping manager enablement — managers drive adoption.",
   "Group-level (scoped) data in the Copilot Dashboard requires at least 50 Copilot or Viva Insights licenses; smaller tenants get tenant-level data."
  ],
+ "done_when": [
+  "Each pilot department has 3–5 named scenarios written down.",
+  "A champions group exists, has early access and a recurring session in the calendar.",
+  "Someone owns the Copilot Dashboard in Viva Insights and reviews it on a fixed schedule."
+ ],
  "sources": [
   {
    "title": "Microsoft Copilot adoption",
@@ -31,5 +36,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

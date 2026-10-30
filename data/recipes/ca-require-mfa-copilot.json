@@ -16,6 +16,11 @@
   "Don't lock out break-glass accounts — always exclude them.",
   "Users without a phishing-resistant method (passkey/FIDO2, Windows Hello for Business, certificate-based authentication or macOS Platform SSO) will be blocked once enforced."
  ],
+ "done_when": [
+  "A Conditional Access policy targets Office 365 for the Copilot license group with the Phishing-resistant MFA authentication strength.",
+  "Break-glass accounts are excluded.",
+  "Report-only results were reviewed in the sign-in logs and the policy is now On."
+ ],
  "sources": [
   {
    "title": "Conditional Access authentication strengths",
@@ -31,5 +36,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

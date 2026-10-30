@@ -7,7 +7,7 @@ subdomain (`*.netlify.app`) or a GitHub Pages sub-path (`https://<user>.github.i
 1. Create a free Buttondown account and note your username (`https://buttondown.com/<username>`).
 2. Open `site_config.py` (the only file to edit) and set `BUTTONDOWN_USERNAME`.
    Optional: `CONTACT_EMAIL`, `OWNER_NAME`, `HOSTING_PROVIDER`.
-3. Build: `python3 build.py`. It validates all recipes, builds `dist/` and checks for broken links.
+3. Build: `python3 build.py`. It validates all recipes, regenerates the PDF checklists and link-preview images when their inputs changed (needs Chrome/Chromium; otherwise the committed files in `downloads/` and `assets/og/` are used), builds `dist/`, and checks links and page titles/descriptions.
    A non-zero exit code means: do not deploy.
 
 ## Option A: Netlify Drop (fastest, no Git)

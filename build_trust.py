@@ -32,18 +32,22 @@ def nav(rel):
             f'<a class="nv-cta" href="{rel}newsletter.html">Newsletter</a></div></nav></header>')
 
 
-def footer(rel, guide_slug):
+def footer(rel, guide_slug, path="", title="", updated=None):
     col = lambda h, links: (f'<div><h4>{h}</h4><ul>' + "".join(f'<li><a href="{u}">{t}</a></li>' for t, u in links) + '</ul></div>')
-    return ('<footer class="sf"><div class="sf-in">'
+    rep = report_url(path, title or C.SITE_NAME) if path else f"{REPO}/issues/new/choose"
+    bar = (f'<div class="sf-pg"><span>{icon("clock")}Last updated <time datetime="{updated}">{fmt(updated)}</time></span>'
+           f'<a href="{rel}methodology.html">{icon("shield")}Methodology: how we verify</a>'
+           f'<a href="{rep}" rel="nofollow">{icon("alert")}Report an error on this page</a></div>') if updated else ""
+    return ('<footer class="sf">' + bar + '<div class="sf-in">'
             f'<div class="sf-brand"><img src="{rel}assets/logo-dark.svg" alt="Tenant Recipes" width="140" height="32">'
             '<p>Fact-checked AI &amp; security recipes for Microsoft 365 admins. An independent project — not affiliated with Microsoft or any vendor.</p>'
             f'<p class="sf-ed">{EDITOR}</p></div>'
             + col("Content", [("Recipes", f"{rel}index.html#library"), ("Guides", f"{rel}guides/index.html"),
-                              ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Windows 11 CIS hardening", f"{rel}guides/windows-11-cis-hardening.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"),
+                              ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Windows 11 CIS hardening", f"{rel}guides/windows-11-cis-hardening.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"), ("Quick guide: 5 Copilot license checks", f"{rel}guides/copilot-license-checks.html"),
                               ("Search", f"{rel}search.html")])
             + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("Changelog", f"{rel}changelog.html"),
                             ("Report an issue", f"{REPO}/issues/new/choose")])
-            + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Atom / RSS feed", f"{rel}feed.xml"),
+            + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Sample issue", f"{rel}newsletter-sample.html"), ("Atom / RSS feed", f"{rel}feed.xml"),
                                    ("Suggest a recipe", f"{REPO}/issues/new?template=suggest-recipe.yml")])
             + col("Legal", [("Privacy policy", f"{rel}privacy.html"), ("Disclaimer", f"{rel}about.html#disclaimer")])
             + f'</div><p class="sf-b">© {TODAY.year} Tenant Recipes · Microsoft, Microsoft 365, Copilot, Entra, Intune and Purview are trademarks of the Microsoft group of companies. '
@@ -273,8 +277,8 @@ def search_body(rel):
             '</article></main><script src="data/search.js"></script><script src="assets/search.js"></script>')
 
 
-def search_index(R, CY, guides, AREA):
-    idx = []
+def search_index(R, CY, guides, AREA, extra=()):
+    idx = list(extra)
     for r in R:
         idx.append({"k": "Recipe", "c": r["category"], "t": r["title"], "u": f'recipes/{r["id"]}.html', "s": r["problem"],
                     "x": " ".join(r["steps"] + r.get("pitfalls", []))})

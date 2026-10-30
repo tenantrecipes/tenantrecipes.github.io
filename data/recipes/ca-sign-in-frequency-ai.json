@@ -13,6 +13,11 @@
  "pitfalls": [
   "Too frequent prompts cause MFA fatigue — balance with phishing-resistant methods."
  ],
+ "done_when": [
+  "The exec group has a sign-in frequency policy on Office 365.",
+  "A separate policy sets Never persistent browser session, scoped with a device filter or to unmanaged devices.",
+  "'Remember MFA on trusted devices' is off."
+ ],
  "sources": [
   {
    "title": "Conditional Access adaptive session lifetime",
@@ -28,5 +33,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

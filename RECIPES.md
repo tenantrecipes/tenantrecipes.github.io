@@ -13,6 +13,7 @@ and only publishes `"status": "published"`. Run `python3 build.py` after adding 
   "problem": "One or two sentences. Also used as page description and newsletter teaser.",
   "steps": ["Plain text. Put commands in `backticks` to render them as code."],
   "pitfalls": ["..."],
+  "done_when": ["Observable end state, e.g. 'The policy is On and break-glass accounts are excluded.'"],  // our own wording, derived from the steps
   "sources": [
     {"title": "Manage emergency access accounts",
      "url": "https://learn.microsoft.com/...",
@@ -21,10 +22,20 @@ and only publishes `"status": "published"`. Run `python3 build.py` after adding 
   "last_verified": "2026-11-02",           // date every claim was fact-checked against the sources, or null
   "verified_by": "KP",                     // person or pipeline that verified, or null
   "created": "2026-10-12",
-  "updated": "2026-11-02"
+  "updated": "2026-11-02",
+  "screenshots": []                        // optional, REAL screenshots only (never mock-ups): see below
 }
 ```
 (Comments above are for explanation only; real files must be plain JSON.)
+
+`done_when` (recommended; the build warns when it is missing) is rendered as a "Done when" checklist and included in the
+"Copy steps" text and the downloadable Markdown checklist. Write it originally; it must not claim anything the steps and sources don't support.
+
+`screenshots` is a list of `{"src": "assets/screenshots/<file>.png", "alt": "...", "caption": "...", "date": "YYYY-MM-DD"}`.
+Only add genuine screenshots from a real tenant (redact tenant names, users and IDs). The caption shows "Screenshot taken <date>".
+The build fails if a listed file is missing. Candidate recipes are listed in SCREENSHOTS.md.
+
+Topic tags on the homepage (Copilot, Conditional Access, News / Retirement, ...) are derived automatically in `build_ux.tags_for()`.
 
 Recipe pages show "Last verified against Microsoft docs: <date>" when `last_verified` is set,
 otherwise a notice that the recipe has not yet been re-verified.

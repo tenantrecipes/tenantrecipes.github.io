@@ -14,6 +14,10 @@
   "Existing grants remain — review them separately.",
   "Changing the setting in the portal needs Global Administrator; via Graph PowerShell a Privileged Role Administrator is enough."
  ],
+ "done_when": [
+  "User consent is set to 'Do not allow' or to verified publishers with selected permissions.",
+  "The admin consent workflow is enabled, with reviewers assigned."
+ ],
  "sources": [
   {
    "title": "Configure how users consent to applications",
@@ -29,5 +33,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

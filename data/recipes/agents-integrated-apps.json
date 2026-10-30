@@ -14,6 +14,11 @@
   "Blocking all apps without an approval process drives shadow IT.",
   "Teams app permission policies are deprecated; tenants were migrated to app centric management from April 2025, so old guidance about permission policies no longer applies."
  ],
+ "done_when": [
+  "You have reviewed Integrated apps and the Requested apps tab.",
+  "In the Teams admin center, third-party apps are allowed or blocked per app, by decision.",
+  "User consent is restricted and the admin consent workflow is on."
+ ],
  "sources": [
   {
    "title": "Get started with the integrated apps portal",
@@ -34,5 +39,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

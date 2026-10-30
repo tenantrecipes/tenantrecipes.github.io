@@ -2,6 +2,11 @@
  {
   "kind": "site",
   "date": "2026-10-30",
+  "text": "Easier to find, use and share: search and topic filters on the homepage, Start-here cards, Copy steps and Download checklist buttons plus Done-when criteria on every recipe, related recipes and back-to-guide links, a one-page quick guide (5 things to check before assigning Copilot licenses), PDF checklists for both pillar guides, a sample newsletter issue and link-preview images."
+ },
+ {
+  "kind": "site",
+  "date": "2026-10-30",
   "text": "Design refresh: consistent page intros, a Verification card at the top of every recipe, guide and security page, numbered steps, pitfall callouts, copy buttons on commands, and an About-the-editor note."
  },
  {

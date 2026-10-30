@@ -16,6 +16,10 @@
   "Works only on SharePoint sites, not OneDrive, and also hides Copilot entry points on the site.",
   "Use it selectively — overuse reduces what search and Copilot can find."
  ],
+ "done_when": [
+  "The selected sites show 'Restrict content from Microsoft Copilot' as on (or RestrictContentOrgWideSearch is $true).",
+  "After reindexing, a test user who has access no longer gets that site's content in Copilot or org-wide search, but can still open the site directly."
+ ],
  "sources": [
   {
    "title": "Restrict discovery of SharePoint sites and content",
@@ -31,5 +35,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

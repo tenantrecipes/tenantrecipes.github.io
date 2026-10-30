@@ -15,6 +15,11 @@
  "pitfalls": [
   "Don't tie them to a single person's phone for MFA — store FIDO2 keys securely in separate locations."
  ],
+ "done_when": [
+  "Two cloud-only emergency accounts exist with a permanent Global Administrator assignment and a phishing-resistant method that differs from your normal admins.",
+  "Their group is excluded from every enforced policy that blocks or restricts sign-in.",
+  "Sign-ins by these accounts trigger an alert, and the last test sign-in is less than 90 days old."
+ ],
  "sources": [
   {
    "title": "Manage emergency access accounts in Microsoft Entra ID",
@@ -25,5 +30,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

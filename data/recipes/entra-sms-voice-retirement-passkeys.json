@@ -20,6 +20,11 @@
   "The temporary opt-out (setting passkeyDynamicMigration in the authentication methods policy via Microsoft Graph) only delays the automatic passkey enablement and registration campaign. There is no opt-out from enforcement.",
   "B2B guests are affected as well: passkey support for B2B users is rolling out from late October 2026 (MC1459133), and guests enabled for SMS or voice are auto-enabled for all passkey types. Excluding them from the passkey policy alone doesn't stop that; move them off SMS and voice instead."
  ],
+ "done_when": [
+  "You have a list (and a security group) of every user who still relies only on SMS or voice.",
+  "Passkey (FIDO2) is enabled for that group and a registration campaign targets it.",
+  "Global Administrators are on phishing-resistant methods, and users have been told about the 1 February 2027 deadline."
+ ],
  "sources": [
   {
    "title": "Passkeys by default and retirement of Microsoft-provided SMS and voice authentication",
@@ -65,5 +70,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-30",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

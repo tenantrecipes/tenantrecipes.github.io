@@ -15,6 +15,11 @@
   "The admin experience (Microsoft Agent 365) is evolving fast — page names differ between tenants and Frontier program members.",
   "Agents built with the Microsoft 365 Agents Toolkit can show up under Integrated apps rather than in the agent registry until they are published through the agent flow."
  ],
+ "done_when": [
+  "Every agent in the registry has an owner.",
+  "No requests are left pending without a decision.",
+  "Day-to-day agent admins use the AI Administrator role instead of Global Administrator."
+ ],
  "sources": [
   {
    "title": "Manage agents in the Microsoft 365 admin center",
@@ -35,5 +40,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

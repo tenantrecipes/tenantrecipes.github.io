@@ -15,6 +15,10 @@
   "Retention for Copilot was separated from Teams chats — older 'Teams chats and Copilot interactions' policies need review.",
   "Deletion runs via a timer job (typically 1–7 days) and is suspended by any hold on the mailbox."
  ],
+ "done_when": [
+  "A retention policy for the 'Microsoft Copilot experiences' location exists with the period and scope compliance asked for.",
+  "The policy is listed in your records management plan."
+ ],
  "sources": [
   {
    "title": "Learn about retention for Copilot & AI apps",
@@ -25,5 +29,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

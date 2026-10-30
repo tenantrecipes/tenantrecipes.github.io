@@ -14,6 +14,10 @@
   "Old multifunction printers and scripts using SMTP AUTH break — inventory them first.",
   "Without Conditional Access licenses (Entra ID P1), use security defaults to block legacy authentication instead."
  ],
+ "done_when": [
+  "Sign-in logs (interactive and non-interactive) show no remaining legacy-protocol sign-ins you still need.",
+  "A policy for All users / All resources, client apps Exchange ActiveSync + Other clients, Block access, is On with break-glass excluded."
+ ],
  "sources": [
   {
    "title": "Block legacy authentication with Conditional Access",
@@ -24,5 +28,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

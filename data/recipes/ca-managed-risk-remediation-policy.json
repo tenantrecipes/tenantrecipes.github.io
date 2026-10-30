@@ -20,6 +20,11 @@
   "Microsoft-managed policies can't be renamed or deleted, only scoped (exclusions) and switched On or Off.",
   "The grant controls automatically add authentication strength and sign-in frequency 'Every time', so after their sessions are revoked users have to sign in again."
  ],
+ "done_when": [
+  "You know the state and the security group of the Microsoft-managed 'Require risk remediation for high-risk users' policy.",
+  "Break-glass accounts are excluded.",
+  "You have made a deliberate decision to keep it On or turn it Off, and the sign-in logs show no users stuck in remediation."
+ ],
  "sources": [
   {
    "title": "Microsoft-managed Conditional Access policies",
@@ -45,5 +50,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-30",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

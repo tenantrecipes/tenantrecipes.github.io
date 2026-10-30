@@ -15,6 +15,11 @@
   "Newly enrolled devices may appear noncompliant until first evaluation — use a grace period.",
   "BitLocker and Secure Boot are measured via Device Health Attestation at boot — a reboot is needed after encryption before the device shows compliant."
  ],
+ "done_when": [
+  "A Windows compliance policy requiring BitLocker, Secure Boot, a minimum OS version and Defender Antimalware is assigned.",
+  "Noncompliance actions with a grace period are set.",
+  "Test devices report Compliant in Intune before any Conditional Access policy relies on the result."
+ ],
  "sources": [
   {
    "title": "Create a compliance policy in Intune",
@@ -30,5 +35,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

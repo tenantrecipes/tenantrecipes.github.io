@@ -13,6 +13,10 @@
  "pitfalls": [
   "Use -All, otherwise only the first page is returned."
  ],
+ "done_when": [
+  "licenses.csv contains every user with their SKU part numbers.",
+  "SKU totals (enabled vs consumed) have been reviewed for unused licenses."
+ ],
  "sources": [
   {
    "title": "Get-MgSubscribedSku",
@@ -28,5 +32,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

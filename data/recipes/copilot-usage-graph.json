@@ -14,6 +14,9 @@
   "The API only covers users with a Copilot license — unlicensed Copilot Chat usage isn't in Graph reports; use the admin center Copilot Chat report or the audit log.",
   "Usernames are concealed unless the reports privacy setting is changed."
  ],
+ "done_when": [
+  "A scheduled job calls the Copilot usage report API with Reports.Read.All and stores the results where Power BI (or your report) can read them."
+ ],
  "sources": [
   {
    "title": "copilotReportRoot resource type",
@@ -29,5 +32,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

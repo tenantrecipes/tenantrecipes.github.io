@@ -15,6 +15,10 @@
   "Audit records contain metadata (who, when, where, resources), not the prompt text — use eDiscovery or DSPM activity explorer for content.",
   "Other AI apps use different record types (e.g. ConnectedAIAppInteraction, AIAppInteraction)."
  ],
+ "done_when": [
+  "UnifiedAuditLogIngestionEnabled returns True.",
+  "An audit search for CopilotInteraction returns recent events, and the export shows which resources Copilot accessed."
+ ],
  "sources": [
   {
    "title": "Audit logs for Copilot and AI applications",
@@ -30,5 +34,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

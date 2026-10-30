@@ -15,6 +15,11 @@
   "The insights and reporting workbook needs sign-in logs streamed to a Log Analytics workspace.",
   "Report-only policies that require a compliant device can prompt users on macOS, iOS and Android to pick a device certificate — exclude those platforms from report-only device compliance policies."
  ],
+ "done_when": [
+  "The policy has run in Report-only for at least 1–2 weeks and you have reviewed its impact.",
+  "What If has been run for guests and service accounts, with the result recorded.",
+  "The policy was switched to On in an agreed maintenance window."
+ ],
  "sources": [
   {
    "title": "Conditional Access report-only mode",
@@ -30,5 +35,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

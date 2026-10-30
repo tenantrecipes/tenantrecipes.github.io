@@ -18,6 +18,10 @@
   "The label may read slightly differently in the portal while the feature rolls out. It is under Default user role permissions.",
   "It doesn't change the requirements in Microsoft Foundry or Security Copilot, such as licenses and Azure subscriptions."
  ],
+ "done_when": [
+  "'Users can create agent blueprints' shows No under Default user role permissions.",
+  "Named builders hold the Agent ID Developer role, and a blueprint owner review is scheduled."
+ ],
  "sources": [
   {
    "title": "Message center MC1506733: Review who can create agents in Microsoft Entra (archive)",
@@ -38,5 +42,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-30",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

@@ -15,6 +15,11 @@
   "Only apps that integrate the Intune SDK/are listed as protected apps are covered — check the protected apps list.",
   "Devices must be registered in Microsoft Entra ID (via Authenticator or Company Portal) for the CA grant to work."
  ],
+ "done_when": [
+  "iOS/iPadOS and Android app protection policies cover the Microsoft Copilot app and the Microsoft 365 apps your users run.",
+  "Copy/paste to unmanaged apps and saving to personal storage are blocked on a test phone.",
+  "A Conditional Access policy requires app protection (or an approved client app) on iOS/Android."
+ ],
  "sources": [
   {
    "title": "App protection policies overview",
@@ -35,5 +40,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

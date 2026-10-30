@@ -9,15 +9,23 @@ import site_config as C
 sys.path.insert(0, str(ROOT / "data" / "guides"))
 import secure_copilot_rollout as G1
 import windows_11_cis_hardening as G2
+import quick_copilot_license_checks as Q
 GUIDES = [G1, G2]
 import build_cyber as CY
 import build_trust as T
+import build_ux as UX
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
 TODAY = datetime.date.today().isoformat()
 BD_PLACEHOLDER = C.BUTTONDOWN_USERNAME in ("", "BUTTONDOWN_USERNAME")
 SITE = C.SITE_URL.rstrip("/")
+RID = {r["id"]: r for r in R}
+CYD = {e["id"]: e for e in CY.load()}
+SITE_LAST = max([d for r in R for d in (r.get("updated"), r.get("last_verified")) if d]
+                + [d for e in CYD.values() for d in (e.get("updated"), e.get("last_verified")) if d]
+                + [g.VERIFIED for g in GUIDES] + [Q.VERIFIED]
+                + [x["date"] for x in json.load(open(ROOT / "data" / "changelog.json"))])
 
 
 def esc(s):  # match the original site's escaping style
@@ -40,7 +48,8 @@ def step_html(s):
 
 def head(title, desc, rel, path, og_type="website"):
     url = f"{SITE}/{path}" if SITE else ""
-    img = f"{SITE}/assets/og-image.png" if SITE else f"{rel}assets/og-image.png"
+    og, og_alt = UX.og_image(path, RID)
+    img = f"{SITE}/assets/{og}" if SITE else f"{rel}assets/{og}"
     tags = [
         '<meta charset="utf-8">',
         '<meta name="viewport" content="width=device-width,initial-scale=1">',
@@ -56,7 +65,8 @@ def head(title, desc, rel, path, og_type="website"):
         f'<meta property="og:description" content="{esc(desc)}">',
         f'<meta property="og:image" content="{img}">',
         '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">',
-        f'<meta property="og:image:alt" content="{esc(C.SITE_NAME)}: {esc(C.SITE_TAGLINE)}">',
+        f'<meta property="og:image:alt" content="{esc(og_alt)}">',
+        f'<meta name="twitter:image:alt" content="{esc(og_alt)}">',
         '<meta name="twitter:card" content="summary_large_image">',
         f'<meta name="twitter:title" content="{esc(title)}">',
         f'<meta name="twitter:description" content="{esc(desc)}">',
@@ -74,8 +84,31 @@ def nav(rel):
     return T.nav(rel)
 
 
-def footer(rel):
-    return T.footer(rel, G1.SLUG)
+def footer(rel, path="", title="", updated=None):
+    return T.footer(rel, G1.SLUG, path, title, updated or SITE_LAST)
+
+
+def meta_desc(s, n=158):
+    """Search/preview description: one clean sentence-ish string of at most n characters."""
+    s = " ".join(s.replace("`", "").split())
+    if len(s) <= n:
+        return s
+    cut = s[:n - 1]
+    cut = cut[:cut.rfind(" ")] if " " in cut else cut
+    return cut.rstrip(",;:—-") + "…"
+
+
+def page_updated(path):
+    if path.startswith("recipes/") and path[8:-5] in RID:
+        r = RID[path[8:-5]]
+        return r.get("updated") or r.get("last_verified")
+    if path.startswith("security/") and path[9:-5] in CYD:
+        e = CYD[path[9:-5]]
+        return e.get("updated") or e.get("last_verified")
+    for g in GUIDES + [Q]:
+        if path == f"guides/{g.SLUG}.html":
+            return g.VERIFIED
+    return None
 
 
 def ad_slot(name):
@@ -107,8 +140,9 @@ def signup(rel, source, heading=True):
 
 def page(path, title, desc, body, og_type="website"):
     rel = "../" * path.count("/")
+    desc = meta_desc(desc)
     html = (f'<!doctype html><html lang="en"><head>{head(title, desc, rel, path, og_type)}</head><body>\n'
-            f'{nav(rel)}{body(rel)}\n{footer(rel)}</body></html>\n')
+            f'{nav(rel)}{body(rel)}\n{footer(rel, path, title.split(" | ")[0], page_updated(path))}</body></html>\n')
     out = DIST / path
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html)
@@ -160,7 +194,7 @@ def hero(rel):
         f'<p class="hx-lead">Step-by-step AI &amp; security recipes for Microsoft 365 admins — Conditional Access, Intune, Purview, '
         f'Copilot Studio agents and licensing. The exact clicks, the pitfalls, and a link to Microsoft Learn for every claim.</p>'
         f'<div class="hx-cta"><a class="btn hx-p" href="guides/{G1.SLUG}.html">Read the rollout guide →</a>'
-        f'<a class="btn hx-g" href="#library">Browse {n} recipes</a></div>'
+        f'<a class="btn hx-g" href="#find">Find a recipe ({n})</a></div>'
         f'<p class="hx-note"><a href="guides/{G1.SLUG}.html"><strong>{len(G1.PHASES)} phases · {sum(len(p["steps"]) for p in G1.PHASES)} steps · printable checklist.</strong> '
         f'Starts where the real risk is: oversharing, EEEU, sharing links and guests.</a> · <a href="#newsletter">Free weekly brief</a></p>'
         f'<dl class="hx-stats"><div><dt>Recipes</dt><dd>{n}</dd></div><div><dt>Categories</dt><dd>{len(cats)}</dd></div>'
@@ -221,6 +255,8 @@ def guide_page(g):
                           + (f'<div class="gd-recs"><h4>Hands-on recipes</h4>{recs}</div>' if recs else "")
                           + (f'<details class="gd-src"><summary>{SL} ({len(st["src"])})</summary><ul>{srcs}</ul></details>' if srcs else "")
                           + '</div>')
+            if i == len(g.PHASES) // 2 + 1:
+                phases += UX.news_mid(rel, "guide-" + g.SLUG)
             phases += (f'<section class="gd-phase{deep}" id="{pid}" aria-labelledby="{pid}-h"><div class="gd-ph-h"><span class="gd-num">Phase {i}</span>'
                        f'<h2 id="{pid}-h">{esc(ph["title"])}</h2><span class="gd-time" title="Our planning estimate">≈ {esc(ph["time"])}</span></div>'
                        + ('<p class="gd-flag">Deepest phase: most of the risk lives here</p>' if deep else "")
@@ -239,7 +275,8 @@ def guide_page(g):
             f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>Pillar guide · {getattr(g, "BADGE", "fact-checked against Microsoft Learn")} on {fmt_date(g.VERIFIED)}</p>'
             f'<h1>{esc(g.TITLE)}</h1><p class="hx-lead">{esc(g.DESC)}</p>'
             f'<div class="hx-cta"><a class="btn hx-p" href="#phase-1-{g.PHASES[0]["id"]}">Start with phase 1 →</a>'
-            f'<a class="btn hx-g" href="#checklist">Printable checklist</a></div>'
+            f'<a class="btn hx-g" href="#checklist">Printable checklist</a>'
+            f'<a class="btn hx-g" href="{rel}downloads/{g.SLUG}-checklist.pdf" download>Checklist PDF</a></div>'
             f'<dl class="hx-stats"><div><dt>Phases</dt><dd>{len(g.PHASES)}</dd></div><div><dt>Steps</dt><dd>{nsteps}</dd></div>'
             f'<div><dt>Linked recipes</dt><dd>{nrec}</dd></div><div><dt>{SL}</dt><dd>{nsrc}</dd></div></dl>'
             f'<ol class="gd-strip">{strip}</ol></div></section>'
@@ -249,7 +286,10 @@ def guide_page(g):
             f'{phases}'
             f'<section class="gd-check" id="checklist" aria-labelledby="ck-h"><div class="gd-ph-h"><span class="gd-num">Checklist</span><h2 id="ck-h">The printable checklist</h2></div>'
             f'<p>Tick items as you go (saved in this browser only), then print or save as PDF for your change board.</p>'
-            f'<p class="gd-ck-btns"><button class="btn p" type="button" id="ck-print">Print checklist</button> <button class="btn" type="button" id="ck-reset">Clear ticks</button> <span id="ck-n" class="fine"></span></p>'
+            f'<p class="gd-ck-btns"><button class="btn p" type="button" id="ck-print">Print checklist</button> '
+            f'<a class="btn" href="{rel}downloads/{g.SLUG}-checklist.pdf" download>Download PDF</a> '
+            f'<a class="btn" href="{rel}guides/checklists/{g.SLUG}.md" download="{g.SLUG}-checklist.md">Markdown (.md)</a> '
+            f'<button class="btn" type="button" id="ck-reset">Clear ticks</button> <span id="ck-n" class="fine"></span></p>'
             f'<ol class="gd-ck">{check}</ol><p class="fine">{esc(g.TITLE)} · {C.SITE_NAME} · verified {g.VERIFIED} · {SITE}/guides/{g.SLUG}.html</p></section>'
             f'<section class="vs" id="verified"><h2>Verification &amp; corrections</h2><p class="fine">Every step above lists the {SL.lower()} it was checked against '
             f'(open “{SL}” under each step). Guide last verified <strong>{fmt_date(g.VERIFIED)}</strong>. '
@@ -272,10 +312,14 @@ def guides_index():
             f'{sum(len(p["steps"]) for p in g.PHASES)} steps</div><h3>{esc(g.TITLE)}</h3><p>{esc(g.DESC)}</p>'
             f'<span class="cm"><span class="cm-ok">{T.icon("check")}Verified {fmt_date(g.VERIFIED)}</span><span>Printable checklist</span></span></a>'
             for g in GUIDES)
+        cards += (f'<a class="card card-lg" href="{Q.SLUG}.html"><span class="card-i">{T.icon("check")}</span><div class="tag">Quick guide · 1 page · PDF</div>'
+                  f'<h3>{esc(Q.TITLE)}</h3><p>{esc(Q.DESC)}</p><span class="cm"><span class="cm-ok">{T.icon("check")}Verified {fmt_date(Q.VERIFIED)}</span>'
+                  f'<span>{len(Q.CHECKS)} checks</span></span></a>')
         return (T.page_hero(rel, T.crumbs_dark(rel, "guides/index.html", [("Home", rel + "index.html"), ("Guides", None)]), "Guides",
                             "Long-form playbooks", "Phased, fact-checked guides that tie the recipes together. Every claim links to its official source.", kind="page")
                 + f'<main class="wrap pg"><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
-    return page("guides/index.html", f"Guides | {C.SITE_NAME}", "Long-form, fact-checked playbooks for Microsoft 365 and Windows admins.", body)
+    return page("guides/index.html", f"Guides: Copilot rollout, Windows 11 hardening and quick checks | {C.SITE_NAME}",
+                "Long-form, fact-checked playbooks for Microsoft 365 and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
 
 
 def build():
@@ -285,25 +329,25 @@ def build():
     pages = []
     n = len(R)
 
-    pages.append(page("index.html", f"{C.SITE_TAGLINE} | {C.SITE_NAME}", C.SITE_DESCRIPTION, lambda rel: (
-        hero(rel) +
+    pages.append(page("index.html", f"{C.SITE_NAME}: fact-checked Copilot, Intune and security recipes for Microsoft 365 admins", C.SITE_DESCRIPTION, lambda rel: (
+        hero(rel).replace('<section class="sec wrap" aria-labelledby="sec-title">', UX.finder(rel, R, GUIDES, Q, len(CY.load())) + '<section class="sec wrap" aria-labelledby="sec-title">', 1) +
         f'<main class="wrap" id="library">{ad_slot("index-top")}<h2 class="lib-h">The recipe library</h2><div class="controls"><input id="q" aria-label="Search recipes" '
         f'placeholder="Search recipes: e.g. DLP, MFA, license, agent…"></div><div id="chips" class="chips"></div>'
-        f'<p id="count" style="color:#666"></p><div class="grid" id="grid"></div>'
+        f'<p id="count" class="fine" aria-live="polite"></p><div class="grid" id="grid"></div>'
         f'<noscript><ul>' + "".join(f'<li><a href="recipes/{r["id"]}.html">{esc(r["title"])}</a></li>' for r in R) + '</ul></noscript>'
         f'{ad_slot("index-bottom")}{signup(rel, "index")}</main>'
         f'<script src="data/recipes.js"></script><script src="assets/app.js"></script>')))
 
     stats = (len(R), len(CY.load()), len(GUIDES), len({s["url"] for r in R for s in r["sources"]} | {s["url"] for e in CY.load() for s in e["sources"]}))
-    pages.append(page("about.html", f"About | {C.SITE_NAME}", "Who runs Tenant Recipes, how every recipe is fact-checked, and how to report an error.",
+    pages.append(page("about.html", f"About Tenant Recipes: independent, fact-checked and source-linked | {C.SITE_NAME}", "Who edits Tenant Recipes, why there is no personal byline, how every recipe is fact-checked against primary sources, and how to report an error.",
                       lambda rel: T.about_body(rel, stats)))
     pages.append(page("methodology.html", f"Methodology: how we fact-check | {C.SITE_NAME}",
                       "Source hierarchy and verification process behind every Tenant Recipes page.", T.methodology_body))
-    pages.append(page("changelog.html", f"Changelog | {C.SITE_NAME}", "Every new page, update and correction on Tenant Recipes.",
+    pages.append(page("changelog.html", f"Changelog: new recipes, updates and corrections | {C.SITE_NAME}", "Every new recipe, guide and security entry, every re-verification and every correction on Tenant Recipes, newest first.",
                       lambda rel: T.changelog_body(rel, T.changelog_entries(R, CY.load(), GUIDES))))
-    pages.append(page("search.html", f"Search | {C.SITE_NAME}", "Search all Tenant Recipes recipes, guides and security entries.", T.search_body))
+    pages.append(page("search.html", f"Search recipes, guides and CVEs | {C.SITE_NAME}", "Search every Tenant Recipes recipe, guide phase and security entry in your browser: Copilot, Conditional Access, Intune, Purview, LAPS, VMware and more.", T.search_body))
 
-    pages.append(page("newsletter.html", f"Newsletter | {C.SITE_NAME}",
+    pages.append(page("newsletter.html", f"The weekly Tenant Recipes brief (free newsletter) | {C.SITE_NAME}",
                       "A free weekly 5-minute brief on what changed in Copilot, Intune, Entra and Purview, and what admins should do about it.",
                       lambda rel: (
         T.page_hero(rel, T.crumbs_dark(rel, "newsletter.html", [("Home", rel + "index.html"), ("Newsletter", None)]), "Newsletter",
@@ -311,11 +355,11 @@ def build():
                     "admins who were handed “roll out Copilot and agents safely”.", kind="page")
         + '<main class="wrap pg"><article class="prose doc"><ul><li><strong>Top story</strong>: the one change that matters this week, '
         'with an admin take.</li><li><strong>Copilot · Intune · Entra &amp; Purview</strong>: short items with what to do, each linked to the source.</li>'
-        '<li><strong>Recipe of the week</strong>: a hands-on playbook from this site.</li></ul><p>5 minutes, no fluff, free.</p></article>'
+        '<li><strong>Recipe of the week</strong>: a hands-on playbook from this site.</li></ul><p>5 minutes, no fluff, free. <a href="newsletter-sample.html">See a sample issue</a>.</p></article>'
         + signup(rel, "newsletter-page", heading=False) + '</main>')))
 
     host = E(C.HOSTING_PROVIDER)
-    pages.append(page("privacy.html", f"Privacy policy | {C.SITE_NAME}", "How Tenant Recipes handles personal data.", lambda rel: (
+    pages.append(page("privacy.html", f"Privacy policy | {C.SITE_NAME}", "How Tenant Recipes handles personal data: no cookies, no analytics, and a newsletter you can leave with one click.", lambda rel: (
         T.page_hero(rel, T.crumbs_dark(rel, "privacy.html", [("Home", rel + "index.html"), ("Privacy policy", None)]), "Legal", "Privacy policy",
                     f"Last updated: {TODAY}. No cookies, no analytics, no ad trackers.", kind="page")
         + f'<main class="wrap pg"><article class="prose doc">'
@@ -343,6 +387,7 @@ def build():
     pages.append(guides_index())
     pages += CY.build(page, R, esc, step_html, signup, fmt_date, E, C.SITE_NAME)
 
+    refs = UX.guide_refs(GUIDES)
     for r in R:
         def body(rel, r=r):
             path = f'recipes/{r["id"]}.html'
@@ -350,21 +395,47 @@ def build():
             chips = (T.chip("list", f'{len(r["steps"])} steps') + (T.chip("alert", f'{len(r["pitfalls"])} pitfall{"s" if len(r["pitfalls"]) != 1 else ""}') if r["pitfalls"] else "")
                      + T.chip("link", f'{len(r["sources"])} Microsoft source{"s" if len(r["sources"]) != 1 else ""}')
                      + (T.chip("clock", f'First published {fmt_date(r["created"])}') if r.get("created") else ""))
-            toc = [("problem", "The problem"), ("steps", "Steps")] + ([("pitfalls", "Pitfalls")] if r["pitfalls"] else []) + [("verified", "Sources & corrections")]
+            toc = ([("problem", "The problem"), ("steps", "Steps")] + ([("done", "Done when")] if r.get("done_when") else [])
+                   + ([("pitfalls", "Pitfalls")] if r["pitfalls"] else []) + [("next", "Related & next steps"), ("verified", "Sources & corrections")])
             pg = G2 if r["id"] in {x for p in G2.PHASES for st in p["steps"] for x in st["rec"]} else G1
             promo = (f'<a class="ps-promo" href="{rel}guides/{pg.SLUG}.html"><span class="ps-k">Pillar guide</span><strong>{esc(pg.SHORT)}</strong>'
                      f'<span>{len(pg.PHASES)} phases · printable checklist {T.icon("arrow")}</span></a>')
+            tags = "".join(f'<a class="tg" href="{rel}index.html?t={E(t.replace(" ", "+"))}#library">{esc(t)}</a>' for t in UX.tags_for(r))
+            rel_items = UX.related(r, R, refs)
             return (T.page_hero(rel, T.crumbs_dark(rel, path, [("Home", rel + "index.html"), ("Recipes", rel + "index.html#library"), (r["category"], None)]),
                                 f'{T.icon("layers")}{esc(r["category"])}', esc(r["title"]), "", chips, kind="recipe")
                     + '<main class="wrap pg"><div class="pg-grid"><article class="doc">'
                     + T.verify_card(rel, r, "Microsoft sources")
+                    + UX.back_to_guide(rel, r, refs, pg)
                     + f'<section id="problem" class="co co-info"><p class="co-h">{T.icon("target")}The problem</p><p>{esc(r["problem"])}</p></section>'
-                    f'<h2 id="steps" class="h-ic">{T.icon("list")}Steps</h2><ol class="steps">' + "".join(f'<li><div>{step_html(s)}</div></li>' for s in r["steps"]) + '</ol>'
+                    + UX.toolbar(rel, r)
+                    + f'<h2 id="steps" class="h-ic">{T.icon("list")}Steps</h2><ol class="steps">' + "".join(f'<li><div>{step_html(s)}</div></li>' for s in r["steps"]) + '</ol>'
+                    + UX.screenshots(r, rel)
+                    + UX.done_when(r, step_html)
                     + (f'<section id="pitfalls" class="co co-warn"><p class="co-h">{T.icon("alert")}Pitfalls</p><ul>' + "".join(f'<li>{step_html(p)}</li>' for p in r["pitfalls"]) + '</ul></section>' if r["pitfalls"] else "")
+                    + UX.news_mid(rel, "recipe-" + r["id"])
+                    + f'<section id="next" class="nx" aria-labelledby="nx-h"><h2 id="nx-h">Related recipes &amp; next steps</h2>'
+                    + (f'<p class="tgs"><span class="fine">Topics:</span> {tags}</p>' if tags else "")
+                    + f'<div class="grid nx-g">{UX.related_cards(rel, rel_items)}</div>{UX.back_to_guide(rel, r, refs, pg)}</section>'
                     + ad_slot("recipe-inline") + T.trust_bottom(rel, path, r["title"], r, "Verified against") + '</article>'
                     + T.side_nav(rel, toc, [(x["title"], f'{rel}recipes/{x["id"]}.html') for x in same], f'More in {r["category"]}', promo)
                     + '</div>' + signup(rel, "recipe-" + r["id"]) + '</main>')
         pages.append(page(f'recipes/{r["id"]}.html', f'{r["title"]} | {C.SITE_NAME}', r["problem"], body, "article"))
+
+    # Quick guide + sample newsletter issue
+    pages.append(page(f"guides/{Q.SLUG}.html", f"{Q.TITLE} | {C.SITE_NAME}", Q.DESC,
+                      lambda rel: UX.quick_body(rel, Q, RID, '<div class="wrap">' + signup(rel, "quick-" + Q.SLUG) + '</div>'), "article"))
+    pages.append(page("newsletter-sample.html", f"Sample issue of the weekly brief | {C.SITE_NAME}",
+                      "See what the free weekly Tenant Recipes brief looks like: a top story with an admin take, short items, a patch-first list and a recipe of the week.",
+                      lambda rel: UX.sample_issue_body(rel, R, CY.load(), GUIDES) + f'<div class="wrap">{signup(rel, "newsletter-sample")}</div>'))
+
+    # Markdown checklists (download buttons)
+    (DIST / "recipes" / "checklists").mkdir(parents=True, exist_ok=True)
+    for r in R:
+        (DIST / "recipes" / "checklists" / f'{r["id"]}.md').write_text(UX.recipe_markdown(r))
+    (DIST / "guides" / "checklists").mkdir(parents=True, exist_ok=True)
+    for g in GUIDES:
+        (DIST / "guides" / "checklists" / f"{g.SLUG}.md").write_text(UX.guide_markdown(g))
 
     # 404: self-contained (works at any depth)
     home = (SITE + "/") if SITE else "/"
@@ -376,9 +447,12 @@ def build():
 
     # static assets
     shutil.copytree(ROOT / "assets", DIST / "assets")
+    shutil.copytree(ROOT / "downloads", DIST / "downloads", ignore=shutil.ignore_patterns("manifest.json"))
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
-    (DIST / "data" / "search.js").write_text(T.search_index(R, CY.load(), GUIDES, CY.AREA))
+    (DIST / "data" / "search.js").write_text(T.search_index(R, CY.load(), GUIDES, CY.AREA, extra=[
+        {"k": "Guide", "c": "Quick guide", "t": Q.TITLE, "u": f"guides/{Q.SLUG}.html", "s": Q.DESC, "x": " ".join(c["t"] + " " + c["why"] for c in Q.CHECKS)},
+        {"k": "Page", "c": "Site", "t": "Sample newsletter issue", "u": "newsletter-sample.html", "s": "What the weekly brief looks like.", "x": ""}]))
     fingerprint_assets()
     if SITE:
         (DIST / "feed.xml").write_text(T.atom(R, CY.load(), GUIDES))

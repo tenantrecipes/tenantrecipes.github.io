@@ -16,6 +16,10 @@
   "The Copilot default comes from the organizer's meeting policy; transcription can be started by any participant whose own policy allows it.",
   "Copilot isn't available in end-to-end encrypted meetings."
  ],
+ "done_when": [
+  "The meeting policy for pilot users allows transcription and has the Copilot setting you chose.",
+  "In a test meeting where a transcript was started, Copilot can still be used on that meeting after it ends."
+ ],
  "sources": [
   {
    "title": "Manage Microsoft Copilot in Teams meetings and events",
@@ -26,5 +30,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

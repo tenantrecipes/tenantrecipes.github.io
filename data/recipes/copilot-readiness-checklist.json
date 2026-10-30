@@ -16,6 +16,12 @@
   "Since July 2026 (version 2606) Semi-Annual Enterprise Channel is unified with Monthly Enterprise Channel, so SAEC devices get the MEC experience — but reports may still show SAEC.",
   "Proxies or TLS inspection that break WebSockets make Copilot in apps fail."
  ],
+ "done_when": [
+  "Every pilot user has a qualifying base license, an Entra ID account, an Exchange Online mailbox and OneDrive.",
+  "Pilot devices report Microsoft 365 Apps on Current Channel or Monthly Enterprise Channel.",
+  "Your network team has confirmed *.cloud.microsoft is allowed in full and WSS traffic is not broken by TLS inspection.",
+  "The Copilot License Details diagnostic shows no blocking issues for your pilot users."
+ ],
  "sources": [
   {
    "title": "Microsoft Copilot requirements",
@@ -36,5 +42,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

@@ -15,6 +15,11 @@
   "Licenses cannot be assigned without UsageLocation.",
   "Look up the SkuPartNumber in your tenant rather than hard-coding it."
  ],
+ "done_when": [
+  "`Get-MgUserLicenseDetail -UserId <user>` lists the Copilot SKU for every user in your list.",
+  "Every target user has a UsageLocation set.",
+  "Your script reads the SkuId from Get-MgSubscribedSku instead of a hard-coded value."
+ ],
  "sources": [
   {
    "title": "Assign licenses with Microsoft Graph PowerShell",
@@ -30,5 +35,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

@@ -13,6 +13,11 @@
  "pitfalls": [
   "'No authentication' agents are accessible to anyone with the link and can only use public information."
  ],
+ "done_when": [
+  "Internal agents use 'Authenticate with Microsoft'.",
+  "The 'Chat without Microsoft Entra ID authentication in Copilot Studio' connector is blocked by a data policy.",
+  "Unused publishing channels are turned off."
+ ],
  "sources": [
   {
    "title": "Configure user authentication in Copilot Studio",
@@ -28,5 +33,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

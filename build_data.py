@@ -42,6 +42,13 @@ def validate(r, fname):
             errs.append(f"source needs title and https url: {s}")
         if s.get("checked") is not None and not DATE.match(str(s["checked"])):
             errs.append(f"source 'checked' must be YYYY-MM-DD or null: {s}")
+    if "done_when" in r and (not isinstance(r["done_when"], list) or not all(isinstance(x, str) and x.strip() for x in r["done_when"])):
+        errs.append("'done_when' must be a list of non-empty strings")
+    for sh in r.get("screenshots") or []:  # optional REAL screenshots only: {src, alt, caption, date}
+        if not all(sh.get(k) for k in ("src", "alt", "caption", "date")) or not DATE.match(str(sh.get("date"))):
+            errs.append(f"screenshot needs src, alt, caption and date (YYYY-MM-DD): {sh}")
+        elif not (str(sh["src"]).startswith("assets/screenshots/") and (ROOT / sh["src"]).exists()):
+            errs.append(f"screenshot file must live under assets/screenshots/ and exist: {sh['src']}")
     if r["last_verified"] is not None and not DATE.match(str(r["last_verified"])):
         errs.append("'last_verified' must be YYYY-MM-DD or null")
     return errs
@@ -74,10 +81,12 @@ def main():
     R = load()
     (ROOT / "data" / "recipes.json").write_text(json.dumps(R, indent=1, ensure_ascii=False))
     # Slim copy for the client-side search
-    slim = [{**{k: r[k] for k in ("id", "category", "title", "problem", "steps")}, "v": r.get("last_verified") or "", "n": len(r.get("sources", []))} for r in R]
-    (ROOT / "data" / "recipes.js").write_text("window.RECIPES=" + json.dumps(slim, ensure_ascii=False) + ";")
+    import build_ux
+    (ROOT / "data" / "recipes.js").write_text(build_ux.slim_js(R))  # includes derived topic tags for the homepage filter
     unverified = sum(1 for r in R if not r["last_verified"])
-    print(f"{len(R)} published recipes ({unverified} not yet verified)")
+    no_dw = [r["id"] for r in R if not r.get("done_when")]
+    print(f"{len(R)} published recipes ({unverified} not yet verified)"
+          + (f"  WARNING: no done_when in {', '.join(no_dw)}" if no_dw else ""))
 
 
 if __name__ == "__main__":

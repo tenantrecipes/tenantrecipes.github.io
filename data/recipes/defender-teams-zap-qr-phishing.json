@@ -19,6 +19,11 @@
   "Quarantined Teams messages are currently admin-only, and users get no quarantine notifications.",
   "User reporting in Teams isn't supported in GCC, GCC High and DoD."
  ],
+ "done_when": [
+  "`Get-TeamsProtectionPolicy` shows ZapEnabled True.",
+  "'Report a security concern' is on in Teams messaging policies and 'Monitor reported items in Microsoft Teams' is on in Defender.",
+  "The SOC has a saved hunting query for QR-code URLs in Teams."
+ ],
  "sources": [
   {
    "title": "Microsoft Defender for Office 365 support for Microsoft Teams",
@@ -49,5 +54,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-30",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

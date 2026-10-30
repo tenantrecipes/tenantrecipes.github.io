@@ -15,6 +15,11 @@
   "Group-based licensing requires Microsoft Entra ID P1 or Office 365 E3 or higher.",
   "Removing a user from the group removes the license — when moving users, add to the new group first, then remove from the old one."
  ],
+ "done_when": [
+  "The pilot security group shows the Microsoft Copilot license under Billing > Licenses with no nested groups inside it.",
+  "A newly added test user receives the license automatically, without a manual assignment.",
+  "Errors & issues for the product is empty, or every listed error has an owner."
+ ],
  "sources": [
   {
    "title": "Assign or unassign licenses to a group in the Microsoft 365 admin center",
@@ -30,5 +35,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }

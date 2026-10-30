@@ -16,6 +16,11 @@
   "Email is covered only for messages sent on or after 1 January 2025; calendar invites aren't supported.",
   "You can't combine sensitive information types and sensitivity labels in the same rule — create separate rules."
  ],
+ "done_when": [
+  "A DLP policy with the 'Microsoft 365 Copilot and Copilot Chat' location and a 'Highly Confidential' label condition exists.",
+  "Simulation results were reviewed before the policy was turned on.",
+  "A test user cannot get Copilot to process a file with that label."
+ ],
  "sources": [
   {
    "title": "Learn about the Microsoft 365 Copilot and Copilot Chat DLP location",
@@ -26,5 +31,6 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30"
+ "updated": "2026-10-30",
+ "screenshots": []
 }
