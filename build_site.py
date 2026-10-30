@@ -18,6 +18,7 @@ import build_search as BS
 import build_tools as TL
 import build_policies as PL
 import build_news as NW
+import build_status as BST
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -340,7 +341,7 @@ def build():
     pages.append(page("index.html", f"{C.SITE_NAME}: fact-checked Copilot, Intune and security recipes for Microsoft 365 admins", C.SITE_DESCRIPTION, lambda rel: (
         UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
                     CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1),
-                    UX.search_bar(rel, R, len(CY.load())))
+                    UX.search_bar(rel, R, len(CY.load())) + BST.pill(rel) + f'<script src="{rel}assets/status.js" defer></script>')
         + NW.latest_strip(rel, esc, fmt_date, CY.load())
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
         + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):] +
@@ -409,6 +410,7 @@ def build():
     pages += CY.build(page, R, esc, step_html, signup, fmt_date, E, C.SITE_NAME)
     pages += TL.build(page, esc, step_html, signup, fmt_date, E, C.SITE_NAME)
     pages += PL.build(page, esc, signup, fmt_date, E, C.SITE_NAME)
+    pages += BST.build(page, esc, E, C.SITE_NAME, DIST)
     pages += NW.build(page, esc, step_html, signup, fmt_date, E, C.SITE_NAME, CY.load())
 
     refs = UX.guide_refs(GUIDES)

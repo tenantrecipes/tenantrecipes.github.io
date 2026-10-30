@@ -1,20 +1,28 @@
-# Builds the site and deploys dist/ to GitHub Pages on every push to main (and on manual run).
-# Inactive until this folder is pushed to a GitHub repo and Pages "Source" is set to "GitHub Actions".
+# Builds the site and deploys dist/ to GitHub Pages.
+# - push to main / manual run: always build and deploy.
+# - schedule (every 15 min): refresh the Microsoft cloud status mirror (tools/fetch_status.py, public sources only).
+#   Deploys only when the status changed or once an hour (keeps "last checked" fresh without a deploy every run).
+#   Commits data/status-history.json when incidents appear or change (30-day history).
 name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      deploy: ${{ steps.gate.outputs.deploy }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -22,12 +30,34 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.11"
-      - run: python3 build.py   # validates recipes + checks links; fails = no deploy
+      - name: Fetch public Microsoft status sources
+        id: st
+        run: python3 tools/fetch_status.py | tee status.out && grep -E '^(changed|history_changed)=' status.out >> "$GITHUB_OUTPUT"
+      - name: Decide whether to deploy
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ] || [ "${{ steps.st.outputs.changed }}" = "true" ] || [ "$(date -u +%M)" -lt 15 ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Save status history
+        if: github.event_name == 'schedule' && steps.st.outputs.history_changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/status-history.json
+          git commit -m "Status history update" && (git pull --rebase -q origin main && git push -q origin HEAD:main) || true
+      - name: Build
+        if: steps.gate.outputs.deploy == 'true'
+        run: python3 build.py   # validates content + checks links; fails = no deploy
       - uses: actions/upload-pages-artifact@v5
+        if: steps.gate.outputs.deploy == 'true'
         with:
           path: dist
   deploy:
     needs: build
+    if: needs.build.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

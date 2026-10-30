@@ -235,6 +235,14 @@
    "joiners",
    "new starter",
    "new hire"
+  ],
+  [
+   "status",
+   "outage",
+   "down",
+   "incident",
+   "service health",
+   "is azure down"
   ]
  ],
  "questions": [
@@ -341,6 +349,10 @@
   [
    "how do I onboard a new employee",
    "policies/onboarding-checklist.html"
+  ],
+  [
+   "is microsoft 365 down",
+   "status/index.html"
   ]
  ]
 }

@@ -10,3 +10,4 @@ newsletter-001.md
 *.orig
 backup*/
 *.tar.gz
+data/status.json
