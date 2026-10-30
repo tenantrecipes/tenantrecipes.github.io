@@ -55,7 +55,7 @@ def head(title, desc, rel, path, og_type="website"):
 
 
 def nav(rel):
-    return (f'<header><nav><a class="logo" href="{rel}index.html">Tenant<span>Recipes</span></a><div>'
+    return (f'<header><nav><a class="logo" href="{rel}index.html"><img src="{rel}assets/logo.svg" alt="Tenant Recipes" width="158" height="36"></a><div>'
             f'<a href="{rel}index.html#library">Recipes</a><a href="{rel}newsletter.html">Newsletter</a>'
             f'<a href="{rel}about.html">About</a></div></nav></header>')
 
