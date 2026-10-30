@@ -369,6 +369,7 @@ def build():
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
     (DIST / "data" / "search.js").write_text(T.search_index(R, CY.load(), GUIDES, CY.AREA))
+    fingerprint_assets()
     if SITE:
         (DIST / "feed.xml").write_text(T.atom(R, CY.load(), GUIDES))
     shutil.copy(ROOT / "favicon.ico", DIST / "favicon.ico")
@@ -382,6 +383,26 @@ def build():
     print(f"Built {len(pages)} pages into {DIST.relative_to(ROOT)}/"
           + ("" if SITE else "  (SITE_URL empty: share image uses a relative URL, no sitemap)")
           + ("  (Buttondown username not set: form not live)" if BD_PLACEHOLDER else ""))
+
+
+def fingerprint_assets():
+    """Cache-busting + no-CSS safety net for every page in dist/.
+    1) CSS/JS references get ?v=<content hash>, so a browser never combines new HTML with an old cached
+       style.css (GitHub Pages serves assets with max-age=600; stale CSS made inline icons render huge).
+    2) Inline SVG icons without explicit size get width/height="1em", so they stay icon-sized even if
+       the stylesheet is missing or outdated (CSS still overrides these presentation attributes)."""
+    import hashlib, re
+    def ver(rel_path):
+        f = DIST / rel_path
+        return hashlib.sha256(f.read_bytes()).hexdigest()[:10] if f.exists() else None
+    ref = re.compile(r'((?:href|src)="(?:\.\./)*((?:assets|data)/[\w.-]+\.(?:css|js)))(")')
+    svg = re.compile(r'<svg (?![^>]*\bwidth=)(?=[^>]*(?:class="ic"|viewBox="0 0 20 20"))')
+    for f in DIST.rglob("*.html"):
+        html = f.read_text()
+        out = ref.sub(lambda m: f'{m.group(1)}?v={ver(m.group(2))}{m.group(3)}' if ver(m.group(2)) else m.group(0), html)
+        out = svg.sub('<svg width="1em" height="1em" ', out)
+        if out != html:
+            f.write_text(out)
 
 
 if __name__ == "__main__":
