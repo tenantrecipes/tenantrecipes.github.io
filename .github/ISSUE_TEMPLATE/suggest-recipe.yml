@@ -1,0 +1,32 @@
+name: Suggest a recipe
+description: A task or change you'd like a step-by-step recipe for.
+title: "[Suggestion] "
+labels: ["recipe-suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: Issues are public — please leave out anything confidential about your organisation.
+  - type: textarea
+    id: task
+    attributes:
+      label: What do you need to get done?
+      placeholder: e.g. Block Copilot on unmanaged devices but allow it on compliant ones
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Copilot rollout & governance
+        - Conditional Access / Entra ID
+        - Intune & devices
+        - Purview, DLP & data security
+        - Agents & Copilot Studio
+        - Licensing & reporting
+        - Cybersecurity (network, servers, VMware…)
+        - Other
+  - type: input
+    id: link
+    attributes:
+      label: Related Microsoft or vendor link (optional)

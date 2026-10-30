@@ -45,3 +45,9 @@ CATEGORY_ORDER = [
     "Licensing & reporting",
     "Admin prompt templates",
 ]
+
+# Public GitHub repo used for "Report an error" / "Suggest a recipe" (GitHub Issues). Brand account only.
+GITHUB_REPO = "tenantrecipes/tenantrecipes.github.io"
+
+# Pages whose last verification is older than this many days show a "due for re-check" notice.
+REVERIFY_DAYS = 90

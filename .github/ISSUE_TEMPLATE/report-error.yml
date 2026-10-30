@@ -1,0 +1,40 @@
+name: Report an error
+description: Something on a page is wrong, outdated or unclear.
+title: "[Error] "
+labels: ["error-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping keep Tenant Recipes accurate. Please don't paste tenant names, user names, IDs or other confidential data — issues are public.
+  - type: input
+    id: page_url
+    attributes:
+      label: Page URL
+      placeholder: https://tenantrecipes.github.io/recipes/...
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong?
+      description: Quote the step or sentence, and say what it should say instead.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source (if you have one)
+      description: A Microsoft Learn page, Message center ID, vendor advisory or CISA/NVD link that shows the correct information.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of problem
+      options:
+        - Factually wrong
+        - Outdated (portal or feature changed)
+        - Broken link
+        - Unclear or missing step
+        - Other
+    validations:
+      required: true

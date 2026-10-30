@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: How Tenant Recipes verifies content
+    url: https://tenantrecipes.github.io/methodology.html
+    about: Read the fact-check process and source hierarchy before reporting.

@@ -5,6 +5,7 @@ Called from build_site.build(); returns the list of page paths it wrote. Exits n
 so an automated pipeline stops before deploying. Never invent CVE ids, versions, CVSS or dates: leave
 cvss null when no vendor/NVD score was verified."""
 import json, re, sys, pathlib, datetime
+import build_trust as T
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC = ROOT / "data" / "cyber"
@@ -210,14 +211,15 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                          '<h2>Affected</h2><ul>' + "".join(f'<li>{step_html(x)}</li>' for x in e["affected"]) + '</ul>'
                          '<h2>Fixed versions</h2><ul class="cy-fix">' + "".join(f'<li>{step_html(x)}</li>' for x in e["fixed"]) + '</ul>')
             kind = "Vulnerability watch" if e["type"] == "vulnerability" else "Hardening recipe"
-            return (f'<main class="wrap"><article><p class="gd-crumb cy-crumb"><a href="{rel}security/index.html">← Security</a> / '
-                    f'<a href="{rel}security/{e["area"]}.html">{esc(at)}</a></p>'
-                    f'<div class="tag" style="margin-top:14px">{kind} · {esc(at)}</div><h1>{esc(e["title"])}</h1>'
-                    f'<p class="meta">Last verified against the vendor and official sources: <strong>{e["last_verified"]}</strong></p>'
-                    f'{disclaimer()}<h2>{"What it is" if e["type"] == "vulnerability" else "Why it matters"}</h2><p>{esc(e["summary"])}</p>{facts}'
+            path = f'security/{e["id"]}.html'
+            return (f'<main class="wrap"><article>'
+                    + T.crumbs(rel, path, [("Home", rel + "index.html"), ("Security", rel + "security/index.html"), (at, rel + f'security/{e["area"]}.html'), (kind, None)])
+                    + f'<div class="tag" style="margin-top:14px">{kind} · {esc(at)}</div><h1>{esc(e["title"])}</h1>'
+                    + T.trust_top(rel, e, "official sources")
+                    + f'{disclaimer()}<h2>{"What it is" if e["type"] == "vulnerability" else "Why it matters"}</h2><p>{esc(e["summary"])}</p>{facts}'
                     f'<h2>{"What to do" if e["type"] == "vulnerability" else "Steps"}</h2><ol>' + "".join(f'<li>{step_html(s)}</li>' for s in e["steps"]) + '</ol>'
                     + (f'<h2>Pitfalls</h2><ul>' + "".join(f'<li>{step_html(p)}</li>' for p in e["pitfalls"]) + '</ul>' if e["pitfalls"] else "")
-                    + f'<h2>Official sources</h2><ul>{src}</ul></article>' + signup(rel, "security-" + e["id"]) + '</main>')
+                    + T.trust_bottom(rel, path, e["title"], e, "Verified against (vendor &amp; official sources)") + '</article>' + signup(rel, "security-" + e["id"]) + '</main>')
         pages.append(page(f'security/{e["id"]}.html', f'{e["title"]} | {SITE_NAME}', e["summary"], body, "article"))
     print(f"Security section: {len(vulns)} vulnerabilities, {len(hards)} hardening recipes, {len(pages)} pages")
     return pages

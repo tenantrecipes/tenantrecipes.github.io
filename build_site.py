@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "data" / "guides"))
 import secure_copilot_rollout as G1
 GUIDES = [G1]
 import build_cyber as CY
+import build_trust as T
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -54,20 +55,17 @@ def head(title, desc, rel, path, og_type="website"):
     ]
     if url:
         tags += [f'<meta property="og:url" content="{url}">', f'<link rel="canonical" href="{url}">']
+    tags.append(f'<link rel="alternate" type="application/atom+xml" title="{esc(C.SITE_NAME)}" href="{rel}feed.xml">')
     tags.append(f'<link rel="stylesheet" href="{rel}assets/style.css">')
     return "".join(tags)
 
 
 def nav(rel):
-    return (f'<header><nav><a class="logo" href="{rel}index.html"><img src="{rel}assets/logo.svg" alt="Tenant Recipes" width="158" height="36"></a><div>'
-            f'<a href="{rel}guides/index.html">Guides</a><a href="{rel}index.html#library">Recipes</a><a href="{rel}security/index.html">Security</a><a href="{rel}newsletter.html">Newsletter</a>'
-            f'<a href="{rel}about.html">About</a></div></nav></header>')
+    return T.nav(rel)
 
 
 def footer(rel):
-    return (f'<footer>Tenant Recipes · Practical AI recipes for Microsoft 365 admins · Not affiliated with Microsoft<br>'
-            f'<a href="{rel}guides/{G1.SLUG}.html">Secure Copilot rollout guide</a> · <a href="{rel}security/index.html">Vulnerability watch</a> · <a href="{rel}newsletter.html">Newsletter</a> · <a href="{rel}about.html">About</a> · '
-            f'<a href="{rel}privacy.html">Privacy policy</a></footer>')
+    return T.footer(rel, G1.SLUG)
 
 
 def ad_slot(name):
@@ -108,9 +106,7 @@ def page(path, title, desc, body, og_type="website"):
 
 
 def contact_html():
-    if C.CONTACT_EMAIL:
-        return f'<a href="mailto:{E(C.CONTACT_EMAIL)}">{E(C.CONTACT_EMAIL)}</a>'
-    return "reply to any newsletter email"
+    return T.contact_html()
 
 
 SECURITY_TRACK = [  # (category, headline, blurb, preferred first recipe id) — counts and links are computed from data
@@ -237,6 +233,10 @@ def guide_page(g):
             f'<p>Tick items as you go (saved in this browser only), then print or save as PDF for your change board.</p>'
             f'<p class="gd-ck-btns"><button class="btn p" type="button" id="ck-print">Print checklist</button> <button class="btn" type="button" id="ck-reset">Clear ticks</button> <span id="ck-n" class="fine"></span></p>'
             f'<ol class="gd-ck">{check}</ol><p class="fine">{esc(g.TITLE)} · {C.SITE_NAME} · verified {g.VERIFIED} · {SITE}/guides/{g.SLUG}.html</p></section>'
+            f'<section class="vs"><h2>Verification &amp; corrections</h2><p class="fine">Every step above lists the Microsoft sources it was checked against '
+            f'(open “Microsoft sources” under each step). Guide last verified <strong>{fmt_date(g.VERIFIED)}</strong>. '
+            f'<a href="{rel}methodology.html">How we verify</a> · <a href="{rel}changelog.html">Changelog</a></p>'
+            f'<div class="vs-f"><p>Spotted something wrong or outdated?</p>{T.report_link(f"guides/{g.SLUG}.html", g.TITLE, "rp btn")}</div></section>'
             f'{signup(rel, "guide-" + g.SLUG)}</div></div>'
             '<script>(function(){var b=document.querySelectorAll(".gd-ck input"),n=document.getElementById("ck-n");'
             'function u(){var c=0;b.forEach(function(x){if(x.checked)c++});n.textContent=c+" of "+b.length+" done"}'
@@ -273,13 +273,14 @@ def build():
         f'{ad_slot("index-bottom")}{signup(rel, "index")}</main>'
         f'<script src="data/recipes.js"></script><script src="assets/app.js"></script>')))
 
-    pages.append(page("about.html", f"About | {C.SITE_NAME}", "Who writes Tenant Recipes and how the recipes are made.", lambda rel: (
-        '<main class="wrap"><article><h1>About Tenant Recipes</h1><p>Tenant Recipes is run by a Microsoft 365 administrator who spent '
-        'years deep in Intune, device management and Conditional Access — and is now all-in on AI: Microsoft 365 Copilot, Copilot Studio '
-        'agents and AI assistants.</p><p>Every recipe is written for working admins: the problem, the exact steps, the pitfalls, and links '
-        'to official Microsoft Learn documentation. Microsoft changes fast, so always check the linked docs before production changes. '
-        'Each recipe shows when it was last verified against those docs.</p>'
-        f'<p>Want to sponsor the newsletter or suggest a recipe? Just {contact_html()}.</p></article></main>')))
+    stats = (len(R), len(CY.load()), len(GUIDES), len({s["url"] for r in R for s in r["sources"]} | {s["url"] for e in CY.load() for s in e["sources"]}))
+    pages.append(page("about.html", f"About | {C.SITE_NAME}", "Who runs Tenant Recipes, how every recipe is fact-checked, and how to report an error.",
+                      lambda rel: T.about_body(rel, stats)))
+    pages.append(page("methodology.html", f"Methodology: how we fact-check | {C.SITE_NAME}",
+                      "Source hierarchy and verification process behind every Tenant Recipes page.", T.methodology_body))
+    pages.append(page("changelog.html", f"Changelog | {C.SITE_NAME}", "Every new page, update and correction on Tenant Recipes.",
+                      lambda rel: T.changelog_body(rel, T.changelog_entries(R, CY.load(), GUIDES))))
+    pages.append(page("search.html", f"Search | {C.SITE_NAME}", "Search all Tenant Recipes recipes, guides and security entries.", T.search_body))
 
     pages.append(page("newsletter.html", f"Newsletter | {C.SITE_NAME}",
                       "A free weekly 5-minute brief on what changed in Copilot, Intune, Entra and Purview, and what admins should do about it.",
@@ -307,7 +308,7 @@ def build():
         'on request.</p>'
         '<h2>Sponsors</h2><p>Sponsors never receive subscriber lists or personal data.</p>'
         '<h2>Your rights</h2><p>Under the GDPR you can ask for access to, correction of, or deletion of your personal data, and you can '
-        f'withdraw consent at any time. To do so, {contact_html()}. You can also complain to the Swedish Authority for Privacy Protection '
+        f'withdraw consent at any time. To do so, reply to any newsletter email (replies reach the editor privately), or open a <a href="{T.REPO}/issues/new/choose">GitHub issue</a> asking us to get in touch — please do not post personal data in the issue itself. You can also complain to the Swedish Authority for Privacy Protection '
         '(<a href="https://www.imy.se/en/">IMY</a>).</p>'
         '<h2>External links</h2><p>Recipes link to Microsoft Learn and other sites, which have their own privacy policies.</p>'
         '<h2>Changes</h2><p>If this policy changes, the date above is updated.</p></article></main>')))
@@ -319,18 +320,15 @@ def build():
 
     for r in R:
         def body(rel, r=r):
-            ver = (f'Last verified against Microsoft docs: <strong>{r["last_verified"]}</strong>' if r.get("last_verified")
-                   else 'Not yet re-verified against current Microsoft docs. Check the linked sources before production changes.')
-            src = "".join(f'<li><a href="{E(s["url"])}">{esc(s["title"])}</a>'
-                          + (f' <span class="fine">(checked {s["checked"]})</span>' if s.get("checked") else "") + '</li>'
-                          for s in r["sources"])
-            return (f'<main class="wrap"><article><a href="{rel}index.html#library">← All recipes</a>'
-                    f'<div class="tag" style="margin-top:14px">{esc(r["category"])}</div><h1>{esc(r["title"])}</h1>'
-                    f'<p class="meta">{ver}</p>'
-                    f'<h2>The problem</h2><p>{esc(r["problem"])}</p>'
+            path = f'recipes/{r["id"]}.html'
+            return (f'<main class="wrap"><article>'
+                    + T.crumbs(rel, path, [("Home", rel + "index.html"), ("Recipes", rel + "index.html#library"), (r["category"], None)])
+                    + f'<div class="tag" style="margin-top:14px">{esc(r["category"])}</div><h1>{esc(r["title"])}</h1>'
+                    + T.trust_top(rel, r, "Microsoft sources")
+                    + f'<h2>The problem</h2><p>{esc(r["problem"])}</p>'
                     f'<h2>Steps</h2><ol>' + "".join(f'<li>{step_html(s)}</li>' for s in r["steps"]) + '</ol>'
                     + (f'<h2>Pitfalls</h2><ul>' + "".join(f'<li>{esc(p)}</li>' for p in r["pitfalls"]) + '</ul>' if r["pitfalls"] else "")
-                    + f'{ad_slot("recipe-inline")}<h2>Official docs</h2><ul>{src}</ul></article>'
+                    + ad_slot("recipe-inline") + T.trust_bottom(rel, path, r["title"], r, "Verified against") + '</article>'
                     + signup(rel, "recipe-" + r["id"]) + '</main>')
         pages.append(page(f'recipes/{r["id"]}.html', f'{r["title"]} | {C.SITE_NAME}', r["problem"], body, "article"))
 
@@ -346,6 +344,9 @@ def build():
     shutil.copytree(ROOT / "assets", DIST / "assets")
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
+    (DIST / "data" / "search.js").write_text(T.search_index(R, CY.load(), GUIDES, CY.AREA))
+    if SITE:
+        (DIST / "feed.xml").write_text(T.atom(R, CY.load(), GUIDES))
     shutil.copy(ROOT / "favicon.ico", DIST / "favicon.ico")
     (DIST / ".nojekyll").write_text("")  # GitHub Pages: serve files as-is
     robots = "User-agent: *\nAllow: /\n" + (f"Sitemap: {SITE}/sitemap.xml\n" if SITE else "")
