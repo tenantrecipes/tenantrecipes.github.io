@@ -1,15 +1,15 @@
 {
- "acceptable-use-policy": "2476fc5142c5e310",
- "access-management-policy": "6d502ebdc34b2ca3",
- "ai-copilot-use-policy": "bebb3c806948454a",
- "backup-recovery-policy": "ae22f8cf96505f9b",
- "byod-mobile-device-policy": "c574336a859e3540",
- "incident-response-policy": "b2513b1f2d24528a",
- "information-classification-policy": "d1761c1882a6fd46",
- "offboarding-checklist": "ed3af037c2276ce3",
- "onboarding-checklist": "de5d889c6f40e740",
- "password-mfa-policy": "bc65f9133d4242a4",
- "patch-management-policy": "442b6b4599c1cb96",
- "role-change-checklist": "4d898773db54b400",
- "third-party-security-policy": "548f916a8156f1db"
+ "acceptable-use-policy": "31b9bf2496e651e3",
+ "access-management-policy": "d9f457da96a03517",
+ "ai-copilot-use-policy": "0d4ae2205fd18c5a",
+ "backup-recovery-policy": "c39ee5f9d7fb6376",
+ "byod-mobile-device-policy": "56f8f834fea4fd72",
+ "incident-response-policy": "dd909c4fbbf24f38",
+ "information-classification-policy": "83f3461c16b9df99",
+ "offboarding-checklist": "ddba2b413dde07d2",
+ "onboarding-checklist": "e1a4bbdfe15b6df2",
+ "password-mfa-policy": "efb68a527b839574",
+ "patch-management-policy": "97cf1e1a6eee989e",
+ "role-change-checklist": "dde85e3c5e791019",
+ "third-party-security-policy": "eded8271956cb6e9"
 }
