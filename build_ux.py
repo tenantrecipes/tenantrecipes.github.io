@@ -268,7 +268,7 @@ def quick_body(rel, Q, RID, page_signup):
             f'<button class="btn rx-b" type="button" data-print="1">{T.icon("list")}<span>Print</span></button></div>'
             f'<ol class="qg-l">{items}</ol>'
             f'<section class="co co-info"><p class="co-h">{T.icon("arrow")}{esc(th["t"])}</p><p>{esc(th["text"])}</p><div class="gd-recs">{recs(th["rec"])}</div></section>'
-            + news_mid(rel, "quick-" + Q.SLUG) +
+            + news_mid(rel, "quick-" + Q.SLUG) + T.author_box(rel) +
             f'<section class="vs" id="verified"><h2>Verification &amp; corrections</h2><p class="fine">Every item was checked against these Microsoft Learn pages on '
             f'<strong>{T.fmt(Q.VERIFIED)}</strong>. The wording is ours: always confirm against the source before you act.</p>'
             f'<ul class="vs-l">{srcs(allsrc)}</ul><div class="vs-f"><p>Spotted something wrong or outdated?</p>'

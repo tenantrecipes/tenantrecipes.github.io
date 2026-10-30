@@ -69,6 +69,7 @@ def build_index(R, CY, guides, Q, AREA, tags_for, site_notes, extra=()):
                     ("What's new (changelog)", "changelog/index.html", "Every new and updated page, newest first."),
                     ("About Tenant Recipes", "about.html", "Independence, editorial standards, corrections and contact."),
                     ("Methodology: how we fact-check", "methodology.html", "Source hierarchy and verification process."),
+                    ("About the editor", "author/index.html", "Who writes and reviews Tenant Recipes, focus areas and editorial principles."),
                     ("Newsletter", "newsletter.html", "The free weekly Tenant Recipes brief."),
                     ("Microsoft cloud status (Azure, Microsoft 365, Power Platform)", "status/index.html", "Unofficial mirror of Microsoft's public status sources: outages, active incidents and the last 30 days."),
                     ("Sample newsletter issue", "newsletter-sample.html", "What the weekly brief looks like.")):

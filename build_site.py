@@ -291,7 +291,7 @@ def guide_page(g):
             f'<ol class="gd-strip">{strip}</ol></div></section>'
             f'<div class="wrap gd-grid"><aside class="gd-toc" aria-label="Table of contents"><p>On this page</p><ol>{toc}'
             f'<li><a href="#checklist">Printable checklist</a></li></ol></aside>'
-            f'<div class="gd-body">{T.guide_verify_card(rel, g)}<div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} {esc(getattr(g, "TIME_NOTE", "Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers."))}</p></div>'
+            f'<div class="gd-body">{T.guide_verify_card(rel, g)}{T.author_box(rel)}<div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} {esc(getattr(g, "TIME_NOTE", "Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers."))}</p></div>'
             f'{phases}'
             f'<section class="gd-check" id="checklist" aria-labelledby="ck-h"><div class="gd-ph-h"><span class="gd-num">Checklist</span><h2 id="ck-h">The printable checklist</h2></div>'
             f'<p>Tick items as you go (saved in this browser only), then print or save as PDF for your change board.</p>'
@@ -354,6 +354,9 @@ def build():
     stats = (len(R), len(CY.load()), len(GUIDES), len({s["url"] for r in R for s in r["sources"]} | {s["url"] for e in CY.load() for s in e["sources"]}))
     pages.append(page("about.html", f"About Tenant Recipes: independent, fact-checked and source-linked | {C.SITE_NAME}", "Who edits Tenant Recipes, why there is no personal byline, how every recipe is fact-checked against primary sources, and how to report an error.",
                       lambda rel: T.about_body(rel, stats)))
+    pages.append(page("author/index.html", f"About the editor: who writes and reviews Tenant Recipes | {C.SITE_NAME}",
+                      "Tenant Recipes is written and technically reviewed by an anonymous editor: IT professional since 1999, Microsoft-focused since 2013. Focus areas, fact-checking and principles.",
+                      T.author_body))
     pages.append(page("methodology.html", f"Methodology: how we fact-check | {C.SITE_NAME}",
                       "Source hierarchy and verification process behind every Tenant Recipes page.", T.methodology_body))
     pages.append(page("changelog/index.html", f"What's new: changelog of recipes, guides and security entries | {C.SITE_NAME}", "Every new recipe, guide and security entry, every re-verification and every correction on Tenant Recipes, newest first.",

@@ -65,7 +65,7 @@ def footer(rel, guide_slug, path="", title="", updated=None):
             + col("Content", [("Recipes", f"{rel}index.html#library"), ("Guides", f"{rel}guides/index.html"),
                               ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Windows 11 CIS hardening", f"{rel}guides/windows-11-cis-hardening.html"), ("News &amp; retirements", f"{rel}news/index.html"), ("Microsoft cloud status", f"{rel}status/index.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"), ("Security tools &amp; testing", f"{rel}tools/index.html"), ("Policy templates", f"{rel}policies/index.html"), ("Quick guide: 5 Copilot license checks", f"{rel}guides/copilot-license-checks.html"),
                               ("Search", f"{rel}search/index.html")])
-            + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("What's new (changelog)", f"{rel}changelog/index.html"),
+            + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("Editor", f"{rel}author/index.html"), ("What's new (changelog)", f"{rel}changelog/index.html"),
                             ("Report an issue", f"{REPO}/issues/new/choose")])
             + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Sample issue", f"{rel}newsletter-sample.html"), (f"X (@{C.X_HANDLE})", f"https://x.com/{C.X_HANDLE}"), ("Atom / RSS feed", f"{rel}feed.xml"),
                                    ("Suggest a recipe", f"{REPO}/issues/new?template=suggest-recipe.yml")])
@@ -165,7 +165,7 @@ def about_body(rel, stats):
         '<h2>Who it is for</h2><p>Microsoft 365, Entra and Intune administrators, security engineers and IT leads who have been asked to '
         '"roll out Copilot and AI agents — safely". If you need to know which setting to change, in which portal, and what can go wrong, '
         'this site is for you.</p>'
-        f'<aside class="ed" aria-label="About the editor"><span class="ed-i">{icon("user")}</span><div><p class="ed-h">About the editor</p><p>{EDITOR}</p></div></aside>'
+        f'<aside class="ed" aria-label="About the editor"><span class="ed-i">{icon("user")}</span><div><p class="ed-h">About the editor</p><p>{EDITOR} <a href="{rel}author/index.html">Editor profile</a></p></div></aside>'
         '<h2>Why it exists</h2><p>Microsoft changes features, names and defaults every week. The official documentation is excellent but spread '
         'over hundreds of pages, Message center posts and blogs. Tenant Recipes turns that into short, task-focused playbooks — '
         'and keeps pointing back to the source, so you never have to take our word for it.</p>'
@@ -194,6 +194,58 @@ def about_body(rel, stats):
         '<h2 id="disclaimer">Disclaimer</h2><p class="fine">Recipes are provided as-is for information. Settings, licensing and portal labels change; '
         'always confirm against the linked official documentation and test in a non-production tenant or pilot group first. '
         'You are responsible for changes you make in your environment. Product names are trademarks of their owners.</p>'
+        '</article></main>')
+
+
+def author_box(rel):
+    """Small byline box for guides: anonymous editor, links to /author/."""
+    return (f'<aside class="ed ed-by" aria-label="Author"><span class="ed-i">{icon("user")}</span><div><p class="ed-h">Author</p>'
+            f'<p>Written and technically reviewed by the <a href="{rel}author/index.html">Tenant Recipes editor</a>. '
+            f'<a href="{rel}methodology.html">How we verify</a></p></div></aside>')
+
+
+def author_body(rel):
+    li = lambda t, d: f'<li><strong>{t}</strong> {d}</li>'
+    return (
+        page_hero(rel, crumbs_dark(rel, "author/index.html", [("Home", rel + "index.html"), ("About", rel + "about.html"), ("Editor", None)]),
+                  "Tenant Recipes editorial", "About the editor",
+                  'Every recipe, guide and security entry on Tenant Recipes is written and technically reviewed by one editor. '
+                  'This page explains who that is in professional terms, what they focus on and how they work.', kind="page")
+        + '<main class="wrap pg"><article class="prose doc">'
+        + f'<aside class="ed" aria-label="Editor profile"><span class="ed-i">{icon("user")}</span><div><p class="ed-h">Editor profile</p>'
+        '<p>IT professional since 1999, focused on Microsoft technology since 2013. Hands-on with tenant administration, identity and endpoint '
+        'security in production environments.</p></div></aside>'
+        '<h2>Focus areas</h2><ul>'
+        + li("Microsoft 365:", "tenant configuration, Exchange Online, SharePoint and Teams governance, licensing.")
+        + li("Microsoft Entra ID:", "Conditional Access, authentication methods, privileged roles and PIM, app consent and workload identities.")
+        + li("Intune:", "compliance and configuration profiles, security baselines, Windows Autopilot and update rings.")
+        + li("Microsoft Defender:", "Defender for Endpoint, Defender for Office 365, attack surface reduction and exposure management.")
+        + li("Microsoft Purview:", "sensitivity labels, DLP, retention and audit.")
+        + li("Copilot governance:", "oversharing controls, licensing, agent and plugin governance before and after roll-out.")
+        + li("Security hardening:", "Windows 11 and server hardening, CIS-style baselines, vulnerability triage and offensive testing tools.")
+        + '</ul>'
+        '<h2>How content is fact-checked</h2>'
+        '<p>Research and first drafts are AI-assisted; the AI never gets the last word. Every step, setting name, date and limitation is compared with '
+        'the primary source on the day of checking, and the source is linked on the page with that date. In order of precedence:</p><ul>'
+        '<li><a href="https://learn.microsoft.com/">Microsoft Learn</a> for settings, portal paths, PowerShell, licensing and limits.</li>'
+        '<li>Microsoft 365 Message center and official Microsoft blogs and roadmap for dates and announced changes.</li>'
+        '<li>Vendor security advisories, the <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog">CISA Known Exploited Vulnerabilities catalog</a> '
+        'and <a href="https://nvd.nist.gov/">NIST NVD</a> for the security section.</li></ul>'
+        '<p>Anything that cannot be confirmed is removed, not softened. Third-party standards such as CIS Benchmarks are paraphrased in our own words and linked, never copied. '
+        f'The full source hierarchy is on the <a href="{rel}methodology.html">methodology page</a>.</p>'
+        '<h2>Principles</h2><ul>'
+        + li("Least privilege.", "Recipes use the narrowest role, scope and permission that gets the job done, and say which role is required.")
+        + li("Production-safe changes.", "Pilot groups, report-only modes and rollback steps come before tenant-wide enforcement.")
+        + li("Sources over opinion.", "Every claim links to its source and shows when it was last verified.")
+        + li("Independent.", "Not affiliated with, sponsored by or endorsed by Microsoft or any other vendor. No sponsors, no affiliate links.")
+        + '</ul>'
+        '<h2>Why there is no name</h2><p>Tenant Recipes is published under its own name on purpose. No employer is named and no personal byline is used: '
+        'the content should stand on its sources, not on a person or a company. That is also why corrections happen in public, '
+        f'in the <a href="{rel}changelog/index.html">changelog</a>.</p>'
+        '<h2>Get in touch</h2><ul>'
+        f'<li><a href="{REPO}/issues/new/choose">Report an error</a> (public GitHub issue, please leave out confidential details).</li>'
+        f'<li><a href="{REPO}/issues/new?template=suggest-recipe.yml">Suggest a recipe</a>.</li>'
+        f'<li>Read more <a href="{rel}about.html">about Tenant Recipes</a>.</li></ul>'
         '</article></main>')
 
 
@@ -345,6 +397,7 @@ def search_index(R, CY, guides, AREA, extra=()):
                         "s": ph["goal"], "x": " ".join(st["t"] + " " + " ".join(st["do"]) for st in ph["steps"])})
     for t, u, s in (("About Tenant Recipes", "about.html", "Who runs the site, independence, corrections and contact."),
                     ("Methodology: how we fact-check", "methodology.html", "Source hierarchy and verification process."),
+                    ("About the editor", "author/index.html", "Who writes and reviews Tenant Recipes, focus areas and editorial principles."),
                     ("Changelog", "changelog.html", "Every new page, update and correction."),
                     ("Newsletter", "newsletter.html", "The free weekly Tenant Recipes brief.")):
         idx.append({"k": "Page", "c": "Site", "t": t, "u": u, "s": s, "x": ""})
