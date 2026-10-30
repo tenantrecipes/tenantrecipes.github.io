@@ -380,3 +380,53 @@ def add_share(html, path, title):
                 raise SystemExit(f"share bar: marker not found on {path}")
             return html[:m.end()] + share_bar(path, title, "top") + html[m.end():b.start()] + share_bar(path, title, "end") + html[b.start():]
     return html
+
+
+# ---------------------------------------------------------------- homepage featured carousel (data-driven, rotates with new content)
+def featured(R, CY, guides, Q):
+    """5 slides: pinned Copilot guide, latest exploited vulnerability, newest recipe, quick guide, Windows 11 guide.
+    'Latest' is computed from data, so the nightly routine's new entries rotate in automatically."""
+    G1, G2 = guides[0], guides[1]
+    ns = lambda g: sum(len(p["steps"]) for p in g.PHASES)
+    vkey = lambda e: e.get("kev_added") or e.get("advisory_date") or e.get("updated") or ""
+    vulns = [e for e in CY if e["type"] == "vulnerability"]
+    v = max([e for e in vulns if e.get("exploited")] or vulns, key=vkey) if vulns else None
+    r = max(R, key=lambda x: (x.get("created", ""), x.get("updated", ""), x["id"]))
+    first = lambda s: (s.split(". ")[0].rstrip(".") + ".") if s else ""
+    slides = [dict(k="Pillar guide", t=G1.TITLE, s=f"{len(G1.PHASES)} phases and {ns(G1)} steps, from licensing and admin roles to the oversharing clean-up, labels, DLP and pilot.",
+                   d=G1.VERIFIED, dl="Verified", u=f"guides/{G1.SLUG}.html", cta="Read the guide", img="og/guide-secure-copilot-rollout.png", c="c1")]
+    if v:
+        lab = "Vulnerability watch · " + ("Exploited · " if v.get("exploited") else "") + v.get("severity", "")
+        slides.append(dict(k=lab, t=v["title"], s=first(v["summary"]), d=vkey(v), dl="Advisory" if not v.get("kev_added") else "Added to CISA KEV",
+                           u=f'security/{v["id"]}.html', cta="What to patch", img="og/security.png", c="c3"))
+    slides.append(dict(k=f'New recipe · {r["category"]}', t=r["title"], s=first(r["problem"]), d=r.get("created") or r.get("updated"), dl="Published",
+                       u=f'recipes/{r["id"]}.html', cta="Open the recipe", img=f'og/cat-{OG_CATS.get(r["category"], "copilot")}.png', c="c2"))
+    slides.append(dict(k="Quick guide · 1 page + PDF", t=Q.TITLE, s="Base licenses, mailboxes, update channel, network and oversharing: a pre-flight check you can run in an afternoon.",
+                       d=Q.VERIFIED, dl="Verified", u=f"guides/{Q.SLUG}.html", cta="Run the checks", img="og/quick-copilot-license-checks.png", c="c4"))
+    slides.append(dict(k="Pillar guide", t=G2.TITLE, s=f"{len(G2.PHASES)} phases: CIS Level 1 vs Level 2, Intune vs GPO, Credential Guard, ASR, BitLocker and compliance scans.",
+                       d=G2.VERIFIED, dl="Verified", u=f"guides/{G2.SLUG}.html", cta="Read the guide", img="og/guide-windows-11-cis-hardening.png", c="c5"))
+    return slides
+
+
+def carousel(rel, slides, n_recipes, last_verified):
+    n = len(slides)
+    items, dots = "", ""
+    for i, s in enumerate(slides):
+        load = 'fetchpriority="high"' if i == 0 else 'loading="lazy"'
+        items += (f'<div class="car-s car-{s["c"]}" role="group" aria-roledescription="slide" aria-label="{i + 1} of {n}: {esc(s["t"])}" id="car-s{i}">'
+                  f'<div class="car-tx"><p class="car-k">{esc(s["k"])}</p><h2 class="car-t"><a href="{rel}{s["u"]}">{esc(s["t"])}</a></h2>'
+                  f'<p class="car-sum">{esc(s["s"])}</p><p class="car-m">{T.icon("clock")}{esc(s["dl"])} <time datetime="{s["d"]}">{T.fmt(s["d"])}</time></p>'
+                  f'<a class="btn hx-p car-cta" href="{rel}{s["u"]}" tabindex="-1" aria-hidden="true">{esc(s["cta"])} →</a></div>'
+                  f'<a class="car-img" href="{rel}{s["u"]}" tabindex="-1" aria-hidden="true"><img src="{rel}assets/{s["img"]}" alt="" width="1200" height="630" {load}></a></div>')
+        dots += f'<button type="button" class="car-dot" aria-controls="car-s{i}" aria-label="Show slide {i + 1}: {esc(s["t"])}"{" aria-current=true" if i == 0 else ""}></button>'
+    arrow = lambda d: f'<svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path d="{"M15 5l-7 7 7 7" if d < 0 else "M9 5l7 7-7 7"}"/></svg>'
+    return (f'<section class="hx car" aria-labelledby="hx-title"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>'
+            f'<div class="wrap"><h1 id="hx-title" class="car-h1">Fact-checked Copilot, Intune &amp; security recipes for Microsoft 365 admins</h1>'
+            f'<p class="hx-badge car-badge"><span class="dot" aria-hidden="true"></span>{n_recipes} recipes, every one checked against its sources · last verified {T.fmt(last_verified)}</p>'
+            f'<div class="car-box" aria-roledescription="carousel" aria-label="Featured articles" role="region">'
+            f'<div class="car-vp" id="car-vp" aria-live="off" tabindex="-1">{items}</div>'
+            f'<div class="car-ctl"><button type="button" class="car-nav car-prev" aria-label="Previous slide" aria-controls="car-vp">{arrow(-1)}</button>'
+            f'<div class="car-dots" role="group" aria-label="Choose slide">{dots}</div>'
+            f'<button type="button" class="car-nav car-next" aria-label="Next slide" aria-controls="car-vp">{arrow(1)}</button>'
+            f'<button type="button" class="car-play" aria-label="Pause automatic slide show" hidden>'
+            f'<svg class="car-pi" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path class="pp-pause" d="M8 5v14M16 5v14"/><path class="pp-play" d="M8 5l11 7-11 7z"/></svg></button></div></div></div></section>')

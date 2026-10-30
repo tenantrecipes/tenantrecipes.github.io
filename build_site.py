@@ -331,13 +331,15 @@ def build():
     n = len(R)
 
     pages.append(page("index.html", f"{C.SITE_NAME}: fact-checked Copilot, Intune and security recipes for Microsoft 365 admins", C.SITE_DESCRIPTION, lambda rel: (
-        hero(rel).replace('<section class="sec wrap" aria-labelledby="sec-title">', UX.finder(rel, R, GUIDES, Q, len(CY.load())) + '<section class="sec wrap" aria-labelledby="sec-title">', 1) +
+        UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")))
+        + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
+        + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):] +
         f'<main class="wrap" id="library">{ad_slot("index-top")}<h2 class="lib-h">The recipe library</h2><div class="controls"><input id="q" aria-label="Search recipes" '
         f'placeholder="Search recipes: e.g. DLP, MFA, license, agent…"></div><div id="chips" class="chips"></div>'
         f'<p id="count" class="fine" aria-live="polite"></p><div class="grid" id="grid"></div>'
         f'<noscript><ul>' + "".join(f'<li><a href="recipes/{r["id"]}.html">{esc(r["title"])}</a></li>' for r in R) + '</ul></noscript>'
         f'{ad_slot("index-bottom")}{signup(rel, "index")}</main>'
-        f'<script src="data/recipes.js"></script><script src="assets/app.js"></script>')))
+        f'<script src="data/recipes.js"></script><script src="assets/app.js"></script><script src="assets/carousel.js" defer></script>')))
 
     stats = (len(R), len(CY.load()), len(GUIDES), len({s["url"] for r in R for s in r["sources"]} | {s["url"] for e in CY.load() for s in e["sources"]}))
     pages.append(page("about.html", f"About Tenant Recipes: independent, fact-checked and source-linked | {C.SITE_NAME}", "Who edits Tenant Recipes, why there is no personal byline, how every recipe is fact-checked against primary sources, and how to report an error.",
