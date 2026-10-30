@@ -1,0 +1,42 @@
+{
+ "id": "ssl-labs",
+ "name": "Qualys SSL Labs Server Test",
+ "vendor": "Qualys",
+ "category": "Web apps",
+ "what": "A free online test that grades the TLS configuration of a public web server: protocol versions, cipher suites, certificate chain and known TLS weaknesses.",
+ "when": "After you publish or renew a certificate, change a load balancer or reverse proxy, or before an audit asks which TLS versions you still accept.",
+ "license": "Proprietary web service",
+ "cost": "free",
+ "cost_note": null,
+ "url": "https://www.ssllabs.com/ssltest/",
+ "repo": null,
+ "example": [
+  "Open the Server Test and enter the public host name, for example `portal.contoso.com`.",
+  "Tick the option not to show the result on the public boards if you prefer it not to be listed.",
+  "Wait for the scan to finish; each IP address behind the name gets its own grade.",
+  "Work through the items that cap the grade (old protocol versions, weak ciphers, incomplete chain), then re-test."
+ ],
+ "pitfalls": [
+  "It only tests servers reachable from the internet; internal hosts need a local scanner.",
+  "A host with several IP addresses can give different grades per node; fix every node.",
+  "The grade is a summary, not a compliance verdict; check what your own policy requires."
+ ],
+ "sources": [
+  {
+   "title": "SSL Server Test",
+   "url": "https://www.ssllabs.com/ssltest/",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "SSL Labs terms and conditions",
+   "url": "https://www.ssllabs.com/about/terms.html",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 20
+}

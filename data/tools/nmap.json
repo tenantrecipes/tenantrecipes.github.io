@@ -1,0 +1,42 @@
+{
+ "id": "nmap",
+ "name": "Nmap",
+ "vendor": "Nmap Project",
+ "category": "External exposure",
+ "what": "A free network scanner for host discovery, port scanning, service and version detection, with a scripting engine for extra checks.",
+ "when": "To verify which ports and services are really open on hosts you are responsible for, internally or from outside, and to confirm a firewall change did what you intended.",
+ "license": "Nmap Public Source License (NPSL)",
+ "cost": "free",
+ "cost_note": "Free for end users under the NPSL; embedding Nmap in commercial products needs an OEM license.",
+ "url": "https://nmap.org/",
+ "repo": "https://github.com/nmap/nmap",
+ "example": [
+  "Get written approval and the exact list of IP ranges in scope.",
+  "Start with a discovery scan of the range: `nmap -sn 10.0.10.0/24`.",
+  "Scan live hosts for services and versions: `nmap -sV -p 1-1024 -oA scan-2026-10 10.0.10.0/24`.",
+  "Compare the open ports with your firewall rules and service inventory, and open a ticket for each unexpected service."
+ ],
+ "pitfalls": [
+  "Aggressive timing and scripts can disrupt fragile devices such as printers, OT and old appliances; scan gently first.",
+  "Scanning networks you do not own or have permission for can be illegal.",
+  "Tell your SOC before you scan so the alerts are not treated as an attack."
+ ],
+ "sources": [
+  {
+   "title": "Nmap Reference Guide",
+   "url": "https://nmap.org/book/man.html",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Nmap legal notices and license",
+   "url": "https://nmap.org/book/man-legal.html",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 60
+}

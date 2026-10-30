@@ -1,0 +1,37 @@
+{
+ "id": "scubagear",
+ "name": "CISA ScubaGear",
+ "vendor": "CISA",
+ "category": "M365 & Entra",
+ "what": "A free assessment tool from CISA that compares a Microsoft 365 tenant with CISA's Secure Cloud Business Applications (SCuBA) baselines and writes an HTML report.",
+ "when": "When you want an independent baseline check of Entra ID, Exchange Online, Defender, SharePoint, Teams and Power Platform settings, for example before an audit.",
+ "license": "CC0-1.0",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://github.com/cisagov/ScubaGear",
+ "repo": "https://github.com/cisagov/ScubaGear",
+ "example": [
+  "On a Windows machine, open Windows PowerShell 5.1 and run `Install-Module -Name ScubaGear`.",
+  "Install the required dependencies with `Install-ScubaDependencies`, then check the version with `Invoke-SCuBA -Version`.",
+  "Run the assessment for all products: `Invoke-SCuBA -ProductNames *` and sign in when prompted.",
+  "Open the generated report and fix the failed 'shall' items before the 'should' items."
+ ],
+ "pitfalls": [
+  "The baselines reflect CISA's view for US federal agencies; decide which items fit your organization.",
+  "The account needs enough read permissions in each product, or checks show as errors.",
+  "Use a YAML config file to document accepted exceptions instead of ignoring failures."
+ ],
+ "sources": [
+  {
+   "title": "ScubaGear on GitHub",
+   "url": "https://github.com/cisagov/ScubaGear",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 80
+}

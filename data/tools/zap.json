@@ -1,0 +1,42 @@
+{
+ "id": "zap",
+ "name": "ZAP",
+ "vendor": "ZAP by Checkmarx (open source)",
+ "category": "Web apps",
+ "what": "An open-source web application security scanner and proxy. It can spider a site, scan passively and actively, and run as a baseline scan in Docker.",
+ "when": "To test your own web apps in a test or staging environment, and to add a passive baseline scan to CI/CD.",
+ "license": "Apache-2.0",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://www.zaproxy.org/",
+ "repo": "https://github.com/zaproxy/zaproxy",
+ "example": [
+  "Start with the passive baseline scan in Docker: `docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t https://staging.contoso.com`.",
+  "To save a report, mount a working folder and add `-r report.html`, as shown in the baseline scan docs.",
+  "Triage the warnings, and mark false positives in a config file so later runs stay quiet.",
+  "Run active scans only against test environments you are allowed to attack."
+ ],
+ "pitfalls": [
+  "Active scans submit forms and can create data or trigger emails; avoid production.",
+  "Authenticated areas need a login configuration, or ZAP only sees the public pages.",
+  "The baseline scan is passive and will not find every issue."
+ ],
+ "sources": [
+  {
+   "title": "ZAP baseline scan",
+   "url": "https://www.zaproxy.org/docs/docker/baseline-scan/",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "ZAP on GitHub",
+   "url": "https://github.com/zaproxy/zaproxy",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 150
+}

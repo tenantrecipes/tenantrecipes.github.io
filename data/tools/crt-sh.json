@@ -1,0 +1,37 @@
+{
+ "id": "crt-sh",
+ "name": "crt.sh certificate search",
+ "vendor": "Sectigo",
+ "category": "External exposure",
+ "what": "A free search engine over public Certificate Transparency logs. It lists certificates issued for a domain, which often reveals forgotten subdomains and services.",
+ "when": "When you build an inventory of internet-facing names, check which certificates have been issued for your domains, or look for certificates you did not request.",
+ "license": "Proprietary web service",
+ "cost": "free",
+ "cost_note": null,
+ "url": "https://crt.sh/",
+ "repo": null,
+ "example": [
+  "Open crt.sh and search for your domain name, for example `contoso.com`.",
+  "Sort the results by issue date and look at the common names and SAN entries.",
+  "Copy unknown host names into your asset list and find an owner for each.",
+  "Ask the owner to either retire the service or bring it under patching and monitoring."
+ ],
+ "pitfalls": [
+  "Certificate Transparency shows issued certificates, not whether the host is still online.",
+  "Wildcard certificates hide the individual host names behind them.",
+  "The data is public, so attackers use the same search; act on what you find."
+ ],
+ "sources": [
+  {
+   "title": "crt.sh Certificate Search",
+   "url": "https://crt.sh/",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 40
+}

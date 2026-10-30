@@ -2,6 +2,11 @@
  {
   "kind": "site",
   "date": "2026-10-30",
+  "text": "New: Security tools & testing. 17 free and open-source tools (domain and mail checks, external exposure, Microsoft 365 and Entra, Active Directory, vulnerability scanning, web apps, Windows hardening, breach exposure), each with a short example, pitfalls and a permission reminder, plus a method for scoping an internal pentest."
+ },
+ {
+  "kind": "site",
+  "date": "2026-10-30",
   "text": "One search for everything: instant results for recipes, guides, vulnerabilities, hardening and news, with suggestions as you type, typo tolerance and common questions. Open it from the header on any page or press /."
  },
  {

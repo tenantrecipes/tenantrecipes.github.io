@@ -1,0 +1,42 @@
+{
+ "id": "bloodhound-ce",
+ "name": "BloodHound Community Edition",
+ "vendor": "SpecterOps",
+ "category": "Active Directory",
+ "what": "A web application that maps relationships in Active Directory and Entra ID as a graph, so you can see attack paths from ordinary users to privileged groups.",
+ "when": "To find and remove dangerous permission chains (for example a helpdesk group that can reset a Domain Admin's password) before an attacker uses them.",
+ "license": "Apache-2.0",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://bloodhound.specterops.io/",
+ "repo": "https://github.com/SpecterOps/BloodHound",
+ "example": [
+  "Install Docker Desktop on an admin workstation you control.",
+  "Download BloodHound CLI from the SpecterOps release page, unpack it and run `bloodhound-cli install`; note the generated admin password.",
+  "Sign in at `http://localhost:8080/ui/login` and change the password.",
+  "Collect data with the official collectors (SharpHound for AD, AzureHound for Entra ID), upload it, and review paths to Tier 0 groups."
+ ],
+ "pitfalls": [
+  "Collectors are often flagged by EDR; agree the run with your security team first.",
+  "The collected data is a map for attackers; protect and delete it when done.",
+  "Fix paths at their root (group membership, ACLs) rather than removing single edges."
+ ],
+ "sources": [
+  {
+   "title": "BloodHound CE quickstart",
+   "url": "https://bloodhound.specterops.io/get-started/quickstart/community-edition-quickstart",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "BloodHound on GitHub",
+   "url": "https://github.com/SpecterOps/BloodHound",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 100
+}

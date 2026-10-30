@@ -24,7 +24,8 @@ def _parts(product):
     return out
 
 
-def build_index(R, CY, guides, Q, AREA, tags_for, site_notes):
+def build_index(R, CY, guides, Q, AREA, tags_for, site_notes, extra=()):
+    """extra: ready-made doc dicts from other sections (tools, policies)."""
     docs, sug = [], []
 
     def doc(**d):
@@ -71,6 +72,8 @@ def build_index(R, CY, guides, Q, AREA, tags_for, site_notes):
                     ("Newsletter", "newsletter.html", "The free weekly Tenant Recipes brief."),
                     ("Sample newsletter issue", "newsletter-sample.html", "What the weekly brief looks like.")):
         doc(t=t, k="Page", c="Site", s=s, u=u)
+    for d in extra:
+        doc(**d)
     syn = json.loads(SYN.read_text())
     urls = {d["u"].split("#")[0] for d in docs}
     bad = [u for _, u in syn["questions"] if u not in urls]
@@ -92,7 +95,7 @@ def build_index(R, CY, guides, Q, AREA, tags_for, site_notes):
 
 def search_body(rel):
     return (T.page_hero(rel, T.crumbs_dark(rel, "search/index.html", [("Home", rel + "index.html"), ("Search", None)]), "Search",
-                        "Search everything", "Recipes, guides, vulnerabilities, hardening and news in one place. Search runs in your browser; nothing is sent anywhere.",
+                        "Search everything", "Recipes, guides, vulnerabilities, hardening, security tools and news in one place. Search runs in your browser; nothing is sent anywhere.",
                         kind="page")
             + '<main class="wrap pg"><article class="prose doc sxp">'
             f'<form class="fd-s sxp-f" action="{rel}search/index.html" method="get" role="search">{T.icon("search")}'

@@ -1,0 +1,42 @@
+{
+ "id": "mxtoolbox",
+ "name": "MxToolbox SuperTool",
+ "vendor": "MxToolbox",
+ "category": "Domain & email",
+ "what": "A web lookup tool for DNS and mail: MX, SPF, DMARC, DKIM, blocklist status and SMTP checks against a domain or IP, with links to follow-up tests.",
+ "when": "Before and after you change mail DNS (SPF, DKIM, DMARC), when mail from your domain starts landing in spam, or when a partner says your IP is on a blocklist.",
+ "license": "Proprietary web service",
+ "cost": "freemium",
+ "cost_note": "The SuperTool lookups are free to use in the browser; MxToolbox also sells monitoring and delivery products.",
+ "url": "https://mxtoolbox.com/SuperTool.aspx",
+ "repo": null,
+ "example": [
+  "Open the SuperTool and enter your mail domain, for example `contoso.com`.",
+  "Prefix the query to force a specific check: `dmarc:contoso.com`, `spf:contoso.com` or `blacklist:<your public mail IP>`.",
+  "Read each result row; failed or warning rows link to a page explaining the check.",
+  "Fix the record at your DNS host, wait for the TTL to expire, and run the same query again to confirm."
+ ],
+ "pitfalls": [
+  "DNS results can be cached; a fix may not show until the old record's TTL has expired.",
+  "A blocklist hit on a shared IP (for example a cloud mail service) is usually the provider's to fix, not yours.",
+  "A green SPF result does not prove DMARC alignment; check DMARC separately."
+ ],
+ "sources": [
+  {
+   "title": "MxToolbox SuperTool (command list)",
+   "url": "https://mxtoolbox.com/SuperTool.aspx",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "MxToolbox products",
+   "url": "https://mxtoolbox.com/products.aspx",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 10
+}

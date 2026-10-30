@@ -1,0 +1,42 @@
+{
+ "id": "hibp-domain-search",
+ "name": "Have I Been Pwned – domain search",
+ "vendor": "Have I Been Pwned (Troy Hunt)",
+ "category": "Leaks & threat intel",
+ "what": "A service that shows which email addresses on a domain you control appear in known data breaches, after you prove you own the domain.",
+ "when": "To find staff accounts exposed in third-party breaches so you can force password changes, check MFA and watch for phishing.",
+ "license": "Proprietary service",
+ "cost": "freemium",
+ "cost_note": "Searching your own domain requires domain verification; larger domains normally need a paid subscription to see results.",
+ "url": "https://haveibeenpwned.com/",
+ "repo": null,
+ "example": [
+  "Sign in to the HIBP dashboard and add your domain.",
+  "Verify ownership with one of the offered methods, such as a DNS record.",
+  "Review the breached addresses and which breach each one came from.",
+  "Make sure affected users have MFA and are not reusing the exposed password, and turn on notifications for new breaches."
+ ],
+ "pitfalls": [
+  "Being in a breach does not mean your Microsoft 365 password leaked; it means the address did, maybe with a reused password.",
+  "Some sensitive breaches are only visible to verified owners.",
+  "Handle the result list as personal data."
+ ],
+ "sources": [
+  {
+   "title": "Have I Been Pwned FAQs",
+   "url": "https://haveibeenpwned.com/FAQs",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Have I Been Pwned plans",
+   "url": "https://haveibeenpwned.com/Subscription",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 170
+}

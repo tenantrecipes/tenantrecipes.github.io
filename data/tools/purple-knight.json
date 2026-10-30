@@ -1,0 +1,37 @@
+{
+ "id": "purple-knight",
+ "name": "Purple Knight",
+ "vendor": "Semperis",
+ "category": "Active Directory",
+ "what": "A free assessment tool that checks Active Directory, Entra ID and Okta for indicators of exposure and compromise and gives a scored report.",
+ "when": "For a second opinion next to PingCastle, especially if you run hybrid identity with Entra ID.",
+ "license": "Proprietary (free tool)",
+ "cost": "free",
+ "cost_note": null,
+ "url": "https://www.semperis.com/purple-knight/",
+ "repo": null,
+ "example": [
+  "Download Purple Knight from the Semperis website.",
+  "Run it from an admin workstation and choose which environments to assess.",
+  "Review the report by category and by severity of each indicator.",
+  "Fix the highest-impact indicators first and run the tool again to compare scores."
+ ],
+ "pitfalls": [
+  "It is an assessment, not continuous monitoring.",
+  "Indicators of compromise need investigation, not just a settings change.",
+  "Compare findings with other tools; they weight risks differently."
+ ],
+ "sources": [
+  {
+   "title": "Purple Knight",
+   "url": "https://www.semperis.com/purple-knight/",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 120
+}

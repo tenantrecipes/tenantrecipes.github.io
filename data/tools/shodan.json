@@ -1,0 +1,42 @@
+{
+ "id": "shodan",
+ "name": "Shodan",
+ "vendor": "Shodan",
+ "category": "External exposure",
+ "what": "A search engine for internet-connected devices. It shows which ports, services, banners and certificates are visible on public IP addresses.",
+ "when": "To see your organization's internet exposure the way an outsider does, and to monitor your own public IP ranges for newly exposed services.",
+ "license": "Proprietary service",
+ "cost": "freemium",
+ "cost_note": "A free account gives limited searching; a one-time membership and monthly API plans unlock more results, filters and IP monitoring.",
+ "url": "https://www.shodan.io/",
+ "repo": null,
+ "example": [
+  "Create an account and search for your organization's public IP addresses or domain name.",
+  "Open each result and note the open ports, product banners and certificate details.",
+  "Compare the list with what you intend to expose; anything unexpected (RDP, management interfaces, old VPN portals) is a finding.",
+  "On a plan that includes it, add your own IP ranges to network monitoring to get alerts on changes."
+ ],
+ "pitfalls": [
+  "Results can be days or weeks old; confirm with your own scan before you act.",
+  "Some filters and features need a paid membership or plan.",
+  "Only monitor IP ranges you own or are responsible for."
+ ],
+ "sources": [
+  {
+   "title": "Shodan",
+   "url": "https://www.shodan.io/",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Shodan API plans and membership",
+   "url": "https://account.shodan.io/billing",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 50
+}

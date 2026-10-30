@@ -1,0 +1,37 @@
+{
+ "id": "monkey365",
+ "name": "Monkey365",
+ "vendor": "silverhack (open-source project)",
+ "category": "M365 & Entra",
+ "what": "An open-source PowerShell framework that collects configuration from Microsoft 365, Entra ID and Azure, checks it against security rules and reports findings with remediation guidance.",
+ "when": "For a broader configuration review of Exchange Online, SharePoint Online, Teams, Entra ID and Azure subscriptions in one run.",
+ "license": "Apache-2.0",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://silverhack.github.io/monkey365/",
+ "repo": "https://github.com/silverhack/monkey365",
+ "example": [
+  "Install the module: `Install-Module -Name monkey365 -Scope CurrentUser`.",
+  "Build a parameter set with Instance `Microsoft365`, the services to collect (for example ExchangeOnline, MicrosoftTeams, SharePointOnline), IncludeEntraID and ExportTo `HTML`.",
+  "Run `Invoke-Monkey365` with those parameters and sign in when prompted.",
+  "Review the HTML report and assign each finding an owner and a due date."
+ ],
+ "pitfalls": [
+  "What the scan can see depends on the permissions of the signed-in identity.",
+  "Rules are generic; tune or document exceptions for settings you have chosen on purpose.",
+  "Store reports securely; they describe your weaknesses in detail."
+ ],
+ "sources": [
+  {
+   "title": "Monkey365 on GitHub",
+   "url": "https://github.com/silverhack/monkey365",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 90
+}

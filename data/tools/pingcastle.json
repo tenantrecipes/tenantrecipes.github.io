@@ -1,0 +1,42 @@
+{
+ "id": "pingcastle",
+ "name": "PingCastle",
+ "vendor": "Netwrix",
+ "category": "Active Directory",
+ "what": "A tool that scores the security risk of an Active Directory domain and produces a health-check report with findings and a maturity level. It also offers an Entra ID risk score.",
+ "when": "For a quick, repeatable AD health check, and to track the risk score over time as you fix findings.",
+ "license": "Non-Profit OSL 3.0 (open source edition) or commercial",
+ "cost": "free",
+ "cost_note": "Free for internal use, including in for-profit companies; a commercial license is needed to sell PingCastle-based services or products.",
+ "url": "https://www.pingcastle.com/",
+ "repo": "https://github.com/netwrix/pingcastle",
+ "example": [
+  "Download PingCastle from the official site to a domain-joined admin workstation.",
+  "Start it and choose the healthcheck option from the interactive menu, then accept or enter the domain.",
+  "Open the HTML report; begin with the rules that carry the highest points.",
+  "Fix, re-run and compare the score; keep reports to show progress."
+ ],
+ "pitfalls": [
+  "Using it to deliver paid audits for other organizations needs a commercial license.",
+  "The score drops slowly when one big rule dominates; read each rule's detail.",
+  "Reports list sensitive accounts and weaknesses; store them like secrets."
+ ],
+ "sources": [
+  {
+   "title": "PingCastle README and license (GitHub)",
+   "url": "https://github.com/netwrix/pingcastle",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "PingCastle",
+   "url": "https://www.pingcastle.com/",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 110
+}

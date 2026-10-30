@@ -1,0 +1,37 @@
+{
+ "id": "hardeningkitty",
+ "name": "HardeningKitty",
+ "vendor": "scip AG (open source)",
+ "category": "Client hardening",
+ "what": "An open-source PowerShell module that audits Windows settings against finding lists (for example based on CIS or Microsoft baselines) and can apply settings.",
+ "when": "To measure a Windows 11 or Windows Server build against a hardening baseline, before and after you deploy policies.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://github.com/scipag/HardeningKitty",
+ "repo": "https://github.com/scipag/HardeningKitty",
+ "example": [
+  "Download the module from GitHub and load it with `Import-Module .\\HardeningKitty.psm1`.",
+  "Run an audit with logging and a CSV report: `Invoke-HardeningKitty -Mode Audit -Log -Report`.",
+  "Review failed findings in the report and decide which belong in your Intune or GPO baseline.",
+  "Deploy fixes through your normal policy tooling, then audit again to confirm."
+ ],
+ "pitfalls": [
+  "The HailMary mode applies settings directly; use it only on test machines and take a backup first.",
+  "A backup of settings is not a full system restore.",
+  "Run audits elevated, or some checks cannot read their values."
+ ],
+ "sources": [
+  {
+   "title": "HardeningKitty on GitHub",
+   "url": "https://github.com/scipag/HardeningKitty",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 160
+}

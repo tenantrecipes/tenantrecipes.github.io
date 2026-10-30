@@ -1,0 +1,37 @@
+{
+ "id": "securityheaders",
+ "name": "Security Headers",
+ "vendor": "Snyk (created by Scott Helme)",
+ "category": "Web apps",
+ "what": "A free scanner that reads the HTTP response headers of a public website and grades how well it uses browser security headers such as CSP, HSTS and X-Frame-Options.",
+ "when": "When you launch or change a public website or web app, or after a CDN or proxy change that might strip headers.",
+ "license": "Proprietary web service",
+ "cost": "free",
+ "cost_note": "The website scan is free; an API is offered separately with API keys.",
+ "url": "https://securityheaders.com/",
+ "repo": null,
+ "example": [
+  "Enter the full URL of the page, for example `https://www.contoso.com`.",
+  "Review the missing headers listed in red and the raw headers the server returned.",
+  "Add the missing headers at the web server, app or CDN, starting with HSTS and a report-only Content-Security-Policy.",
+  "Scan again and compare the grade and the raw header list."
+ ],
+ "pitfalls": [
+  "A strict Content-Security-Policy can break scripts; roll it out in report-only mode first.",
+  "Headers can differ between pages and redirects; test the pages users actually land on.",
+  "Some header recommendations change over time; read the explanation for each header rather than chasing the letter grade."
+ ],
+ "sources": [
+  {
+   "title": "Security Headers – About",
+   "url": "https://securityheaders.com/about/",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 30
+}

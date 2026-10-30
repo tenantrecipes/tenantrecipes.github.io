@@ -520,3 +520,13 @@ html.sx-lock{overflow:hidden}
 .sx-pop{font-size:16px}
 .sx-gw input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
 .sx-sug{font-size:.95em}.sx-o strong{font-size:1em}.sx-o>span{font-size:.84em}.sx-h{font-size:11px}.sx-all{font-size:.92em}
+
+/* ---- Tools section ---- */
+.tl-perm{display:flex;gap:12px;align-items:flex-start;margin:22px 0;padding:14px 16px;border:1px solid #f0b429;border-left:5px solid #d97706;border-radius:12px;background:#fffbeb;color:#5b3a00;font-size:.95em;line-height:1.55}
+.tl-perm .ic{flex:0 0 20px;width:20px;height:20px;margin-top:2px;stroke:#d97706}
+.tl-perm strong{display:block;color:#7c2d12}
+.tl-meta{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:10px 0 0;font-size:.82em;color:#5a6472}
+.tl-cost{display:inline-block;padding:2px 9px;border-radius:999px;font-weight:600;font-size:.92em;background:#e8f5ee;color:#0f6b3b}
+.tl-c-open-source{background:#e8f0fe;color:#1a4fb5}
+.tl-c-freemium{background:#f3ecfd;color:#6b2fb3}
+.tl-card[hidden]{display:none}

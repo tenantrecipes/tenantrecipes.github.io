@@ -1,0 +1,42 @@
+{
+ "id": "nuclei",
+ "name": "Nuclei",
+ "vendor": "ProjectDiscovery",
+ "category": "Vulnerability scanning",
+ "what": "A fast open-source scanner that runs YAML templates against URLs and hosts to detect known vulnerabilities and misconfigurations.",
+ "when": "To check your own web-facing assets for newly published issues quickly, or to automate checks in a pipeline.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://docs.projectdiscovery.io/tools/nuclei/overview",
+ "repo": "https://github.com/projectdiscovery/nuclei",
+ "example": [
+  "Install with Go: `go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest`.",
+  "Run against one approved target: `nuclei -u https://app.contoso.com`.",
+  "Narrow the run to the most important templates: `nuclei -u https://app.contoso.com -severity critical,high`.",
+  "Verify each hit manually and create tickets only for confirmed findings."
+ ],
+ "pitfalls": [
+  "Community templates vary in quality; confirm findings before you escalate.",
+  "Some templates send active requests; never point it at systems you do not own.",
+  "Rate-limit scans against production."
+ ],
+ "sources": [
+  {
+   "title": "Nuclei on GitHub",
+   "url": "https://github.com/projectdiscovery/nuclei",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Nuclei documentation",
+   "url": "https://docs.projectdiscovery.io/tools/nuclei/overview",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 140
+}

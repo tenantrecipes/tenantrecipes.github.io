@@ -229,6 +229,7 @@ def search_bar(rel, R, n_sec):
         lead += f'<a class="chip chip-hi" href="?t={E(nt.replace(" ", "+"))}#library">{T.icon("alert")}News &amp; retirements</a>'
     lead += f'<a class="chip chip-hi" href="{rel}changelog/">{T.icon("clock")}What\'s new</a>'
     lead += f'<a class="chip chip-hi" href="{rel}security/index.html#watch">{T.icon("shield")}Vulnerability watch</a>'
+    lead += f'<a class="chip chip-hi" href="{rel}tools/index.html">{T.icon("target")}Security tools</a>'
     return (f'<div class="hx-find"><form class="fd-s" action="{rel}search/index.html" method="get" role="search">{T.icon("search")}'
             f'<label class="sr" for="fd-q">Search all recipes, guides and security entries</label>'
             f'<input id="fd-q" name="q" type="search" placeholder="Search recipes, CVEs…" data-ph-wide="Search recipes, guides, CVEs and news: e.g. MFA, Citrix, oversharing" autocomplete="off" data-sx>'

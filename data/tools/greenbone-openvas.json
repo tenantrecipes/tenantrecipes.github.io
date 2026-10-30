@@ -1,0 +1,47 @@
+{
+ "id": "greenbone-openvas",
+ "name": "OpenVAS / Greenbone Community Edition",
+ "vendor": "Greenbone",
+ "category": "Vulnerability scanning",
+ "what": "An open-source network vulnerability scanner with a web interface and a community feed of vulnerability tests.",
+ "when": "For authenticated or unauthenticated vulnerability scans of servers and network devices when you have no commercial scanner.",
+ "license": "GPL-2.0 (scanner) and other open-source licenses",
+ "cost": "open source",
+ "cost_note": "The Community Edition uses a community feed; Greenbone sells enterprise products and feeds.",
+ "url": "https://greenbone.github.io/docs/latest/",
+ "repo": "https://github.com/greenbone/openvas-scanner",
+ "example": [
+  "Follow the Greenbone Community Containers guide to run the components with Docker Compose on a dedicated Linux host.",
+  "Wait for the feeds to sync, then sign in to the web interface.",
+  "Create a target with your approved IP ranges and, if possible, scan credentials.",
+  "Run a scan task, then sort results by severity and confirm each finding before you ticket it."
+ ],
+ "pitfalls": [
+  "The first feed sync can take a long time; scans before it finishes miss checks.",
+  "Unauthenticated scans see far less than authenticated ones.",
+  "Scan production carefully and in agreed windows; some checks can upset fragile systems."
+ ],
+ "sources": [
+  {
+   "title": "Greenbone Community Documentation",
+   "url": "https://greenbone.github.io/docs/latest/",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Greenbone Community Containers",
+   "url": "https://greenbone.github.io/docs/latest/22.4/container/index.html",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "openvas-scanner on GitHub",
+   "url": "https://github.com/greenbone/openvas-scanner",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 130
+}

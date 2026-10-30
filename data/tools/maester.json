@@ -1,0 +1,42 @@
+{
+ "id": "maester",
+ "name": "Maester",
+ "vendor": "Maester project",
+ "category": "M365 & Entra",
+ "what": "An open-source PowerShell test framework, built on Pester, that checks Microsoft Entra ID and Microsoft 365 configuration against a library of security tests and produces an HTML report.",
+ "when": "For recurring configuration checks of a tenant (Conditional Access, Entra settings, Exchange Online), and to catch drift after changes, for example in a scheduled pipeline.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://maester.dev/",
+ "repo": "https://github.com/maester365/maester",
+ "example": [
+  "Install the Pester version the Maester docs pin (currently `Install-Module Pester -MinimumVersion 5.7.1 -MaximumVersion 5.7.1 -SkipPublisherCheck -Force`), then `Install-Module Maester -Scope CurrentUser`.",
+  "Create a test folder and download the tests into it with `Install-MaesterTests`.",
+  "Sign in with `Connect-Maester` using an account with read access to the tenant.",
+  "Run `Invoke-Maester` and open the HTML report; start with failed tests on Conditional Access and privileged roles."
+ ],
+ "pitfalls": [
+  "Some test sets need extra PowerShell modules and roles, for example Exchange Online checks.",
+  "A passed test only means that setting matches the test; it is not a full security review.",
+  "Keep the tests updated; new checks are added often."
+ ],
+ "sources": [
+  {
+   "title": "Maester – Installation",
+   "url": "https://maester.dev/docs/installation",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Maester on GitHub",
+   "url": "https://github.com/maester365/maester",
+   "checked": "2026-10-30"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 70
+}
