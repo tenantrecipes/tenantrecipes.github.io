@@ -147,7 +147,7 @@ def build():
     host = E(C.HOSTING_PROVIDER)
     pages.append(page("privacy.html", f"Privacy policy | {C.SITE_NAME}", "How Tenant Recipes handles personal data.", lambda rel: (
         f'<main class="wrap"><article><h1>Privacy policy</h1><p class="fine">Last updated: {TODAY}</p>'
-        f'<p>Tenant Recipes is a personal project run by {E(C.OWNER_NAME)} in {E(C.OWNER_COUNTRY)}, who is the data controller for the '
+        f'<p>Tenant Recipes is a personal project based in {E(C.OWNER_COUNTRY)}. {E(C.OWNER_NAME)} is the data controller for the '
         f'personal data described here. We collect as little as possible.</p>'
         '<h2>Visiting the site</h2><p>The site uses no cookies, no analytics and no advertising trackers. '
         f'Like any website, our hosting provider ({host}) processes technical data such as your IP address and browser type in server logs '
