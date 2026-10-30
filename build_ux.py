@@ -408,7 +408,7 @@ def featured(R, CY, guides, Q):
     return slides
 
 
-def carousel(rel, slides, n_recipes, last_verified):
+def carousel(rel, slides, n_recipes, last_verified, top=""):
     n = len(slides)
     items, dots = "", ""
     for i, s in enumerate(slides):
@@ -422,7 +422,7 @@ def carousel(rel, slides, n_recipes, last_verified):
     arrow = lambda d: f'<svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path d="{"M15 5l-7 7 7 7" if d < 0 else "M9 5l7 7-7 7"}"/></svg>'
     return (f'<section class="hx car" aria-labelledby="hx-title"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>'
             f'<div class="wrap"><h1 id="hx-title" class="car-h1">Fact-checked Copilot, Intune &amp; security recipes for Microsoft 365 admins</h1>'
-            f'<p class="hx-badge car-badge"><span class="dot" aria-hidden="true"></span>{n_recipes} recipes, every one checked against its sources · last verified {T.fmt(last_verified)}</p>'
+            f'<p class="hx-badge car-badge"><span class="dot" aria-hidden="true"></span>{n_recipes} recipes, every one checked against its sources · last verified {T.fmt(last_verified)}</p>{top}'
             f'<div class="car-box" aria-roledescription="carousel" aria-label="Featured articles" role="region">'
             f'<div class="car-vp" id="car-vp" aria-live="off" tabindex="-1">{items}</div>'
             f'<div class="car-ctl"><button type="button" class="car-nav car-prev" aria-label="Previous slide" aria-controls="car-vp">{arrow(-1)}</button>'

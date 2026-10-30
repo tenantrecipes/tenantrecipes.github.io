@@ -416,3 +416,9 @@ background:linear-gradient(135deg,#0e1f52ee,#24135aee);border:1px solid #ffffff1
 @media (max-width:560px){.vw-card{padding:12px 14px}.vw-t{flex-basis:100%;font-size:.98rem}.vw-r2{flex-direction:column}.vw-r2>*::after{display:none}.vw-r3{flex-direction:column}}
 .vw-list>li{margin:0;padding:0}.vw-list .vw-card{margin:0;padding:14px 18px}
 @media (max-width:560px){.vw-list .vw-card{padding:12px 14px}.vw-do{flex-basis:auto}.vw-r3{align-items:flex-start}}
+/* Patch Tuesday countdown, homepage hero variant */
+.pt-cd.pt-hero{margin:14px 0 18px;padding:12px 18px;background:#ffffff14;border:1px solid #5ee6c855;color:#dfe6ff;font-size:.95rem;backdrop-filter:blur(6px);box-shadow:0 8px 24px #0006}
+.pt-hero .pt-k{background:#5ee6c8;color:#06221c}.pt-hero .pt-t b{color:#fff;font-size:1.05em}.pt-hero .pt-l{color:#5ee6c8}
+.pt-hero.live{background:#5ee6c822;border-color:#5ee6c8}.pt-hero.live .pt-k{background:#fff;color:#0b5c46}.pt-hero .pt-t a{color:#5ee6c8}
+@media (max-width:560px){.pt-cd.pt-hero{padding:10px 14px;font-size:.88rem}}
+.pt-w{white-space:nowrap}

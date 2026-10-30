@@ -31,6 +31,6 @@ function tick(){var now=Date.now(),t=target(now),loc=new Date(t).toLocaleString(
 w.forEach(function(el){var tx=el.querySelector(".pt-t"),live=now>=t;el.classList.toggle("live",live);
 if(live){var lt=el.getAttribute("data-latest");tx.innerHTML="<b>Patch Tuesday is live.</b> Microsoft's updates came out at 10:00 PT ("+loc+" your time)."+(lt?' <a href="'+lt+'">Read our summary →</a>':"")}
 else{var s=Math.floor((t-now)/6e4),d=Math.floor(s/1440),h=Math.floor(s%1440/60),mi=s%60;
-tx.innerHTML="Next release in <b>"+pl(d,"day")+", "+pl(h,"hour")+", "+pl(mi,"minute")+"</b> · "+loc+" your time (10:00 PT)"}})}
+tx.innerHTML="Next release in <b>"+pl(d,"day")+", "+pl(h,"hour")+", "+pl(mi,"minute")+"</b> · <span class=\"pt-w\">"+loc+" your time (10:00 PT)</span>"}})}
 tick();setInterval(tick,30000)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init()})();

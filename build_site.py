@@ -332,8 +332,8 @@ def build():
     n = len(R)
 
     pages.append(page("index.html", f"{C.SITE_NAME}: fact-checked Copilot, Intune and security recipes for Microsoft 365 admins", C.SITE_DESCRIPTION, lambda rel: (
-        UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")))
-        + f'<div class="wrap pt-home">{CY.patch_tuesday_widget(rel, CY.load())}</div>'
+        UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
+                    CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1))
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
         + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):] +
         f'<main class="wrap" id="library">{ad_slot("index-top")}<h2 class="lib-h">The recipe library</h2><div class="controls"><input id="q" aria-label="Search recipes" '
