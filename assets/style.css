@@ -391,3 +391,13 @@ background:linear-gradient(135deg,#0e1f52ee,#24135aee);border:1px solid #ffffff1
 @media (prefers-reduced-motion:reduce){.car-dot{transition:none}}
 .hx.car h1.car-h1{font-size:clamp(1.2rem,2.3vw,1.65rem);line-height:1.25;letter-spacing:-.01em;margin:0 0 12px}
 @media (max-width:560px){.hx.car h1.car-h1{font-size:1.12rem}.car-s{min-height:0}}
+/* ---- security categories + Patch Tuesday countdown ---- */
+.cy-cat{display:inline-block;padding:1px 8px;margin-right:4px;border-radius:6px;font:700 .7rem/1.6 system-ui,sans-serif;letter-spacing:.02em;background:#eef1f8;color:#334;white-space:nowrap;vertical-align:1px}
+.cy-cat-client{background:#e7f0ff;color:#0f3f8a}.cy-cat-server{background:#efe8ff;color:#4b2a99}.cy-cat-network{background:#e3f7f1;color:#0b5c46}
+.cy-cat-web-runtime{background:#fff1e0;color:#8a4b00}.cy-cat-virtualization{background:#e6f4fb;color:#0b5272}.cy-cat-firmware{background:#f3eee6;color:#5b4524}.cy-cat-cloud-m365{background:#e8f3ff;color:#0f6cbd}
+.card .cy-cat{margin:6px 0 2px}.cy-filter{margin:14px 0 4px}[data-cat][hidden],.cy-empty[hidden]{display:none!important}
+.pt-cd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:18px 0 0;padding:10px 16px;border:1px solid #e3e5ec;border-radius:12px;background:#fff;font-size:.9rem;color:#334}
+.pt-k{display:inline-block;padding:2px 8px;border-radius:6px;background:#0b1538;color:#5ee6c8;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.pt-t{flex:1 1 260px}.pt-t b{font-variant-numeric:tabular-nums;color:#0b1538}.pt-l{font-weight:700;white-space:nowrap;text-decoration:none}.pt-l:hover{text-decoration:underline}
+.pt-cd.live{border-color:#5ee6c8;background:#effcf8}.pt-cd.live .pt-k{background:#0b5c46;color:#fff}
+.pt-home{padding-top:0;padding-bottom:0}

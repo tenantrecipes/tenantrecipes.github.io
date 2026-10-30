@@ -4,6 +4,7 @@
  "order": 20,
  "type": "vulnerability",
  "area": "virtualization",
+ "category": "Virtualization",
  "title": "VMSA-2026-0006: vCenter auth bypass and code execution, ESX VM escape (patch vCenter and ESX)",
  "summary": "Broadcom's critical advisory VMSA-2026-0006 fixes five flaws. Two in vCenter let an unauthenticated attacker with network access bypass authentication (CVE-2026-59309) and execute code (CVE-2026-59310). One in ESX lets an admin inside a VM with a VMXNET3 adapter run code on the host (CVE-2026-47876). CISA lists CVE-2026-59310 and the ESX logging flaw CVE-2026-41709 as known exploited.",
  "vendor": "Broadcom (VMware)",

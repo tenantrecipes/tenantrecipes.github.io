@@ -4,6 +4,7 @@
  "order": 80,
  "type": "hardening",
  "area": "endpoint",
+ "category": "Client",
  "title": "Kill shared local admin passwords with Windows LAPS (Entra ID or AD)",
  "summary": "When every device has the same local administrator password, one stolen hash opens them all. Windows LAPS, built into Windows, rotates a unique password per device and backs it up to Microsoft Entra ID or Active Directory. It's free, and the legacy Microsoft LAPS is deprecated.",
  "steps": [

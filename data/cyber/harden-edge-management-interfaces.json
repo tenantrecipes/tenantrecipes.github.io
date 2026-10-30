@@ -4,6 +4,7 @@
  "order": 100,
  "type": "hardening",
  "area": "network",
+ "category": "Network",
  "title": "Get firewall, VPN and iLO/iDRAC management interfaces off the internet",
  "summary": "This month's exploited flaws in Cisco ASA/FTD and FortiMail hit internet-facing edge devices. CISA's directive BOD 23-02 sets a clear baseline: management interfaces of routers, switches, firewalls, VPN concentrators, proxies, load balancers and out-of-band server management (iLO, iDRAC) should not be reachable from the public internet.",
  "steps": [

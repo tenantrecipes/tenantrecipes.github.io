@@ -48,6 +48,8 @@ The 40 original recipes were migrated on 2026-10-30 by `tools/migrate_v1_to_file
 Built by `build_cyber.py` into `/security/` (landing, one page per area, one page per entry).
 Common fields: `id`, `status`, `order`, `type` (`vulnerability` | `hardening`), `area`
 (`network` | `endpoint` | `server` | `services` | `virtualization` | `cloud`), `title`, `summary`,
+`category` (required for vulnerabilities, optional for hardening; one of `Client` | `Server` | `Network` |
+`Web/Runtime` | `Virtualization` | `Firmware` | `Cloud/M365`, validated by the build and used by the filter chips on /security/),
 `steps`, `pitfalls`, `sources` (https, with `checked`), `last_verified`, `verified_by`, `created`, `updated`.
 
 Extra fields for `type: vulnerability`: `vendor`, `product`, `severity` (the vendor's own rating),
@@ -58,3 +60,5 @@ Extra fields for `type: vulnerability`: `vendor`, `product`, `severity` (the ven
 Rules: copy CVE ids, versions, CVSS and dates only from the vendor advisory, CISA (KEV JSON feed:
 https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) or NIST NVD.
 If a value can't be verified, leave it null or out. Never estimate a CVSS score.
+A Patch Tuesday summary entry should use an id starting with `patch-tuesday-` (or set `"patch_tuesday": true`);
+the countdown widget then links to the newest one during the 24 hours after release.

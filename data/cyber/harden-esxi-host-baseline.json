@@ -4,6 +4,7 @@
  "order": 90,
  "type": "hardening",
  "area": "virtualization",
+ "category": "Virtualization",
  "title": "ESXi host hardening baseline: lockdown mode, no SSH, execInstalledOnly, remote audit logs",
  "summary": "Ransomware crews go after hypervisors because one host holds many servers. These are the highest-impact controls from Broadcom's vSphere 8 security configuration guide, with PowerCLI to check and set each one.",
  "steps": [

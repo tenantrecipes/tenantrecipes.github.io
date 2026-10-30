@@ -4,6 +4,7 @@
  "order": 70,
  "type": "hardening",
  "area": "server",
+ "category": "Server",
  "title": "Stop NTLM relay on-prem: require SMB signing and LDAP signing plus channel binding",
  "summary": "Unsigned SMB and LDAP let an attacker in the middle relay credentials. Windows 11 24H2 and Windows Server 2025 now require SMB signing by default, and new Windows Server 2025 AD deployments require LDAP signing. Older or upgraded environments often don't. Here's how to audit first and then enforce.",
  "steps": [

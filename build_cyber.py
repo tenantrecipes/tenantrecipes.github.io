@@ -19,6 +19,29 @@ AREAS = [  # (key, title, blurb)
     ("cloud", "Cloud & identity", "Entra ID, Conditional Access and Microsoft 365: our tenant recipes."),
 ]
 AREA = {k: (t, b) for k, t, b in AREAS}
+CATEGORIES = ["Client", "Server", "Network", "Web/Runtime", "Virtualization", "Firmware", "Cloud/M365"]  # filter labels (English on site)
+
+
+def cat_slug(c):
+    return re.sub(r"[^a-z0-9]+", "-", c.lower()).strip("-")
+
+
+MSRC_GUIDE = "https://msrc.microsoft.com/update-guide"
+
+
+def patch_tuesday_widget(rel, ents=None):
+    """Small Patch Tuesday countdown. JS (assets/ui.js) computes the 2nd Tuesday 10:00 America/Los_Angeles;
+    without JS the static rule text stays. data-latest points at our newest Patch Tuesday summary, if any."""
+    latest = ""
+    pts = sorted([e for e in (ents or []) if e.get("patch_tuesday") or e["id"].startswith("patch-tuesday-")],
+                 key=lambda e: e.get("advisory_date") or e.get("updated") or "", reverse=True)
+    if pts:
+        latest = f' data-latest="{rel}security/{pts[0]["id"]}.html"'
+    return (f'<aside class="pt-cd" data-pt{latest} aria-label="Patch Tuesday countdown"><span class="pt-k">Patch Tuesday</span>'
+            '<span class="pt-t" aria-live="polite">Microsoft releases security updates on the second Tuesday of each month, at about 10:00 Pacific Time.</span>'
+            f'<a class="pt-l" href="{MSRC_GUIDE}">MSRC Security Update Guide →</a></aside>')
+
+
 CLOUD_CATS = ["Identity & threat protection", "Conditional Access for AI"]  # existing recipe categories shown under Cloud & identity
 TYPES = {"vulnerability", "hardening"}
 SEVERITIES = {"Critical", "High", "Important", "Medium", "Moderate", "Low"}
@@ -26,7 +49,7 @@ STATUSES = {"published", "draft", "needs-review", "retired"}
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 CVE = re.compile(r"^CVE-\d{4}-\d{4,}$")
 REQ = ["id", "status", "type", "area", "title", "summary", "steps", "pitfalls", "sources", "last_verified"]
-REQ_VULN = ["vendor", "product", "cves", "severity", "exploited", "advisory_date", "affected", "fixed"]
+REQ_VULN = ["category", "vendor", "product", "cves", "severity", "exploited", "advisory_date", "affected", "fixed"]
 
 
 def _validate(e, fname):
@@ -45,6 +68,8 @@ def _validate(e, fname):
         errs.append(f"type must be one of {sorted(TYPES)}")
     if e["area"] not in AREA:
         errs.append(f"area must be one of {list(AREA)}")
+    if e.get("category") is not None and e["category"] not in CATEGORIES:
+        errs.append(f"category must be one of {CATEGORIES}")
     if not e["steps"] or not all(isinstance(s, str) and s.strip() for s in e["steps"]):
         errs.append("steps must be non-empty strings")
     if not e["sources"]:
@@ -104,6 +129,9 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
         return (f'<span class="cy-kev" title="Listed in the CISA Known Exploited Vulnerabilities catalog">Exploited · CISA KEV {fmt_date(e["kev_added"])}</span>'
                 if e.get("kev_added") else ('<span class="cy-kev">Exploited</span>' if e.get("exploited") else ""))
 
+    def catb(e):
+        return (f'<span class="cy-cat cy-cat-{cat_slug(e["category"])}">{esc(e["category"])}</span>' if e.get("category") else "")
+
     def cve_list(e):
         return ", ".join(c["id"] for c in e["cves"])
 
@@ -115,8 +143,8 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
     def vuln_rows(rel, items):
         rows = ""
         for e in items:
-            rows += (f'<tr><td><a href="{rel}security/{e["id"]}.html"><strong>{esc(e["title"])}</strong></a>'
-                     f'<span class="cy-meta">{esc(e["vendor"])} · {esc(cve_list(e))}</span></td>'
+            rows += (f'<tr data-cat="{cat_slug(e["category"])}"><td><a href="{rel}security/{e["id"]}.html"><strong>{esc(e["title"])}</strong></a>'
+                     f'<span class="cy-meta">{catb(e)} {esc(e["vendor"])} · {esc(cve_list(e))}</span></td>'
                      f'<td>{sev(e["severity"])}</td><td>{kev(e)}</td>'
                      f'<td><a class="cy-area" href="{rel}security/{e["area"]}.html">{esc(AREA[e["area"]][0])}</a></td>'
                      f'<td class="cy-d">{fmt_date(_date_key(e))}</td></tr>')
@@ -124,8 +152,8 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 f'<th>Area</th><th>Date</th></tr></thead><tbody>{rows}</tbody></table></div>')
 
     def hard_cards(rel, items):
-        return "".join(f'<a class="card" href="{rel}security/{e["id"]}.html"><div class="tag">Hardening · {esc(AREA[e["area"]][0])}</div>'
-                       f'<h3>{esc(e["title"])}</h3><p class="clamp">{esc(e["summary"])}</p>{T.card_meta(e)}</a>' for e in items)
+        return "".join(f'<a class="card" data-cat="{cat_slug(e.get("category") or "")}" href="{rel}security/{e["id"]}.html"><div class="tag">Hardening · {esc(AREA[e["area"]][0])}</div>'
+                       f'<h3>{esc(e["title"])}</h3><p class="clamp">{esc(e["summary"])}</p>{catb(e)}{T.card_meta(e)}</a>' for e in items)
 
     def recipe_cards(rel, items):
         return "".join(f'<a class="card" href="{rel}recipes/{r["id"]}.html"><div class="tag">{esc(r["category"])}</div>'
@@ -148,6 +176,18 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                       f'<strong>{esc(t)}</strong><p>{esc(b)}</p><span class="sec-go">'
                       + (f'{nv} in vulnerability watch · ' if nv else "") + 'Open →</span></a>')
         exploited = sum(1 for e in vulns if e.get("exploited"))
+        cnt = {c: sum(1 for e in vulns + hards if e.get("category") == c) for c in CATEGORIES}
+        fchips = (f'<button type="button" class="chip on" data-f="" aria-pressed="true">All <span>{len(vulns) + len(hards)}</span></button>'
+                  + "".join(f'<button type="button" class="chip" data-f="{cat_slug(c)}" aria-pressed="false">{esc(c)} <span>{n}</span></button>'
+                            for c, n in cnt.items() if n))
+        filt = (f'<div class="chips cy-filter" id="cy-filter" role="group" aria-label="Filter by category" hidden>{fchips}</div>'
+                '<p class="fine" id="cy-fn" aria-live="polite"></p>'
+                '<script>(function(){var w=document.getElementById("cy-filter");if(!w)return;w.hidden=false;var n=document.getElementById("cy-fn");'
+                'w.addEventListener("click",function(ev){var b=ev.target.closest("button[data-f]");if(!b)return;var f=b.getAttribute("data-f");'
+                'w.querySelectorAll("button").forEach(function(x){var on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on?"true":"false")});'
+                'var k=0;document.querySelectorAll("#watch tr[data-cat],#hardening [data-cat]").forEach(function(r){var s=!f||r.getAttribute("data-cat")===f;r.hidden=!s;if(s)k++});'
+                'n.textContent=f?k+" entr"+(k===1?"y":"ies")+" in "+b.firstChild.textContent.trim():"";'
+                'document.querySelectorAll(".cy-empty").forEach(function(m){var sec=m.closest("section");m.hidden=!!sec.querySelector("[data-cat]:not([hidden])")})})})();</script>')
         return (hero(rel, f'<a href="{rel}index.html">Home</a> / Security', f'Fact-checked against vendor advisories and CISA · last verified {fmt_date(last)}',
                      'Cybersecurity beyond the tenant.<br><span class="grad">Patch what is exploited. Harden what is exposed.</span>',
                      'A vulnerability watch for the CVEs that are actually being exploited, plus hardening recipes for network, endpoints, servers, '
@@ -156,14 +196,15 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                      f'<div class="hx-cta"><a class="btn hx-p" href="#watch">Vulnerability watch →</a><a class="btn hx-g" href="#hardening">Hardening recipes</a></div>')
                 + f'<main class="wrap">{disclaimer()}'
                 f'<section class="sec" aria-labelledby="areas-h"><p class="sec-k">Areas</p><h2 id="areas-h">Pick your layer</h2><div class="sec-grid cy-areas">{tiles}</div></section>'
-                f'<section class="sec" id="watch" aria-labelledby="watch-h"><p class="sec-k">Vulnerability watch</p><h2 id="watch-h">What to patch first — newest first</h2>'
+                f'{patch_tuesday_widget(rel, ents)}'
+                f'<section class="sec" id="watch" aria-labelledby="watch-h"><p class="sec-k">Vulnerability watch</p><h2 id="watch-h">What to patch first — newest first</h2>{filt}'
                 '<p class="fine">Severity is the vendor\'s own rating. "Exploited" means the vendor or CISA reports exploitation in the wild. '
                 'Dates are the CISA KEV addition date, or the advisory date when not in KEV.</p>'
-                f'{vuln_rows(rel, vulns)}</section>'
+                f'{vuln_rows(rel, vulns)}<p class="fine cy-empty" hidden>No vulnerabilities in this category yet.</p></section>'
                 f'<section class="sec" id="hardening" aria-labelledby="hard-h"><p class="sec-k">Hardening</p><h2 id="hard-h">Close the doors attackers use most</h2>'
                 f'<a class="cy-promo" href="{rel}guides/windows-11-cis-hardening.html"><span class="cy-promo-k">New guide</span><strong>How to harden Windows 11 with the CIS Benchmark:</strong> '
                 f'a phased playbook from Level 1 to compliance scans →</a>'
-                f'<div class="grid">{hard_cards(rel, hards)}</div></section>'
+                f'<div class="grid">{hard_cards(rel, hards)}</div><p class="fine cy-empty" hidden>No hardening recipes in this category yet.</p></section>'
                 f'{signup(rel, "security-index")}</main>')
     pages.append(page("security/index.html", f"Cybersecurity: vulnerability watch & hardening | {SITE_NAME}",
                       "Exploited CVEs and hardening recipes for network, endpoints, servers, services and VMware — fact-checked against vendor advisories and CISA.",
@@ -210,7 +251,7 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                              if c.get("cvss") is not None else '<span class="fine">not scored in sources checked</span>')
                     crow += (f'<tr><td><a href="https://nvd.nist.gov/vuln/detail/{c["id"]}">{c["id"]}</a></td><td>{sev(c.get("severity")) if c.get("severity") else ""}</td>'
                              f'<td>{score}</td><td>{esc(c.get("note", ""))}</td></tr>')
-                facts = (f'<dl class="cy-facts"><div><dt>Vendor</dt><dd>{esc(e["vendor"])}</dd></div><div><dt>Product</dt><dd>{esc(e["product"])}</dd></div>'
+                facts = (f'<dl class="cy-facts"><div><dt>Category</dt><dd>{catb(e)}</dd></div><div><dt>Vendor</dt><dd>{esc(e["vendor"])}</dd></div><div><dt>Product</dt><dd>{esc(e["product"])}</dd></div>'
                          f'<div><dt>Vendor severity</dt><dd>{sev(e["severity"])}</dd></div><div><dt>Exploitation</dt><dd>{kev(e) or "No exploitation reported in sources checked"}</dd></div>'
                          f'<div><dt>Advisory</dt><dd>{esc(e.get("advisory_id", ""))} · {fmt_date(e["advisory_date"])}</dd></div>'
                          + (f'<div><dt>Impact</dt><dd>{esc(e["impact"])}</dd></div>' if e.get("impact") else "") + '</dl>'
@@ -222,6 +263,7 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
             isv = e["type"] == "vulnerability"
             chips = ((T.chip("alert", f'Vendor severity: {esc(e["severity"])}') + (T.chip("target", "Exploited in the wild") if e.get("exploited") else "")
                       + T.chip("list", esc(cve_list(e)))) if isv else T.chip("list", f'{len(e["steps"])} steps')) \
+                + (T.chip("layers", f'Category: {esc(e["category"])}') if e.get("category") else "") \
                 + T.chip("link", f'{len(e["sources"])} official source{"s" if len(e["sources"]) != 1 else ""}')
             toc = [("what", "What it is" if isv else "Why it matters")] + ([("cves", "CVEs"), ("affected", "Affected & fixed")] if isv else []) \
                 + [("todo", "What to do" if isv else "Steps")] + ([("pitfalls", "Pitfalls")] if e["pitfalls"] else []) + [("verified", "Sources & corrections")]
