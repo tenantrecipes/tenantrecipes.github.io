@@ -5,7 +5,7 @@
 
 # >>> CHANGE ME: your Buttondown username (the last part of https://buttondown.com/<username>).
 #     While it is still "BUTTONDOWN_USERNAME", the signup form is shown but marked as not live.
-BUTTONDOWN_USERNAME = "krister"
+BUTTONDOWN_USERNAME = "tenantrecipes"
 
 # Public URL of the site, no trailing slash. Leave "" until the first deploy, then set e.g.
 # "https://tenantrecipes.netlify.app" or "https://<github-user>.github.io/tenantrecipes".
