@@ -58,7 +58,7 @@ def head(title, desc, rel, path, og_type="website"):
         '<meta name="viewport" content="width=device-width,initial-scale=1">',
         f"<title>{esc(title)}</title>",
         f'<meta name="description" content="{esc(desc)}">',
-        f'<link rel="icon" href="{rel}assets/favicon.svg" type="image/svg+xml">',
+        f'<link rel="icon" href="{rel}assets/favicon-32.png" type="image/png" sizes="32x32">',
         f'<link rel="icon" href="{rel}favicon.ico" sizes="any">',
         f'<link rel="apple-touch-icon" href="{rel}assets/apple-touch-icon.png">',
         '<meta name="theme-color" content="#0f2f6b">',

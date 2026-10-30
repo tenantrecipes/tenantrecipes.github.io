@@ -49,10 +49,21 @@ set(el._fl.d,p2(Math.min(d,99)));set(el._fl.h,p2(h));set(el._fl.m,p2(m));set(el.
 tick();setInterval(tick,1000)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init()})();
 
-/* Mobile menu: close on Escape, outside tap or link tap */
+/* Menu: close on Escape (focus back to toggle), outside tap or link tap; focus first link on open; mark current page */
 (function(){var m=document.querySelector("details.nv-m");if(!m)return;var sm=m.querySelector("summary");
-sm.setAttribute("aria-haspopup","true");sm.setAttribute("aria-expanded","false");
-m.addEventListener("toggle",function(){sm.setAttribute("aria-expanded",m.open?"true":"false")});
+sm.setAttribute("aria-expanded","false");
+var here=location.pathname.replace(/index\.html$/,"");
+m.querySelectorAll(".nv-md a").forEach(function(a){var p=a.pathname.replace(/index\.html$/,"");if(p===here&&p!=="/"&&!a.hash)a.setAttribute("aria-current","page")});
+m.addEventListener("toggle",function(){sm.setAttribute("aria-expanded",m.open?"true":"false");sm.setAttribute("aria-label",m.open?"Close menu":"Menu");
+ if(m.open&&!matchMedia("(hover:none)").matches){var f=m.querySelector(".nv-md a");if(f)f.focus()}});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&m.open){m.open=false;sm.focus()}});
 document.addEventListener("click",function(e){if(m.open&&!m.contains(e.target))m.open=false});
+m.addEventListener("focusout",function(e){if(m.open&&e.relatedTarget&&!m.contains(e.relatedTarget))m.open=false});
 m.addEventListener("click",function(e){if(e.target.closest(".nv-md a"))m.open=false});})();
+/* Back to top: appears after ~600px, smooth (instant with reduced motion), focus moves to the header */
+(function(){var b=document.createElement("button");b.type="button";b.className="btt";b.setAttribute("aria-label","Back to top");b.title="Back to top";
+b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';document.body.appendChild(b);
+var on=false;function upd(){var s=(window.scrollY||document.documentElement.scrollTop)>600;if(s!==on){on=s;b.classList.toggle("on",s);b.tabIndex=s?0:-1}}
+b.tabIndex=-1;window.addEventListener("scroll",upd,{passive:true});upd();
+b.addEventListener("click",function(){var rm=matchMedia("(prefers-reduced-motion: reduce)").matches;window.scrollTo({top:0,behavior:rm?"auto":"smooth"});
+ var t=document.getElementById("top");if(t)t.focus({preventScroll:true})});})();

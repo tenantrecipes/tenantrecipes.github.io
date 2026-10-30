@@ -27,13 +27,20 @@ NAV_LINKS = [("Recipes", "index.html#library"), ("Guides", "guides/index.html"),
 
 
 def nav(rel):
+    """Header: logo mark + wordmark left; inline links on wide screens; search + menu button right.
+    The menu is a <details> so it works without JS; assets/ui.js adds Escape / outside-tap close and focus handling."""
     links = "".join(f'<a href="{rel}{u}">{esc(t)}</a>' for t, u in NAV_LINKS)
-    return (f'<header class="sh"><nav><a class="logo" href="{rel}index.html"><img src="{rel}assets/logo.svg" alt="Tenant Recipes" width="158" height="36"></a>'
+    menu = "".join(f'<a href="{rel}{u}">{esc(t)}</a>' for t, u in NAV_LINKS if t != "About") \
+        + f'<a href="{rel}newsletter.html">Newsletter</a><a href="{rel}about.html">About</a>'
+    return (f'<header class="sh" id="top" tabindex="-1"><nav aria-label="Main">'
+            f'<a class="logo" href="{rel}index.html" aria-label="Tenant Recipes, home"><img class="logo-m" src="{rel}assets/mark-64.png" srcset="{rel}assets/mark-128.png 2x" alt="" width="32" height="32">'
+            f'<span class="logo-w">Tenant <b>Recipes</b></span></a>'
             f'<div class="nv"><div class="nv-l">{links}</div>'
-            f'<a class="nv-sb" href="{rel}search/index.html" data-sx-open title="Search (press /)">{icon("search")}<span class="nv-sbl">Search</span><kbd>/</kbd></a>'
+            f'<a class="nv-sb" href="{rel}search/index.html" data-sx-open aria-label="Search" title="Search (press /)">{icon("search")}<span class="nv-sbl">Search</span><kbd>/</kbd></a>'
             f'<a class="nv-cta" href="{rel}newsletter.html">Newsletter</a>'
-            f'<details class="nv-m"><summary aria-label="Menu"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>'
-            f'<div class="nv-md">{links}<a class="nv-mc" href="{rel}newsletter.html">Newsletter</a></div></details></div></nav></header>')
+            f'<details class="nv-m"><summary aria-label="Menu" aria-controls="nv-menu"><svg class="ic ic-o" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
+            f'<svg class="ic ic-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></summary>'
+            f'<div class="nv-md" id="nv-menu" role="navigation" aria-label="All sections">{menu}</div></details></div></nav></header>')
 
 
 def ad_slot(name):
