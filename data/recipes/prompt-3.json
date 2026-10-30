@@ -1,0 +1,28 @@
+{
+ "id": "prompt-3",
+ "status": "published",
+ "order": 390,
+ "category": "Admin prompt templates",
+ "title": "Prompt: explain an Intune error to the help desk",
+ "problem": "Help desk staff don't understand Intune error codes.",
+ "steps": [
+  "Open Microsoft Copilot Chat (formerly Microsoft 365 Copilot Chat) or your approved AI tool.",
+  "'Explain this Intune error to a level-1 help desk agent: [error text]. Give likely causes, safe first steps, and when to escalate. Do not invent error codes; say if you are unsure.'",
+  "Review the output critically and verify facts against official documentation."
+ ],
+ "pitfalls": [
+  "Never paste secrets, tenant IDs or personal data into tools not approved for that data.",
+  "AI output can be wrong — treat it as a draft."
+ ],
+ "sources": [
+  {
+   "title": "Get started writing prompts in Microsoft Copilot",
+   "url": "https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-writing-prompts-in-microsoft-365-copilot",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

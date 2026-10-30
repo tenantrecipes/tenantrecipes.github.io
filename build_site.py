@@ -1,0 +1,212 @@
+"""Generate the static site into dist/ from data/recipes.json + site_config.py.
+All internal links and assets are relative, so dist/ works on a free subdomain or a sub-path
+(e.g. https://user.github.io/tenantrecipes/). Run via `python3 build.py`."""
+import json, re, shutil, pathlib, sys, datetime
+from html import escape as E
+ROOT = pathlib.Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+import site_config as C
+
+DIST = ROOT / "dist"
+R = json.load(open(ROOT / "data" / "recipes.json"))
+TODAY = datetime.date.today().isoformat()
+BD_PLACEHOLDER = C.BUTTONDOWN_USERNAME in ("", "BUTTONDOWN_USERNAME")
+SITE = C.SITE_URL.rstrip("/")
+
+
+def esc(s):  # match the original site's escaping style
+    return E(s, quote=True)
+
+
+def step_html(s):
+    """Text between `backticks` in a recipe step is rendered as <code> (e.g. PowerShell)."""
+    parts = s.split("`")
+    return "".join(esc(p) if i % 2 == 0 else f"<code>{esc(p)}</code>" for i, p in enumerate(parts))
+
+
+def head(title, desc, rel, path, og_type="website"):
+    url = f"{SITE}/{path}" if SITE else ""
+    img = f"{SITE}/assets/og-image.png" if SITE else f"{rel}assets/og-image.png"
+    tags = [
+        '<meta charset="utf-8">',
+        '<meta name="viewport" content="width=device-width,initial-scale=1">',
+        f"<title>{esc(title)}</title>",
+        f'<meta name="description" content="{esc(desc)}">',
+        f'<link rel="icon" href="{rel}assets/favicon.svg" type="image/svg+xml">',
+        f'<link rel="icon" href="{rel}favicon.ico" sizes="any">',
+        f'<link rel="apple-touch-icon" href="{rel}assets/apple-touch-icon.png">',
+        '<meta name="theme-color" content="#0f2f6b">',
+        f'<meta property="og:site_name" content="{esc(C.SITE_NAME)}">',
+        f'<meta property="og:type" content="{og_type}">',
+        f'<meta property="og:title" content="{esc(title)}">',
+        f'<meta property="og:description" content="{esc(desc)}">',
+        f'<meta property="og:image" content="{img}">',
+        '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">',
+        f'<meta property="og:image:alt" content="{esc(C.SITE_NAME)}: {esc(C.SITE_TAGLINE)}">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        f'<meta name="twitter:title" content="{esc(title)}">',
+        f'<meta name="twitter:description" content="{esc(desc)}">',
+        f'<meta name="twitter:image" content="{img}">',
+    ]
+    if url:
+        tags += [f'<meta property="og:url" content="{url}">', f'<link rel="canonical" href="{url}">']
+    tags.append(f'<link rel="stylesheet" href="{rel}assets/style.css">')
+    return "".join(tags)
+
+
+def nav(rel):
+    return (f'<header><nav><a class="logo" href="{rel}index.html">Tenant<span>Recipes</span></a><div>'
+            f'<a href="{rel}index.html#library">Recipes</a><a href="{rel}newsletter.html">Newsletter</a>'
+            f'<a href="{rel}about.html">About</a></div></nav></header>')
+
+
+def footer(rel):
+    return (f'<footer>Tenant Recipes · Practical AI recipes for Microsoft 365 admins · Not affiliated with Microsoft<br>'
+            f'<a href="{rel}newsletter.html">Newsletter</a> · <a href="{rel}about.html">About</a> · '
+            f'<a href="{rel}privacy.html">Privacy policy</a></footer>')
+
+
+def ad_slot(name):
+    """Empty sponsor slot. Hidden unless SHOW_AD_SLOTS = True in site_config.py. No ad code."""
+    hidden = "" if C.SHOW_AD_SLOTS else " hidden"
+    inner = '<span class="slot-label">Sponsor</span>' if C.SHOW_AD_SLOTS else ""
+    return f'<aside class="sponsor-slot" data-slot="{name}" aria-label="Sponsor"{hidden}><!-- sponsor slot: {name} (empty) -->{inner}</aside>'
+
+
+def signup(rel, source, heading=True):
+    """Buttondown embed form. The username comes ONLY from site_config.BUTTONDOWN_USERNAME."""
+    u = E(C.BUTTONDOWN_USERNAME)
+    h = ('<h2>The weekly Tenant Recipes brief</h2><p>Every week: what changed in Copilot, Intune, Entra and Purview '
+         '— and what you should do about it. 5 minutes, no fluff.</p>') if heading else ""
+    guard = (' onsubmit="alert(\'Newsletter signup is not live yet: set BUTTONDOWN_USERNAME in site_config.py.\');return false"'
+             if BD_PLACEHOLDER else "")
+    note = ('<p class="todo">Not live yet: set BUTTONDOWN_USERNAME in site_config.py and rebuild.</p>'
+            if BD_PLACEHOLDER else "")
+    return (f'<section class="news" id="newsletter">{h}'
+            f'<!-- Buttondown embed form. Username is set in site_config.py (BUTTONDOWN_USERNAME), nowhere else. -->'
+            f'<form class="bd-form" action="https://buttondown.com/api/emails/embed-subscribe/{u}" method="post" target="_blank"{guard}>'
+            f'<label class="sr" for="bd-email-{source}">Email address</label>'
+            f'<input id="bd-email-{source}" type="email" name="email" required autocomplete="email" placeholder="you@company.com"> '
+            f'<input type="hidden" name="embed" value="1">'
+            f'<input type="hidden" name="metadata__source" value="{E(source)}">'
+            f'<button class="btn p" type="submit">Subscribe</button></form>'
+            f'<p class="fine">Free. Unsubscribe anytime. See the <a href="{rel}privacy.html">privacy policy</a>.</p>{note}</section>')
+
+
+def page(path, title, desc, body, og_type="website"):
+    rel = "../" * path.count("/")
+    html = (f'<!doctype html><html lang="en"><head>{head(title, desc, rel, path, og_type)}</head><body>\n'
+            f'{nav(rel)}{body(rel)}\n{footer(rel)}</body></html>\n')
+    out = DIST / path
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(html)
+    return path
+
+
+def contact_html():
+    if C.CONTACT_EMAIL:
+        return f'<a href="mailto:{E(C.CONTACT_EMAIL)}">{E(C.CONTACT_EMAIL)}</a>'
+    return "reply to any newsletter email"
+
+
+def build():
+    if DIST.exists():
+        shutil.rmtree(DIST)
+    DIST.mkdir()
+    pages = []
+    n = len(R)
+
+    pages.append(page("index.html", f"{C.SITE_TAGLINE} | {C.SITE_NAME}", C.SITE_DESCRIPTION, lambda rel: (
+        f'<section class="hero"><div class="wrap"><h1>{C.SITE_TAGLINE}</h1><p>Step-by-step playbooks, fact-checked against Microsoft Learn, for rolling out '
+        f'Copilot and AI agents safely — Conditional Access, Intune, Purview and licensing. Written by an admin, linked to Microsoft Learn.</p>'
+        f'<a class="btn" href="#library">Browse {n} recipes</a> <a class="btn ghost" href="#newsletter">Get the weekly brief</a></div></section>'
+        f'<main class="wrap" id="library">{ad_slot("index-top")}<div class="controls"><input id="q" aria-label="Search recipes" '
+        f'placeholder="Search recipes: e.g. DLP, MFA, license, agent…"></div><div id="chips" class="chips"></div>'
+        f'<p id="count" style="color:#666"></p><div class="grid" id="grid"></div>'
+        f'<noscript><ul>' + "".join(f'<li><a href="recipes/{r["id"]}.html">{esc(r["title"])}</a></li>' for r in R) + '</ul></noscript>'
+        f'{ad_slot("index-bottom")}{signup(rel, "index")}</main>'
+        f'<script src="data/recipes.js"></script><script src="assets/app.js"></script>')))
+
+    pages.append(page("about.html", f"About | {C.SITE_NAME}", "Who writes Tenant Recipes and how the recipes are made.", lambda rel: (
+        '<main class="wrap"><article><h1>About Tenant Recipes</h1><p>Tenant Recipes is run by a Microsoft 365 administrator who spent '
+        'years deep in Intune, device management and Conditional Access — and is now all-in on AI: Microsoft 365 Copilot, Copilot Studio '
+        'agents and AI assistants.</p><p>Every recipe is written for working admins: the problem, the exact steps, the pitfalls, and links '
+        'to official Microsoft Learn documentation. Microsoft changes fast, so always check the linked docs before production changes. '
+        'Each recipe shows when it was last verified against those docs.</p>'
+        f'<p>Want to sponsor the newsletter or suggest a recipe? Just {contact_html()}.</p></article></main>')))
+
+    pages.append(page("newsletter.html", f"Newsletter | {C.SITE_NAME}",
+                      "A free weekly 5-minute brief on what changed in Copilot, Intune, Entra and Purview, and what admins should do about it.",
+                      lambda rel: (
+        '<main class="wrap"><article><h1>The weekly Tenant Recipes brief</h1><p>One short email every Tuesday morning (CET) for Microsoft 365 '
+        'admins who were handed “roll out Copilot and agents safely”.</p><ul><li><strong>Top story</strong>: the one change that matters this week, '
+        'with an admin take.</li><li><strong>Copilot · Intune · Entra &amp; Purview</strong>: short items with what to do, each linked to the source.</li>'
+        '<li><strong>Recipe of the week</strong>: a hands-on playbook from this site.</li></ul><p>5 minutes, no fluff, free.</p></article>'
+        + signup(rel, "newsletter-page", heading=False) + '</main>')))
+
+    host = E(C.HOSTING_PROVIDER)
+    pages.append(page("privacy.html", f"Privacy policy | {C.SITE_NAME}", "How Tenant Recipes handles personal data.", lambda rel: (
+        f'<main class="wrap"><article><h1>Privacy policy</h1><p class="fine">Last updated: {TODAY}</p>'
+        f'<p>Tenant Recipes is a personal project run by {E(C.OWNER_NAME)} in {E(C.OWNER_COUNTRY)}, who is the data controller for the '
+        f'personal data described here. We collect as little as possible.</p>'
+        '<h2>Visiting the site</h2><p>The site uses no cookies, no analytics and no advertising trackers. '
+        f'Like any website, our hosting provider ({host}) processes technical data such as your IP address and browser type in server logs '
+        'to deliver and protect the site. We do not use these logs to identify you.</p>'
+        '<h2>Newsletter</h2><p>If you subscribe, your email address (and the page you signed up from) is stored by our newsletter provider, '
+        '<a href="https://buttondown.com/legal/privacy">Buttondown</a>, which processes it on our behalf and may store data outside the EU/EEA '
+        'under appropriate safeguards. We use your address only to send the newsletter. The legal basis is your consent (GDPR Art. 6(1)(a)); '
+        'you confirm it by clicking the link in the confirmation email. Buttondown may record opens and link clicks, which we only look at in '
+        'aggregate to improve the newsletter. Links in the newsletter may carry “utm” tags that show a visit came from the newsletter; they '
+        'do not identify you.</p><p>Every email has an unsubscribe link. When you unsubscribe, we stop sending to you and delete your address '
+        'on request.</p>'
+        '<h2>Sponsors</h2><p>Sponsors never receive subscriber lists or personal data.</p>'
+        '<h2>Your rights</h2><p>Under the GDPR you can ask for access to, correction of, or deletion of your personal data, and you can '
+        f'withdraw consent at any time. To do so, {contact_html()}. You can also complain to the Swedish Authority for Privacy Protection '
+        '(<a href="https://www.imy.se/en/">IMY</a>).</p>'
+        '<h2>External links</h2><p>Recipes link to Microsoft Learn and other sites, which have their own privacy policies.</p>'
+        '<h2>Changes</h2><p>If this policy changes, the date above is updated.</p></article></main>')))
+
+    for r in R:
+        def body(rel, r=r):
+            ver = (f'Last verified against Microsoft docs: <strong>{r["last_verified"]}</strong>' if r.get("last_verified")
+                   else 'Not yet re-verified against current Microsoft docs. Check the linked sources before production changes.')
+            src = "".join(f'<li><a href="{E(s["url"])}">{esc(s["title"])}</a>'
+                          + (f' <span class="fine">(checked {s["checked"]})</span>' if s.get("checked") else "") + '</li>'
+                          for s in r["sources"])
+            return (f'<main class="wrap"><article><a href="{rel}index.html#library">← All recipes</a>'
+                    f'<div class="tag" style="margin-top:14px">{esc(r["category"])}</div><h1>{esc(r["title"])}</h1>'
+                    f'<p class="meta">{ver}</p>'
+                    f'<h2>The problem</h2><p>{esc(r["problem"])}</p>'
+                    f'<h2>Steps</h2><ol>' + "".join(f'<li>{step_html(s)}</li>' for s in r["steps"]) + '</ol>'
+                    + (f'<h2>Pitfalls</h2><ul>' + "".join(f'<li>{esc(p)}</li>' for p in r["pitfalls"]) + '</ul>' if r["pitfalls"] else "")
+                    + f'{ad_slot("recipe-inline")}<h2>Official docs</h2><ul>{src}</ul></article>'
+                    + signup(rel, "recipe-" + r["id"]) + '</main>')
+        pages.append(page(f'recipes/{r["id"]}.html', f'{r["title"]} | {C.SITE_NAME}', r["problem"], body, "article"))
+
+    # 404: self-contained (works at any depth)
+    home = (SITE + "/") if SITE else "/"
+    (DIST / "404.html").write_text(
+        '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<title>Not found | Tenant Recipes</title><style>body{font-family:system-ui,Segoe UI,sans-serif;text-align:center;padding:80px 20px;'
+        'color:#1b1b1f}a{color:#0f6cbd}</style></head><body><h1>Page not found</h1>'
+        f'<p>That recipe may have moved. <a href="{home}">Browse all recipes</a>.</p></body></html>\n')
+
+    # static assets
+    shutil.copytree(ROOT / "assets", DIST / "assets")
+    (DIST / "data").mkdir()
+    shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
+    shutil.copy(ROOT / "favicon.ico", DIST / "favicon.ico")
+    (DIST / ".nojekyll").write_text("")  # GitHub Pages: serve files as-is
+    robots = "User-agent: *\nAllow: /\n" + (f"Sitemap: {SITE}/sitemap.xml\n" if SITE else "")
+    (DIST / "robots.txt").write_text(robots)
+    if SITE:
+        urls = "".join(f"<url><loc>{SITE}/{p}</loc></url>" for p in pages)
+        (DIST / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>'
+            f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
+    print(f"Built {len(pages)} pages into {DIST.relative_to(ROOT)}/"
+          + ("" if SITE else "  (SITE_URL empty: share image uses a relative URL, no sitemap)")
+          + ("  (Buttondown username not set: form not live)" if BD_PLACEHOLDER else ""))
+
+
+if __name__ == "__main__":
+    build()

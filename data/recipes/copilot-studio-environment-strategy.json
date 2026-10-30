@@ -1,0 +1,33 @@
+{
+ "id": "copilot-studio-environment-strategy",
+ "status": "published",
+ "order": 270,
+ "category": "Agents & Copilot Studio governance",
+ "title": "Set up a Power Platform environment strategy for Copilot Studio agents",
+ "problem": "Makers build agents in the default environment with no governance.",
+ "steps": [
+  "Define environments: Default (personal productivity), Dev/Test/Prod for shared agents.",
+  "Turn on environment routing in the Power Platform admin center to send new makers to their own personal developer environment.",
+  "Restrict who can create environments in Power Platform admin center."
+ ],
+ "pitfalls": [
+  "Leaving the default environment wide open is the most common mistake.",
+  "Environment routing is a premium (Managed Environments) governance feature and the routed developer environments are managed."
+ ],
+ "sources": [
+  {
+   "title": "Environment routing",
+   "url": "https://learn.microsoft.com/en-us/power-platform/admin/default-environment-routing",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Security and governance in Copilot Studio",
+   "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/security-and-governance",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

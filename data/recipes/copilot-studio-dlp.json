@@ -1,0 +1,39 @@
+{
+ "id": "copilot-studio-dlp",
+ "status": "published",
+ "order": 280,
+ "category": "Agents & Copilot Studio governance",
+ "title": "Use Power Platform data policies to govern Copilot Studio connectors",
+ "problem": "Agents can connect to external services and leak data.",
+ "steps": [
+  "Power Platform admin center > Security > Data and privacy > Data policy > + New policy.",
+  "Classify connectors into Business, Non-business, and Blocked.",
+  "Use the Copilot Studio connectors (e.g. 'Chat without Microsoft Entra ID authentication in Copilot Studio', Direct Line and other publishing channels, knowledge sources) to block risky use cases.",
+  "Apply to all environments, with exceptions for dev."
+ ],
+ "pitfalls": [
+  "Data policies only apply to Power Platform; agents in other platforms need other controls.",
+  "New Copilot Studio connectors often land in the default Non-business group — check before you block that group."
+ ],
+ "sources": [
+  {
+   "title": "Configure data policies for agents (Copilot Studio)",
+   "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Data policies (Power Platform)",
+   "url": "https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Create a data policy",
+   "url": "https://learn.microsoft.com/en-us/power-platform/admin/create-dlp-policy",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

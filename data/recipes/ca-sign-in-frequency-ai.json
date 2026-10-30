@@ -1,0 +1,32 @@
+{
+ "id": "ca-sign-in-frequency-ai",
+ "status": "published",
+ "order": 110,
+ "category": "Conditional Access for AI",
+ "title": "Set sign-in frequency for high-risk Copilot users",
+ "problem": "Executives with broad data access stay signed in for weeks on shared or traveling devices.",
+ "steps": [
+  "Policy 1: Conditional Access policy for the exec group targeting Office 365; Session: Sign-in frequency, e.g. every 12 hours.",
+  "Policy 2 (separate): Persistent browser session = Never persistent. This control requires the policy to target All resources, so it can't live in the Office 365 policy — scope it with a device filter or to unmanaged devices.",
+  "Turn off 'Remember MFA on trusted devices' before using sign-in frequency to avoid unexpected prompts."
+ ],
+ "pitfalls": [
+  "Too frequent prompts cause MFA fatigue — balance with phishing-resistant methods."
+ ],
+ "sources": [
+  {
+   "title": "Conditional Access adaptive session lifetime",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-session-lifetime",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Configure adaptive session lifetime policies",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/howto-conditional-access-session-lifetime",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

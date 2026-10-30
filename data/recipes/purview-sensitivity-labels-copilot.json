@@ -1,0 +1,34 @@
+{
+ "id": "purview-sensitivity-labels-copilot",
+ "status": "published",
+ "order": 230,
+ "category": "Purview, DLP & data security for Copilot",
+ "title": "Make Copilot respect sensitivity labels and encryption",
+ "problem": "You need to know how labeled and encrypted content is handled in Copilot responses.",
+ "steps": [
+  "Publish sensitivity labels to users.",
+  "Copilot applies the highest-priority label of referenced content to new content in supported scenarios (and it replaces a lower-priority manual label).",
+  "For encrypted content, Copilot needs the user to have both EXTRACT and VIEW usage rights.",
+  "To stop Copilot summarizing files at rest, use labels that apply encryption without the EXTRACT right. Test with a pilot user."
+ ],
+ "pitfalls": [
+  "Content without the EXTRACT right won't be summarized — expected behavior, not a bug.",
+  "Container labels (sites, teams) aren't inherited by items, so Copilot won't show them for that content."
+ ],
+ "sources": [
+  {
+   "title": "Use sensitivity labels with Microsoft 365 Copilot",
+   "url": "https://learn.microsoft.com/en-us/purview/ai-m365-copilot-considerations",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Learn about sensitivity labels",
+   "url": "https://learn.microsoft.com/en-us/purview/sensitivity-labels",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

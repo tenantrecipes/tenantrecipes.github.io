@@ -1,0 +1,30 @@
+{
+ "id": "purview-dlp-copilot-location",
+ "status": "published",
+ "order": 240,
+ "category": "Purview, DLP & data security for Copilot",
+ "title": "Use a DLP policy to stop Copilot processing labeled content",
+ "problem": "Highly confidential files should not be summarized by Copilot at all.",
+ "steps": [
+  "Purview portal > Data loss prevention > Policies > + Create policy > Custom template > Custom policy.",
+  "On Locations, turn on 'Microsoft 365 Copilot and Copilot Chat'.",
+  "Rule condition: Content contains > Sensitivity labels > 'Highly Confidential'.",
+  "Action: Prevent Copilot from processing content. Test in simulation mode first."
+ ],
+ "pitfalls": [
+  "Labeled items still appear in citations — Copilot just doesn't use their content.",
+  "Email is covered only for messages sent on or after 1 January 2025; calendar invites aren't supported.",
+  "You can't combine sensitive information types and sensitivity labels in the same rule — create separate rules."
+ ],
+ "sources": [
+  {
+   "title": "Learn about the Microsoft 365 Copilot and Copilot Chat DLP location",
+   "url": "https://learn.microsoft.com/en-us/purview/dlp-microsoft365-copilot-location-learn-about",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

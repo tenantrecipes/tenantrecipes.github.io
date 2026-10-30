@@ -1,0 +1,38 @@
+{
+ "id": "agents-integrated-apps",
+ "status": "published",
+ "order": 300,
+ "category": "Agents & Copilot Studio governance",
+ "title": "Control which users can install agents and apps (Integrated apps)",
+ "problem": "Users install third-party agents and Teams apps that access org data.",
+ "steps": [
+  "Microsoft 365 admin center > Settings > Integrated apps: review deployed apps and agents, the Requested apps tab, and who each app is available to.",
+  "Teams admin center > Teams apps > Manage apps: allow or block apps and agents per app and assign them to users/groups (app centric management). Org-wide app settings blocks all third-party apps.",
+  "Microsoft Entra admin center > Entra ID > Enterprise apps > Consent and permissions: restrict user consent and turn on the admin consent workflow so users can request apps."
+ ],
+ "pitfalls": [
+  "Blocking all apps without an approval process drives shadow IT.",
+  "Teams app permission policies are deprecated; tenants were migrated to app centric management from April 2025, so old guidance about permission policies no longer applies."
+ ],
+ "sources": [
+  {
+   "title": "Get started with the integrated apps portal",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/test-and-deploy-microsoft-365-apps",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Manage agents and apps in the Teams admin center",
+   "url": "https://learn.microsoft.com/en-us/microsoftteams/manage-apps",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Configure the admin consent workflow",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

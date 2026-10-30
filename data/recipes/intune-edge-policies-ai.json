@@ -1,0 +1,32 @@
+{
+ "id": "intune-edge-policies-ai",
+ "status": "published",
+ "order": 190,
+ "category": "Intune & devices for AI",
+ "title": "Control generative AI in Microsoft Edge with Intune settings catalog",
+ "problem": "You want enterprise data protection in the browser and to manage Copilot in the Edge sidebar.",
+ "steps": [
+  "Intune > Devices > Configuration > Create > New policy > Windows 10 and later > Settings catalog, then search for Microsoft Edge.",
+  "Configure the Copilot policies you decided on, e.g. EdgeCopilotEnabled, Microsoft365CopilotChatIconEnabled (toolbar icon) and EdgeEntraCopilotPageContext (page context for Entra profiles).",
+  "Assign to device groups and verify at edge://policy."
+ ],
+ "pitfalls": [
+  "Policy names change between Edge versions — always check the current Edge policy reference."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Edge browser policy documentation",
+   "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Configure Microsoft Edge with Intune",
+   "url": "https://learn.microsoft.com/en-us/deployedge/configure-edge-with-intune",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

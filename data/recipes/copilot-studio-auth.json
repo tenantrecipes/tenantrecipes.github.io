@@ -1,0 +1,32 @@
+{
+ "id": "copilot-studio-auth",
+ "status": "published",
+ "order": 320,
+ "category": "Agents & Copilot Studio governance",
+ "title": "Require authentication for Copilot Studio agents",
+ "problem": "An agent published to a website without auth exposes internal knowledge.",
+ "steps": [
+  "In Copilot Studio open the agent > Settings > Security > Authentication and choose 'Authenticate with Microsoft' for internal agents (or 'Authenticate manually' for other identity providers).",
+  "Enforce it tenant-wide: in a Power Platform data policy, block the connector 'Chat without Microsoft Entra ID authentication in Copilot Studio' — makers then can't pick 'No authentication'.",
+  "Review published channels for each agent (e.g. block Direct Line or demo website channels you don't use)."
+ ],
+ "pitfalls": [
+  "'No authentication' agents are accessible to anyone with the link and can only use public information."
+ ],
+ "sources": [
+  {
+   "title": "Configure user authentication in Copilot Studio",
+   "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/configuration-end-user-authentication",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Configure data policies for agents (Copilot Studio)",
+   "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

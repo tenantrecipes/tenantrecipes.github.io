@@ -1,0 +1,12 @@
+# Build output (rebuilt by CI / Netlify)
+dist/
+__pycache__/
+# Private: business plan with sponsor prospects and local screenshots. Keep out of a public repo.
+PLAN.md
+screenshots/
+newsletters/drafts/*.md
+newsletter-001.md
+*.bak
+*.orig
+backup*/
+*.tar.gz

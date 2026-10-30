@@ -1,0 +1,39 @@
+{
+ "id": "agents-inventory-admin-center",
+ "status": "published",
+ "order": 290,
+ "category": "Agents & Copilot Studio governance",
+ "title": "Inventory and manage agents in the Microsoft 365 admin center",
+ "problem": "You don't know which agents exist or who uses them.",
+ "steps": [
+  "Microsoft 365 admin center > Agents > Overview for a summary, then All agents > Registry for the full inventory (in tenants that don't have the new Agents section yet: Copilot > Agents).",
+  "Review each agent's publisher type (Microsoft, external partner, published by your org, shared by creator), owner, availability and risk signals.",
+  "Approve or reject requests under All agents > Requests, assign owners to ownerless agents, and block or delete agents that violate policy.",
+  "Use the AI Administrator role for day-to-day agent management instead of Global Administrator."
+ ],
+ "pitfalls": [
+  "The admin experience (Microsoft Agent 365) is evolving fast — page names differ between tenants and Frontier program members.",
+  "Agents built with the Microsoft 365 Agents Toolkit can show up under Integrated apps rather than in the agent registry until they are published through the agent flow."
+ ],
+ "sources": [
+  {
+   "title": "Manage agents in the Microsoft 365 admin center",
+   "url": "https://learn.microsoft.com/en-us/microsoft-agent-365/admin/manage-copilot-agents-integrated-apps",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Agent overview in the Microsoft 365 admin center",
+   "url": "https://learn.microsoft.com/en-us/microsoft-agent-365/admin/agent-365-overview",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "New capabilities for AI admins from Ignite 2025 (Tech Community)",
+   "url": "https://techcommunity.microsoft.com/blog/microsoft365copilotblog/new-capabilities-for-ai-admins-from-ignite-2025/4478906",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

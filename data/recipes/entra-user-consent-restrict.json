@@ -1,0 +1,33 @@
+{
+ "id": "entra-user-consent-restrict",
+ "status": "published",
+ "order": 310,
+ "category": "Agents & Copilot Studio governance",
+ "title": "Restrict user consent for apps and AI tools",
+ "problem": "Employees grant third-party AI tools access to mail and files via OAuth consent.",
+ "steps": [
+  "Entra admin center > Entra ID > Enterprise apps > Consent and permissions > User consent settings.",
+  "Select 'Allow user consent for apps from verified publishers, for selected permissions' or 'Do not allow user consent'.",
+  "Enable the admin consent workflow (Admin consent settings) so users can request access."
+ ],
+ "pitfalls": [
+  "Existing grants remain — review them separately.",
+  "Changing the setting in the portal needs Global Administrator; via Graph PowerShell a Privileged Role Administrator is enough."
+ ],
+ "sources": [
+  {
+   "title": "Configure how users consent to applications",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-user-consent",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Configure the admin consent workflow",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

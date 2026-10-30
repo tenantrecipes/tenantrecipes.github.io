@@ -1,0 +1,35 @@
+{
+ "id": "sharepoint-restricted-content-discovery",
+ "status": "published",
+ "order": 220,
+ "category": "Purview, DLP & data security for Copilot",
+ "title": "Hide specific sites from Copilot with Restricted Content Discovery",
+ "problem": "A few sensitive sites should not be surfaced by Copilot or org-wide search.",
+ "steps": [
+  "Requires a Microsoft Copilot license in the tenant and SharePoint Advanced Management (included with Microsoft Copilot or as an add-on).",
+  "SharePoint admin center > Sites > Active sites > select the site > Settings > turn on 'Restrict content from Microsoft Copilot' > Save.",
+  "Or PowerShell: `Connect-SPOService -Url https://contoso-admin.sharepoint.com` then `Set-SPOSite -Identity <siteUrl> -RestrictContentOrgWideSearch $true`",
+  "Verify after reindexing (can take time for large sites)."
+ ],
+ "pitfalls": [
+  "Users with access can still open the site directly — it's not a permission change.",
+  "Works only on SharePoint sites, not OneDrive, and also hides Copilot entry points on the site.",
+  "Use it selectively — overuse reduces what search and Copilot can find."
+ ],
+ "sources": [
+  {
+   "title": "Restrict discovery of SharePoint sites and content",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/restricted-content-discovery",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Microsoft Copilot requirements (SharePoint Advanced Management)",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-copilot-requirements",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

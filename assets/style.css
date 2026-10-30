@@ -1,0 +1,18 @@
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Segoe UI,sans-serif;color:#1b1b1f;background:#f6f7fb;line-height:1.6}
+a{color:#0f6cbd}header{background:#fff;border-bottom:1px solid #e3e5ec}nav,.wrap{max-width:1100px;margin:auto;padding:0 20px}
+nav{display:flex;justify-content:space-between;align-items:center;height:60px}nav .logo{font-weight:800;text-decoration:none;color:#1b1b1f}nav .logo span{color:#0f6cbd}nav a{margin-left:18px;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0f2f6b,#0f6cbd 60%,#6a3fd1);color:#fff;padding:72px 0}.hero h1{font-size:2.6rem;margin:0 0 12px;line-height:1.15}.hero p{font-size:1.15rem;max-width:680px;opacity:.92}
+.btn{display:inline-block;background:#fff;color:#0f2f6b;padding:12px 20px;border-radius:8px;font-weight:700;text-decoration:none;border:0;cursor:pointer}.btn.p{background:#0f6cbd;color:#fff}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin:30px 0 16px}#q{flex:1;min-width:240px;padding:12px;border:1px solid #cfd3de;border-radius:8px;font-size:1rem}
+.chip{border:1px solid #cfd3de;background:#fff;border-radius:999px;padding:6px 14px;cursor:pointer;font-size:.9rem}.chip.on{background:#0f6cbd;color:#fff;border-color:#0f6cbd}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}.card{background:#fff;border:1px solid #e3e5ec;border-radius:12px;padding:18px;text-decoration:none;color:inherit;transition:.15s}.card:hover{box-shadow:0 6px 20px #0f2f6b1f;transform:translateY(-2px)}
+.tag{font-size:.75rem;font-weight:700;color:#6a3fd1;text-transform:uppercase;letter-spacing:.04em}.card h3{margin:6px 0;font-size:1.05rem}.card p{margin:0;color:#555;font-size:.92rem}
+.news{background:#fff;border:1px solid #e3e5ec;border-radius:12px;padding:28px;margin:40px 0}.news input{padding:12px;border:1px solid #cfd3de;border-radius:8px;width:280px;font-size:1rem}
+article{background:#fff;border:1px solid #e3e5ec;border-radius:12px;padding:32px;margin:30px 0}pre,code{font-family:Consolas,monospace;font-size:.88rem}li code{background:#eef1f8;padding:2px 5px;border-radius:4px;word-break:break-word}
+.todo{font-size:.8rem;color:#b3261e}footer{text-align:center;color:#777;padding:30px;font-size:.9rem}
+/* v2 (2026-10-30): signup form, sponsor slots, recipe meta, footer links */
+.btn.ghost{background:transparent;color:#fff;border:1px solid #fff}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.bd-form{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.fine{font-size:.82rem;color:#666}.meta{font-size:.88rem;color:#555;background:#f3f5fa;border-left:3px solid #6a3fd1;padding:8px 12px;border-radius:4px}
+footer a{color:#777}.sponsor-slot{min-height:90px;border:1px dashed #cfd3de;border-radius:12px;margin:20px 0;display:flex;align-items:center;justify-content:center;color:#999;font-size:.8rem}
+.sponsor-slot[hidden]{display:none}

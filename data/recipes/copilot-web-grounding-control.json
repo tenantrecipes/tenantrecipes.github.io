@@ -1,0 +1,35 @@
+{
+ "id": "copilot-web-grounding-control",
+ "status": "published",
+ "order": 50,
+ "category": "Copilot rollout & governance",
+ "title": "Decide whether Copilot can use web content (web search)",
+ "problem": "Security asks whether prompts can be sent to Bing for web grounding and wants a control.",
+ "steps": [
+  "Review how web search works: Copilot sends short generated search queries to Bing — not the full prompt, files or Entra identity (very short prompts can be sent as-is).",
+  "Control it with the 'Allow web search in Copilot' policy in Cloud Policy service for Microsoft 365: enabled, disabled, or disabled in Work mode but enabled in Web mode and Copilot Chat.",
+  "For finer control, a Purview DLP rule can block web search only when prompts contain sensitive information types.",
+  "Document the decision and communicate it to users."
+ ],
+ "pitfalls": [
+  "Turning off web search reduces answer quality for public-information questions.",
+  "Policies are applied via Cloud Policy and can take time to reach clients.",
+  "The DPA and EU Data Boundary don't apply to the generated Bing queries."
+ ],
+ "sources": [
+  {
+   "title": "Manage web search in Microsoft Copilot and Microsoft Copilot Chat",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/manage-public-web-access",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "DLP for Microsoft 365 Copilot and Copilot Chat",
+   "url": "https://learn.microsoft.com/en-us/purview/dlp-microsoft365-copilot-location-learn-about",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

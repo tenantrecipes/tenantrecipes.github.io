@@ -1,0 +1,32 @@
+{
+ "id": "license-inventory-script",
+ "status": "published",
+ "order": 350,
+ "category": "Licensing & reporting",
+ "title": "List who has which license with Graph PowerShell",
+ "problem": "You need a quick inventory of license assignments for cost review.",
+ "steps": [
+  "`Connect-MgGraph -Scopes 'User.Read.All','Organization.Read.All'`",
+  "`$skus = Get-MgSubscribedSku | Select SkuId, SkuPartNumber, ConsumedUnits, @{n='Enabled';e={$_.PrepaidUnits.Enabled}}`",
+  "`Get-MgUser -All -Property DisplayName,UserPrincipalName,AssignedLicenses | Select DisplayName,UserPrincipalName,@{n='Skus';e={($_.AssignedLicenses.SkuId | % { $id=$_; ($skus | ? SkuId -eq $id).SkuPartNumber }) -join ';'}} | Export-Csv licenses.csv -NoTypeInformation`"
+ ],
+ "pitfalls": [
+  "Use -All, otherwise only the first page is returned."
+ ],
+ "sources": [
+  {
+   "title": "Get-MgSubscribedSku",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.identity.directorymanagement/get-mgsubscribedsku",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Get-MgUser",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.users/get-mguser",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

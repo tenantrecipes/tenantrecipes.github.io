@@ -1,0 +1,39 @@
+{
+ "id": "intune-deploy-m365-apps-channel",
+ "status": "published",
+ "order": 140,
+ "category": "Intune & devices for AI",
+ "title": "Deploy Microsoft 365 Apps on Current or Monthly Enterprise Channel with Intune",
+ "problem": "Copilot features arrive late or not at all on devices on older Microsoft 365 Apps builds or the wrong update channel.",
+ "steps": [
+  "Intune admin center > Apps > All Apps > Create > Microsoft 365 Apps: Windows 10 and later.",
+  "Choose the update channel: Current Channel or Monthly Enterprise Channel.",
+  "Assign to the Copilot pilot device/user group.",
+  "Verify version with the Microsoft 365 Apps admin center inventory."
+ ],
+ "pitfalls": [
+  "Changing channel on existing installs may require a separate policy (Office cloud policy or administrative template) — avoid conflicting settings catalog policies, which can trigger reinstalls.",
+  "Since version 2606 (July 2026) Semi-Annual Enterprise Channel devices receive the Monthly Enterprise Channel experience, but some reports still show SAEC."
+ ],
+ "sources": [
+  {
+   "title": "Add Microsoft 365 Apps to Windows devices with Intune",
+   "url": "https://learn.microsoft.com/en-us/intune/app-management/deployment/add-microsoft-365-windows",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Overview of update channels for Microsoft 365 Apps",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365-apps/updates/overview-update-channels",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Channel unification: SAEC to MEC",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365-apps/updates/unified-update-channels",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

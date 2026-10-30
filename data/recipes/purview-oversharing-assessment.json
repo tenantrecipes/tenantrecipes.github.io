@@ -1,0 +1,33 @@
+{
+ "id": "purview-oversharing-assessment",
+ "status": "published",
+ "order": 200,
+ "category": "Purview, DLP & data security for Copilot",
+ "title": "Find oversharing before Copilot does: data security posture for AI",
+ "problem": "Copilot respects permissions, so content shared with 'Everyone' becomes discoverable through Copilot.",
+ "steps": [
+  "Open Microsoft Purview > Data Security Posture Management (DSPM, or DSPM for AI (classic)).",
+  "Review the default weekly data risk assessment for oversharing, or create a custom data risk assessment for specific sites.",
+  "Review top sites with sensitive content shared broadly.",
+  "Remediate: restrict access, apply labels, or use Restricted Content Discovery."
+ ],
+ "pitfalls": [
+  "Assessment results are a snapshot — rerun after remediation."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Purview data security and compliance protections for generative AI apps",
+   "url": "https://learn.microsoft.com/en-us/purview/ai-microsoft-purview",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Purview for Microsoft 365 Copilot and Copilot Chat",
+   "url": "https://learn.microsoft.com/en-us/purview/ai-m365-copilot",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

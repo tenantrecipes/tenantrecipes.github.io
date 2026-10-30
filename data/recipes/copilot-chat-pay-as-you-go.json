@@ -1,0 +1,34 @@
+{
+ "id": "copilot-chat-pay-as-you-go",
+ "status": "published",
+ "order": 360,
+ "category": "Licensing & reporting",
+ "title": "Understand Microsoft Copilot Chat vs Microsoft Copilot (licensed)",
+ "problem": "Leadership is confused about what's free and what requires a license.",
+ "steps": [
+  "Naming: Microsoft 365 Copilot is now called Microsoft Copilot, and Microsoft 365 Copilot Chat is now Microsoft Copilot Chat.",
+  "Microsoft Copilot Chat is included for users with an eligible Microsoft 365 subscription: web-grounded chat, file upload and agents, with enterprise data protection.",
+  "Pay-as-you-go billing can be turned on for metered agents in Copilot Chat, SharePoint agents and the Copilot Retrieval API.",
+  "Microsoft Copilot (add-on license) adds work grounding across Microsoft Graph and the full in-app experiences.",
+  "Map scenarios to the right tier before buying."
+ ],
+ "pitfalls": [
+  "Pay-as-you-go needs a billing policy (Azure subscription + users) connected to the Copilot service — set a budget with email alerts. It's off by default."
+ ],
+ "sources": [
+  {
+   "title": "Overview of Microsoft Copilot Chat",
+   "url": "https://learn.microsoft.com/en-us/copilot/overview",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Microsoft Copilot pay-as-you-go service overview",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/pay-as-you-go/pay-as-you-go-overview",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

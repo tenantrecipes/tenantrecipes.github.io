@@ -1,0 +1,27 @@
+{
+ "id": "intune-windows-autopatch",
+ "status": "published",
+ "order": 180,
+ "category": "Intune & devices for AI",
+ "title": "Keep AI-ready devices current with Windows Autopatch",
+ "problem": "Copilot and security features depend on current Windows and Office builds.",
+ "steps": [
+  "Register devices in Windows Autopatch and organize them with Autopatch groups and update rings.",
+  "Include Microsoft 365 Apps updates (Autopatch targets Monthly Enterprise Channel), plus Edge and Teams.",
+  "Monitor Intune update reports for devices falling behind."
+ ],
+ "pitfalls": [
+  "Autopatch features require Business Premium, A3+, E3+ or F3 licenses — check eligibility first."
+ ],
+ "sources": [
+  {
+   "title": "What is Windows Autopatch?",
+   "url": "https://learn.microsoft.com/en-us/windows/deployment/windows-autopatch/overview/windows-autopatch-overview",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

@@ -1,0 +1,28 @@
+{
+ "id": "ca-block-legacy-auth",
+ "status": "published",
+ "order": 100,
+ "category": "Conditional Access for AI",
+ "title": "Block legacy authentication before you scale AI",
+ "problem": "Legacy protocols can't do MFA, undermining every AI security control you add.",
+ "steps": [
+  "Entra admin center > Entra ID > Monitoring & health > Sign-in logs: add the Client app column and filter on the legacy authentication protocols (check the non-interactive sign-ins tab too).",
+  "Entra ID > Conditional Access > Policies > New policy: All users (exclude break-glass accounts), Target resources: All resources, Conditions > Client apps: only Exchange ActiveSync clients and Other clients.",
+  "Grant: Block access. Start in Report-only, then switch to On."
+ ],
+ "pitfalls": [
+  "Old multifunction printers and scripts using SMTP AUTH break — inventory them first.",
+  "Without Conditional Access licenses (Entra ID P1), use security defaults to block legacy authentication instead."
+ ],
+ "sources": [
+  {
+   "title": "Block legacy authentication with Conditional Access",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-legacy-authentication",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

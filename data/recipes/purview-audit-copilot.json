@@ -1,0 +1,34 @@
+{
+ "id": "purview-audit-copilot",
+ "status": "published",
+ "order": 250,
+ "category": "Purview, DLP & data security for Copilot",
+ "title": "Audit Copilot interactions in Microsoft Purview",
+ "problem": "Security asks: who used Copilot, when, and which resources were referenced?",
+ "steps": [
+  "Make sure auditing is on (Exchange Online PowerShell): `Connect-ExchangeOnline` then `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled`",
+  "Purview > Audit > search with activity 'Interacted with Copilot' (record type CopilotInteraction).",
+  "Export results; files, sites and other resources Copilot accessed are listed in the AuditData.",
+  "Or `Search-UnifiedAuditLog -RecordType CopilotInteraction -StartDate (Get-Date).AddDays(-7) -EndDate (Get-Date)`"
+ ],
+ "pitfalls": [
+  "Audit records contain metadata (who, when, where, resources), not the prompt text — use eDiscovery or DSPM activity explorer for content.",
+  "Other AI apps use different record types (e.g. ConnectedAIAppInteraction, AIAppInteraction)."
+ ],
+ "sources": [
+  {
+   "title": "Audit logs for Copilot and AI applications",
+   "url": "https://learn.microsoft.com/en-us/purview/audit-copilot",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Search the audit log",
+   "url": "https://learn.microsoft.com/en-us/purview/audit-search",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

@@ -1,0 +1,33 @@
+{
+ "id": "copilot-usage-graph",
+ "status": "published",
+ "order": 340,
+ "category": "Licensing & reporting",
+ "title": "Pull Copilot usage via Microsoft Graph reports API",
+ "problem": "You want Copilot usage in Power BI or a scheduled report.",
+ "steps": [
+  "Grant Reports.Read.All (application, or delegated for a user with e.g. Reports Reader or AI Administrator).",
+  "Call `GET https://graph.microsoft.com/v1.0/copilot/reports/getMicrosoft365CopilotUsageUserDetail(period='D30')` (also UserCountSummary and UserCountTrend) — now available in v1.0, not only beta.",
+  "Schedule with Azure Automation or a Logic App and store the results."
+ ],
+ "pitfalls": [
+  "The API only covers users with a Copilot license — unlicensed Copilot Chat usage isn't in Graph reports; use the admin center Copilot Chat report or the audit log.",
+  "Usernames are concealed unless the reports privacy setting is changed."
+ ],
+ "sources": [
+  {
+   "title": "copilotReportRoot resource type",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/api/admin-settings/reports/resources/copilotreportroot",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "copilotReportRoot: getMicrosoft365CopilotUsageUserDetail",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/api/admin-settings/reports/copilotreportroot-getmicrosoft365copilotusageuserdetail",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

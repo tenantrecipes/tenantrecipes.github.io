@@ -1,0 +1,39 @@
+{
+ "id": "intune-app-protection-copilot",
+ "status": "published",
+ "order": 160,
+ "category": "Intune & devices for AI",
+ "title": "Protect Copilot on iOS/Android with app protection policies",
+ "problem": "Users want Copilot and Microsoft 365 apps on personal phones without enrolling them.",
+ "steps": [
+  "Intune > Apps > App protection policies > Create (iOS/iPadOS and Android).",
+  "Target the Microsoft Copilot app (formerly the Microsoft 365 Copilot app) and the Microsoft 365 apps (Outlook, Teams, Word, etc.).",
+  "Data protection: restrict cut/copy/paste to policy-managed apps, block save to personal storage.",
+  "Pair with a Conditional Access policy granting 'Require app protection policy' (or approved client app) for iOS/Android."
+ ],
+ "pitfalls": [
+  "Only apps that integrate the Intune SDK/are listed as protected apps are covered — check the protected apps list.",
+  "Devices must be registered in Microsoft Entra ID (via Authenticator or Company Portal) for the CA grant to work."
+ ],
+ "sources": [
+  {
+   "title": "App protection policies overview",
+   "url": "https://learn.microsoft.com/en-us/intune/app-management/protection/overview",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Microsoft Intune protected apps",
+   "url": "https://learn.microsoft.com/en-us/intune/app-management/ref-protected-apps",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Require approved client apps or app protection policy",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-approved-app-or-app-protection",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

@@ -1,0 +1,35 @@
+{
+ "id": "ca-compliant-device-ai",
+ "status": "published",
+ "order": 90,
+ "category": "Conditional Access for AI",
+ "title": "Require a compliant or hybrid-joined device for Microsoft 365 (and Copilot)",
+ "problem": "You don't want Copilot answers with sensitive data ending up on unmanaged personal devices.",
+ "steps": [
+  "Entra admin center > Entra ID > Conditional Access > Policies > New policy targeting the Copilot users group.",
+  "Target resources: Office 365.",
+  "Grant: Require device to be marked as compliant OR Require Microsoft Entra hybrid joined device (Require one of the selected controls).",
+  "Exclude break-glass accounts (and Directory Synchronization Accounts if you sync); start in report-only."
+ ],
+ "pitfalls": [
+  "Unmanaged browsers on personal devices will be blocked — consider app-enforced restrictions instead for web access.",
+  "Device compliance requires the device to be enrolled in Intune (or a supported compliance partner).",
+  "In report-only, compliant-device policies can prompt macOS, iOS and Android users for a device certificate — exclude those platforms while testing."
+ ],
+ "sources": [
+  {
+   "title": "Require a compliant device, hybrid joined device or MFA",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-alt-all-users-compliant-hybrid-or-mfa",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Conditional Access report-only mode",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-report-only",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

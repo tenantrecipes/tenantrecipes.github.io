@@ -1,0 +1,29 @@
+{
+ "id": "ca-break-glass",
+ "status": "published",
+ "order": 130,
+ "category": "Conditional Access for AI",
+ "title": "Keep break-glass accounts out of every AI-era CA policy",
+ "problem": "Rapid policy changes for AI raise the risk of tenant lockout.",
+ "steps": [
+  "Create two cloud-only emergency access accounts with a permanent Global Administrator assignment.",
+  "Register a phishing-resistant method that differs from your normal admin accounts — passkey (FIDO2) is recommended, certificate-based authentication is an alternative. This also satisfies mandatory MFA.",
+  "Put them in a dedicated group (e.g. EmergencyAccess) and exclude it from every Conditional Access policy that blocks or restricts sign-in (report-only policies don't need the exclusion).",
+  "Alert on every sign-in and audit event for these accounts (Azure Monitor/Log Analytics).",
+  "Test sign-in at least every 90 days (e.g. quarterly)."
+ ],
+ "pitfalls": [
+  "Don't tie them to a single person's phone for MFA — store FIDO2 keys securely in separate locations."
+ ],
+ "sources": [
+  {
+   "title": "Manage emergency access accounts in Microsoft Entra ID",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

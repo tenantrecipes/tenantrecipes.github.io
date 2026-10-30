@@ -1,0 +1,34 @@
+{
+ "id": "ca-report-only-first",
+ "status": "published",
+ "order": 80,
+ "category": "Conditional Access for AI",
+ "title": "Roll out AI-related Conditional Access policies in report-only mode",
+ "problem": "A new policy for AI apps could block access for thousands of users if it's wrong.",
+ "steps": [
+  "Create the policy with state 'Report-only'.",
+  "Wait 1–2 weeks and review the policy impact view (no Log Analytics needed) or the Conditional Access insights and reporting workbook.",
+  "Use the What If tool for edge cases (guests, service accounts).",
+  "Switch to On during a maintenance window."
+ ],
+ "pitfalls": [
+  "The insights and reporting workbook needs sign-in logs streamed to a Log Analytics workspace.",
+  "Report-only policies that require a compliant device can prompt users on macOS, iOS and Android to pick a device certificate — exclude those platforms from report-only device compliance policies."
+ ],
+ "sources": [
+  {
+   "title": "Conditional Access report-only mode",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-report-only",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Conditional Access insights and reporting workbook",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/howto-conditional-access-insights-reporting",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

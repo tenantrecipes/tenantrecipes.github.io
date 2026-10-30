@@ -1,0 +1,40 @@
+{
+ "id": "copilot-readiness-checklist",
+ "status": "published",
+ "order": 10,
+ "category": "Copilot rollout & governance",
+ "title": "Run a Microsoft Copilot readiness check before you assign licenses",
+ "problem": "Teams buy Copilot licenses and assign them before prerequisites (apps, update channel, identity, data access) are in place, leading to a poor first impression.",
+ "steps": [
+  "Confirm users have a qualifying Microsoft 365 base license (Copilot isn't available with device-based licensing for Microsoft 365 Apps) and Microsoft 365 Apps on Current Channel or Monthly Enterprise Channel.",
+  "Confirm users have a Microsoft Entra ID account, an Exchange Online mailbox (for mail/calendar/meeting grounding) and OneDrive (needed for some features).",
+  "Network: allow the whole *.cloud.microsoft domain (including copilot.cloud.microsoft) and full WebSocket Secure (WSS) connectivity to *.office.com and *.cloud.microsoft; avoid TLS inspection on that traffic.",
+  "Review oversharing risk in SharePoint before broad rollout (see the oversharing recipes).",
+  "Assign licenses to a pilot group first and validate users with the Copilot License Details diagnostic."
+ ],
+ "pitfalls": [
+  "Since July 2026 (version 2606) Semi-Annual Enterprise Channel is unified with Monthly Enterprise Channel, so SAEC devices get the MEC experience — but reports may still show SAEC.",
+  "Proxies or TLS inspection that break WebSockets make Copilot in apps fail."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Copilot requirements",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-copilot-requirements",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Microsoft Copilot adoption guide and overview for IT admins",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/enablement-resources",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Channel unification: Semi-Annual Enterprise Channel to Monthly Enterprise Channel",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365-apps/updates/unified-update-channels",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

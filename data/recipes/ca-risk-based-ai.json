@@ -1,0 +1,34 @@
+{
+ "id": "ca-risk-based-ai",
+ "status": "published",
+ "order": 120,
+ "category": "Conditional Access for AI",
+ "title": "Block risky sign-ins and require password change for high user risk",
+ "problem": "An attacker with a stolen session could use Copilot to search all accessible data quickly.",
+ "steps": [
+  "Requires Microsoft Entra ID P2 (ID Protection).",
+  "Policy 1 — sign-in risk: All users, All resources, Sign-in risk High and Medium > Grant: Require authentication strength (Multifactor authentication), Session: Sign-in frequency Every time.",
+  "Policy 2 — user risk: All users, All resources, User risk High > Grant: Require risk remediation (authentication strength and sign-in frequency Every time are applied automatically).",
+  "Exclude break-glass accounts, start in report-only, then review the Risky users report weekly."
+ ],
+ "pitfalls": [
+  "Risk policies need P2 licenses for covered users.",
+  "Users who aren't registered for MFA are blocked on risky sign-ins (AADSTS53004) — drive MFA registration first."
+ ],
+ "sources": [
+  {
+   "title": "Require MFA for elevated sign-in risk",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-risk-based-sign-in",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Require risk remediation for elevated user risk",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-risk-based-user",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

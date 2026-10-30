@@ -1,0 +1,34 @@
+{
+ "id": "copilot-assign-license-graph",
+ "status": "published",
+ "order": 30,
+ "category": "Copilot rollout & governance",
+ "title": "Assign a Microsoft Copilot license to a user with Microsoft Graph PowerShell",
+ "problem": "You need to script license assignment for a list of users.",
+ "steps": [
+  "Connect: `Connect-MgGraph -Scopes 'User.ReadWrite.All','Organization.Read.All'`",
+  "Find the SKU: `Get-MgSubscribedSku | Select SkuPartNumber, SkuId`",
+  "Set a usage location if missing: `Update-MgUser -UserId user@contoso.com -UsageLocation SE`",
+  "Assign: `Set-MgUserLicense -UserId user@contoso.com -AddLicenses @{SkuId='<SkuId>'} -RemoveLicenses @()`"
+ ],
+ "pitfalls": [
+  "Licenses cannot be assigned without UsageLocation.",
+  "Look up the SkuPartNumber in your tenant rather than hard-coding it."
+ ],
+ "sources": [
+  {
+   "title": "Assign licenses with Microsoft Graph PowerShell",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/enterprise/assign-licenses-to-user-accounts-with-microsoft-365-powershell",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Set-MgUserLicense",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.users.actions/set-mguserlicense",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

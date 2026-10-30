@@ -1,0 +1,28 @@
+{
+ "id": "prompt-1",
+ "status": "published",
+ "order": 370,
+ "category": "Admin prompt templates",
+ "title": "Prompt: summarize a Conditional Access policy export",
+ "problem": "You have a JSON export of CA policies and need a human-readable summary.",
+ "steps": [
+  "Open Microsoft Copilot Chat (formerly Microsoft 365 Copilot Chat) or your approved AI tool.",
+  "Paste the JSON and use: 'You are a Microsoft Entra Conditional Access expert. Summarize each policy in this JSON as a table with columns: name, state, included users, excluded users, target resources, conditions, grant controls, session controls. Then list gaps (e.g., missing break-glass exclusions, policies stuck in report-only).'",
+  "Review the output critically and verify facts against official documentation."
+ ],
+ "pitfalls": [
+  "Never paste secrets, tenant IDs or personal data into tools not approved for that data.",
+  "AI output can be wrong — treat it as a draft."
+ ],
+ "sources": [
+  {
+   "title": "Get started writing prompts in Microsoft Copilot",
+   "url": "https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-writing-prompts-in-microsoft-365-copilot",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

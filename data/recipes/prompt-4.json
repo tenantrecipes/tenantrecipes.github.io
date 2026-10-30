@@ -1,0 +1,28 @@
+{
+ "id": "prompt-4",
+ "status": "published",
+ "order": 400,
+ "category": "Admin prompt templates",
+ "title": "Prompt: draft a Copilot acceptable use policy",
+ "problem": "You need a starting point for an AI acceptable use policy.",
+ "steps": [
+  "Open Microsoft Copilot Chat (formerly Microsoft 365 Copilot Chat) or your approved AI tool.",
+  "'Draft an acceptable use policy for generative AI tools at [company]. Cover: approved tools, data that must not be entered, verifying outputs, sensitivity labels, reporting incidents, and consequences. Keep it under 1 page and in plain language.'",
+  "Review the output critically and verify facts against official documentation."
+ ],
+ "pitfalls": [
+  "Never paste secrets, tenant IDs or personal data into tools not approved for that data.",
+  "AI output can be wrong — treat it as a draft."
+ ],
+ "sources": [
+  {
+   "title": "Get started writing prompts in Microsoft Copilot",
+   "url": "https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-writing-prompts-in-microsoft-365-copilot",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

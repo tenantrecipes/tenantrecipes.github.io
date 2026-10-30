@@ -1,0 +1,29 @@
+{
+ "id": "purview-retention-copilot",
+ "status": "published",
+ "order": 260,
+ "category": "Purview, DLP & data security for Copilot",
+ "title": "Set retention for Copilot interactions",
+ "problem": "Compliance requires a defined retention period for AI prompts and responses.",
+ "steps": [
+  "Purview > Data lifecycle management > Retention policies > New retention policy.",
+  "Select the 'Microsoft Copilot experiences' location (Microsoft 365 Copilot, Copilot Studio and other Microsoft Copilots).",
+  "Set retain/delete period and scope.",
+  "Document in your records management plan."
+ ],
+ "pitfalls": [
+  "Retention for Copilot was separated from Teams chats — older 'Teams chats and Copilot interactions' policies need review.",
+  "Deletion runs via a timer job (typically 1–7 days) and is suspended by any hold on the mailbox."
+ ],
+ "sources": [
+  {
+   "title": "Learn about retention for Copilot & AI apps",
+   "url": "https://learn.microsoft.com/en-us/purview/retention-policies-copilot",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

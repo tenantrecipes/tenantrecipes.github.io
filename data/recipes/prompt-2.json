@@ -1,0 +1,28 @@
+{
+ "id": "prompt-2",
+ "status": "published",
+ "order": 380,
+ "category": "Admin prompt templates",
+ "title": "Prompt: write a Copilot rollout announcement",
+ "problem": "You need a clear end-user announcement for Copilot.",
+ "steps": [
+  "Open Microsoft Copilot Chat (formerly Microsoft 365 Copilot Chat) or your approved AI tool.",
+  "'Write a 200-word announcement for employees that Microsoft Copilot is being rolled out to [group] on [date]. Include: what it is, 3 concrete use cases for [department], where to get training, and a reminder that Copilot only shows content they already have access to.'",
+  "Review the output critically and verify facts against official documentation."
+ ],
+ "pitfalls": [
+  "Never paste secrets, tenant IDs or personal data into tools not approved for that data.",
+  "AI output can be wrong — treat it as a draft."
+ ],
+ "sources": [
+  {
+   "title": "Get started writing prompts in Microsoft Copilot",
+   "url": "https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-writing-prompts-in-microsoft-365-copilot",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

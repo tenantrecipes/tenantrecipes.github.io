@@ -1,0 +1,30 @@
+{
+ "id": "copilot-teams-meeting-transcription",
+ "status": "published",
+ "order": 60,
+ "category": "Copilot rollout & governance",
+ "title": "Make Copilot in Teams meetings work: transcription and recording policies",
+ "problem": "Users can't use Copilot in meetings, or Copilot disappears after the meeting.",
+ "steps": [
+  "Transcription must be allowed (Teams meeting policy, -AllowTranscription) and a transcript started for Copilot to work after the meeting.",
+  "Organizers choose 'During and after the meeting', 'Only during the meeting' or 'Off' in meeting options.",
+  "Teams admin center > Meetings > Meeting policies > Recording & transcription > Copilot: On, On with saved transcript required (default), On with transcript saved by default, or Off.",
+  "PowerShell: `Set-CsTeamsMeetingPolicy -Identity <policy> -Copilot EnabledWithTranscriptDefaultOn`"
+ ],
+ "pitfalls": [
+  "'Only during the meeting' means no post-meeting recap — users think Copilot is broken.",
+  "The Copilot default comes from the organizer's meeting policy; transcription can be started by any participant whose own policy allows it.",
+  "Copilot isn't available in end-to-end encrypted meetings."
+ ],
+ "sources": [
+  {
+   "title": "Manage Microsoft Copilot in Teams meetings and events",
+   "url": "https://learn.microsoft.com/en-us/microsoftteams/copilot-teams-transcription",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

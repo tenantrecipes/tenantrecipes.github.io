@@ -1,0 +1,35 @@
+{
+ "id": "ca-require-mfa-copilot",
+ "status": "published",
+ "order": 70,
+ "category": "Conditional Access for AI",
+ "title": "Require phishing-resistant MFA for users accessing Microsoft Copilot",
+ "problem": "Copilot can surface a lot of data quickly, so a compromised account is more dangerous. You want stronger authentication for licensed users.",
+ "steps": [
+  "Entra admin center > Entra ID > Conditional Access > Policies > New policy.",
+  "Users: include the Copilot license group; exclude break-glass accounts.",
+  "Target resources: Office 365 (the Office 365 app group includes Enterprise Copilot Platform).",
+  "Grant: Require authentication strength > Phishing-resistant MFA.",
+  "Start in Report-only, review sign-in logs, then turn On."
+ ],
+ "pitfalls": [
+  "Don't lock out break-glass accounts — always exclude them.",
+  "Users without a phishing-resistant method (passkey/FIDO2, Windows Hello for Business, certificate-based authentication or macOS Platform SSO) will be blocked once enforced."
+ ],
+ "sources": [
+  {
+   "title": "Conditional Access authentication strengths",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Apps included in the Office 365 app group",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/reference-office-365-application-contents",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

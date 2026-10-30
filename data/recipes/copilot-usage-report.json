@@ -1,0 +1,32 @@
+{
+ "id": "copilot-usage-report",
+ "status": "published",
+ "order": 330,
+ "category": "Licensing & reporting",
+ "title": "Track active Copilot usage with the Microsoft 365 usage report",
+ "problem": "Management asks if the Copilot investment is used.",
+ "steps": [
+  "Microsoft 365 admin center > Reports > Usage > Microsoft Copilot > Copilot (Usage tab).",
+  "Review enabled vs active users, active users rate and adoption by app; data arrives within about 48 hours.",
+  "Reallocate licenses from users inactive for 30+ days (after checking with managers)."
+ ],
+ "pitfalls": [
+  "User names are concealed by default — change it under Settings > Org settings > Services > Reports (Global Administrator)."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Copilot usage report",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/admin/activity-reports/microsoft-365-copilot-usage",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Reports show anonymous user names",
+   "url": "https://learn.microsoft.com/en-us/troubleshoot/microsoft-365/admin/miscellaneous/reports-show-anonymous-user-name",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

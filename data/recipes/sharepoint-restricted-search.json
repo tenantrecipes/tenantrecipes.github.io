@@ -1,0 +1,30 @@
+{
+ "id": "sharepoint-restricted-search",
+ "status": "retired",
+ "order": 210,
+ "category": "Purview, DLP & data security for Copilot",
+ "title": "Use Restricted SharePoint Search as a temporary guardrail",
+ "problem": "You need to deploy Copilot now but haven't finished cleaning up permissions.",
+ "steps": [
+  "Connect: `Connect-SPOService -Url https://contoso-admin.sharepoint.com`",
+  "Enable: `Set-SPOTenantRestrictedSearchMode -Mode Enabled`",
+  "Add allowed sites: `Add-SPOTenantRestrictedSearchAllowedList -SitesList @('https://contoso.sharepoint.com/sites/HR')`",
+  "Plan the permission cleanup — this is a stopgap (max 100 sites)."
+ ],
+ "pitfalls": [
+  "RETIRED: Restricted SharePoint Search is retiring — new enablement has been blocked since 31 July 2026. Use Restricted Content Discovery instead.",
+  "Users' own OneDrive and content they recently interacted with remain discoverable.",
+  "It is meant to be temporary, not a long-term control."
+ ],
+ "sources": [
+  {
+   "title": "Restricted SharePoint Search",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/restricted-sharepoint-search",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

@@ -1,0 +1,34 @@
+{
+ "id": "copilot-pilot-group-licensing",
+ "status": "published",
+ "order": 20,
+ "category": "Copilot rollout & governance",
+ "title": "Assign Copilot licenses to a pilot group with group-based licensing",
+ "problem": "Manually assigning Copilot licenses per user does not scale and is hard to audit.",
+ "steps": [
+  "Create a security group, e.g. 'SG-Copilot-Pilot' (no nested groups — they aren't supported).",
+  "Microsoft 365 admin center > Billing > Licenses > Assign licenses: pick the group and the Microsoft Copilot subscription (group-based licensing is managed in the Microsoft 365 admin center, not the Entra admin center).",
+  "Add pilot users to the group; licenses are applied automatically.",
+  "Monitor errors under Billing > Licenses > the product > Errors & issues."
+ ],
+ "pitfalls": [
+  "Group-based licensing requires Microsoft Entra ID P1 or Office 365 E3 or higher.",
+  "Removing a user from the group removes the license — when moving users, add to the new group first, then remove from the old one."
+ ],
+ "sources": [
+  {
+   "title": "Assign or unassign licenses to a group in the Microsoft 365 admin center",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-group-licenses",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Manage licenses (Microsoft Learn training)",
+   "url": "https://learn.microsoft.com/en-us/training/modules/create-configure-manage-identities/8-manage-licenses",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

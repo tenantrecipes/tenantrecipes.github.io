@@ -1,0 +1,35 @@
+{
+ "id": "copilot-adoption-hub",
+ "status": "published",
+ "order": 40,
+ "category": "Copilot rollout & governance",
+ "title": "Plan adoption with the Microsoft Copilot adoption resources",
+ "problem": "Licenses get assigned but usage stays low because nobody planned training or champions.",
+ "steps": [
+  "Pick 3–5 business scenarios per department (meeting recap, email drafting, document summary).",
+  "Recruit a champions group and give them early access.",
+  "Use the Copilot Dashboard in Viva Insights to track readiness, adoption and impact (no paid Viva Insights license needed).",
+  "Run monthly 'show and tell' sessions and collect prompts that work."
+ ],
+ "pitfalls": [
+  "Measuring only license count, not active usage.",
+  "Skipping manager enablement — managers drive adoption.",
+  "Group-level (scoped) data in the Copilot Dashboard requires at least 50 Copilot or Viva Insights licenses; smaller tenants get tenant-level data."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Copilot adoption",
+   "url": "https://adoption.microsoft.com/en-us/copilot/",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Connect to the Copilot Dashboard",
+   "url": "https://learn.microsoft.com/en-us/viva/insights/org-team-insights/copilot-dashboard",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

@@ -1,0 +1,34 @@
+{
+ "id": "intune-compliance-baseline",
+ "status": "published",
+ "order": 150,
+ "category": "Intune & devices for AI",
+ "title": "Create a Windows compliance policy that CA can rely on",
+ "problem": "Device-based Conditional Access is meaningless if compliance policies are weak.",
+ "steps": [
+  "Intune > Devices > Compliance > Create policy > Windows 10 and later.",
+  "Require BitLocker, Secure Boot, a minimum OS version, and Microsoft Defender Antimalware.",
+  "Optionally require the device to be at or under a machine risk score from Defender for Endpoint.",
+  "Set actions for noncompliance (Mark device noncompliant after a grace period)."
+ ],
+ "pitfalls": [
+  "Newly enrolled devices may appear noncompliant until first evaluation — use a grace period.",
+  "BitLocker and Secure Boot are measured via Device Health Attestation at boot — a reboot is needed after encryption before the device shows compliant."
+ ],
+ "sources": [
+  {
+   "title": "Create a compliance policy in Intune",
+   "url": "https://learn.microsoft.com/en-us/intune/device-security/compliance/create-policy",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Windows compliance settings in Intune",
+   "url": "https://learn.microsoft.com/en-us/intune/device-security/compliance/ref-windows-settings",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}

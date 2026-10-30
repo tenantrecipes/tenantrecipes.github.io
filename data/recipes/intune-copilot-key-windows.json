@@ -1,0 +1,28 @@
+{
+ "id": "intune-copilot-key-windows",
+ "status": "published",
+ "order": 170,
+ "category": "Intune & devices for AI",
+ "title": "Manage the Copilot experience on Windows devices",
+ "problem": "Copilot on Windows changes frequently and admins need to control what users see.",
+ "steps": [
+  "Entra users get the Microsoft Copilot app (previously the Microsoft 365 app) pinned; licensed users can switch between Work and Web.",
+  "Set what the Copilot key (or Win+C) opens with the WindowsAI CSP `./User/Vendor/MSFT/Policy/Config/WindowsAI/SetCopilotHardwareKey` (GPO: Windows Components > Windows Copilot > Set Copilot Hardware Key).",
+  "Block the consumer Copilot app (package MICROSOFT.COPILOT) with AppLocker, or remove it per device; deploy the apps you want with Intune per group.",
+  "Communicate to users what the Copilot key opens in your tenant."
+ ],
+ "pitfalls": [
+  "The legacy 'Turn off Windows Copilot' policy (TurnOffWindowsCopilot) is slated for deprecation — Microsoft recommends AppLocker instead."
+ ],
+ "sources": [
+  {
+   "title": "Manage Copilot on Windows",
+   "url": "https://learn.microsoft.com/en-us/windows/client-management/manage-windows-copilot",
+   "checked": "2026-10-30"
+  }
+ ],
+ "last_verified": "2026-10-30",
+ "verified_by": "Pascal",
+ "created": "2026-10-12",
+ "updated": "2026-10-30"
+}
