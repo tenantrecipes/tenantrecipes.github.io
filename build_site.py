@@ -6,6 +6,9 @@ from html import escape as E
 ROOT = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 import site_config as C
+sys.path.insert(0, str(ROOT / "data" / "guides"))
+import secure_copilot_rollout as G1
+GUIDES = [G1]
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -56,13 +59,13 @@ def head(title, desc, rel, path, og_type="website"):
 
 def nav(rel):
     return (f'<header><nav><a class="logo" href="{rel}index.html"><img src="{rel}assets/logo.svg" alt="Tenant Recipes" width="158" height="36"></a><div>'
-            f'<a href="{rel}index.html#library">Recipes</a><a href="{rel}newsletter.html">Newsletter</a>'
+            f'<a href="{rel}guides/index.html">Guides</a><a href="{rel}index.html#library">Recipes</a><a href="{rel}newsletter.html">Newsletter</a>'
             f'<a href="{rel}about.html">About</a></div></nav></header>')
 
 
 def footer(rel):
     return (f'<footer>Tenant Recipes · Practical AI recipes for Microsoft 365 admins · Not affiliated with Microsoft<br>'
-            f'<a href="{rel}newsletter.html">Newsletter</a> · <a href="{rel}about.html">About</a> · '
+            f'<a href="{rel}guides/{G1.SLUG}.html">Secure Copilot rollout guide</a> · <a href="{rel}newsletter.html">Newsletter</a> · <a href="{rel}about.html">About</a> · '
             f'<a href="{rel}privacy.html">Privacy policy</a></footer>')
 
 
@@ -149,8 +152,10 @@ def hero(rel):
         f'<h1 id="hx-title">Roll out Copilot.<br><span class="grad">Without opening a hole in your tenant.</span></h1>'
         f'<p class="hx-lead">Step-by-step AI &amp; security recipes for Microsoft 365 admins — Conditional Access, Intune, Purview, '
         f'Copilot Studio agents and licensing. The exact clicks, the pitfalls, and a link to Microsoft Learn for every claim.</p>'
-        f'<div class="hx-cta"><a class="btn hx-p" href="#library">Browse {n} recipes →</a>'
-        f'<a class="btn hx-g" href="#newsletter">Get the free weekly brief</a></div>'
+        f'<div class="hx-cta"><a class="btn hx-p" href="guides/{G1.SLUG}.html">Read the rollout guide →</a>'
+        f'<a class="btn hx-g" href="#library">Browse {n} recipes</a></div>'
+        f'<p class="hx-note"><a href="guides/{G1.SLUG}.html"><strong>{len(G1.PHASES)} phases · {sum(len(p["steps"]) for p in G1.PHASES)} steps · printable checklist.</strong> '
+        f'Starts where the real risk is: oversharing, EEEU, sharing links and guests.</a> · <a href="#newsletter">Free weekly brief</a></p>'
         f'<dl class="hx-stats"><div><dt>Recipes</dt><dd>{n}</dd></div><div><dt>Categories</dt><dd>{len(cats)}</dd></div>'
         f'<div><dt>Microsoft sources linked</dt><dd>{len(sources)}</dd></div><div><dt>Last verified</dt><dd>{fmt_date(last)}</dd></div></dl>'
         f'</div><div class="hx-art"><div class="hx-shield"><img src="{rel}assets/mark.svg" alt="" width="200" height="200"></div>'
@@ -162,6 +167,91 @@ def hero(rel):
         f'<h2 id="sec-title">AI is only as safe as your tenant. {sec_total} recipes to harden it first.</h2>'
         f'<div class="sec-grid">{tiles}</div></section>'
     )
+
+
+def _txt(s):
+    return step_html(s)
+
+
+def guide_page(g):
+    RID = {r["id"]: r for r in R}
+    for ph in g.PHASES:
+        for st in ph["steps"]:
+            for rid in st["rec"]:
+                if rid not in RID:
+                    sys.exit(f"Guide {g.SLUG}: unknown recipe id {rid}")
+    nsteps = sum(len(p["steps"]) for p in g.PHASES)
+    nsrc = len({u for p in g.PHASES for s in p["steps"] for _, u in s["src"]})
+    nrec = len({r for p in g.PHASES for s in p["steps"] for r in s["rec"]})
+
+    def body(rel):
+        toc, phases, strip = "", "", ""
+        for i, ph in enumerate(g.PHASES, 1):
+            pid = f'phase-{i}-{ph["id"]}'
+            deep = " deep" if ph.get("deep") else ""
+            strip += (f'<li class="{deep.strip()}"><a href="#{pid}"><span class="gd-sn">{i}</span><strong>{esc(ph["title"])}</strong>'
+                      f'<em>{esc(ph["time"])}</em></a></li>')
+            sub = "".join(f'<li><a href="#{pid}-s{j}">{i}.{j} {esc(st["t"])}</a></li>' for j, st in enumerate(ph["steps"], 1)) if ph.get("deep") else ""
+            toc += f'<li class="{deep.strip()}"><a href="#{pid}">{i}. {esc(ph["title"])}</a>' + (f'<ul>{sub}</ul>' if sub else "") + '</li>'
+            steps = ""
+            for j, st in enumerate(ph["steps"], 1):
+                recs = "".join(f'<a class="gd-chip" href="{rel}recipes/{rid}.html">{esc(RID[rid]["title"])}</a>' for rid in st["rec"])
+                srcs = "".join(f'<li><a href="{E(u)}">{esc(t)}</a></li>' for t, u in st["src"])
+                steps += (f'<div class="gd-step" id="{pid}-s{j}"><h3><span>{i}.{j}</span> {esc(st["t"])}</h3>'
+                          f'<p class="gd-done"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 6.8"/></svg>Done when: {_txt(st["check"])}</p>'
+                          '<h4>Do this</h4><ul class="gd-do">' + "".join(f'<li>{_txt(x)}</li>' for x in st["do"]) + '</ul>'
+                          + ('<div class="gd-pit"><h4>Pitfalls</h4><ul>' + "".join(f'<li>{_txt(x)}</li>' for x in st["pit"]) + '</ul></div>' if st["pit"] else "")
+                          + (f'<div class="gd-recs"><h4>Hands-on recipes</h4>{recs}</div>' if recs else "")
+                          + (f'<details class="gd-src"><summary>Microsoft sources ({len(st["src"])})</summary><ul>{srcs}</ul></details>' if srcs else "")
+                          + '</div>')
+            phases += (f'<section class="gd-phase{deep}" id="{pid}" aria-labelledby="{pid}-h"><div class="gd-ph-h"><span class="gd-num">Phase {i}</span>'
+                       f'<h2 id="{pid}-h">{esc(ph["title"])}</h2><span class="gd-time" title="Our planning estimate">≈ {esc(ph["time"])}</span></div>'
+                       + ('<p class="gd-flag">Deepest phase: most of the risk lives here</p>' if deep else "")
+                       + f'<p class="gd-goal">{esc(ph["goal"])}</p>' + (f'<p>{esc(ph["lead"])}</p>' if ph.get("lead") else "") + steps + '</section>')
+        # rebuild checklist cleanly, grouped by phase
+        check = ""
+        for i, ph in enumerate(g.PHASES, 1):
+            pid = f'phase-{i}-{ph["id"]}'
+            check += f'<li class="gd-ck-h">Phase {i}: {esc(ph["title"])} <em>(≈ {esc(ph["time"])})</em></li>'
+            check += "".join(f'<li><label><input type="checkbox" data-k="{g.SLUG}:{pid}-s{j}"> <span><b>{i}.{j}</b> {_txt(st["check"])}</span></label></li>'
+                             for j, st in enumerate(ph["steps"], 1))
+        intro = "".join(f'<p>{esc(x)}</p>' for x in g.INTRO)
+        return (
+            f'<section class="gd-hero"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i></div><div class="wrap">'
+            f'<p class="gd-crumb"><a href="{rel}index.html">Home</a> / <a href="{rel}guides/index.html">Guides</a></p>'
+            f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>Pillar guide · fact-checked against Microsoft Learn on {fmt_date(g.VERIFIED)}</p>'
+            f'<h1>{esc(g.TITLE)}</h1><p class="hx-lead">{esc(g.DESC)}</p>'
+            f'<div class="hx-cta"><a class="btn hx-p" href="#phase-1-{g.PHASES[0]["id"]}">Start with phase 1 →</a>'
+            f'<a class="btn hx-g" href="#checklist">Printable checklist</a></div>'
+            f'<dl class="hx-stats"><div><dt>Phases</dt><dd>{len(g.PHASES)}</dd></div><div><dt>Steps</dt><dd>{nsteps}</dd></div>'
+            f'<div><dt>Linked recipes</dt><dd>{nrec}</dd></div><div><dt>Microsoft sources</dt><dd>{nsrc}</dd></div></dl>'
+            f'<ol class="gd-strip">{strip}</ol></div></section>'
+            f'<div class="wrap gd-grid"><aside class="gd-toc" aria-label="Table of contents"><p>On this page</p><ol>{toc}'
+            f'<li><a href="#checklist">Printable checklist</a></li></ol></aside>'
+            f'<div class="gd-body"><div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers.</p></div>'
+            f'{phases}'
+            f'<section class="gd-check" id="checklist" aria-labelledby="ck-h"><div class="gd-ph-h"><span class="gd-num">Checklist</span><h2 id="ck-h">The printable checklist</h2></div>'
+            f'<p>Tick items as you go (saved in this browser only), then print or save as PDF for your change board.</p>'
+            f'<p class="gd-ck-btns"><button class="btn p" type="button" id="ck-print">Print checklist</button> <button class="btn" type="button" id="ck-reset">Clear ticks</button> <span id="ck-n" class="fine"></span></p>'
+            f'<ol class="gd-ck">{check}</ol><p class="fine">{esc(g.TITLE)} · {C.SITE_NAME} · verified {g.VERIFIED} · {SITE}/guides/{g.SLUG}.html</p></section>'
+            f'{signup(rel, "guide-" + g.SLUG)}</div></div>'
+            '<script>(function(){var b=document.querySelectorAll(".gd-ck input"),n=document.getElementById("ck-n");'
+            'function u(){var c=0;b.forEach(function(x){if(x.checked)c++});n.textContent=c+" of "+b.length+" done"}'
+            'b.forEach(function(x){try{x.checked=localStorage.getItem(x.dataset.k)==="1"}catch(e){}x.addEventListener("change",function(){try{localStorage.setItem(x.dataset.k,x.checked?"1":"0")}catch(e){}u()})});u();'
+            'document.getElementById("ck-print").onclick=function(){document.body.classList.add("print-ck");window.print();setTimeout(function(){document.body.classList.remove("print-ck")},500)};'
+            'document.getElementById("ck-reset").onclick=function(){b.forEach(function(x){x.checked=false;try{localStorage.removeItem(x.dataset.k)}catch(e){}});u()};})();</script>'
+        )
+    return page(f"guides/{g.SLUG}.html", f"{g.TITLE} | {C.SITE_NAME}", g.DESC, body, "article")
+
+
+def guides_index():
+    def body(rel):
+        cards = "".join(
+            f'<a class="card" href="{g.SLUG}.html"><div class="tag">Pillar guide · {len(g.PHASES)} phases</div><h3>{esc(g.TITLE)}</h3><p>{esc(g.DESC)}</p></a>'
+            for g in GUIDES)
+        return (f'<main class="wrap"><h1 style="margin-top:34px">Guides</h1><p>Long-form, phased playbooks that tie the recipes together. '
+                f'Every claim links to Microsoft Learn.</p><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
+    return page("guides/index.html", f"Guides | {C.SITE_NAME}", "Long-form, fact-checked playbooks for Microsoft 365 admins.", body)
 
 
 def build():
@@ -218,6 +308,10 @@ def build():
         '(<a href="https://www.imy.se/en/">IMY</a>).</p>'
         '<h2>External links</h2><p>Recipes link to Microsoft Learn and other sites, which have their own privacy policies.</p>'
         '<h2>Changes</h2><p>If this policy changes, the date above is updated.</p></article></main>')))
+
+    for g in GUIDES:
+        pages.append(guide_page(g))
+    pages.append(guides_index())
 
     for r in R:
         def body(rel, r=r):
