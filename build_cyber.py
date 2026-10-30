@@ -68,6 +68,8 @@ def _validate(e, fname):
         errs.append(f"type must be one of {sorted(TYPES)}")
     if e["area"] not in AREA:
         errs.append(f"area must be one of {list(AREA)}")
+    if e.get("action") is not None and not (isinstance(e["action"], str) and 0 < len(e["action"]) <= 200):
+        errs.append("action must be a short string (max 200 chars)")
     if e.get("category") is not None and e["category"] not in CATEGORIES:
         errs.append(f"category must be one of {CATEGORIES}")
     if not e["steps"] or not all(isinstance(s, str) and s.strip() for s in e["steps"]):
@@ -108,6 +110,13 @@ def load():
     return [e for e in out if e["status"] == "published"]
 
 
+def _short(t, n=170):
+    """Fallback action line: first sentence of a step, without code blocks."""
+    t = re.sub(r"```.*?```", "", t, flags=re.S).strip()
+    t = re.split(r"(?<=[.!?])\s", t, 1)[0]
+    return t if len(t) <= n else t[:n].rsplit(" ", 1)[0] + "…"
+
+
 def _date_key(e):
     return e.get("kev_added") or e.get("advisory_date") or e.get("updated") or ""
 
@@ -141,15 +150,26 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 'before you act, and test changes before production. Not affiliated with any vendor.</span></aside>')
 
     def vuln_rows(rel, items):
-        rows = ""
+        """Stacked cards (ordered list, one <article> per vulnerability), newest first."""
+        lis = ""
         for e in items:
-            rows += (f'<tr data-cat="{cat_slug(e["category"])}"><td><a href="{rel}security/{e["id"]}.html"><strong>{esc(e["title"])}</strong></a>'
-                     f'<span class="cy-meta">{catb(e)} {esc(e["vendor"])} · {esc(cve_list(e))}</span></td>'
-                     f'<td>{sev(e["severity"])}</td><td>{kev(e)}</td>'
-                     f'<td><a class="cy-area" href="{rel}security/{e["area"]}.html">{esc(AREA[e["area"]][0])}</a></td>'
-                     f'<td class="cy-d">{fmt_date(_date_key(e))}</td></tr>')
-        return ('<div class="cy-tw"><table class="cy-t"><thead><tr><th>Vulnerability</th><th>Vendor severity</th><th>Exploitation</th>'
-                f'<th>Area</th><th>Date</th></tr></thead><tbody>{rows}</tbody></table></div>')
+            scored = [c for c in e["cves"] if c.get("cvss") is not None]
+            top = max(scored, key=lambda c: float(c["cvss"])) if scored else None
+            cvss = (f'CVSS {top["cvss"]} <span class="vw-src">({esc(str(top.get("cvss_version") or ""))}, {esc(top["cvss_source"])})</span>'
+                    if top else '<span class="vw-src">CVSS not scored in sources checked</span>')
+            when = (f'Added to CISA KEV <time datetime="{e["kev_added"]}">{fmt_date(e["kev_added"])}</time>' if e.get("kev_added")
+                    else f'Published <time datetime="{e["advisory_date"]}">{fmt_date(e["advisory_date"])}</time>' if e.get("advisory_date") else "")
+            vsrc = e["sources"][0]
+            hid = f'vw-{e["id"]}'
+            lis += (f'<li data-cat="{cat_slug(e["category"])}"><article class="vw-card" aria-labelledby="{hid}">'
+                    f'<div class="vw-r1"><h3 class="vw-t" id="{hid}"><a href="{rel}security/{e["id"]}.html">{esc(e["title"])}</a></h3>'
+                    f'<p class="vw-b">{catb(e)}{sev(e["severity"])}{kev(e)}</p></div>'
+                    f'<p class="vw-r2"><span class="vw-cve">{esc(cve_list(e))}</span><span>{esc(e["vendor"])} · {esc(e["product"])}</span>'
+                    f'<span>{cvss}</span>' + (f'<span>{when}</span>' if when else "") +
+                    f'<a class="cy-area" href="{rel}security/{e["area"]}.html">{esc(AREA[e["area"]][0])}</a></p>'
+                    f'<p class="vw-r3"><span class="vw-do"><strong>What to do:</strong> {step_html(e.get("action") or _short(e["steps"][0]))}</span>'
+                    f'<a class="vw-v" href="{E(vsrc["url"])}" rel="noopener">Vendor advisory →</a></p></article></li>')
+        return f'<ol class="vw-list" aria-label="Vulnerabilities, newest first">{lis}</ol>'
 
     def hard_cards(rel, items):
         return "".join(f'<a class="card" data-cat="{cat_slug(e.get("category") or "")}" href="{rel}security/{e["id"]}.html"><div class="tag">Hardening · {esc(AREA[e["area"]][0])}</div>'
@@ -185,7 +205,7 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 '<script>(function(){var w=document.getElementById("cy-filter");if(!w)return;w.hidden=false;var n=document.getElementById("cy-fn");'
                 'w.addEventListener("click",function(ev){var b=ev.target.closest("button[data-f]");if(!b)return;var f=b.getAttribute("data-f");'
                 'w.querySelectorAll("button").forEach(function(x){var on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on?"true":"false")});'
-                'var k=0;document.querySelectorAll("#watch tr[data-cat],#hardening [data-cat]").forEach(function(r){var s=!f||r.getAttribute("data-cat")===f;r.hidden=!s;if(s)k++});'
+                'var k=0;document.querySelectorAll("#watch [data-cat],#hardening [data-cat]").forEach(function(r){var s=!f||r.getAttribute("data-cat")===f;r.hidden=!s;if(s)k++});'
                 'n.textContent=f?k+" entr"+(k===1?"y":"ies")+" in "+b.firstChild.textContent.trim():"";'
                 'document.querySelectorAll(".cy-empty").forEach(function(m){var sec=m.closest("section");m.hidden=!!sec.querySelector("[data-cat]:not([hidden])")})})})();</script>')
         return (hero(rel, f'<a href="{rel}index.html">Home</a> / Security', f'Fact-checked against vendor advisories and CISA · last verified {fmt_date(last)}',

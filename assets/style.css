@@ -401,3 +401,18 @@ background:linear-gradient(135deg,#0e1f52ee,#24135aee);border:1px solid #ffffff1
 .pt-t{flex:1 1 260px}.pt-t b{font-variant-numeric:tabular-nums;color:#0b1538}.pt-l{font-weight:700;white-space:nowrap;text-decoration:none}.pt-l:hover{text-decoration:underline}
 .pt-cd.live{border-color:#5ee6c8;background:#effcf8}.pt-cd.live .pt-k{background:#0b5c46;color:#fff}
 .pt-home{padding-top:0;padding-bottom:0}
+/* ---- vulnerability watch: stacked cards ---- */
+.vw-list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:12px}
+.vw-card{background:#fff;border:1px solid #e3e5ec;border-radius:12px;padding:14px 18px;transition:box-shadow .15s,border-color .15s}
+.vw-card:hover{border-color:#cfd5e3;box-shadow:0 6px 18px #0b153814}
+.vw-r1{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:6px 16px}
+.vw-t{flex:1 1 420px;margin:0;font-size:1.04rem;line-height:1.35}.vw-t a{color:#0b1538;text-decoration:none}.vw-t a:hover{text-decoration:underline;color:#0f6cbd}
+.vw-b{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0}.vw-b .cy-cat{margin:0}
+.vw-r2{display:flex;flex-wrap:wrap;gap:4px 0;margin:8px 0 0;font-size:.83rem;color:#555}
+.vw-r2>*:not(:last-child)::after{content:"·";margin:0 8px;color:#aab}
+.vw-cve{font-family:Consolas,monospace;color:#334}.vw-src{color:#777}.vw-r2 .cy-area{font-size:.83rem}
+.vw-r3{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;margin:10px 0 0;padding-top:10px;border-top:1px dashed #e3e5ec;font-size:.9rem;color:#333}
+.vw-do{flex:1 1 380px}.vw-do code{font-size:.85em}.vw-v{font-weight:700;white-space:nowrap;text-decoration:none}.vw-v:hover{text-decoration:underline}
+@media (max-width:560px){.vw-card{padding:12px 14px}.vw-t{flex-basis:100%;font-size:.98rem}.vw-r2{flex-direction:column}.vw-r2>*::after{display:none}.vw-r3{flex-direction:column}}
+.vw-list>li{margin:0;padding:0}.vw-list .vw-card{margin:0;padding:14px 18px}
+@media (max-width:560px){.vw-list .vw-card{padding:12px 14px}.vw-do{flex-basis:auto}.vw-r3{align-items:flex-start}}

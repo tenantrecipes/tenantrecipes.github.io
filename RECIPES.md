@@ -54,7 +54,7 @@ Common fields: `id`, `status`, `order`, `type` (`vulnerability` | `hardening`), 
 
 Extra fields for `type: vulnerability`: `vendor`, `product`, `severity` (the vendor's own rating),
 `exploited` (bool), `kev_added` (CISA KEV date or null), `advisory_date`, `advisory_id`, `impact`,
-`affected` (list), `fixed` (list), and `cves`: `[{"id": "CVE-YYYY-NNNN", "cvss": 9.8 | null,
+`affected` (list), `fixed` (list), `action` (one short 'What to do' line, max 200 chars, shown on the watch list), and `cves`: `[{"id": "CVE-YYYY-NNNN", "cvss": 9.8 | null,
 "cvss_version": "3.1", "cvss_source": "Broadcom", "severity": "Critical", "note": "..."}]`.
 
 Rules: copy CVE ids, versions, CVSS and dates only from the vendor advisory, CISA (KEV JSON feed:

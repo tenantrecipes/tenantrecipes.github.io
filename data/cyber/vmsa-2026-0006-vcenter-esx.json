@@ -57,6 +57,7 @@
  "advisory_date": "2026-07-29",
  "advisory_id": "VMSA-2026-0006.2",
  "impact": "Unauthenticated access to and code execution on vCenter; code execution on the ESX host from a VM; operations on ESX that are not logged.",
+ "action": "Patch vCenter first if you can, then roll the ESX update through your clusters (fixed builds in VMSA-2026-0006).",
  "affected": [
   "Any VMware ESX, vCenter, Workstation or Fusion version earlier than the fixed versions in the VMSA, including ESX and vCenter inside VCF, VVF and Telco Cloud.",
   "VMXNET3 issue: only VMs with a VMXNET3 adapter. Broadcom advises updating ESX rather than switching adapter types.",
