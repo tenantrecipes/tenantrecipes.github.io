@@ -51,7 +51,7 @@ def checklist_html(g):
         rows += "".join(f'<li><i></i><div><b>{i}.{j} {code(st["t"])}</b><br>{code(st["check"])}</div></li>' for j, st in enumerate(ph["steps"], 1))
         rows += "</ul>"
     n = sum(len(p["steps"]) for p in g.PHASES)
-    return f"""<!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}
+    return f"""<!doctype html><html><head><meta charset="utf-8"><title>{E(g.TITLE)}: checklist (Tenant Recipes)</title><style>{BASE_CSS}
 @page{{size:A4;margin:14mm 14mm 14mm 14mm}}body{{font-size:9pt}}
 h2{{font-size:10.5pt;margin:12px 0 4px;color:#0f2f6b;break-after:avoid}}h2 span{{background:#0f2f6b;color:#fff;border-radius:4px;padding:1px 6px;font-size:8.5pt;margin-right:4px}}
 h2 em{{font-weight:400;font-style:normal;color:#5d667c;font-size:8.5pt}}
@@ -74,7 +74,7 @@ def quick_html():
         items += (f'<li><span class="n">{n}</span><div><h2>{E(c["t"])}</h2><p>{E(c["why"])}</p>'
                   f'<p class="ck"><i></i><b>Check:</b> {E(c["check"])}</p><p class="s">Source: {src}</p></div></li>')
     th = Q.THEN
-    return f"""<!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}
+    return f"""<!doctype html><html><head><meta charset="utf-8"><title>{E(Q.TITLE)} (Tenant Recipes)</title><style>{BASE_CSS}
 @page{{size:A4;margin:12mm 14mm}}body{{font-size:9.2pt}}
 ol{{list-style:none;margin:0;padding:0}}li{{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #eef1f6;break-inside:avoid}}
 .n{{flex:none;width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#1f7bff,#7a4dff);color:#fff;font-weight:800;display:grid;place-items:center}}
