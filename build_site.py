@@ -109,6 +109,60 @@ def contact_html():
     return "reply to any newsletter email"
 
 
+SECURITY_TRACK = [  # (category, headline, blurb, preferred first recipe id) — counts and links are computed from data
+    ("Conditional Access for AI", "Lock down sign-ins", "Phishing-resistant MFA, risk-based blocks and break-glass hygiene before AI scales.", "ca-require-mfa-copilot"),
+    ("Purview, DLP & data security for Copilot", "Stop oversharing", "Find what Copilot can see, then fence it with labels, DLP and audit.", "purview-oversharing-assessment"),
+    ("Intune & devices for AI", "Harden devices", "Compliant devices and app protection so AI only runs where it should.", "intune-compliance-baseline"),
+]
+
+
+def fmt_date(iso):
+    d = datetime.date.fromisoformat(iso)
+    return f"{d.day} {d.strftime('%b %Y')}"
+
+
+def hero(rel):
+    """Homepage hero. Every number is computed from data/recipes.json at build time — nothing invented."""
+    n = len(R)
+    cats = sorted({r["category"] for r in R})
+    sources = {s["url"] for r in R for s in r.get("sources", [])}
+    last = max(r["last_verified"] for r in R if r.get("last_verified"))
+    newest = sorted(R, key=lambda r: (r.get("updated", ""), r.get("created", ""), -r.get("order", 0)), reverse=True)[:4]
+    ticker_items = "".join(f'<li><a href="recipes/{r["id"]}.html"><span>{esc(r["category"])}</span>{esc(r["title"])}</a></li>' for r in R)
+    ticker_dupe = "".join(f'<li><a href="recipes/{r["id"]}.html" tabindex="-1"><span>{esc(r["category"])}</span>{esc(r["title"])}</a></li>' for r in R)
+    checks = "".join(f'<li><a href="recipes/{r["id"]}.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 6.8"/></svg>'
+                     f'<span>{esc(r["title"])}</span></a></li>' for r in newest)
+    tiles = ""
+    for cat, h, blurb, pick in SECURITY_TRACK:
+        rs = [r for r in R if r["category"] == cat]
+        if not rs:
+            continue
+        rs.sort(key=lambda r: r["id"] != pick)  # preferred recipe first, if it still exists
+        tiles += (f'<a class="sec-tile" href="recipes/{rs[0]["id"]}.html"><span class="sec-n">{len(rs)}</span><span class="sec-l">recipes</span>'
+                  f'<strong>{esc(h)}</strong><p>{esc(blurb)}</p><span class="sec-go">Start with: {esc(rs[0]["title"])} →</span></a>')
+    sec_total = sum(1 for r in R if r["category"] in {t[0] for t in SECURITY_TRACK})
+    return (
+        f'<section class="hx" aria-labelledby="hx-title"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>'
+        f'<div class="wrap hx-in"><div class="hx-copy">'
+        f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>Every recipe fact-checked against Microsoft sources · last verified {fmt_date(last)}</p>'
+        f'<h1 id="hx-title">Roll out Copilot.<br><span class="grad">Without opening a hole in your tenant.</span></h1>'
+        f'<p class="hx-lead">Step-by-step AI &amp; security recipes for Microsoft 365 admins — Conditional Access, Intune, Purview, '
+        f'Copilot Studio agents and licensing. The exact clicks, the pitfalls, and a link to Microsoft Learn for every claim.</p>'
+        f'<div class="hx-cta"><a class="btn hx-p" href="#library">Browse {n} recipes →</a>'
+        f'<a class="btn hx-g" href="#newsletter">Get the free weekly brief</a></div>'
+        f'<dl class="hx-stats"><div><dt>Recipes</dt><dd>{n}</dd></div><div><dt>Categories</dt><dd>{len(cats)}</dd></div>'
+        f'<div><dt>Microsoft sources linked</dt><dd>{len(sources)}</dd></div><div><dt>Last verified</dt><dd>{fmt_date(last)}</dd></div></dl>'
+        f'</div><div class="hx-art"><div class="hx-shield"><img src="{rel}assets/mark.svg" alt="" width="200" height="200"></div>'
+        f'<div class="hx-card"><p class="hx-card-h"><span aria-hidden="true">●●●</span> tenant-check</p><ul>{checks}</ul>'
+        f'<p class="hx-card-f">{n}/{n} recipes verified · {fmt_date(last)}</p></div></div></div>'
+        f'<div class="ticker" aria-label="All recipes"><ul class="tk">{ticker_items}</ul><ul class="tk" aria-hidden="true">{ticker_dupe}</ul></div>'
+        f'</section>'
+        f'<section class="sec wrap" aria-labelledby="sec-title"><p class="sec-k">Security track</p>'
+        f'<h2 id="sec-title">AI is only as safe as your tenant. {sec_total} recipes to harden it first.</h2>'
+        f'<div class="sec-grid">{tiles}</div></section>'
+    )
+
+
 def build():
     if DIST.exists():
         shutil.rmtree(DIST)
@@ -117,10 +171,8 @@ def build():
     n = len(R)
 
     pages.append(page("index.html", f"{C.SITE_TAGLINE} | {C.SITE_NAME}", C.SITE_DESCRIPTION, lambda rel: (
-        f'<section class="hero"><div class="wrap"><h1>{C.SITE_TAGLINE}</h1><p>Step-by-step playbooks, fact-checked against Microsoft Learn, for rolling out '
-        f'Copilot and AI agents safely — Conditional Access, Intune, Purview and licensing. Written by an admin, linked to Microsoft Learn.</p>'
-        f'<a class="btn" href="#library">Browse {n} recipes</a> <a class="btn ghost" href="#newsletter">Get the weekly brief</a></div></section>'
-        f'<main class="wrap" id="library">{ad_slot("index-top")}<div class="controls"><input id="q" aria-label="Search recipes" '
+        hero(rel) +
+        f'<main class="wrap" id="library">{ad_slot("index-top")}<h2 class="lib-h">The recipe library</h2><div class="controls"><input id="q" aria-label="Search recipes" '
         f'placeholder="Search recipes: e.g. DLP, MFA, license, agent…"></div><div id="chips" class="chips"></div>'
         f'<p id="count" style="color:#666"></p><div class="grid" id="grid"></div>'
         f'<noscript><ul>' + "".join(f'<li><a href="recipes/{r["id"]}.html">{esc(r["title"])}</a></li>' for r in R) + '</ul></noscript>'
