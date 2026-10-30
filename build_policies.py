@@ -11,7 +11,7 @@ import build_trust as T
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC = ROOT / "data" / "policies"
 OUT = ROOT / "downloads" / "policies"
-GEN_VERSION = "4"
+GEN_VERSION = "5"
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 PH = re.compile(r"\{\{([A-Z_]+)\}\}")
 COMMON_PH = {
@@ -85,7 +85,12 @@ def _validate(e, fname):
     err += [f"unknown ISO theme {x}" for x in fw.get("iso", []) if x not in ISO]
     err += [f"unknown CSF category {x}" for x in fw.get("csf", []) if x not in CSF]
     err += [f"unknown CIS control {x}" for x in fw.get("cis", []) if x not in CIS]
+    if e.get("type", "policy") not in ("policy", "checklist"):
+        err.append("type must be policy or checklist")
     for s in e.get("body", []):
+        for l in s.get("links", []):
+            if not str(l.get("u", "")).startswith("https://learn.microsoft.com/"):
+                err.append(f"links must point to Microsoft Learn: {l}")
         if not s.get("h") or not (s.get("p") or s.get("items")):
             err.append(f"section needs h and p or items: {s.get('h')}")
     if e.get("last_verified") and not DATE.match(e["last_verified"]):
@@ -101,8 +106,19 @@ def load():
         if errs:
             bad.append(f"{f.name}: " + "; ".join(errs))
         elif e["status"] == "published":
-            e["sources"] = SOURCES
+            e.setdefault("type", "policy")
+            learn, seen = [], set()
+            for sec in e["body"]:
+                for l in sec.get("links", []):
+                    if l["u"] not in seen:
+                        seen.add(l["u"]); learn.append({"title": l["t"], "url": l["u"], "checked": e["last_verified"]})
+            e["sources"] = learn + SOURCES
             out.append(e)
+    ids = {x["id"] for x in out}
+    for x in out:
+        for r in x.get("related", []):
+            if r not in ids:
+                bad.append(f'{x["id"]}: related id not found: {r}')
     if bad:
         print("Invalid policy data:\n  " + "\n  ".join(bad), file=sys.stderr)
         sys.exit(1)
@@ -129,10 +145,15 @@ def to_markdown(e):
         L += [f"## {i}. {s['h']}", ""]
         for p in s.get("p", []):
             L += [p, ""]
+        box = "- [ ] " if e.get("type") == "checklist" else "- "
         for it in s.get("items", []):
-            L.append(f"- {it}")
+            L.append(f"{box}{it}")
         if s.get("items"):
             L.append("")
+        if s.get("links"):
+            L += ["Microsoft Learn: " + "; ".join(f"[{l['t']}]({l['u']})" for l in s["links"]), ""]
+    if e.get("related"):
+        L += ["## Related", ""] + [f"- Access management policy template: https://tenantrecipes.github.io/policies/{r}.html" if r == "access-management-policy" else f"- https://tenantrecipes.github.io/policies/{r}.html" for r in e["related"]] + [""]
     L += ["## Framework references", "", "Indicative mapping prepared by Tenant Recipes; confirm against your own statement of applicability.", ""]
     L += [f"- **{a}:** {b}" for a, b in fw_rows(e)] + [""]
     L += ["## Placeholders to replace", ""] + [f"- `{{{{{k}}}}}`: {d}" for k, d in ph_list(e)] + [""]
@@ -192,7 +213,16 @@ def to_docx(e, path):
         for p in s.get("p", []):
             para(p)
         for it in s.get("items", []):
-            para(it, "List Bullet")
+            if e.get("type") == "checklist":
+                para("\u2610  " + it)
+            else:
+                para(it, "List Bullet")
+        if s.get("links"):
+            lp = d.add_paragraph(); r = lp.add_run("Microsoft Learn: " + "; ".join(f"{l['t']} ({l['u']})" for l in s["links"])); r.italic = True; r.font.size = Pt(9)
+    if e.get("related"):
+        d.add_heading("Related", 1)
+        for r in e["related"]:
+            para(f"Access management policy template: https://tenantrecipes.github.io/policies/{r}.html" if r == "access-management-policy" else f"https://tenantrecipes.github.io/policies/{r}.html", "List Bullet")
     d.add_heading("Framework references", 1)
     para("Indicative mapping prepared by Tenant Recipes; confirm against your own statement of applicability.")
     for a, b in fw_rows(e):
@@ -255,19 +285,30 @@ def build(page, esc, signup, fmt_date, E, SITE_NAME):
                 f'<a class="btn" href="{rel}downloads/policies/{e["id"]}.md" download>Markdown (.md)</a></div>')
 
     def landing(rel):
-        cards = "".join(f'<a class="card pl-card" href="{rel}policies/{e["id"]}.html"><div class="tag">Policy template</div><h3>{esc(e["title"])}</h3>'
+        lab = lambda e: "Checklist" if e["type"] == "checklist" else "Policy template"
+        cards = "".join(f'<a class="card pl-card" data-cat="{e["type"]}" href="{rel}policies/{e["id"]}.html"><div class="tag">{lab(e)}</div><h3>{esc(e["title"])}</h3>'
                         f'<p class="clamp">{_ph_html(esc, e["purpose"])}</p><p class="tl-meta"><span class="tl-cost">.docx + .md</span>'
                         f'<span>Review: {esc(e["review"].split(",")[0].rstrip("."))}</span></p></a>' for e in ents)
+        npol = sum(1 for e in ents if e["type"] == "policy"); ncl = len(ents) - npol
+        filt = (f'<div class="chips cy-filter" id="pl-filter" role="group" aria-label="Filter by type" hidden>'
+                f'<button type="button" class="chip on" data-f="" aria-pressed="true">All <span>{len(ents)}</span></button>'
+                f'<button type="button" class="chip" data-f="policy" aria-pressed="false">Policies <span>{npol}</span></button>'
+                f'<button type="button" class="chip" data-f="checklist" aria-pressed="false">Checklists <span>{ncl}</span></button></div>'
+                '<script>(function(){var w=document.getElementById("pl-filter");if(!w)return;w.hidden=false;'
+                'function go(f){w.querySelectorAll("button").forEach(function(x){var on=x.getAttribute("data-f")===f;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on?"true":"false")});'
+                'document.querySelectorAll("#templates [data-cat]").forEach(function(r){r.hidden=!!f&&r.getAttribute("data-cat")!==f})}'
+                'w.addEventListener("click",function(ev){var b=ev.target.closest("button[data-f]");if(b)go(b.getAttribute("data-f"))});'
+                'var h=location.hash.slice(1);if(h==="checklists")go("checklist");else if(h==="policies")go("policy")})();</script>')
         return (f'<section class="gd-hero cy-hero"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div><div class="wrap">'
                 f'<p class="gd-crumb"><a href="{rel}index.html">Home</a> / Policy templates</p>'
                 f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>Framework references checked on official sources · {fmt_date(last)}</p>'
-                '<h1>Security policy templates.<br><span class="grad">Plain language, ready to adapt.</span></h1>'
-                '<p class="hx-lead">Ten short IT security policies written from scratch for small and mid-sized organizations on Microsoft 365. '
+                '<h1>Security policy templates &amp; checklists.<br><span class="grad">Plain language, ready to adapt.</span></h1>'
+                '<p class="hx-lead">Short IT security policies and joiner, mover and leaver checklists written from scratch for small and mid-sized organizations on Microsoft 365. '
                 'Replace the placeholders, adapt with your legal and HR teams, and download as Word or Markdown. References: ISO/IEC 27001, NIST CSF 2.0 and CIS Controls v8.</p>'
-                f'<dl class="hx-stats"><div><dt>Templates</dt><dd>{len(ents)}</dd></div><div><dt>Formats</dt><dd>.docx · .md</dd></div>'
+                f'<dl class="hx-stats"><div><dt>Policies</dt><dd>{npol}</dd></div><div><dt>Checklists</dt><dd>{ncl}</dd></div><div><dt>Formats</dt><dd>.docx · .md</dd></div>'
                 '<div><dt>Frameworks referenced</dt><dd>3</dd></div></dl></div></section>'
                 f'<main class="wrap">{notice()}'
-                f'<section class="sec" aria-labelledby="pl-h"><p class="sec-k">Templates</p><h2 id="pl-h">Pick a policy</h2><div class="grid">{cards}</div></section>'
+                f'<section class="sec" id="templates" aria-labelledby="pl-h"><p class="sec-k">Templates</p><h2 id="pl-h">Pick a policy or checklist</h2>{filt}<div class="grid">{cards}</div></section>'
                 '<section class="sec"><p class="sec-k">How to use them</p><h2>From template to adopted policy</h2><ol class="steps">'
                 '<li><div>Download the Word file and replace every highlighted <code>{{PLACEHOLDER}}</code>.</div></li>'
                 '<li><div>Delete rules that do not fit your organization and add the ones you need; a short policy people follow beats a long one they ignore.</div></li>'
@@ -287,29 +328,35 @@ def build(page, esc, signup, fmt_date, E, SITE_NAME):
             for i, s in enumerate(e["body"], 1):
                 secs += f'<h3 id="s{i}">{i}. {esc(s["h"])}</h3>' + "".join(f'<p>{_ph_html(esc, p)}</p>' for p in s.get("p", []))
                 if s.get("items"):
-                    secs += '<ul>' + "".join(f'<li>{_ph_html(esc, x)}</li>' for x in s["items"]) + '</ul>'
+                    if e["type"] == "checklist":
+                        secs += '<ul class="pl-cl">' + "".join(f'<li><span class="pl-box" aria-hidden="true"></span>{_ph_html(esc, x)}</li>' for x in s["items"]) + '</ul>'
+                    else:
+                        secs += '<ul>' + "".join(f'<li>{_ph_html(esc, x)}</li>' for x in s["items"]) + '</ul>'
+                if s.get("links"):
+                    secs += '<p class="pl-ln">Microsoft Learn: ' + " · ".join(f'<a href="{E(l["u"])}" rel="noopener">{esc(l["t"])}</a>' for l in s["links"]) + '</p>'
             fw = "".join(f'<tr><td>{esc(a)}</td><td>{esc(b)}</td></tr>' for a, b in fw_rows(e))
             phs = "".join(f'<tr><td><code>{{{{{k}}}}}</code></td><td>{esc(v)}</td></tr>' for k, v in ph_list(e))
             meta = (f'<dl class="cy-facts"><div><dt>Purpose</dt><dd>{_ph_html(esc, e["purpose"])}</dd></div>'
                     f'<div><dt>Audience</dt><dd>{_ph_html(esc, e["audience"])}</dd></div><div><dt>Review cadence</dt><dd>{esc(e["review"])}</dd></div></dl>')
             chips = T.chip("list", f'{len(e["body"])} sections') + T.chip("layers", f'{len(fw_rows(e))} framework references') + T.chip("download" if "download" in T._P else "link", ".docx + .md")
-            toc = [("about", "About this template"), ("download", "Download"), ("policy", "Policy text"), ("frameworks", "Framework references"),
+            toc = [("about", "About this template"), ("download", "Download"), ("policy", "Checklist" if e["type"] == "checklist" else "Policy text"), ("frameworks", "Framework references"),
                    ("placeholders", "Placeholders"), ("verified", "Sources & corrections")]
             rel_items = [(x["title"], f'{rel}policies/{x["id"]}.html') for x in ents if x["id"] != e["id"]][:6]
             return (T.page_hero(rel, T.crumbs_dark(rel, path, [("Home", rel + "index.html"), ("Policy templates", rel + "policies/index.html"), (e["short"], None)]),
-                                f'{T.icon("shield")}Policy template', esc(e["title"]), "", chips, kind="cyber")
+                                f'{T.icon("shield")}{"Checklist" if e["type"] == "checklist" else "Policy template"}', esc(e["title"]), "", chips, kind="cyber")
                     + '<main class="wrap pg"><div class="pg-grid"><article class="doc">' + notice()
                     + f'<h2 id="about">About this template</h2>{meta}'
                     + f'<h2 id="download">Download</h2><p>Editable files with the same text. Placeholders are highlighted in the Word file.</p>{dl(rel, e)}'
-                    + f'<h2 id="policy">Policy text</h2><div class="pl-body">{secs}</div>'
+                    + f'<h2 id="policy">{"Checklist" if e["type"] == "checklist" else "Policy text"}</h2><div class="pl-body">{secs}</div>'
+                    + ("".join(f'<p class="pl-rel">Related policy: <a href="{rel}policies/{r}.html">{esc(next(x["title"] for x in ents if x["id"] == r))}</a></p>' for r in e.get("related", [])))
                     + f'<h2 id="frameworks">Framework references</h2><p class="fine">Indicative mapping prepared by us to identifiers checked on the official ISO, NIST and CIS sources. '
                     'It is not an official crosswalk; confirm against your own statement of applicability. ISO control-level numbers are not listed because the control text is copyrighted.</p>'
                     f'<div class="cy-tw"><table class="cy-t"><thead><tr><th>Framework</th><th>Reference</th></tr></thead><tbody>{fw}</tbody></table></div>'
                     + f'<h2 id="placeholders">Placeholders to replace</h2><div class="cy-tw"><table class="cy-t"><thead><tr><th>Placeholder</th><th>Replace with</th></tr></thead><tbody>{phs}</tbody></table></div>'
-                    + T.trust_bottom(rel, path, e["title"], e, "Framework references checked against") + '</article>'
+                    + T.trust_bottom(rel, path, e["title"], e, "Microsoft Learn and framework sources checked" if e["type"] == "checklist" else "Framework references checked against") + '</article>'
                     + T.side_nav(rel, toc, rel_items, "More policy templates")
                     + '</div>' + signup(rel, "policies-" + e["id"]) + '</main>')
-        desc = f'Free {e["short"].lower()} policy template in plain English: ' + PH.sub(lambda m: "your company" if m.group(1) == "COMPANY" else m.group(1).lower(), e["purpose"])
+        desc = (f'Free IT {e["short"].lower()} in plain English: ' if e["type"] == "checklist" else f'Free {e["short"].lower()} policy template in plain English: ') + PH.sub(lambda m: "your company" if m.group(1) == "COMPANY" else m.group(1).lower(), e["purpose"])
         desc = desc if len(desc) <= 160 else desc[:157].rsplit(" ", 1)[0] + "…"
         pages.append(page(f'policies/{e["id"]}.html', f'{e["title"]} template | {SITE_NAME}', desc, body, "article"))
     print(f"Policy templates: {len(ents)} templates, {len(pages)} pages")
@@ -318,9 +365,9 @@ def build(page, esc, signup, fmt_date, E, SITE_NAME):
 
 def search_docs():
     out = [{"t": "Security policy templates", "k": "Page", "c": "Site", "u": "policies/index.html",
-            "s": "Ten free plain-language IT security policy templates with Word and Markdown downloads."}]
+            "s": "Free plain-language IT security policy templates and onboarding, offboarding and role change checklists with Word and Markdown downloads."}]
     for e in load():
         txt = " ".join(" ".join(s.get("p", []) + s.get("items", [])) for s in e["body"])
-        out.append({"t": e["title"], "k": "Policy", "c": "Policy template", "g": [e["short"]], "s": PH.sub(lambda m: "your organization" if m.group(1) == "COMPANY" else m.group(1).lower().replace("_", " "), e["purpose"])[:220],
+        out.append({"t": e["title"], "k": "Policy", "c": "Checklist" if e["type"] == "checklist" else "Policy template", "g": [e["short"]], "s": PH.sub(lambda m: "your organization" if m.group(1) == "COMPANY" else m.group(1).lower().replace("_", " "), e["purpose"])[:220],
                     "x": PH.sub("", txt)[:420], "u": f'policies/{e["id"]}.html', "d": e.get("updated")})
     return out

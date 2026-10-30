@@ -1,0 +1,154 @@
+{
+ "id": "offboarding-checklist",
+ "type": "checklist",
+ "title": "Employee Offboarding Checklist (IT)",
+ "short": "Offboarding checklist",
+ "order": 120,
+ "purpose": "A step-by-step IT checklist to remove a leaver's access at {{COMPANY}} completely and on time, while keeping the business data they leave behind.",
+ "audience": "IT service desk, identity and device administrators, HR, managers and the security team.",
+ "review": "Every 12 months, and after any offboarding that went wrong.",
+ "extra_placeholders": [
+  "LEAVER_HOURS",
+  "RETENTION_DAYS",
+  "IT_SERVICE_DESK"
+ ],
+ "related": [
+  "access-management-policy"
+ ],
+ "frameworks": {
+  "iso": [
+   "Organizational",
+   "People",
+   "Technological"
+  ],
+  "csf": [
+   "PR.AA",
+   "GV.RR"
+  ],
+  "cis": [
+   5,
+   6
+  ]
+ },
+ "body": [
+  {
+   "h": "Choose the path",
+   "items": [
+    "Planned departure: complete the steps below on the last working day, and no later than {{LEAVER_HOURS}} hours after it.",
+    "Immediate or hostile termination: HR tells IT before the conversation with the employee; IT blocks sign-in and revokes sessions while the conversation happens. Do the 'Block access now' section first, then the rest."
+   ],
+   "p": [
+    "HR or the manager opens the leaver ticket as early as possible, with the last working day and who receives the person's mail and files."
+   ]
+  },
+  {
+   "h": "Block access now",
+   "items": [
+    "Block sign-in for the user in Microsoft Entra ID (and disable the account in on-premises Active Directory if synced).",
+    "Reset the password so cached credentials stop working.",
+    "Revoke all sign-in sessions and refresh tokens (in the admin center or with Revoke-MgUserSignInSession).",
+    "Remove or disable the user's registered MFA methods, passkeys and Temporary Access Passes.",
+    "Disable or remove VPN, remote access and any accounts outside Entra single sign-on."
+   ],
+   "links": [
+    {
+     "t": "Revoke user access in an emergency in Microsoft Entra ID",
+     "u": "https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access"
+    },
+    {
+     "t": "Revoke-MgUserSignInSession",
+     "u": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.users.actions/revoke-mgusersigninsession"
+    },
+    {
+     "t": "Manage authentication methods for Microsoft Entra MFA",
+     "u": "https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-userdevicesettings"
+    }
+   ]
+  },
+  {
+   "h": "Mail and files",
+   "items": [
+    "With the manager's or HR's written approval, convert the mailbox to a shared mailbox and give access to the agreed person; or set up forwarding or an auto-reply for a limited period.",
+    "Before removing the licence, check the shared mailbox is under the size limit for unlicensed shared mailboxes or keep a licence.",
+    "Transfer or give access to OneDrive content; the manager gets access by default when the user is deleted, but files are removed after the retention period.",
+    "Make sure legal holds or retention policies are in place before deleting anything."
+   ],
+   "links": [
+    {
+     "t": "Convert a user mailbox to a shared mailbox",
+     "u": "https://learn.microsoft.com/en-us/microsoft-365/admin/email/convert-user-mailbox-to-shared-mailbox"
+    },
+    {
+     "t": "OneDrive retention and deletion",
+     "u": "https://learn.microsoft.com/en-us/sharepoint/retention-and-deletion"
+    },
+    {
+     "t": "Remove a former employee (Microsoft 365 admin)",
+     "u": "https://learn.microsoft.com/en-us/microsoft-365/admin/add-users/remove-former-employee"
+    }
+   ]
+  },
+  {
+   "h": "Groups, apps and roles",
+   "items": [
+    "Remove the user from all security groups, Microsoft 365 groups, Teams and distribution lists.",
+    "Remove admin roles and PIM eligibilities.",
+    "Remove access to business applications that do not use single sign-on (finance, CRM, line-of-business apps).",
+    "Revoke third-party SaaS accounts, API keys and personal access tokens the user created; transfer ownership of app registrations, automations and shared resources.",
+    "Change shared passwords, service account secrets and door or alarm codes the user knew."
+   ],
+   "links": [
+    {
+     "t": "What is Privileged Identity Management?",
+     "u": "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure"
+    }
+   ]
+  },
+  {
+   "h": "Devices and hardware",
+   "items": [
+    "Collect laptop, phone, security keys, badges and other hardware; check against the asset register.",
+    "Company devices: wipe and re-provision, or retire from Intune; personal devices: remove company data with a selective wipe/retire.",
+    "Remove the device objects from Entra ID and Intune when they are no longer used."
+   ],
+   "links": [
+    {
+     "t": "Wipe devices with Microsoft Intune",
+     "u": "https://learn.microsoft.com/en-us/intune/intune-service/remote-actions/devices-wipe"
+    }
+   ]
+  },
+  {
+   "h": "Check and close",
+   "items": [
+    "Review the sign-in and audit logs for the last days of employment for unusual downloads, forwarding rules or sharing.",
+    "Confirm no mail forwarding rules or external sharing links created by the user remain active unless approved.",
+    "Delete or keep the account according to the retention rules; record the decision."
+   ],
+   "links": [
+    {
+     "t": "Search the audit log",
+     "u": "https://learn.microsoft.com/en-us/purview/audit-search"
+    }
+   ]
+  },
+  {
+   "h": "Sign-off",
+   "items": [
+    "The manager and HR confirms every item above is done or marked not applicable with a reason.",
+    "IT confirms the account, device and access changes, with date and initials.",
+    "The completed checklist is stored with the ticket or HR record for at least {{RETENTION_DAYS}} days."
+   ]
+  },
+  {
+   "h": "Ownership and review",
+   "p": [
+    "Checklist owner: {{OWNER}}. Approved by: {{APPROVER}}. Effective from: {{EFFECTIVE_DATE}}. Next review: {{REVIEW_DATE}}."
+   ]
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

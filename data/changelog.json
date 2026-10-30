@@ -2,6 +2,11 @@
  {
   "kind": "site",
   "date": "2026-10-30",
+  "text": "New: IT checklists for onboarding, offboarding (planned and immediate) and role changes, with Microsoft Learn links for each Microsoft 365 step, Word and Markdown downloads, and a Policies / Checklists filter on the policy templates page."
+ },
+ {
+  "kind": "site",
+  "date": "2026-10-30",
   "text": "New: Policy templates. Ten plain-language IT security policies (acceptable use, password and MFA, BYOD, AI and Copilot, information classification, incident response, backup, access management, patching, third-party security) with placeholders, ISO 27001, NIST CSF 2.0 and CIS v8 references, and Word and Markdown downloads."
  },
  {

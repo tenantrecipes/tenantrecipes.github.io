@@ -221,6 +221,20 @@
    "template",
    "templates",
    "policy template"
+  ],
+  [
+   "offboarding",
+   "leaver",
+   "leavers",
+   "termination",
+   "exit"
+  ],
+  [
+   "onboarding",
+   "joiner",
+   "joiners",
+   "new starter",
+   "new hire"
   ]
  ],
  "questions": [
@@ -319,6 +333,14 @@
   [
    "how do I write an incident response policy",
    "policies/incident-response-policy.html"
+  ],
+  [
+   "what do I do when an employee leaves",
+   "policies/offboarding-checklist.html"
+  ],
+  [
+   "how do I onboard a new employee",
+   "policies/onboarding-checklist.html"
   ]
  ]
 }

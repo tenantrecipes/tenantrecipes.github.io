@@ -1,0 +1,128 @@
+{
+ "id": "onboarding-checklist",
+ "type": "checklist",
+ "title": "Employee Onboarding Checklist (IT)",
+ "short": "Onboarding checklist",
+ "order": 110,
+ "purpose": "A step-by-step IT checklist so new starters at {{COMPANY}} get the right account, licences, device and access on day one, securely and without guesswork.",
+ "audience": "IT service desk, identity and device administrators, HR and hiring managers.",
+ "review": "Every 12 months, or when HR, identity or device processes change.",
+ "extra_placeholders": [
+  "IT_SERVICE_DESK",
+  "RETENTION_DAYS"
+ ],
+ "related": [
+  "access-management-policy"
+ ],
+ "frameworks": {
+  "iso": [
+   "Organizational",
+   "People",
+   "Technological"
+  ],
+  "csf": [
+   "PR.AA",
+   "PR.AT"
+  ],
+  "cis": [
+   5,
+   6,
+   14
+  ]
+ },
+ "body": [
+  {
+   "h": "Before day 1: request and approval",
+   "items": [
+    "HR has confirmed the start date, job title, department, manager and contract end date (if any) in the HR system.",
+    "The manager has requested role-based access using the standard role template; any extra access has a documented approval.",
+    "Privileged or sensitive access (admin roles, finance, HR data) has a second approval and an end date."
+   ]
+  },
+  {
+   "h": "Before day 1: account and licences",
+   "items": [
+    "Create the user in Microsoft Entra ID (or let HR-driven provisioning create it) with correct name, department, manager and usage location.",
+    "Add the user to the role-based groups; licences are assigned through group-based licensing rather than by hand.",
+    "Set an account expiry or review date for contractors and temporary staff.",
+    "Mailbox, OneDrive and Teams are created by the licence; add shared mailboxes, Teams and SharePoint sites the role needs."
+   ],
+   "links": [
+    {
+     "t": "Create, invite and delete users in Microsoft Entra ID",
+     "u": "https://learn.microsoft.com/en-us/entra/fundamentals/how-to-create-delete-users"
+    },
+    {
+     "t": "Assign licenses to a group",
+     "u": "https://learn.microsoft.com/en-us/entra/identity/users/licensing-groups-assign"
+    },
+    {
+     "t": "What are lifecycle workflows?",
+     "u": "https://learn.microsoft.com/en-us/entra/id-governance/what-are-lifecycle-workflows"
+    }
+   ]
+  },
+  {
+   "h": "Before day 1: sign-in and device",
+   "items": [
+    "Prepare a Temporary Access Pass (TAP) so the new starter can register MFA or passkeys on day one without a known password; share it through a verified channel.",
+    "Register the laptop for Windows Autopilot (or prepare the device in your MDM) and assign it to the user.",
+    "Prepare the phone or confirm the BYOD route and app protection policies."
+   ],
+   "links": [
+    {
+     "t": "Configure a Temporary Access Pass",
+     "u": "https://learn.microsoft.com/en-us/entra/identity/authentication/howto-authentication-temporary-access-pass"
+    },
+    {
+     "t": "Overview of Windows Autopilot",
+     "u": "https://learn.microsoft.com/en-us/autopilot/overview"
+    }
+   ]
+  },
+  {
+   "h": "Day 1",
+   "items": [
+    "Verify identity in person or by video before handing over the TAP or device.",
+    "User signs in, registers phishing-resistant MFA or an authenticator app, and the TAP expires or is removed.",
+    "Device completes Autopilot enrolment and shows as compliant.",
+    "User confirms access to mail, Teams, OneDrive and the role's core applications.",
+    "Give the acceptable use, password and MFA, and AI use policies; record acceptance.",
+    "Explain how to report phishing and incidents to {{IT_SERVICE_DESK}} and {{SECURITY_CONTACT}}."
+   ],
+   "links": [
+    {
+     "t": "Manage authentication methods for Microsoft Entra MFA",
+     "u": "https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-userdevicesettings"
+    }
+   ]
+  },
+  {
+   "h": "First week",
+   "items": [
+    "Security awareness training is assigned and has a due date.",
+    "Manager checks that access matches the role, no more and no less; remove anything granted 'just in case'.",
+    "Any temporary or project access has an end date.",
+    "Open issues are closed or tracked in a ticket."
+   ]
+  },
+  {
+   "h": "Sign-off",
+   "items": [
+    "The hiring manager confirms every item above is done or marked not applicable with a reason.",
+    "IT confirms the account, device and access changes, with date and initials.",
+    "The completed checklist is stored with the ticket or HR record for at least {{RETENTION_DAYS}} days."
+   ]
+  },
+  {
+   "h": "Ownership and review",
+   "p": [
+    "Checklist owner: {{OWNER}}. Approved by: {{APPROVER}}. Effective from: {{EFFECTIVE_DATE}}. Next review: {{REVIEW_DATE}}."
+   ]
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

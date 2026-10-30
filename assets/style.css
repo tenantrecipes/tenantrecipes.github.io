@@ -599,3 +599,11 @@ header.sh .nv-md a[aria-current=page]{background:#eef4ff;color:#1366d6}
 @media (max-width:760px){header.sh{position:relative;z-index:50;backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff}
  header.sh .nv-md{left:12px;right:12px;min-width:0}}
 html.nv-open .btt{opacity:0;visibility:hidden}
+
+/* Checklists */
+.pl-cl{list-style:none;padding-left:0!important}
+.pl-cl li{position:relative;padding-left:32px;margin:10px 0}
+.pl-box{position:absolute;left:0;top:.2em;width:18px;height:18px;border:2px solid #9aa6bf;border-radius:4px;background:#fff}
+.pl-ln{font-size:.88rem;color:#5a6472;margin:6px 0 18px}.pl-ln a{color:#1366d6}
+.pl-rel{margin:18px 0;padding:12px 14px;border:1px solid #e2e6ef;border-radius:10px;background:#fbfcff}
+.pl-card[hidden]{display:none}
