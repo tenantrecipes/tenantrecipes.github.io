@@ -6,5 +6,7 @@ document.querySelectorAll("pre.cb").forEach(function(p){var b=document.createEle
 b.addEventListener("click",function(){copy(p.querySelector("code").innerText,b,"Copy")});p.appendChild(b)});
 document.querySelectorAll("[data-copy]").forEach(function(b){var src=document.getElementById(b.dataset.copy);if(!src)return;var lab=(b.querySelector("span")||b).textContent;
 b.addEventListener("click",function(){copy(src.textContent,b,lab)})});
+document.querySelectorAll("[data-share-copy]").forEach(function(b){b.addEventListener("click",function(){copy(b.dataset.shareCopy,b)})});
+if(navigator.share){document.querySelectorAll("[data-share-native]").forEach(function(b){b.hidden=false;b.addEventListener("click",function(){navigator.share({title:b.dataset.title,url:b.dataset.url}).catch(function(){})})})}
 document.querySelectorAll("[data-print]").forEach(function(b){b.addEventListener("click",function(){window.print()})});
 });

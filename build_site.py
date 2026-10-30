@@ -143,6 +143,7 @@ def page(path, title, desc, body, og_type="website"):
     desc = meta_desc(desc)
     html = (f'<!doctype html><html lang="en"><head>{head(title, desc, rel, path, og_type)}</head><body>\n'
             f'{nav(rel)}{body(rel)}\n{footer(rel, path, title.split(" | ")[0], page_updated(path))}</body></html>\n')
+    html = UX.add_share(html, path, title.split(" | ")[0])
     out = DIST / path
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html)

@@ -319,3 +319,62 @@ def og_image(path, RID):
     if path.startswith("newsletter"):
         return "og/newsletter.png", "The weekly Tenant Recipes brief"
     return "og-image.png", f"{C.SITE_NAME}: {C.SITE_TAGLINE}"
+
+
+# ---------------------------------------------------------------- share buttons (plain links, no third-party scripts)
+_SI = {
+    "linkedin": ('fill', '<path d="M4 9h3.2v11H4zM5.6 3.6a1.85 1.85 0 110 3.7 1.85 1.85 0 010-3.7zM9.8 9h3v1.5c.5-.9 1.6-1.8 3.3-1.8 3.4 0 4 2.2 4 5.1V20h-3.2v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V20H9.8z"/>'),
+    "x": ('fill', '<path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.4 4.7H5.6z"/>'),
+    "reddit": ('fill', '<path fill-rule="evenodd" d="M12 8.2c-4.6 0-8.3 2.6-8.3 5.9S7.4 20 12 20s8.3-2.6 8.3-5.9S16.6 8.2 12 8.2zM8.8 15.4a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8zm6.4 0a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8z"/><circle cx="17.6" cy="4.6" r="1.6"/><path d="M12.6 8.3l1.3-4.4 3.7.8-.2.9-2.8-.6-1 3.4z"/>'),
+    "bluesky": ('fill', '<path d="M6.3 4.4C8.6 6.1 11 9.6 12 11.4c1-1.8 3.4-5.3 5.7-7 1.6-1.2 4.3-2.2 4.3.9 0 .6-.4 5.2-.6 5.9-.7 2.6-3.3 3.2-5.6 2.8 4 .7 5 2.9 2.8 5.2-4.2 4.3-6-1.1-6.5-2.5L12 16l-.1.7c-.5 1.4-2.3 6.8-6.5 2.5-2.2-2.3-1.2-4.5 2.8-5.2-2.3.4-4.9-.2-5.6-2.8C2.4 10.5 2 5.9 2 5.3c0-3.1 2.7-2.1 4.3-.9z"/>'),
+    "mail": ('stroke', '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/>'),
+    "link": ('stroke', T._P["link"]),
+    "share": ('stroke', '<circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1"/>'),
+}
+
+
+def _sic(name):
+    kind, body = _SI[name]
+    attrs = 'fill="currentColor" stroke="none"' if kind == "fill" else 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'
+    return f'<svg class="shr-i" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" focusable="false" {attrs}>{body}</svg>'
+
+
+def share_bar(path, title, where="top"):
+    from urllib.parse import quote
+    url = f"{SITE}/{path}"
+    u, t = quote(url, safe=""), quote(title, safe="")
+    links = [
+        ("linkedin", "LinkedIn", f"https://www.linkedin.com/sharing/share-offsite/?url={u}"),
+        ("x", "X", f"https://x.com/intent/post?text={t}&url={u}"),
+        ("reddit", "Reddit", f"https://www.reddit.com/submit?url={u}&title={t}"),
+        ("bluesky", "Bluesky", f"https://bsky.app/intent/compose?text={quote(title + ' ' + url, safe='')}"),
+        ("mail", "Email", f"mailto:?subject={t}&body={quote(title + chr(10) + chr(10) + url, safe='')}"),
+    ]
+    a = "".join(f'<a class="shr-b shr-{k}" href="{E(h, quote=True)}"' + ('' if k == "mail" else ' target="_blank" rel="noopener noreferrer"')
+                + f' aria-label="Share on {n}' + (' (opens in a new tab)' if k != "mail" else '') + f'" title="Share on {n}">{_sic(k)}<span>{n}</span></a>'
+                for k, n, h in links)
+    a = a.replace('aria-label="Share on Email"', 'aria-label="Share by email"').replace('title="Share on Email"', 'title="Share by email"')
+    a += (f'<button class="shr-b" type="button" data-share-copy="{E(url, quote=True)}" aria-label="Copy link to this page">{_sic("link")}<span>Copy link</span></button>'
+          f'<button class="shr-b shr-native" type="button" data-share-native data-title="{esc(title)}" data-url="{E(url, quote=True)}" aria-label="Share with an app on this device" hidden>{_sic("share")}<span>Share…</span></button>')
+    lab = "Share this page" if where == "top" else "Found this useful? Share it with a colleague"
+    return f'<div class="shr shr-{where}" role="group" aria-label="{"Share this page" if where == "top" else "Share this page (end of page)"}"><span class="shr-l">{lab}</span>{a}</div>'
+
+
+_SHARE_RULES = [  # (path regex, top-insert regex (insert AFTER match), bottom-insert regex (insert BEFORE match))
+    (r"^recipes/[^/]+\.html$", r'id="rx-steps">.*?</script></div>', r'<section class="vs" id="verified"'),
+    (r"^guides/copilot-license-checks\.html$", r'data-print="1">.*?</button></div>', r'<section class="vs" id="verified"'),
+    (r"^guides/(?!index)[^/]+\.html$", r'<div class="gd-body">', r'<section class="vs" id="verified"'),
+    (r"^security/[a-z0-9-]+-[a-z0-9-]+\.html$", r'<article class="doc">', r'<section class="vs" id="verified"'),
+    (r"^newsletter-sample\.html$", r'<article class="doc nl">', r'</article></main>'),
+]
+
+
+def add_share(html, path, title):
+    for pr, top, bot in _SHARE_RULES:
+        if re.match(pr, path):
+            m = re.search(top, html, re.S)
+            b = re.search(bot, html)
+            if not m or not b:
+                raise SystemExit(f"share bar: marker not found on {path}")
+            return html[:m.end()] + share_bar(path, title, "top") + html[m.end():b.start()] + share_bar(path, title, "end") + html[b.start():]
+    return html
