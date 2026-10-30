@@ -1,0 +1,42 @@
+{
+ "id": "certipy",
+ "name": "Certipy",
+ "vendor": "ly4k",
+ "category": "Active Directory",
+ "what": "A Python toolkit for enumerating and testing Active Directory Certificate Services (AD CS). It finds misconfigured certificate templates and enrollment paths that can escalate a low-privileged domain user to high privilege (the ESC-class issues from SpecterOps research).",
+ "when": "On every AD engagement where AD CS is present, and for purple-team validation after you harden templates, enrollment permissions and ESC6/ESC8-style relay paths.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://github.com/ly4k/Certipy",
+ "repo": "https://github.com/ly4k/Certipy",
+ "example": [
+  "Install with Python 3.12+: `pip install certipy-ad` (command is `certipy`).",
+  "Against an approved lab domain, enumerate with a domain user: `certipy find -u analyst@contoso.lab -p 'REDACTED' -dc-ip 10.10.10.10 -vulnerable -stdout`.",
+  "Triage flagged ESC findings with the Certipy wiki privilege-escalation notes and your AD CS hardening baseline.",
+  "Open tickets for over-permissive templates, enrollment rights on Domain Controllers, and HTTP enrollment endpoints that allow NTLM relay; re-run after fixes."
+ ],
+ "pitfalls": [
+  "Requesting certificates or abusing templates outside a signed scope can create lasting privileged credentials; stick to find/enumerate until abuse is approved.",
+  "BloodHound CE and Certipy complement each other; export Certipy data into BloodHound when you need graph paths.",
+  "Python version matters: current releases expect 3.12+."
+ ],
+ "sources": [
+  {
+   "title": "Certipy on GitHub",
+   "url": "https://github.com/ly4k/Certipy",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Certipy wiki (installation and privilege escalation)",
+   "url": "https://github.com/ly4k/Certipy/wiki",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 220,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

@@ -1,0 +1,42 @@
+{
+ "id": "roadtools",
+ "name": "ROADtools (ROADrecon)",
+ "vendor": "Dirk-jan Mollema",
+ "category": "M365 & Entra",
+ "what": "A framework for Entra ID (Azure AD) exploration. ROADrecon authenticates to Microsoft Graph, stores a tenant snapshot locally, and serves an HTML interface so red and blue teams can inspect users, apps, roles and relationships without clicking through the portal all day.",
+ "when": "During Entra-focused assessments or continuous purple-team reviews when you need an offline, queryable picture of directory objects, app permissions and privileged roles.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://github.com/dirkjanm/ROADtools",
+ "repo": "https://github.com/dirkjanm/ROADtools",
+ "example": [
+  "Install ROADrecon from PyPI into a virtualenv on an admin workstation: `pip install roadrecon`.",
+  "Authenticate with an account that has agreed Graph read permissions and gather: `roadrecon auth` then `roadrecon gather`.",
+  "Start the GUI against the local database: `roadrecon gui`, and review high-privilege roles, stale guests and over-permissioned apps.",
+  "Export findings into tickets; re-gather after remediation to show the diff."
+ ],
+ "pitfalls": [
+  "Gathered data is a full tenant map; protect the database like production identity exports.",
+  "Permissions that are too broad for the test account create lasting risk; use least privilege and revoke after the test.",
+  "ROADtools is not a substitute for Conditional Access and identity governance reviews; combine with Maester or ScubaGear."
+ ],
+ "sources": [
+  {
+   "title": "ROADtools on GitHub",
+   "url": "https://github.com/dirkjanm/ROADtools",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Getting started with ROADrecon (wiki)",
+   "url": "https://github.com/dirkjanm/ROADtools/wiki/Getting-started-with-ROADrecon",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 280,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

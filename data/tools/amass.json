@@ -1,0 +1,47 @@
+{
+ "id": "amass",
+ "name": "OWASP Amass",
+ "vendor": "OWASP",
+ "category": "External exposure",
+ "what": "An OWASP attack-surface and asset discovery toolkit. Its strongest day-to-day use is subdomain and related asset enumeration from OSINT sources, with optional active techniques when you are allowed to probe the target.",
+ "when": "At the start of an external assessment or continuous exposure program to build the inventory of domains and subdomains that belong to your organization before you scan them.",
+ "license": "Apache-2.0",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://owasp.org/www-project-amass/",
+ "repo": "https://github.com/owasp-amass/amass",
+ "example": [
+  "Install from the OWASP Amass releases or your package manager on an assessment host.",
+  "Passive enumeration first: `amass enum -passive -d contoso.com -o amass-passive.txt`.",
+  "With approval for active checks, run a fuller enum and compare against DNS and certificate inventory.",
+  "Feed confirmed in-scope hosts into Nuclei, Nmap or your vulnerability scanner; drop anything not yours."
+ ],
+ "pitfalls": [
+  "Passive mode still queries third-party APIs; configure API keys responsibly and respect their terms.",
+  "Active mode can include techniques that touch the target; keep it inside the signed scope.",
+  "Results include noise and third-party SaaS hostnames; verify ownership before scanning."
+ ],
+ "sources": [
+  {
+   "title": "OWASP Amass project page",
+   "url": "https://owasp.org/www-project-amass/",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "owasp-amass/amass on GitHub",
+   "url": "https://github.com/owasp-amass/amass",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "OWASP Amass documentation",
+   "url": "https://owasp-amass.github.io/docs/",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 320,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

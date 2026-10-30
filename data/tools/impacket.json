@@ -1,0 +1,42 @@
+{
+ "id": "impacket",
+ "name": "Impacket",
+ "vendor": "Fortra Core Security",
+ "category": "Lateral movement",
+ "what": "A Python library and example scripts for low-level Windows and directory protocols (SMB, MSRPC, Kerberos, LDAP, WMI and others). Pentesters use the example tools for authenticated remote execution, secret retrieval and Kerberos ticket work in labs they control.",
+ "when": "During an authorized internal pentest when you already have credentials or tickets and need protocol-level access that GUI tools do not expose, for example remote command execution over SMB/WMI or Kerberos ticket crafting in a lab.",
+ "license": "Apache Software License 1.1 (modified)",
+ "cost": "open source",
+ "cost_note": "Provided for research and education; read the LICENSE and project disclaimer before commercial packaging.",
+ "url": "https://github.com/fortra/impacket",
+ "repo": "https://github.com/fortra/impacket",
+ "example": [
+  "Install the latest stable release with `pipx install impacket` on an assessment workstation you control.",
+  "With written approval and a domain account in scope, list SMB shares: `impacket-smbclient 'CONTOSO/analyst:REDACTED@dc01.contoso.lab'`.",
+  "For remote command execution over the service control manager on an approved host: `impacket-psexec 'CONTOSO/analyst:REDACTED@ws01.contoso.lab'`.",
+  "Document every script name and target IP in the engagement log; prefer read-only scripts until the client authorizes write actions."
+ ],
+ "pitfalls": [
+  "Many example scripts are dual-use and will look like attacker activity; coordinate with SOC and EDR exclusions for the test window.",
+  "Wrong targets or over-broad credentials can disrupt production; bind each run to the signed scope list.",
+  "The project states it is aimed at research and education, not production product embedding."
+ ],
+ "sources": [
+  {
+   "title": "Impacket on GitHub (Fortra)",
+   "url": "https://github.com/fortra/impacket",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Impacket LICENSE",
+   "url": "https://github.com/fortra/impacket/blob/master/LICENSE",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 210,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

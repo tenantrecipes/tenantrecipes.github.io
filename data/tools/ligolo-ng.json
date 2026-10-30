@@ -1,0 +1,37 @@
+{
+ "id": "ligolo-ng",
+ "name": "Ligolo-ng",
+ "vendor": "nicocha30",
+ "category": "Pivoting",
+ "what": "A tunneling tool for authorized network pivoting. Instead of a simple SOCKS proxy it brings up a TUN interface so you can route IP traffic into a compromised or jump network with multiple concurrent tunnels.",
+ "when": "During an internal or assumed-breach engagement when you have a foothold agent on an approved host and need to reach otherwise inaccessible segments without dropping a heavyweight C2 solely for routing.",
+ "license": "GPL-3.0",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://github.com/nicocha30/ligolo-ng",
+ "repo": "https://github.com/nicocha30/ligolo-ng",
+ "example": [
+  "Download matching proxy and agent binaries from the Ligolo-ng GitHub releases for your platforms.",
+  "Start the proxy on the assessment host, create a TUN interface as documented, and run the agent on the approved foothold.",
+  "Add routes only for in-scope subnets, then continue scanning or administration through the tunnel.",
+  "Close tunnels and remove routes when that phase of the test ends."
+ ],
+ "pitfalls": [
+  "The project is explicitly for authorized network penetration tests; unauthorized pivoting is illegal.",
+  "TUN setup needs privileges on the proxy host; practice in a lab before the engagement.",
+  "Tunnel traffic still needs to match the rules of engagement and any geo or segmentation constraints."
+ ],
+ "sources": [
+  {
+   "title": "Ligolo-ng on GitHub",
+   "url": "https://github.com/nicocha30/ligolo-ng",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 330,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

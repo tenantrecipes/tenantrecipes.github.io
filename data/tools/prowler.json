@@ -1,0 +1,42 @@
+{
+ "id": "prowler",
+ "name": "Prowler",
+ "vendor": "Prowler, Inc.",
+ "category": "Cloud assessment",
+ "what": "An open-source cloud security and compliance scanner with hundreds of checks across AWS, Azure and Google Cloud. It can run as a CLI, SDK or self-hosted stack and maps findings to common frameworks.",
+ "when": "For recurring configuration reviews of cloud accounts you own, CI pipelines, and purple-team validation after hardening Identity, storage, logging and network controls.",
+ "license": "Apache-2.0",
+ "cost": "open source",
+ "cost_note": "Open-source CLI/SDK/self-hosted are free; Prowler also offers commercial cloud products.",
+ "url": "https://docs.prowler.com/introduction",
+ "repo": "https://github.com/prowler-cloud/prowler",
+ "example": [
+  "Install the CLI per the current docs (pip or container) on a jump host with read-only cloud credentials.",
+  "Run a provider scan for an approved Azure subscription or AWS account and write JSON/HTML output.",
+  "Filter to identity, storage and logging checks first; open tickets for failed high findings with the check ID from the report.",
+  "Re-run on a schedule and track the trend instead of treating one scan as a one-off audit."
+ ],
+ "pitfalls": [
+  "Scanner credentials need broad read access; lock them to the assessment principal and rotate after use.",
+  "Checks can produce false positives around intentional exceptions; verify before remediating production.",
+  "Multi-cloud setups need separate provider configuration; do not assume AWS flags apply to Azure."
+ ],
+ "sources": [
+  {
+   "title": "Prowler documentation (introduction)",
+   "url": "https://docs.prowler.com/introduction",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "prowler-cloud/prowler on GitHub",
+   "url": "https://github.com/prowler-cloud/prowler",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 300,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

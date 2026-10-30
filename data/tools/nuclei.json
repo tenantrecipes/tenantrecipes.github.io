@@ -3,8 +3,8 @@
  "name": "Nuclei",
  "vendor": "ProjectDiscovery",
  "category": "Vulnerability scanning",
- "what": "A fast open-source scanner that runs YAML templates against URLs and hosts to detect known vulnerabilities and misconfigurations.",
- "when": "To check your own web-facing assets for newly published issues quickly, or to automate checks in a pipeline.",
+ "what": "A fast open-source vulnerability scanner from ProjectDiscovery that runs YAML templates against URLs and hosts. Template packs cover known CVEs, misconfigurations, exposures and technology fingerprints, and you can add private templates for your own environment.",
+ "when": "To re-check your own web-facing assets quickly after a new CVE drops, to regression-test fixes, or to run a curated template set in CI against staging.",
  "license": "MIT",
  "cost": "open source",
  "cost_note": null,
@@ -12,14 +12,15 @@
  "repo": "https://github.com/projectdiscovery/nuclei",
  "example": [
   "Install with Go: `go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest`.",
-  "Run against one approved target: `nuclei -u https://app.contoso.com`.",
-  "Narrow the run to the most important templates: `nuclei -u https://app.contoso.com -severity critical,high`.",
-  "Verify each hit manually and create tickets only for confirmed findings."
+  "Update the public template pack before each engagement: `nuclei -update-templates`.",
+  "Run against one approved target with severity filter: `nuclei -u https://app.contoso.com -severity critical,high -o nuclei-app.txt`.",
+  "For a list of in-scope URLs: `nuclei -l urls.txt -t http/cves/ -rate-limit 50`.",
+  "Verify each hit manually; open tickets only for confirmed findings with template ID and evidence."
  ],
  "pitfalls": [
   "Community templates vary in quality; confirm findings before you escalate.",
-  "Some templates send active requests; never point it at systems you do not own.",
-  "Rate-limit scans against production."
+  "Some templates send active or exploit-like requests; never point them at systems you do not own.",
+  "Unthrottled scans against production can look like an attack and may trip WAFs; set `-rate-limit` and notify the SOC."
  ],
  "sources": [
   {

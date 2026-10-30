@@ -9,7 +9,8 @@ import build_trust as T
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC = ROOT / "data" / "tools"
 CATEGORIES = ["Domain & email", "External exposure", "M365 & Entra", "Active Directory", "Vulnerability scanning",
-              "Web apps", "Client hardening", "Leaks & threat intel", "Methods"]
+              "Web apps", "Client hardening", "Leaks & threat intel", "Credential access", "Lateral movement",
+              "Cloud assessment", "Pivoting", "Methods"]
 COSTS = {"free", "open source", "freemium"}
 KINDS = {"tool", "method"}
 REQ = ["id", "status", "kind", "name", "category", "what", "when", "cost", "url", "example", "pitfalls", "sources", "last_verified"]
@@ -102,8 +103,9 @@ def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 f'<p class="gd-crumb"><a href="{rel}index.html">Home</a> / Tools</p>'
                 f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>Checked on each tool\'s official site · last verified {fmt_date(last)}</p>'
                 '<h1>Security tools &amp; testing.<br><span class="grad">See your exposure before attackers do.</span></h1>'
-                '<p class="hx-lead">Free and open-source tools to check your domains, internet exposure, Microsoft 365 tenant, Active Directory, '
-                'web apps and Windows clients, each with a short example and the pitfalls. Plus a method for scoping an internal pentest.</p>'
+                '<p class="hx-lead">Free and open-source tools used by pentesters and purple-team admins: domain and internet exposure checks, '
+                'Microsoft 365 and Entra, Active Directory and AD CS, credential access and lateral movement, web fuzzing, cloud assessment and pivoting. '
+                'Each entry has a short example and the pitfalls. Plus a method for scoping an internal pentest.</p>'
                 f'<dl class="hx-stats">{st}</dl></div></section>'
                 f'<main class="wrap">{notice()}'
                 f'<section class="sec" id="tools" aria-labelledby="tl-h"><p class="sec-k">Toolbox</p><h2 id="tl-h">Pick a tool by what you want to check</h2>{filt}'
@@ -113,7 +115,7 @@ def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 'confirm on the official page before you rely on them.</p>'
                 f'{signup(rel, "tools-index")}</main>')
     pages.append(page("tools/index.html", f"Security tools & testing: free scanners and checks | {SITE_NAME}",
-                      "Free and open-source security tools for domains, external exposure, Microsoft 365, Active Directory, web apps and Windows, with examples and pitfalls.",
+                      "Advanced free and open-source security tools for pentests and purple teams: AD, Entra, credential access, web fuzzing, cloud assessment and pivoting.",
                       landing))
 
     for e in ents:

@@ -1,0 +1,42 @@
+{
+ "id": "aadinternals",
+ "name": "AADInternals",
+ "vendor": "Nestori Syynimaa / Gerenios",
+ "category": "M365 & Entra",
+ "what": "A PowerShell module for administering and researching Entra ID and Microsoft 365. It exposes many undocumented or portal-hidden operations that identity engineers and pentesters use for deep tenant reviews.",
+ "when": "When portal clicks are not enough: verifying federation settings, application credentials, sync artefacts or other Entra configuration details during an authorized assessment.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://aadinternals.com/aadinternals/",
+ "repo": "https://github.com/Gerenios/AADInternals",
+ "example": [
+  "On an approved Windows admin workstation: `Install-Module AADInternals` from the PowerShell Gallery.",
+  "Import the module and authenticate with the method that matches your test account (see the AADInternals documentation).",
+  "Run only the read-oriented cmdlets listed in the engagement plan first; escalate to write cmdlets only with a change ticket.",
+  "Record every cmdlet and tenant ID in the engagement log and revoke any temporary consent when finished."
+ ],
+ "pitfalls": [
+  "Several cmdlets can change federation, credentials or sync behaviour; treat write actions as production changes.",
+  "EDR and cloud logs will show unusual Graph and AD-related traffic; notify the SOC.",
+  "Keep the module updated from the official gallery/GitHub; random mirrors are a supply-chain risk."
+ ],
+ "sources": [
+  {
+   "title": "AADInternals documentation",
+   "url": "https://aadinternals.com/aadinternals/",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "AADInternals on GitHub",
+   "url": "https://github.com/Gerenios/AADInternals",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 290,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

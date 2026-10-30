@@ -1,0 +1,47 @@
+{
+ "id": "burp-suite",
+ "name": "Burp Suite Community Edition",
+ "vendor": "PortSwigger",
+ "category": "Web apps",
+ "what": "An intercepting HTTP(S) proxy and manual web testing toolkit. Community Edition covers proxying, repeater-style request editing and basic tools; Burp Suite Professional adds the automated scanner, Intruder at full speed and collaboration features.",
+ "when": "For hands-on testing of web apps and APIs you own or have written permission to test, especially when you need to manipulate requests that automated scanners miss.",
+ "license": "PortSwigger EULA",
+ "cost": "freemium",
+ "cost_note": "Community Edition is free for download and use under PortSwigger's Community terms. Professional is a paid per-user subscription.",
+ "url": "https://portswigger.net/burp/communitydownload",
+ "repo": null,
+ "example": [
+  "Download Community Edition from PortSwigger and install the CA certificate in your browser for HTTPS interception.",
+  "Configure the browser proxy to Burp, browse only the in-scope application, and confirm traffic appears in the Proxy HTTP history.",
+  "Send interesting requests to Repeater, change parameters safely, and note authz/idor behaviour for the report.",
+  "If your team needs active scanning and unrestricted Intruder, evaluate Professional against your budget; do not confuse Community limits with product bugs."
+ ],
+ "pitfalls": [
+  "Community throttles some automated features; that is expected, not a misconfiguration.",
+  "Intercepting credentials and session tokens means the Burp project file is sensitive; encrypt and delete after the engagement.",
+  "Active scanning (Pro) can submit destructive requests; keep it off production unless the rules of engagement say otherwise."
+ ],
+ "sources": [
+  {
+   "title": "Burp Suite Community Edition download",
+   "url": "https://portswigger.net/burp/communitydownload",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Burp Suite Community terms",
+   "url": "https://portswigger.net/burp/tc-community",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Burp Suite subscription model",
+   "url": "https://portswigger.net/support/burp-suite-licensing-model",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 270,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

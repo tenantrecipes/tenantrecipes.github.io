@@ -3,8 +3,8 @@
  "name": "ZAP",
  "vendor": "ZAP by Checkmarx (open source)",
  "category": "Web apps",
- "what": "An open-source web application security scanner and proxy. It can spider a site, scan passively and actively, and run as a baseline scan in Docker.",
- "when": "To test your own web apps in a test or staging environment, and to add a passive baseline scan to CI/CD.",
+ "what": "An open-source web application security proxy and scanner (ZAP by Checkmarx). It spiders sites, supports passive and active scanning, API/OpenAPI imports and a Docker baseline scan suitable for CI.",
+ "when": "To test your own web apps in test or staging, to add a passive baseline gate in CI/CD, and as a free alternative or complement when Burp Professional is not available.",
  "license": "Apache-2.0",
  "cost": "open source",
  "cost_note": null,
@@ -12,14 +12,14 @@
  "repo": "https://github.com/zaproxy/zaproxy",
  "example": [
   "Start with the passive baseline scan in Docker: `docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t https://staging.contoso.com`.",
-  "To save a report, mount a working folder and add `-r report.html`, as shown in the baseline scan docs.",
-  "Triage the warnings, and mark false positives in a config file so later runs stay quiet.",
-  "Run active scans only against test environments you are allowed to attack."
+  "Mount a working folder and add `-r report.html` so the HTML report lands on disk, as shown in the baseline docs.",
+  "For authenticated areas, configure a context and login sequence in the desktop UI before active scanning.",
+  "Triage warnings, mark false positives in a config file, and keep active scans off production unless the rules of engagement allow them."
  ],
  "pitfalls": [
   "Active scans submit forms and can create data or trigger emails; avoid production.",
-  "Authenticated areas need a login configuration, or ZAP only sees the public pages.",
-  "The baseline scan is passive and will not find every issue."
+  "Without a login configuration ZAP only sees public pages.",
+  "The baseline scan is passive and will not replace a manual review or a full active policy."
  ],
  "sources": [
   {

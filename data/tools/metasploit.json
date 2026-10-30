@@ -1,0 +1,42 @@
+{
+ "id": "metasploit",
+ "name": "Metasploit Framework",
+ "vendor": "Rapid7",
+ "category": "Vulnerability scanning",
+ "what": "An open-source exploitation and post-exploitation framework with modules for reconnaissance, known vulnerability checks, exploits, payloads and pivoting. It is the standard lab platform for proving that a finding is reachable, not only reported by a scanner.",
+ "when": "In a scoped pentest or purple-team lab when a vulnerability is already triaged and you need a controlled exploit or auxiliary module against systems you are allowed to attack.",
+ "license": "BSD-3-Clause",
+ "cost": "open source",
+ "cost_note": "Metasploit Framework is free and open source; Rapid7 also sells Metasploit Pro with extra UI and automation.",
+ "url": "https://docs.metasploit.com/",
+ "repo": "https://github.com/rapid7/metasploit-framework",
+ "example": [
+  "Install Framework via the official Rapid7 nightlies or your distro package on an isolated assessment host.",
+  "Start `msfconsole`, search for a module that matches a confirmed finding, and set RHOSTS only to in-scope addresses.",
+  "Prefer `check` / auxiliary scanners before `exploit`, and capture evidence (session info, proof file) for the report.",
+  "Tear down sessions and revert lab snapshots when the test step ends."
+ ],
+ "pitfalls": [
+  "Default payloads and meterpreter sessions are noisy and often blocked; agree C2-like traffic with the SOC.",
+  "Exploits can crash services; never fire unstable modules at production without a rollback plan.",
+  "Keep Framework updated; old modules and stale CVEs waste time and create false confidence."
+ ],
+ "sources": [
+  {
+   "title": "Metasploit Framework documentation",
+   "url": "https://docs.metasploit.com/",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "metasploit-framework on GitHub",
+   "url": "https://github.com/rapid7/metasploit-framework",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 260,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

@@ -1,0 +1,42 @@
+{
+ "id": "evil-winrm",
+ "name": "Evil-WinRM",
+ "vendor": "Hackplayers",
+ "category": "Lateral movement",
+ "what": "A Ruby WinRM shell aimed at authorized pentests. It gives an interactive PowerShell-style session over Windows Remote Management, with upload/download, pass-the-hash, Kerberos tickets and in-memory script loading.",
+ "when": "When WinRM (often TCP 5985/5986) is in scope and you already have valid credentials or a hash/ticket for a Windows host you are allowed to administer during the test.",
+ "license": "LGPL-3.0",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://github.com/Hackplayers/evil-winrm",
+ "repo": "https://github.com/Hackplayers/evil-winrm",
+ "example": [
+  "Install the gem on the assessment host: `gem install evil-winrm`.",
+  "Open a session to an approved host with a password: `evil-winrm -i 10.10.20.15 -u analyst -p 'REDACTED'`.",
+  "Or pass-the-hash when that technique is in the rules of engagement: `evil-winrm -i 10.10.20.15 -u administrator -H '<NTLM hash>'`.",
+  "Use `upload`/`download` for evidence files, keep a session log (`-l`), and close the session when the test step is done."
+ ],
+ "pitfalls": [
+  "Authors require authorized testing or nonprofit education only; do not point it at systems without written permission.",
+  "AMSI bypass and in-memory loaders will be blocked or alerted by modern EDR; agree the technique list with the client.",
+  "Kerberos mode needs correct time sync, realm config and usually an FQDN, not a raw IP."
+ ],
+ "sources": [
+  {
+   "title": "Evil-WinRM on GitHub",
+   "url": "https://github.com/Hackplayers/evil-winrm",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "evil-winrm RubyGems page",
+   "url": "https://rubygems.org/gems/evil-winrm",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 240,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

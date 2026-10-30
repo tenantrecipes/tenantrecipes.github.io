@@ -1,0 +1,42 @@
+{
+ "id": "ffuf",
+ "name": "ffuf",
+ "vendor": "ffuf project (joohoi and contributors)",
+ "category": "Web apps",
+ "what": "A fast web fuzzer written in Go. It discovers hidden paths, virtual hosts and parameters by injecting a wordlist into marked parts of an HTTP request and filtering responses by status, size or regex.",
+ "when": "During authorized web app tests when you need content discovery beyond what a spider sees, or when validating that staging sites do not expose leftover admin paths.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://github.com/ffuf/ffuf",
+ "repo": "https://github.com/ffuf/ffuf",
+ "example": [
+  "Install with Go: `go install github.com/ffuf/ffuf/v2@latest`.",
+  "Directory discovery against an approved staging host: `ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt -u https://staging.contoso.com/FUZZ -mc 200,204,301,302,403`.",
+  "Tune with `-rate`, `-fc`/`-fs` filters and a recursion depth that matches the rules of engagement.",
+  "Export results (`-o findings.json -of json`) and verify each hit manually before reporting."
+ ],
+ "pitfalls": [
+  "Aggressive wordlists and threads can overwhelm fragile apps or WAFs; start slow on production-like systems.",
+  "Matching only on HTTP 200 misses many interesting responses; learn the app's baseline sizes first.",
+  "Never fuzz authentication or payment flows without explicit approval and test accounts."
+ ],
+ "sources": [
+  {
+   "title": "ffuf on GitHub",
+   "url": "https://github.com/ffuf/ffuf",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "ffuf wiki",
+   "url": "https://github.com/ffuf/ffuf/wiki",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 310,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

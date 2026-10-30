@@ -1,0 +1,42 @@
+{
+ "id": "hashcat",
+ "name": "Hashcat",
+ "vendor": "Hashcat Project",
+ "category": "Credential access",
+ "what": "A high-performance password recovery engine that runs on GPUs and CPUs. It cracks many hash formats (NTLM, NetNTLMv2, Kerberos, bcrypt and hundreds more) using dictionaries, rules, masks and hybrid attacks.",
+ "when": "Offline, on hardware you control, to measure password strength of hashes obtained during an authorized assessment or from your own password audit exports.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://hashcat.net/hashcat/",
+ "repo": "https://github.com/hashcat/hashcat",
+ "example": [
+  "Download the release from hashcat.net or build from the GitHub repository on a dedicated cracking box.",
+  "Identify the hash mode (`hashcat --help` / example hashes) for example NetNTLMv2 from Responder.",
+  "Run a dictionary attack against an approved hash file: `hashcat -m 5600 hashes.txt rockyou.txt -r rules/best64.rule`.",
+  "Report crack rates and weak patterns to the client; never reuse cracked production passwords outside the engagement vault."
+ ],
+ "pitfalls": [
+  "Cracking must stay offline; do not attack live authentication endpoints.",
+  "GPU drivers and OpenCL/CUDA setup dominate install time; test on a lab hash first.",
+  "Storing cracked plaintext next to production identity data is a serious handling risk; encrypt and wipe on schedule."
+ ],
+ "sources": [
+  {
+   "title": "Hashcat official site",
+   "url": "https://hashcat.net/hashcat/",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "Hashcat on GitHub",
+   "url": "https://github.com/hashcat/hashcat",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 250,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

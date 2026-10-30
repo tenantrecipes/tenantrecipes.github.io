@@ -1,0 +1,37 @@
+{
+ "id": "responder",
+ "name": "Responder",
+ "vendor": "Laurent Gaffi\u00e9 (lgandx)",
+ "category": "Credential access",
+ "what": "A network poisoner for LLMNR, NBT-NS and mDNS with rogue authentication servers (SMB, HTTP, LDAP and others). It captures NetNTLM challenges when Windows clients try to resolve names that do not exist on the network.",
+ "when": "In an authorized internal assessment or purple-team exercise to measure how many systems still fall for broadcast name resolution, and to prove the value of disabling LLMNR/NBT-NS and enabling SMB signing / EPA.",
+ "license": "GPL-3.0",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://github.com/lgandx/Responder",
+ "repo": "https://github.com/lgandx/Responder",
+ "example": [
+  "Clone the active repo on an assessment VLAN you control: `git clone https://github.com/lgandx/Responder.git`.",
+  "Start in analyze mode first so you only observe queries: `python3 Responder.py -I eth0 -A`.",
+  "With explicit approval, enable poisoning on that interface and collect hashes only from in-scope hosts.",
+  "Feed captured NetNTLMv2 hashes into an offline cracker in your lab (for example Hashcat) and report which systems still broadcast LLMNR/NBT-NS."
+ ],
+ "pitfalls": [
+  "Active poisoning can break name resolution for nearby users; use a dedicated test VLAN when possible and keep the window short.",
+  "The SpiderLabs fork is deprecated; use lgandx/Responder.",
+  "Capturing credentials for accounts outside scope is still a breach of engagement rules; filter and destroy out-of-scope material."
+ ],
+ "sources": [
+  {
+   "title": "Responder on GitHub (lgandx)",
+   "url": "https://github.com/lgandx/Responder",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 230,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}

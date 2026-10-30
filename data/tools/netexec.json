@@ -1,0 +1,43 @@
+{
+ "id": "netexec",
+ "name": "NetExec",
+ "vendor": "Pennyw0rth (community)",
+ "category": "Lateral movement",
+ "what": "A network execution toolkit (command `nxc`) that talks SMB, LDAP, WinRM, MSSQL, RDP, SSH and more so you can validate credentials, run modules and move through a Windows domain during an authorized internal assessment. It is the actively maintained successor to CrackMapExec.",
+ "when": "After you have written scope and a lab or production approval, when you need to spray or verify domain credentials, enumerate shares, dump secrets with an approved module, or confirm which hosts accept a given account.",
+ "license": "BSD-2-Clause",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://www.netexec.wiki/",
+ "repo": "https://github.com/Pennyw0rth/NetExec",
+ "example": [
+  "Install on an approved assessment host: `pipx install git+https://github.com/Pennyw0rth/NetExec`.",
+  "Confirm SMB reachability for an in-scope subnet: `nxc smb 10.10.20.0/24`.",
+  "Test a service account against that range only: `nxc smb 10.10.20.0/24 -u svc_backup -p 'REDACTED'`.",
+  "Run a single agreed module (for example share listing) and export results for the report; do not enable destructive modules without a change ticket.",
+  "Hand findings to the blue team with host, account and module name so detections can be tuned."
+ ],
+ "pitfalls": [
+  "Credential spraying and secret-dump modules can lock accounts or trip EDR; agree lockout thresholds and SOC notification first.",
+  "CrackMapExec is archived; use NetExec, not the old packages.",
+  "Keep captured hashes and tickets in the engagement vault and wipe them when the report is delivered."
+ ],
+ "sources": [
+  {
+   "title": "NetExec documentation wiki",
+   "url": "https://www.netexec.wiki/",
+   "checked": "2026-10-30"
+  },
+  {
+   "title": "NetExec on GitHub",
+   "url": "https://github.com/Pennyw0rth/NetExec",
+   "checked": "2026-10-30"
+  }
+ ],
+ "order": 200,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30"
+}
