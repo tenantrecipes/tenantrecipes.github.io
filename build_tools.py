@@ -62,6 +62,10 @@ def notice():
             'Get approval in writing, agree the scope, and tell the people who monitor those systems.</span></aside>')
 
 
+def _host(u):
+    return re.sub(r"^https://(www\\.)?", "", u).rstrip("/")
+
+
 def cost_badge(e):
     return f'<span class="tl-cost tl-c-{cat_slug(e["cost"])}">{T.esc(e["cost"].capitalize())}</span>'
 
@@ -120,7 +124,7 @@ def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME):
                      + (f'<div><dt>Maker</dt><dd>{esc(e["vendor"])}</dd></div>' if e.get("vendor") else "")
                      + f'<div><dt>Cost</dt><dd>{cost_badge(e)}</dd></div>'
                      + (f'<div><dt>License</dt><dd>{esc(e["license"])}</dd></div>' if e.get("license") else "")
-                     + f'<div><dt>Official site</dt><dd><a href="{E(e["url"])}" rel="noopener">{esc(re.sub(r"^https://(www\.)?", "", e["url"]).rstrip("/"))}</a></dd></div>'
+                     + f'<div><dt>Official site</dt><dd><a href="{E(e["url"])}" rel="noopener">{esc(_host(e["url"]))}</a></dd></div>'
                      + (f'<div><dt>Source code</dt><dd><a href="{E(e["repo"])}" rel="noopener">GitHub</a></dd></div>' if e.get("repo") else "")
                      + '</dl>' + (f'<p class="fine">{esc(e["cost_note"])}</p>' if e.get("cost_note") else ""))
             kind = "Method" if ism else "Tool"
