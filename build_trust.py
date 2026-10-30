@@ -35,8 +35,9 @@ def nav(rel):
 def footer(rel, guide_slug):
     col = lambda h, links: (f'<div><h4>{h}</h4><ul>' + "".join(f'<li><a href="{u}">{t}</a></li>' for t, u in links) + '</ul></div>')
     return ('<footer class="sf"><div class="sf-in">'
-            f'<div class="sf-brand"><img src="{rel}assets/logo.svg" alt="Tenant Recipes" width="140" height="32">'
-            '<p>Fact-checked AI &amp; security recipes for Microsoft 365 admins. An independent project — not affiliated with Microsoft or any vendor.</p></div>'
+            f'<div class="sf-brand"><img src="{rel}assets/logo-dark.svg" alt="Tenant Recipes" width="140" height="32">'
+            '<p>Fact-checked AI &amp; security recipes for Microsoft 365 admins. An independent project — not affiliated with Microsoft or any vendor.</p>'
+            f'<p class="sf-ed">{EDITOR}</p></div>'
             + col("Content", [("Recipes", f"{rel}index.html#library"), ("Guides", f"{rel}guides/index.html"),
                               ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"),
                               ("Search", f"{rel}search.html")])
@@ -127,15 +128,16 @@ def trust_bottom(rel, path, title, item, heading):
 def about_body(rel, stats):
     n_rec, n_cy, n_g, n_src = stats
     return (
-        f'<main class="wrap"><article class="prose">{crumbs(rel, "about.html", [("Home", rel + "index.html"), ("About", None)])}'
-        '<p class="tag">Tenant Recipes editorial</p><h1>About Tenant Recipes</h1>'
-        '<p class="lead">Practical, fact-checked recipes for the people who actually click through the Microsoft 365 admin portals: '
-        'the exact steps, the pitfalls and a link to the primary source for every claim.</p>'
+        page_hero(rel, crumbs_dark(rel, "about.html", [("Home", rel + "index.html"), ("About", None)]), "Tenant Recipes editorial",
+                  "About Tenant Recipes", 'Practical, fact-checked recipes for the people who actually click through the Microsoft 365 admin portals: '
+                  'the exact steps, the pitfalls and a link to the primary source for every claim.', kind="page")
+        + f'<main class="wrap pg"><article class="prose doc">'
         f'<dl class="ab-stats"><div><dt>Tenant recipes</dt><dd>{n_rec}</dd></div><div><dt>Security entries</dt><dd>{n_cy}</dd></div>'
         f'<div><dt>Guides</dt><dd>{n_g}</dd></div><div><dt>Primary sources linked</dt><dd>{n_src}</dd></div></dl>'
         '<h2>Who it is for</h2><p>Microsoft 365, Entra and Intune administrators, security engineers and IT leads who have been asked to '
         '"roll out Copilot and AI agents — safely". If you need to know which setting to change, in which portal, and what can go wrong, '
         'this site is for you.</p>'
+        f'<aside class="ed" aria-label="About the editor"><span class="ed-i">{icon("user")}</span><div><p class="ed-h">About the editor</p><p>{EDITOR}</p></div></aside>'
         '<h2>Why it exists</h2><p>Microsoft changes features, names and defaults every week. The official documentation is excellent but spread '
         'over hundreds of pages, Message center posts and blogs. Tenant Recipes turns that into short, task-focused playbooks — '
         'and keeps pointing back to the source, so you never have to take our word for it.</p>'
@@ -179,10 +181,10 @@ def contact_html():
 def methodology_body(rel):
     tier = lambda n, t, d: f'<tr><td><span class="mt-n">{n}</span></td><td><strong>{t}</strong></td><td>{d}</td></tr>'
     return (
-        f'<main class="wrap"><article class="prose">{crumbs(rel, "methodology.html", [("Home", rel + "index.html"), ("About", rel + "about.html"), ("Methodology", None)])}'
-        '<p class="tag">Editorial standards</p><h1>How we fact-check</h1>'
-        '<p class="lead">Every recipe is only as good as its sources. This page explains which sources we trust, in what order, '
-        'how a claim gets onto the site, and what happens when it turns out to be wrong.</p>'
+        page_hero(rel, crumbs_dark(rel, "methodology.html", [("Home", rel + "index.html"), ("About", rel + "about.html"), ("Methodology", None)]),
+                  "Editorial standards", "How we fact-check", 'Every recipe is only as good as its sources. This page explains which sources we trust, in what order, '
+                  'how a claim gets onto the site, and what happens when it turns out to be wrong.', kind="page")
+        + '<main class="wrap pg"><article class="prose doc">'
         '<h2>Source hierarchy — Microsoft 365 recipes and guides</h2>'
         '<p>When sources disagree, the higher tier wins, and we say so on the page if the difference matters.</p>'
         '<div class="cy-tw"><table class="mt-t"><thead><tr><th></th><th>Source</th><th>Used for</th></tr></thead><tbody>'
@@ -255,15 +257,16 @@ def changelog_body(rel, entries):
     out = ""
     for d, items in entries:
         out += f'<section class="cl-day"><h2 id="d-{d}">{fmt(d)}</h2><ul class="cl">{"".join(items)}</ul></section>'
-    return (f'<main class="wrap"><article class="prose">{crumbs(rel, "changelog.html", [("Home", rel + "index.html"), ("Changelog", None)])}'
-            '<p class="tag">What changed</p><h1>Changelog</h1>'
-            f'<p class="lead">Every new page, update and correction, newest first. Generated automatically from the site data at each build. '
-            f'Also available as an <a href="{rel}feed.xml">Atom feed</a>.</p>{out}</article></main>')
+    return (page_hero(rel, crumbs_dark(rel, "changelog.html", [("Home", rel + "index.html"), ("Changelog", None)]), "What changed", "Changelog",
+                      'Every new page, update and correction, newest first. Generated automatically from the site data at each build. '
+                      f'Also available as an <a href="{rel}feed.xml">Atom feed</a>.', kind="page")
+            + f'<main class="wrap pg"><article class="prose doc">{out}</article></main>')
 
 
 def search_body(rel):
-    return (f'<main class="wrap"><article class="prose">{crumbs(rel, "search.html", [("Home", rel + "index.html"), ("Search", None)])}'
-            '<h1>Search Tenant Recipes</h1><form class="ss-f" action="search.html" method="get" role="search">'
+    return (page_hero(rel, crumbs_dark(rel, "search.html", [("Home", rel + "index.html"), ("Search", None)]), "Search",
+                      "Search Tenant Recipes", "Every recipe, guide phase and security entry — searched in your browser, nothing is sent anywhere.", kind="page")
+            + '<main class="wrap pg"><article class="prose doc"><form class="ss-f" action="search.html" method="get" role="search">'
             '<label class="sr" for="ss-q">Search</label><input id="ss-q" name="q" type="search" placeholder="e.g. MFA, EEEU, LAPS, agents, VMware" autofocus>'
             '<button class="btn p" type="submit">Search</button></form><div id="ss-chips" class="chips"></div><p id="ss-n" class="fine"></p><ol id="ss-r" class="ss-r"></ol>'
             '<noscript><p>Search needs JavaScript. Browse the <a href="index.html#library">recipe library</a> or the <a href="security/index.html">security section</a>.</p></noscript>'
@@ -309,3 +312,106 @@ def atom(R, CY, guides):
             f'<title>{esc(C.SITE_NAME)}</title><subtitle>{esc(C.SITE_TAGLINE)}</subtitle>'
             f'<link href="{SITE}/feed.xml" rel="self"/><link href="{SITE}/"/><id>{SITE}/</id>'
             f'<updated>{newest}T00:00:00Z</updated><author><name>Tenant Recipes editorial</name></author>{ent}</feed>\n')
+
+
+# ---------------------------------------------------------------- v5 design system components (2026-10-30)
+EDITOR = ("Edited by an IT professional working in IT since 1999, focused on Microsoft technology since 2013, based in Sweden.")
+
+_P = {  # inline SVG icon paths (24x24, stroke icons)
+    "shield": '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8"/>',
+    "check": '<path d="M5 12.5l4.2 4.2L19 7"/>',
+    "alert": '<path d="M12 3.5L2.8 19.5h18.4L12 3.5z"/><path d="M12 10v4.2M12 17.2v.1"/>',
+    "info": '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.1"/>',
+    "clock": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/>',
+    "book": '<path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5v-15z"/><path d="M4 20.5A2.5 2.5 0 016.5 23H20v-5"/>',
+    "link": '<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/>',
+    "list": '<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>',
+    "bug": '<path d="M12 3a9 9 0 100 18 9 9 0 000-18z"/><path d="M12 8v5M12 16v.1"/>',
+    "layers": '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/>',
+    "target": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+    "arrow": '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    "search": '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+    "user": '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4.2 4.4-6 8-6s6.8 1.8 8 6"/>',
+}
+
+
+def icon(name, cls="ic"):
+    return f'<svg class="{cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">{_P[name]}</svg>'
+
+
+def page_hero(rel, crumb_html, kicker, title_html, lead_html="", chips="", kind=""):
+    """Dark page intro used on every non-home page (matches the homepage hero)."""
+    return (f'<section class="ph{(" ph-" + kind) if kind else ""}"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i></div>'
+            f'<div class="wrap ph-in">{crumb_html}'
+            + (f'<p class="ph-k">{kicker}</p>' if kicker else "")
+            + f'<h1>{title_html}</h1>'
+            + (f'<p class="ph-lead">{lead_html}</p>' if lead_html else "")
+            + (f'<ul class="ph-chips">{chips}</ul>' if chips else "")
+            + '</div></section>')
+
+
+def chip(ic, text):
+    return f'<li>{icon(ic)}<span>{text}</span></li>'
+
+
+def verify_card(rel, item, noun="Microsoft sources"):
+    """Prominent verification summary under the title. Only shows values present in the data."""
+    srcs = item.get("sources", [])
+    last = item.get("last_verified")
+    due = stale(last)
+    badge = ('<span class="vc-b vc-due">' + icon("clock") + 'Re-check due</span>') if due else \
+            ('<span class="vc-b vc-ok">' + icon("check") + 'Verified</span>')
+    prim = ""
+    if srcs:
+        s = srcs[0]
+        when = f' · checked on <time datetime="{s["checked"]}">{fmt(s["checked"])}</time>' if s.get("checked") else " · check date not recorded"
+        prim = (f'<div class="vc-p"><span class="vc-l">Primary source</span><a href="{E(s["url"])}">{esc(s["title"])}</a>'
+                f'<span class="vc-w">{when.lstrip(" ·")}</span></div>')
+    stats = (f'<dl class="vc-s"><div><dt>Last verified</dt><dd>{fmt(last) if last else "Not yet"}</dd></div>'
+             f'<div><dt>Sources checked</dt><dd><a href="#verified">{len(srcs)} {noun}</a></dd></div>'
+             + (f'<div><dt>Last updated</dt><dd>{fmt(item["updated"])}</dd></div>' if item.get("updated") else "")
+             + '</dl>')
+    warn = (f'<p class="vc-warn">{icon("alert")}This page was last checked more than {C.REVERIFY_DAYS} days ago. '
+            'Check the linked sources before you make production changes.</p>') if due else ""
+    return (f'<section class="vc{" is-due" if due else ""}" aria-labelledby="vc-h"><div class="vc-h"><span class="vc-i">{icon("shield")}</span>'
+            f'<h2 id="vc-h">Verification</h2>{badge}<a class="vc-m" href="{rel}methodology.html">How we verify {icon("arrow")}</a></div>'
+            f'{prim}{stats}{warn}</section>')
+
+
+def guide_verify_card(rel, g):
+    """Guide version: every source was checked on g.VERIFIED (see the guide module). Primary = most-cited source."""
+    from collections import Counter
+    cnt = Counter((t, u) for p in g.PHASES for s in p["steps"] for t, u in s["src"])
+    (t, u), n = cnt.most_common(1)[0]
+    due = stale(g.VERIFIED)
+    badge = ('<span class="vc-b vc-due">' + icon("clock") + 'Re-check due</span>') if due else ('<span class="vc-b vc-ok">' + icon("check") + 'Verified</span>')
+    return (f'<section class="vc" aria-labelledby="vc-h"><div class="vc-h"><span class="vc-i">{icon("shield")}</span>'
+            f'<h2 id="vc-h">Verification</h2>{badge}<a class="vc-m" href="{rel}methodology.html">How we verify {icon("arrow")}</a></div>'
+            f'<div class="vc-p"><span class="vc-l">Most-cited source ({n} steps)</span><a href="{E(u)}">{esc(t)}</a>'
+            f'<span class="vc-w">checked on <time datetime="{g.VERIFIED}">{fmt(g.VERIFIED)}</time></span></div>'
+            f'<dl class="vc-s"><div><dt>Last verified</dt><dd>{fmt(g.VERIFIED)}</dd></div>'
+            f'<div><dt>Sources checked</dt><dd><a href="#verified">{len(cnt)} Microsoft sources</a></dd></div>'
+            f'<div><dt>Per step</dt><dd>Open “Microsoft sources” under each step</dd></div></dl></section>')
+
+
+def card_meta(item, nsteps=True):
+    bits = []
+    if item.get("last_verified"):
+        bits.append(f'<span class="cm-ok">{icon("check")}Verified {fmt(item["last_verified"])}</span>')
+    if nsteps and item.get("steps"):
+        bits.append(f'<span>{len(item["steps"])} steps</span>')
+    if item.get("sources"):
+        bits.append(f'<span>{len(item["sources"])} source{"s" if len(item["sources"]) != 1 else ""}</span>')
+    return f'<span class="cm">{"".join(bits)}</span>'
+
+
+def side_nav(rel, links, related, related_h, extra=""):
+    toc = "".join(f'<li><a href="#{a}">{esc(t)}</a></li>' for a, t in links)
+    rel_html = "".join(f'<li><a href="{u}">{esc(t)}</a></li>' for t, u in related)
+    return (f'<aside class="pg-side" aria-label="On this page"><div class="ps-box"><p class="ps-h">{icon("list")}On this page</p><ol class="ps-toc">{toc}</ol></div>'
+            + (f'<div class="ps-box"><p class="ps-h">{icon("layers")}{esc(related_h)}</p><ul class="ps-rel">{rel_html}</ul></div>' if rel_html else "")
+            + extra + '</aside>')
+
+
+def crumbs_dark(rel, path, items):
+    return crumbs(rel, path, items).replace('class="crumb"', 'class="crumb ph-crumb"', 1)

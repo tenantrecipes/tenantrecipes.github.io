@@ -74,7 +74,7 @@ def main():
     R = load()
     (ROOT / "data" / "recipes.json").write_text(json.dumps(R, indent=1, ensure_ascii=False))
     # Slim copy for the client-side search
-    slim = [{k: r[k] for k in ("id", "category", "title", "problem", "steps")} for r in R]
+    slim = [{**{k: r[k] for k in ("id", "category", "title", "problem", "steps")}, "v": r.get("last_verified") or "", "n": len(r.get("sources", []))} for r in R]
     (ROOT / "data" / "recipes.js").write_text("window.RECIPES=" + json.dumps(slim, ensure_ascii=False) + ";")
     unverified = sum(1 for r in R if not r["last_verified"])
     print(f"{len(R)} published recipes ({unverified} not yet verified)")

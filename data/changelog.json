@@ -1,8 +1,37 @@
 [
- {"date": "2026-10-30", "kind": "site", "text": "Trust & transparency update: rewritten About page, new Methodology page, this changelog, per-page source and verification panels, \"Report an error\" links on every page, site-wide search, breadcrumbs, Atom feed and a new footer."},
- {"date": "2026-10-30", "kind": "site", "text": "New Cybersecurity section: a vulnerability watch for exploited CVEs and hardening recipes for network, endpoints, servers, services and VMware."},
- {"date": "2026-10-30", "kind": "site", "text": "New pillar guide: how to roll out Microsoft Copilot without opening a hole in your tenant (9 phases, printable checklist)."},
- {"date": "2026-10-30", "kind": "site", "text": "Full fact-check pass of every recipe against current Microsoft Learn pages; 18 recipes corrected."},
- {"date": "2026-10-30", "kind": "site", "text": "New homepage, logo and Identity & threat protection track."},
- {"date": "2026-10-30", "kind": "site", "text": "Tenant Recipes launched on GitHub Pages."}
+ {
+  "kind": "site",
+  "date": "2026-10-30",
+  "text": "Design refresh: consistent page intros, a Verification card at the top of every recipe, guide and security page, numbered steps, pitfall callouts, copy buttons on commands, and an About-the-editor note."
+ },
+ {
+  "date": "2026-10-30",
+  "kind": "site",
+  "text": "Trust & transparency update: rewritten About page, new Methodology page, this changelog, per-page source and verification panels, \"Report an error\" links on every page, site-wide search, breadcrumbs, Atom feed and a new footer."
+ },
+ {
+  "date": "2026-10-30",
+  "kind": "site",
+  "text": "New Cybersecurity section: a vulnerability watch for exploited CVEs and hardening recipes for network, endpoints, servers, services and VMware."
+ },
+ {
+  "date": "2026-10-30",
+  "kind": "site",
+  "text": "New pillar guide: how to roll out Microsoft Copilot without opening a hole in your tenant (9 phases, printable checklist)."
+ },
+ {
+  "date": "2026-10-30",
+  "kind": "site",
+  "text": "Full fact-check pass of every recipe against current Microsoft Learn pages; 18 recipes corrected."
+ },
+ {
+  "date": "2026-10-30",
+  "kind": "site",
+  "text": "New homepage, logo and Identity & threat protection track."
+ },
+ {
+  "date": "2026-10-30",
+  "kind": "site",
+  "text": "Tenant Recipes launched on GitHub Pages."
+ }
 ]

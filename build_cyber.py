@@ -108,9 +108,9 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
         return ", ".join(c["id"] for c in e["cves"])
 
     def disclaimer():
-        return ('<aside class="cy-disc" role="note"><strong>Informational only.</strong> Summaries of public vendor and CISA advisories, '
+        return (f'<aside class="cy-disc" role="note">{T.icon("info")}<span><strong>Informational only.</strong> Summaries of public vendor and CISA advisories, '
                 f'fact-checked on the date shown. Affected and fixed versions change — always confirm against the linked vendor advisory '
-                'before you act, and test changes before production. Not affiliated with any vendor.</aside>')
+                'before you act, and test changes before production. Not affiliated with any vendor.</span></aside>')
 
     def vuln_rows(rel, items):
         rows = ""
@@ -125,11 +125,11 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
 
     def hard_cards(rel, items):
         return "".join(f'<a class="card" href="{rel}security/{e["id"]}.html"><div class="tag">Hardening · {esc(AREA[e["area"]][0])}</div>'
-                       f'<h3>{esc(e["title"])}</h3><p>{esc(e["summary"])}</p></a>' for e in items)
+                       f'<h3>{esc(e["title"])}</h3><p class="clamp">{esc(e["summary"])}</p>{T.card_meta(e)}</a>' for e in items)
 
     def recipe_cards(rel, items):
         return "".join(f'<a class="card" href="{rel}recipes/{r["id"]}.html"><div class="tag">{esc(r["category"])}</div>'
-                       f'<h3>{esc(r["title"])}</h3><p>{esc(r["problem"])}</p></a>' for r in items)
+                       f'<h3>{esc(r["title"])}</h3><p class="clamp">{esc(r["problem"])}</p>{T.card_meta(r)}</a>' for r in items)
 
     def hero(rel, crumb, badge, title, lead, stats, cta=""):
         st = "".join(f'<div><dt>{esc(k)}</dt><dd>{v}</dd></div>' for k, v in stats)
@@ -212,14 +212,27 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                          '<h2>Fixed versions</h2><ul class="cy-fix">' + "".join(f'<li>{step_html(x)}</li>' for x in e["fixed"]) + '</ul>')
             kind = "Vulnerability watch" if e["type"] == "vulnerability" else "Hardening recipe"
             path = f'security/{e["id"]}.html'
-            return (f'<main class="wrap"><article>'
-                    + T.crumbs(rel, path, [("Home", rel + "index.html"), ("Security", rel + "security/index.html"), (at, rel + f'security/{e["area"]}.html'), (kind, None)])
-                    + f'<div class="tag" style="margin-top:14px">{kind} · {esc(at)}</div><h1>{esc(e["title"])}</h1>'
-                    + T.trust_top(rel, e, "official sources")
-                    + f'{disclaimer()}<h2>{"What it is" if e["type"] == "vulnerability" else "Why it matters"}</h2><p>{esc(e["summary"])}</p>{facts}'
-                    f'<h2>{"What to do" if e["type"] == "vulnerability" else "Steps"}</h2><ol>' + "".join(f'<li>{step_html(s)}</li>' for s in e["steps"]) + '</ol>'
-                    + (f'<h2>Pitfalls</h2><ul>' + "".join(f'<li>{step_html(p)}</li>' for p in e["pitfalls"]) + '</ul>' if e["pitfalls"] else "")
-                    + T.trust_bottom(rel, path, e["title"], e, "Verified against (vendor &amp; official sources)") + '</article>' + signup(rel, "security-" + e["id"]) + '</main>')
+            isv = e["type"] == "vulnerability"
+            chips = ((T.chip("alert", f'Vendor severity: {esc(e["severity"])}') + (T.chip("target", "Exploited in the wild") if e.get("exploited") else "")
+                      + T.chip("list", esc(cve_list(e)))) if isv else T.chip("list", f'{len(e["steps"])} steps')) \
+                + T.chip("link", f'{len(e["sources"])} official source{"s" if len(e["sources"]) != 1 else ""}')
+            toc = [("what", "What it is" if isv else "Why it matters")] + ([("cves", "CVEs"), ("affected", "Affected & fixed")] if isv else []) \
+                + [("todo", "What to do" if isv else "Steps")] + ([("pitfalls", "Pitfalls")] if e["pitfalls"] else []) + [("verified", "Sources & corrections")]
+            rel_items = [(x["title"], f'{rel}security/{x["id"]}.html') for x in ents if x["area"] == e["area"] and x["id"] != e["id"]][:5]
+            facts = facts.replace('<h2>CVEs</h2>', '<h2 id="cves">CVEs</h2>').replace('<h2>Affected</h2>', '<h2 id="affected">Affected</h2>')
+            facts = facts.replace('<h2>Fixed versions</h2><ul class="cy-fix">', f'<section class="co co-ok"><p class="co-h">{T.icon("check")}Fixed versions</p><ul class="cy-fix">').replace('</ul>', '</ul></section>', 0)
+            if isv:
+                facts = facts[::-1].replace('>lu/<', '>noitces/<>lu/<', 1)[::-1]
+            return (T.page_hero(rel, T.crumbs_dark(rel, path, [("Home", rel + "index.html"), ("Security", rel + "security/index.html"), (at, rel + f'security/{e["area"]}.html'), (kind, None)]),
+                                f'{T.icon("shield")}{kind} · {esc(at)}', esc(e["title"]), "", chips, kind="cyber")
+                    + '<main class="wrap pg"><div class="pg-grid"><article class="doc">'
+                    + T.verify_card(rel, e, "official sources") + disclaimer()
+                    + f'<h2 id="what">{"What it is" if isv else "Why it matters"}</h2><p>{esc(e["summary"])}</p>{facts}'
+                    f'<h2 id="todo" class="h-ic">{T.icon("list")}{"What to do" if isv else "Steps"}</h2><ol class="steps">' + "".join(f'<li><div>{step_html(s)}</div></li>' for s in e["steps"]) + '</ol>'
+                    + (f'<section id="pitfalls" class="co co-warn"><p class="co-h">{T.icon("alert")}Pitfalls</p><ul>' + "".join(f'<li>{step_html(p)}</li>' for p in e["pitfalls"]) + '</ul></section>' if e["pitfalls"] else "")
+                    + T.trust_bottom(rel, path, e["title"], e, "Verified against (vendor &amp; official sources)") + '</article>'
+                    + T.side_nav(rel, toc, rel_items, f'More in {at}')
+                    + '</div>' + signup(rel, "security-" + e["id"]) + '</main>')
         pages.append(page(f'security/{e["id"]}.html', f'{e["title"]} | {SITE_NAME}', e["summary"], body, "article"))
     print(f"Security section: {len(vulns)} vulnerabilities, {len(hards)} hardening recipes, {len(pages)} pages")
     return pages

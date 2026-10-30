@@ -26,7 +26,15 @@ def esc(s):  # match the original site's escaping style
 def step_html(s):
     """Text between `backticks` in a recipe step is rendered as <code> (e.g. PowerShell)."""
     parts = s.split("`")
-    return "".join(esc(p) if i % 2 == 0 else f"<code>{esc(p)}</code>" for i, p in enumerate(parts))
+    out = []
+    for i, p in enumerate(parts):
+        if i % 2 == 0:
+            out.append(esc(p))
+        elif len(p) >= 40 and " " in p:  # commands / queries: block with copy button (added by assets/ui.js)
+            out.append(f'<pre class="cb"><code>{esc(p)}</code></pre>')
+        else:
+            out.append(f"<code>{esc(p)}</code>")
+    return "".join(out)
 
 
 def head(title, desc, rel, path, og_type="website"):
@@ -57,6 +65,7 @@ def head(title, desc, rel, path, og_type="website"):
         tags += [f'<meta property="og:url" content="{url}">', f'<link rel="canonical" href="{url}">']
     tags.append(f'<link rel="alternate" type="application/atom+xml" title="{esc(C.SITE_NAME)}" href="{rel}feed.xml">')
     tags.append(f'<link rel="stylesheet" href="{rel}assets/style.css">')
+    tags.append(f'<script src="{rel}assets/ui.js" defer></script>')
     return "".join(tags)
 
 
@@ -217,7 +226,7 @@ def guide_page(g):
         intro = "".join(f'<p>{esc(x)}</p>' for x in g.INTRO)
         return (
             f'<section class="gd-hero"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i></div><div class="wrap">'
-            f'<p class="gd-crumb"><a href="{rel}index.html">Home</a> / <a href="{rel}guides/index.html">Guides</a></p>'
+            + T.crumbs_dark(rel, f"guides/{g.SLUG}.html", [("Home", rel + "index.html"), ("Guides", rel + "guides/index.html"), (g.SHORT, None)]) +
             f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>Pillar guide · fact-checked against Microsoft Learn on {fmt_date(g.VERIFIED)}</p>'
             f'<h1>{esc(g.TITLE)}</h1><p class="hx-lead">{esc(g.DESC)}</p>'
             f'<div class="hx-cta"><a class="btn hx-p" href="#phase-1-{g.PHASES[0]["id"]}">Start with phase 1 →</a>'
@@ -227,13 +236,13 @@ def guide_page(g):
             f'<ol class="gd-strip">{strip}</ol></div></section>'
             f'<div class="wrap gd-grid"><aside class="gd-toc" aria-label="Table of contents"><p>On this page</p><ol>{toc}'
             f'<li><a href="#checklist">Printable checklist</a></li></ol></aside>'
-            f'<div class="gd-body"><div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers.</p></div>'
+            f'<div class="gd-body">{T.guide_verify_card(rel, g)}<div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers.</p></div>'
             f'{phases}'
             f'<section class="gd-check" id="checklist" aria-labelledby="ck-h"><div class="gd-ph-h"><span class="gd-num">Checklist</span><h2 id="ck-h">The printable checklist</h2></div>'
             f'<p>Tick items as you go (saved in this browser only), then print or save as PDF for your change board.</p>'
             f'<p class="gd-ck-btns"><button class="btn p" type="button" id="ck-print">Print checklist</button> <button class="btn" type="button" id="ck-reset">Clear ticks</button> <span id="ck-n" class="fine"></span></p>'
             f'<ol class="gd-ck">{check}</ol><p class="fine">{esc(g.TITLE)} · {C.SITE_NAME} · verified {g.VERIFIED} · {SITE}/guides/{g.SLUG}.html</p></section>'
-            f'<section class="vs"><h2>Verification &amp; corrections</h2><p class="fine">Every step above lists the Microsoft sources it was checked against '
+            f'<section class="vs" id="verified"><h2>Verification &amp; corrections</h2><p class="fine">Every step above lists the Microsoft sources it was checked against '
             f'(open “Microsoft sources” under each step). Guide last verified <strong>{fmt_date(g.VERIFIED)}</strong>. '
             f'<a href="{rel}methodology.html">How we verify</a> · <a href="{rel}changelog.html">Changelog</a></p>'
             f'<div class="vs-f"><p>Spotted something wrong or outdated?</p>{T.report_link(f"guides/{g.SLUG}.html", g.TITLE, "rp btn")}</div></section>'
@@ -250,10 +259,13 @@ def guide_page(g):
 def guides_index():
     def body(rel):
         cards = "".join(
-            f'<a class="card" href="{g.SLUG}.html"><div class="tag">Pillar guide · {len(g.PHASES)} phases</div><h3>{esc(g.TITLE)}</h3><p>{esc(g.DESC)}</p></a>'
+            f'<a class="card card-lg" href="{g.SLUG}.html"><span class="card-i">{T.icon("book")}</span><div class="tag">Pillar guide · {len(g.PHASES)} phases · '
+            f'{sum(len(p["steps"]) for p in g.PHASES)} steps</div><h3>{esc(g.TITLE)}</h3><p>{esc(g.DESC)}</p>'
+            f'<span class="cm"><span class="cm-ok">{T.icon("check")}Verified {fmt_date(g.VERIFIED)}</span><span>Printable checklist</span></span></a>'
             for g in GUIDES)
-        return (f'<main class="wrap"><h1 style="margin-top:34px">Guides</h1><p>Long-form, phased playbooks that tie the recipes together. '
-                f'Every claim links to Microsoft Learn.</p><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
+        return (T.page_hero(rel, T.crumbs_dark(rel, "guides/index.html", [("Home", rel + "index.html"), ("Guides", None)]), "Guides",
+                            "Long-form playbooks", "Phased, fact-checked guides that tie the recipes together. Every claim links to Microsoft Learn.", kind="page")
+                + f'<main class="wrap pg"><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
     return page("guides/index.html", f"Guides | {C.SITE_NAME}", "Long-form, fact-checked playbooks for Microsoft 365 admins.", body)
 
 
@@ -285,15 +297,19 @@ def build():
     pages.append(page("newsletter.html", f"Newsletter | {C.SITE_NAME}",
                       "A free weekly 5-minute brief on what changed in Copilot, Intune, Entra and Purview, and what admins should do about it.",
                       lambda rel: (
-        '<main class="wrap"><article><h1>The weekly Tenant Recipes brief</h1><p>One short email every Tuesday morning (CET) for Microsoft 365 '
-        'admins who were handed “roll out Copilot and agents safely”.</p><ul><li><strong>Top story</strong>: the one change that matters this week, '
+        T.page_hero(rel, T.crumbs_dark(rel, "newsletter.html", [("Home", rel + "index.html"), ("Newsletter", None)]), "Newsletter",
+                    "The weekly Tenant Recipes brief", "One short email every Tuesday morning (CET) for Microsoft 365 "
+                    "admins who were handed “roll out Copilot and agents safely”.", kind="page")
+        + '<main class="wrap pg"><article class="prose doc"><ul><li><strong>Top story</strong>: the one change that matters this week, '
         'with an admin take.</li><li><strong>Copilot · Intune · Entra &amp; Purview</strong>: short items with what to do, each linked to the source.</li>'
         '<li><strong>Recipe of the week</strong>: a hands-on playbook from this site.</li></ul><p>5 minutes, no fluff, free.</p></article>'
         + signup(rel, "newsletter-page", heading=False) + '</main>')))
 
     host = E(C.HOSTING_PROVIDER)
     pages.append(page("privacy.html", f"Privacy policy | {C.SITE_NAME}", "How Tenant Recipes handles personal data.", lambda rel: (
-        f'<main class="wrap"><article><h1>Privacy policy</h1><p class="fine">Last updated: {TODAY}</p>'
+        T.page_hero(rel, T.crumbs_dark(rel, "privacy.html", [("Home", rel + "index.html"), ("Privacy policy", None)]), "Legal", "Privacy policy",
+                    f"Last updated: {TODAY}. No cookies, no analytics, no ad trackers.", kind="page")
+        + f'<main class="wrap pg"><article class="prose doc">'
         f'<p>Tenant Recipes is a personal project based in {E(C.OWNER_COUNTRY)}. {E(C.OWNER_NAME)} is the data controller for the '
         f'personal data described here. We collect as little as possible.</p>'
         '<h2>Visiting the site</h2><p>The site uses no cookies, no analytics and no advertising trackers. '
@@ -321,15 +337,23 @@ def build():
     for r in R:
         def body(rel, r=r):
             path = f'recipes/{r["id"]}.html'
-            return (f'<main class="wrap"><article>'
-                    + T.crumbs(rel, path, [("Home", rel + "index.html"), ("Recipes", rel + "index.html#library"), (r["category"], None)])
-                    + f'<div class="tag" style="margin-top:14px">{esc(r["category"])}</div><h1>{esc(r["title"])}</h1>'
-                    + T.trust_top(rel, r, "Microsoft sources")
-                    + f'<h2>The problem</h2><p>{esc(r["problem"])}</p>'
-                    f'<h2>Steps</h2><ol>' + "".join(f'<li>{step_html(s)}</li>' for s in r["steps"]) + '</ol>'
-                    + (f'<h2>Pitfalls</h2><ul>' + "".join(f'<li>{esc(p)}</li>' for p in r["pitfalls"]) + '</ul>' if r["pitfalls"] else "")
+            same = [x for x in R if x["category"] == r["category"] and x["id"] != r["id"]][:5]
+            chips = (T.chip("list", f'{len(r["steps"])} steps') + (T.chip("alert", f'{len(r["pitfalls"])} pitfall{"s" if len(r["pitfalls"]) != 1 else ""}') if r["pitfalls"] else "")
+                     + T.chip("link", f'{len(r["sources"])} Microsoft source{"s" if len(r["sources"]) != 1 else ""}')
+                     + (T.chip("clock", f'First published {fmt_date(r["created"])}') if r.get("created") else ""))
+            toc = [("problem", "The problem"), ("steps", "Steps")] + ([("pitfalls", "Pitfalls")] if r["pitfalls"] else []) + [("verified", "Sources & corrections")]
+            promo = (f'<a class="ps-promo" href="{rel}guides/{G1.SLUG}.html"><span class="ps-k">Pillar guide</span><strong>{esc(G1.SHORT)}</strong>'
+                     f'<span>{len(G1.PHASES)} phases · printable checklist {T.icon("arrow")}</span></a>')
+            return (T.page_hero(rel, T.crumbs_dark(rel, path, [("Home", rel + "index.html"), ("Recipes", rel + "index.html#library"), (r["category"], None)]),
+                                f'{T.icon("layers")}{esc(r["category"])}', esc(r["title"]), "", chips, kind="recipe")
+                    + '<main class="wrap pg"><div class="pg-grid"><article class="doc">'
+                    + T.verify_card(rel, r, "Microsoft sources")
+                    + f'<section id="problem" class="co co-info"><p class="co-h">{T.icon("target")}The problem</p><p>{esc(r["problem"])}</p></section>'
+                    f'<h2 id="steps" class="h-ic">{T.icon("list")}Steps</h2><ol class="steps">' + "".join(f'<li><div>{step_html(s)}</div></li>' for s in r["steps"]) + '</ol>'
+                    + (f'<section id="pitfalls" class="co co-warn"><p class="co-h">{T.icon("alert")}Pitfalls</p><ul>' + "".join(f'<li>{step_html(p)}</li>' for p in r["pitfalls"]) + '</ul></section>' if r["pitfalls"] else "")
                     + ad_slot("recipe-inline") + T.trust_bottom(rel, path, r["title"], r, "Verified against") + '</article>'
-                    + signup(rel, "recipe-" + r["id"]) + '</main>')
+                    + T.side_nav(rel, toc, [(x["title"], f'{rel}recipes/{x["id"]}.html') for x in same], f'More in {r["category"]}', promo)
+                    + '</div>' + signup(rel, "recipe-" + r["id"]) + '</main>')
         pages.append(page(f'recipes/{r["id"]}.html', f'{r["title"]} | {C.SITE_NAME}', r["problem"], body, "article"))
 
     # 404: self-contained (works at any depth)
