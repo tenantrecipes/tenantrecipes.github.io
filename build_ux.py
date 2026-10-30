@@ -351,7 +351,7 @@ def share_bar(path, title, where="top"):
         ("mail", "Email", f"mailto:?subject={t}&body={quote(title + chr(10) + chr(10) + url, safe='')}"),
     ]
     a = "".join(f'<a class="shr-b shr-{k}" href="{E(h, quote=True)}"'
-                + (f' data-share-sheet data-title="{esc(title)}" data-url="{E(url, quote=True)}"' if k == "x" else "")
+                + (f' data-x-app data-title="{esc(title)}" data-url="{E(url, quote=True)}"' if k == "x" else "")
                 + ('' if k == "mail" else ' target="_blank" rel="noopener noreferrer"')
                 + f' aria-label="Share on {n}' + (' (opens in a new tab)' if k != "mail" else '') + f'" title="Share on {n}">{_sic(k)}<span>{n}</span></a>'
                 for k, n, h in links)
