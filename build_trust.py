@@ -22,7 +22,7 @@ def fmt(iso):
 
 
 # ---------------------------------------------------------------- header / footer
-NAV_LINKS = [("Recipes", "index.html#library"), ("Guides", "guides/index.html"), ("Security", "security/index.html"), ("Tools", "tools/index.html"),
+NAV_LINKS = [("Recipes", "index.html#library"), ("Guides", "guides/index.html"), ("Security", "security/index.html"), ("Tools", "tools/index.html"), ("Policies", "policies/index.html"),
              ("What's new", "changelog/index.html"), ("About", "about.html")]
 
 
@@ -55,7 +55,7 @@ def footer(rel, guide_slug, path="", title="", updated=None):
             '<p>Fact-checked AI &amp; security recipes for Microsoft 365 admins. An independent project — not affiliated with Microsoft or any vendor.</p>'
             f'<p class="sf-ed">{EDITOR}</p></div>'
             + col("Content", [("Recipes", f"{rel}index.html#library"), ("Guides", f"{rel}guides/index.html"),
-                              ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Windows 11 CIS hardening", f"{rel}guides/windows-11-cis-hardening.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"), ("Security tools &amp; testing", f"{rel}tools/index.html"), ("Quick guide: 5 Copilot license checks", f"{rel}guides/copilot-license-checks.html"),
+                              ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Windows 11 CIS hardening", f"{rel}guides/windows-11-cis-hardening.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"), ("Security tools &amp; testing", f"{rel}tools/index.html"), ("Policy templates", f"{rel}policies/index.html"), ("Quick guide: 5 Copilot license checks", f"{rel}guides/copilot-license-checks.html"),
                               ("Search", f"{rel}search/index.html")])
             + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("What's new (changelog)", f"{rel}changelog/index.html"),
                             ("Report an issue", f"{REPO}/issues/new/choose")])

@@ -2,6 +2,11 @@
  {
   "kind": "site",
   "date": "2026-10-30",
+  "text": "New: Policy templates. Ten plain-language IT security policies (acceptable use, password and MFA, BYOD, AI and Copilot, information classification, incident response, backup, access management, patching, third-party security) with placeholders, ISO 27001, NIST CSF 2.0 and CIS v8 references, and Word and Markdown downloads."
+ },
+ {
+  "kind": "site",
+  "date": "2026-10-30",
   "text": "New: Security tools & testing. 17 free and open-source tools (domain and mail checks, external exposure, Microsoft 365 and Entra, Active Directory, vulnerability scanning, web apps, Windows hardening, breach exposure), each with a short example, pitfalls and a permission reminder, plus a method for scoping an internal pentest."
  },
  {

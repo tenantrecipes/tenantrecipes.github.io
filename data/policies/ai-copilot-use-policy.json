@@ -1,0 +1,103 @@
+{
+ "id": "ai-copilot-use-policy",
+ "title": "AI and Microsoft Copilot Use Policy",
+ "short": "AI & Copilot use",
+ "purpose": "Sets the rules for using generative AI tools, including Microsoft 365 Copilot, so that people can benefit from them without leaking information or relying on wrong answers.",
+ "audience": "All employees and contractors who use generative AI for work, plus IT, security, legal and data owners who approve AI tools.",
+ "review": "Every 6 months, because AI tools, features and regulations change quickly.",
+ "extra_placeholders": [
+  "APPROVED_AI_TOOLS"
+ ],
+ "frameworks": {
+  "iso": [
+   "Organizational",
+   "People",
+   "Technological"
+  ],
+  "csf": [
+   "GV.PO",
+   "PR.DS",
+   "PR.AT"
+  ],
+  "cis": [
+   3,
+   14
+  ]
+ },
+ "body": [
+  {
+   "h": "Purpose",
+   "p": [
+    "Generative AI can save time, but it can also expose confidential data, produce convincing errors and create legal risk. This policy describes safe and responsible use."
+   ]
+  },
+  {
+   "h": "Scope",
+   "p": [
+    "It covers chat assistants, AI features in business apps, coding assistants and any service that generates text, images, code or audio, whether provided by {{COMPANY}} or found online."
+   ]
+  },
+  {
+   "h": "Approved tools",
+   "items": [
+    "Only the AI tools listed in {{APPROVED_AI_TOOLS}} may be used with company information.",
+    "Microsoft 365 Copilot works with the files, mail and chats you already have access to. Before it is enabled, data owners review and fix oversharing (broad sharing links, 'Everyone' permissions and public Teams or sites).",
+    "New AI tools, plug-ins and agents are approved by IT and security before use."
+   ]
+  },
+  {
+   "h": "What you may not put into AI tools",
+   "items": [
+    "Information classified as Confidential or Restricted, unless the tool is approved for that level.",
+    "Personal data about customers or colleagues, passwords, keys, source code secrets or security details, in any tool that is not approved.",
+    "Anything you are not allowed to share with the provider of the tool."
+   ]
+  },
+  {
+   "h": "Using AI output",
+   "items": [
+    "You are responsible for anything you produce with AI. Check facts, figures, quotes and references before you use them.",
+    "Do not use AI output alone for decisions about people, such as hiring, performance or credit.",
+    "Be open about AI use when a customer, colleague or reader would reasonably expect to know.",
+    "Respect copyright and licences; do not ask tools to reproduce protected material."
+   ]
+  },
+  {
+   "h": "Security and monitoring",
+   "items": [
+    "Sensitivity labels and data loss prevention apply to AI features in the same way as to other apps.",
+    "AI interactions in company tools may be logged and retained for security, compliance and legal holds.",
+    "Report suspicious AI behaviour, prompt injection or a possible data leak to {{SECURITY_CONTACT}}."
+   ]
+  },
+  {
+   "h": "Training",
+   "p": [
+    "Everyone who gets access to AI tools completes short training on safe prompting, data handling and checking output."
+   ]
+  },
+  {
+   "h": "Exceptions",
+   "p": [
+    "Exceptions must be requested in writing, explain the business reason and the risk, include compensating measures, and have an end date. {{OWNER}} approves or rejects them and keeps a record."
+   ]
+  },
+  {
+   "h": "Compliance",
+   "p": [
+    "Breaches of this policy may lead to access being removed and to action under employment or contract terms. Report suspected breaches to {{SECURITY_CONTACT}}."
+   ]
+  },
+  {
+   "h": "Ownership and review",
+   "p": [
+    "Policy owner: {{OWNER}}. Approved by: {{APPROVER}}. Effective from: {{EFFECTIVE_DATE}}. Next review: {{REVIEW_DATE}}."
+   ]
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 40
+}

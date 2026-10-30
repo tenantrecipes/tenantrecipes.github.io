@@ -1,0 +1,92 @@
+{
+ "id": "information-classification-policy",
+ "title": "Information Classification Policy",
+ "short": "Information classification",
+ "purpose": "Defines how {{COMPANY}} labels information by sensitivity and how each level must be stored, shared and disposed of.",
+ "audience": "Everyone who creates, receives or handles {{COMPANY}} information, and the owners of business data.",
+ "review": "Every 12 months, and when labels or data protection tools change.",
+ "extra_placeholders": [],
+ "frameworks": {
+  "iso": [
+   "Organizational",
+   "Technological"
+  ],
+  "csf": [
+   "ID.AM",
+   "PR.DS"
+  ],
+  "cis": [
+   3
+  ]
+ },
+ "body": [
+  {
+   "h": "Purpose",
+   "p": [
+    "Not all information needs the same protection. Clear levels help people share freely where that is safe and protect what really matters."
+   ]
+  },
+  {
+   "h": "Scope",
+   "p": [
+    "It covers information in any form: documents, email, chats, databases, recordings and paper."
+   ]
+  },
+  {
+   "h": "Classification levels",
+   "items": [
+    "Public: approved for anyone, such as published marketing material. No special handling.",
+    "Internal: for staff and trusted partners, such as internal procedures. Do not publish; share externally only for a business need.",
+    "Confidential: could harm {{COMPANY}}, customers or individuals if disclosed, such as contracts, financial results or personal data. Share only with named people who need it, and encrypt when sent outside the company.",
+    "Restricted: the most sensitive information, such as board material, merger plans, security secrets or special categories of personal data. Access limited to a named group, encryption required and external sharing only with owner approval."
+   ]
+  },
+  {
+   "h": "Labelling",
+   "items": [
+    "Apply the matching sensitivity label in Microsoft 365 when you create or receive information. When unsure, choose the higher level and ask the owner.",
+    "Labels may apply encryption, watermarks and sharing limits automatically.",
+    "Information without a label is treated as Internal."
+   ]
+  },
+  {
+   "h": "Handling rules",
+   "items": [
+    "Store information only in approved company locations.",
+    "Use sharing links scoped to specific people for Confidential and Restricted content; do not use 'anyone' links.",
+    "Print Confidential or Restricted material only when needed, and collect it immediately.",
+    "Dispose of information securely when no longer needed and in line with retention rules."
+   ]
+  },
+  {
+   "h": "Roles",
+   "items": [
+    "Information owners decide the level, approve access and review it at least yearly.",
+    "Everyone handles information according to its label and reports mislabelled or exposed information to {{SECURITY_CONTACT}}."
+   ]
+  },
+  {
+   "h": "Exceptions",
+   "p": [
+    "Exceptions must be requested in writing, explain the business reason and the risk, include compensating measures, and have an end date. {{OWNER}} approves or rejects them and keeps a record."
+   ]
+  },
+  {
+   "h": "Compliance",
+   "p": [
+    "Breaches of this policy may lead to access being removed and to action under employment or contract terms. Report suspected breaches to {{SECURITY_CONTACT}}."
+   ]
+  },
+  {
+   "h": "Ownership and review",
+   "p": [
+    "Policy owner: {{OWNER}}. Approved by: {{APPROVER}}. Effective from: {{EFFECTIVE_DATE}}. Next review: {{REVIEW_DATE}}."
+   ]
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 50
+}

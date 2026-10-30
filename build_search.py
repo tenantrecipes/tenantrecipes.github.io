@@ -95,7 +95,7 @@ def build_index(R, CY, guides, Q, AREA, tags_for, site_notes, extra=()):
 
 def search_body(rel):
     return (T.page_hero(rel, T.crumbs_dark(rel, "search/index.html", [("Home", rel + "index.html"), ("Search", None)]), "Search",
-                        "Search everything", "Recipes, guides, vulnerabilities, hardening, security tools and news in one place. Search runs in your browser; nothing is sent anywhere.",
+                        "Search everything", "Recipes, guides, vulnerabilities, hardening, security tools, policy templates and news in one place. Search runs in your browser; nothing is sent anywhere.",
                         kind="page")
             + '<main class="wrap pg"><article class="prose doc sxp">'
             f'<form class="fd-s sxp-f" action="{rel}search/index.html" method="get" role="search">{T.icon("search")}'

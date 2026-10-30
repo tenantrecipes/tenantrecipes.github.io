@@ -1,0 +1,97 @@
+{
+ "id": "backup-recovery-policy",
+ "title": "Backup and Recovery Policy",
+ "short": "Backup & recovery",
+ "purpose": "Makes sure {{COMPANY}} can restore data and systems after deletion, failure or a ransomware attack within agreed times.",
+ "audience": "IT operations, system and data owners, cloud administrators and service providers who run backups for {{COMPANY}}.",
+ "review": "Every 12 months, and after any failed restore test or significant change to critical systems.",
+ "extra_placeholders": [
+  "RPO_HOURS",
+  "RTO_HOURS",
+  "RETENTION_DAYS"
+ ],
+ "frameworks": {
+  "iso": [
+   "Technological"
+  ],
+  "csf": [
+   "PR.DS",
+   "PR.IR",
+   "RC.RP"
+  ],
+  "cis": [
+   11
+  ]
+ },
+ "body": [
+  {
+   "h": "Purpose",
+   "p": [
+    "Backups only matter if they can be restored when needed, including after an attacker has tried to destroy them."
+   ]
+  },
+  {
+   "h": "Scope",
+   "p": [
+    "It covers servers, databases, business applications, endpoints holding unique data, and cloud services such as Microsoft 365, where built-in retention is not the same as a backup."
+   ]
+  },
+  {
+   "h": "Requirements",
+   "items": [
+    "Each critical system has a documented recovery point objective (default {{RPO_HOURS}} hours of data loss at most) and recovery time objective (default {{RTO_HOURS}} hours to restore).",
+    "Backups follow the 3-2-1 idea: at least three copies, on two different types of storage, with one copy offsite or in a separate cloud account.",
+    "At least one copy is immutable or offline, so ransomware and stolen admin accounts cannot change or delete it.",
+    "Backups are encrypted in transit and at rest, and the keys are stored separately from the backups.",
+    "Backups are kept for at least {{RETENTION_DAYS}} days, longer where law or contracts require."
+   ]
+  },
+  {
+   "h": "Access and protection",
+   "items": [
+    "Backup systems use separate admin accounts with phishing-resistant MFA, not everyday domain accounts.",
+    "Deleting backups or shortening retention needs approval by a second person.",
+    "Backup failures raise alerts that are followed up the same working day."
+   ]
+  },
+  {
+   "h": "Testing",
+   "items": [
+    "Restore tests are run at least quarterly for a sample of systems and at least yearly for each critical system.",
+    "At least once a year, a full recovery scenario (for example a ransomware case) is exercised, including rebuilding identity services.",
+    "Test results, the time it took and any gaps are recorded and fixed."
+   ]
+  },
+  {
+   "h": "Roles",
+   "items": [
+    "System owners define what must be backed up and the RPO and RTO.",
+    "IT operations runs, monitors and tests backups.",
+    "{{OWNER}} reviews test results and reports risks to management."
+   ]
+  },
+  {
+   "h": "Exceptions",
+   "p": [
+    "Exceptions must be requested in writing, explain the business reason and the risk, include compensating measures, and have an end date. {{OWNER}} approves or rejects them and keeps a record."
+   ]
+  },
+  {
+   "h": "Compliance",
+   "p": [
+    "Breaches of this policy may lead to access being removed and to action under employment or contract terms. Report suspected breaches to {{SECURITY_CONTACT}}."
+   ]
+  },
+  {
+   "h": "Ownership and review",
+   "p": [
+    "Policy owner: {{OWNER}}. Approved by: {{APPROVER}}. Effective from: {{EFFECTIVE_DATE}}. Next review: {{REVIEW_DATE}}."
+   ]
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 70
+}

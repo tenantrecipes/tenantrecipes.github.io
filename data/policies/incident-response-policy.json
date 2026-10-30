@@ -1,0 +1,109 @@
+{
+ "id": "incident-response-policy",
+ "title": "Incident Response Policy",
+ "short": "Incident response",
+ "purpose": "Describes how {{COMPANY}} detects, reports, handles and learns from information security incidents.",
+ "audience": "All staff (who must report incidents), the incident response team, IT operations, management, legal, communications and HR.",
+ "review": "Every 12 months, and after every major incident or exercise.",
+ "extra_placeholders": [
+  "IR_LEAD",
+  "IT_SERVICE_DESK"
+ ],
+ "frameworks": {
+  "iso": [
+   "Organizational",
+   "Technological"
+  ],
+  "csf": [
+   "DE.AE",
+   "RS.MA",
+   "RS.AN",
+   "RS.CO",
+   "RS.MI",
+   "RC.RP",
+   "RC.CO"
+  ],
+  "cis": [
+   17
+  ]
+ },
+ "body": [
+  {
+   "h": "Purpose",
+   "p": [
+    "A fast, coordinated response limits damage and cost. This policy makes sure everyone knows what to report, who leads and what happens next."
+   ]
+  },
+  {
+   "h": "Scope",
+   "p": [
+    "It covers any event that threatens the confidentiality, integrity or availability of {{COMPANY}} information or systems, including those at suppliers that affect us."
+   ]
+  },
+  {
+   "h": "What to report",
+   "items": [
+    "Suspected phishing that someone clicked or replied to, unusual sign-in prompts, malware warnings, lost or stolen devices, data sent to the wrong person and unexpected system behaviour.",
+    "Report straight away to {{IT_SERVICE_DESK}} or {{SECURITY_CONTACT}}. Do not investigate on your own, delete evidence or contact the attacker."
+   ]
+  },
+  {
+   "h": "Roles",
+   "items": [
+    "{{IR_LEAD}} leads the response, decides severity and calls in the incident response team.",
+    "IT and security staff contain, investigate and recover systems.",
+    "Management decides on business impact, external help and spending.",
+    "Legal and the data protection officer assess notification duties to authorities, customers and individuals within the legal deadlines.",
+    "Communications handles all external statements; nobody else speaks to media about an incident."
+   ]
+  },
+  {
+   "h": "Response phases",
+   "items": [
+    "Prepare: keep contact lists, playbooks, logging and out-of-band communication ready, and test them.",
+    "Detect and analyse: confirm the incident, set a severity level and record a timeline from the first report.",
+    "Contain: limit spread, for example by isolating devices, revoking sessions and resetting credentials.",
+    "Eradicate and recover: remove the cause, restore from clean backups, monitor closely and return to normal operation.",
+    "Learn: within two weeks of closing a significant incident, hold a blameless review and track every improvement to completion."
+   ]
+  },
+  {
+   "h": "Severity levels",
+   "items": [
+    "Low: limited impact, handled by IT in normal working hours.",
+    "Medium: affects several users or internal data; incident team engaged the same day.",
+    "High: business-critical systems, confidential data or many users affected; management informed immediately.",
+    "Critical: major outage, ransomware or likely notifiable data breach; full team and executive leadership engaged around the clock."
+   ]
+  },
+  {
+   "h": "Evidence and records",
+   "p": [
+    "Preserve logs and affected systems before rebuilding where possible. Keep an incident record with timeline, decisions, impact and notifications for at least the period required by law and contracts."
+   ]
+  },
+  {
+   "h": "Exceptions",
+   "p": [
+    "Exceptions must be requested in writing, explain the business reason and the risk, include compensating measures, and have an end date. {{OWNER}} approves or rejects them and keeps a record."
+   ]
+  },
+  {
+   "h": "Compliance",
+   "p": [
+    "Breaches of this policy may lead to access being removed and to action under employment or contract terms. Report suspected breaches to {{SECURITY_CONTACT}}."
+   ]
+  },
+  {
+   "h": "Ownership and review",
+   "p": [
+    "Policy owner: {{OWNER}}. Approved by: {{APPROVER}}. Effective from: {{EFFECTIVE_DATE}}. Next review: {{REVIEW_DATE}}."
+   ]
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 60
+}

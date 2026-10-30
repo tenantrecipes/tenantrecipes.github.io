@@ -16,6 +16,7 @@ import build_trust as T
 import build_ux as UX
 import build_search as BS
 import build_tools as TL
+import build_policies as PL
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -405,6 +406,7 @@ def build():
     pages.append(guides_index())
     pages += CY.build(page, R, esc, step_html, signup, fmt_date, E, C.SITE_NAME)
     pages += TL.build(page, esc, step_html, signup, fmt_date, E, C.SITE_NAME)
+    pages += PL.build(page, esc, signup, fmt_date, E, C.SITE_NAME)
 
     refs = UX.guide_refs(GUIDES)
     for r in R:
@@ -470,7 +472,7 @@ def build():
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
     idx = BS.build_index(R, CY.load(), GUIDES, Q, CY.AREA, UX.tags_for, json.load(open(ROOT / "data" / "changelog.json")),
-                         TL.search_docs())
+                         TL.search_docs() + PL.search_docs())
     (DIST / "search").mkdir(exist_ok=True)
     (DIST / "search" / "index.json").write_text(json.dumps(idx, ensure_ascii=False, separators=(",", ":")))
     print(f"Search index: {len(idx['docs'])} docs, {len(idx['sug'])} suggestions, {len(idx['syn'])} synonym groups, {len(idx['q'])} questions")

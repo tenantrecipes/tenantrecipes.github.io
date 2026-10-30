@@ -1,0 +1,12 @@
+{
+ "acceptable-use-policy": "abcf4b23f1b47be9",
+ "access-management-policy": "bbfe89cb328108f6",
+ "ai-copilot-use-policy": "4dcf4f4627716460",
+ "backup-recovery-policy": "65b960a342b2f17b",
+ "byod-mobile-device-policy": "eee75ce5abbf54f8",
+ "incident-response-policy": "04ff5f35d9fa5541",
+ "information-classification-policy": "1b1d8e7ba57ac456",
+ "password-mfa-policy": "d28a645a7e87a644",
+ "patch-management-policy": "761ca5a233183e34",
+ "third-party-security-policy": "495c3fd22afa6f2e"
+}

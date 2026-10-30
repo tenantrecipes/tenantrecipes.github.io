@@ -534,3 +534,10 @@ html.sx-lock{overflow:hidden}
 /* Mobile menu fix: header must stay above the hero so the dropdown is visible and tappable */
 header.sh{display:block}
 @media (max-width:760px){header.sh{position:relative;z-index:50}}
+/* ---- Policy templates ---- */
+mark.ph{background:#fef3c7;color:#7c2d12;padding:0 3px;border-radius:4px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;white-space:nowrap}
+.pl-dl{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 26px}
+.pl-dl .btn{display:inline-flex;align-items:center;gap:8px}
+.pl-body h3{margin-top:1.6em}
+.pl-notice{border-color:#93c5fd;border-left-color:#2563eb;background:#eff6ff;color:#1e3a5f}
+.pl-notice .ic{stroke:#2563eb}.pl-notice strong{color:#1e3a8a}

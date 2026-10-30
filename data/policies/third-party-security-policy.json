@@ -1,0 +1,86 @@
+{
+ "id": "third-party-security-policy",
+ "title": "Third-Party and Vendor Security Policy",
+ "short": "Third-party security",
+ "purpose": "Ensures that suppliers who access {{COMPANY}} systems or data, or deliver critical services, meet appropriate security requirements.",
+ "audience": "Procurement, contract owners, legal, IT, security and anyone who buys or manages a service from a supplier.",
+ "review": "Every 12 months.",
+ "extra_placeholders": [],
+ "frameworks": {
+  "iso": [
+   "Organizational"
+  ],
+  "csf": [
+   "GV.SC"
+  ],
+  "cis": [
+   15
+  ]
+ },
+ "body": [
+  {
+   "h": "Purpose",
+   "p": [
+    "Suppliers often have access to our data, systems or users, so a weakness at a supplier can become our incident. This policy makes supplier risk visible and managed."
+   ]
+  },
+  {
+   "h": "Scope",
+   "p": [
+    "It covers cloud and software providers, IT service providers, consultants, outsourcers and any supplier that handles {{COMPANY}} data or connects to its systems."
+   ]
+  },
+  {
+   "h": "Before signing",
+   "items": [
+    "Every new supplier has an internal owner and a risk tier (low, medium or high) based on the data and access involved.",
+    "Medium- and high-risk suppliers complete a security assessment, for example a questionnaire, certifications such as ISO/IEC 27001 or SOC 2 reports, and a review of their incident history.",
+    "Contracts include security requirements, incident notification within an agreed time, audit or evidence rights, data location, subcontractor rules and return or deletion of data at the end."
+   ]
+  },
+  {
+   "h": "During the contract",
+   "items": [
+    "Supplier access to systems uses named accounts, MFA, the least privilege needed and time limits.",
+    "High-risk suppliers are reassessed every year, others at renewal.",
+    "Supplier incidents that affect {{COMPANY}} are handled through the incident response policy."
+   ]
+  },
+  {
+   "h": "Ending the relationship",
+   "items": [
+    "All supplier access is removed on the end date.",
+    "Data is returned or deleted, and the supplier confirms this in writing."
+   ]
+  },
+  {
+   "h": "Register",
+   "p": [
+    "{{OWNER}} keeps a register of suppliers, their risk tier, owner, last assessment and contract end date."
+   ]
+  },
+  {
+   "h": "Exceptions",
+   "p": [
+    "Exceptions must be requested in writing, explain the business reason and the risk, include compensating measures, and have an end date. {{OWNER}} approves or rejects them and keeps a record."
+   ]
+  },
+  {
+   "h": "Compliance",
+   "p": [
+    "Breaches of this policy may lead to access being removed and to action under employment or contract terms. Report suspected breaches to {{SECURITY_CONTACT}}."
+   ]
+  },
+  {
+   "h": "Ownership and review",
+   "p": [
+    "Policy owner: {{OWNER}}. Approved by: {{APPROVER}}. Effective from: {{EFFECTIVE_DATE}}. Next review: {{REVIEW_DATE}}."
+   ]
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 100
+}

@@ -1,0 +1,108 @@
+{
+ "id": "access-management-policy",
+ "title": "Access Management Policy (Joiner, Mover, Leaver)",
+ "short": "Access management",
+ "purpose": "Controls how access to {{COMPANY}} systems is granted, changed and removed when people join, move roles or leave.",
+ "audience": "HR, managers, IT and identity administrators, application owners and anyone who approves access.",
+ "review": "Every 12 months, and when HR or identity systems change.",
+ "extra_placeholders": [
+  "LEAVER_HOURS",
+  "ACCESS_REVIEW_MONTHS"
+ ],
+ "frameworks": {
+  "iso": [
+   "Organizational",
+   "People",
+   "Technological"
+  ],
+  "csf": [
+   "PR.AA",
+   "GV.RR"
+  ],
+  "cis": [
+   5,
+   6
+  ]
+ },
+ "body": [
+  {
+   "h": "Purpose",
+   "p": [
+    "People should have the access they need for their job, no more, and lose it when they no longer need it. Leftover access is a common way in for attackers."
+   ]
+  },
+  {
+   "h": "Scope",
+   "p": [
+    "It covers all user, guest, administrator and service accounts in company systems and cloud services."
+   ]
+  },
+  {
+   "h": "Principles",
+   "items": [
+    "Least privilege: grant the minimum access needed, preferably through role-based groups rather than individual permissions.",
+    "Separation of duties: one person should not be able to both request and approve their own access, or complete high-risk financial actions alone.",
+    "Every account belongs to one named person or, for service accounts, a named owner."
+   ]
+  },
+  {
+   "h": "Joiners",
+   "items": [
+    "Accounts are created only after HR or the hiring manager confirms the start in the HR system.",
+    "Standard access comes from the role; extra access needs an approved request.",
+    "New users enrol MFA on day one and complete security awareness training within their first month."
+   ]
+  },
+  {
+   "h": "Movers",
+   "items": [
+    "When someone changes role, the new manager confirms the access they need, and access from the old role is removed within 30 days at the latest.",
+    "Temporary access for projects has an end date."
+   ]
+  },
+  {
+   "h": "Leavers",
+   "items": [
+    "Accounts are disabled no later than {{LEAVER_HOURS}} hours after the last working day, and immediately for unfriendly departures.",
+    "Sessions and tokens are revoked, devices returned or wiped, and mailbox and files handed over to the manager according to retention rules.",
+    "Shared passwords the leaver knew are changed."
+   ]
+  },
+  {
+   "h": "Guests and privileged access",
+   "items": [
+    "Guest accounts have a sponsor and expire or are reviewed at least every {{ACCESS_REVIEW_MONTHS}} months.",
+    "Privileged roles are granted just-in-time where possible, and are reviewed at least quarterly."
+   ]
+  },
+  {
+   "h": "Access reviews",
+   "p": [
+    "Managers and application owners review who has access to their systems at least every {{ACCESS_REVIEW_MONTHS}} months and remove what is not needed. Results are recorded."
+   ]
+  },
+  {
+   "h": "Exceptions",
+   "p": [
+    "Exceptions must be requested in writing, explain the business reason and the risk, include compensating measures, and have an end date. {{OWNER}} approves or rejects them and keeps a record."
+   ]
+  },
+  {
+   "h": "Compliance",
+   "p": [
+    "Breaches of this policy may lead to access being removed and to action under employment or contract terms. Report suspected breaches to {{SECURITY_CONTACT}}."
+   ]
+  },
+  {
+   "h": "Ownership and review",
+   "p": [
+    "Policy owner: {{OWNER}}. Approved by: {{APPROVER}}. Effective from: {{EFFECTIVE_DATE}}. Next review: {{REVIEW_DATE}}."
+   ]
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-10-30",
+ "created": "2026-10-30",
+ "updated": "2026-10-30",
+ "order": 80
+}

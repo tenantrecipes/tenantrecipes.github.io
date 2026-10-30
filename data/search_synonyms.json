@@ -214,6 +214,13 @@
    "scan",
    "vulnerability scanner",
    "port scan"
+  ],
+  [
+   "policy",
+   "policies",
+   "template",
+   "templates",
+   "policy template"
   ]
  ],
  "questions": [
@@ -300,6 +307,18 @@
   [
    "how do I find attack paths in active directory",
    "tools/bloodhound-ce.html"
+  ],
+  [
+   "do you have a byod policy template",
+   "policies/byod-mobile-device-policy.html"
+  ],
+  [
+   "is there an ai usage policy template",
+   "policies/ai-copilot-use-policy.html"
+  ],
+  [
+   "how do I write an incident response policy",
+   "policies/incident-response-policy.html"
   ]
  ]
 }
