@@ -37,9 +37,11 @@ def patch_tuesday_widget(rel, ents=None):
                  key=lambda e: e.get("advisory_date") or e.get("updated") or "", reverse=True)
     if pts:
         latest = f' data-latest="{rel}security/{pts[0]["id"]}.html"'
-    return (f'<aside class="pt-cd" data-pt{latest} aria-label="Patch Tuesday countdown"><span class="pt-k">Patch Tuesday</span>'
-            '<span class="pt-t" aria-live="polite">Microsoft releases security updates on the second Tuesday of each month, at about 10:00 Pacific Time.</span>'
-            f'<a class="pt-l" href="{MSRC_GUIDE}">MSRC Security Update Guide →</a></aside>')
+    return (f'<aside class="pt-cd" data-pt{latest} aria-label="Patch Tuesday countdown"><div class="pt-info">'
+            '<span class="pt-k">Patch Tuesday</span>'
+            '<p class="pt-t" aria-live="polite">Microsoft releases security updates on the second Tuesday of each month, at about 10:00 Pacific Time.</p>'
+            f'<a class="pt-l" href="{MSRC_GUIDE}">MSRC Security Update Guide →</a></div>'
+            '<div class="pt-clock" role="timer" hidden></div></aside>')
 
 
 CLOUD_CATS = ["Identity & threat protection", "Conditional Access for AI"]  # existing recipe categories shown under Cloud & identity

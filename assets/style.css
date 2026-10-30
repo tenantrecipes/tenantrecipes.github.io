@@ -396,11 +396,6 @@ background:linear-gradient(135deg,#0e1f52ee,#24135aee);border:1px solid #ffffff1
 .cy-cat-client{background:#e7f0ff;color:#0f3f8a}.cy-cat-server{background:#efe8ff;color:#4b2a99}.cy-cat-network{background:#e3f7f1;color:#0b5c46}
 .cy-cat-web-runtime{background:#fff1e0;color:#8a4b00}.cy-cat-virtualization{background:#e6f4fb;color:#0b5272}.cy-cat-firmware{background:#f3eee6;color:#5b4524}.cy-cat-cloud-m365{background:#e8f3ff;color:#0f6cbd}
 .card .cy-cat{margin:6px 0 2px}.cy-filter{margin:14px 0 4px}[data-cat][hidden],.cy-empty[hidden]{display:none!important}
-.pt-cd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:18px 0 0;padding:10px 16px;border:1px solid #e3e5ec;border-radius:12px;background:#fff;font-size:.9rem;color:#334}
-.pt-k{display:inline-block;padding:2px 8px;border-radius:6px;background:#0b1538;color:#5ee6c8;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-.pt-t{flex:1 1 260px}.pt-t b{font-variant-numeric:tabular-nums;color:#0b1538}.pt-l{font-weight:700;white-space:nowrap;text-decoration:none}.pt-l:hover{text-decoration:underline}
-.pt-cd.live{border-color:#5ee6c8;background:#effcf8}.pt-cd.live .pt-k{background:#0b5c46;color:#fff}
-.pt-home{padding-top:0;padding-bottom:0}
 /* ---- vulnerability watch: stacked cards ---- */
 .vw-list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:12px}
 .vw-card{background:#fff;border:1px solid #e3e5ec;border-radius:12px;padding:14px 18px;transition:box-shadow .15s,border-color .15s}
@@ -416,9 +411,36 @@ background:linear-gradient(135deg,#0e1f52ee,#24135aee);border:1px solid #ffffff1
 @media (max-width:560px){.vw-card{padding:12px 14px}.vw-t{flex-basis:100%;font-size:.98rem}.vw-r2{flex-direction:column}.vw-r2>*::after{display:none}.vw-r3{flex-direction:column}}
 .vw-list>li{margin:0;padding:0}.vw-list .vw-card{margin:0;padding:14px 18px}
 @media (max-width:560px){.vw-list .vw-card{padding:12px 14px}.vw-do{flex-basis:auto}.vw-r3{align-items:flex-start}}
-/* Patch Tuesday countdown, homepage hero variant */
-.pt-cd.pt-hero{margin:14px 0 18px;padding:12px 18px;background:#ffffff14;border:1px solid #5ee6c855;color:#dfe6ff;font-size:.95rem;backdrop-filter:blur(6px);box-shadow:0 8px 24px #0006}
-.pt-hero .pt-k{background:#5ee6c8;color:#06221c}.pt-hero .pt-t b{color:#fff;font-size:1.05em}.pt-hero .pt-l{color:#5ee6c8}
-.pt-hero.live{background:#5ee6c822;border-color:#5ee6c8}.pt-hero.live .pt-k{background:#fff;color:#0b5c46}.pt-hero .pt-t a{color:#5ee6c8}
-@media (max-width:560px){.pt-cd.pt-hero{padding:10px 14px;font-size:.88rem}}
-.pt-w{white-space:nowrap}
+
+/* ---- Patch Tuesday countdown: split-flap clock ---- */
+.pt-cd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;margin:18px 0 0;padding:14px 18px;border:1px solid #e3e5ec;border-radius:14px;background:#fff;color:#334;font-size:.9rem}
+.pt-info{flex:1 1 260px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.pt-k{display:inline-block;padding:2px 8px;border-radius:6px;background:#0b1538;color:#5ee6c8;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.pt-t{margin:0}.pt-t b{color:#0b1538}.pt-t a{font-weight:700}.pt-w{white-space:nowrap}
+.pt-l{font-weight:700;white-space:nowrap;text-decoration:none}.pt-l:hover{text-decoration:underline}
+.pt-cd.live{border-color:#5ee6c8;background:#effcf8}.pt-cd.live .pt-k{background:#0b5c46;color:#fff}
+.pt-hero{margin:14px 0 18px;background:#ffffff12;border-color:#5ee6c855;color:#dfe6ff;font-size:.95rem;backdrop-filter:blur(6px);box-shadow:0 8px 24px #0006}
+.pt-hero .pt-k{background:#5ee6c8;color:#06221c}.pt-hero .pt-t b{color:#fff}.pt-hero .pt-l,.pt-hero .pt-t a{color:#5ee6c8}
+.pt-hero.live{background:#5ee6c822;border-color:#5ee6c8}.pt-hero.live .pt-k{background:#fff;color:#0b5c46}
+.pt-clock{display:flex;align-items:flex-start;gap:6px;font-size:2.6rem;flex:none}.pt-clock[hidden]{display:none}
+.pt-u{display:flex;flex-direction:column;align-items:center;gap:6px}
+.pt-u i{font:800 .62rem/1 system-ui,sans-serif;letter-spacing:.14em;color:#667;font-style:normal}.pt-hero .pt-u i{color:#aab6dd}
+.pt-sep{font:700 1em/1.45 Georgia,serif;color:#8a8478;padding:0 1px}.pt-hero .pt-sep{color:#c9c2b0}
+.fl{position:relative;display:block;width:1.62em;height:1.45em;perspective:6em;border-radius:.14em;background:#161412;
+ box-shadow:0 .06em 0 #000,0 .14em .3em #0007,inset 0 0 0 1px #ffffff0d;font:700 1em/1.45em "Helvetica Neue",Arial,sans-serif;color:#f1e6c8;font-variant-numeric:tabular-nums}
+.fl>span{position:absolute;left:0;right:0;height:50%;overflow:hidden;background:linear-gradient(#2a2622,#1d1a17);backface-visibility:hidden}
+.fl-t,.fl-ft{top:0;border-radius:.14em .14em 0 0;transform-origin:50% 100%}
+.fl-b,.fl-fb{bottom:0;border-radius:0 0 .14em .14em;transform-origin:50% 0;background:linear-gradient(#1b1815,#24201c)!important}
+.fl>span b{display:block;height:1.45em;text-align:center;font-weight:700;letter-spacing:.02em;text-shadow:0 1px 0 #0009}
+.fl-b b,.fl-fb b{margin-top:-.725em}
+.fl::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:#0a0908;z-index:5;box-shadow:0 1px 0 #ffffff12}
+.fl::after{content:"";position:absolute;top:calc(50% - .09em);left:-.05em;right:-.05em;height:.18em;z-index:6;
+ background:linear-gradient(90deg,#3b3632 0 .1em,transparent .1em calc(100% - .1em),#3b3632 calc(100% - .1em))}
+.fl-ft,.fl-fb{display:none;z-index:3}
+.fl.go .fl-ft{display:block;animation:fl-top .28s ease-in forwards}
+.fl.go .fl-fb{display:block;transform:rotateX(90deg);animation:fl-bot .28s .28s ease-out forwards}
+@keyframes fl-top{to{transform:rotateX(-90deg);filter:brightness(.55)}}
+@keyframes fl-bot{from{transform:rotateX(90deg);filter:brightness(1.4)}to{transform:rotateX(0)}}
+@media (prefers-reduced-motion:reduce){.fl.go .fl-ft,.fl.go .fl-fb{animation:none;display:none}}
+@media (max-width:560px){.pt-cd{padding:12px 14px;justify-content:center}.pt-info{flex-basis:100%}.pt-clock{font-size:2rem;margin:0 auto}}
+@media (max-width:360px){.pt-clock{font-size:1.6rem;gap:4px}}
