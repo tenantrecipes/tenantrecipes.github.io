@@ -1,0 +1,41 @@
+{
+ "id": "kql-ca-report-only-impact",
+ "status": "published",
+ "title": "Measure what a report-only Conditional Access policy would block",
+ "lang": "kql",
+ "tags": [
+  "Conditional Access",
+  "Sign-in logs"
+ ],
+ "summary": "Count report-only results per policy and user, so you know who would fail or be interrupted before you switch a policy to On.",
+ "code": "// Interactive sign-ins; ConditionalAccessPolicies is a dynamic column in SigninLogs\nSigninLogs\n| where TimeGenerated > ago(14d)\n| mv-expand CAP = ConditionalAccessPolicies\n| extend Policy = tostring(CAP.displayName), Result = tostring(CAP.result)\n| where Result in (\"reportOnlyFailure\", \"reportOnlyInterrupted\")\n| summarize SignIns = count(), Users = dcount(UserPrincipalName), Apps = make_set(AppDisplayName, 10)\n    by Policy, Result\n| order by SignIns desc",
+ "notes": [
+  "reportOnlyFailure means the policy would have blocked the sign-in; reportOnlyInterrupted means the user would have been asked for something (for example MFA) they didn't complete.",
+  "Replace the summarize line with 'by Policy, Result, UserPrincipalName' to get the user list for one policy."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "ca-report-only-first",
+  "label": "Roll out AI-related Conditional Access policies in report-only mode"
+ },
+ "refs": [
+  {
+   "title": "appliedConditionalAccessPolicy resource (result values)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/resources/appliedconditionalaccesspolicy?view=graph-rest-1.0"
+  },
+  {
+   "title": "SigninLogs table reference (Azure Monitor)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/signinlogs"
+  },
+  {
+   "title": "Report-only mode",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-report-only"
+  },
+  {
+   "title": "Conditional Access insights and reporting workbook",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/howto-conditional-access-insights-reporting"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

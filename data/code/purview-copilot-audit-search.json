@@ -1,0 +1,37 @@
+{
+ "id": "purview-copilot-audit-search",
+ "status": "published",
+ "title": "Search the audit log for Copilot interactions",
+ "lang": "powershell",
+ "tags": [
+  "Purview",
+  "Copilot"
+ ],
+ "summary": "Pull the last 7 days of CopilotInteraction audit records with Exchange Online PowerShell and export who used Copilot and where.",
+ "code": "Connect-ExchangeOnline\n\nSearch-UnifiedAuditLog -RecordType CopilotInteraction `\n    -StartDate (Get-Date).AddDays(-7) -EndDate (Get-Date) -ResultSize 5000 |\n  Select-Object CreationDate, UserIds, Operations,\n    @{n='App';e={ ($_.AuditData | ConvertFrom-Json).CopilotEventData.AppHost }} |\n  Export-Csv .\\copilot-audit.csv -NoTypeInformation -Encoding UTF8",
+ "notes": [
+  "Unified audit logging must be on (Get-AdminAuditLogConfig shows UnifiedAuditLogIngestionEnabled).",
+  "One call returns at most 5000 records; for larger ranges use the Purview Audit search or split the date range."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "purview-audit-copilot",
+  "label": "Audit Copilot interactions in Microsoft Purview"
+ },
+ "refs": [
+  {
+   "title": "Search-UnifiedAuditLog (Exchange Online PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/exchange/search-unifiedauditlog"
+  },
+  {
+   "title": "Audit logs for Copilot and AI activities",
+   "url": "https://learn.microsoft.com/en-us/purview/audit-copilot"
+  },
+  {
+   "title": "Microsoft Purview audit schema for Copilot (CopilotEventData, AppHost)",
+   "url": "https://learn.microsoft.com/en-us/office/office-365-management-api/copilot-schema"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

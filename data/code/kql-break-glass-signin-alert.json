@@ -1,0 +1,33 @@
+{
+ "id": "kql-break-glass-signin-alert",
+ "status": "published",
+ "title": "Alert on any sign-in by a break-glass account",
+ "lang": "kql",
+ "tags": [
+  "Emergency access",
+  "Sign-in logs"
+ ],
+ "summary": "Log search alert query for emergency access accounts: every sign-in, successful or not, should page someone.",
+ "code": "// Use as a Log Analytics / Sentinel scheduled alert (for example every 5 minutes, threshold > 0)\nlet BreakGlass = dynamic([\"<object-id-1>\", \"<object-id-2>\"]);\nunion SigninLogs, AADNonInteractiveUserSignInLogs\n| where UserId in (BreakGlass)\n| project TimeGenerated, UserPrincipalName, UserId, IPAddress, AppDisplayName, ResultType, ResultDescription",
+ "notes": [
+  "Match on object ID (UserId), not UPN: a renamed account keeps its object ID.",
+  "Test the alert when you do your regular break-glass sign-in test."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "ca-break-glass",
+  "label": "Keep break-glass accounts out of every AI-era CA policy"
+ },
+ "refs": [
+  {
+   "title": "Manage emergency access accounts in Microsoft Entra ID (monitoring and alerting)",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access"
+  },
+  {
+   "title": "SigninLogs table reference (Azure Monitor)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/signinlogs"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

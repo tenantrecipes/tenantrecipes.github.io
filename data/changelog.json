@@ -1,6 +1,36 @@
 [
  {
   "date": "2026-10-31",
+  "time": "12:57",
+  "kind": "site",
+  "type": "Site",
+  "title": "New tool: Conditional Access policy generator",
+  "blurb": "Pick a scenario, get Graph JSON and New-MgIdentityConditionalAccessPolicy PowerShell. Report-only by default, break-glass excluded, runs in your browser.",
+  "url": "code/ca-policy-generator.html",
+  "text": "New interactive Conditional Access policy generator in the Code Library. Nine scenarios (MFA for all users, block legacy authentication, require a compliant device, phishing-resistant MFA for admin roles, sign-in risk MFA or block, high user risk with password change, block device code flow, protect security info registration). Options for pilot group, break-glass group exclusion, Directory Synchronization Accounts exclusion, authentication strength and policy state. Output is Microsoft Graph v1.0 JSON and Microsoft Graph PowerShell, checked against the conditionalAccessPolicy schema; the state defaults to report-only. Everything runs in your browser and nothing is sent anywhere."
+ },
+ {
+  "date": "2026-10-31",
+  "time": "12:57",
+  "kind": "site",
+  "type": "Site",
+  "title": "New tool: mail DNS checker",
+  "blurb": "Graded check of MX, SPF (lookup count), DMARC, Microsoft 365 DKIM, MTA-STS, TLS-RPT, CAA and DNSSEC, with links to Microsoft Learn. Nothing is stored.",
+  "url": "tools/mail-dns-checker.html",
+  "text": "New mail DNS checker under Tools. Type a domain and your browser queries public DNS-over-HTTPS resolvers (Cloudflare, with Google as fallback) directly: MX, SPF including the 10-lookup limit and -all/~all, DMARC policy, pct, rua and alignment, the Microsoft 365 DKIM selector1/selector2 CNAMEs, MTA-STS, TLS-RPT, CAA and DNSSEC. The result is an A–F grade with concrete fixes and links to Microsoft Learn and the RFCs. Tenant Recipes stores nothing and the domain is not put in the URL."
+ },
+ {
+  "date": "2026-10-31",
+  "time": "12:57",
+  "kind": "site",
+  "type": "Site",
+  "title": "Code Library: 12 new snippets",
+  "blurb": "KQL for legacy auth, report-only CA impact, break-glass sign-ins, device code flow and ZAP; PowerShell for licences, admin roles, consent, phone MFA, Intune, Autopilot and Copilot audit.",
+  "url": "code/index.html",
+  "text": "Twelve new Code Library snippets, now 22 in total. KQL: legacy authentication sign-ins, Conditional Access report-only impact, break-glass account sign-in alert, device code flow audit, and ZAP post-delivery actions. PowerShell (Microsoft Graph, Exchange Online): licence inventory to CSV, privileged role assignments, user consent setting, users with phone-based MFA, non-compliant Intune devices, Autopilot device inventory, and a Copilot audit log search. Each one is syntax-checked and links to its guide or recipe and the official reference."
+ },
+ {
+  "date": "2026-10-31",
   "time": "12:47",
   "kind": "site",
   "type": "Guide",

@@ -1,0 +1,32 @@
+{
+ "id": "kql-device-code-flow-audit",
+ "status": "published",
+ "title": "Audit device code flow sign-ins before you block it",
+ "lang": "kql",
+ "tags": [
+  "Conditional Access",
+  "Sign-in logs"
+ ],
+ "summary": "Who and what still authenticates with the device code flow, so you can scope exclusions before a block-device-code Conditional Access policy.",
+ "code": "union SigninLogs, AADNonInteractiveUserSignInLogs\n| where TimeGenerated > ago(30d)\n| where AuthenticationProtocol == \"deviceCode\"\n| summarize SignIns = count(), LastSeen = max(TimeGenerated), IPs = make_set(IPAddress, 5)\n    by UserPrincipalName, AppDisplayName\n| order by SignIns desc",
+ "notes": [
+  "Expect shared devices such as Teams Rooms and some CLI tools. Put real exceptions in a dedicated group that the block policy excludes."
+ ],
+ "source": {
+  "kind": "tool",
+  "path": "code/ca-policy-generator.html",
+  "label": "Conditional Access policy generator (Block device code flow)"
+ },
+ "refs": [
+  {
+   "title": "SigninLogs table reference (AuthenticationProtocol values)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/signinlogs"
+  },
+  {
+   "title": "Block authentication flows with Conditional Access",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-authentication-flows"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

@@ -1,0 +1,33 @@
+{
+ "id": "graph-license-inventory-csv",
+ "status": "published",
+ "title": "Export every licensed user with SKU names to CSV",
+ "lang": "powershell",
+ "tags": [
+  "Licensing",
+  "Microsoft Graph"
+ ],
+ "summary": "One CSV of licensed users with readable SKU part numbers and account state, so you can spot licenses on disabled accounts before a true-up.",
+ "code": "Connect-MgGraph -Scopes 'User.Read.All','Organization.Read.All'\n\n$sku = @{}\nGet-MgSubscribedSku | ForEach-Object { $sku[$_.SkuId] = $_.SkuPartNumber }\n\nGet-MgUser -All -Property DisplayName,UserPrincipalName,AccountEnabled,AssignedLicenses |\n  Where-Object { $_.AssignedLicenses.Count -gt 0 } |\n  Select-Object DisplayName, UserPrincipalName, AccountEnabled,\n    @{n='Licenses';e={ ($_.AssignedLicenses.SkuId | ForEach-Object { $sku[$_] }) -join ';' }} |\n  Export-Csv .\\license-inventory.csv -NoTypeInformation -Encoding UTF8",
+ "notes": [
+  "Filter the CSV on AccountEnabled = False to find licenses you can reclaim.",
+  "Get-MgUser only returns the properties you ask for with -Property; AssignedLicenses is empty without it."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "license-inventory-script",
+  "label": "List who has which license with Graph PowerShell"
+ },
+ "refs": [
+  {
+   "title": "Get-MgSubscribedSku (Microsoft Graph PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.identity.directorymanagement/get-mgsubscribedsku"
+  },
+  {
+   "title": "Get-MgUser (Microsoft Graph PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.users/get-mguser"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

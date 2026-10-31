@@ -34,10 +34,10 @@ entra-private-access-vpn-replacement, adcs-hardening-tier0. Technical = admin-by
 
 ## Code Library (`data/code/<id>.json` → `/code/`)
 
-Copy-ready snippets built by `build_code.py`. Each snippet must come from an existing guide step or recipe on this site
+Copy-ready snippets built by `build_code.py`. Each snippet must come from an existing guide step, recipe or interactive tool page on this site
 (condensed, never copied from external sites) and link back to it. Fields: `id` (= file name), `status`, `title`,
 `lang` (`powershell` | `azcli` | `shell` | `bicep` | `kql` | `json` | `http` | `yaml`), `tags`, `summary`, `code`,
-`notes` (before-you-run warnings), `source` (`{"kind": "guide", "slug", "anchor", "label"}` or `{"kind": "recipe", "id", "label"}`),
+`notes` (before-you-run warnings), `source` (`{"kind": "guide", "slug", "anchor", "label"}`, `{"kind": "recipe", "id", "label"}` or `{"kind": "tool", "path", "label"}` for an interactive tool page from `build_apps.py`),
 `refs` (official references, https), `created`, `last_verified`. The build fails on an unknown language, guide slug or recipe id.
 Use `<placeholders>` for tenant-specific values and never include secrets.
 

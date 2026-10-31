@@ -1,0 +1,37 @@
+{
+ "id": "autopilot-device-inventory",
+ "status": "published",
+ "title": "Export Windows Autopilot devices with group tag and enrollment state",
+ "lang": "powershell",
+ "tags": [
+  "Autopilot",
+  "Microsoft Graph"
+ ],
+ "summary": "Check that imported hardware hashes carry the right group tag and see which devices never enrolled, before a rollout wave.",
+ "code": "Connect-MgGraph -Scopes 'DeviceManagementServiceConfig.Read.All'\n\nGet-MgDeviceManagementWindowsAutopilotDeviceIdentity -All |\n  Select-Object SerialNumber, Manufacturer, Model, GroupTag, EnrollmentState, LastContactedDateTime |\n  Sort-Object GroupTag, SerialNumber |\n  Export-Csv .\\autopilot-devices.csv -NoTypeInformation -Encoding UTF8",
+ "notes": [
+  "Empty GroupTag on devices that should get a tag-based dynamic group means the profile won't apply.",
+  "EnrollmentState values: unknown, enrolled, pendingReset, failed, notContacted."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "autopilot-register-hash-corporate-identifiers",
+  "label": "Pre-stage Windows devices for Autopilot: hardware hash import vs corporate identifiers"
+ },
+ "refs": [
+  {
+   "title": "windowsAutopilotDeviceIdentity resource type",
+   "url": "https://learn.microsoft.com/en-us/graph/api/resources/intune-enrollment-windowsautopilotdeviceidentity?view=graph-rest-1.0"
+  },
+  {
+   "title": "List windowsAutopilotDeviceIdentities (permissions)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/intune-enrollment-windowsautopilotdeviceidentity-list?view=graph-rest-1.0"
+  },
+  {
+   "title": "Get-MgDeviceManagementWindowsAutopilotDeviceIdentity (Microsoft Graph PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.devicemanagement.enrollment/get-mgdevicemanagementwindowsautopilotdeviceidentity"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

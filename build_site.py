@@ -31,6 +31,7 @@ import build_markers as MK
 import build_tiers as TR
 import build_history as HI
 import build_code as CODE
+import build_apps as AP
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -593,6 +594,7 @@ def build():
     pages += BST.build(page, esc, E, C.SITE_NAME, DIST)
     pages += NW.build(page, esc, step_html, signup, fmt_date, E, C.SITE_NAME, CY.load())
     pages += CODE.build(page, esc, fmt_date, signup, C.SITE_NAME, set(RID), {g.SLUG for g in GUIDES + [Q]})
+    pages += AP.build(page, esc, fmt_date, signup, C.SITE_NAME)
 
     refs = UX.guide_refs(GUIDES)
     BL.check(R)
@@ -667,7 +669,7 @@ def build():
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
     idx = BS.build_index(R, CY.load(), GUIDES, Q, CY.AREA, UX.tags_for, json.load(open(ROOT / "data" / "changelog.json")),
-                         TL.search_docs() + PL.search_docs() + NW.search_docs(CY.load()) + CODE.search_docs())
+                         TL.search_docs() + PL.search_docs() + NW.search_docs(CY.load()) + CODE.search_docs() + AP.search_docs())
     (DIST / "search").mkdir(exist_ok=True)
     (DIST / "search" / "index.json").write_text(json.dumps(idx, ensure_ascii=False, separators=(",", ":")))
     print(f"Search index: {len(idx['docs'])} docs, {len(idx['sug'])} suggestions, {len(idx['syn'])} synonym groups, {len(idx['q'])} questions")

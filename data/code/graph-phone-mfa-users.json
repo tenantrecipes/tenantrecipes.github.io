@@ -1,0 +1,37 @@
+{
+ "id": "graph-phone-mfa-users",
+ "status": "published",
+ "title": "Find users with a phone registered for MFA and what else they have",
+ "lang": "powershell",
+ "tags": [
+  "MFA",
+  "Microsoft Graph"
+ ],
+ "summary": "From the authentication methods registration report: users with mobilePhone registered, their other methods and whether they're admins, to target a passkey campaign.",
+ "code": "Connect-MgGraph -Scopes 'AuditLog.Read.All'\n\nGet-MgReportAuthenticationMethodUserRegistrationDetail -All `\n    -Filter \"methodsRegistered/any(m:m eq 'mobilePhone')\" |\n  Select-Object UserPrincipalName, IsAdmin, IsMfaRegistered,\n    UserPreferredMethodForSecondaryAuthentication,\n    @{n='Methods';e={ $_.MethodsRegistered -join ';' }} |\n  Export-Csv .\\phone-mfa-users.csv -NoTypeInformation -Encoding UTF8",
+ "notes": [
+  "Users whose Methods column holds only mobilePhone (and maybe email) depend on SMS or voice: move them first.",
+  "The report reflects registration, not which method was last used for sign-in."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "entra-sms-voice-retirement-passkeys",
+  "label": "Move users off SMS and voice MFA before Microsoft-provided SMS and voice retire on 1 February 2027"
+ },
+ "refs": [
+  {
+   "title": "List userRegistrationDetails (filter on methodsRegistered, permissions)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/authenticationmethodsroot-list-userregistrationdetails?view=graph-rest-1.0"
+  },
+  {
+   "title": "userRegistrationDetails resource type",
+   "url": "https://learn.microsoft.com/en-us/graph/api/resources/userregistrationdetails?view=graph-rest-1.0"
+  },
+  {
+   "title": "Get-MgReportAuthenticationMethodUserRegistrationDetail (Microsoft Graph PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.reports/get-mgreportauthenticationmethoduserregistrationdetail"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

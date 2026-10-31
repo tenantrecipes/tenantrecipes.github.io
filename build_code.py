@@ -1,15 +1,17 @@
 """Code Library (/code/): copy-ready PowerShell, Azure CLI, azcmagent, Bicep, KQL, Graph/JSON and YAML snippets.
 One snippet = data/code/<id>.json. Every snippet is taken (and condensed) from an existing guide step or recipe on this site
 and links back to it plus the official references it was checked against. Static, no backend.
-Schema: id, status, title, lang (see LANGS), tags[], summary, code, notes[], source {kind: guide|recipe, slug|id, anchor?, label},
+Schema: id, status, title, lang (see LANGS), tags[], summary, code, notes[], source {kind: guide|recipe|tool, slug|id|path, anchor?, label},
 refs [{title, url}] (https), created, last_verified. The build fails on invalid data or an unknown source."""
 import json, re, sys, pathlib
 import build_trust as T
+import build_apps as AP
 
 ROOT = pathlib.Path(__file__).resolve().parent
 LANGS = {"powershell": "PowerShell", "azcli": "Azure CLI", "shell": "azcmagent / shell", "bicep": "Bicep", "kql": "KQL",
          "json": "Graph / JSON", "http": "Graph HTTP", "yaml": "YAML"}
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+TOOL_PAGES = {AP.CA_PATH, AP.DNS_PATH}  # source.kind "tool": an interactive tool page on this site (build_apps.py)
 
 
 def load(recipe_ids=(), guide_slugs=()):
@@ -31,8 +33,10 @@ def load(recipe_ids=(), guide_slugs=()):
             errs.append(f"{p}: unknown guide slug {src.get('slug')}")
         if src.get("kind") == "recipe" and src.get("id") not in recipe_ids:
             errs.append(f"{p}: unknown recipe id {src.get('id')}")
-        if src.get("kind") not in ("guide", "recipe"):
-            errs.append(f"{p}: source.kind must be guide or recipe")
+        if src.get("kind") == "tool" and src.get("path") not in TOOL_PAGES:
+            errs.append(f"{p}: unknown interactive tool page {src.get('path')}")
+        if src.get("kind") not in ("guide", "recipe", "tool"):
+            errs.append(f"{p}: source.kind must be guide, recipe or tool")
         if not s["refs"] or not all(str(r.get("url", "")).startswith("https://") and r.get("title") for r in s["refs"]):
             errs.append(f"{p}: refs need title and https url")
         for k in ("created", "last_verified"):
@@ -47,6 +51,8 @@ def load(recipe_ids=(), guide_slugs=()):
 
 def _src_href(rel, s):
     src = s["source"]
+    if src["kind"] == "tool":
+        return f'{rel}{src["path"]}'
     if src["kind"] == "guide":
         return f'{rel}guides/{src["slug"]}.html' + (f'#{src["anchor"]}' if src.get("anchor") else "")
     return f'{rel}recipes/{src["id"]}.html'
@@ -96,7 +102,7 @@ def build(page, esc, fmt_date, signup, SITE_NAME, recipe_ids, guide_slugs):
                 + f'<main class="wrap pg"><aside class="co co-warn"><p class="co-h">{T.icon("alert")}Read before you paste</p><p>Replace every '
                 '<code>&lt;placeholder&gt;</code>, run against a test subscription or tenant first, and read the linked step for prerequisites, '
                 'permissions and rollback. Never paste secrets into a script file.</p></aside>'
-                + chips + f'<div class="cl-g">{"".join(card(rel, s) for s in S)}</div>' + js
+                + AP.promo(rel) + chips + f'<div class="cl-g">{"".join(card(rel, s) for s in S)}</div>' + js
                 + f'<p class="fine">Suggest a snippet or report a problem via the <a href="{rel}contact/index.html">contact page</a>.</p>'
                 + signup(rel, "code-index") + '</main>')
     pages.append(page("code/index.html", f"Code Library: PowerShell, Azure CLI, Bicep, KQL and Graph snippets | {SITE_NAME}",

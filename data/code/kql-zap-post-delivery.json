@@ -1,0 +1,33 @@
+{
+ "id": "kql-zap-post-delivery",
+ "status": "published",
+ "title": "See what zero-hour auto purge (ZAP) removed after delivery",
+ "lang": "kql",
+ "tags": [
+  "Defender for Office 365",
+  "Advanced hunting"
+ ],
+ "summary": "Defender advanced hunting: phishing and malware that ZAP pulled from mailboxes after delivery, per day and result, plus the most-hit recipients.",
+ "code": "// Microsoft Defender portal > Hunting > Advanced hunting\nEmailPostDeliveryEvents\n| where Timestamp > ago(30d)\n| where ActionType in (\"Phish ZAP\", \"Malware ZAP\")\n| summarize Messages = dcount(NetworkMessageId), Recipients = dcount(RecipientEmailAddress)\n    by Day = bin(Timestamp, 1d), ActionType, ActionResult\n| order by Day desc",
+ "notes": [
+  "This table covers email. ZAP for Teams messages is configured separately in the Teams protection policy (see the linked recipe).",
+  "Join on NetworkMessageId with EmailEvents to get sender and subject for a message."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "defender-teams-zap-qr-phishing",
+  "label": "Catch phishing in Teams chats: ZAP for Teams, QR-code URL detection and user reporting"
+ },
+ "refs": [
+  {
+   "title": "EmailPostDeliveryEvents table (advanced hunting schema)",
+   "url": "https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-emailpostdeliveryevents-table"
+  },
+  {
+   "title": "Zero-hour auto purge (ZAP) in Microsoft Defender for Office 365",
+   "url": "https://learn.microsoft.com/en-us/defender-office-365/zero-hour-auto-purge"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

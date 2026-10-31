@@ -1,0 +1,37 @@
+{
+ "id": "graph-privileged-role-assignments",
+ "status": "published",
+ "title": "List active Entra role assignments with role and principal names",
+ "lang": "powershell",
+ "tags": [
+  "PIM",
+  "Microsoft Graph"
+ ],
+ "summary": "Inventory who holds which Microsoft Entra role right now (permanent or activated), the first step before moving admins to eligible PIM assignments.",
+ "code": "Connect-MgGraph -Scopes 'RoleManagement.Read.Directory'\n\n$role = @{}\nGet-MgRoleManagementDirectoryRoleDefinition -All | ForEach-Object { $role[$_.Id] = $_.DisplayName }\n\nGet-MgRoleManagementDirectoryRoleAssignment -All -ExpandProperty principal |\n  Select-Object @{n='Role';e={ $role[$_.RoleDefinitionId] }},\n    @{n='Principal';e={ $_.Principal.AdditionalProperties.displayName }},\n    @{n='UPN';e={ $_.Principal.AdditionalProperties.userPrincipalName }},\n    @{n='Type';e={ $_.Principal.AdditionalProperties.'@odata.type' }},\n    DirectoryScopeId |\n  Sort-Object Role, Principal | Format-Table -AutoSize",
+ "notes": [
+  "Shows active assignments only. PIM-eligible assignments that aren't activated don't appear here.",
+  "DirectoryScopeId '/' means tenant-wide; anything else is scoped (for example an administrative unit)."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "pim-least-privilege-daily-ops",
+  "label": "PIM: least privilege without breaking daily operations"
+ },
+ "refs": [
+  {
+   "title": "List unifiedRoleAssignments (permissions, $expand=principal)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/rbacapplication-list-roleassignments?view=graph-rest-1.0"
+  },
+  {
+   "title": "Get-MgRoleManagementDirectoryRoleAssignment (Microsoft Graph PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.identity.governance/get-mgrolemanagementdirectoryroleassignment"
+  },
+  {
+   "title": "Get-MgRoleManagementDirectoryRoleDefinition (Microsoft Graph PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.identity.governance/get-mgrolemanagementdirectoryroledefinition"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

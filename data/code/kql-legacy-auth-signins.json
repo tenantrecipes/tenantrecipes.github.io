@@ -1,0 +1,41 @@
+{
+ "id": "kql-legacy-auth-signins",
+ "status": "published",
+ "title": "Find sign-ins that still use legacy authentication",
+ "lang": "kql",
+ "tags": [
+  "Conditional Access",
+  "Sign-in logs"
+ ],
+ "summary": "Before you block legacy authentication: who still signs in with IMAP, POP, SMTP AUTH, ActiveSync or other legacy clients, interactive and non-interactive.",
+ "code": "// Entra sign-in logs in Log Analytics / Microsoft Sentinel\nunion SigninLogs, AADNonInteractiveUserSignInLogs\n| where TimeGenerated > ago(30d)\n| where isnotempty(ClientAppUsed)\n| where ClientAppUsed !in (\"Browser\", \"Mobile Apps and Desktop clients\")\n| summarize SignIns = count(), Succeeded = countif(ResultType == \"0\"), LastSeen = max(TimeGenerated)\n    by UserPrincipalName, ClientAppUsed, AppDisplayName\n| order by SignIns desc",
+ "notes": [
+  "Needs the SignInLogs and NonInteractiveUserSignInLogs categories sent to a Log Analytics workspace (diagnostic settings).",
+  "Browser and 'Mobile Apps and Desktop clients' are the modern-auth client types; everything else in ClientAppUsed is legacy."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "ca-block-legacy-auth",
+  "label": "Block legacy authentication before you scale AI"
+ },
+ "refs": [
+  {
+   "title": "SigninLogs table reference (Azure Monitor)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/signinlogs"
+  },
+  {
+   "title": "AADNonInteractiveUserSignInLogs table reference",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/aadnoninteractiveusersigninlogs"
+  },
+  {
+   "title": "Block legacy authentication with Conditional Access",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-legacy-authentication"
+  },
+  {
+   "title": "Deep dive: How does Conditional Access block legacy authentication? (Microsoft Tech Community)",
+   "url": "https://techcommunity.microsoft.com/blog/itopstalkblog/deep-dive-how-does-conditional-access-block-legacy-authentication/3265345"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

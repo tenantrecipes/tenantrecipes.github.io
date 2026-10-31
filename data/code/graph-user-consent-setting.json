@@ -1,0 +1,41 @@
+{
+ "id": "graph-user-consent-setting",
+ "status": "published",
+ "title": "Check whether users can consent to apps",
+ "lang": "powershell",
+ "tags": [
+  "Entra ID",
+  "App consent"
+ ],
+ "summary": "Read the tenant's user consent setting from the authorization policy: an empty list means user consent is off.",
+ "code": "Connect-MgGraph -Scopes 'Policy.Read.All'\n\n(Get-MgPolicyAuthorizationPolicy).DefaultUserRolePermissions.PermissionGrantPoliciesAssigned",
+ "notes": [
+  "Empty output: users can't consent to apps. A value like ManagePermissionGrantsForSelf.microsoft-user-default-low: users can consent to low-risk permissions from verified publishers.",
+  "Change the setting in the Entra admin center (Enterprise apps > Consent and permissions), and turn on the admin consent workflow at the same time."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "entra-user-consent-restrict",
+  "label": "Restrict user consent for apps and AI tools"
+ },
+ "refs": [
+  {
+   "title": "defaultUserRolePermissions resource (permissionGrantPoliciesAssigned)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/resources/defaultuserrolepermissions?view=graph-rest-1.0"
+  },
+  {
+   "title": "Get authorizationPolicy (permissions)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/authorizationpolicy-get?view=graph-rest-1.0"
+  },
+  {
+   "title": "Get-MgPolicyAuthorizationPolicy (Microsoft Graph PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.identity.signins/get-mgpolicyauthorizationpolicy"
+  },
+  {
+   "title": "Configure how users consent to applications",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-user-consent"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

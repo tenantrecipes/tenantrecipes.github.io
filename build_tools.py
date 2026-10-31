@@ -5,6 +5,7 @@ checked on the tool's official site or repository on the date in `sources[].chec
 null. Text is written in our own words. Exits non-zero on invalid data so the pipeline stops before deploy."""
 import json, re, sys, pathlib
 import build_trust as T
+import build_apps as AP
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC = ROOT / "data" / "tools"
@@ -123,7 +124,7 @@ def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 'Microsoft 365 and Entra, Active Directory and AD CS, credential access and lateral movement, web fuzzing, cloud assessment and pivoting. '
                 'Each entry has a short example and the pitfalls. Plus a method for scoping an internal pentest.</p>'
                 f'<dl class="hx-stats">{st}</dl></div></section>'
-                f'<main class="wrap">{notice()}'
+                f'<main class="wrap">{notice()}{AP.promo(rel)}'
                 f'<section class="sec" id="tools" aria-labelledby="tl-h"><p class="sec-k">Toolbox</p><h2 id="tl-h">Pick a tool by what you want to check</h2>{filt}'
                 f'<div class="grid">{"".join(card(rel, e) for e in ents)}</div></section>'
                 + T.ad_slot("tools-between-sections") +

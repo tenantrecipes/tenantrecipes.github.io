@@ -1,0 +1,37 @@
+{
+ "id": "intune-noncompliant-devices",
+ "status": "published",
+ "title": "List non-compliant Intune devices with last sync time",
+ "lang": "powershell",
+ "tags": [
+  "Intune",
+  "Microsoft Graph"
+ ],
+ "summary": "Every Intune-managed device in a noncompliant state with its user, OS and last check-in, sorted so stale devices surface first.",
+ "code": "Connect-MgGraph -Scopes 'DeviceManagementManagedDevices.Read.All'\n\nGet-MgDeviceManagementManagedDevice -All -Filter \"complianceState eq 'noncompliant'\" |\n  Select-Object DeviceName, UserPrincipalName, OperatingSystem, OsVersion, LastSyncDateTime |\n  Sort-Object LastSyncDateTime |\n  Format-Table -AutoSize",
+ "notes": [
+  "Devices that haven't synced within the compliance status validity period turn non-compliant on their own; old LastSyncDateTime values point to that cause.",
+  "Other complianceState values you can filter on: inGracePeriod, conflict, error, unknown."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "intune-devices-stay-noncompliant",
+  "label": "Why Intune devices stay non-compliant: causes and diagnosis"
+ },
+ "refs": [
+  {
+   "title": "managedDevice resource type (complianceState filter)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/resources/intune-devices-manageddevice?view=graph-rest-1.0"
+  },
+  {
+   "title": "List managedDevices (permissions)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/intune-devices-manageddevice-list?view=graph-rest-1.0"
+  },
+  {
+   "title": "Get-MgDeviceManagementManagedDevice (Microsoft Graph PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.devicemanagement/get-mgdevicemanagementmanageddevice"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

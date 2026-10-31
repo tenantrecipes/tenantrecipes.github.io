@@ -19,13 +19,15 @@ NONEXEC = re.compile(r'type\s*=\s*"(application/ld\+json|application/json|text/p
 SCRIPT = re.compile(r"<script(\s[^>]*)?>(.*?)</script>", re.S | re.I)
 STYLE = re.compile(r"<style(\s[^>]*)?>(.*?)</style>", re.S | re.I)
 MARK = 'http-equiv="Content-Security-Policy"'
+# Extra connect-src per page (relative to dist/). Only the mail DNS checker talks to other hosts: the two public DoH resolvers.
+EXTRA_CONNECT = {"tools/mail-dns-checker.html": "https://cloudflare-dns.com https://dns.google"}
 
 
 def h(s):
     return "'sha256-" + base64.b64encode(hashlib.sha256(s.encode("utf-8")).digest()).decode() + "'"
 
 
-def policy(scripts, styles):
+def policy(scripts, styles, connect=""):
     gc_script = " https://gc.zgo.at" if GC else ""
     gc_conn = f" https://{GC}.goatcounter.com" if GC else ""
     return "; ".join([
@@ -33,7 +35,7 @@ def policy(scripts, styles):
         "script-src 'self'" + "".join(" " + x for x in scripts) + gc_script,
         "style-src 'self'" + "".join(" " + x for x in styles),
         "img-src 'self' data:" + gc_conn,
-        "connect-src 'self'" + gc_conn,
+        "connect-src 'self'" + ((" " + connect) if connect else "") + gc_conn,
         "font-src 'self'",
         "manifest-src 'self'",
         "object-src 'none'",
@@ -79,7 +81,8 @@ def main():
         sc = sorted({h(m.group(2)) for m in SCRIPT.finditer(t)
                      if not re.search(r"\ssrc\s*=", m.group(1) or "") and not NONEXEC.search(m.group(1) or "")})
         st = sorted({h(m.group(2)) for m in STYLE.finditer(t)})
-        meta = (f'<meta {MARK} content="{policy(sc, st)}">'
+        rel = p.relative_to(DIST).as_posix()
+        meta = (f'<meta {MARK} content="{policy(sc, st, EXTRA_CONNECT.get(rel, ""))}">'
                 '<meta name="referrer" content="strict-origin-when-cross-origin">')
         new, k = re.subn(r'(<meta charset="utf-8">)', r"\1" + meta.replace("\\", "\\\\"), t, count=1, flags=re.I)
         if not k:
