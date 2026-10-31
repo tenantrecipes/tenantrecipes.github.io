@@ -33,9 +33,32 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "Users get more MFA prompts than the configured frequency suggests.",
+   "cause": "'Remember MFA on trusted devices' is still on alongside sign-in frequency.",
+   "fix": "Turn it off, as in the steps."
+  },
+  {
+   "symptom": "The Never persistent browser session control can't be saved in the Office 365 policy.",
+   "cause": "That control requires the policy to target All resources.",
+   "fix": "Keep it in a separate All resources policy scoped with a device filter or to unmanaged devices."
+  },
+  {
+   "symptom": "Complaints about prompt fatigue.",
+   "fix": "Lengthen the interval and move users to phishing-resistant methods rather than removing the control."
+  }
+ ],
+ "rollback": [
+  "Entra ID > Conditional Access > Policies: open Policy 1 (sign-in frequency) and/or Policy 2 (persistent browser session), one at a time and set Enable policy to Report-only (keeps impact data) or Off. Don't delete it, so the configuration is kept.",
+  "Confirm in the sign-in logs (Conditional Access tab on the affected events) that the policy no longer applies and sign-ins succeed.",
+  "Adjust the interval or scope, then switch back to On."
+ ]
 }

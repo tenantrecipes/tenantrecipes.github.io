@@ -31,9 +31,30 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "Labeled files still appear as citations.",
+   "fix": "Expected: the policy stops Copilot from using the content, not from citing the item."
+  },
+  {
+   "symptom": "An email or calendar invite with the label is still processed.",
+   "cause": "Email is covered only for messages sent on or after 1 January 2025; calendar invites aren't supported.",
+   "fix": "Expected limitation; don't treat it as a policy failure."
+  },
+  {
+   "symptom": "You can't add sensitive information types to the label rule.",
+   "fix": "Create a separate rule; the two can't be combined in one rule."
+  }
+ ],
+ "rollback": [
+  "Purview portal > Data loss prevention > Policies: switch the policy back to simulation mode or turn it off rather than deleting it.",
+  "Verify with a test prompt on a labeled item that Copilot uses the content again."
+ ]
 }

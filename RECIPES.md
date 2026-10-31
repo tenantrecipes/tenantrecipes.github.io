@@ -77,7 +77,7 @@ The badge shows next to the step title.
 
 Status 2026-10-31: the 40 published recipes whose sources are all Microsoft (Learn, Support, Tech Community, Adoption, labelled Message center mirror)
 and whose steps were checked on 2026-10-30 have `"markers": {"steps": "official"}`. The `prompt-*` recipes are not marked.
-Nothing is marked `tested`. `ca-block-legacy-auth` and `ca-require-mfa-copilot` have troubleshooting and rollback (marked `practical`).
+Nothing is marked `tested`. `ca-block-legacy-auth`, `ca-require-mfa-copilot` and 11 more config-changing recipes (CA, Entra consent, Intune, Purview DLP, SharePoint RCD) have troubleshooting and rollback (marked `practical`).
 
 ## Checklist for new recipes (nightly pipeline)
 

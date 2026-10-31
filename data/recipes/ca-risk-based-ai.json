@@ -35,9 +35,32 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "Risky sign-ins fail with AADSTS53004.",
+   "cause": "The user isn't registered for MFA, so the risk policy can't be satisfied.",
+   "fix": "Drive MFA registration before switching the policies On; check registration for users flagged in Report-only."
+  },
+  {
+   "symptom": "Policies don't evaluate risk for some users.",
+   "cause": "Risk policies require Entra ID P2 for covered users.",
+   "fix": "Verify licensing for the users in scope."
+  },
+  {
+   "symptom": "High-risk users are repeatedly prompted.",
+   "fix": "Expected: Require risk remediation adds sign-in frequency Every time. Review the Risky users report and remediate or dismiss risk."
+  }
+ ],
+ "rollback": [
+  "Entra ID > Conditional Access > Policies: open the sign-in risk and/or user risk policy (roll back one at a time) and set Enable policy to Report-only (keeps impact data) or Off. Don't delete it, so the configuration is kept.",
+  "Confirm in the sign-in logs (Conditional Access tab on the affected events) that the policy no longer applies and sign-ins succeed.",
+  "Resolve registration or licensing gaps, then return to On."
+ ]
 }

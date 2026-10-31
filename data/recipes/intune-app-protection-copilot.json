@@ -40,9 +40,32 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "Policy doesn't apply to an app.",
+   "cause": "The app doesn't integrate the Intune SDK or isn't on the protected apps list.",
+   "fix": "Check the protected apps list; unsupported apps can't be targeted."
+  },
+  {
+   "symptom": "iOS/Android users are blocked by the 'Require app protection policy' CA grant.",
+   "cause": "The device isn't registered in Entra ID via Authenticator or Company Portal.",
+   "fix": "Have users install the broker app and register, then retry."
+  },
+  {
+   "symptom": "Users can't paste into personal apps or save to personal storage.",
+   "fix": "Expected from the data protection settings; adjust only if the business case requires it."
+  }
+ ],
+ "rollback": [
+  "Set the paired Conditional Access policy to Report-only or Off first, so access isn't blocked.",
+  "Then remove the group assignment from the app protection policy (or relax the data protection setting) instead of deleting it.",
+  "Confirm on a test device that the app re-checks in and the restriction is gone."
+ ]
 }

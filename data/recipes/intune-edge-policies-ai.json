@@ -32,9 +32,26 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "A configured setting doesn't show up at edge://policy.",
+   "cause": "The device hasn't synced, isn't in the assigned device group, or the policy name changed in the Edge version in use.",
+   "fix": "Check assignment and sync, then compare against the current Edge policy reference."
+  },
+  {
+   "symptom": "edge://policy shows an error for a policy.",
+   "fix": "Check the value and the supported Edge version in the Edge policy reference."
+  }
+ ],
+ "rollback": [
+  "Remove the specific Copilot setting from the Settings catalog profile (or unassign the device group); don't delete the whole profile if it carries other settings.",
+  "Sync the device and confirm at edge://policy that the setting is gone."
+ ]
 }

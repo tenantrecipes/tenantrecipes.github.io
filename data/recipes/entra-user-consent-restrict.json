@@ -33,9 +33,32 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "Users are blocked from an app they need.",
+   "fix": "Expected after restricting consent. They request it through the admin consent workflow; review and grant admin consent for that app."
+  },
+  {
+   "symptom": "Users can't request access at all.",
+   "cause": "The admin consent workflow isn't enabled or has no reviewers.",
+   "fix": "Enable it under Admin consent settings and assign reviewers."
+  },
+  {
+   "symptom": "Risky apps still have access after the change.",
+   "cause": "Existing grants remain.",
+   "fix": "Review and revoke existing permission grants separately."
+  }
+ ],
+ "rollback": [
+  "Enterprise apps > Consent and permissions > User consent settings: return to the previously used option (record it before you change). Needs Global Administrator in the portal; Graph PowerShell works with Privileged Role Administrator.",
+  "Prefer moving from 'Do not allow' to 'verified publishers, selected permissions' over reopening full user consent.",
+  "Confirm by having a test user attempt consent to an allowed app."
+ ]
 }

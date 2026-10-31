@@ -50,9 +50,33 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-30",
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "Users are stuck in remediation and can't sign in.",
+   "cause": "They aren't registered for MFA, or (hybrid) password hash sync isn't enabled, so secure password change can't complete.",
+   "fix": "Find them in the sign-in logs filtered on Conditional Access, drive MFA registration, check PHS, or have an admin remediate the user risk."
+  },
+  {
+   "symptom": "Guest or external users hit unexpected results.",
+   "cause": "The policy isn't supported for external and guest users.",
+   "fix": "Narrow scope via the policy's security group membership."
+  },
+  {
+   "symptom": "A different grant than expected is enforced.",
+   "cause": "Precedence: Block overrides all, and Require risk remediation overrides Require password change.",
+   "fix": "Review overlap with your own user-risk policies; if you run one, set the managed policy to Off."
+  }
+ ],
+ "rollback": [
+  "Entra ID > Conditional Access > Policies: set the Microsoft-managed policy to Off (it can't be deleted or renamed), or remove users by changing its security group membership.",
+  "Check the Policy impact tab and sign-in logs to confirm it no longer applies.",
+  "If you need different behaviour, Duplicate it and run your own copy in Report-only first."
+ ]
 }

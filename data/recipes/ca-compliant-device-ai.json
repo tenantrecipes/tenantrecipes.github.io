@@ -36,9 +36,32 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "Users on personal devices lose browser access to Office 365.",
+   "cause": "Unmanaged devices can't satisfy compliant or Entra hybrid joined.",
+   "fix": "Expected by design. For web access from unmanaged devices, use app-enforced restrictions instead of widening the policy."
+  },
+  {
+   "symptom": "A device the user considers managed is treated as noncompliant.",
+   "cause": "It isn't enrolled in Intune (or a supported compliance partner), or compliance hasn't been evaluated yet.",
+   "fix": "Check enrollment and compliance state in Intune before excluding anyone."
+  },
+  {
+   "symptom": "macOS, iOS or Android users get a device certificate prompt while the policy is in Report-only.",
+   "fix": "Exclude those platforms from the policy during testing."
+  }
+ ],
+ "rollback": [
+  "Entra ID > Conditional Access > Policies: open the compliant-device policy and set Enable policy to Report-only (keeps impact data) or Off. Don't delete it, so the configuration is kept.",
+  "Confirm in the sign-in logs (Conditional Access tab on the affected events) that the policy no longer applies and sign-ins succeed.",
+  "Fix enrollment/compliance for the affected devices, then switch back to On."
+ ]
 }

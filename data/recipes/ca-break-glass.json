@@ -30,9 +30,30 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "An emergency access account is blocked or challenged during the periodic test sign-in.",
+   "cause": "A Conditional Access policy that blocks or restricts sign-in doesn't exclude the EmergencyAccess group.",
+   "fix": "Open the failed sign-in event, check the Conditional Access tab for the applied policy, and add the group exclusion to it. Re-test."
+  },
+  {
+   "symptom": "The registered passkey or certificate can't be found or used when you need it.",
+   "fix": "Keep the FIDO2 keys for the two accounts in separate secure locations, not on one person's phone, and include method checks in the 90-day test."
+  },
+  {
+   "symptom": "No alert fires for a test sign-in.",
+   "fix": "Check the Azure Monitor/Log Analytics alert rule covers both accounts and both sign-in and audit events; treat a silent test as a failed control."
+  }
+ ],
+ "rollback": [
+  "Don't remove the accounts or their Global Administrator assignment as a 'rollback'; they are the rollback for every other identity change.",
+  "If a new exclusion or alert change causes issues, revert that single change and repeat the test sign-in to confirm access and alerting both work."
+ ]
 }

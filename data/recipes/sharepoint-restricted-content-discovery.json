@@ -35,9 +35,31 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-10-31",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "Content still appears in Copilot or search after enabling.",
+   "cause": "Reindexing hasn't completed; it can take time on large sites.",
+   "fix": "Wait and re-check."
+  },
+  {
+   "symptom": "Users report they can still open the site.",
+   "fix": "Expected: it isn't a permission change. Fix permissions separately if access is the problem."
+  },
+  {
+   "symptom": "The setting is unavailable.",
+   "cause": "The tenant lacks a Microsoft Copilot license / SharePoint Advanced Management.",
+   "fix": "Check licensing requirements."
+  }
+ ],
+ "rollback": [
+  "Turn off 'Restrict content from Microsoft Copilot' on the site, or run `Set-SPOSite -Identity <siteUrl> -RestrictContentOrgWideSearch $false`.",
+  "Allow time for reindexing, then confirm the content is discoverable again."
+ ]
 }
