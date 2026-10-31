@@ -269,6 +269,96 @@
   /* ---------- UI ---------- */
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
   var LABEL = { ok: "Pass", warn: "Improve", fail: "Fail", info: "Info" };
+  var SCRIPT_SRC = (document.currentScript && document.currentScript.src) || "";
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function isoLocal(dt) {
+    var off = -dt.getTimezoneOffset(), sign = off >= 0 ? "+" : "-"; off = Math.abs(off);
+    return dt.getFullYear() + "-" + pad(dt.getMonth() + 1) + "-" + pad(dt.getDate()) + " " + pad(dt.getHours()) + ":" + pad(dt.getMinutes()) + " (UTC" + sign + pad(Math.floor(off / 60)) + ":" + pad(off % 60) + ")";
+  }
+
+  /* Print-only report (Save as PDF). Built with DOM APIs only, so the strict CSP holds and nothing leaves the browser. */
+  function buildReport(res, when) {
+    var rep = el("div", "mdr"); rep.id = "mdc-report"; rep.setAttribute("aria-hidden", "true");
+    var hd = el("div", "mdr-hd"), brand = el("div", "mdr-brand");
+    var logo = el("img", "mdr-logo"); logo.alt = ""; logo.width = 40; logo.height = 40;
+    try { logo.src = new URL("mark.svg", SCRIPT_SRC || location.href).href; } catch (e) { logo.src = "/assets/mark.svg"; }
+    brand.appendChild(logo);
+    var wm = el("p", "mdr-wm"); wm.appendChild(el("b", "", "Tenant")); wm.appendChild(el("span", "", "Recipes")); brand.appendChild(wm);
+    hd.appendChild(brand);
+    var meta = el("div", "mdr-meta"); meta.appendChild(el("p", "mdr-kind", "Mail DNS security report")); meta.appendChild(el("p", "", isoLocal(when))); hd.appendChild(meta);
+    rep.appendChild(hd);
+
+    var counts = { ok: 0, warn: 0, fail: 0, info: 0 }; res.checks.forEach(function (c) { counts[c.status]++; });
+    var sum = el("section", "mdr-sum");
+    var g = el("div", "mdr-grade g-" + res.grade.toLowerCase()); g.appendChild(el("span", "mdr-gl", res.grade)); g.appendChild(el("span", "mdr-gs", res.nx ? "0 / 100" : res.score + " / 100"));
+    sum.appendChild(g);
+    var st = el("div", "mdr-st");
+    st.appendChild(el("p", "mdr-lbl", "Domain"));
+    st.appendChild(el("h1", "", res.domain));
+    st.appendChild(el("p", "", res.nx ? "Domain not found in DNS (NXDOMAIN)." : (res.m365 ? "Inbound mail: Exchange Online" : res.parked ? "Receives no mail (no MX or null MX)" : "Inbound mail: not Exchange Online")));
+    var ct = el("p", "mdr-counts");
+    ["ok", "warn", "fail", "info"].forEach(function (k) { var b = el("span", "mdr-pill mdr-" + k, counts[k] + " " + LABEL[k].toLowerCase()); ct.appendChild(b); });
+    st.appendChild(ct);
+    sum.appendChild(st); rep.appendChild(sum);
+
+    /* Overview table */
+    rep.appendChild(el("h2", "mdr-h2", "Overview"));
+    var tb = el("table", "mdr-tbl"), th = el("thead"), tr = el("tr");
+    ["Check", "Result", "Weight", "Summary"].forEach(function (x) { tr.appendChild(el("th", "", x)); }); th.appendChild(tr); tb.appendChild(th);
+    var tbody = el("tbody");
+    res.checks.forEach(function (c) {
+      var r = el("tr"); r.appendChild(el("td", "mdr-cn", c.title));
+      var td = el("td"); td.appendChild(el("span", "mdr-pill mdr-" + c.status, LABEL[c.status])); r.appendChild(td);
+      var w = WEIGHTS[c.id] || 0; r.appendChild(el("td", "mdr-num", w ? Math.round(w * c.score * 10) / 10 + " / " + w : "–"));
+      r.appendChild(el("td", "", c.summary)); tbody.appendChild(r);
+    });
+    tb.appendChild(tbody); rep.appendChild(tb);
+
+    /* Recommended next steps: failures first, then improvements */
+    var todo = res.checks.filter(function (c) { return c.status === "fail"; }).concat(res.checks.filter(function (c) { return c.status === "warn"; }));
+    var nx = el("section", "mdr-next"); nx.appendChild(el("h2", "mdr-h2", "Recommended next steps"));
+    if (!todo.length) nx.appendChild(el("p", "", "No failures or improvements found. Keep monitoring DMARC aggregate reports and re-run this check after DNS changes."));
+    else {
+      var ol = el("ol");
+      todo.forEach(function (c) {
+        var li = el("li"); li.appendChild(el("span", "mdr-pill mdr-" + c.status, LABEL[c.status])); li.appendChild(el("b", "", " " + c.title + ": "));
+        li.appendChild(document.createTextNode(c.summary));
+        if (c.links[0]) { li.appendChild(el("span", "mdr-ref", " See: " + c.links[0].t + ".")); }
+        ol.appendChild(li);
+      });
+      nx.appendChild(ol);
+    }
+    rep.appendChild(nx);
+
+    /* Detailed results */
+    rep.appendChild(el("h2", "mdr-h2 mdr-brk", "Detailed results"));
+    res.checks.forEach(function (c) {
+      var card = el("section", "mdr-c mdr-c-" + c.status);
+      var h = el("h3"); h.appendChild(el("span", "mdr-pill mdr-" + c.status, LABEL[c.status])); h.appendChild(document.createTextNode(" " + c.title));
+      if (c.id === "spf" && typeof c.lookups === "number") h.appendChild(el("span", "mdr-tag", c.lookups + " / 10 DNS lookups"));
+      if (c.id === "dmarc" && c.policy) h.appendChild(el("span", "mdr-tag", "p=" + c.policy));
+      card.appendChild(h);
+      card.appendChild(el("p", "mdr-find", c.summary));
+      if (c.details.length) { var ul = el("ul"); c.details.forEach(function (x) { ul.appendChild(el("li", "", x)); }); card.appendChild(ul); }
+      card.appendChild(el("p", "mdr-lbl", "Records found"));
+      var pre = el("pre", "mdr-rec"); pre.textContent = c.records.length ? c.records.join("\n") : (c.id === "dnssec" ? "(resolver AD flag: " + (c.status === "ok" ? "set" : "not set") + ")" : "(none)"); card.appendChild(pre);
+      if (c.links.length) {
+        card.appendChild(el("p", "mdr-lbl", "Reference"));
+        var ul2 = el("ul", "mdr-links");
+        c.links.forEach(function (l) { var li = el("li"), a = el("a", "", l.t); a.href = l.u; li.appendChild(a); li.appendChild(el("span", "mdr-url", l.u)); ul2.appendChild(li); });
+        card.appendChild(ul2);
+      }
+      rep.appendChild(card);
+    });
+
+    var ft = el("section", "mdr-disc");
+    ft.appendChild(el("h2", "mdr-h2", "About this report"));
+    ft.appendChild(el("p", "", "Generated in the browser with the Tenant Recipes mail DNS checker from public DNS records only (DNS-over-HTTPS via Cloudflare or Google Public DNS), at the date and time above. No mail was sent, no server was probed and nothing was stored by Tenant Recipes."));
+    ft.appendChild(el("p", "", "The grade uses Tenant Recipes' own weights (DMARC 30, SPF 25, DKIM 20, MTA-STS 7, MX 6, TLS-RPT 4, CAA 4, DNSSEC 4) and is not a Microsoft score. DKIM is checked only for the Microsoft 365 selectors, and the MTA-STS policy file is not downloaded. DNS changes can take time to propagate. Verify findings against the linked Microsoft Learn articles and RFCs before you change production DNS. Provided as is, without warranty."));
+    var src = el("p", "mdr-src"); var a2 = el("a", "", "tenantrecipes.com/tools/mail-dns-checker.html"); a2.href = "https://tenantrecipes.com/tools/mail-dns-checker.html"; src.appendChild(document.createTextNode("Run it again: ")); src.appendChild(a2); ft.appendChild(src);
+    rep.appendChild(ft);
+    return rep;
+  }
   function init() {
     var form = document.getElementById("mdc-form"); if (!form) return;
     var input = document.getElementById("mdc-domain"), out = document.getElementById("mdc-out"), btn = document.getElementById("mdc-go"), stat = document.getElementById("mdc-status");
@@ -281,11 +371,19 @@
       input.value = d;
       resolve = makeResolver(window.fetch.bind(window));
       btn.disabled = true; stat.textContent = "Checking " + d + " …";
-      run(d, resolve).then(function (res) { render(res); stat.textContent = "Checked " + d + " at " + new Date().toLocaleTimeString() + "."; })
+      clearReport();
+      run(d, resolve).then(function (res) { var now = new Date(); render(res, now); stat.textContent = "Checked " + d + " at " + now.toLocaleTimeString() + "."; })
         .catch(function (err) { stat.textContent = "The check failed: " + err.message + ". Your network may block DNS-over-HTTPS; try again or use another network."; })
         .then(function () { btn.disabled = false; });
     });
-    function render(res) {
+    function clearReport() {
+      var old = document.getElementById("mdc-report"); if (old) old.parentNode.removeChild(old);
+      document.body.classList.remove("mdc-has-report");
+    }
+    function render(res, when) {
+      clearReport();
+      document.body.appendChild(buildReport(res, when));
+      document.body.classList.add("mdc-has-report");
       var head = el("div", "mdc-sum");
       var g = el("p", "mdc-grade g-" + res.grade.toLowerCase(), res.grade);
       g.setAttribute("aria-label", "Grade " + res.grade);
@@ -295,6 +393,18 @@
       var counts = { ok: 0, warn: 0, fail: 0, info: 0 }; res.checks.forEach(function (c) { counts[c.status]++; });
       txtb.appendChild(el("p", "fine", counts.ok + " pass · " + counts.warn + " to improve · " + counts.fail + " fail · " + counts.info + " info"));
       head.appendChild(g); head.appendChild(txtb); out.appendChild(head);
+      var bar = el("div", "mdc-bar"), pdf = el("button", "btn mdc-pdf", "Save report as PDF");
+      pdf.type = "button";
+      pdf.addEventListener("click", function () {
+        var t = document.title;
+        document.title = "Mail DNS report " + res.domain + " " + when.getFullYear() + "-" + pad(when.getMonth() + 1) + "-" + pad(when.getDate()) + " - Tenant Recipes";
+        var restore = function () { document.title = t; window.removeEventListener("afterprint", restore); };
+        window.addEventListener("afterprint", restore);
+        window.print();
+      });
+      bar.appendChild(pdf);
+      bar.appendChild(el("p", "fine", "Opens the print dialog: choose \u201cSave as PDF\u201d as the destination. The report is built in your browser."));
+      out.appendChild(bar);
       res.checks.forEach(function (c) {
         var card = el("section", "mdc-c mdc-" + c.status);
         var h = el("h3"); h.appendChild(el("span", "mdc-pill", LABEL[c.status])); h.appendChild(document.createTextNode(" " + c.title)); card.appendChild(h);

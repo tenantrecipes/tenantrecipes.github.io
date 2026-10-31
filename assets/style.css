@@ -856,3 +856,42 @@ html{scroll-padding-top:86px}                 /* header 44 + what's-new bar ~30 
 @media (max-width:480px){.mdc-row{flex-direction:column}.mdc-row .btn{width:100%}.mdc-sum{align-items:flex-start}}
 .mdc-sum .mdc-grade{color:#fff}
 .mdc-rec code{background:none;color:inherit;padding:0;border:0;font-size:inherit;box-shadow:none}
+/* Mail DNS checker: Save as PDF bar + print-only report (#mdc-report, built by assets/mail-dns.js) */
+.mdc-bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 14px}.mdc-bar .fine{margin:0;flex:1;min-width:220px}
+.mdr{display:none}
+@media print{
+@page{size:A4;margin:16mm 14mm 18mm;@bottom-left{content:"Tenant Recipes · Mail DNS security report";font:8pt Inter,system-ui,sans-serif;color:#5d667c}@bottom-right{content:"Page " counter(page) " of " counter(pages);font:8pt Inter,system-ui,sans-serif;color:#5d667c}@top-right{content:"tenantrecipes.com";font:8pt Inter,system-ui,sans-serif;color:#5d667c}}
+body.mdc-has-report{background:#fff!important;margin:0;padding:0}
+body.mdc-has-report>*:not(#mdc-report){display:none!important}
+body.mdc-has-report #mdc-report{display:block}
+.mdr{font:9.5pt/1.45 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#0e1424;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.mdr *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.mdr p{margin:3px 0}.mdr a{color:#1f6feb;text-decoration:none}
+.mdr-hd{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-radius:10px;background:linear-gradient(120deg,#071027,#0f2f6b 55%,#2a1360);color:#fff}
+.mdr-brand{display:flex;align-items:center;gap:10px}.mdr-logo{width:34px;height:34px;display:block}
+.mdr-wm{font:800 15pt/1 Inter,system-ui,sans-serif;letter-spacing:-.3px;margin:0}.mdr-wm b{color:#fff;font-weight:800}.mdr-wm span{color:#9fd0ff;margin-left:4px}
+.mdr-meta{text-align:right;font-size:8.5pt;color:#cfd8f0}.mdr-meta .mdr-kind{font-weight:700;color:#fff;font-size:10pt;text-transform:uppercase;letter-spacing:.06em}
+.mdr-sum{display:flex;gap:18px;align-items:center;margin:16px 0 6px;padding:14px 16px;border:1px solid #e2e6ef;border-radius:10px;break-inside:avoid}
+.mdr-grade{flex:none;width:86px;height:86px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;background:#5d667c}
+.mdr-grade.g-a{background:#0f7a4f}.mdr-grade.g-b{background:#3f8f2f}.mdr-grade.g-c{background:#c27c00}.mdr-grade.g-d{background:#d0611b}.mdr-grade.g-f{background:#b3261e}
+.mdr-gl{font:800 34pt/1 Inter,system-ui,sans-serif}.mdr-gs{font-size:8pt;font-weight:600;opacity:.92;margin-top:2px}
+.mdr-st h1{font:800 20pt/1.15 Inter,system-ui,sans-serif;letter-spacing:-.4px;color:#0f2f6b;margin:0 0 2px;word-break:break-all}
+.mdr-lbl{font-size:7.5pt;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#5d667c;margin:8px 0 2px!important}.mdr-st .mdr-lbl{margin-top:0!important}
+.mdr-counts{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px!important}
+.mdr-pill{display:inline-block;font:700 7pt/1 Inter,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.05em;padding:3px 7px;border-radius:99px;white-space:nowrap;vertical-align:1px}
+.mdr-ok{background:#e8f7ef;color:#0f7a4f}.mdr-warn{background:#fff6e6;color:#8a5200}.mdr-fail{background:#fdecea;color:#b3261e}.mdr-info{background:#eef4ff;color:#1b4fb8}
+.mdr-h2{font:800 12.5pt/1.2 Inter,system-ui,sans-serif;color:#0f2f6b;margin:16px 0 6px;padding-bottom:4px;border-bottom:2px solid #1f6feb;break-after:avoid}
+.mdr-brk{break-before:page;margin-top:0}
+.mdr-tbl{width:100%;border-collapse:collapse;font-size:8.5pt}.mdr-tbl th{text-align:left;background:#0f2f6b;color:#fff;padding:5px 7px;font-weight:700}
+.mdr-tbl td{padding:5px 7px;border-bottom:1px solid #e2e6ef;vertical-align:top}.mdr-tbl tr{break-inside:avoid}.mdr-tbl tbody tr:nth-child(even) td{background:#f5f7fb}
+.mdr-cn{font-weight:650;white-space:nowrap}.mdr-num{white-space:nowrap;font-variant-numeric:tabular-nums;color:#3b4357}
+.mdr-next ol{margin:4px 0;padding-left:18px}.mdr-next li{margin:4px 0;break-inside:avoid}.mdr-ref{color:#5d667c;font-size:8.5pt}
+.mdr-c{border:1px solid #e2e6ef;border-left:4px solid #e2e6ef;border-radius:8px;padding:9px 12px;margin:0 0 9px;break-inside:avoid}
+.mdr-c-ok{border-left-color:#0f7a4f}.mdr-c-warn{border-left-color:#f3c56b}.mdr-c-fail{border-left-color:#b3261e}.mdr-c-info{border-left-color:#1b4fb8}
+.mdr-c h3{font:750 11pt/1.3 Inter,system-ui,sans-serif;margin:0 0 4px;color:#0e1424}
+.mdr-tag{float:right;font-size:8pt;font-weight:600;color:#3b4357;background:#f5f7fb;border:1px solid #e2e6ef;border-radius:6px;padding:1px 6px}
+.mdr-find{font-weight:600}.mdr-c ul{margin:3px 0;padding-left:16px}.mdr-c li{margin:1px 0}
+.mdr-rec{font:7.8pt/1.45 ui-monospace,"Cascadia Code","SF Mono",Menlo,Consolas,monospace;background:#f5f7fb;color:#0e1424;border:1px solid #e2e6ef;border-radius:6px;padding:6px 8px;margin:2px 0;white-space:pre-wrap;word-break:break-all}
+.mdr-links{list-style:none;padding:0!important}.mdr-links li{margin:1px 0}.mdr-url{display:block;font-size:7.5pt;color:#5d667c;word-break:break-all}
+.mdr-disc{margin-top:14px;padding:10px 14px;background:#f5f7fb;border-radius:8px;font-size:8.3pt;color:#3b4357;break-inside:avoid}.mdr-disc .mdr-h2{border:0;margin-top:0;font-size:10.5pt}.mdr-src{font-weight:600}
+}
