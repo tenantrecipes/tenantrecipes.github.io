@@ -351,6 +351,8 @@ def og_image(path, RID):
         return "og/guide-cloud-hardening-adversary-emulation.png", "Tenant Recipes guide: cloud hardening under attack simulation"
     if path.startswith("guides/azure-update-manager-enterprise-patching"):
         return "og/guide-azure-update-manager-enterprise-patching.png", "Tenant Recipes guide: Azure Update Manager at enterprise scale"
+    if path.startswith("guides/azure-arc-onboarding-enterprise-scale"):
+        return "og/guide-azure-arc-onboarding-enterprise-scale.png", "Tenant Recipes guide: Azure Arc onboarding at enterprise scale"
     if path.startswith("guides/copilot-license-checks"):
         return "og/quick-copilot-license-checks.png", "Tenant Recipes quick guide: 5 checks before Copilot licenses"
     if path.startswith("guides/"):
@@ -481,6 +483,7 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
     G1, G2 = guides[0], guides[1]
     G3 = guides[2] if len(guides) > 2 else None
     G4 = guides[3] if len(guides) > 3 else None
+    G5 = guides[4] if len(guides) > 4 else None
     tc = dict(tag_counts(R))
     tag = lambda t: f'{rel}?t={qp(t)}#library'
     exploited = sum(1 for e in CYL if e["type"] == "vulnerability" and e.get("exploited"))
@@ -505,6 +508,7 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
          "Autopilot provisioning, compliance baselines, hardened Windows 11 and clean joiner/leaver handling.",
          [L(tag("Intune"), "Intune &amp; device recipes", tc.get("Intune"))]
          + ([L(f'{rel}search/index.html?q=Autopilot', "Windows Autopilot", ap_n)] if ap_n else [])
+         + ([L(f'{rel}guides/{G5.SLUG}.html', "Onboard servers to Azure Arc")] if G5 else [])
          + ([L(f'{rel}guides/{G4.SLUG}.html', "Server patching with Azure Update Manager")] if G4 else [])
          + [L(f'{rel}guides/{G2.SLUG}.html', "Windows 11 CIS hardening guide"),
           L(f'{rel}security/endpoint.html', "Endpoint &amp; client security"),

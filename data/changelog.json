@@ -2,6 +2,11 @@
  {
   "date": "2026-10-31",
   "kind": "site",
+  "text": "New pillar guide: Azure Arc Onboarding at Enterprise Scale. 11 phases from pilot to offboarding: landing zone and resource providers, RBAC, service principals and managed identities, proxy, Private Link and Arc gateway, the Connected Machine agent and its local lockdown, Windows and Linux onboarding (Group Policy, Configuration Manager, Ansible), automated onboarding with PowerShell, Azure Policy, Azure Monitor Agent, Defender for Cloud, troubleshooting and verification. Hands over to the Azure Update Manager guide for patching. Printable checklist included."
+ },
+ {
+  "date": "2026-10-31",
+  "kind": "site",
   "text": "New pillar guide: Azure Update Manager at enterprise scale. A patch framework for 10 to several hundred Windows Server and Linux servers across Azure VMs and Azure Arc: rings anchored to Patch Tuesday, maintenance configurations in Bicep and CLI, reboot policy, dynamic scopes and Azure Policy, pre/post events with snapshots and cancellation, compliance reporting, alerts, troubleshooting and rollback. Printable checklist included."
  },
  {

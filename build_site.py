@@ -11,8 +11,9 @@ import secure_copilot_rollout as G1
 import windows_11_cis_hardening as G2
 import cloud_hardening_adversary_emulation as G3
 import azure_update_manager_enterprise_patching as G4
+import azure_arc_onboarding_enterprise_scale as G5
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2, G3, G4]
+GUIDES = [G1, G2, G3, G4, G5]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
@@ -309,6 +310,7 @@ def guide_page(g):
     SEC = {e["id"]: e for e in CY.load()}
     TOOLS = {e["id"]: e for e in TL.load()}
     SL = getattr(g, "SRC_LABEL", "Microsoft sources")
+    GS = {x.SLUG: x for x in GUIDES}
     for ph in g.PHASES:
         for st in ph["steps"]:
             for rid in st["rec"]:
@@ -320,6 +322,9 @@ def guide_page(g):
             for tid in st.get("tools", []):
                 if tid not in TOOLS:
                     sys.exit(f"Guide {g.SLUG}: unknown tool id {tid}")
+            for gs in st.get("guides", []):
+                if gs not in GS or gs == g.SLUG:
+                    sys.exit(f"Guide {g.SLUG}: unknown guide slug {gs}")
             if st.get("marker") and st["marker"] not in MK.MARKERS:
                 sys.exit(f"Guide {g.SLUG}: unknown marker {st['marker']} on step {st['t']}")
             if st.get("marker") == "tested" and MK.validate_tested(st.get("tested"), st["t"]):
@@ -341,7 +346,8 @@ def guide_page(g):
             for j, st in enumerate(ph["steps"], 1):
                 recs = ("".join(f'<a class="gd-chip" href="{rel}recipes/{rid}.html">{esc(RID[rid]["title"])}</a>' for rid in st["rec"])
                         + "".join(f'<a class="gd-chip" href="{rel}security/{sid}.html">{esc(SEC[sid]["title"])}</a>' for sid in st.get("sec", []))
-                        + "".join(f'<a class="gd-chip" href="{rel}tools/{tid}.html">{esc(TOOLS[tid]["name"])}</a>' for tid in st.get("tools", [])))
+                        + "".join(f'<a class="gd-chip" href="{rel}tools/{tid}.html">{esc(TOOLS[tid]["name"])}</a>' for tid in st.get("tools", []))
+                        + "".join(f'<a class="gd-chip" href="{rel}guides/{gs}.html">Guide: {esc(GS[gs].SHORT)}</a>' for gs in st.get("guides", [])))
                 srcs = "".join(f'<li><a href="{E(u)}">{esc(t)}</a></li>' for t, u in st["src"])
                 steps += (f'<div class="gd-step" id="{pid}-s{j}"><h3><span>{i}.{j}</span> {esc(st["t"])}{MK.badge(rel, st.get("marker"), st.get("tested"), fmt_date)}</h3>'
                           f'<p class="gd-done"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 6.8"/></svg>Done when: {_txt(st["check"])}</p>'
@@ -417,8 +423,8 @@ def guides_index():
         return (T.page_hero(rel, T.crumbs_dark(rel, "guides/index.html", [("Home", rel + "index.html"), ("Guides", None)]), "Guides",
                             "Long-form playbooks", "Phased, fact-checked guides that tie the recipes together. Every claim links to its official source.", kind="page")
                 + f'<main class="wrap pg"><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
-    return page("guides/index.html", f"Guides: Copilot, Windows 11, cloud hardening, Azure Update Manager and quick checks | {C.SITE_NAME}",
-                "Long-form, fact-checked playbooks for Microsoft 365, Entra hardening under attack simulation, Azure Update Manager server patching and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
+    return page("guides/index.html", f"Guides: Copilot, Windows 11, cloud hardening, Azure Arc, Update Manager and quick checks | {C.SITE_NAME}",
+                "Long-form, fact-checked playbooks for Microsoft 365, Entra hardening under attack simulation, Azure Arc onboarding, Azure Update Manager server patching and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
 
 
 def build():
