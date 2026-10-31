@@ -94,18 +94,22 @@ def back_to_guide(rel, r, refs, fallback):
 
 
 def related(r, R, refs, n=3):
+    """Curated 'related' ids first (data/recipes/<id>.json), then scored by shared tags, category, guide phase and topic cluster."""
+    import build_links as BL
+    byid = {x["id"]: x for x in R}
+    explicit = [byid[i] for i in r.get("related", []) if i in byid][:n]
     mine = set(tags_for(r))
     phases = {(g.SLUG, i) for g, i, j, ph, st in refs.get(r["id"], [])}
     scored = []
     for x in R:
-        if x["id"] == r["id"]:
+        if x["id"] == r["id"] or x in explicit:
             continue
-        s = 2 * len(mine & set(tags_for(x))) + (3 if x["category"] == r["category"] else 0)
+        s = 2 * len(mine & set(tags_for(x))) + (3 if x["category"] == r["category"] else 0) + BL.score(r, x)
         s += 4 * len(phases & {(g.SLUG, i) for g, i, j, ph, st in refs.get(x["id"], [])})
         if s:
             scored.append((s, x.get("order", 0), x))
     scored.sort(key=lambda t: (-t[0], t[1]))
-    return [x for _, _, x in scored[:n]]
+    return explicit + [x for _, _, x in scored[:n - len(explicit)]]
 
 
 def related_cards(rel, items):
@@ -203,13 +207,18 @@ def news_mid(rel, source):
 
 
 # ---------------------------------------------------------------- homepage finder + Start here
+PROBLEM_IDS = ["ca-production-lockout-mistakes", "intune-devices-stay-noncompliant", "pim-least-privilege-daily-ops"]  # problem-oriented articles
+
+
 def finder(rel, R, guides, quick, n_sec):
     G1, G2 = guides[0], guides[1]
     chips = "".join(f'<a class="chip" href="?t={E(t.replace(" ", "+"))}#library" data-tag="{esc(t)}">{esc(t)} <span>{n}</span></a>'
                     for t, n in tag_counts(R))
-    newest = sorted(R, key=lambda r: (r.get("created", ""), r.get("updated", "")), reverse=True)[:3]
+    newest = sorted((r for r in R if r["id"] not in PROBLEM_IDS), key=lambda r: (r.get("created", ""), r.get("updated", "")), reverse=True)[:3]
     new_li = "".join(f'<li><a href="{rel}recipes/{r["id"]}.html">{esc(r["title"])}</a></li>' for r in newest)
     nsteps = lambda g: sum(len(p["steps"]) for p in g.PHASES)
+    byid = {r["id"]: r for r in R}
+    prob_li = "".join(f'<li><a href="{rel}recipes/{i}.html">{esc(byid[i]["title"])}</a></li>' for i in PROBLEM_IDS if i in byid)
     cards = (
         f'<a class="sh-c sh-1" href="{rel}guides/{G1.SLUG}.html"><span class="sh-k">{T.icon("shield")}Start here · pillar guide</span>'
         f'<strong>Secure Copilot rollout</strong><p>{len(G1.PHASES)} phases, {nsteps(G1)} steps, from licensing to oversharing clean-up and pilot.</p>'
@@ -217,10 +226,9 @@ def finder(rel, R, guides, quick, n_sec):
         f'<a class="sh-c sh-2" href="{rel}guides/{G2.SLUG}.html"><span class="sh-k">{T.icon("layers")}Pillar guide</span>'
         f'<strong>Windows 11 hardening</strong><p>{len(G2.PHASES)} phases built around the CIS Benchmark and Microsoft security baselines.</p>'
         f'<span class="sh-go">Open the guide {T.icon("arrow")}</span></a>'
-        f'<a class="sh-c sh-3" href="{rel}security/index.html"><span class="sh-k">{T.icon("alert")}Security</span>'
-        f'<strong>Vulnerability watch &amp; hardening</strong><p>{n_sec} entries: exploited CVEs to patch first, plus network, server and VMware hardening.</p>'
-        f'<span class="sh-go">Open security {T.icon("arrow")}</span></a>'
-        f'<div class="sh-c sh-4"><span class="sh-k">{T.icon("clock")}Newest recipes</span><ul>{new_li}</ul>'
+        + (f'<div class="sh-c sh-3"><span class="sh-k">{T.icon("alert")}When it breaks</span><ul>{prob_li}</ul>'
+           f'<a class="sh-go" href="{rel}?t=Security#library">All security recipes {T.icon("arrow")}</a></div>' if prob_li else "")
+        + f'<div class="sh-c sh-4"><span class="sh-k">{T.icon("clock")}Newest recipes</span><ul>{new_li}</ul>'
         f'<a class="sh-go" href="{rel}guides/{quick.SLUG}.html">Quick guide: {esc(quick.SHORT.split(": ", 1)[-1])} {T.icon("arrow")}</a></div>')
     return (f'<section class="fd wrap" id="find" aria-labelledby="fd-k"><p class="sec-k fd-k" id="fd-k">Start here</p><div class="sh">{cards}</div></section>')
 
@@ -412,7 +420,8 @@ def featured(R, CY, guides, Q):
     ns = lambda g: sum(len(p["steps"]) for p in g.PHASES)
     vkey = lambda e: e.get("kev_added") or e.get("advisory_date") or e.get("updated") or ""
     vulns = [e for e in CY if e["type"] == "vulnerability"]
-    v = max([e for e in vulns if e.get("exploited")] or vulns, key=vkey) if vulns else None
+    ms = [e for e in vulns if "Microsoft" in (e.get("vendor") or "")]  # homepage = Microsoft track; other vendors live in the second track
+    v = max([e for e in ms if e.get("exploited")] or ms, key=vkey) if ms else None
     r = max(R, key=lambda x: (x.get("created", ""), x.get("updated", ""), x["id"]))
     first = lambda s: (s.split(". ")[0].rstrip(".") + ".") if s else ""
     slides = [dict(k="Pillar guide", t=G1.TITLE, s=f"{len(G1.PHASES)} phases and {ns(G1)} steps, from licensing and admin roles to the oversharing clean-up, labels, DLP and pilot.",
@@ -443,7 +452,7 @@ def carousel(rel, slides, n_recipes, last_verified, top="", lead=""):
         dots += f'<button type="button" class="car-dot" aria-controls="car-s{i}" aria-label="Show slide {i + 1}: {esc(s["t"])}"{" aria-current=true" if i == 0 else ""}></button>'
     arrow = lambda d: f'<svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path d="{"M15 5l-7 7 7 7" if d < 0 else "M9 5l7 7-7 7"}"/></svg>'
     return (f'<section class="hx car" aria-labelledby="hx-title"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>'
-            f'<div class="wrap"><h1 id="hx-title" class="car-h1">Independent Microsoft Cloud, Security &amp; Automation playbooks</h1><p class="car-sub">A knowledge base for solving real admin problems: exact settings, scripts, rollback and a source for every claim. <a href="#tasks">Explore by task ↓</a></p>{lead}'
+            f'<div class="wrap"><h1 id="hx-title" class="car-h1">Independent Microsoft Cloud &amp; Modern Workplace playbooks</h1><p class="car-sub">Identity, devices, Copilot and automation for people who run tenants: exact settings, scripts, rollback and a source for every claim. <a href="#tasks">Explore by task ↓</a> · <a href="#infra">Cybersecurity &amp; Infrastructure track</a></p>{lead}'
             f'<p class="hx-badge car-badge"><span class="dot" aria-hidden="true"></span>{n_recipes} recipes, every one checked against its sources · last verified {T.fmt(last_verified)}</p>{top}'
             f'<div class="car-box" aria-roledescription="carousel" aria-label="Featured articles" role="region">'
             f'<div class="car-vp" id="car-vp" aria-live="off" tabindex="-1">{items}</div>'
@@ -474,7 +483,7 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
          [L(tag("Conditional Access"), "Conditional Access", tc.get("Conditional Access")),
           L(tag("Identity"), "Identity &amp; threat protection", tc.get("Identity")),
           L(tag("Purview & DLP"), "Purview &amp; DLP", tc.get("Purview & DLP")),
-          L(f'{rel}security/index.html#watch', "Exploited CVEs to patch", exploited or None),
+          L(f'{rel}recipes/ca-production-lockout-mistakes.html', "CA mistakes that cause lockouts") if any(r["id"] == "ca-production-lockout-mistakes" for r in R) else "",
           L(f'{rel}policies/index.html', "Security policy templates", len(pols))],
          f'{rel}?t=Security#library', f"All {tc.get('Security', sec_n)} security recipes"),
         ("layers", "Manage", "Intune, Windows, Autopilot, devices",
@@ -507,5 +516,22 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
         f'<div class="tk-c tk-{i}"><p class="sh-k">{T.icon(ic)}{esc(k)}</p><h3>{esc(scope)}</h3><p class="tk-d">{esc(d)}</p>'
         f'<ul class="tk-l">{"".join(li)}</ul><a class="sh-go" href="{go}">{esc(gol)} {T.icon("arrow")}</a></div>'
         for i, (ic, k, scope, d, li, go, gol) in enumerate(hubs, 1))
-    return (f'<section class="tk-hub wrap" id="tasks" aria-labelledby="tk-h"><p class="sec-k">Explore by task</p>'
+    return (f'<section class="tk-hub wrap" id="tasks" aria-labelledby="tk-h"><p class="sec-k">Microsoft Cloud &amp; Modern Workplace · explore by task</p>'
             f'<h2 id="tk-h">What are you trying to solve?</h2><div class="tk-g">{cards}</div></section>')
+
+
+# ---------------------------------------------------------------- homepage second track (2026-10-31)
+def infra_track(rel, CYL, tools, pols):
+    """Compact, clearly secondary band: Cybersecurity & Infrastructure (non-Microsoft CVEs, hardening, tools, templates)."""
+    vk = lambda e: e.get("kev_added") or e.get("advisory_date") or ""
+    other = sorted((e for e in CYL if e["type"] == "vulnerability" and e.get("exploited") and "Microsoft" not in (e.get("vendor") or "")), key=vk, reverse=True)
+    expl = sum(1 for e in CYL if e["type"] == "vulnerability" and e.get("exploited"))
+    hard = sum(1 for e in CYL if e["type"] == "hardening")
+    L = lambda u, t, n: f'<li><a href="{rel}{u}">{t} <span>{n}</span></a></li>'
+    latest = " · ".join(f'<a href="{rel}security/{e["id"]}.html">{esc((e.get("vendor") or "").split(" (")[0])} {esc(e["cves"][0]["id"] if e.get("cves") else "")}</a>' for e in other[:3])
+    return (f'<section class="t2 wrap" id="infra" aria-labelledby="t2-h"><div class="t2-in"><div class="t2-tx"><p class="sec-k t2-k">Second track</p>'
+            f'<h2 id="t2-h">Cybersecurity &amp; Infrastructure</h2><p>Beyond the tenant: exploited CVEs in network, server and virtualisation products, '
+            f'hardening baselines, pentest tooling and policy templates.</p>'
+            + (f'<p class="t2-new fine">Latest exploited: {latest}</p>' if latest else "") +
+            f'</div><ul class="t2-l">{L("security/index.html#watch", "Vulnerability watch", expl)}{L("security/index.html#hardening", "Hardening recipes", hard)}'
+            f'{L("tools/index.html", "Security &amp; pentest tools", len(tools))}{L("policies/index.html", "Policy templates", len(pols))}</ul></div></section>')

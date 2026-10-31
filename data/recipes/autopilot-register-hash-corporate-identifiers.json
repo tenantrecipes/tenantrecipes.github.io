@@ -110,5 +110,9 @@
  "verified_by": "Pascal",
  "created": "2026-10-31",
  "updated": "2026-10-31",
- "screenshots": []
+ "screenshots": [],
+ "related": [
+  "autopilot-device-preparation-entra-join",
+  "autopilot-troubleshoot-enrollment"
+ ]
 }

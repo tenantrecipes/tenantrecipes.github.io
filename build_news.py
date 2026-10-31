@@ -80,13 +80,17 @@ def card(rel, esc, fmt_date, e, short=False):
 
 
 def latest_strip(rel, esc, fmt_date, CY, n=4):
-    its = items(CY)[:n]
-    return (f'<section class="wrap nw-strip" aria-labelledby="nw-sh"><div class="nw-sh-row"><h2 id="nw-sh">Latest news</h2>'
+    """Homepage strip = Microsoft track only: curated news plus exploited Microsoft vulnerabilities."""
+    ms = {v["id"] for v in CY if "Microsoft" in (v.get("vendor") or "")}
+    its = [e for e in items(CY) if e["kind"] == "news" or e["id"] in ms][:n]
+    return (f'<section class="wrap nw-strip" aria-labelledby="nw-sh"><div class="nw-sh-row"><h2 id="nw-sh">Latest Microsoft 365 news</h2>'
             f'<a href="{rel}news/index.html">All news &amp; retirements →</a></div>'
             f'<ol class="nw-list nw-mini">{"".join(card(rel, esc, fmt_date, e, True) for e in its)}</ol></section>')
 
 
 def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME, CY):
+    import build_links as BL, build_data as BD
+    RECIPES = BD.load()
     its = items(CY)
     pages = []
 
@@ -121,6 +125,8 @@ def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME, CY):
             facts = (f'<dl class="cy-facts"><div><dt>Category</dt><dd>{esc(e["category"])}</dd></div><div><dt>Published</dt><dd>{fmt_date(e["date"])}</dd></div>{eff}'
                      f'<div><dt>Primary source</dt><dd><a href="{E(e["primary"]["url"])}" rel="noopener">{esc(e["primary"]["title"])}</a></dd></div></dl>')
             rel_links = "".join(f'<li><a href="{(rel + r["url"]) if not r["url"].startswith("http") else E(r["url"])}">{esc(r["title"])}</a></li>' for r in e.get("related", []))
+            listed = {r["url"].rsplit("/", 1)[-1][:-5] for r in e.get("related", []) if r["url"].startswith("recipes/")} | ({e["recipe"]} if e.get("recipe") else set())
+            rel_links += BL.related_list_html(rel, BL.recipe_matches(e, RECIPES, 3 if len(listed) < 2 else 2, skip=listed), esc)
             others = [(x["title"], rel + x["u"]) for x in its if x["id"] != e["id"]][:5]
             toc = [("what", "What's changing"), ("why", "Why it matters"), ("todo", "What to do"), ("related", "Related"), ("verified", "Sources")]
             return (T.page_hero(rel, T.crumbs_dark(rel, path, [("Home", rel + "index.html"), ("News", rel + "news/index.html"), (e["category"], None)]),

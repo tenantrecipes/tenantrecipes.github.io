@@ -67,5 +67,9 @@
   "Set the paired Conditional Access policy to Report-only or Off first, so access isn't blocked.",
   "Then remove the group assignment from the app protection policy (or relax the data protection setting) instead of deleting it.",
   "Confirm on a test device that the app re-checks in and the restriction is gone."
+ ],
+ "related": [
+  "ca-compliant-device-ai",
+  "purview-dlp-copilot-location"
  ]
 }

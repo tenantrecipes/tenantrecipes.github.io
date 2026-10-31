@@ -58,5 +58,10 @@
   "Entra ID > Conditional Access > Policies: set the policy to Report-only (or Off) instead of deleting it.",
   "Confirm in the sign-in logs that the affected users can sign in again.",
   "Register phishing-resistant methods for the users who were blocked, review the report-only results again, then turn the policy back On."
+ ],
+ "related": [
+  "ca-break-glass",
+  "entra-sms-voice-retirement-passkeys",
+  "ca-production-lockout-mistakes"
  ]
 }

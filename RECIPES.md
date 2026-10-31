@@ -89,6 +89,14 @@ Nothing is marked `tested`. `ca-block-legacy-auth`, `ca-require-mfa-copilot` and
 
 Topic tags on the homepage (Copilot, Conditional Access, News / Retirement, ...) are derived automatically in `build_ux.tags_for()`.
 
+## Internal linking: `related` and topic clusters
+
+Optional `"related": ["<recipe-id>", ...]` lists curated cross-links (max 3 shown first under "Related recipes"; the build fails on an unknown id).
+The rest is automatic (`build_links.py`): every recipe, news item and security entry belongs to the topic clusters whose keywords appear in its id, title and summary
+(Identity & access, Devices & Windows, Copilot, agents & data protection). Recipe pages get a "More in this topic cluster" list; news items and Microsoft/Windows
+security entries get related recipes when they share a specific cluster keyword. New recipes should set `related` to 2–3 recipes in a *neighbouring* cluster
+(for example a CA recipe → device compliance or PIM), because same-cluster links are already added automatically.
+
 Recipe pages show "Last verified against Microsoft docs: <date>" when `last_verified` is set,
 otherwise a notice that the recipe has not yet been re-verified.
 

@@ -43,5 +43,9 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "purview-dlp-copilot-location",
+  "copilot-studio-environment-strategy"
+ ]
 }

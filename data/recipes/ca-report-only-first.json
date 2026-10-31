@@ -39,5 +39,9 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "ca-production-lockout-mistakes",
+  "ca-break-glass"
+ ]
 }

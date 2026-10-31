@@ -47,7 +47,12 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "purview-oversharing-assessment",
+   "copilot-pilot-group-licensing",
+   "ca-require-mfa-copilot"
+  ]
  },
  {
   "id": "copilot-pilot-group-licensing",
@@ -90,7 +95,12 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "copilot-readiness-checklist",
+   "purview-oversharing-assessment",
+   "copilot-usage-report"
+  ]
  },
  {
   "id": "copilot-assign-license-graph",
@@ -320,6 +330,11 @@
    "Entra ID > Conditional Access > Policies: set the policy to Report-only (or Off) instead of deleting it.",
    "Confirm in the sign-in logs that the affected users can sign in again.",
    "Register phishing-resistant methods for the users who were blocked, review the report-only results again, then turn the policy back On."
+  ],
+  "related": [
+   "ca-break-glass",
+   "entra-sms-voice-retirement-passkeys",
+   "ca-production-lockout-mistakes"
   ]
  },
  {
@@ -363,7 +378,11 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "ca-production-lockout-mistakes",
+   "ca-break-glass"
+  ]
  },
  {
   "id": "ca-compliant-device-ai",
@@ -430,6 +449,100 @@
    "Entra ID > Conditional Access > Policies: open the compliant-device policy and set Enable policy to Report-only (keeps impact data) or Off. Don't delete it, so the configuration is kept.",
    "Confirm in the sign-in logs (Conditional Access tab on the affected events) that the policy no longer applies and sign-ins succeed.",
    "Fix enrollment/compliance for the affected devices, then switch back to On."
+  ],
+  "related": [
+   "intune-compliance-baseline",
+   "intune-devices-stay-noncompliant",
+   "ca-break-glass"
+  ]
+ },
+ {
+  "status": "published",
+  "last_verified": "2026-10-31",
+  "verified_by": "Tenant Recipes editor",
+  "created": "2026-10-31",
+  "updated": "2026-10-31",
+  "screenshots": [],
+  "id": "ca-production-lockout-mistakes",
+  "order": 95,
+  "category": "Conditional Access for AI",
+  "title": "Conditional Access: the mistakes that cause production lockouts",
+  "problem": "Most Conditional Access outages are self-inflicted: a block policy on All resources without exclusions, an enforced policy that never ran in report-only, a forgotten sync account. Each mistake below comes with the check that catches it before users do.",
+  "steps": [
+   "Mistake 1, no emergency access exclusion. Keep two cloud-only emergency access accounts in a dedicated group and exclude that group from every enforced policy. Before each change, confirm the exclusion with `Get-MgIdentityConditionalAccessPolicy | Select DisplayName, State, @{n='ExcludedGroups';e={$_.Conditions.Users.ExcludeGroups}}`.",
+   "Mistake 2, Block combined with All resources. Microsoft warns that this combination can lock out admins, and that you can't exclude important endpoints such as Microsoft Graph. Scope block policies to the conditions you actually mean (legacy client apps, device code flow, a country list) instead of blocking everything and carving out exceptions.",
+   "Mistake 3, going straight to On. Create every new policy, and every policy built from a template, in Report-only. Read the Report-only tab on real sign-in events, or the Insights and Reporting workbook if you stream sign-in logs to Log Analytics, and leave it there for at least a week before you switch to On.",
+   "Mistake 4, trusting one exclusion. An excluded user can still be challenged or blocked by another policy. Run the What If tool for the excluded identities, and test with a non-admin test user in a pilot group before the organisation-wide rollout.",
+   "Mistake 5, enforcing MFA before people can satisfy it. Make sure users have registered the required methods, protect the security info registration page with its own policy, and only then enforce strong authentication for all users.",
+   "Mistake 6, forgetting non-interactive accounts. Exclude service accounts such as the Microsoft Entra Connect Sync account from user-scoped policies. User-scoped policies don't apply to service principals anyway; target those with Conditional Access for workload identities, and move scripts to managed identities.",
+   "Mistake 7, a country block without the right exclusions. If you block by location, build a named location of allowed countries or regions, set it as the exclusion of the block policy, and exclude the emergency access group as well.",
+   "Mistake 8, no protection on the policies themselves. Turn on protected actions so that creating, changing or deleting a Conditional Access policy needs a fresh strong authentication, and treat Conditional Access Administrator as a privileged role in PIM.",
+   "Mistake 9, deleting a policy to roll back. Set the policy to Off or back to Report-only instead. A deleted policy or named location can still be restored within the 30-day soft-delete period, but turning it off is faster to reverse."
+  ],
+  "pitfalls": [
+   "The tenant limit is 240 Conditional Access policies in any state, report-only and off included. Consolidate by app group and use groups, roles and application filters instead of long GUID lists.",
+   "Creating Conditional Access policies means you can't enable security defaults. Plan the switch so there is no gap.",
+   "A simulated run (policy impact, What If) doesn't replace a real test with a test user. Do both.",
+   "Contingency policies should be created Off and named so they stand out, for example with an ENABLE IN EMERGENCY prefix and a sequence number, so they can be switched on in order during an outage."
+  ],
+  "done_when": [
+   "Every enforced policy excludes the emergency access group, and the export of all policies proves it.",
+   "No policy combines Block with All resources unless it has a documented reason and a tested exclusion.",
+   "Every policy that was switched to On spent at least a week in Report-only, and its Report-only results were reviewed.",
+   "Protected actions are on for Conditional Access policy changes."
+  ],
+  "sources": [
+   {
+    "title": "Plan a Microsoft Entra Conditional Access deployment",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Manage emergency access accounts in Microsoft Entra ID",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+    "checked": "2026-10-31"
+   }
+  ],
+  "markers": {
+   "steps": "official",
+   "pitfalls": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "notes": [
+   {
+    "marker": "practical",
+    "text": "Export all policies to JSON with Microsoft Graph PowerShell before every change window. A diff of the export is the fastest way to see what changed when sign-ins start failing."
+   }
+  ],
+  "troubleshooting": [
+   {
+    "symptom": "Users are blocked minutes after a policy change.",
+    "cause": "A new or edited policy applies to more users, apps or conditions than intended.",
+    "fix": "Open a failed sign-in event, check the Conditional Access tab for the policy that applied, and set that policy to Report-only. Collect the correlation ID, the app and the client app type for the analysis."
+   },
+   {
+    "symptom": "An excluded user is still prompted for MFA or blocked.",
+    "cause": "A second policy also applies to the user.",
+    "fix": "Run What If for that user, app and platform. It lists every policy that applies, so you can see which one causes the prompt."
+   },
+   {
+    "symptom": "Directory synchronisation or a scripted job starts failing after a policy rollout.",
+    "cause": "The service account is in scope of a user-scoped policy.",
+    "fix": "Exclude the account from the policy, and plan the move to a managed identity or a workload identity policy."
+   }
+  ],
+  "rollback": [
+   "Set the policy that causes the problem to Report-only, or to Off if Report-only still interferes. Don't delete it.",
+   "If one user is blocked, add a temporary exclusion for that user only, log it, and remove it as soon as the policy is fixed.",
+   "If a policy was deleted by mistake, restore it from the deleted policies within 30 days, then check that it comes back in the state you expect.",
+   "Confirm the rollback with a new test sign-in and a check of the sign-in log entry."
+  ],
+  "related": [
+   "ca-break-glass",
+   "ca-report-only-first",
+   "pim-least-privilege-daily-ops",
+   "ca-compliant-device-ai"
   ]
  },
  {
@@ -484,6 +597,11 @@
    "Entra ID > Conditional Access > Policies: open the policy and set Enable policy to Report-only (keeps visibility) or Off. Don't delete it, so the configuration is kept.",
    "Confirm in the sign-in logs that the affected sign-ins succeed again.",
    "Fix or replace the client that depended on legacy authentication, then switch the policy back to On."
+  ],
+  "related": [
+   "ca-report-only-first",
+   "ca-production-lockout-mistakes",
+   "ca-break-glass"
   ]
  },
  {
@@ -548,6 +666,10 @@
    "Entra ID > Conditional Access > Policies: open Policy 1 (sign-in frequency) and/or Policy 2 (persistent browser session), one at a time and set Enable policy to Report-only (keeps impact data) or Off. Don't delete it, so the configuration is kept.",
    "Confirm in the sign-in logs (Conditional Access tab on the affected events) that the policy no longer applies and sign-ins succeed.",
    "Adjust the interval or scope, then switch back to On."
+  ],
+  "related": [
+   "ca-compliant-device-ai",
+   "ca-production-lockout-mistakes"
   ]
  },
  {
@@ -614,6 +736,11 @@
    "Entra ID > Conditional Access > Policies: open the sign-in risk and/or user risk policy (roll back one at a time) and set Enable policy to Report-only (keeps impact data) or Off. Don't delete it, so the configuration is kept.",
    "Confirm in the sign-in logs (Conditional Access tab on the affected events) that the policy no longer applies and sign-ins succeed.",
    "Resolve registration or licensing gaps, then return to On."
+  ],
+  "related": [
+   "ca-managed-risk-remediation-policy",
+   "ca-break-glass",
+   "pim-least-privilege-daily-ops"
   ]
  },
  {
@@ -673,6 +800,101 @@
   "rollback": [
    "Don't remove the accounts or their Global Administrator assignment as a 'rollback'; they are the rollback for every other identity change.",
    "If a new exclusion or alert change causes issues, revert that single change and repeat the test sign-in to confirm access and alerting both work."
+  ],
+  "related": [
+   "pim-least-privilege-daily-ops",
+   "ca-production-lockout-mistakes",
+   "ca-report-only-first"
+  ]
+ },
+ {
+  "status": "published",
+  "last_verified": "2026-10-31",
+  "verified_by": "Tenant Recipes editor",
+  "created": "2026-10-31",
+  "updated": "2026-10-31",
+  "screenshots": [],
+  "id": "intune-devices-stay-noncompliant",
+  "order": 135,
+  "category": "Intune & devices for AI",
+  "title": "Why Intune devices stay non-compliant: causes and diagnosis",
+  "problem": "A device that is configured correctly can still show Not compliant, In grace period or Not evaluated, and Conditional Access blocks it. The usual causes are tenant-wide compliance settings, check-in timing, settings in Error, and a second policy you didn't look at.",
+  "steps": [
+   "Check the tenant-wide settings first: Intune admin center > Endpoint security > Device compliance > Compliance policy settings. If Mark devices with no compliance policy assigned as is set to Not compliant, every device that doesn't receive a policy is non-compliant, and Company Portal shows No compliance policies have been assigned.",
+   "Check the Compliance status validity period (default 30 days, range 1–120). A device that doesn't report all of its compliance policies within that period is treated as non-compliant. Look for the Is active setting under Devices > Monitor > Setting compliance.",
+   "Check the built-in default compliance checks. A device is non-compliant if it has no applicable compliance policy assigned, if it isn't active (it hasn't kept in contact with Intune), or if the enrolled user no longer exists or has no valid Intune license.",
+   "Find out which policy fails. A per-policy report only shows compliance with that policy, and the overall device state can be Not compliant because of another policy. When several compliance policies apply, Intune uses the most secure one. Open the device, review every compliance policy on it, and drill into Per-setting status.",
+   "Look for settings in Error. The device keeps its previous compliance state for up to seven days while a setting reports Error. After that it becomes Not compliant, or In grace period if the policy has a grace period. A device that was compliant can therefore lose access a week after the real problem started.",
+   "Understand Not evaluated. It is the first state after enrollment, and it also appears for devices with no compliance policy and no trigger, devices that haven't checked in since the policy changed, and devices without user affinity, such as DEP devices without affinity, Android Enterprise dedicated devices and devices enrolled with a device enrollment manager account.",
+   "Force a check-in before you conclude anything. Reports reflect the last check-in, and a device can take up to 24 hours to appear in a policy's device status. Use Devices > All devices > select the device > Sync, then re-read the report.",
+   "Query the state at scale with Microsoft Graph: `GET https://graph.microsoft.com/v1.0/deviceManagement/managedDevices?$filter=complianceState eq 'noncompliant'&$select=deviceName,userPrincipalName,lastSyncDateTime,complianceState`. Possible values for `complianceState` include `inGracePeriod`, `error`, `conflict` and `unknown`, and an old `lastSyncDateTime` points to a check-in problem rather than a setting problem.",
+   "Check settings the OS doesn't fix by itself. Settings such as device encryption on Windows, Android and macOS are quarantined rather than remediated, so the device stays blocked until the user or a configuration profile actually fixes the setting. Company Portal tells the user what is wrong."
+  ],
+  "pitfalls": [
+   "Reports show the compliance state for the last user who checked in. On shared devices that can be a previous user's state, and device-targeted policies show System account when no user was signed in.",
+   "Summary tiles and detailed device lists don't update at the same moment, so the counts can disagree for a while.",
+   "If a compliance policy and a configuration profile set the same setting, the compliance policy wins, even when the configuration profile is stricter.",
+   "Don't flip Mark devices with no compliance policy assigned as back to Compliant to make a problem go away. It turns off a security control for every unassigned device."
+  ],
+  "done_when": [
+   "Mark devices with no compliance policy assigned as is Not compliant, and the Devices without compliance policy report is empty or explained.",
+   "Every non-compliant device in the Graph query has a known cause: a failing setting, a stale check-in, a missing license or a missing assignment.",
+   "No device has had a compliance setting in Error for more than seven days without an open action."
+  ],
+  "sources": [
+   {
+    "title": "Device compliance policies in Microsoft Intune",
+    "url": "https://learn.microsoft.com/en-us/intune/intune-service/protect/device-compliance-get-started",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Monitor results of your device compliance policies in Microsoft Intune",
+    "url": "https://learn.microsoft.com/en-us/intune/intune-service/protect/compliance-policy-monitor",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Device action: Sync (Microsoft Intune)",
+    "url": "https://learn.microsoft.com/en-us/intune/intune-service/remote-actions/device-sync",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "managedDevice resource type (Microsoft Graph v1.0)",
+    "url": "https://learn.microsoft.com/en-us/graph/api/resources/intune-devices-manageddevice?view=graph-rest-1.0",
+    "checked": "2026-10-31"
+   }
+  ],
+  "markers": {
+   "steps": "official",
+   "pitfalls": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Company Portal says No compliance policies have been assigned.",
+    "cause": "The device or user isn't in any compliance policy assignment, and the tenant marks unassigned devices as non-compliant.",
+    "fix": "Add the device or user group to the right platform policy, sync the device, and check that the policy appears on the device's compliance page."
+   },
+   {
+    "symptom": "The device was compliant last week and is now blocked, and nobody changed anything.",
+    "cause": "A setting has been in Error for seven days, or the device stopped checking in within the validity period.",
+    "fix": "Check Per-setting status for Error entries and the device's last check-in time. Fix the setting or the check-in, then sync."
+   },
+   {
+    "symptom": "The policy report says Compliant, but Conditional Access blocks the device.",
+    "cause": "Another compliance policy, or one of the default checks such as the user's license, makes the overall state non-compliant.",
+    "fix": "Open the device in Intune and check its overall compliance and every policy on it, not only the policy report you started from."
+   }
+  ],
+  "rollback": [
+   "If a new compliance policy marks many devices non-compliant, add a grace period to that policy or unassign it from the affected group. Don't change the tenant-wide default to Compliant.",
+   "If a new setting causes the problem, remove that setting from the policy and keep the rest of the policy assigned.",
+   "Sync a sample of the affected devices and confirm with the Graph query that `complianceState` is back to `compliant`."
+  ],
+  "related": [
+   "intune-compliance-baseline",
+   "ca-compliant-device-ai",
+   "autopilot-troubleshoot-enrollment"
   ]
  },
  {
@@ -786,6 +1008,11 @@
    "If compliance-based Conditional Access blocks users, set that CA policy to Report-only first.",
    "Then extend the grace period, relax the failing setting, or remove the assignment for the affected group; avoid deleting the policy.",
    "Confirm device compliance state in Intune updates after the next check-in."
+  ],
+  "related": [
+   "intune-devices-stay-noncompliant",
+   "ca-compliant-device-ai",
+   "autopilot-device-preparation-entra-join"
   ]
  },
  {
@@ -857,6 +1084,10 @@
    "Set the paired Conditional Access policy to Report-only or Off first, so access isn't blocked.",
    "Then remove the group assignment from the app protection policy (or relax the data protection setting) instead of deleting it.",
    "Confirm on a test device that the app re-checks in and the restriction is gone."
+  ],
+  "related": [
+   "ca-compliant-device-ai",
+   "purview-dlp-copilot-location"
   ]
  },
  {
@@ -930,7 +1161,11 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "intune-deploy-m365-apps-channel",
+   "autopilot-device-preparation-entra-join"
+  ]
  },
  {
   "id": "intune-edge-policies-ai",
@@ -1094,7 +1329,12 @@
   "verified_by": "Pascal",
   "created": "2026-10-31",
   "updated": "2026-10-31",
-  "screenshots": []
+  "screenshots": [],
+  "related": [
+   "autopilot-register-hash-corporate-identifiers",
+   "intune-compliance-baseline",
+   "intune-windows-autopatch"
+  ]
  },
  {
   "id": "autopilot-register-hash-corporate-identifiers",
@@ -1208,7 +1448,11 @@
   "verified_by": "Pascal",
   "created": "2026-10-31",
   "updated": "2026-10-31",
-  "screenshots": []
+  "screenshots": [],
+  "related": [
+   "autopilot-device-preparation-entra-join",
+   "autopilot-troubleshoot-enrollment"
+  ]
  },
  {
   "id": "autopilot-troubleshoot-enrollment",
@@ -1310,7 +1554,11 @@
   "verified_by": "Pascal",
   "created": "2026-10-31",
   "updated": "2026-10-31",
-  "screenshots": []
+  "screenshots": [],
+  "related": [
+   "intune-devices-stay-noncompliant",
+   "autopilot-device-preparation-entra-join"
+  ]
  },
  {
   "id": "purview-oversharing-assessment",
@@ -1352,7 +1600,12 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "sharepoint-restricted-content-discovery",
+   "purview-sensitivity-labels-copilot",
+   "purview-dlp-copilot-location"
+  ]
  },
  {
   "id": "sharepoint-restricted-content-discovery",
@@ -1459,7 +1712,11 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "purview-dlp-copilot-location",
+   "purview-oversharing-assessment"
+  ]
  },
  {
   "id": "purview-dlp-copilot-location",
@@ -1519,6 +1776,10 @@
   "rollback": [
    "Purview portal > Data loss prevention > Policies: switch the policy back to simulation mode or turn it off rather than deleting it.",
    "Verify with a test prompt on a labeled item that Copilot uses the content again."
+  ],
+  "related": [
+   "purview-sensitivity-labels-copilot",
+   "copilot-studio-dlp"
   ]
  },
  {
@@ -1601,6 +1862,103 @@
   }
  },
  {
+  "status": "published",
+  "last_verified": "2026-10-31",
+  "verified_by": "Tenant Recipes editor",
+  "created": "2026-10-31",
+  "updated": "2026-10-31",
+  "screenshots": [],
+  "id": "pim-least-privilege-daily-ops",
+  "order": 125,
+  "category": "Identity & threat protection",
+  "title": "PIM: least privilege without breaking daily operations",
+  "problem": "Moving every admin to eligible assignments in Privileged Identity Management cuts standing access, but badly chosen role settings lock admins out, flood approvers or make people activate five roles every morning. These settings keep least privilege and keep the work moving.",
+  "steps": [
+   "Inventory first. List every Microsoft Entra role assignment with `GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleAssignments?$expand=principal` and flag roles with the PRIVILEGED label. Aim for fewer than five Global Administrators and fewer than ten privileged role assignments.",
+   "Keep zero permanently active assignments except for the two cloud-only emergency access accounts, which stay permanently active Global Administrators. Make everyone else eligible, and use cloud-only accounts, not on-premises synced accounts, for admin roles.",
+   "Set role settings per role, because every assignment of a role follows that role's settings. Change them under ID Governance > Privileged Identity Management > Microsoft Entra roles > Roles > select the role > Role settings > Edit. You need at least Privileged Role Administrator.",
+   "Tier the activation rules. For the highest-impact roles (for example Global Administrator and Privileged Role Administrator), use a short activation maximum duration, require justification and require approval. For daily support roles, use a longer duration (the range is 1–24 hours), require MFA and justification, and skip approval so the help desk isn't blocked.",
+   "Configure approvers explicitly, at least two per role. If approval is required and no approvers are set, active Privileged Role Administrators and Global Administrators become the default approvers. If all of them are only eligible, the tenant can lock itself out.",
+   "For strong authentication at activation, use On activation, require Microsoft Entra Conditional Access authentication context with an authentication strength. Create and enable the Conditional Access policy for that context first, and scope it to all users or the eligible users, not to the directory role, because the user doesn't hold the role yet when activating.",
+   "Remove the 'activate six roles every morning' problem with PIM for Groups. Assign the roles a job needs to a role-assignable group, and make the admin an eligible member of that group, so one activation covers all of them.",
+   "Use time-bound eligible assignments with an end date for projects and contractors, and run recurring access reviews of privileged roles to remove eligibility that is no longer needed.",
+   "Watch it. Configure PIM security alerts, keep notifications on for activations of highly privileged roles, and read the PIM audit history every week. Audit history goes back 30 days, so export it monthly."
+  ],
+  "pitfalls": [
+   "Requiring MFA on activation doesn't always prompt the user. If they already signed in with strong credentials in the session, no new prompt appears. Use authentication context with sign-in frequency set to Every time if you need a fresh authentication on each activation.",
+   "After reauthenticating for one activation, there is a 10-minute window in which other activations don't prompt again, across Microsoft Entra roles, Azure resource roles and PIM for Groups.",
+   "Authentication context only applies at activation. Afterwards the user can use the role from another session or device. Add a second Conditional Access policy that targets the directory roles if the same requirements must apply while the role is in use.",
+   "Anyone who can edit the Conditional Access policy behind an authentication context can change or remove the activation requirement. Treat Conditional Access Administrator and Security Administrator as privileged.",
+   "You can't make service principals eligible for roles. Give them time-limited active assignments instead."
+  ],
+  "done_when": [
+   "Only the two emergency access accounts hold permanent active Global Administrator.",
+   "Every privileged role has explicit approvers, or a documented reason for not requiring approval.",
+   "Admins who need several roles activate one PIM for Groups membership instead of several roles.",
+   "An access review of privileged roles is scheduled, and PIM alerts and notifications are configured."
+  ],
+  "sources": [
+   {
+    "title": "Configure Microsoft Entra role settings in PIM",
+    "url": "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-how-to-change-default-settings",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Plan a Privileged Identity Management deployment",
+    "url": "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-deployment-plan",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Best practices for Microsoft Entra roles",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/best-practices",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Manage emergency access accounts in Microsoft Entra ID",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+    "checked": "2026-10-31"
+   }
+  ],
+  "markers": {
+   "steps": "official",
+   "pitfalls": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "notes": [
+   {
+    "marker": "practical",
+    "text": "Roll out per role, not per person. Convert one role to eligible-only, let the team work with it for a week, and then move to the next role. Start with roles that few people use."
+   }
+  ],
+  "troubleshooting": [
+   {
+    "symptom": "Activation requests wait for approval and nobody answers.",
+    "cause": "No approvers are configured for the role, so requests go to the default approvers (active Privileged Role Administrators and Global Administrators), and with eligible-only assignments there may be none active.",
+    "fix": "Set at least two named approvers per role. Approvers don't need an admin role themselves."
+   },
+   {
+    "symptom": "Activation with authentication context doesn't ask for the expected method.",
+    "cause": "The Conditional Access policy for the context is off, in report-only, excludes the user, or is scoped to the directory role.",
+    "fix": "Scope the policy to all or eligible users, enable it, and test the activation with an eligible test admin."
+   },
+   {
+    "symptom": "Admins complain that they have to activate many roles every day.",
+    "fix": "Bundle the roles for that job into a PIM for Groups group, and make the admins eligible members instead of eligible for each role."
+   }
+  ],
+  "rollback": [
+   "If a role setting blocks urgent work, edit that role's settings back to the previous values (for example remove the approval requirement or extend the duration). Role settings are per role, so other roles aren't affected.",
+   "If an admin is locked out, use an emergency access account to give a time-bound active assignment, and remove it when the root cause is fixed.",
+   "Confirm the rollback by having an eligible test admin activate the role and checking the PIM audit history."
+  ],
+  "related": [
+   "ca-break-glass",
+   "ca-production-lockout-mistakes",
+   "entra-user-consent-restrict"
+  ]
+ },
+ {
   "id": "entra-sms-voice-retirement-passkeys",
   "status": "published",
   "order": 410,
@@ -1676,7 +2034,11 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "ca-require-mfa-copilot",
+   "ca-production-lockout-mistakes"
+  ]
  },
  {
   "id": "ca-managed-risk-remediation-policy",
@@ -1758,6 +2120,11 @@
    "Entra ID > Conditional Access > Policies: set the Microsoft-managed policy to Off (it can't be deleted or renamed), or remove users by changing its security group membership.",
    "Check the Policy impact tab and sign-in logs to confirm it no longer applies.",
    "If you need different behaviour, Duplicate it and run your own copy in Report-only first."
+  ],
+  "related": [
+   "ca-risk-based-ai",
+   "entra-sms-voice-retirement-passkeys",
+   "ca-break-glass"
   ]
  },
  {
@@ -1982,7 +2349,11 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "purview-dlp-copilot-location",
+   "copilot-studio-environment-strategy"
+  ]
  },
  {
   "id": "agents-inventory-admin-center",
@@ -2030,7 +2401,11 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "agents-restrict-blueprint-creation",
+   "copilot-studio-dlp"
+  ]
  },
  {
   "id": "agents-integrated-apps",
@@ -2127,7 +2502,12 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "agents-inventory-admin-center",
+   "copilot-studio-environment-strategy",
+   "pim-least-privilege-daily-ops"
+  ]
  },
  {
   "id": "entra-user-consent-restrict",
@@ -2191,6 +2571,10 @@
    "Enterprise apps > Consent and permissions > User consent settings: return to the previously used option (record it before you change). Needs Global Administrator in the portal; Graph PowerShell works with Privileged Role Administrator.",
    "Prefer moving from 'Do not allow' to 'verified publishers, selected permissions' over reopening full user consent.",
    "Confirm by having a test user attempt consent to an allowed app."
+  ],
+  "related": [
+   "agents-integrated-apps",
+   "pim-least-privilege-daily-ops"
   ]
  },
  {
@@ -2352,7 +2736,11 @@
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "related": [
+   "copilot-assign-license-graph",
+   "copilot-pilot-group-licensing"
+  ]
  },
  {
   "id": "copilot-chat-pay-as-you-go",

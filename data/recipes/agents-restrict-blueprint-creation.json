@@ -46,5 +46,10 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "agents-inventory-admin-center",
+  "copilot-studio-environment-strategy",
+  "pim-least-privilege-daily-ops"
+ ]
 }

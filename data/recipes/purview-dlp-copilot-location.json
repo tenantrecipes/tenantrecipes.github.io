@@ -56,5 +56,9 @@
  "rollback": [
   "Purview portal > Data loss prevention > Policies: switch the policy back to simulation mode or turn it off rather than deleting it.",
   "Verify with a test prompt on a labeled item that Copilot uses the content again."
+ ],
+ "related": [
+  "purview-sensitivity-labels-copilot",
+  "copilot-studio-dlp"
  ]
 }

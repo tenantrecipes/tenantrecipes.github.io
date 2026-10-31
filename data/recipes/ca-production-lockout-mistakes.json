@@ -1,0 +1,89 @@
+{
+ "status": "published",
+ "last_verified": "2026-10-31",
+ "verified_by": "Tenant Recipes editor",
+ "created": "2026-10-31",
+ "updated": "2026-10-31",
+ "screenshots": [],
+ "id": "ca-production-lockout-mistakes",
+ "order": 95,
+ "category": "Conditional Access for AI",
+ "title": "Conditional Access: the mistakes that cause production lockouts",
+ "problem": "Most Conditional Access outages are self-inflicted: a block policy on All resources without exclusions, an enforced policy that never ran in report-only, a forgotten sync account. Each mistake below comes with the check that catches it before users do.",
+ "steps": [
+  "Mistake 1, no emergency access exclusion. Keep two cloud-only emergency access accounts in a dedicated group and exclude that group from every enforced policy. Before each change, confirm the exclusion with `Get-MgIdentityConditionalAccessPolicy | Select DisplayName, State, @{n='ExcludedGroups';e={$_.Conditions.Users.ExcludeGroups}}`.",
+  "Mistake 2, Block combined with All resources. Microsoft warns that this combination can lock out admins, and that you can't exclude important endpoints such as Microsoft Graph. Scope block policies to the conditions you actually mean (legacy client apps, device code flow, a country list) instead of blocking everything and carving out exceptions.",
+  "Mistake 3, going straight to On. Create every new policy, and every policy built from a template, in Report-only. Read the Report-only tab on real sign-in events, or the Insights and Reporting workbook if you stream sign-in logs to Log Analytics, and leave it there for at least a week before you switch to On.",
+  "Mistake 4, trusting one exclusion. An excluded user can still be challenged or blocked by another policy. Run the What If tool for the excluded identities, and test with a non-admin test user in a pilot group before the organisation-wide rollout.",
+  "Mistake 5, enforcing MFA before people can satisfy it. Make sure users have registered the required methods, protect the security info registration page with its own policy, and only then enforce strong authentication for all users.",
+  "Mistake 6, forgetting non-interactive accounts. Exclude service accounts such as the Microsoft Entra Connect Sync account from user-scoped policies. User-scoped policies don't apply to service principals anyway; target those with Conditional Access for workload identities, and move scripts to managed identities.",
+  "Mistake 7, a country block without the right exclusions. If you block by location, build a named location of allowed countries or regions, set it as the exclusion of the block policy, and exclude the emergency access group as well.",
+  "Mistake 8, no protection on the policies themselves. Turn on protected actions so that creating, changing or deleting a Conditional Access policy needs a fresh strong authentication, and treat Conditional Access Administrator as a privileged role in PIM.",
+  "Mistake 9, deleting a policy to roll back. Set the policy to Off or back to Report-only instead. A deleted policy or named location can still be restored within the 30-day soft-delete period, but turning it off is faster to reverse."
+ ],
+ "pitfalls": [
+  "The tenant limit is 240 Conditional Access policies in any state, report-only and off included. Consolidate by app group and use groups, roles and application filters instead of long GUID lists.",
+  "Creating Conditional Access policies means you can't enable security defaults. Plan the switch so there is no gap.",
+  "A simulated run (policy impact, What If) doesn't replace a real test with a test user. Do both.",
+  "Contingency policies should be created Off and named so they stand out, for example with an ENABLE IN EMERGENCY prefix and a sequence number, so they can be switched on in order during an outage."
+ ],
+ "done_when": [
+  "Every enforced policy excludes the emergency access group, and the export of all policies proves it.",
+  "No policy combines Block with All resources unless it has a documented reason and a tested exclusion.",
+  "Every policy that was switched to On spent at least a week in Report-only, and its Report-only results were reviewed.",
+  "Protected actions are on for Conditional Access policy changes."
+ ],
+ "sources": [
+  {
+   "title": "Plan a Microsoft Entra Conditional Access deployment",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Manage emergency access accounts in Microsoft Entra ID",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+   "checked": "2026-10-31"
+  }
+ ],
+ "markers": {
+  "steps": "official",
+  "pitfalls": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "notes": [
+  {
+   "marker": "practical",
+   "text": "Export all policies to JSON with Microsoft Graph PowerShell before every change window. A diff of the export is the fastest way to see what changed when sign-ins start failing."
+  }
+ ],
+ "troubleshooting": [
+  {
+   "symptom": "Users are blocked minutes after a policy change.",
+   "cause": "A new or edited policy applies to more users, apps or conditions than intended.",
+   "fix": "Open a failed sign-in event, check the Conditional Access tab for the policy that applied, and set that policy to Report-only. Collect the correlation ID, the app and the client app type for the analysis."
+  },
+  {
+   "symptom": "An excluded user is still prompted for MFA or blocked.",
+   "cause": "A second policy also applies to the user.",
+   "fix": "Run What If for that user, app and platform. It lists every policy that applies, so you can see which one causes the prompt."
+  },
+  {
+   "symptom": "Directory synchronisation or a scripted job starts failing after a policy rollout.",
+   "cause": "The service account is in scope of a user-scoped policy.",
+   "fix": "Exclude the account from the policy, and plan the move to a managed identity or a workload identity policy."
+  }
+ ],
+ "rollback": [
+  "Set the policy that causes the problem to Report-only, or to Off if Report-only still interferes. Don't delete it.",
+  "If one user is blocked, add a temporary exclusion for that user only, log it, and remove it as soon as the policy is fixed.",
+  "If a policy was deleted by mistake, restore it from the deleted policies within 30 days, then check that it comes back in the state you expect.",
+  "Confirm the rollback with a new test sign-in and a check of the sign-in log entry."
+ ],
+ "related": [
+  "ca-break-glass",
+  "ca-report-only-first",
+  "pim-least-privilege-daily-ops",
+  "ca-compliant-device-ai"
+ ]
+}

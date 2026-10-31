@@ -98,5 +98,9 @@
  "verified_by": "Pascal",
  "created": "2026-10-31",
  "updated": "2026-10-31",
- "screenshots": []
+ "screenshots": [],
+ "related": [
+  "intune-devices-stay-noncompliant",
+  "autopilot-device-preparation-entra-join"
+ ]
 }

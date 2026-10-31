@@ -1,0 +1,90 @@
+{
+ "status": "published",
+ "last_verified": "2026-10-31",
+ "verified_by": "Tenant Recipes editor",
+ "created": "2026-10-31",
+ "updated": "2026-10-31",
+ "screenshots": [],
+ "id": "intune-devices-stay-noncompliant",
+ "order": 135,
+ "category": "Intune & devices for AI",
+ "title": "Why Intune devices stay non-compliant: causes and diagnosis",
+ "problem": "A device that is configured correctly can still show Not compliant, In grace period or Not evaluated, and Conditional Access blocks it. The usual causes are tenant-wide compliance settings, check-in timing, settings in Error, and a second policy you didn't look at.",
+ "steps": [
+  "Check the tenant-wide settings first: Intune admin center > Endpoint security > Device compliance > Compliance policy settings. If Mark devices with no compliance policy assigned as is set to Not compliant, every device that doesn't receive a policy is non-compliant, and Company Portal shows No compliance policies have been assigned.",
+  "Check the Compliance status validity period (default 30 days, range 1–120). A device that doesn't report all of its compliance policies within that period is treated as non-compliant. Look for the Is active setting under Devices > Monitor > Setting compliance.",
+  "Check the built-in default compliance checks. A device is non-compliant if it has no applicable compliance policy assigned, if it isn't active (it hasn't kept in contact with Intune), or if the enrolled user no longer exists or has no valid Intune license.",
+  "Find out which policy fails. A per-policy report only shows compliance with that policy, and the overall device state can be Not compliant because of another policy. When several compliance policies apply, Intune uses the most secure one. Open the device, review every compliance policy on it, and drill into Per-setting status.",
+  "Look for settings in Error. The device keeps its previous compliance state for up to seven days while a setting reports Error. After that it becomes Not compliant, or In grace period if the policy has a grace period. A device that was compliant can therefore lose access a week after the real problem started.",
+  "Understand Not evaluated. It is the first state after enrollment, and it also appears for devices with no compliance policy and no trigger, devices that haven't checked in since the policy changed, and devices without user affinity, such as DEP devices without affinity, Android Enterprise dedicated devices and devices enrolled with a device enrollment manager account.",
+  "Force a check-in before you conclude anything. Reports reflect the last check-in, and a device can take up to 24 hours to appear in a policy's device status. Use Devices > All devices > select the device > Sync, then re-read the report.",
+  "Query the state at scale with Microsoft Graph: `GET https://graph.microsoft.com/v1.0/deviceManagement/managedDevices?$filter=complianceState eq 'noncompliant'&$select=deviceName,userPrincipalName,lastSyncDateTime,complianceState`. Possible values for `complianceState` include `inGracePeriod`, `error`, `conflict` and `unknown`, and an old `lastSyncDateTime` points to a check-in problem rather than a setting problem.",
+  "Check settings the OS doesn't fix by itself. Settings such as device encryption on Windows, Android and macOS are quarantined rather than remediated, so the device stays blocked until the user or a configuration profile actually fixes the setting. Company Portal tells the user what is wrong."
+ ],
+ "pitfalls": [
+  "Reports show the compliance state for the last user who checked in. On shared devices that can be a previous user's state, and device-targeted policies show System account when no user was signed in.",
+  "Summary tiles and detailed device lists don't update at the same moment, so the counts can disagree for a while.",
+  "If a compliance policy and a configuration profile set the same setting, the compliance policy wins, even when the configuration profile is stricter.",
+  "Don't flip Mark devices with no compliance policy assigned as back to Compliant to make a problem go away. It turns off a security control for every unassigned device."
+ ],
+ "done_when": [
+  "Mark devices with no compliance policy assigned as is Not compliant, and the Devices without compliance policy report is empty or explained.",
+  "Every non-compliant device in the Graph query has a known cause: a failing setting, a stale check-in, a missing license or a missing assignment.",
+  "No device has had a compliance setting in Error for more than seven days without an open action."
+ ],
+ "sources": [
+  {
+   "title": "Device compliance policies in Microsoft Intune",
+   "url": "https://learn.microsoft.com/en-us/intune/intune-service/protect/device-compliance-get-started",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Monitor results of your device compliance policies in Microsoft Intune",
+   "url": "https://learn.microsoft.com/en-us/intune/intune-service/protect/compliance-policy-monitor",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Device action: Sync (Microsoft Intune)",
+   "url": "https://learn.microsoft.com/en-us/intune/intune-service/remote-actions/device-sync",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "managedDevice resource type (Microsoft Graph v1.0)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/resources/intune-devices-manageddevice?view=graph-rest-1.0",
+   "checked": "2026-10-31"
+  }
+ ],
+ "markers": {
+  "steps": "official",
+  "pitfalls": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "Company Portal says No compliance policies have been assigned.",
+   "cause": "The device or user isn't in any compliance policy assignment, and the tenant marks unassigned devices as non-compliant.",
+   "fix": "Add the device or user group to the right platform policy, sync the device, and check that the policy appears on the device's compliance page."
+  },
+  {
+   "symptom": "The device was compliant last week and is now blocked, and nobody changed anything.",
+   "cause": "A setting has been in Error for seven days, or the device stopped checking in within the validity period.",
+   "fix": "Check Per-setting status for Error entries and the device's last check-in time. Fix the setting or the check-in, then sync."
+  },
+  {
+   "symptom": "The policy report says Compliant, but Conditional Access blocks the device.",
+   "cause": "Another compliance policy, or one of the default checks such as the user's license, makes the overall state non-compliant.",
+   "fix": "Open the device in Intune and check its overall compliance and every policy on it, not only the policy report you started from."
+  }
+ ],
+ "rollback": [
+  "If a new compliance policy marks many devices non-compliant, add a grace period to that policy or unassign it from the affected group. Don't change the tenant-wide default to Compliant.",
+  "If a new setting causes the problem, remove that setting from the policy and keep the rest of the policy assigned.",
+  "Sync a sample of the affected devices and confirm with the Graph query that `complianceState` is back to `compliant`."
+ ],
+ "related": [
+  "intune-compliance-baseline",
+  "ca-compliant-device-ai",
+  "autopilot-troubleshoot-enrollment"
+ ]
+}

@@ -263,6 +263,17 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                            else b + " Exploited CVEs with fixed versions, plus hardening recipes linked to vendor advisories."), area_body))
 
     # ---------- entry pages ----------
+    import build_links as BL
+
+    def _rel_recipes(rel, e):
+        """Related tenant recipes for Microsoft / Windows entries only (a shared specific cluster keyword = an obvious match)."""
+        if e.get("type") == "vulnerability" and "Microsoft" not in (e.get("vendor") or ""):
+            return ""
+        if e.get("type") == "hardening" and e.get("area") not in ("endpoint", "server", "cloud"):
+            return ""
+        m = BL.recipe_matches(e, R, 3)
+        return (f'<section class="nx" aria-labelledby="rr-h"><h2 id="rr-h">Related tenant recipes</h2><ul>{BL.related_list_html(rel, m, esc)}</ul></section>' if m else "")
+
     for e in ents:
         def body(rel, e=e):
             at, _ = AREA[e["area"]]
@@ -304,6 +315,7 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                     + f'<h2 id="what">{"What it is" if isv else "Why it matters"}</h2><p>{esc(e["summary"])}</p>{facts}'
                     f'<h2 id="todo" class="h-ic">{T.icon("list")}{"What to do" if isv else "Steps"}</h2><ol class="steps">' + "".join(f'<li><div>{step_html(s)}</div></li>' for s in e["steps"]) + '</ol>'
                     + (f'<section id="pitfalls" class="co co-warn"><p class="co-h">{T.icon("alert")}Pitfalls</p><ul>' + "".join(f'<li>{step_html(p)}</li>' for p in e["pitfalls"]) + '</ul></section>' if e["pitfalls"] else "")
+                    + _rel_recipes(rel, e)
                     + T.trust_bottom(rel, path, e["title"], e, "Verified against (vendor &amp; official sources)") + '</article>'
                     + T.side_nav(rel, toc, rel_items, f'More in {at}')
                     + '</div>' + signup(rel, "security-" + e["id"]) + '</main>')

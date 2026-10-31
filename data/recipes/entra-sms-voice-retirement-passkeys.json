@@ -74,5 +74,9 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "ca-require-mfa-copilot",
+  "ca-production-lockout-mistakes"
+ ]
 }

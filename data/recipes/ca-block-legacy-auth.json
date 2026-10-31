@@ -50,5 +50,10 @@
   "Entra ID > Conditional Access > Policies: open the policy and set Enable policy to Report-only (keeps visibility) or Off. Don't delete it, so the configuration is kept.",
   "Confirm in the sign-in logs that the affected sign-ins succeed again.",
   "Fix or replace the client that depended on legacy authentication, then switch the policy back to On."
+ ],
+ "related": [
+  "ca-report-only-first",
+  "ca-production-lockout-mistakes",
+  "ca-break-glass"
  ]
 }

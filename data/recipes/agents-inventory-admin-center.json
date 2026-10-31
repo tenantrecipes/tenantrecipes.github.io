@@ -44,5 +44,9 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "agents-restrict-blueprint-creation",
+  "copilot-studio-dlp"
+ ]
 }

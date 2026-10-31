@@ -16,6 +16,7 @@ import build_trust as T
 import build_ux as UX
 import build_search as BS
 import build_tools as TL
+import build_links as BL
 import build_policies as PL
 import build_news as NW
 import build_status as BST
@@ -283,11 +284,9 @@ def hero(rel):
         f'<p class="hx-card-f">{n}/{n} recipes verified · {fmt_date(last)}</p></div></div></div>'
         f'<div class="ticker" aria-label="All recipes"><ul class="tk">{ticker_items}</ul><ul class="tk" aria-hidden="true">{ticker_dupe}</ul></div>'
         f'</section>'
-        f'<section class="sec wrap" aria-labelledby="sec-title"><p class="sec-k">Security track</p>'
+        f'<section class="sec wrap" aria-labelledby="sec-title"><p class="sec-k">Microsoft security track</p>'
         f'<h2 id="sec-title">AI is only as safe as your tenant. {sec_total} recipes to harden it first.</h2>'
         f'<div class="sec-grid">{tiles}</div>'
-        f'<a class="cy-promo" href="security/index.html"><span class="cy-promo-k">New</span><strong>Cybersecurity beyond the tenant:</strong> '
-        f'vulnerability watch for exploited CVEs, plus hardening for network, servers and VMware →</a>'
         f'<a class="cy-promo" href="guides/{G2.SLUG}.html"><span class="cy-promo-k">New guide</span><strong>{esc(G2.TITLE)}:</strong> '
         f'{len(G2.PHASES)} phases from CIS Level 1 vs Level 2 to Credential Guard, ASR, BitLocker and compliance scans →</a></section>'
     )
@@ -416,15 +415,16 @@ def build():
     pages = []
     n = len(R)
 
-    pages.append(page("index.html", f"{C.SITE_NAME}: Microsoft Cloud, Security & Automation playbooks for admins",
-                      "Fact-checked playbooks for Microsoft 365 admins: Copilot rollout, Conditional Access, Intune, Purview, exploited CVEs, pentest tools and policy templates.", lambda rel: (
+    pages.append(page("index.html", f"{C.SITE_NAME}: Microsoft Cloud & Modern Workplace playbooks for admins",
+                      "Fact-checked playbooks for Microsoft 365 admins: Conditional Access, PIM, Intune, Autopilot, Copilot and Purview, plus a Cybersecurity & Infrastructure track.", lambda rel: (
         UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
                     CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1),
                     UX.search_bar(rel, R, len(CY.load())) + BST.pill(rel) + f'<script src="{rel}assets/status.js" defer></script>')
         + UX.task_hubs(rel, R, GUIDES, Q, CY.load(), TL.load(), PL.load())
         + NW.latest_strip(rel, esc, fmt_date, CY.load())
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
-        + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):] +
+        + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):]
+        + UX.infra_track(rel, CY.load(), TL.load(), PL.load()) +
         f'<main class="wrap" id="library">{ad_slot("index-top")}<h2 class="lib-h">The recipe library</h2><p class="lib-hint fine">Filter by topic, or use the search at the top to search everything.</p><div id="chips" class="chips" role="group" aria-label="Filter recipes by topic"></div>'
         f'<p id="count" class="fine" aria-live="polite"></p><div class="grid" id="grid"></div>'
         f'<noscript><ul>' + "".join(f'<li><a href="recipes/{r["id"]}.html">{esc(r["title"])}</a></li>' for r in R) + '</ul></noscript>'
@@ -497,6 +497,8 @@ def build():
     pages += NW.build(page, esc, step_html, signup, fmt_date, E, C.SITE_NAME, CY.load())
 
     refs = UX.guide_refs(GUIDES)
+    BL.check(R)
+    NEWS = NW.load_curated()
     for r in R:
         def body(rel, r=r):
             path = f'recipes/{r["id"]}.html'
@@ -528,7 +530,8 @@ def build():
                     + UX.news_mid(rel, "recipe-" + r["id"]) + ad_slot("recipe-before-related")
                     + f'<section id="next" class="nx" aria-labelledby="nx-h"><h2 id="nx-h">Related recipes &amp; next steps</h2>'
                     + (f'<p class="tgs"><span class="fine">Topics:</span> {tags}</p>' if tags else "")
-                    + f'<div class="grid nx-g">{UX.related_cards(rel, rel_items)}</div>{UX.back_to_guide(rel, r, refs, pg)}</section>'
+                    + f'<div class="grid nx-g">{UX.related_cards(rel, rel_items)}</div>'
+                    + BL.cluster_box(rel, r, R, {x["id"] for x in rel_items}, NEWS, esc) + f'{UX.back_to_guide(rel, r, refs, pg)}</section>'
                     + T.trust_bottom(rel, path, r["title"], r, "Verified against") + '</article>'
                     + T.side_nav(rel, toc, [(x["title"], f'{rel}recipes/{x["id"]}.html') for x in same], f'More in {r["category"]}', promo)
                     + '</div>' + signup(rel, "recipe-" + r["id"]) + '</main>')

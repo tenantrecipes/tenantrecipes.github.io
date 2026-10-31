@@ -2,6 +2,16 @@
  {
   "date": "2026-10-31",
   "kind": "site",
+  "text": "Three problem-oriented recipes: Conditional Access mistakes that cause production lockouts, why Intune devices stay non-compliant (causes and diagnosis), and PIM least privilege without breaking daily operations. Each has troubleshooting and rollback."
+ },
+ {
+  "date": "2026-10-31",
+  "kind": "site",
+  "text": "Internal linking by topic cluster: recipes now link to curated related recipes and to more pages in their cluster (Identity & access, Devices & Windows, Copilot, agents & data protection), and news items list related recipes. The homepage leads with Microsoft Cloud & Modern Workplace; Cybersecurity & Infrastructure is now a separate, secondary track."
+ },
+ {
+  "date": "2026-10-31",
+  "kind": "site",
   "text": "Three new Windows Autopilot recipes: device preparation with Entra join and a provisioning-owned device group, hardware hash import vs corporate identifiers (CSV and Graph), and enrollment troubleshooting with event IDs, registry values and MDM diagnostics. The Manage task hub on the homepage now links to Autopilot."
  },
  {

@@ -39,5 +39,10 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "copilot-readiness-checklist",
+  "purview-oversharing-assessment",
+  "copilot-usage-report"
+ ]
 }

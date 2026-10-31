@@ -36,5 +36,9 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "copilot-assign-license-graph",
+  "copilot-pilot-group-licensing"
+ ]
 }

@@ -32,5 +32,9 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "intune-deploy-m365-apps-channel",
+  "autopilot-device-preparation-entra-join"
+ ]
 }

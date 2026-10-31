@@ -55,5 +55,10 @@
  "rollback": [
   "Don't remove the accounts or their Global Administrator assignment as a 'rollback'; they are the rollback for every other identity change.",
   "If a new exclusion or alert change causes issues, revert that single change and repeat the test sign-in to confirm access and alerting both work."
+ ],
+ "related": [
+  "pim-least-privilege-daily-ops",
+  "ca-production-lockout-mistakes",
+  "ca-report-only-first"
  ]
 }

@@ -78,5 +78,10 @@
   "Entra ID > Conditional Access > Policies: set the Microsoft-managed policy to Off (it can't be deleted or renamed), or remove users by changing its security group membership.",
   "Check the Policy impact tab and sign-in logs to confirm it no longer applies.",
   "If you need different behaviour, Duplicate it and run your own copy in Report-only first."
+ ],
+ "related": [
+  "ca-risk-based-ai",
+  "entra-sms-voice-retirement-passkeys",
+  "ca-break-glass"
  ]
 }

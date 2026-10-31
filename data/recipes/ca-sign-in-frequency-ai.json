@@ -60,5 +60,9 @@
   "Entra ID > Conditional Access > Policies: open Policy 1 (sign-in frequency) and/or Policy 2 (persistent browser session), one at a time and set Enable policy to Report-only (keeps impact data) or Off. Don't delete it, so the configuration is kept.",
   "Confirm in the sign-in logs (Conditional Access tab on the affected events) that the policy no longer applies and sign-ins succeed.",
   "Adjust the interval or scope, then switch back to On."
+ ],
+ "related": [
+  "ca-compliant-device-ai",
+  "ca-production-lockout-mistakes"
  ]
 }

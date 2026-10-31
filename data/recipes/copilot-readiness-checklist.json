@@ -46,5 +46,10 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "purview-oversharing-assessment",
+  "copilot-pilot-group-licensing",
+  "ca-require-mfa-copilot"
+ ]
 }

@@ -38,5 +38,9 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "purview-dlp-copilot-location",
+  "purview-oversharing-assessment"
+ ]
 }

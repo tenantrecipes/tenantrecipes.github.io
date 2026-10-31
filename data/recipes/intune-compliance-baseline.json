@@ -62,5 +62,10 @@
   "If compliance-based Conditional Access blocks users, set that CA policy to Report-only first.",
   "Then extend the grace period, relax the failing setting, or remove the assignment for the affected group; avoid deleting the policy.",
   "Confirm device compliance state in Intune updates after the next check-in."
+ ],
+ "related": [
+  "intune-devices-stay-noncompliant",
+  "ca-compliant-device-ai",
+  "autopilot-device-preparation-entra-join"
  ]
 }

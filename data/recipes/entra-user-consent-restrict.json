@@ -60,5 +60,9 @@
   "Enterprise apps > Consent and permissions > User consent settings: return to the previously used option (record it before you change). Needs Global Administrator in the portal; Graph PowerShell works with Privileged Role Administrator.",
   "Prefer moving from 'Do not allow' to 'verified publishers, selected permissions' over reopening full user consent.",
   "Confirm by having a test user attempt consent to an allowed app."
+ ],
+ "related": [
+  "agents-integrated-apps",
+  "pim-least-privilege-daily-ops"
  ]
 }

@@ -1,0 +1,97 @@
+{
+ "status": "published",
+ "last_verified": "2026-10-31",
+ "verified_by": "Tenant Recipes editor",
+ "created": "2026-10-31",
+ "updated": "2026-10-31",
+ "screenshots": [],
+ "id": "pim-least-privilege-daily-ops",
+ "order": 125,
+ "category": "Identity & threat protection",
+ "title": "PIM: least privilege without breaking daily operations",
+ "problem": "Moving every admin to eligible assignments in Privileged Identity Management cuts standing access, but badly chosen role settings lock admins out, flood approvers or make people activate five roles every morning. These settings keep least privilege and keep the work moving.",
+ "steps": [
+  "Inventory first. List every Microsoft Entra role assignment with `GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleAssignments?$expand=principal` and flag roles with the PRIVILEGED label. Aim for fewer than five Global Administrators and fewer than ten privileged role assignments.",
+  "Keep zero permanently active assignments except for the two cloud-only emergency access accounts, which stay permanently active Global Administrators. Make everyone else eligible, and use cloud-only accounts, not on-premises synced accounts, for admin roles.",
+  "Set role settings per role, because every assignment of a role follows that role's settings. Change them under ID Governance > Privileged Identity Management > Microsoft Entra roles > Roles > select the role > Role settings > Edit. You need at least Privileged Role Administrator.",
+  "Tier the activation rules. For the highest-impact roles (for example Global Administrator and Privileged Role Administrator), use a short activation maximum duration, require justification and require approval. For daily support roles, use a longer duration (the range is 1–24 hours), require MFA and justification, and skip approval so the help desk isn't blocked.",
+  "Configure approvers explicitly, at least two per role. If approval is required and no approvers are set, active Privileged Role Administrators and Global Administrators become the default approvers. If all of them are only eligible, the tenant can lock itself out.",
+  "For strong authentication at activation, use On activation, require Microsoft Entra Conditional Access authentication context with an authentication strength. Create and enable the Conditional Access policy for that context first, and scope it to all users or the eligible users, not to the directory role, because the user doesn't hold the role yet when activating.",
+  "Remove the 'activate six roles every morning' problem with PIM for Groups. Assign the roles a job needs to a role-assignable group, and make the admin an eligible member of that group, so one activation covers all of them.",
+  "Use time-bound eligible assignments with an end date for projects and contractors, and run recurring access reviews of privileged roles to remove eligibility that is no longer needed.",
+  "Watch it. Configure PIM security alerts, keep notifications on for activations of highly privileged roles, and read the PIM audit history every week. Audit history goes back 30 days, so export it monthly."
+ ],
+ "pitfalls": [
+  "Requiring MFA on activation doesn't always prompt the user. If they already signed in with strong credentials in the session, no new prompt appears. Use authentication context with sign-in frequency set to Every time if you need a fresh authentication on each activation.",
+  "After reauthenticating for one activation, there is a 10-minute window in which other activations don't prompt again, across Microsoft Entra roles, Azure resource roles and PIM for Groups.",
+  "Authentication context only applies at activation. Afterwards the user can use the role from another session or device. Add a second Conditional Access policy that targets the directory roles if the same requirements must apply while the role is in use.",
+  "Anyone who can edit the Conditional Access policy behind an authentication context can change or remove the activation requirement. Treat Conditional Access Administrator and Security Administrator as privileged.",
+  "You can't make service principals eligible for roles. Give them time-limited active assignments instead."
+ ],
+ "done_when": [
+  "Only the two emergency access accounts hold permanent active Global Administrator.",
+  "Every privileged role has explicit approvers, or a documented reason for not requiring approval.",
+  "Admins who need several roles activate one PIM for Groups membership instead of several roles.",
+  "An access review of privileged roles is scheduled, and PIM alerts and notifications are configured."
+ ],
+ "sources": [
+  {
+   "title": "Configure Microsoft Entra role settings in PIM",
+   "url": "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-how-to-change-default-settings",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Plan a Privileged Identity Management deployment",
+   "url": "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-deployment-plan",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Best practices for Microsoft Entra roles",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/best-practices",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Manage emergency access accounts in Microsoft Entra ID",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+   "checked": "2026-10-31"
+  }
+ ],
+ "markers": {
+  "steps": "official",
+  "pitfalls": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "notes": [
+  {
+   "marker": "practical",
+   "text": "Roll out per role, not per person. Convert one role to eligible-only, let the team work with it for a week, and then move to the next role. Start with roles that few people use."
+  }
+ ],
+ "troubleshooting": [
+  {
+   "symptom": "Activation requests wait for approval and nobody answers.",
+   "cause": "No approvers are configured for the role, so requests go to the default approvers (active Privileged Role Administrators and Global Administrators), and with eligible-only assignments there may be none active.",
+   "fix": "Set at least two named approvers per role. Approvers don't need an admin role themselves."
+  },
+  {
+   "symptom": "Activation with authentication context doesn't ask for the expected method.",
+   "cause": "The Conditional Access policy for the context is off, in report-only, excludes the user, or is scoped to the directory role.",
+   "fix": "Scope the policy to all or eligible users, enable it, and test the activation with an eligible test admin."
+  },
+  {
+   "symptom": "Admins complain that they have to activate many roles every day.",
+   "fix": "Bundle the roles for that job into a PIM for Groups group, and make the admins eligible members instead of eligible for each role."
+  }
+ ],
+ "rollback": [
+  "If a role setting blocks urgent work, edit that role's settings back to the previous values (for example remove the approval requirement or extend the duration). Role settings are per role, so other roles aren't affected.",
+  "If an admin is locked out, use an emergency access account to give a time-bound active assignment, and remove it when the root cause is fixed.",
+  "Confirm the rollback by having an eligible test admin activate the role and checking the PIM audit history."
+ ],
+ "related": [
+  "ca-break-glass",
+  "ca-production-lockout-mistakes",
+  "entra-user-consent-restrict"
+ ]
+}

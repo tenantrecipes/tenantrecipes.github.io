@@ -38,5 +38,10 @@
  "screenshots": [],
  "markers": {
   "steps": "official"
- }
+ },
+ "related": [
+  "sharepoint-restricted-content-discovery",
+  "purview-sensitivity-labels-copilot",
+  "purview-dlp-copilot-location"
+ ]
 }
