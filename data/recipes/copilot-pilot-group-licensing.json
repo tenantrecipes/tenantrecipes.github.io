@@ -1,6 +1,7 @@
 {
  "id": "copilot-pilot-group-licensing",
  "status": "published",
+ "tier": "recipe",
  "order": 20,
  "category": "Copilot rollout & governance",
  "title": "Assign Copilot licenses to a pilot group with group-based licensing",

@@ -1,6 +1,7 @@
 {
  "id": "ca-risk-based-ai",
  "status": "published",
+ "tier": "recipe",
  "order": 120,
  "category": "Conditional Access for AI",
  "title": "Block risky sign-ins and require password change for high user risk",

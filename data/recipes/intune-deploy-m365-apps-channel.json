@@ -1,6 +1,7 @@
 {
  "id": "intune-deploy-m365-apps-channel",
  "status": "published",
+ "tier": "recipe",
  "order": 140,
  "category": "Intune & devices for AI",
  "title": "Deploy Microsoft 365 Apps on Current or Monthly Enterprise Channel with Intune",

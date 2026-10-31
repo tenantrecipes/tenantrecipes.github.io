@@ -1,6 +1,7 @@
 {
  "id": "purview-retention-copilot",
  "status": "published",
+ "tier": "recipe",
  "order": 260,
  "category": "Purview, DLP & data security for Copilot",
  "title": "Set retention for Copilot interactions",

@@ -1,6 +1,7 @@
 {
  "id": "copilot-readiness-checklist",
  "status": "published",
+ "tier": "recipe",
  "order": 10,
  "category": "Copilot rollout & governance",
  "title": "Run a Microsoft Copilot readiness check before you assign licenses",

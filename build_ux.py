@@ -274,7 +274,7 @@ def quick_body(rel, Q, RID, page_signup):
                 allsrc.append(k)
     pdf = f"{rel}downloads/{Q.SLUG}.pdf"
     return (T.page_hero(rel, T.crumbs_dark(rel, f"guides/{Q.SLUG}.html", [("Home", rel + "index.html"), ("Guides", rel + "guides/index.html"), ("Quick guide", None)]),
-                        f'{T.icon("check")}Quick guide · 1 page', esc(Q.TITLE),
+                        f'<a class="tier tier-technical" href="{rel}guides/index.html#tier-technical">Technical guide</a> {T.icon("check")}Quick guide · 1 page', esc(Q.TITLE),
                         "A pre-flight check you can run in an afternoon. Each item links to the Microsoft Learn page it was checked against "
                         "and to our hands-on recipe.",
                         T.chip("check", f"Verified {T.fmt(Q.VERIFIED)}") + T.chip("link", f"{len(allsrc)} Microsoft sources") + T.chip("list", "Printable PDF"), kind="page")
@@ -550,7 +550,19 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
         f'<ul class="tk-l">{"".join(li)}</ul><a class="sh-go" href="{go}">{esc(gol)} {T.icon("arrow")}</a></div>'
         for i, (ic, k, scope, d, li, go, gol) in enumerate(hubs, 1))
     return (f'<section class="tk-hub wrap" id="tasks" aria-labelledby="tk-h"><p class="sec-k">Microsoft Cloud &amp; Modern Workplace · explore by task</p>'
-            f'<h2 id="tk-h">What are you trying to solve?</h2><div class="tk-g">{cards}</div></section>')
+            f'<h2 id="tk-h">What are you trying to solve?</h2><div class="tk-g">{cards}</div>'
+            + _tier_strip(rel, R, guides, quick) + '</section>')
+
+
+def _tier_strip(rel, R, guides, quick):
+    """Three content levels with live counts, linking to the sections on /guides/."""
+    import build_tiers as TR
+    n = {"pillar": 0, "technical": 0, "recipe": len(R)}
+    for g in list(guides) + [quick]:
+        n[TR.guide_tier(g)] += 1
+    return ('<p class="tk-tiers"><span class="fine">Three levels:</span>'
+            + "".join(f'<a href="{rel}guides/index.html#tier-{t}"><span class="tier tier-{t}">{TR.TIERS[t][1]}</span> {n[t]}</a>'
+                      for t in ("pillar", "technical", "recipe")) + '</p>')
 
 
 # ---------------------------------------------------------------- homepage second track (2026-10-31)

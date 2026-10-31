@@ -8,6 +8,8 @@ Time estimates, wave sizes and the tag model are Tenant Recipes' own planning fi
 Patching is deliberately not covered here: it lives in the Azure Update Manager guide (azure-update-manager-enterprise-patching)."""
 
 SLUG = "azure-arc-onboarding-enterprise-scale"
+TIER = "pillar"  # pillar | technical (see GUIDES.md)
+PUBLISHED = "2026-10-31"
 TITLE = "Azure Arc Onboarding at Enterprise Scale: A Complete Deployment Guide"
 SHORT = "Azure Arc onboarding at scale"
 DESC = ("An expert deployment guide for connecting Windows Server and Linux machines to Azure Arc at scale: landing zone and RBAC, "

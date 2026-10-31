@@ -1,6 +1,7 @@
 {
  "id": "autopilot-register-hash-corporate-identifiers",
  "status": "published",
+ "tier": "recipe",
  "order": 210,
  "category": "Intune & devices for AI",
  "title": "Pre-stage Windows devices for Autopilot: hardware hash import vs corporate identifiers, by CSV or Graph",

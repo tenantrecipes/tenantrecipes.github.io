@@ -1,6 +1,7 @@
 {
  "id": "agents-inventory-admin-center",
  "status": "published",
+ "tier": "recipe",
  "order": 290,
  "category": "Agents & Copilot Studio governance",
  "title": "Inventory and manage agents in the Microsoft 365 admin center",

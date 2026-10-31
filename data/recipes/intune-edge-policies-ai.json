@@ -1,6 +1,7 @@
 {
  "id": "intune-edge-policies-ai",
  "status": "published",
+ "tier": "recipe",
  "order": 190,
  "category": "Intune & devices for AI",
  "title": "Control generative AI in Microsoft Edge with Intune settings catalog",

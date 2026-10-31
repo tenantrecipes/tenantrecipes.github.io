@@ -1,6 +1,7 @@
 {
  "id": "ca-block-legacy-auth",
  "status": "published",
+ "tier": "recipe",
  "order": 100,
  "category": "Conditional Access for AI",
  "title": "Block legacy authentication before you scale AI",

@@ -1,6 +1,7 @@
 {
  "id": "copilot-studio-environment-strategy",
  "status": "published",
+ "tier": "recipe",
  "order": 270,
  "category": "Agents & Copilot Studio governance",
  "title": "Set up a Power Platform environment strategy for Copilot Studio agents",

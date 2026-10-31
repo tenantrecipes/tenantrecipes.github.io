@@ -1,6 +1,7 @@
 {
  "id": "license-inventory-script",
  "status": "published",
+ "tier": "recipe",
  "order": 350,
  "category": "Licensing & reporting",
  "title": "List who has which license with Graph PowerShell",

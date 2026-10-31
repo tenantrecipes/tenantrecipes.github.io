@@ -1,6 +1,7 @@
 {
  "id": "agents-restrict-blueprint-creation",
  "status": "published",
+ "tier": "recipe",
  "order": 305,
  "category": "Agents & Copilot Studio governance",
  "title": "Decide who can create agents in Entra before default users get the right on 4 November 2026",

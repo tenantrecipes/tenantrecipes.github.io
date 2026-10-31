@@ -1,6 +1,16 @@
 [
  {
   "date": "2026-10-31",
+  "time": "09:55",
+  "kind": "site",
+  "type": "Site",
+  "title": "Three content levels: Pillar, Technical, Recipe",
+  "blurb": "Every guide and recipe now carries a level badge; /guides/ groups and filters by level.",
+  "url": "guides/index.html",
+  "text": "Content is now explicitly organised in three levels: Pillar guides (end-to-end programmes for a whole area), Technical guides (deep dives into one component) and Recipes (one concrete fix). Each page shows its level badge, the guides index groups and filters by level, and the homepage task hubs show live counts per level."
+ },
+ {
+  "date": "2026-10-31",
   "time": "08:53",
   "kind": "site",
   "type": "Guide",

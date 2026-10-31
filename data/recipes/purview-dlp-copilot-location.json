@@ -1,6 +1,7 @@
 {
  "id": "purview-dlp-copilot-location",
  "status": "published",
+ "tier": "recipe",
  "order": 240,
  "category": "Purview, DLP & data security for Copilot",
  "title": "Use a DLP policy to stop Copilot processing labeled content",

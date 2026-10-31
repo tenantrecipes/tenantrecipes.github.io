@@ -1,6 +1,7 @@
 {
  "id": "prompt-1",
  "status": "published",
+ "tier": "recipe",
  "order": 370,
  "category": "Admin prompt templates",
  "title": "Prompt: summarize a Conditional Access policy export",

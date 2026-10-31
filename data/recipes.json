@@ -2,6 +2,7 @@
  {
   "id": "copilot-readiness-checklist",
   "status": "published",
+  "tier": "recipe",
   "order": 10,
   "category": "Copilot rollout & governance",
   "title": "Run a Microsoft Copilot readiness check before you assign licenses",
@@ -57,6 +58,7 @@
  {
   "id": "copilot-pilot-group-licensing",
   "status": "published",
+  "tier": "recipe",
   "order": 20,
   "category": "Copilot rollout & governance",
   "title": "Assign Copilot licenses to a pilot group with group-based licensing",
@@ -105,6 +107,7 @@
  {
   "id": "copilot-assign-license-graph",
   "status": "published",
+  "tier": "recipe",
   "order": 30,
   "category": "Copilot rollout & governance",
   "title": "Assign a Microsoft Copilot license to a user with Microsoft Graph PowerShell",
@@ -148,6 +151,7 @@
  {
   "id": "copilot-adoption-hub",
   "status": "published",
+  "tier": "recipe",
   "order": 40,
   "category": "Copilot rollout & governance",
   "title": "Plan adoption with the Microsoft Copilot adoption resources",
@@ -192,6 +196,7 @@
  {
   "id": "copilot-web-grounding-control",
   "status": "published",
+  "tier": "recipe",
   "order": 50,
   "category": "Copilot rollout & governance",
   "title": "Decide whether Copilot can use web content (web search)",
@@ -235,6 +240,7 @@
  {
   "id": "copilot-teams-meeting-transcription",
   "status": "published",
+  "tier": "recipe",
   "order": 60,
   "category": "Copilot rollout & governance",
   "title": "Make Copilot in Teams meetings work: transcription and recording policies",
@@ -273,6 +279,7 @@
  {
   "id": "ca-require-mfa-copilot",
   "status": "published",
+  "tier": "recipe",
   "order": 70,
   "category": "Conditional Access for AI",
   "title": "Require phishing-resistant MFA for users accessing Microsoft Copilot",
@@ -340,6 +347,7 @@
  {
   "id": "ca-report-only-first",
   "status": "published",
+  "tier": "recipe",
   "order": 80,
   "category": "Conditional Access for AI",
   "title": "Roll out AI-related Conditional Access policies in report-only mode",
@@ -387,6 +395,7 @@
  {
   "id": "ca-compliant-device-ai",
   "status": "published",
+  "tier": "recipe",
   "order": 90,
   "category": "Conditional Access for AI",
   "title": "Require a compliant or hybrid-joined device for Microsoft 365 (and Copilot)",
@@ -458,6 +467,7 @@
  },
  {
   "status": "published",
+  "tier": "recipe",
   "last_verified": "2026-10-31",
   "verified_by": "Tenant Recipes editor",
   "created": "2026-10-31",
@@ -548,6 +558,7 @@
  {
   "id": "ca-block-legacy-auth",
   "status": "published",
+  "tier": "recipe",
   "order": 100,
   "category": "Conditional Access for AI",
   "title": "Block legacy authentication before you scale AI",
@@ -607,6 +618,7 @@
  {
   "id": "ca-sign-in-frequency-ai",
   "status": "published",
+  "tier": "recipe",
   "order": 110,
   "category": "Conditional Access for AI",
   "title": "Set sign-in frequency for high-risk Copilot users",
@@ -675,6 +687,7 @@
  {
   "id": "ca-risk-based-ai",
   "status": "published",
+  "tier": "recipe",
   "order": 120,
   "category": "Conditional Access for AI",
   "title": "Block risky sign-ins and require password change for high user risk",
@@ -746,6 +759,7 @@
  {
   "id": "ca-break-glass",
   "status": "published",
+  "tier": "recipe",
   "order": 130,
   "category": "Conditional Access for AI",
   "title": "Keep break-glass accounts out of every AI-era CA policy",
@@ -809,6 +823,7 @@
  },
  {
   "status": "published",
+  "tier": "recipe",
   "last_verified": "2026-10-31",
   "verified_by": "Tenant Recipes editor",
   "created": "2026-10-31",
@@ -900,6 +915,7 @@
  {
   "id": "intune-deploy-m365-apps-channel",
   "status": "published",
+  "tier": "recipe",
   "order": 140,
   "category": "Intune & devices for AI",
   "title": "Deploy Microsoft 365 Apps on Current or Monthly Enterprise Channel with Intune",
@@ -947,6 +963,7 @@
  {
   "id": "intune-compliance-baseline",
   "status": "published",
+  "tier": "recipe",
   "order": 150,
   "category": "Intune & devices for AI",
   "title": "Create a Windows compliance policy that CA can rely on",
@@ -1018,6 +1035,7 @@
  {
   "id": "intune-app-protection-copilot",
   "status": "published",
+  "tier": "recipe",
   "order": 160,
   "category": "Intune & devices for AI",
   "title": "Protect Copilot on iOS/Android with app protection policies",
@@ -1093,6 +1111,7 @@
  {
   "id": "intune-copilot-key-windows",
   "status": "published",
+  "tier": "recipe",
   "order": 170,
   "category": "Intune & devices for AI",
   "title": "Manage the Copilot experience on Windows devices",
@@ -1130,6 +1149,7 @@
  {
   "id": "intune-windows-autopatch",
   "status": "published",
+  "tier": "recipe",
   "order": 180,
   "category": "Intune & devices for AI",
   "title": "Keep AI-ready devices current with Windows Autopatch",
@@ -1170,6 +1190,7 @@
  {
   "id": "intune-edge-policies-ai",
   "status": "published",
+  "tier": "recipe",
   "order": 190,
   "category": "Intune & devices for AI",
   "title": "Control generative AI in Microsoft Edge with Intune settings catalog",
@@ -1227,6 +1248,7 @@
  {
   "id": "autopilot-device-preparation-entra-join",
   "status": "published",
+  "tier": "recipe",
   "order": 200,
   "category": "Intune & devices for AI",
   "title": "Windows Autopilot device preparation: user-driven Entra join with a provisioning-owned device group",
@@ -1339,6 +1361,7 @@
  {
   "id": "autopilot-register-hash-corporate-identifiers",
   "status": "published",
+  "tier": "recipe",
   "order": 210,
   "category": "Intune & devices for AI",
   "title": "Pre-stage Windows devices for Autopilot: hardware hash import vs corporate identifiers, by CSV or Graph",
@@ -1457,6 +1480,7 @@
  {
   "id": "autopilot-troubleshoot-enrollment",
   "status": "published",
+  "tier": "recipe",
   "order": 220,
   "category": "Intune & devices for AI",
   "title": "Troubleshoot Windows Autopilot enrollment: event IDs, profile registry, MDM diagnostics and auto-collected logs",
@@ -1563,6 +1587,7 @@
  {
   "id": "purview-oversharing-assessment",
   "status": "published",
+  "tier": "recipe",
   "order": 200,
   "category": "Purview, DLP & data security for Copilot",
   "title": "Find oversharing before Copilot does: data security posture for AI",
@@ -1610,6 +1635,7 @@
  {
   "id": "sharepoint-restricted-content-discovery",
   "status": "published",
+  "tier": "recipe",
   "order": 220,
   "category": "Purview, DLP & data security for Copilot",
   "title": "Hide specific sites from Copilot with Restricted Content Discovery",
@@ -1675,6 +1701,7 @@
  {
   "id": "purview-sensitivity-labels-copilot",
   "status": "published",
+  "tier": "recipe",
   "order": 230,
   "category": "Purview, DLP & data security for Copilot",
   "title": "Make Copilot respect sensitivity labels and encryption",
@@ -1721,6 +1748,7 @@
  {
   "id": "purview-dlp-copilot-location",
   "status": "published",
+  "tier": "recipe",
   "order": 240,
   "category": "Purview, DLP & data security for Copilot",
   "title": "Use a DLP policy to stop Copilot processing labeled content",
@@ -1785,6 +1813,7 @@
  {
   "id": "purview-audit-copilot",
   "status": "published",
+  "tier": "recipe",
   "order": 250,
   "category": "Purview, DLP & data security for Copilot",
   "title": "Audit Copilot interactions in Microsoft Purview",
@@ -1827,6 +1856,7 @@
  {
   "id": "purview-retention-copilot",
   "status": "published",
+  "tier": "recipe",
   "order": 260,
   "category": "Purview, DLP & data security for Copilot",
   "title": "Set retention for Copilot interactions",
@@ -1863,6 +1893,7 @@
  },
  {
   "status": "published",
+  "tier": "recipe",
   "last_verified": "2026-10-31",
   "verified_by": "Tenant Recipes editor",
   "created": "2026-10-31",
@@ -1961,6 +1992,7 @@
  {
   "id": "entra-sms-voice-retirement-passkeys",
   "status": "published",
+  "tier": "recipe",
   "order": 410,
   "category": "Identity & threat protection",
   "title": "Move users off SMS and voice MFA before Microsoft-provided SMS and voice retire on 1 February 2027",
@@ -2043,6 +2075,7 @@
  {
   "id": "ca-managed-risk-remediation-policy",
   "status": "published",
+  "tier": "recipe",
   "order": 420,
   "category": "Identity & threat protection",
   "title": "Check the Microsoft-managed 'Require risk remediation for high-risk users' policy that just switched on",
@@ -2130,6 +2163,7 @@
  {
   "id": "sharepoint-otp-retirement-b2b",
   "status": "published",
+  "tier": "recipe",
   "order": 430,
   "category": "Identity & threat protection",
   "title": "Stop 'access denied' for external users as SharePoint one-time passcode retires",
@@ -2204,6 +2238,7 @@
  {
   "id": "defender-teams-zap-qr-phishing",
   "status": "published",
+  "tier": "recipe",
   "order": 440,
   "category": "Identity & threat protection",
   "title": "Catch phishing in Teams chats: ZAP for Teams, QR-code URL detection and user reporting",
@@ -2266,6 +2301,7 @@
  {
   "id": "copilot-studio-environment-strategy",
   "status": "published",
+  "tier": "recipe",
   "order": 270,
   "category": "Agents & Copilot Studio governance",
   "title": "Set up a Power Platform environment strategy for Copilot Studio agents",
@@ -2307,6 +2343,7 @@
  {
   "id": "copilot-studio-dlp",
   "status": "published",
+  "tier": "recipe",
   "order": 280,
   "category": "Agents & Copilot Studio governance",
   "title": "Use Power Platform data policies to govern Copilot Studio connectors",
@@ -2358,6 +2395,7 @@
  {
   "id": "agents-inventory-admin-center",
   "status": "published",
+  "tier": "recipe",
   "order": 290,
   "category": "Agents & Copilot Studio governance",
   "title": "Inventory and manage agents in the Microsoft 365 admin center",
@@ -2410,6 +2448,7 @@
  {
   "id": "agents-integrated-apps",
   "status": "published",
+  "tier": "recipe",
   "order": 300,
   "category": "Agents & Copilot Studio governance",
   "title": "Control which users can install agents and apps (Integrated apps)",
@@ -2457,6 +2496,7 @@
  {
   "id": "agents-restrict-blueprint-creation",
   "status": "published",
+  "tier": "recipe",
   "order": 305,
   "category": "Agents & Copilot Studio governance",
   "title": "Decide who can create agents in Entra before default users get the right on 4 November 2026",
@@ -2512,6 +2552,7 @@
  {
   "id": "entra-user-consent-restrict",
   "status": "published",
+  "tier": "recipe",
   "order": 310,
   "category": "Agents & Copilot Studio governance",
   "title": "Restrict user consent for apps and AI tools",
@@ -2580,6 +2621,7 @@
  {
   "id": "copilot-studio-auth",
   "status": "published",
+  "tier": "recipe",
   "order": 320,
   "category": "Agents & Copilot Studio governance",
   "title": "Require authentication for Copilot Studio agents",
@@ -2621,6 +2663,7 @@
  {
   "id": "copilot-usage-report",
   "status": "published",
+  "tier": "recipe",
   "order": 330,
   "category": "Licensing & reporting",
   "title": "Track active Copilot usage with the Microsoft 365 usage report",
@@ -2661,6 +2704,7 @@
  {
   "id": "copilot-usage-graph",
   "status": "published",
+  "tier": "recipe",
   "order": 340,
   "category": "Licensing & reporting",
   "title": "Pull Copilot usage via Microsoft Graph reports API",
@@ -2701,6 +2745,7 @@
  {
   "id": "license-inventory-script",
   "status": "published",
+  "tier": "recipe",
   "order": 350,
   "category": "Licensing & reporting",
   "title": "List who has which license with Graph PowerShell",
@@ -2745,6 +2790,7 @@
  {
   "id": "copilot-chat-pay-as-you-go",
   "status": "published",
+  "tier": "recipe",
   "order": 360,
   "category": "Licensing & reporting",
   "title": "Understand Microsoft Copilot Chat vs Microsoft Copilot (licensed)",
@@ -2787,6 +2833,7 @@
  {
   "id": "prompt-1",
   "status": "published",
+  "tier": "recipe",
   "order": 370,
   "category": "Admin prompt templates",
   "title": "Prompt: summarize a Conditional Access policy export",
@@ -2819,6 +2866,7 @@
  {
   "id": "prompt-2",
   "status": "published",
+  "tier": "recipe",
   "order": 380,
   "category": "Admin prompt templates",
   "title": "Prompt: write a Copilot rollout announcement",
@@ -2851,6 +2899,7 @@
  {
   "id": "prompt-3",
   "status": "published",
+  "tier": "recipe",
   "order": 390,
   "category": "Admin prompt templates",
   "title": "Prompt: explain an Intune error to the help desk",
@@ -2883,6 +2932,7 @@
  {
   "id": "prompt-4",
   "status": "published",
+  "tier": "recipe",
   "order": 400,
   "category": "Admin prompt templates",
   "title": "Prompt: draft a Copilot acceptable use policy",

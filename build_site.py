@@ -27,6 +27,7 @@ import build_policies as PL
 import build_news as NW
 import build_status as BST
 import build_markers as MK
+import build_tiers as TR
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -389,7 +390,8 @@ def guide_page(g):
         return (
             f'<section class="gd-hero"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i></div><div class="wrap">'
             + T.crumbs_dark(rel, f"guides/{g.SLUG}.html", [("Home", rel + "index.html"), ("Guides", rel + "guides/index.html"), (g.SHORT, None)]) +
-            f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>Pillar guide · {getattr(g, "BADGE", "fact-checked against Microsoft Learn")} on {fmt_date(g.VERIFIED)}</p>'
+            f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>{TR.label(TR.guide_tier(g))} · {getattr(g, "BADGE", "fact-checked against Microsoft Learn")} on {fmt_date(g.VERIFIED)}</p>'
+            f'<p class="tier-row">{TR.badge(rel, TR.guide_tier(g))}</p>'
             f'<h1>{esc(g.TITLE)}</h1><p class="hx-lead">{esc(g.DESC)}</p>'
             f'<div class="hx-cta"><a class="btn hx-p" href="#phase-1-{g.PHASES[0]["id"]}">Start with phase 1 →</a>'
             f'<a class="btn hx-g" href="#checklist">Printable checklist</a>'
@@ -423,23 +425,44 @@ def guide_page(g):
 
 
 def guides_index():
+    def gcard(rel, g):
+        t = TR.guide_tier(g)
+        return (f'<a class="card card-lg" href="{g.SLUG}.html"><span class="card-i">{T.icon("book" if t == "pillar" else "layers")}</span><div class="tag">{TR.label(t)} · {len(g.PHASES)} phases · '
+                f'{sum(len(p["steps"]) for p in g.PHASES)} steps</div><h3>{esc(g.TITLE)}</h3><p>{esc(g.DESC)}</p>'
+                f'<span class="cm"><span class="cm-ok">{T.icon("check")}Verified {fmt_date(g.VERIFIED)}</span><span>Printable checklist</span></span></a>')
+
     def body(rel):
-        cards = "".join(
-            f'<a class="card card-lg" href="{g.SLUG}.html"><span class="card-i">{T.icon("book")}</span><div class="tag">Pillar guide · {len(g.PHASES)} phases · '
-            f'{sum(len(p["steps"]) for p in g.PHASES)} steps</div><h3>{esc(g.TITLE)}</h3><p>{esc(g.DESC)}</p>'
-            f'<span class="cm"><span class="cm-ok">{T.icon("check")}Verified {fmt_date(g.VERIFIED)}</span><span>Printable checklist</span></span></a>'
-            for g in GUIDES)
-        cards += (f'<a class="card card-lg" href="{Q.SLUG}.html"><span class="card-i">{T.icon("check")}</span><div class="tag">Quick guide · 1 page · PDF</div>'
-                  f'<h3>{esc(Q.TITLE)}</h3><p>{esc(Q.DESC)}</p><span class="cm"><span class="cm-ok">{T.icon("check")}Verified {fmt_date(Q.VERIFIED)}</span>'
-                  f'<span>{len(Q.CHECKS)} checks</span></span></a>')
+        tiers = TR.by_tier(GUIDES)
+        qcard = (f'<a class="card card-lg" href="{Q.SLUG}.html"><span class="card-i">{T.icon("check")}</span><div class="tag">{TR.label(TR.guide_tier(Q))} · quick checks · 1 page · PDF</div>'
+                 f'<h3>{esc(Q.TITLE)}</h3><p>{esc(Q.DESC)}</p><span class="cm"><span class="cm-ok">{T.icon("check")}Verified {fmt_date(Q.VERIFIED)}</span>'
+                 f'<span>{len(Q.CHECKS)} checks</span></span></a>')
+        n_tech = len(tiers["technical"]) + (1 if TR.guide_tier(Q) == "technical" else 0)
+        counts = {"pillar": len(tiers["pillar"]), "technical": n_tech, "recipe": len(R)}
+        legend = "".join(f'<a class="tl-c tl-{t}" href="#tier-{t}"><span class="tier tier-{t}">{TR.TIERS[t][0]}</span><strong>{counts[t]}</strong><span>{esc(TR.TIERS[t][2])}</span></a>'
+                         for t in ("pillar", "technical", "recipe"))
+        filt = ('<div class="chips tl-f" role="group" aria-label="Filter by level"><button class="chip on" type="button" data-tier="all" aria-pressed="true">All</button>'
+                + "".join(f'<button class="chip" type="button" data-tier="{t}" aria-pressed="false">{TR.TIERS[t][1]}</button>' for t in ("pillar", "technical", "recipe")) + '</div>')
+        cats = {}
+        for r in R:
+            cats[r["category"]] = cats.get(r["category"], 0) + 1
+        rcards = "".join(f'<a class="card" href="{rel}index.html#library"><div class="tag">{TR.label("recipe")} · {n}</div><h3>{esc(c)}</h3></a>' for c, n in cats.items())
+        sec = lambda t, h, inner: (f'<section class="tl-s" id="tier-{t}" data-tier="{t}" aria-labelledby="tier-{t}-h"><h2 id="tier-{t}-h">{TR.badge(rel, t)} {h}</h2>'
+                                    f'<p class="fine">{esc(TR.TIERS[t][2])}</p><div class="grid">{inner}</div></section>')
         return (T.page_hero(rel, T.crumbs_dark(rel, "guides/index.html", [("Home", rel + "index.html"), ("Guides", None)]), "Guides",
-                            "Long-form playbooks", "Phased, fact-checked guides that tie the recipes together. Every claim links to its official source.", kind="page")
-                + f'<main class="wrap pg"><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
-    return page("guides/index.html", f"Guides: Copilot, Windows 11, cloud hardening, Azure Arc, Update Manager, Admin By Request, Entra Private Access and quick checks | {C.SITE_NAME}",
-                "Long-form, fact-checked playbooks for Microsoft 365, Entra Private Access VPN replacement, Entra hardening under attack simulation, Azure Arc onboarding, Azure Update Manager server patching, Admin By Request and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
+                            "Pillar guides, technical guides and recipes", "Three levels of content: pillar guides for a whole area, technical guides for one component, recipes for one problem. Every claim links to its official source.", kind="page")
+                + f'<main class="wrap pg"><div class="tl-g">{legend}</div>{filt}'
+                + sec("pillar", f'{counts["pillar"]} pillar guides', "".join(gcard(rel, g) for g in tiers["pillar"]))
+                + sec("technical", f'{n_tech} technical guides', "".join(gcard(rel, g) for g in tiers["technical"]) + (qcard if TR.guide_tier(Q) == "technical" else ""))
+                + sec("recipe", f'{len(R)} recipes', rcards + f'<a class="card" href="{rel}index.html#library"><div class="tag">All recipes</div><h3>Browse and filter all {len(R)} recipes →</h3></a>')
+                + '<script>(function(){var b=document.querySelectorAll(".tl-f .chip"),s=document.querySelectorAll(".tl-s");b.forEach(function(x){x.addEventListener("click",function(){'
+                  'b.forEach(function(y){y.classList.toggle("on",y===x);y.setAttribute("aria-pressed",y===x)});s.forEach(function(z){z.hidden=x.dataset.tier!=="all"&&z.dataset.tier!==x.dataset.tier})})})})();</script>'
+                + f'{signup(rel, "guides-index")}</main>')
+    return page("guides/index.html", f"Guides: pillar guides, technical guides and recipes for Microsoft Cloud admins | {C.SITE_NAME}",
+                "Pillar guides for whole areas (Copilot, Windows 11 CIS, Azure Arc, Update Manager, Entra Private Access), technical deep dives and short recipes, all fact-checked with printable checklists.", body)
 
 
 def build():
+    TR.validate_guides(GUIDES + [Q])
     if DIST.exists():
         shutil.rmtree(DIST)
     DIST.mkdir()
@@ -560,7 +583,7 @@ def build():
             tags = "".join(f'<a class="tg" href="{rel}index.html?t={E(t.replace(" ", "+"))}#library">{esc(t)}</a>' for t in UX.tags_for(r))
             rel_items = UX.related(r, R, refs)
             return (T.page_hero(rel, T.crumbs_dark(rel, path, [("Home", rel + "index.html"), ("Recipes", rel + "index.html#library"), (r["category"], None)]),
-                                f'{T.icon("layers")}{esc(r["category"])}', esc(r["title"]), "", chips, kind="recipe")
+                                f'{TR.badge(rel, "recipe")} {T.icon("layers")}{esc(r["category"])}', esc(r["title"]), "", chips, kind="recipe")
                     + '<main class="wrap pg"><div class="pg-grid"><article class="doc">'
                     + T.verify_card(rel, r, "Microsoft sources")
                     + UX.back_to_guide(rel, r, refs, pg)

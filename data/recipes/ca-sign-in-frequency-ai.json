@@ -1,6 +1,7 @@
 {
  "id": "ca-sign-in-frequency-ai",
  "status": "published",
+ "tier": "recipe",
  "order": 110,
  "category": "Conditional Access for AI",
  "title": "Set sign-in frequency for high-risk Copilot users",

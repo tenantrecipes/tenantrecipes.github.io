@@ -1,6 +1,7 @@
 {
  "id": "sharepoint-restricted-search",
  "status": "retired",
+ "tier": "recipe",
  "order": 210,
  "category": "Purview, DLP & data security for Copilot",
  "title": "Use Restricted SharePoint Search as a temporary guardrail",

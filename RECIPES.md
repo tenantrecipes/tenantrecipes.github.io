@@ -1,5 +1,7 @@
 # Recipe data format
 
+Content has three levels (Pillar guide / Technical guide / Recipe). This file covers **recipes**; see GUIDES.md for the tiers and guide modules.
+
 One recipe = one file: `data/recipes/<id>.json`. `build_data.py` picks up every file, validates it,
 and only publishes `"status": "published"`. Run `python3 build.py` after adding or editing.
 
@@ -7,6 +9,7 @@ and only publishes `"status": "published"`. Run `python3 build.py` after adding 
 {
   "id": "ca-break-glass",                  // = file name, lowercase-kebab-case, becomes recipes/<id>.html
   "status": "published",                   // published | draft | needs-review | retired
+  "tier": "recipe",                        // REQUIRED, always "recipe" here (pillar/technical guides: see GUIDES.md)
   "order": 130,                            // sort order within the category (optional)
   "category": "Conditional Access for AI", // see CATEGORY_ORDER in site_config.py
   "title": "Keep break-glass accounts out of every AI-era CA policy",
@@ -81,7 +84,7 @@ Nothing is marked `tested`. `ca-block-legacy-auth`, `ca-require-mfa-copilot` and
 
 ## Checklist for new recipes (nightly pipeline)
 
-1. Required fields plus `done_when`.
+1. Required fields (including `"tier": "recipe"`) plus `done_when`. If the content needs phases, it is a guide, not a recipe (GUIDES.md).
 2. Add `troubleshooting` (2–4 items, symptom/fix) and `rollback` whenever the recipe changes configuration. Skip them rather than invent content.
 3. Set `markers.steps` to `official` only when every step is backed by a checked Microsoft/vendor source. Use `practical` for editor-experience sections.
 4. Never set `tested` unless a real test was run; record environment and date.

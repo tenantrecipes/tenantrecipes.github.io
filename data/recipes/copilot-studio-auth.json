@@ -1,6 +1,7 @@
 {
  "id": "copilot-studio-auth",
  "status": "published",
+ "tier": "recipe",
  "order": 320,
  "category": "Agents & Copilot Studio governance",
  "title": "Require authentication for Copilot Studio agents",

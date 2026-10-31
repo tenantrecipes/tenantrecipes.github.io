@@ -1,6 +1,7 @@
 {
  "id": "copilot-web-grounding-control",
  "status": "published",
+ "tier": "recipe",
  "order": 50,
  "category": "Copilot rollout & governance",
  "title": "Decide whether Copilot can use web content (web search)",

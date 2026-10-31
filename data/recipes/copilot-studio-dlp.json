@@ -1,6 +1,7 @@
 {
  "id": "copilot-studio-dlp",
  "status": "published",
+ "tier": "recipe",
  "order": 280,
  "category": "Agents & Copilot Studio governance",
  "title": "Use Power Platform data policies to govern Copilot Studio connectors",

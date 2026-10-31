@@ -1,6 +1,7 @@
 {
  "id": "copilot-teams-meeting-transcription",
  "status": "published",
+ "tier": "recipe",
  "order": 60,
  "category": "Copilot rollout & governance",
  "title": "Make Copilot in Teams meetings work: transcription and recording policies",

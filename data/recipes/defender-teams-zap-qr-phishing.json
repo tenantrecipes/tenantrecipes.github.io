@@ -1,6 +1,7 @@
 {
  "id": "defender-teams-zap-qr-phishing",
  "status": "published",
+ "tier": "recipe",
  "order": 440,
  "category": "Identity & threat protection",
  "title": "Catch phishing in Teams chats: ZAP for Teams, QR-code URL detection and user reporting",

@@ -1,6 +1,7 @@
 {
  "id": "prompt-2",
  "status": "published",
+ "tier": "recipe",
  "order": 380,
  "category": "Admin prompt templates",
  "title": "Prompt: write a Copilot rollout announcement",

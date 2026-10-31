@@ -7,6 +7,8 @@ Text in `backticks` renders as <code>. 'rec' = recipe ids, 'tools' = tools ids, 
 Not sponsored: Tenant Recipes has no commercial relationship with Admin By Request (see NOTICE)."""
 
 SLUG = "admin-by-request-intune-win32-packaging"
+TIER = "technical"  # pillar | technical (see GUIDES.md)
+PUBLISHED = "2026-10-31"
 TITLE = "Package Admin By Request for Intune: IntuneWinAppUtil.exe to a production Win32 app"
 SHORT = "Admin By Request: Intune Win32 packaging"
 DESC = ("Technical deep dive: wrap the Admin By Request Windows client with the Win32 Content Prep Tool (IntuneWinAppUtil.exe) and ship it as an Intune Win32 app. "

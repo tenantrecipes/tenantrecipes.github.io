@@ -1,6 +1,7 @@
 {
  "id": "intune-copilot-key-windows",
  "status": "published",
+ "tier": "recipe",
  "order": 170,
  "category": "Intune & devices for AI",
  "title": "Manage the Copilot experience on Windows devices",

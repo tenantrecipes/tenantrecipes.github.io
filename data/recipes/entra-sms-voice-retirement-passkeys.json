@@ -1,6 +1,7 @@
 {
  "id": "entra-sms-voice-retirement-passkeys",
  "status": "published",
+ "tier": "recipe",
  "order": 410,
  "category": "Identity & threat protection",
  "title": "Move users off SMS and voice MFA before Microsoft-provided SMS and voice retire on 1 February 2027",

@@ -1,6 +1,7 @@
 {
  "id": "copilot-chat-pay-as-you-go",
  "status": "published",
+ "tier": "recipe",
  "order": 360,
  "category": "Licensing & reporting",
  "title": "Understand Microsoft Copilot Chat vs Microsoft Copilot (licensed)",

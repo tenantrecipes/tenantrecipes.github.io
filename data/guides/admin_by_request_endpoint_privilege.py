@@ -7,6 +7,8 @@ Text in `backticks` renders as <code>. 'rec' = recipe ids, 'tools' = tools ids u
 Not sponsored: Tenant Recipes has no commercial relationship with Admin By Request (see NOTICE)."""
 
 SLUG = "admin-by-request-endpoint-privilege"
+TIER = "pillar"  # pillar | technical (see GUIDES.md)
+PUBLISHED = "2026-10-31"
 TITLE = "Admin By Request from zero to production: remove local admin rights with just-in-time elevation"
 SHORT = "Admin By Request: just-in-time admin"
 DESC = ("An expert, end-to-end playbook for replacing standing local administrator rights with Admin By Request: why permanent admin and total lockdown both fail, "

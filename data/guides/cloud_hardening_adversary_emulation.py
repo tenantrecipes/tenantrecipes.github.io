@@ -6,6 +6,8 @@ Time estimates are Tenant Recipes' own planning figures, not vendor numbers.
 Defensive use only: own tenants or written authorization."""
 
 SLUG = "cloud-hardening-adversary-emulation"
+TIER = "pillar"  # pillar | technical (see GUIDES.md)
+PUBLISHED = "2026-10-31"
 TITLE = "Cloud hardening under attack simulation: Entra and Microsoft 365 from baseline to adversary emulation"
 SHORT = "Cloud hardening + adversary emulation"
 DESC = ("An expert project playbook that chains ScubaGear, Monkey365, Maester, Prowler, ROADtools and AADInternals: "

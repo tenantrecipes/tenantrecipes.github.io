@@ -1,6 +1,7 @@
 {
  "id": "purview-oversharing-assessment",
  "status": "published",
+ "tier": "recipe",
  "order": 200,
  "category": "Purview, DLP & data security for Copilot",
  "title": "Find oversharing before Copilot does: data security posture for AI",

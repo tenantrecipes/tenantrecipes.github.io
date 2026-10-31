@@ -1,6 +1,7 @@
 {
  "id": "copilot-adoption-hub",
  "status": "published",
+ "tier": "recipe",
  "order": 40,
  "category": "Copilot rollout & governance",
  "title": "Plan adoption with the Microsoft Copilot adoption resources",

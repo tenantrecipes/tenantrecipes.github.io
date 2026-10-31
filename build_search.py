@@ -52,14 +52,14 @@ def build_index(R, CY, guides, Q, AREA, tags_for, site_notes, extra=()):
             sug.append(e["vendor"])
             sug += _parts(e["product"])
     for g in guides:
-        doc(t=g.TITLE, k="Guide", c="Pillar guide", s=_clip(g.DESC, 220),
+        doc(t=g.TITLE, k="Guide", c={"technical": "Technical guide"}.get(getattr(g, "TIER", ""), "Pillar guide"), s=_clip(g.DESC, 220),
             x=_clip(" ".join(st["t"] for ph in g.PHASES for st in ph["steps"]), 500), u=f"guides/{g.SLUG}.html", d=g.VERIFIED)
         for i, ph in enumerate(g.PHASES, 1):
             doc(t=f'{g.SHORT}: {ph["title"]}', k="Guide", c=f"Phase {i}", s=_clip(ph["goal"], 200),
                 x=_clip(" ".join(st["t"] for st in ph["steps"]), 300), u=f'guides/{g.SLUG}.html#phase-{i}-{ph["id"]}')
             sug.append(ph["title"])
             sug += [st["t"] for st in ph["steps"]]
-    doc(t=Q.TITLE, k="Guide", c="Quick guide", s=_clip(Q.DESC, 220), x=_clip(" ".join(c["t"] for c in Q.CHECKS), 300),
+    doc(t=Q.TITLE, k="Guide", c="Technical guide", s=_clip(Q.DESC, 220), x=_clip(" ".join(c["t"] for c in Q.CHECKS), 300),
         u=f"guides/{Q.SLUG}.html", d=Q.VERIFIED)
     sug += [c["t"] for c in Q.CHECKS]
     for n in site_notes[:20]:

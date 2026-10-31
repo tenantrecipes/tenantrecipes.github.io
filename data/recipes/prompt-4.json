@@ -1,6 +1,7 @@
 {
  "id": "prompt-4",
  "status": "published",
+ "tier": "recipe",
  "order": 400,
  "category": "Admin prompt templates",
  "title": "Prompt: draft a Copilot acceptable use policy",

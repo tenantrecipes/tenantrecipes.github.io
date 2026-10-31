@@ -1,6 +1,7 @@
 {
  "id": "ca-break-glass",
  "status": "published",
+ "tier": "recipe",
  "order": 130,
  "category": "Conditional Access for AI",
  "title": "Keep break-glass accounts out of every AI-era CA policy",

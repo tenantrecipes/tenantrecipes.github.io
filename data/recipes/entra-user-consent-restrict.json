@@ -1,6 +1,7 @@
 {
  "id": "entra-user-consent-restrict",
  "status": "published",
+ "tier": "recipe",
  "order": 310,
  "category": "Agents & Copilot Studio governance",
  "title": "Restrict user consent for apps and AI tools",

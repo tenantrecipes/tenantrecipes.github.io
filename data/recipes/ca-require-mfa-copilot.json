@@ -1,6 +1,7 @@
 {
  "id": "ca-require-mfa-copilot",
  "status": "published",
+ "tier": "recipe",
  "order": 70,
  "category": "Conditional Access for AI",
  "title": "Require phishing-resistant MFA for users accessing Microsoft Copilot",

@@ -1,6 +1,7 @@
 {
  "id": "ca-managed-risk-remediation-policy",
  "status": "published",
+ "tier": "recipe",
  "order": 420,
  "category": "Identity & threat protection",
  "title": "Check the Microsoft-managed 'Require risk remediation for high-risk users' policy that just switched on",

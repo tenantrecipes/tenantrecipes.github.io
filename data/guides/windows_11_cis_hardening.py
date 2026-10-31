@@ -4,6 +4,8 @@ Text in `backticks` renders as <code>. 'rec' = recipe ids (data/recipes/), 'sec'
 Time estimates are Tenant Recipes' own planning figures, not CIS or Microsoft numbers."""
 
 SLUG = "windows-11-cis-hardening"
+TIER = "pillar"  # pillar | technical (see GUIDES.md)
+PUBLISHED = "2026-10-30"
 TITLE = "How to harden Windows 11 with the CIS Benchmark"
 SHORT = "The Windows 11 CIS hardening guide"
 DESC = ("A phased, fact-checked playbook for Windows 11 hardening: CIS Level 1 vs Level 2, how CIS relates to Microsoft security baselines, "

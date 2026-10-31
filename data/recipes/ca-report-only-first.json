@@ -1,6 +1,7 @@
 {
  "id": "ca-report-only-first",
  "status": "published",
+ "tier": "recipe",
  "order": 80,
  "category": "Conditional Access for AI",
  "title": "Roll out AI-related Conditional Access policies in report-only mode",

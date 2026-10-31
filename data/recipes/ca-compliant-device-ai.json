@@ -1,6 +1,7 @@
 {
  "id": "ca-compliant-device-ai",
  "status": "published",
+ "tier": "recipe",
  "order": 90,
  "category": "Conditional Access for AI",
  "title": "Require a compliant or hybrid-joined device for Microsoft 365 (and Copilot)",

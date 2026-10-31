@@ -1,6 +1,7 @@
 {
  "id": "agents-integrated-apps",
  "status": "published",
+ "tier": "recipe",
  "order": 300,
  "category": "Agents & Copilot Studio governance",
  "title": "Control which users can install agents and apps (Integrated apps)",

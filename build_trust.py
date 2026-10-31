@@ -533,7 +533,7 @@ def search_index(R, CY, guides, AREA, extra=()):
         idx.append({"k": "Security", "c": AREA[e["area"]][0], "t": e["title"], "u": f'security/{e["id"]}.html', "s": e["summary"],
                     "x": " ".join(e["steps"] + [c["id"] for c in e.get("cves", [])] + [e.get("vendor", ""), e.get("product", "")])})
     for g in guides:
-        idx.append({"k": "Guide", "c": "Pillar guide", "t": g.TITLE, "u": f"guides/{g.SLUG}.html", "s": g.DESC,
+        idx.append({"k": "Guide", "c": {"technical": "Technical guide"}.get(getattr(g, "TIER", ""), "Pillar guide"), "t": g.TITLE, "u": f"guides/{g.SLUG}.html", "s": g.DESC,
                     "x": " ".join(st["t"] for ph in g.PHASES for st in ph["steps"])})
         for i, ph in enumerate(g.PHASES, 1):
             idx.append({"k": "Guide", "c": f"Phase {i}", "t": f'{g.SHORT}: {ph["title"]}', "u": f'guides/{g.SLUG}.html#phase-{i}-{ph["id"]}',

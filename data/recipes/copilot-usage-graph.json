@@ -1,6 +1,7 @@
 {
  "id": "copilot-usage-graph",
  "status": "published",
+ "tier": "recipe",
  "order": 340,
  "category": "Licensing & reporting",
  "title": "Pull Copilot usage via Microsoft Graph reports API",

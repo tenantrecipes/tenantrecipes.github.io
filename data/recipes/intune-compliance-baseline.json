@@ -1,6 +1,7 @@
 {
  "id": "intune-compliance-baseline",
  "status": "published",
+ "tier": "recipe",
  "order": 150,
  "category": "Intune & devices for AI",
  "title": "Create a Windows compliance policy that CA can rely on",

@@ -1,6 +1,7 @@
 {
  "id": "intune-windows-autopatch",
  "status": "published",
+ "tier": "recipe",
  "order": 180,
  "category": "Intune & devices for AI",
  "title": "Keep AI-ready devices current with Windows Autopatch",

@@ -1,6 +1,7 @@
 {
  "id": "sharepoint-restricted-content-discovery",
  "status": "published",
+ "tier": "recipe",
  "order": 220,
  "category": "Purview, DLP & data security for Copilot",
  "title": "Hide specific sites from Copilot with Restricted Content Discovery",

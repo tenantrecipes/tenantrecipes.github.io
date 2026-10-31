@@ -760,3 +760,13 @@ html{scroll-padding-top:86px}                 /* header 44 + what's-new bar ~30 
 .wn-l b{flex-shrink:0;max-width:52%}.wn-cs{display:none}
 @media (max-width:760px){.wn-h span,.wn-c{display:none}.wn-cs{display:inline}.wn-l b{flex-shrink:1;max-width:none}.wn-l>li{flex:1}}
 .wn.open .wn-l b{max-width:none;flex-shrink:1}
+/* content tiers (pillar / technical / recipe) */
+.tier{display:inline-block;font-size:.68rem;font-weight:750;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:999px;text-decoration:none;line-height:1.6;border:1px solid transparent;vertical-align:middle}
+.tier-pillar{background:#e7f0ff;color:#0f3f8f;border-color:#bcd3fb}.tier-technical{background:#e9fbf5;color:#0b6b53;border-color:#b5ead8}.tier-recipe{background:#fff4e5;color:#8a4b00;border-color:#f5d6a8}
+.tier-row{margin:6px 0 0}.ph-k .tier{letter-spacing:.06em}
+.tl-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0 0 14px}
+.tl-c{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border:1px solid #dfe4ee;border-radius:12px;background:#fff;text-decoration:none;color:inherit}
+.tl-c strong{font-size:1.5rem;line-height:1.1}.tl-c span:last-child{color:#5a6275;font-size:.88rem}.tl-c:hover{border-color:#b9c6e4}
+.tl-s{margin:22px 0 8px}.tl-s h2{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tk-tiers{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:14px 0 0;font-size:.9rem}.tk-tiers a{text-decoration:none}
+.tl-c .tier{align-self:flex-start}

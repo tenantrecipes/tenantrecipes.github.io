@@ -1,6 +1,7 @@
 {
  "id": "purview-sensitivity-labels-copilot",
  "status": "published",
+ "tier": "recipe",
  "order": 230,
  "category": "Purview, DLP & data security for Copilot",
  "title": "Make Copilot respect sensitivity labels and encryption",

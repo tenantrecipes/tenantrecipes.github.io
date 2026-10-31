@@ -1,6 +1,7 @@
 {
  "id": "purview-audit-copilot",
  "status": "published",
+ "tier": "recipe",
  "order": 250,
  "category": "Purview, DLP & data security for Copilot",
  "title": "Audit Copilot interactions in Microsoft Purview",

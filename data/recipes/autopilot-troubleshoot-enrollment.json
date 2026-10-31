@@ -1,6 +1,7 @@
 {
  "id": "autopilot-troubleshoot-enrollment",
  "status": "published",
+ "tier": "recipe",
  "order": 220,
  "category": "Intune & devices for AI",
  "title": "Troubleshoot Windows Autopilot enrollment: event IDs, profile registry, MDM diagnostics and auto-collected logs",

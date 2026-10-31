@@ -1,6 +1,7 @@
 {
  "id": "prompt-3",
  "status": "published",
+ "tier": "recipe",
  "order": 390,
  "category": "Admin prompt templates",
  "title": "Prompt: explain an Intune error to the help desk",

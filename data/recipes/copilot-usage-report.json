@@ -1,6 +1,7 @@
 {
  "id": "copilot-usage-report",
  "status": "published",
+ "tier": "recipe",
  "order": 330,
  "category": "Licensing & reporting",
  "title": "Track active Copilot usage with the Microsoft 365 usage report",

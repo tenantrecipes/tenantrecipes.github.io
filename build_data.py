@@ -11,7 +11,7 @@ import build_markers as MK
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC = ROOT / "data" / "recipes"
-REQUIRED = ["id", "status", "category", "title", "problem", "steps", "pitfalls", "sources", "last_verified"]
+REQUIRED = ["id", "status", "tier", "category", "title", "problem", "steps", "pitfalls", "sources", "last_verified"]
 STATUSES = {"published", "draft", "needs-review", "retired"}
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
@@ -27,6 +27,8 @@ def validate(r, fname):
         errs.append(f"id '{r['id']}' must match file name")
     if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", r["id"]):
         errs.append("id must be lowercase-kebab-case")
+    if r["tier"] != "recipe":
+        errs.append("'tier' must be \"recipe\" for files in data/recipes/ (pillar/technical guides live in data/guides/, see GUIDES.md)")
     if r["status"] not in STATUSES:
         errs.append(f"status must be one of {sorted(STATUSES)}")
     for k in ("title", "problem", "category"):

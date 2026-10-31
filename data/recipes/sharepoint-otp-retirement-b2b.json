@@ -1,6 +1,7 @@
 {
  "id": "sharepoint-otp-retirement-b2b",
  "status": "published",
+ "tier": "recipe",
  "order": 430,
  "category": "Identity & threat protection",
  "title": "Stop 'access denied' for external users as SharePoint one-time passcode retires",

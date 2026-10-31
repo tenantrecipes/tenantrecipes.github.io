@@ -1,6 +1,7 @@
 {
  "id": "autopilot-device-preparation-entra-join",
  "status": "published",
+ "tier": "recipe",
  "order": 200,
  "category": "Intune & devices for AI",
  "title": "Windows Autopilot device preparation: user-driven Entra join with a provisioning-owned device group",

@@ -3,6 +3,8 @@ Original wording. Fact-checked against the linked Microsoft Learn pages on VERIF
 Rendered as guides/<SLUG>.html and as a printable PDF in downloads/ (tools/make_shareables.py)."""
 
 SLUG = "copilot-license-checks"
+TIER = "technical"  # pillar | technical (see GUIDES.md)
+PUBLISHED = "2026-10-30"
 TITLE = "5 things to check before you assign Microsoft Copilot licenses"
 SHORT = "Quick guide: 5 checks before Copilot licenses"
 DESC = ("A one-page pre-flight check for Microsoft 365 admins: base licenses, identity and mailboxes, update channel, "

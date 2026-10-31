@@ -1,6 +1,7 @@
 {
  "id": "intune-app-protection-copilot",
  "status": "published",
+ "tier": "recipe",
  "order": 160,
  "category": "Intune & devices for AI",
  "title": "Protect Copilot on iOS/Android with app protection policies",

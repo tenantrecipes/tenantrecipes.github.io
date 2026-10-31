@@ -1,6 +1,7 @@
 {
  "id": "copilot-assign-license-graph",
  "status": "published",
+ "tier": "recipe",
  "order": 30,
  "category": "Copilot rollout & governance",
  "title": "Assign a Microsoft Copilot license to a user with Microsoft Graph PowerShell",

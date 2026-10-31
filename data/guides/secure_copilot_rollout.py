@@ -3,6 +3,8 @@ Text in `backticks` renders as <code>. Every step lists Microsoft sources; 'reci
 Time estimates are Tenant Recipes' own planning estimates, not Microsoft figures."""
 
 SLUG = "secure-copilot-rollout"
+TIER = "pillar"  # pillar | technical (see GUIDES.md)
+PUBLISHED = "2026-10-30"
 TITLE = "How to roll out Microsoft Copilot without opening a hole in your tenant"
 SHORT = "The secure Copilot rollout guide"
 DESC = ("A phased, fact-checked checklist for Microsoft 365 admins: licensing, admin roles and Conditional Access, "
