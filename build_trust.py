@@ -385,7 +385,7 @@ def contact_body(rel):
         '<p class="fine">Vulnerabilities in Microsoft or other vendors\' products are not ours to fix: report those to the vendor, for Microsoft via the '
         '<a href="https://msrc.microsoft.com/report/vulnerability">Microsoft Security Response Center</a>. Our machine-readable contact file is at '
         f'<a href="{rel}.well-known/security.txt">/.well-known/security.txt</a>.</p>'
-        '<h2>Privacy</h2><p>Contacting us through GitHub is subject to GitHub\'s own terms and privacy statement. We do not use contact forms, '
+        '<h2>Privacy</h2><p>' + ('Email you send us is used only to answer you and is not shared. ' if C.CONTACT_EMAIL else '') + 'Contacting us through GitHub is subject to GitHub\'s own terms and privacy statement. We do not use contact forms, '
         f'cookies or tracking for any of this. See the <a href="{rel}privacy.html">privacy policy</a>.</p>'
         '</article></main>')
 

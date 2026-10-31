@@ -578,7 +578,7 @@ def build():
         'on request.</p>'
         '<h2>Sponsors</h2><p>Sponsors never receive subscriber lists or personal data.</p>'
         '<h2>Your rights</h2><p>Under the GDPR you can ask for access to, correction of, or deletion of your personal data, and you can '
-        f'withdraw consent at any time. To do so, reply to any newsletter email (replies reach the editor privately), or open a <a href="{T.REPO}/issues/new/choose">GitHub issue</a> asking us to get in touch — please do not post personal data in the issue itself. You can also complain to the Swedish Authority for Privacy Protection '
+        f'withdraw consent at any time. To do so, ' + (f'email <a href="mailto:{E(C.CONTACT_EMAIL)}">{E(C.CONTACT_EMAIL)}</a>, ' if C.CONTACT_EMAIL else '') + f'reply to any newsletter email (replies reach the editor privately), or open a <a href="{T.REPO}/issues/new/choose">GitHub issue</a> asking us to get in touch — please do not post personal data in the issue itself. You can also complain to the Swedish Authority for Privacy Protection '
         '(<a href="https://www.imy.se/en/">IMY</a>).</p>'
         '<h2>External links</h2><p>Recipes link to Microsoft Learn and other sites, which have their own privacy policies.</p>'
         '<h2>Changes</h2><p>If this policy changes, the date above is updated.</p></article></main>')))

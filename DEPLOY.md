@@ -186,13 +186,15 @@ the Defender portal. Do not type them from memory: Microsoft assigns parts of th
       `Get-DkimSigningConfig -Identity tenantrecipes.com | Format-List Selector1CNAME,Selector2CNAME`
       (new domains use `selector1-tenantrecipes-com._domainkey.<tenant>.<x>-v1.dkim.mail.microsoft`). Then enable
       DKIM signing for the domain in Defender > Email authentication settings.
-- [ ] DMARC TXT `_dmarc`: start with `v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s; rua=mailto:dmarc@tenantrecipes.com`
-      and move to `p=reject` after a week or two of clean reports. The domain only sends through Microsoft 365.
+- [x] DMARC TXT `_dmarc`: live as `v=DMARC1; p=quarantine; adkim=s; aspf=s; pct=100` (no report address yet).
+      Optional: once a `dmarc@tenantrecipes.com` alias exists and receives mail, append `; rua=mailto:dmarc@tenantrecipes.com`
+      to get aggregate reports, then move to `p=reject` after a week or two of clean reports. The domain only sends through Microsoft 365.
 - [ ] Optional hardening: MTA-STS (`_mta-sts` TXT + policy file on `https://mta-sts.tenantrecipes.com`) and TLS-RPT
       (`_smtp._tls` TXT `v=TLSRPTv1; rua=mailto:tlsrpt@tenantrecipes.com`).
-- [ ] Create the aliases `contact@tenantrecipes.com` and `security@tenantrecipes.com` (plus `dmarc@` / `tlsrpt@` for reports if used)
-      and send a test mail to each. Only then set `CONTACT_EMAIL = "contact@tenantrecipes.com"` and
-      `SECURITY_EMAIL = "security@tenantrecipes.com"` in `site_config.py`, add the security address to `SECURITY.md`, and rebuild.
+- [x] Aliases `contact@tenantrecipes.com` and `security@tenantrecipes.com` created and test mail received (2026-10-31).
+      `CONTACT_EMAIL` / `SECURITY_EMAIL` are set in `site_config.py` and the security address is in `SECURITY.md`.
+      Replies should be sent *from* the alias (Send-from-alias enabled) so the mailbox address is never exposed.
+- [ ] Optional: `dmarc@` / `tlsrpt@` aliases for reports (see DMARC / TLS-RPT above).
 
 ### GitHub account `tenantrecipes`
 - [ ] 2FA on the account (passkey or authenticator app, recovery codes in the password manager). Cannot be checked or

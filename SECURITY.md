@@ -1,7 +1,8 @@
 # Security policy
 
 Tenant Recipes is a static website (GitHub Pages). If you find a security problem with the website or this repository,
-please report it **privately** via [GitHub private vulnerability reporting](https://github.com/tenantrecipes/tenantrecipes.github.io/security/advisories/new).
+please report it **privately** via [GitHub private vulnerability reporting](https://github.com/tenantrecipes/tenantrecipes.github.io/security/advisories/new)
+or by email to [security@tenantrecipes.com](mailto:security@tenantrecipes.com) with "Security" in the subject.
 Do not open a public issue.
 
 - Include the affected URL, what you observed and how to reproduce it.
@@ -10,6 +11,5 @@ Do not open a public issue.
 
 Vulnerabilities in Microsoft or other vendors' products should be reported to that vendor (for Microsoft: https://msrc.microsoft.com/report/vulnerability).
 
-More: https://tenantrecipes.com/contact/#security
+More: https://tenantrecipes.com/contact/#security · machine-readable: https://tenantrecipes.com/.well-known/security.txt
 
-<!-- TODO: when security@tenantrecipes.com is confirmed to receive mail, add it here as a second private channel. -->
