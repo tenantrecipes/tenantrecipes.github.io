@@ -19,6 +19,7 @@ import build_tools as TL
 import build_policies as PL
 import build_news as NW
 import build_status as BST
+import build_markers as MK
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -308,6 +309,10 @@ def guide_page(g):
             for sid in st.get("sec", []):
                 if sid not in SEC:
                     sys.exit(f"Guide {g.SLUG}: unknown security entry id {sid}")
+            if st.get("marker") and st["marker"] not in MK.MARKERS:
+                sys.exit(f"Guide {g.SLUG}: unknown marker {st['marker']} on step {st['t']}")
+            if st.get("marker") == "tested" and MK.validate_tested(st.get("tested"), st["t"]):
+                sys.exit(f"Guide {g.SLUG}: " + "; ".join(MK.validate_tested(st.get("tested"), st["t"])))
     nsteps = sum(len(p["steps"]) for p in g.PHASES)
     nsrc = len({u for p in g.PHASES for s in p["steps"] for _, u in s["src"]})
     nrec = len({r for p in g.PHASES for s in p["steps"] for r in s["rec"] + s.get("sec", [])})
@@ -326,7 +331,7 @@ def guide_page(g):
                 recs = ("".join(f'<a class="gd-chip" href="{rel}recipes/{rid}.html">{esc(RID[rid]["title"])}</a>' for rid in st["rec"])
                         + "".join(f'<a class="gd-chip" href="{rel}security/{sid}.html">{esc(SEC[sid]["title"])}</a>' for sid in st.get("sec", [])))
                 srcs = "".join(f'<li><a href="{E(u)}">{esc(t)}</a></li>' for t, u in st["src"])
-                steps += (f'<div class="gd-step" id="{pid}-s{j}"><h3><span>{i}.{j}</span> {esc(st["t"])}</h3>'
+                steps += (f'<div class="gd-step" id="{pid}-s{j}"><h3><span>{i}.{j}</span> {esc(st["t"])}{MK.badge(rel, st.get("marker"), st.get("tested"), fmt_date)}</h3>'
                           f'<p class="gd-done"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 6.8"/></svg>Done when: {_txt(st["check"])}</p>'
                           '<h4>Do this</h4><ul class="gd-do">' + "".join(f'<li>{_txt(x)}</li>' for x in st["do"]) + '</ul>'
                           + ('<div class="gd-pit"><h4>Pitfalls</h4><ul>' + "".join(f'<li>{_txt(x)}</li>' for x in st["pit"]) + '</ul></div>' if st["pit"] else "")
@@ -499,7 +504,8 @@ def build():
                      + T.chip("link", f'{len(r["sources"])} Microsoft source{"s" if len(r["sources"]) != 1 else ""}')
                      + (T.chip("clock", f'First published {fmt_date(r["created"])}') if r.get("created") else ""))
             toc = ([("problem", "The problem"), ("steps", "Steps")] + ([("done", "Done when")] if r.get("done_when") else [])
-                   + ([("pitfalls", "Pitfalls")] if r["pitfalls"] else []) + [("next", "Related & next steps"), ("verified", "Sources & corrections")])
+                   + ([("pitfalls", "Pitfalls")] if r["pitfalls"] else []) + ([("troubleshooting", "Troubleshooting")] if r.get("troubleshooting") else [])
+                   + ([("rollback", "Rollback")] if r.get("rollback") else []) + [("next", "Related & next steps"), ("verified", "Sources & corrections")])
             pg = G2 if r["id"] in {x for p in G2.PHASES for st in p["steps"] for x in st["rec"]} else G1
             promo = (f'<a class="ps-promo" href="{rel}guides/{pg.SLUG}.html"><span class="ps-k">Pillar guide</span><strong>{esc(pg.SHORT)}</strong>'
                      f'<span>{len(pg.PHASES)} phases · printable checklist {T.icon("arrow")}</span></a>')
@@ -512,10 +518,12 @@ def build():
                     + UX.back_to_guide(rel, r, refs, pg)
                     + f'<section id="problem" class="co co-info"><p class="co-h">{T.icon("target")}The problem</p><p>{esc(r["problem"])}</p></section>'
                     + UX.toolbar(rel, r) + ad_slot("recipe-after-intro")
-                    + f'<h2 id="steps" class="h-ic">{T.icon("list")}Steps</h2><ol class="steps">' + "".join(f'<li><div>{step_html(s)}</div></li>' for s in r["steps"]) + '</ol>'
+                    + f'<h2 id="steps" class="h-ic">{T.icon("list")}Steps{MK.section_badge(rel, r, "steps", fmt_date)}</h2><ol class="steps">' + "".join(f'<li><div>{step_html(s)}</div></li>' for s in r["steps"]) + '</ol>'
+                    + MK.notes_html(rel, r, step_html, fmt_date)
                     + UX.screenshots(r, rel)
                     + UX.done_when(r, step_html)
-                    + (f'<section id="pitfalls" class="co co-warn"><p class="co-h">{T.icon("alert")}Pitfalls</p><ul>' + "".join(f'<li>{step_html(p)}</li>' for p in r["pitfalls"]) + '</ul></section>' if r["pitfalls"] else "")
+                    + (f'<section id="pitfalls" class="co co-warn"><p class="co-h">{T.icon("alert")}Pitfalls{MK.section_badge(rel, r, "pitfalls", fmt_date)}</p><ul>' + "".join(f'<li>{step_html(p)}</li>' for p in r["pitfalls"]) + '</ul></section>' if r["pitfalls"] else "")
+                    + MK.troubleshooting_html(rel, r, step_html, T.icon, fmt_date) + MK.rollback_html(rel, r, step_html, T.icon, fmt_date)
                     + UX.news_mid(rel, "recipe-" + r["id"]) + ad_slot("recipe-before-related")
                     + f'<section id="next" class="nx" aria-labelledby="nx-h"><h2 id="nx-h">Related recipes &amp; next steps</h2>'
                     + (f'<p class="tgs"><span class="fine">Topics:</span> {tags}</p>' if tags else "")

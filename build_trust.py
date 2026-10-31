@@ -5,6 +5,7 @@ import json, re, datetime, pathlib, subprocess
 from html import escape as E
 from urllib.parse import quote
 import site_config as C
+import build_markers as MK
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SITE = C.SITE_URL.rstrip("/")
@@ -297,6 +298,7 @@ def methodology_body(rel):
         '<li><strong>Automated checks.</strong> The build refuses to publish a page without sources, with malformed dates or CVE IDs, or with a broken internal link.</li>'
         '<li><strong>Human review.</strong> The editor sets these rules, reviews anything flagged as uncertain or contradictory, and handles every correction.</li>'
         '<li><strong>Publish and log.</strong> The page goes live with its sources and check dates, and the addition is listed in the changelog.</li></ol>'
+        + MK.legend_html(rel) +
         '<h2>What the dates mean</h2><dl class="mt-dl">'
         '<div><dt>Verified</dt><dd>The day the page\'s steps were last compared with all of its sources.</dd></div>'
         '<div><dt>Checked (per source)</dt><dd>The day that particular source page was opened and compared.</dd></div>'

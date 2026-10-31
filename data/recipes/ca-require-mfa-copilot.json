@@ -36,6 +36,27 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
- "screenshots": []
+ "updated": "2026-10-31",
+ "screenshots": [],
+ "markers": {
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "A user in the Copilot license group is blocked after the policy is turned On.",
+   "cause": "They have no registered method that satisfies the Phishing-resistant MFA authentication strength.",
+   "fix": "Check the sign-in event's Conditional Access tab to confirm which policy blocked it, then have the user register a phishing-resistant method (for example a passkey). A Temporary Access Pass can be used to bootstrap that registration."
+  },
+  {
+   "symptom": "Break-glass accounts are prompted or blocked by the policy.",
+   "fix": "The exclusion is missing or points at the wrong group. Exclude the emergency access group, then test sign-in with one of those accounts."
+  }
+ ],
+ "rollback": [
+  "Entra ID > Conditional Access > Policies: set the policy to Report-only (or Off) instead of deleting it.",
+  "Confirm in the sign-in logs that the affected users can sign in again.",
+  "Register phishing-resistant methods for the users who were blocked, review the report-only results again, then turn the policy back On."
+ ]
 }

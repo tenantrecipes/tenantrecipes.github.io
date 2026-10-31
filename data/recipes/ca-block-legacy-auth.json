@@ -28,6 +28,27 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
- "screenshots": []
+ "updated": "2026-10-31",
+ "screenshots": [],
+ "markers": {
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "A multifunction printer, scanner or script stops sending mail once the policy is On.",
+   "cause": "It authenticates with SMTP AUTH or another legacy protocol, which the policy now blocks.",
+   "fix": "Find it in the sign-in logs (Client app column, interactive and non-interactive tabs), then move it to an option that supports modern authentication. Avoid a permanent exclusion: it reopens the gap the policy closes."
+  },
+  {
+   "symptom": "Report-only results show legacy sign-ins you can't attribute.",
+   "fix": "Open the sign-in event and check the Report-only tab for which policy would have applied, and the user, app and IP details for the source. Resolve those before switching to On."
+  }
+ ],
+ "rollback": [
+  "Entra ID > Conditional Access > Policies: open the policy and set Enable policy to Report-only (keeps visibility) or Off. Don't delete it, so the configuration is kept.",
+  "Confirm in the sign-in logs that the affected sign-ins succeed again.",
+  "Fix or replace the client that depended on legacy authentication, then switch the policy back to On."
+ ]
 }

@@ -1,5 +1,10 @@
 [
  {
+  "date": "2026-10-31",
+  "kind": "site",
+  "text": "Content markers on recipes: Official guidance, Practical insight and Tested configuration (tested only with a named test environment and date; see the methodology page). Recipes can now carry Troubleshooting and Rollback sections, starting with the legacy authentication and phishing-resistant MFA recipes."
+ },
+ {
   "date": "2026-10-30",
   "kind": "site",
   "text": "New Microsoft cloud status page: an unofficial mirror of Microsoft's public status sources for Azure, Microsoft 365 admin center, Power Platform admin center, consumer services and Azure DevOps, checked every 15 minutes."

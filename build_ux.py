@@ -127,6 +127,13 @@ def recipe_markdown(r):
         out += ["", "## Done when"] + [f"- [ ] {s}" for s in r["done_when"]]
     if r.get("pitfalls"):
         out += ["", "## Pitfalls"] + [f"- {s}" for s in r["pitfalls"]]
+    if r.get("troubleshooting"):
+        import build_markers as MK
+        out += ["", "## Troubleshooting"] + [f"- {MK.ts_text(t, lambda x: x)}" for t in r["troubleshooting"]]
+    if r.get("rollback"):
+        out += ["", "## Rollback"] + [f"- [ ] {i}. {s}" for i, s in enumerate(r["rollback"], 1)]
+    if r.get("tested"):
+        out += ["", f'Tested configuration: {r["tested"]["environment"]}, {r["tested"]["date"]}']
     out += ["", "## Sources"] + [f'- {s["title"]}: {s["url"]}' for s in r["sources"]]
     out += ["", f"From {C.SITE_NAME} ({SITE}). Always confirm against the linked sources and test in a pilot first.", ""]
     return "\n".join(out)

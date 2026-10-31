@@ -44,7 +44,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-pilot-group-licensing",
@@ -84,7 +87,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-assign-license-graph",
@@ -124,7 +130,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-adoption-hub",
@@ -165,7 +174,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-web-grounding-control",
@@ -205,7 +217,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-teams-meeting-transcription",
@@ -240,7 +255,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "ca-require-mfa-copilot",
@@ -280,8 +298,29 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
-  "screenshots": []
+  "updated": "2026-10-31",
+  "screenshots": [],
+  "markers": {
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "A user in the Copilot license group is blocked after the policy is turned On.",
+    "cause": "They have no registered method that satisfies the Phishing-resistant MFA authentication strength.",
+    "fix": "Check the sign-in event's Conditional Access tab to confirm which policy blocked it, then have the user register a phishing-resistant method (for example a passkey). A Temporary Access Pass can be used to bootstrap that registration."
+   },
+   {
+    "symptom": "Break-glass accounts are prompted or blocked by the policy.",
+    "fix": "The exclusion is missing or points at the wrong group. Exclude the emergency access group, then test sign-in with one of those accounts."
+   }
+  ],
+  "rollback": [
+   "Entra ID > Conditional Access > Policies: set the policy to Report-only (or Off) instead of deleting it.",
+   "Confirm in the sign-in logs that the affected users can sign in again.",
+   "Register phishing-resistant methods for the users who were blocked, review the report-only results again, then turn the policy back On."
+  ]
  },
  {
   "id": "ca-report-only-first",
@@ -321,7 +360,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "ca-compliant-device-ai",
@@ -362,7 +404,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "ca-block-legacy-auth",
@@ -394,8 +439,29 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
-  "screenshots": []
+  "updated": "2026-10-31",
+  "screenshots": [],
+  "markers": {
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "A multifunction printer, scanner or script stops sending mail once the policy is On.",
+    "cause": "It authenticates with SMTP AUTH or another legacy protocol, which the policy now blocks.",
+    "fix": "Find it in the sign-in logs (Client app column, interactive and non-interactive tabs), then move it to an option that supports modern authentication. Avoid a permanent exclusion: it reopens the gap the policy closes."
+   },
+   {
+    "symptom": "Report-only results show legacy sign-ins you can't attribute.",
+    "fix": "Open the sign-in event and check the Report-only tab for which policy would have applied, and the user, app and IP details for the source. Resolve those before switching to On."
+   }
+  ],
+  "rollback": [
+   "Entra ID > Conditional Access > Policies: open the policy and set Enable policy to Report-only (keeps visibility) or Off. Don't delete it, so the configuration is kept.",
+   "Confirm in the sign-in logs that the affected sign-ins succeed again.",
+   "Fix or replace the client that depended on legacy authentication, then switch the policy back to On."
+  ]
  },
  {
   "id": "ca-sign-in-frequency-ai",
@@ -433,7 +499,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "ca-risk-based-ai",
@@ -473,7 +542,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "ca-break-glass",
@@ -508,7 +580,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "intune-deploy-m365-apps-channel",
@@ -552,7 +627,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "intune-compliance-baseline",
@@ -592,7 +670,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "intune-app-protection-copilot",
@@ -637,7 +718,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "intune-copilot-key-windows",
@@ -671,7 +755,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "intune-windows-autopatch",
@@ -704,7 +791,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "intune-edge-policies-ai",
@@ -741,7 +831,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "purview-oversharing-assessment",
@@ -780,7 +873,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "sharepoint-restricted-content-discovery",
@@ -820,7 +916,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "purview-sensitivity-labels-copilot",
@@ -859,7 +958,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "purview-dlp-copilot-location",
@@ -895,7 +997,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "purview-audit-copilot",
@@ -934,7 +1039,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "purview-retention-copilot",
@@ -968,7 +1076,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "entra-sms-voice-retirement-passkeys",
@@ -1043,7 +1154,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-30",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "ca-managed-risk-remediation-policy",
@@ -1098,7 +1212,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-30",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "sharepoint-otp-retirement-b2b",
@@ -1169,7 +1286,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-30",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "defender-teams-zap-qr-phishing",
@@ -1228,7 +1348,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-30",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-studio-environment-strategy",
@@ -1266,7 +1389,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-studio-dlp",
@@ -1310,7 +1436,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "agents-inventory-admin-center",
@@ -1355,7 +1484,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "agents-integrated-apps",
@@ -1399,7 +1531,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "agents-restrict-blueprint-creation",
@@ -1446,7 +1581,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-30",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "entra-user-consent-restrict",
@@ -1484,7 +1622,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-studio-auth",
@@ -1522,7 +1663,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-usage-report",
@@ -1559,7 +1703,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-usage-graph",
@@ -1596,7 +1743,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "license-inventory-script",
@@ -1633,7 +1783,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "copilot-chat-pay-as-you-go",
@@ -1672,7 +1825,10 @@
   "verified_by": "Pascal",
   "created": "2026-10-12",
   "updated": "2026-10-30",
-  "screenshots": []
+  "screenshots": [],
+  "markers": {
+   "steps": "official"
+  }
  },
  {
   "id": "prompt-1",

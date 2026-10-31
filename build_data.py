@@ -7,6 +7,7 @@ Exits non-zero if any recipe file is invalid, so an automated pipeline stops bef
 import json, re, sys, pathlib, datetime
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import site_config as C
+import build_markers as MK
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC = ROOT / "data" / "recipes"
@@ -51,6 +52,7 @@ def validate(r, fname):
             errs.append(f"screenshot file must live under assets/screenshots/ and exist: {sh['src']}")
     if r["last_verified"] is not None and not DATE.match(str(r["last_verified"])):
         errs.append("'last_verified' must be YYYY-MM-DD or null")
+    errs += MK.validate(r)  # markers, notes, tested, troubleshooting, rollback (all optional)
     return errs
 
 

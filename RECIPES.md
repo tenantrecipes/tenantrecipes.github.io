@@ -35,6 +35,58 @@ and only publishes `"status": "published"`. Run `python3 build.py` after adding 
 Only add genuine screenshots from a real tenant (redact tenant names, users and IDs). The caption shows "Screenshot taken <date>".
 The build fails if a listed file is missing. Candidate recipes are listed in SCREENSHOTS.md.
 
+## Optional sections: troubleshooting and rollback
+
+Both are optional but **encouraged for every new recipe that changes tenant configuration**. When a field is missing or empty,
+nothing is rendered (no empty heading, no TOC entry, nothing in the Markdown checklist).
+
+```json
+"troubleshooting": [
+  "A plain string works for a short tip.",
+  {"symptom": "What the admin sees", "cause": "Likely cause (optional)", "fix": "What to do. `backticks` render as code."}
+],
+"rollback": ["Ordered steps that undo the change safely, e.g. set the CA policy back to Report-only or Off instead of deleting it."]
+```
+
+Rules: write only what the linked sources or the steps above support. No invented error codes, no guessed portal paths.
+A rollback should name the safest reversible state (Report-only, Off, unassign, previous ring) and how to confirm the undo worked.
+
+## Content markers: Official guidance / Practical insight / Tested configuration
+
+Markers tell the reader where a section comes from. They are rendered as small badges that link to
+`/methodology.html#markers` (legend). All fields are optional.
+
+```json
+"markers": {"steps": "official", "pitfalls": "practical", "troubleshooting": "practical", "rollback": "practical"},
+"notes": [{"marker": "practical", "text": "Short editor callout shown after the steps."}],
+"tested": {"environment": "E5 dev tenant, 25 users, Windows 11 24H2", "date": "2026-11-05", "result": "Policy blocked IMAP; Outlook unaffected."}
+```
+
+Sections that can carry a marker: `steps`, `done_when`, `pitfalls`, `troubleshooting`, `rollback`.
+
+| Marker | Use when | Never use when |
+|---|---|---|
+| `official` – **Official guidance** | The section restates what Microsoft (or the primary vendor) documents, and the linked sources were checked. The build requires `last_verified`. | The section adds our own judgement or ordering that the source does not state. |
+| `practical` – **Practical insight** | Editor experience, observations and field patterns (typical breakages, sensible rollout order). Not claimed as lab-tested. | It is only a paraphrase of the docs (use `official`). |
+| `tested` – **Tested configuration** | The configuration was actually applied and tested in a real test environment. **`tested.environment` and `tested.date` are required**; the build fails without them or with a future date. The badge shows both. | The steps were only compared with documentation. That is verification, not testing. |
+
+When in doubt, leave the section unmarked; unmarked sections still follow the verification process on the methodology page.
+
+Guides (`guides/*.py`): a step dict may carry `"marker": "official" | "practical" | "tested"` (and `"tested": {...}` for tested).
+The badge shows next to the step title.
+
+Status 2026-10-31: the 40 published recipes whose sources are all Microsoft (Learn, Support, Tech Community, Adoption, labelled Message center mirror)
+and whose steps were checked on 2026-10-30 have `"markers": {"steps": "official"}`. The `prompt-*` recipes are not marked.
+Nothing is marked `tested`. `ca-block-legacy-auth` and `ca-require-mfa-copilot` have troubleshooting and rollback (marked `practical`).
+
+## Checklist for new recipes (nightly pipeline)
+
+1. Required fields plus `done_when`.
+2. Add `troubleshooting` (2–4 items, symptom/fix) and `rollback` whenever the recipe changes configuration. Skip them rather than invent content.
+3. Set `markers.steps` to `official` only when every step is backed by a checked Microsoft/vendor source. Use `practical` for editor-experience sections.
+4. Never set `tested` unless a real test was run; record environment and date.
+5. Write for experienced admins and pentesters: no beginner explanations, exact setting names, cmdlets and Graph endpoints.
+
 Topic tags on the homepage (Copilot, Conditional Access, News / Retirement, ...) are derived automatically in `build_ux.tags_for()`.
 
 Recipe pages show "Last verified against Microsoft docs: <date>" when `last_verified` is set,
