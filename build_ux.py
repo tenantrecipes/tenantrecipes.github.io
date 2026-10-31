@@ -572,7 +572,8 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
          f'{rel}guides/{G1.SLUG}.html', "Start with the rollout guide"),
         ("list", "Automate", "PowerShell, Graph, scripts, tools",
          "Copy-paste PowerShell and Graph, plus assessment and pentest tooling for the tenant and beyond.",
-         [L(tag("PowerShell & Graph"), "PowerShell &amp; Graph recipes", tc.get("PowerShell & Graph")),
+         [L(f'{rel}code/index.html', "Code Library: copy-ready snippets", len(list((__import__("pathlib").Path(__file__).resolve().parent / "data" / "code").glob("*.json"))) or None),
+          L(tag("PowerShell & Graph"), "PowerShell &amp; Graph recipes", tc.get("PowerShell & Graph")),
           L(tag("Prompts"), "Admin prompt templates", tc.get("Prompts")),
           L(f'{rel}tools/index.html?f=m365-entra#tools', "M365 &amp; Entra assessment tools", m365_tools or None),
           L(f'{rel}tools/index.html', "All security &amp; pentest tools", len(tools))]

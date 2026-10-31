@@ -31,3 +31,12 @@ so older guides need no manual history.
 Current assignments (2026-10-31): Pillar = secure-copilot-rollout, windows-11-cis-hardening, cloud-hardening-adversary-emulation,
 azure-update-manager-enterprise-patching, azure-arc-onboarding-enterprise-scale, admin-by-request-endpoint-privilege (zero-to-production programme),
 entra-private-access-vpn-replacement. Technical = admin-by-request-intune-win32-packaging, copilot-license-checks (quick guide). All 51 recipes = Recipe.
+
+## Code Library (`data/code/<id>.json` → `/code/`)
+
+Copy-ready snippets built by `build_code.py`. Each snippet must come from an existing guide step or recipe on this site
+(condensed, never copied from external sites) and link back to it. Fields: `id` (= file name), `status`, `title`,
+`lang` (`powershell` | `azcli` | `shell` | `bicep` | `kql` | `json` | `http` | `yaml`), `tags`, `summary`, `code`,
+`notes` (before-you-run warnings), `source` (`{"kind": "guide", "slug", "anchor", "label"}` or `{"kind": "recipe", "id", "label"}`),
+`refs` (official references, https), `created`, `last_verified`. The build fails on an unknown language, guide slug or recipe id.
+Use `<placeholders>` for tenant-specific values and never include secrets.

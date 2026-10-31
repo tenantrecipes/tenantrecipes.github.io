@@ -1,0 +1,38 @@
+{
+ "id": "autopilot-import-graph-json",
+ "status": "published",
+ "title": "Import Autopilot hardware hashes with Microsoft Graph (JSON body)",
+ "lang": "json",
+ "tags": [
+  "Autopilot",
+  "Microsoft Graph",
+  "Intune"
+ ],
+ "summary": "Request body for the importedWindowsAutopilotDeviceIdentities/import action: serial number, Base64 hardware hash, optional group tag and user.",
+ "code": "POST https://graph.microsoft.com/v1.0/deviceManagement/importedWindowsAutopilotDeviceIdentities/import\nContent-Type: application/json\n\n{\n  \"importedWindowsAutopilotDeviceIdentities\": [\n    {\n      \"@odata.type\": \"#microsoft.graph.importedWindowsAutopilotDeviceIdentity\",\n      \"serialNumber\": \"<serial number>\",\n      \"hardwareIdentifier\": \"<Base64 hardware hash>\",\n      \"groupTag\": \"<group tag>\",\n      \"assignedUserPrincipalName\": \"<user@contoso.com>\"\n    }\n  ]\n}",
+ "notes": [
+  "Permission: DeviceManagementServiceConfig.ReadWrite.All (delegated or application).",
+  "Poll state.deviceImportStatus and deviceErrorName, then verify with GET /deviceManagement/windowsAutopilotDeviceIdentities."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "autopilot-register-hash-corporate-identifiers",
+  "label": "Pre-stage Windows devices for Autopilot: hardware hash import vs corporate identifiers, by CSV or Graph"
+ },
+ "refs": [
+  {
+   "title": "import action (importedWindowsAutopilotDeviceIdentity), Microsoft Graph v1.0",
+   "url": "https://learn.microsoft.com/en-us/graph/api/intune-enrollment-importedwindowsautopilotdeviceidentity-import?view=graph-rest-1.0"
+  },
+  {
+   "title": "List windowsAutopilotDeviceIdentities, Microsoft Graph v1.0",
+   "url": "https://learn.microsoft.com/en-us/graph/api/intune-enrollment-windowsautopilotdeviceidentity-list?view=graph-rest-1.0"
+  },
+  {
+   "title": "Manually register devices with Windows Autopilot",
+   "url": "https://learn.microsoft.com/en-us/autopilot/add-devices"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

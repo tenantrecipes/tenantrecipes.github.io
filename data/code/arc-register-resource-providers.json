@@ -1,0 +1,43 @@
+{
+ "id": "arc-register-resource-providers",
+ "status": "published",
+ "title": "Register the Azure Arc and Update Manager resource providers",
+ "lang": "azcli",
+ "tags": [
+  "Azure Arc",
+  "Update Manager",
+  "Landing zone"
+ ],
+ "summary": "Register every resource provider Arc-enabled servers and Azure Update Manager need, once per target subscription, before the first onboarding wave.",
+ "code": "az account set --subscription \"<subscription-id>\"\n\nfor ns in Microsoft.HybridCompute Microsoft.GuestConfiguration Microsoft.HybridConnectivity Microsoft.Compute Microsoft.Maintenance; do\n  az provider register --namespace \"$ns\"\ndone\n# Add Microsoft.AzureArcData only if SQL Server instances will be Arc-enabled.\n\n# Check the state (Registered) before you start a wave\naz provider list --query \"[?namespace=='Microsoft.HybridCompute' || namespace=='Microsoft.Maintenance'].{ns:namespace, state:registrationState}\" -o table",
+ "notes": [
+  "A missing Microsoft.HybridCompute registration fails azcmagent connect on every machine in the wave.",
+  "Microsoft.Compute is needed even in Arc-only subscriptions; without it Arc machines produce no periodic assessment data."
+ ],
+ "source": {
+  "kind": "guide",
+  "slug": "azure-arc-onboarding-enterprise-scale",
+  "anchor": "phase-2-landingzone-s3",
+  "label": "Azure Arc onboarding at scale, step 2.3"
+ },
+ "refs": [
+  {
+   "title": "Connected Machine agent prerequisites (OS support, resource providers, permissions)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/prerequisites"
+  },
+  {
+   "title": "Troubleshoot Connected Machine agent connection issues (AZCM error codes)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/troubleshoot-agent-onboard"
+  },
+  {
+   "title": "Connect hybrid machines to Azure at scale with a service principal",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/onboard-service-principal"
+  },
+  {
+   "title": "Prerequisites for Azure Update Manager",
+   "url": "https://learn.microsoft.com/en-us/azure/update-manager/prerequisites"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

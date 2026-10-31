@@ -1,0 +1,34 @@
+{
+ "id": "update-manager-maintenance-config-bicep",
+ "status": "published",
+ "title": "Maintenance configuration for Azure Update Manager in Bicep",
+ "lang": "bicep",
+ "tags": [
+  "Update Manager",
+  "Infrastructure as code"
+ ],
+ "summary": "The same ring as code: an InGuestPatch maintenance configuration with window, reboot policy and Windows/Linux classifications, ready for a pipeline.",
+ "code": "param location string = resourceGroup().location\n\nresource mcProdA 'Microsoft.Maintenance/maintenanceConfigurations@2023-04-01' = {\n  name: 'mc-prodA'\n  location: location\n  tags: {\n    PatchRing: 'ProdA'\n    Owner: 'platform-team'\n  }\n  properties: {\n    maintenanceScope: 'InGuestPatch'\n    extensionProperties: {\n      InGuestPatchMode: 'User'\n    }\n    maintenanceWindow: {\n      startDateTime: '2026-11-01 22:00'\n      duration: '03:00'\n      timeZone: 'W. Europe Standard Time'\n      recurEvery: 'Month Third Tuesday Offset4'\n    }\n    installPatches: {\n      rebootSetting: 'IfRequired'\n      windowsParameters: {\n        classificationsToInclude: [\n          'Critical'\n          'Security'\n        ]\n      }\n      linuxParameters: {\n        classificationsToInclude: [\n          'Critical'\n          'Security'\n        ]\n      }\n    }\n  }\n}",
+ "notes": [
+  "Property names follow the Microsoft.Maintenance/maintenanceConfigurations@2023-04-01 reference; allowed classifications differ between Windows and Linux.",
+  "Assign machines with a Microsoft.Maintenance/configurationAssignments resource (static or a dynamic-scope filter)."
+ ],
+ "source": {
+  "kind": "guide",
+  "slug": "azure-update-manager-enterprise-patching",
+  "anchor": "phase-5-schedules-s2",
+  "label": "Azure Update Manager at scale, step 5.2"
+ },
+ "refs": [
+  {
+   "title": "Microsoft.Maintenance/maintenanceConfigurations (Bicep/ARM reference)",
+   "url": "https://learn.microsoft.com/en-us/azure/templates/microsoft.maintenance/maintenanceconfigurations"
+  },
+  {
+   "title": "Manage Azure VMs programmatically (maintenance configuration API, CLI, PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/azure/update-manager/manage-vms-programmatically"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

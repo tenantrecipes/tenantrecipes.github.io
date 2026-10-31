@@ -1,0 +1,30 @@
+{
+ "id": "arc-connect-azconnectedmachine-pssession",
+ "status": "published",
+ "title": "Onboard several servers to Azure Arc over PowerShell remoting",
+ "lang": "powershell",
+ "tags": [
+  "Azure Arc",
+  "PowerShell"
+ ],
+ "summary": "Use Connect-AzConnectedMachine with a PSSession to install the Connected Machine agent and register a batch of Windows servers in one run.",
+ "code": "Install-Module Az.ConnectedMachine -Scope CurrentUser\nConnect-AzAccount\nSet-AzContext -Subscription \"<subscription-id>\"\n\n# One server (add -Proxy http://proxy.corp.example:8080 behind a proxy)\nConnect-AzConnectedMachine -ResourceGroupName rg-arc-prod-weu -Name SRV01 -Location westeurope\n\n# Several servers through remoting; resource names default to each host name\n$s = New-PSSession -ComputerName SRV01,SRV02,SRV03\nConnect-AzConnectedMachine -ResourceGroupName rg-arc-prod-weu -Location westeurope -PSSession $s",
+ "notes": [
+  "Remoting needs Enable-PSRemoting on each target and an operator who is local admin there.",
+  "For hundreds of servers, a pushed script with a dedicated onboarding service principal scales better."
+ ],
+ "source": {
+  "kind": "guide",
+  "slug": "azure-arc-onboarding-enterprise-scale",
+  "anchor": "phase-8-automate-s1",
+  "label": "Azure Arc onboarding at scale, step 8.1"
+ },
+ "refs": [
+  {
+   "title": "Connect hybrid machines by using Azure PowerShell (Connect-AzConnectedMachine)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/onboard-powershell"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

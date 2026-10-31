@@ -1,0 +1,39 @@
+{
+ "id": "intunewinapputil-package-msi",
+ "status": "published",
+ "title": "Package an MSI for Intune with IntuneWinAppUtil.exe",
+ "lang": "powershell",
+ "tags": [
+  "Intune",
+  "Win32 apps",
+  "Admin By Request"
+ ],
+ "summary": "Turn a vendor MSI into a .intunewin file with separate source and output folders, so the packaging tool never ends up inside its own package.",
+ "code": "# Elevated PowerShell, one line. Replace the version folder and MSI name with yours.\n& \"C:\\Packaging\\Tools\\IntuneWinAppUtil.exe\" -c \"C:\\Packaging\\AdminByRequest\\8.5.1.0\\source\" -s \"Admin By Request 8.5 Workstation.msi\" -o \"C:\\Packaging\\AdminByRequest\\8.5.1.0\\output\" -q\n\n# -c = folder that holds the setup file, -s = the setup file, -o = output folder\n# -q  = no prompts, overwrite existing output, create the output folder\n# -qq = the same without console output (build pipelines)",
+ "notes": [
+  "'The folder you specified cannot be accessed' means -c points at the MSI instead of its folder.",
+  "Quote every path with spaces and keep the command on one line when you paste it."
+ ],
+ "source": {
+  "kind": "guide",
+  "slug": "admin-by-request-intune-win32-packaging",
+  "anchor": "phase-3-package-s2",
+  "label": "Admin By Request: Intune Win32 packaging, step 3.2"
+ },
+ "refs": [
+  {
+   "title": "Microsoft Win32 Content Prep Tool (GitHub repository and README)",
+   "url": "https://github.com/microsoft/Microsoft-Win32-Content-Prep-Tool"
+  },
+  {
+   "title": "Prepare a Win32 app to be uploaded to Intune",
+   "url": "https://learn.microsoft.com/en-us/intune/intune-service/apps/apps-win32-prepare"
+  },
+  {
+   "title": "Admin By Request: Working with Intune (Windows Win32 package)",
+   "url": "https://docs.adminbyrequest.com/integrations/intune.htm"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

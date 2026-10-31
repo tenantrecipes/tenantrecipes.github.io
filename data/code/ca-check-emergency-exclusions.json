@@ -1,0 +1,41 @@
+{
+ "id": "ca-check-emergency-exclusions",
+ "status": "published",
+ "title": "List Conditional Access policies with their excluded groups",
+ "lang": "powershell",
+ "tags": [
+  "Conditional Access",
+  "Microsoft Graph"
+ ],
+ "summary": "Before any CA change, confirm the emergency access group is still excluded from every enforced policy, with Microsoft Graph PowerShell.",
+ "code": "Connect-MgGraph -Scopes 'Policy.Read.All'\n\nGet-MgIdentityConditionalAccessPolicy |\n  Select DisplayName, State, @{n='ExcludedGroups';e={$_.Conditions.Users.ExcludeGroups}}",
+ "notes": [
+  "Every policy in State 'enabled' should list the emergency access group's object ID under ExcludedGroups.",
+  "Roll back by setting a policy to Off or Report-only, not by deleting it."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "ca-production-lockout-mistakes",
+  "label": "Conditional Access: the mistakes that cause production lockouts"
+ },
+ "refs": [
+  {
+   "title": "Get-MgIdentityConditionalAccessPolicy (Microsoft Graph PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.identity.signins/get-mgidentityconditionalaccesspolicy"
+  },
+  {
+   "title": "List conditionalAccessPolicies (permissions)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/conditionalaccessroot-list-policies?view=graph-rest-1.0"
+  },
+  {
+   "title": "Plan a Microsoft Entra Conditional Access deployment",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access"
+  },
+  {
+   "title": "Manage emergency access accounts in Microsoft Entra ID",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

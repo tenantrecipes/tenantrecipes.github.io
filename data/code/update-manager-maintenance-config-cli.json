@@ -1,0 +1,38 @@
+{
+ "id": "update-manager-maintenance-config-cli",
+ "status": "published",
+ "title": "Create a Patch Tuesday maintenance configuration and a tag-driven ring",
+ "lang": "azcli",
+ "tags": [
+  "Update Manager",
+  "Automation"
+ ],
+ "summary": "Azure CLI for one ring: a monthly InGuestPatch window anchored to Patch Tuesday, then a subscription-level dynamic scope that picks machines by tag.",
+ "code": "# Ring ProdA: third Tuesday of the month + 4 days, 22:00 W. Europe, 3-hour window\naz maintenance configuration create --resource-group rg-patching --resource-name mc-prodA --maintenance-scope InGuestPatch --location westeurope --maintenance-window-start-date-time \"2026-11-01 22:00\" --maintenance-window-duration \"03:00\" --maintenance-window-recur-every \"Month Third Tuesday Offset4\" --maintenance-window-time-zone \"W. Europe Standard Time\" --reboot-setting IfRequired --extension-properties InGuestPatchMode=User\n\n# Dynamic scope: every Windows and Linux machine tagged PatchRing=ProdA (command is marked experimental)\naz maintenance assignment create-or-update-subscription --maintenance-configuration-id <config-id> --name ring-prodA --filter-tags \"{PatchRing:[ProdA]}\" --filter-tags-operator All --filter-os-types windows linux",
+ "notes": [
+  "Register Microsoft.Maintenance first.",
+  "Dynamic scopes are evaluated at run time: removing the tag removes the machine from the ring."
+ ],
+ "source": {
+  "kind": "guide",
+  "slug": "azure-update-manager-enterprise-patching",
+  "anchor": "phase-5-schedules-s2",
+  "label": "Azure Update Manager at scale, step 5.2"
+ },
+ "refs": [
+  {
+   "title": "Manage Azure VMs programmatically (maintenance configuration API, CLI, PowerShell)",
+   "url": "https://learn.microsoft.com/en-us/azure/update-manager/manage-vms-programmatically"
+  },
+  {
+   "title": "az maintenance assignment (Azure CLI reference)",
+   "url": "https://learn.microsoft.com/en-us/cli/azure/maintenance/assignment"
+  },
+  {
+   "title": "Manage a dynamic scope",
+   "url": "https://learn.microsoft.com/en-us/azure/update-manager/manage-dynamic-scoping"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

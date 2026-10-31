@@ -1,0 +1,38 @@
+{
+ "id": "arc-azcmagent-check-connect",
+ "status": "published",
+ "title": "Pre-check and connect a server with azcmagent and a service principal",
+ "lang": "shell",
+ "tags": [
+  "Azure Arc",
+  "Automation"
+ ],
+ "summary": "Check endpoint reachability from the server, then connect it with the onboarding service principal, tags and automatic agent upgrade.",
+ "code": "# 1. Pre-check from the machine (add --enable-pls-check for Private Link, --extensions all for extension endpoints)\nazcmagent check --location westeurope\n\n# 2. Connect. Fetch the secret at run time from a vault or secure variable; never store it in the script.\nazcmagent connect --service-principal-id <appId> --service-principal-secret <secret> --tenant-id <tenant> --subscription-id <sub> --resource-group rg-arc-prod-weu --location westeurope --tags \"Environment=Prod,Site=STO1,PatchRing=ProdA\" --enable-automatic-upgrade\n\n# 3. Verify\nazcmagent show",
+ "notes": [
+  "The Windows onboarding script only runs in 64-bit Windows PowerShell; some RMM tools start 32-bit PowerShell.",
+  "Exit codes mirror the AZCM error codes (26 = network, 41 = credentials, 44 = name already exists): log them per wave."
+ ],
+ "source": {
+  "kind": "guide",
+  "slug": "azure-arc-onboarding-enterprise-scale",
+  "anchor": "phase-8-automate-s2",
+  "label": "Azure Arc onboarding at scale, step 8.2"
+ },
+ "refs": [
+  {
+   "title": "Connect hybrid machines to Azure at scale with a service principal",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/onboard-service-principal"
+  },
+  {
+   "title": "azcmagent connect (CLI reference: --tags, --resource-name, --private-link-scope, --gateway-id)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/azcmagent-connect"
+  },
+  {
+   "title": "azcmagent check (CLI reference)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/azcmagent-check"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

@@ -1,6 +1,16 @@
 [
  {
   "date": "2026-10-31",
+  "time": "10:07",
+  "kind": "site",
+  "type": "Site",
+  "title": "Code Library: 10 copy-ready snippets",
+  "blurb": "PowerShell, Azure CLI, azcmagent, Bicep, KQL and Graph/JSON, filterable by language and topic, each linked to its guide.",
+  "url": "code/index.html",
+  "text": "New Code Library at /code/: 10 copy-ready snippets condensed from our guides and recipes (IntuneWinAppUtil packaging, Arc resource providers, Connect-AzConnectedMachine, azcmagent connect and local lockdown, Resource Graph inventory, Update Manager maintenance configuration in Azure CLI and Bicep, Conditional Access exclusion check, Autopilot Graph import). Filter by language and topic; every snippet links to the step it belongs to and to the official reference."
+ },
+ {
+  "date": "2026-10-31",
   "time": "10:03",
   "kind": "site",
   "type": "Site",

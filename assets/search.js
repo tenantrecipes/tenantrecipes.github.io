@@ -5,7 +5,7 @@
 var me=document.currentScript,ROOT=me?new URL("../",me.src).href:"/";
 var IDX=null,LOAD=null,DOCS=[],VOC=[],VOCSET={},SYN=[],QS=[],SUG=[];
 var STOP={"how":1,"do":1,"i":1,"to":1,"the":1,"a":1,"an":1,"in":1,"on":1,"of":1,"for":1,"my":1,"what":1,"is":1,"are":1,"can":1,"should":1,"with":1,"and":1,"before":1,"after":1,"does":1,"it":1,"we":1,"our":1,"you":1,"your":1,"from":1,"by":1,"at":1,"be":1,"who":1,"which":1,"why":1,"when":1,"me":1,"get":1,"need":1,"about":1,"or":1};
-var GROUPS=[["Vulnerability","Vulnerabilities"],["Recipe","Recipes"],["Guide","Guides"],["Hardening","Hardening"],["Tool","Tools"],["Policy","Policy templates"],["News","News"],["Update","Site updates"],["Page","Pages"]];
+var GROUPS=[["Vulnerability","Vulnerabilities"],["Recipe","Recipes"],["Guide","Guides"],["Hardening","Hardening"],["Tool","Tools"],["Code","Code snippets"],["Policy","Policy templates"],["News","News"],["Update","Site updates"],["Page","Pages"]];
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function norm(s){return String(s||"").toLowerCase().replace(/[\u2018\u2019]/g,"'").replace(/[\u201c\u201d]/g,'"').replace(/\s+/g," ").trim()}
 function words(s){return norm(s).split(/[^a-z0-9\-\.']+/).map(function(w){return w.replace(/^[\-\.']+|[\-\.']+$/g,"")}).filter(Boolean)}

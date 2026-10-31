@@ -1,0 +1,38 @@
+{
+ "id": "arc-resource-graph-inventory",
+ "status": "published",
+ "title": "Count Arc-enabled servers per wave with Azure Resource Graph",
+ "lang": "kql",
+ "tags": [
+  "Azure Arc",
+  "Reporting"
+ ],
+ "summary": "A cross-subscription Resource Graph query that lists every Arc machine with status, OS and tags, so a wave is only closed when counts match.",
+ "code": "resources\n| where type =~ 'microsoft.hybridcompute/machines'\n| project name, resourceGroup, location,\n          status = tostring(properties.status),\n          os = tostring(properties.osName),\n          tags\n| order by resourceGroup asc, name asc",
+ "notes": [
+  "Run it in Resource Graph Explorer or with az graph query -q; portal views are per subscription and filter.",
+  "Machines missing from the result are failures, not 'pending'."
+ ],
+ "source": {
+  "kind": "guide",
+  "slug": "azure-arc-onboarding-enterprise-scale",
+  "anchor": "phase-11-verify-s1",
+  "label": "Azure Arc onboarding at scale, step 11.1"
+ },
+ "refs": [
+  {
+   "title": "azcmagent check (CLI reference)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/azcmagent-check"
+  },
+  {
+   "title": "Simplify network configuration with Azure Arc gateway",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/arc-gateway"
+  },
+  {
+   "title": "Azure Resource Graph sample queries for Arc-enabled servers",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/resource-graph-samples"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}

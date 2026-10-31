@@ -1,0 +1,34 @@
+{
+ "id": "arc-azcmagent-local-lockdown",
+ "status": "published",
+ "title": "Lock down a sensitive Arc server locally with azcmagent config",
+ "lang": "shell",
+ "tags": [
+  "Azure Arc",
+  "Hardening"
+ ],
+ "summary": "Local agent settings that not even an Azure Owner can override: extension allowlist, monitor mode and no incoming remote connections.",
+ "code": "# Monitoring-only server: allow just Azure Monitor Agent and turn guest configuration off\nazcmagent config set extensions.allowlist \"Microsoft.Azure.Monitor/AzureMonitorWindowsAgent\"\nazcmagent config set guestconfiguration.enabled false\n\n# Or: monitor mode (only monitoring and security extensions, guest configuration disabled)\nazcmagent config set config.mode monitor\n\n# ESU-only server: extension manager running, nothing installed\nazcmagent config set extensions.allowlist \"Allow/None\"\n\n# No SSH / Windows Admin Center through Arc\nazcmagent config set incomingconnections.enabled false\n\nazcmagent config list",
+ "notes": [
+  "Allowlists do not remove extensions that are already installed; delete those from Azure afterwards.",
+  "Anyone who is local admin or root can change these settings."
+ ],
+ "source": {
+  "kind": "guide",
+  "slug": "azure-arc-onboarding-enterprise-scale",
+  "anchor": "phase-6-agent-s2",
+  "label": "Azure Arc onboarding at scale, step 6.2"
+ },
+ "refs": [
+  {
+   "title": "Extensions security: allowlists, blocklists and monitor mode",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/security-extensions"
+  },
+  {
+   "title": "azcmagent config (CLI reference)",
+   "url": "https://learn.microsoft.com/en-us/azure/azure-arc/servers/azcmagent-config"
+  }
+ ],
+ "created": "2026-10-31",
+ "last_verified": "2026-10-31"
+}
