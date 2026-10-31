@@ -353,6 +353,8 @@ def og_image(path, RID):
         return "og/guide-azure-update-manager-enterprise-patching.png", "Tenant Recipes guide: Azure Update Manager at enterprise scale"
     if path.startswith("guides/azure-arc-onboarding-enterprise-scale"):
         return "og/guide-azure-arc-onboarding-enterprise-scale.png", "Tenant Recipes guide: Azure Arc onboarding at enterprise scale"
+    if path.startswith("guides/admin-by-request-endpoint-privilege"):
+        return "og/guide-admin-by-request-endpoint-privilege.png", "Tenant Recipes guide: remove local admin rights with Admin By Request"
     if path.startswith("guides/copilot-license-checks"):
         return "og/quick-copilot-license-checks.png", "Tenant Recipes quick guide: 5 checks before Copilot licenses"
     if path.startswith("guides/"):
@@ -484,6 +486,7 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
     G3 = guides[2] if len(guides) > 2 else None
     G4 = guides[3] if len(guides) > 3 else None
     G5 = guides[4] if len(guides) > 4 else None
+    GABR = next((g for g in guides if g.SLUG == "admin-by-request-endpoint-privilege"), None)
     tc = dict(tag_counts(R))
     tag = lambda t: f'{rel}?t={qp(t)}#library'
     exploited = sum(1 for e in CYL if e["type"] == "vulnerability" and e.get("exploited"))
@@ -510,6 +513,7 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
          + ([L(f'{rel}search/index.html?q=Autopilot', "Windows Autopilot", ap_n)] if ap_n else [])
          + ([L(f'{rel}guides/{G5.SLUG}.html', "Onboard servers to Azure Arc")] if G5 else [])
          + ([L(f'{rel}guides/{G4.SLUG}.html', "Server patching with Azure Update Manager")] if G4 else [])
+         + ([L(f'{rel}guides/{GABR.SLUG}.html', "Remove local admin rights (Admin By Request)")] if GABR else [])
          + [L(f'{rel}guides/{G2.SLUG}.html', "Windows 11 CIS hardening guide"),
           L(f'{rel}security/endpoint.html', "Endpoint &amp; client security"),
           L(f'{rel}security/harden-windows-laps.html', "Windows LAPS hardening")]

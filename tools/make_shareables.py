@@ -8,7 +8,7 @@ import sys, json, re, hashlib, shutil, subprocess, tempfile, pathlib, html
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT)); sys.path.insert(0, str(ROOT / "data" / "guides"))
 import site_config as C
-import secure_copilot_rollout as G1, windows_11_cis_hardening as G2, cloud_hardening_adversary_emulation as G3, azure_update_manager_enterprise_patching as G4, azure_arc_onboarding_enterprise_scale as G5, quick_copilot_license_checks as Q
+import secure_copilot_rollout as G1, windows_11_cis_hardening as G2, cloud_hardening_adversary_emulation as G3, azure_update_manager_enterprise_patching as G4, azure_arc_onboarding_enterprise_scale as G5, admin_by_request_endpoint_privilege as GABR, quick_copilot_license_checks as Q
 DL, OG = ROOT / "downloads", ROOT / "assets" / "og"
 MANIFEST = DL / "manifest.json"
 SITE = C.SITE_URL.rstrip("/")
@@ -129,6 +129,8 @@ def og_specs():
         f"{len(G4.PHASES)} phases · {ns(G4)} steps · rings, maintenance configurations, Arc, pre/post events", ["Azure Arc", "Rings", "Dynamic scopes", "Rollback"], "#0b6e99")
     out["guide-azure-arc-onboarding-enterprise-scale"] = og_html("Pillar guide", "Azure Arc onboarding at enterprise scale",
         f"{len(G5.PHASES)} phases · {ns(G5)} steps · agent, identities, network, policy, monitoring", ["Azure Arc", "Private Link", "Azure Policy", "Defender"], "#1f5fa8")
+    out["guide-admin-by-request-endpoint-privilege"] = og_html("Pillar guide", "Remove local admin rights with Admin By Request",
+        f"{len(GABR.PHASES)} phases · {ns(GABR)} steps · Run As Admin, Admin Session, approval, MFA, Intune", ["Least privilege", "JIT elevation", "Intune", "Entra ID"], "#2f6b3a")
     out["quick-copilot-license-checks"] = og_html("Quick guide · 1 page", "5 things to check before you assign Copilot licenses",
         "Base licenses, mailboxes, update channel, network and oversharing. Free PDF.", ["Checklist", "Microsoft Learn sources"], "#e39a1f")
     out["guides"] = og_html("Guides", "Fact-checked playbooks for Microsoft 365 and Windows admins", "Phased guides with printable checklists.", ["Copilot", "Windows 11", "Azure Arc", "Server patching"])
@@ -154,7 +156,7 @@ def generate(force=False):
     flags = [ch, "--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1", "--run-all-compositor-stages-before-draw"]
     with tempfile.TemporaryDirectory() as td:
         td = pathlib.Path(td)
-        docs = {f"{G1.SLUG}-checklist": checklist_html(G1), f"{G2.SLUG}-checklist": checklist_html(G2), f"{G3.SLUG}-checklist": checklist_html(G3), f"{G4.SLUG}-checklist": checklist_html(G4), f"{G5.SLUG}-checklist": checklist_html(G5), Q.SLUG: quick_html()}
+        docs = {f"{G1.SLUG}-checklist": checklist_html(G1), f"{G2.SLUG}-checklist": checklist_html(G2), f"{G3.SLUG}-checklist": checklist_html(G3), f"{G4.SLUG}-checklist": checklist_html(G4), f"{G5.SLUG}-checklist": checklist_html(G5), f"{GABR.SLUG}-checklist": checklist_html(GABR), Q.SLUG: quick_html()}
         for name, doc in docs.items():
             src = td / f"{name}.html"; src.write_text(doc)
             run(flags + ["--no-pdf-header-footer", f"--print-to-pdf={DL / (name + '.pdf')}", src.as_uri()])

@@ -12,8 +12,9 @@ import windows_11_cis_hardening as G2
 import cloud_hardening_adversary_emulation as G3
 import azure_update_manager_enterprise_patching as G4
 import azure_arc_onboarding_enterprise_scale as G5
+import admin_by_request_endpoint_privilege as GABR
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2, G3, G4, G5]
+GUIDES = [G1, G2, G3, G4, G5, GABR]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
@@ -330,7 +331,7 @@ def guide_page(g):
             if st.get("marker") == "tested" and MK.validate_tested(st.get("tested"), st["t"]):
                 sys.exit(f"Guide {g.SLUG}: " + "; ".join(MK.validate_tested(st.get("tested"), st["t"])))
     nsteps = sum(len(p["steps"]) for p in g.PHASES)
-    nsrc = len({u for p in g.PHASES for s in p["steps"] for _, u in s["src"]})
+    nsrc = len({u for p in g.PHASES for s in p["steps"] for _, u in s["src"]} | {u for _, u in getattr(g, "PROBLEM", {}).get("src", [])})
     nrec = len({r for p in g.PHASES for s in p["steps"] for r in s["rec"] + s.get("sec", []) + s.get("tools", [])})
 
     def body(rel):
@@ -374,6 +375,15 @@ def guide_page(g):
             check += "".join(f'<li><label><input type="checkbox" data-k="{g.SLUG}:{pid}-s{j}"> <span><b>{i}.{j}</b> {_txt(st["check"])}</span></label></li>'
                              for j, st in enumerate(ph["steps"], 1))
         intro = "".join(f'<p>{esc(x)}</p>' for x in g.INTRO)
+        nt = getattr(g, "NOTICE", None)
+        notice = (f'<aside class="co co-info gd-notice" aria-label="Editorial note"><p class="co-h">{esc(nt["title"])}</p><p>{esc(nt["text"])}</p></aside>') if nt else ""
+        pb = getattr(g, "PROBLEM", None)
+        problem = (f'<section class="gd-phase gd-problem" id="the-problem" aria-labelledby="pb-h"><div class="gd-ph-h"><span class="gd-num">Background</span><h2 id="pb-h">{esc(pb["title"])}</h2></div>'
+                   + "".join(f'<h3>{esc(h)}</h3>' + "".join(f'<p>{esc(x)}</p>' for x in ps) for h, ps in pb["blocks"])
+                   + (f'<details class="gd-src"><summary>{SL} ({len(pb["src"])})</summary><ul>' + "".join(f'<li><a href="{E(u)}">{esc(t)}</a></li>' for t, u in pb["src"]) + '</ul></details>' if pb.get("src") else "")
+                   + '</section>') if pb else ""
+        if pb:
+            toc = f'<li><a href="#the-problem">The problem</a></li>' + toc
         return (
             f'<section class="gd-hero"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i></div><div class="wrap">'
             + T.crumbs_dark(rel, f"guides/{g.SLUG}.html", [("Home", rel + "index.html"), ("Guides", rel + "guides/index.html"), (g.SHORT, None)]) +
@@ -387,8 +397,8 @@ def guide_page(g):
             f'<ol class="gd-strip">{strip}</ol></div></section>'
             f'<div class="wrap gd-grid"><aside class="gd-toc" aria-label="Table of contents"><p>On this page</p><ol>{toc}'
             f'<li><a href="#checklist">Printable checklist</a></li></ol></aside>'
-            f'<div class="gd-body">{T.guide_verify_card(rel, g)}{T.author_box(rel)}<div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} {esc(getattr(g, "TIME_NOTE", "Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers."))}</p></div>'
-            f'{phases}'
+            f'<div class="gd-body">{T.guide_verify_card(rel, g)}{T.author_box(rel)}{notice}<div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} {esc(getattr(g, "TIME_NOTE", "Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers."))}</p></div>'
+            f'{problem}{phases}'
             f'<section class="gd-check" id="checklist" aria-labelledby="ck-h"><div class="gd-ph-h"><span class="gd-num">Checklist</span><h2 id="ck-h">The printable checklist</h2></div>'
             f'<p>Tick items as you go (saved in this browser only), then print or save as PDF for your change board.</p>'
             f'<p class="gd-ck-btns"><button class="btn p" type="button" id="ck-print">Print checklist</button> '
@@ -423,8 +433,8 @@ def guides_index():
         return (T.page_hero(rel, T.crumbs_dark(rel, "guides/index.html", [("Home", rel + "index.html"), ("Guides", None)]), "Guides",
                             "Long-form playbooks", "Phased, fact-checked guides that tie the recipes together. Every claim links to its official source.", kind="page")
                 + f'<main class="wrap pg"><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
-    return page("guides/index.html", f"Guides: Copilot, Windows 11, cloud hardening, Azure Arc, Update Manager and quick checks | {C.SITE_NAME}",
-                "Long-form, fact-checked playbooks for Microsoft 365, Entra hardening under attack simulation, Azure Arc onboarding, Azure Update Manager server patching and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
+    return page("guides/index.html", f"Guides: Copilot, Windows 11, cloud hardening, Azure Arc, Update Manager, Admin By Request and quick checks | {C.SITE_NAME}",
+                "Long-form, fact-checked playbooks for Microsoft 365, Entra hardening under attack simulation, Azure Arc onboarding, Azure Update Manager server patching, removing local admin rights with Admin By Request and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
 
 
 def build():

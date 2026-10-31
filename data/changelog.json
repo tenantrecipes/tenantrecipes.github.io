@@ -2,6 +2,11 @@
  {
   "date": "2026-10-31",
   "kind": "site",
+  "text": "New pillar guide: Admin By Request from zero to production. Why standing local admin rights and fully locked-down users both fail, then an end-to-end setup: licensing and the free plan, portal SSO, the Entra ID Connector, Run As Admin vs Admin Session with approval and MFA, lockdown, pre-approvals and malware scanning, Intune deployment for Windows and macOS, removing existing local admins, pilot to rollout, audit and SIEM, troubleshooting and rollback. Not sponsored. Printable checklist included."
+ },
+ {
+  "date": "2026-10-31",
+  "kind": "site",
   "text": "New pillar guide: Azure Arc Onboarding at Enterprise Scale. 11 phases from pilot to offboarding: landing zone and resource providers, RBAC, service principals and managed identities, proxy, Private Link and Arc gateway, the Connected Machine agent and its local lockdown, Windows and Linux onboarding (Group Policy, Configuration Manager, Ansible), automated onboarding with PowerShell, Azure Policy, Azure Monitor Agent, Defender for Cloud, troubleshooting and verification. Hands over to the Azure Update Manager guide for patching. Printable checklist included."
  },
  {
