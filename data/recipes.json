@@ -403,11 +403,34 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Users on personal devices lose browser access to Office 365.",
+    "cause": "Unmanaged devices can't satisfy compliant or Entra hybrid joined.",
+    "fix": "Expected by design. For web access from unmanaged devices, use app-enforced restrictions instead of widening the policy."
+   },
+   {
+    "symptom": "A device the user considers managed is treated as noncompliant.",
+    "cause": "It isn't enrolled in Intune (or a supported compliance partner), or compliance hasn't been evaluated yet.",
+    "fix": "Check enrollment and compliance state in Intune before excluding anyone."
+   },
+   {
+    "symptom": "macOS, iOS or Android users get a device certificate prompt while the policy is in Report-only.",
+    "fix": "Exclude those platforms from the policy during testing."
+   }
+  ],
+  "rollback": [
+   "Entra ID > Conditional Access > Policies: open the compliant-device policy and set Enable policy to Report-only (keeps impact data) or Off. Don't delete it, so the configuration is kept.",
+   "Confirm in the sign-in logs (Conditional Access tab on the affected events) that the policy no longer applies and sign-ins succeed.",
+   "Fix enrollment/compliance for the affected devices, then switch back to On."
+  ]
  },
  {
   "id": "ca-block-legacy-auth",
@@ -498,11 +521,34 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Users get more MFA prompts than the configured frequency suggests.",
+    "cause": "'Remember MFA on trusted devices' is still on alongside sign-in frequency.",
+    "fix": "Turn it off, as in the steps."
+   },
+   {
+    "symptom": "The Never persistent browser session control can't be saved in the Office 365 policy.",
+    "cause": "That control requires the policy to target All resources.",
+    "fix": "Keep it in a separate All resources policy scoped with a device filter or to unmanaged devices."
+   },
+   {
+    "symptom": "Complaints about prompt fatigue.",
+    "fix": "Lengthen the interval and move users to phishing-resistant methods rather than removing the control."
+   }
+  ],
+  "rollback": [
+   "Entra ID > Conditional Access > Policies: open Policy 1 (sign-in frequency) and/or Policy 2 (persistent browser session), one at a time and set Enable policy to Report-only (keeps impact data) or Off. Don't delete it, so the configuration is kept.",
+   "Confirm in the sign-in logs (Conditional Access tab on the affected events) that the policy no longer applies and sign-ins succeed.",
+   "Adjust the interval or scope, then switch back to On."
+  ]
  },
  {
   "id": "ca-risk-based-ai",
@@ -541,11 +587,34 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Risky sign-ins fail with AADSTS53004.",
+    "cause": "The user isn't registered for MFA, so the risk policy can't be satisfied.",
+    "fix": "Drive MFA registration before switching the policies On; check registration for users flagged in Report-only."
+   },
+   {
+    "symptom": "Policies don't evaluate risk for some users.",
+    "cause": "Risk policies require Entra ID P2 for covered users.",
+    "fix": "Verify licensing for the users in scope."
+   },
+   {
+    "symptom": "High-risk users are repeatedly prompted.",
+    "fix": "Expected: Require risk remediation adds sign-in frequency Every time. Review the Risky users report and remediate or dismiss risk."
+   }
+  ],
+  "rollback": [
+   "Entra ID > Conditional Access > Policies: open the sign-in risk and/or user risk policy (roll back one at a time) and set Enable policy to Report-only (keeps impact data) or Off. Don't delete it, so the configuration is kept.",
+   "Confirm in the sign-in logs (Conditional Access tab on the affected events) that the policy no longer applies and sign-ins succeed.",
+   "Resolve registration or licensing gaps, then return to On."
+  ]
  },
  {
   "id": "ca-break-glass",
@@ -579,11 +648,32 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "An emergency access account is blocked or challenged during the periodic test sign-in.",
+    "cause": "A Conditional Access policy that blocks or restricts sign-in doesn't exclude the EmergencyAccess group.",
+    "fix": "Open the failed sign-in event, check the Conditional Access tab for the applied policy, and add the group exclusion to it. Re-test."
+   },
+   {
+    "symptom": "The registered passkey or certificate can't be found or used when you need it.",
+    "fix": "Keep the FIDO2 keys for the two accounts in separate secure locations, not on one person's phone, and include method checks in the 90-day test."
+   },
+   {
+    "symptom": "No alert fires for a test sign-in.",
+    "fix": "Check the Azure Monitor/Log Analytics alert rule covers both accounts and both sign-in and audit events; treat a silent test as a failed control."
+   }
+  ],
+  "rollback": [
+   "Don't remove the accounts or their Global Administrator assignment as a 'rollback'; they are the rollback for every other identity change.",
+   "If a new exclusion or alert change causes issues, revert that single change and repeat the test sign-in to confirm access and alerting both work."
+  ]
  },
  {
   "id": "intune-deploy-m365-apps-channel",
@@ -669,11 +759,34 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Newly enrolled devices show noncompliant.",
+    "cause": "They haven't completed first evaluation.",
+    "fix": "Use a grace period in Actions for noncompliance and wait for the next check-in."
+   },
+   {
+    "symptom": "BitLocker or Secure Boot reported noncompliant on an encrypted device.",
+    "cause": "Device Health Attestation measures them at boot.",
+    "fix": "Reboot after encryption, then re-check compliance."
+   },
+   {
+    "symptom": "Devices fail on machine risk score.",
+    "fix": "Check the device in Defender for Endpoint; resolve the risk rather than loosening the threshold."
+   }
+  ],
+  "rollback": [
+   "If compliance-based Conditional Access blocks users, set that CA policy to Report-only first.",
+   "Then extend the grace period, relax the failing setting, or remove the assignment for the affected group; avoid deleting the policy.",
+   "Confirm device compliance state in Intune updates after the next check-in."
+  ]
  },
  {
   "id": "intune-app-protection-copilot",
@@ -717,11 +830,34 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Policy doesn't apply to an app.",
+    "cause": "The app doesn't integrate the Intune SDK or isn't on the protected apps list.",
+    "fix": "Check the protected apps list; unsupported apps can't be targeted."
+   },
+   {
+    "symptom": "iOS/Android users are blocked by the 'Require app protection policy' CA grant.",
+    "cause": "The device isn't registered in Entra ID via Authenticator or Company Portal.",
+    "fix": "Have users install the broker app and register, then retry."
+   },
+   {
+    "symptom": "Users can't paste into personal apps or save to personal storage.",
+    "fix": "Expected from the data protection settings; adjust only if the business case requires it."
+   }
+  ],
+  "rollback": [
+   "Set the paired Conditional Access policy to Report-only or Off first, so access isn't blocked.",
+   "Then remove the group assignment from the app protection policy (or relax the data protection setting) instead of deleting it.",
+   "Confirm on a test device that the app re-checks in and the restriction is gone."
+  ]
  },
  {
   "id": "intune-copilot-key-windows",
@@ -830,11 +966,28 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "A configured setting doesn't show up at edge://policy.",
+    "cause": "The device hasn't synced, isn't in the assigned device group, or the policy name changed in the Edge version in use.",
+    "fix": "Check assignment and sync, then compare against the current Edge policy reference."
+   },
+   {
+    "symptom": "edge://policy shows an error for a policy.",
+    "fix": "Check the value and the supported Edge version in the Edge policy reference."
+   }
+  ],
+  "rollback": [
+   "Remove the specific Copilot setting from the Settings catalog profile (or unassign the device group); don't delete the whole profile if it carries other settings.",
+   "Sync the device and confirm at edge://policy that the setting is gone."
+  ]
  },
  {
   "id": "purview-oversharing-assessment",
@@ -915,11 +1068,33 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Content still appears in Copilot or search after enabling.",
+    "cause": "Reindexing hasn't completed; it can take time on large sites.",
+    "fix": "Wait and re-check."
+   },
+   {
+    "symptom": "Users report they can still open the site.",
+    "fix": "Expected: it isn't a permission change. Fix permissions separately if access is the problem."
+   },
+   {
+    "symptom": "The setting is unavailable.",
+    "cause": "The tenant lacks a Microsoft Copilot license / SharePoint Advanced Management.",
+    "fix": "Check licensing requirements."
+   }
+  ],
+  "rollback": [
+   "Turn off 'Restrict content from Microsoft Copilot' on the site, or run `Set-SPOSite -Identity <siteUrl> -RestrictContentOrgWideSearch $false`.",
+   "Allow time for reindexing, then confirm the content is discoverable again."
+  ]
  },
  {
   "id": "purview-sensitivity-labels-copilot",
@@ -996,11 +1171,32 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Labeled files still appear as citations.",
+    "fix": "Expected: the policy stops Copilot from using the content, not from citing the item."
+   },
+   {
+    "symptom": "An email or calendar invite with the label is still processed.",
+    "cause": "Email is covered only for messages sent on or after 1 January 2025; calendar invites aren't supported.",
+    "fix": "Expected limitation; don't treat it as a policy failure."
+   },
+   {
+    "symptom": "You can't add sensitive information types to the label rule.",
+    "fix": "Create a separate rule; the two can't be combined in one rule."
+   }
+  ],
+  "rollback": [
+   "Purview portal > Data loss prevention > Policies: switch the policy back to simulation mode or turn it off rather than deleting it.",
+   "Verify with a test prompt on a labeled item that Copilot uses the content again."
+  ]
  },
  {
   "id": "purview-audit-copilot",
@@ -1211,11 +1407,35 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-30",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Users are stuck in remediation and can't sign in.",
+    "cause": "They aren't registered for MFA, or (hybrid) password hash sync isn't enabled, so secure password change can't complete.",
+    "fix": "Find them in the sign-in logs filtered on Conditional Access, drive MFA registration, check PHS, or have an admin remediate the user risk."
+   },
+   {
+    "symptom": "Guest or external users hit unexpected results.",
+    "cause": "The policy isn't supported for external and guest users.",
+    "fix": "Narrow scope via the policy's security group membership."
+   },
+   {
+    "symptom": "A different grant than expected is enforced.",
+    "cause": "Precedence: Block overrides all, and Require risk remediation overrides Require password change.",
+    "fix": "Review overlap with your own user-risk policies; if you run one, set the managed policy to Off."
+   }
+  ],
+  "rollback": [
+   "Entra ID > Conditional Access > Policies: set the Microsoft-managed policy to Off (it can't be deleted or renamed), or remove users by changing its security group membership.",
+   "Check the Policy impact tab and sign-in logs to confirm it no longer applies.",
+   "If you need different behaviour, Duplicate it and run your own copy in Report-only first."
+  ]
  },
  {
   "id": "sharepoint-otp-retirement-b2b",
@@ -1621,11 +1841,34 @@
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-10-31",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Users are blocked from an app they need.",
+    "fix": "Expected after restricting consent. They request it through the admin consent workflow; review and grant admin consent for that app."
+   },
+   {
+    "symptom": "Users can't request access at all.",
+    "cause": "The admin consent workflow isn't enabled or has no reviewers.",
+    "fix": "Enable it under Admin consent settings and assign reviewers."
+   },
+   {
+    "symptom": "Risky apps still have access after the change.",
+    "cause": "Existing grants remain.",
+    "fix": "Review and revoke existing permission grants separately."
+   }
+  ],
+  "rollback": [
+   "Enterprise apps > Consent and permissions > User consent settings: return to the previously used option (record it before you change). Needs Global Administrator in the portal; Graph PowerShell works with Privileged Role Administrator.",
+   "Prefer moving from 'Do not allow' to 'verified publishers, selected permissions' over reopening full user consent.",
+   "Confirm by having a test user attempt consent to an allowed app."
+  ]
  },
  {
   "id": "copilot-studio-auth",
