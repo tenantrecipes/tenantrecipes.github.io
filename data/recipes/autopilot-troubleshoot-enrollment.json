@@ -1,0 +1,102 @@
+{
+ "id": "autopilot-troubleshoot-enrollment",
+ "status": "published",
+ "order": 220,
+ "category": "Intune & devices for AI",
+ "title": "Troubleshoot Windows Autopilot enrollment: event IDs, profile registry, MDM diagnostics and auto-collected logs",
+ "problem": "When Autopilot stalls in OOBE the error page rarely names the cause. Work the flow in order (profile, tenant match, Entra join, MDM enrollment, ESP/apps) and pull the evidence from the device and from Intune instead of guessing.",
+ "steps": [
+  "Locate the failure in the flow: network > profile download > user auth > Entra join > automatic MDM enrollment > settings/apps (ESP for classic, tracked apps/scripts for device preparation). If you see the ESP on a device meant for device preparation, it's running classic Autopilot.",
+  "Device preparation: start at Devices > Monitor > Windows Autopilot device preparation deployments; the device detail shows the last phase and which app or script failed or was Skipped.",
+  "Classic Autopilot on Windows 11: enable the diagnostics page in the ESP profile (Show app and profile configuration progress = Yes, Turn on log collection and diagnostics page for end users = Yes) and open it in OOBE with Ctrl+Shift+D.",
+  "In OOBE, Shift+F10 gives a prompt. Read the Autopilot channel: `Get-WinEvent -LogName 'Microsoft-Windows-ModernDeployment-Diagnostics-Provider/Autopilot' -MaxEvents 50 | Format-Table TimeCreated,Id,Message -Wrap`. Key IDs: 807 ZtdDeviceIsNotRegistered, 809/815 no assigned profile, 908 serial or product key mismatch, 171/172 TPM attestation (self-deploying/pre-provisioning), 163 profile already present.",
+  "Check what the device actually received: `Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\Provisioning\\Diagnostics\\Autopilot`. CloudAssignedTenantDomain blank or IsAutopilotDisabled = 1 means no registration or no profile download; TenantMatched = 0 means the user signed in to a different tenant than the device is registered to.",
+  "MDM side: `Get-WinEvent -LogName 'Microsoft-Windows-DeviceManagement-Enterprise-Diagnostics-Provider/Admin' -MaxEvents 50`, plus `dsregcmd /status` for join state. Enable the Debug channel in Event Viewer when Admin isn't enough.",
+  "Bundle everything: `mdmdiagnosticstool.exe -area \"DeviceEnrollment;DeviceProvisioning;Autopilot\" -zip C:\\Users\\Public\\Documents\\MDMDiagReport.zip`. The zip holds Autopilot and provisioning ETLs, MDMDiagHtmlReport.html, a registry dump and the enterprise diagnostics evtx.",
+  "From the portal: Intune auto-captures logs on Autopilot failure (one set per device per day, kept 28 days) under the device > Diagnostics > Download; for enrolled corporate devices use Collect diagnostics (bulk up to 25). Graph can't collect or download these.",
+  "After a profile change, restart from OOBE with `shutdown.exe /r /t 0` so the device downloads the profile again."
+ ],
+ "pitfalls": [
+  "A device that boots into OOBE before any profile exists can cache an empty profile. Create and assign the profile first, then restart the device.",
+  "Re-using a pre-provisioned or self-deploying device returns 0x80180014 until you select Unblock device on its Autopilot record. The same code appears when Windows (MDM) is blocked in a device platform restriction.",
+  "Known policy conflicts during device ESP: AppLocker CSP, DeviceLock password rules that break autologon after reboot, disabling the Microsoft Account Sign-in Assistant (wlidsvc), AutoAdminLogon = 0, and PreferredAadTenantDomainName. Target those to users or apply after enrollment.",
+  "Classic ESP can't install LOB (MSI) and Win32 apps at the same time ('Another installation is in progress'). Use one type, or device preparation, which supports both.",
+  "Deleting the Entra device object created at registration breaks Autopilot targeting and join. Recover by deleting and re-importing the Autopilot device, not by recreating the Entra object."
+ ],
+ "done_when": [
+  "The failing phase is identified from the deployment report, Autopilot event IDs or the profile registry values.",
+  "An MDM diagnostics zip or the Intune auto-collected logs for the device are saved with the ticket.",
+  "The fix is applied and a rerun reaches the desktop (classic) or Success in the device preparation report."
+ ],
+ "troubleshooting": [
+  {
+   "symptom": "Event 807 or 815 in the Autopilot log.",
+   "fix": "Confirm the hash is registered and the device is in a group targeted by a deployment profile; Sync in Intune, then restart OOBE."
+  },
+  {
+   "symptom": "Event 908 SerialNumberMismatch / ProductKeyIdMismatch, or Fix pending after a repair.",
+   "fix": "Hardware changed (e.g. motherboard). Deregister and re-register the device with a fresh hash."
+  },
+  {
+   "symptom": "'Can't connect to the URL of your organization's MDM terms of use'.",
+   "cause": "Usually licensing.",
+   "fix": "Give the user a valid Intune, EMS or Microsoft 365 license that includes Intune."
+  },
+  {
+   "symptom": "Join type shows Microsoft Entra registered instead of joined.",
+   "fix": "The device was workplace joined before. Delete it from Intune and Autopilot in the documented order, re-register and redeploy."
+  },
+  {
+   "symptom": "Error 80180018 on the Something went wrong page.",
+   "fix": "Check user licensing and the user's device limits: the Entra join limit (default 50) and any Intune device limit restriction."
+  }
+ ],
+ "rollback": [
+  "Turn the Debug channel of DeviceManagement-Enterprise-Diagnostics-Provider back off and delete exported zips and CSVs from the device and your workstation; they contain device and user identifiers.",
+  "If you changed the ESP profile to show the diagnostics page for a pilot, set Turn on log collection and diagnostics page for end users back to No when the pilot ends, if you don't want users to see it.",
+  "If you unblocked a device or moved a device between profiles, verify the Autopilot record shows the intended profile and assignment status before handing it back."
+ ],
+ "markers": {
+  "steps": "official",
+  "pitfalls": "official",
+  "troubleshooting": "official",
+  "rollback": "practical"
+ },
+ "sources": [
+  {
+   "title": "Windows Autopilot troubleshooting FAQ",
+   "url": "https://learn.microsoft.com/en-us/autopilot/troubleshooting",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Windows Autopilot device preparation troubleshooting FAQ",
+   "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/troubleshooting-faq",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Device preparation reporting and monitoring",
+   "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/reporting-monitoring",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Collect MDM logs",
+   "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm-collect-logs",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Device action: Collect diagnostics",
+   "url": "https://learn.microsoft.com/en-us/intune/device-management/actions/collect-diagnostics",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Windows Autopilot registration overview (incl. deregister)",
+   "url": "https://learn.microsoft.com/en-us/autopilot/registration-overview",
+   "checked": "2026-10-31"
+  }
+ ],
+ "last_verified": "2026-10-31",
+ "verified_by": "Pascal",
+ "created": "2026-10-31",
+ "updated": "2026-10-31",
+ "screenshots": []
+}

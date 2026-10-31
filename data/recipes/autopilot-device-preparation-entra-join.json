@@ -1,0 +1,107 @@
+{
+ "id": "autopilot-device-preparation-entra-join",
+ "status": "published",
+ "order": 200,
+ "category": "Intune & devices for AI",
+ "title": "Windows Autopilot device preparation: user-driven Entra join with a provisioning-owned device group",
+ "problem": "Device preparation replaces the classic Autopilot profile + ESP pair for Windows 11 Entra join, but it silently does nothing if the device group, its owner or the app context is wrong. Build it so the essential apps land during OOBE and everything else follows after the desktop.",
+ "steps": [
+  "Pick the engine per device: device preparation covers user-driven and automatic mode, Entra join only, Windows 11 (24H2, or 22H2/23H2 with KB5035942). Need hybrid join, pre-provisioning, self-deploying, Autopilot Reset, Windows 10 or more than 25 apps during OOBE? Stay on classic Autopilot profiles.",
+  "Prerequisites: Windows automatic Intune enrollment is configured and the target users are allowed to join devices to Microsoft Entra ID.",
+  "Make sure the Intune Provisioning Client service principal exists (app ID `f1346770-5b25-470b-88bd-d5744ab7952c`; some tenants show it as Intune Autopilot ConfidentialClient): `Connect-MgGraph -Scopes Application.ReadWrite.All` then `New-MgServicePrincipal -AppId f1346770-5b25-470b-88bd-d5744ab7952c`. A 409 Request_MultipleObjectsWithSameKeyValue means it is already there.",
+  "Create a dedicated assigned security device group (not dynamic, not role-assignable), e.g. `$g = New-MgGroup -DisplayName 'APDP-UserDriven-Devices' -MailEnabled:$false -MailNickname 'apdp-ud-devices' -SecurityEnabled -IsAssignableToRole:$false`.",
+  "Make the provisioning service principal the group owner: `$sp = Get-MgServicePrincipal -Filter \"appId eq 'f1346770-5b25-470b-88bd-d5744ab7952c'\"` then `New-MgGroupOwnerByRef -GroupId $g.Id -BodyParameter @{'@odata.id'=\"https://graph.microsoft.com/v1.0/directoryObjects/$($sp.Id)\"}`. Devices are added to this group during the deployment; you don't add members yourself.",
+  "Create a user group for the people who will run setup, and assign every essential app and platform script to the device group (not the user group). Apps must install in System context; scripts must have Run this script using the logged on credentials = No.",
+  "Intune admin center > Devices > Windows > Enrollment > Device preparation policies > Create > User Driven. Device group page: the device group. Configuration: Deployment mode User-driven, Deployment type Single user, Join type Microsoft Entra joined, User account type Standard User (removes the auto-granted local admin before the desktop).",
+  "Set Minutes allowed before showing installation error (15–720, covers the whole run), a custom error message, Show link to diagnostics = Yes, and decide on Allow users to skip setup after multiple attempts. Under Apps select up to 25 essential apps (LOB, Win32, WinGet-backed Store, Microsoft 365, Enterprise App Catalog; LOB and Win32 can be mixed) and under Scripts up to 10 scripts.",
+  "Assignments: the user group. If several policies target the same user, order them in the Priority column (lowest number wins); a device-based assignment beats a user-based one.",
+  "If an enrollment restriction blocks personal Windows devices, every device needs a corporate identifier or device association before first boot (see the related registration recipe). OOBE tweaks such as hiding the EULA/privacy pages and the device name template only work for associated devices.",
+  "Run a pilot device and watch Devices > Monitor > Windows Autopilot device preparation deployments: phase, per-app and per-script status, and deployment time in near real time."
+ ],
+ "pitfalls": [
+  "A device that is registered as a classic Autopilot device and not associated gets the classic profile and ESP instead. If you see the ESP, you are not running device preparation; deregister the device or associate it.",
+  "Only selected apps and scripts are tracked during OOBE. Everything else assigned to the device group, all other MDM policy and all user-targeted config arrive after the desktop appears, so don't rely on a CA-relevant setting being present at first sign-in unless it's in the selected list.",
+  "A failing selected app or script fails the whole deployment. Keep the list short: what the user cannot work without, plus security agents.",
+  "The policy can be saved with no device group. It then never launches, without an obvious error.",
+  "The admin creating the policy needs the Intune RBAC permission Enrollment time device membership assignment; without it devices are not added to the group."
+ ],
+ "done_when": [
+  "The Intune Provisioning Client service principal owns an assigned, non-role-assignable device group referenced by the policy.",
+  "A pilot device shows Success in the device preparation deployment report with every selected app and script Installed.",
+  "The pilot device is in the device group, Entra joined, enrolled in Intune, and the user is a standard user."
+ ],
+ "troubleshooting": [
+  {
+   "symptom": "Saving the policy fails with a device security group error, or Device group shows 0 groups assigned.",
+   "cause": "The provisioning service principal isn't owner of the group.",
+   "fix": "Add the service principal with app ID `f1346770-5b25-470b-88bd-d5744ab7952c` as owner, then save again."
+  },
+  {
+   "symptom": "Device preparation never starts during OOBE.",
+   "fix": "Check Windows build and required update, that the device isn't classic-registered with a profile, that the signing-in user is in the assigned user group, that a device group is set, and that a corporate identifier exists when personal devices are blocked."
+  },
+  {
+   "symptom": "Apps or scripts show Skipped in the deployment report.",
+   "cause": "Not assigned to the policy's device group, or not applicable.",
+   "fix": "Assign them to the device group and confirm System context; with a managed installer configured, a known issue can skip Win32, Store and Enterprise App Catalog apps."
+  },
+  {
+   "symptom": "The device gets the wrong policy.",
+   "fix": "Re-order the policies in the Priority column; check for a device-based assignment that overrides the user one."
+  }
+ ],
+ "rollback": [
+  "Remove the user group from the policy's Assignments (or point it at an empty pilot group). Devices already deployed keep their configuration; new devices fall back to plain Entra join + automatic enrollment.",
+  "To move a device back to classic Autopilot, remove its device association and register its hardware hash, then assign a classic profile.",
+  "Keep the device group and its owner in place until no policy references it; deleting it breaks any remaining policy.",
+  "Confirm with a test device that OOBE no longer shows device preparation and that the deployment report shows no new runs for the removed group."
+ ],
+ "markers": {
+  "steps": "official",
+  "pitfalls": "practical",
+  "troubleshooting": "official",
+  "rollback": "practical"
+ },
+ "sources": [
+  {
+   "title": "Compare Windows Autopilot device preparation and Windows Autopilot",
+   "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/compare",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Device preparation user-driven Entra join: overview",
+   "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/tutorial/user-driven/entra-join-workflow",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Step 3: Create an assigned device group",
+   "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/tutorial/user-driven/entra-join-device-group",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Step 6: Create a Windows Autopilot device preparation policy",
+   "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/tutorial/user-driven/entra-join-autopilot-policy",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Windows Autopilot device preparation troubleshooting FAQ",
+   "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/troubleshooting-faq",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Device preparation reporting and monitoring",
+   "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/reporting-monitoring",
+   "checked": "2026-10-31"
+  },
+  {
+   "title": "Microsoft Graph: Add owners to a group",
+   "url": "https://learn.microsoft.com/en-us/graph/api/group-post-owners?view=graph-rest-1.0",
+   "checked": "2026-10-31"
+  }
+ ],
+ "last_verified": "2026-10-31",
+ "verified_by": "Pascal",
+ "created": "2026-10-31",
+ "updated": "2026-10-31",
+ "screenshots": []
+}

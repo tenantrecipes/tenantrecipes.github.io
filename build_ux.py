@@ -466,6 +466,7 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
     ai_n = sum(1 for r in R if {"Copilot", "Agents", "Licensing", "Prompts"} & set(tags_for(r)))
     sec_n = sum(1 for r in R if {"Conditional Access", "Identity", "Purview & DLP", "Security"} & set(tags_for(r)))
     pid = {p["id"] for p in pols}
+    ap_n = sum(1 for r in R if "autopilot" in r["title"].lower())
     L = lambda u, t, n=None: f'<li><a href="{u}">{t}' + (f' <span>{n}</span>' if n else "") + '</a></li>'
     hubs = [
         ("shield", "Secure", "Identity, Conditional Access, Defender, Purview",
@@ -476,10 +477,11 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
           L(f'{rel}security/index.html#watch', "Exploited CVEs to patch", exploited or None),
           L(f'{rel}policies/index.html', "Security policy templates", len(pols))],
          f'{rel}?t=Security#library', f"All {tc.get('Security', sec_n)} security recipes"),
-        ("layers", "Manage", "Intune, Windows, devices",
-         "Compliance baselines, hardened Windows 11 and clean joiner/leaver handling.",
-         [L(tag("Intune"), "Intune &amp; device recipes", tc.get("Intune")),
-          L(f'{rel}guides/{G2.SLUG}.html', "Windows 11 CIS hardening guide"),
+        ("layers", "Manage", "Intune, Windows, Autopilot, devices",
+         "Autopilot provisioning, compliance baselines, hardened Windows 11 and clean joiner/leaver handling.",
+         [L(tag("Intune"), "Intune &amp; device recipes", tc.get("Intune"))]
+         + ([L(f'{rel}search/index.html?q=Autopilot', "Windows Autopilot", ap_n)] if ap_n else [])
+         + [L(f'{rel}guides/{G2.SLUG}.html', "Windows 11 CIS hardening guide"),
           L(f'{rel}security/endpoint.html', "Endpoint &amp; client security"),
           L(f'{rel}security/harden-windows-laps.html', "Windows LAPS hardening")]
          + ([L(f'{rel}policies/onboarding-checklist.html', "Joiner / leaver checklists")] if "onboarding-checklist" in pid else []),

@@ -990,6 +990,329 @@
   ]
  },
  {
+  "id": "autopilot-device-preparation-entra-join",
+  "status": "published",
+  "order": 200,
+  "category": "Intune & devices for AI",
+  "title": "Windows Autopilot device preparation: user-driven Entra join with a provisioning-owned device group",
+  "problem": "Device preparation replaces the classic Autopilot profile + ESP pair for Windows 11 Entra join, but it silently does nothing if the device group, its owner or the app context is wrong. Build it so the essential apps land during OOBE and everything else follows after the desktop.",
+  "steps": [
+   "Pick the engine per device: device preparation covers user-driven and automatic mode, Entra join only, Windows 11 (24H2, or 22H2/23H2 with KB5035942). Need hybrid join, pre-provisioning, self-deploying, Autopilot Reset, Windows 10 or more than 25 apps during OOBE? Stay on classic Autopilot profiles.",
+   "Prerequisites: Windows automatic Intune enrollment is configured and the target users are allowed to join devices to Microsoft Entra ID.",
+   "Make sure the Intune Provisioning Client service principal exists (app ID `f1346770-5b25-470b-88bd-d5744ab7952c`; some tenants show it as Intune Autopilot ConfidentialClient): `Connect-MgGraph -Scopes Application.ReadWrite.All` then `New-MgServicePrincipal -AppId f1346770-5b25-470b-88bd-d5744ab7952c`. A 409 Request_MultipleObjectsWithSameKeyValue means it is already there.",
+   "Create a dedicated assigned security device group (not dynamic, not role-assignable), e.g. `$g = New-MgGroup -DisplayName 'APDP-UserDriven-Devices' -MailEnabled:$false -MailNickname 'apdp-ud-devices' -SecurityEnabled -IsAssignableToRole:$false`.",
+   "Make the provisioning service principal the group owner: `$sp = Get-MgServicePrincipal -Filter \"appId eq 'f1346770-5b25-470b-88bd-d5744ab7952c'\"` then `New-MgGroupOwnerByRef -GroupId $g.Id -BodyParameter @{'@odata.id'=\"https://graph.microsoft.com/v1.0/directoryObjects/$($sp.Id)\"}`. Devices are added to this group during the deployment; you don't add members yourself.",
+   "Create a user group for the people who will run setup, and assign every essential app and platform script to the device group (not the user group). Apps must install in System context; scripts must have Run this script using the logged on credentials = No.",
+   "Intune admin center > Devices > Windows > Enrollment > Device preparation policies > Create > User Driven. Device group page: the device group. Configuration: Deployment mode User-driven, Deployment type Single user, Join type Microsoft Entra joined, User account type Standard User (removes the auto-granted local admin before the desktop).",
+   "Set Minutes allowed before showing installation error (15–720, covers the whole run), a custom error message, Show link to diagnostics = Yes, and decide on Allow users to skip setup after multiple attempts. Under Apps select up to 25 essential apps (LOB, Win32, WinGet-backed Store, Microsoft 365, Enterprise App Catalog; LOB and Win32 can be mixed) and under Scripts up to 10 scripts.",
+   "Assignments: the user group. If several policies target the same user, order them in the Priority column (lowest number wins); a device-based assignment beats a user-based one.",
+   "If an enrollment restriction blocks personal Windows devices, every device needs a corporate identifier or device association before first boot (see the related registration recipe). OOBE tweaks such as hiding the EULA/privacy pages and the device name template only work for associated devices.",
+   "Run a pilot device and watch Devices > Monitor > Windows Autopilot device preparation deployments: phase, per-app and per-script status, and deployment time in near real time."
+  ],
+  "pitfalls": [
+   "A device that is registered as a classic Autopilot device and not associated gets the classic profile and ESP instead. If you see the ESP, you are not running device preparation; deregister the device or associate it.",
+   "Only selected apps and scripts are tracked during OOBE. Everything else assigned to the device group, all other MDM policy and all user-targeted config arrive after the desktop appears, so don't rely on a CA-relevant setting being present at first sign-in unless it's in the selected list.",
+   "A failing selected app or script fails the whole deployment. Keep the list short: what the user cannot work without, plus security agents.",
+   "The policy can be saved with no device group. It then never launches, without an obvious error.",
+   "The admin creating the policy needs the Intune RBAC permission Enrollment time device membership assignment; without it devices are not added to the group."
+  ],
+  "done_when": [
+   "The Intune Provisioning Client service principal owns an assigned, non-role-assignable device group referenced by the policy.",
+   "A pilot device shows Success in the device preparation deployment report with every selected app and script Installed.",
+   "The pilot device is in the device group, Entra joined, enrolled in Intune, and the user is a standard user."
+  ],
+  "troubleshooting": [
+   {
+    "symptom": "Saving the policy fails with a device security group error, or Device group shows 0 groups assigned.",
+    "cause": "The provisioning service principal isn't owner of the group.",
+    "fix": "Add the service principal with app ID `f1346770-5b25-470b-88bd-d5744ab7952c` as owner, then save again."
+   },
+   {
+    "symptom": "Device preparation never starts during OOBE.",
+    "fix": "Check Windows build and required update, that the device isn't classic-registered with a profile, that the signing-in user is in the assigned user group, that a device group is set, and that a corporate identifier exists when personal devices are blocked."
+   },
+   {
+    "symptom": "Apps or scripts show Skipped in the deployment report.",
+    "cause": "Not assigned to the policy's device group, or not applicable.",
+    "fix": "Assign them to the device group and confirm System context; with a managed installer configured, a known issue can skip Win32, Store and Enterprise App Catalog apps."
+   },
+   {
+    "symptom": "The device gets the wrong policy.",
+    "fix": "Re-order the policies in the Priority column; check for a device-based assignment that overrides the user one."
+   }
+  ],
+  "rollback": [
+   "Remove the user group from the policy's Assignments (or point it at an empty pilot group). Devices already deployed keep their configuration; new devices fall back to plain Entra join + automatic enrollment.",
+   "To move a device back to classic Autopilot, remove its device association and register its hardware hash, then assign a classic profile.",
+   "Keep the device group and its owner in place until no policy references it; deleting it breaks any remaining policy.",
+   "Confirm with a test device that OOBE no longer shows device preparation and that the deployment report shows no new runs for the removed group."
+  ],
+  "markers": {
+   "steps": "official",
+   "pitfalls": "practical",
+   "troubleshooting": "official",
+   "rollback": "practical"
+  },
+  "sources": [
+   {
+    "title": "Compare Windows Autopilot device preparation and Windows Autopilot",
+    "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/compare",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Device preparation user-driven Entra join: overview",
+    "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/tutorial/user-driven/entra-join-workflow",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Step 3: Create an assigned device group",
+    "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/tutorial/user-driven/entra-join-device-group",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Step 6: Create a Windows Autopilot device preparation policy",
+    "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/tutorial/user-driven/entra-join-autopilot-policy",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Windows Autopilot device preparation troubleshooting FAQ",
+    "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/troubleshooting-faq",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Device preparation reporting and monitoring",
+    "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/reporting-monitoring",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Microsoft Graph: Add owners to a group",
+    "url": "https://learn.microsoft.com/en-us/graph/api/group-post-owners?view=graph-rest-1.0",
+    "checked": "2026-10-31"
+   }
+  ],
+  "last_verified": "2026-10-31",
+  "verified_by": "Pascal",
+  "created": "2026-10-31",
+  "updated": "2026-10-31",
+  "screenshots": []
+ },
+ {
+  "id": "autopilot-register-hash-corporate-identifiers",
+  "status": "published",
+  "order": 210,
+  "category": "Intune & devices for AI",
+  "title": "Pre-stage Windows devices for Autopilot: hardware hash import vs corporate identifiers, by CSV or Graph",
+  "problem": "Classic Autopilot needs a registered hardware hash; device preparation with personal enrollment blocked needs a corporate identifier instead. Mixing them up is the most common reason a new device enrolls as personal, gets blocked, or runs the wrong flow.",
+  "steps": [
+   "Decide per fleet: classic Autopilot profile = register the hardware hash (ideally by OEM/reseller, own upload mainly for test and limited cases). Device preparation = no registration; upload a Windows corporate identifier (manufacturer, model, serial) only if an enrollment restriction blocks personal Windows devices, or use device association.",
+   "Collect a hash on a running device (elevated): `Install-Script -Name Get-WindowsAutopilotInfo` then `Get-WindowsAutopilotInfo -OutputFile AutopilotHWID.csv`. In OOBE: Shift+F10, `powershell.exe`, then `Get-WindowsAutopilotInfo -Online` with an Intune Administrator (first run asks for Graph consent). Windows 11 OOBE can also export it from the diagnostics page (Ctrl+Shift+D).",
+   "Merge into one CSV, max 500 rows per batch, header exactly `Device Serial Number,Windows Product ID,Hardware Hash,Group Tag,Assigned User`: no extra columns, no quotes, ANSI encoding, edited in a plain-text editor, never saved from Excel.",
+   "Import: Intune admin center > Devices > Windows > Enrollment > Windows Autopilot > Devices > Import, then Sync and Refresh until the rows appear. Wait for each batch to finish before the next.",
+   "Scripted import: `POST https://graph.microsoft.com/v1.0/deviceManagement/importedWindowsAutopilotDeviceIdentities/import` with `importedWindowsAutopilotDeviceIdentities[]` carrying `serialNumber`, `hardwareIdentifier` (Base64 hash), optional `groupTag` and `assignedUserPrincipalName`. Permission: `DeviceManagementServiceConfig.ReadWrite.All`. Poll `state.deviceImportStatus` and `deviceErrorName`.",
+   "Verify registrations: `GET https://graph.microsoft.com/v1.0/deviceManagement/windowsAutopilotDeviceIdentities` (filter on serial) and confirm each device has the intended group tag and an assigned profile.",
+   "Corporate identifiers for Windows: build a CSV without header, one `Manufacturer,Model,Serial` line per device (periods removed from the serial, max 5,000 rows / 5 MB, one identifier type per file). Read the values with `Get-CimInstance Win32_ComputerSystem | ForEach-Object { $_.Manufacturer, $_.Model, (Get-CimInstance Win32_BIOS).SerialNumber -join ',' }`.",
+   "Upload: Devices > Enrollment > Corporate device identifiers > Add > Upload CSV file > Manufacturer, model, and serial number (Windows only). Manual entry isn't available for Windows. Above 10 CSV uploads, use Graph: `POST https://graph.microsoft.com/beta/deviceManagement/importedDeviceIdentities/importDeviceIdentityList` (beta) with `DeviceManagementServiceConfig.ReadWrite.All`.",
+   "Only now enable or confirm the device platform restriction that blocks personally owned Windows devices, and track identifier status (Enrolled, Not contacted, Failed)."
+  ],
+  "pitfalls": [
+   "Windows corporate identifiers only matter at enrollment time. Afterwards Intune shows ownership from normal Windows logic, so a device can enroll as corporate and later read Personal; fix it in device Properties if you need to.",
+   "Once any Windows corporate identifier exists, every other Entra join during setup is marked personal. Uploading a partial list and then blocking personal devices locks out the rest of the fleet.",
+   "Corporate identifiers need Windows 11 22H2/23H2 builds 22621.3374/22631.3374 or later (Windows 10 22H2 19045.4598). Older builds report model and manufacturer as Unknown and never match.",
+   "Microsoft recommends uploading 4K hashes yourself only for testing or limited cases: the hash carries sensitive hardware data and loosely vetted Intune accounts exist. Prefer OEM/partner registration, and treat exported CSVs as secrets that you delete after import.",
+   "Don't register Entra registered (workplace joined) or MDM-only devices as Autopilot devices; remove them from Intune and Entra first or the join type sticks as registered.",
+   "An invalid UPN in Assigned User isn't validated beyond the domain and can make the device unusable until the assignment is removed."
+  ],
+  "done_when": [
+   "Every classic-Autopilot device appears under Windows Autopilot devices with the right group tag and an assigned profile.",
+   "Every device-preparation device that needs it is listed under Corporate device identifiers before first boot.",
+   "A test device enrolls as Corporate and is not stopped by the personal-device restriction."
+  ],
+  "troubleshooting": [
+   {
+    "symptom": "Import does nothing, network trace shows HTTP 400 'Cannot convert the literal ... to Edm.Binary'.",
+    "cause": "Hash isn't validly padded Base64.",
+    "fix": "Test with `[Convert]::FromBase64String(\"<hash>\")` and adjust trailing `=`/`A` padding until it decodes, then re-import."
+   },
+   {
+    "symptom": "ZtdDeviceAssignedToAnotherTenant",
+    "fix": "The hash is registered in another tenant; the other tenant (or the reseller) must deregister it first."
+   },
+   {
+    "symptom": "ZtdDeviceAlreadyAssigned or ZtdDeviceDuplicated",
+    "fix": "Search the serial under Windows Autopilot devices; drop duplicate rows instead of importing again."
+   },
+   {
+    "symptom": "InvalidZtdHardwareHash",
+    "fix": "Manufacturer or serial is empty in the hash. Check `Get-CimInstance Win32_BaseBoard | Select-Object Manufacturer, SerialNumber`."
+   },
+   {
+    "symptom": "Enrollment fails with Enrollment restriction not met.",
+    "fix": "Check Devices > Enrollment failures, then confirm the identifier triple matches what the device reports (exact model string, serial without periods)."
+   }
+  ],
+  "rollback": [
+   "If devices are blocked after enabling the personal-device restriction, set Windows (MDM) personally owned back to Allow in that restriction first; that is the fastest reversible state.",
+   "Delete wrong corporate identifiers under Corporate device identifiers. Deleting doesn't change ownership of already enrolled devices.",
+   "To undo a hash registration: delete the device from Intune first, unassign the user, then delete it under Windows Autopilot devices and Sync. For Entra joined devices, don't delete the Entra object by hand.",
+   "Confirm the undo: the serial no longer appears in `windowsAutopilotDeviceIdentities`, and a test device enrolls or runs the intended flow."
+  ],
+  "markers": {
+   "steps": "official",
+   "pitfalls": "official",
+   "troubleshooting": "official",
+   "rollback": "practical"
+  },
+  "sources": [
+   {
+    "title": "Manually register devices with Windows Autopilot",
+    "url": "https://learn.microsoft.com/en-us/autopilot/add-devices",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Windows Autopilot registration overview (incl. deregister)",
+    "url": "https://learn.microsoft.com/en-us/autopilot/registration-overview",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Add corporate identifiers to Intune",
+    "url": "https://learn.microsoft.com/en-us/intune/intune-service/enrollment/corporate-identifiers-add",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Device preparation Step 7: Add Windows corporate identifier",
+    "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/tutorial/user-driven/entra-join-corporate-identifier",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Graph v1.0: importedWindowsAutopilotDeviceIdentity import",
+    "url": "https://learn.microsoft.com/en-us/graph/api/intune-enrollment-importedwindowsautopilotdeviceidentity-import?view=graph-rest-1.0",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Graph v1.0: List windowsAutopilotDeviceIdentities",
+    "url": "https://learn.microsoft.com/en-us/graph/api/intune-enrollment-windowsautopilotdeviceidentity-list?view=graph-rest-1.0",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Graph beta: importDeviceIdentityList",
+    "url": "https://learn.microsoft.com/en-us/graph/api/intune-enrollment-importeddeviceidentity-importdeviceidentitylist?view=graph-rest-beta",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Windows Autopilot troubleshooting FAQ",
+    "url": "https://learn.microsoft.com/en-us/autopilot/troubleshooting",
+    "checked": "2026-10-31"
+   }
+  ],
+  "last_verified": "2026-10-31",
+  "verified_by": "Pascal",
+  "created": "2026-10-31",
+  "updated": "2026-10-31",
+  "screenshots": []
+ },
+ {
+  "id": "autopilot-troubleshoot-enrollment",
+  "status": "published",
+  "order": 220,
+  "category": "Intune & devices for AI",
+  "title": "Troubleshoot Windows Autopilot enrollment: event IDs, profile registry, MDM diagnostics and auto-collected logs",
+  "problem": "When Autopilot stalls in OOBE the error page rarely names the cause. Work the flow in order (profile, tenant match, Entra join, MDM enrollment, ESP/apps) and pull the evidence from the device and from Intune instead of guessing.",
+  "steps": [
+   "Locate the failure in the flow: network > profile download > user auth > Entra join > automatic MDM enrollment > settings/apps (ESP for classic, tracked apps/scripts for device preparation). If you see the ESP on a device meant for device preparation, it's running classic Autopilot.",
+   "Device preparation: start at Devices > Monitor > Windows Autopilot device preparation deployments; the device detail shows the last phase and which app or script failed or was Skipped.",
+   "Classic Autopilot on Windows 11: enable the diagnostics page in the ESP profile (Show app and profile configuration progress = Yes, Turn on log collection and diagnostics page for end users = Yes) and open it in OOBE with Ctrl+Shift+D.",
+   "In OOBE, Shift+F10 gives a prompt. Read the Autopilot channel: `Get-WinEvent -LogName 'Microsoft-Windows-ModernDeployment-Diagnostics-Provider/Autopilot' -MaxEvents 50 | Format-Table TimeCreated,Id,Message -Wrap`. Key IDs: 807 ZtdDeviceIsNotRegistered, 809/815 no assigned profile, 908 serial or product key mismatch, 171/172 TPM attestation (self-deploying/pre-provisioning), 163 profile already present.",
+   "Check what the device actually received: `Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\Provisioning\\Diagnostics\\Autopilot`. CloudAssignedTenantDomain blank or IsAutopilotDisabled = 1 means no registration or no profile download; TenantMatched = 0 means the user signed in to a different tenant than the device is registered to.",
+   "MDM side: `Get-WinEvent -LogName 'Microsoft-Windows-DeviceManagement-Enterprise-Diagnostics-Provider/Admin' -MaxEvents 50`, plus `dsregcmd /status` for join state. Enable the Debug channel in Event Viewer when Admin isn't enough.",
+   "Bundle everything: `mdmdiagnosticstool.exe -area \"DeviceEnrollment;DeviceProvisioning;Autopilot\" -zip C:\\Users\\Public\\Documents\\MDMDiagReport.zip`. The zip holds Autopilot and provisioning ETLs, MDMDiagHtmlReport.html, a registry dump and the enterprise diagnostics evtx.",
+   "From the portal: Intune auto-captures logs on Autopilot failure (one set per device per day, kept 28 days) under the device > Diagnostics > Download; for enrolled corporate devices use Collect diagnostics (bulk up to 25). Graph can't collect or download these.",
+   "After a profile change, restart from OOBE with `shutdown.exe /r /t 0` so the device downloads the profile again."
+  ],
+  "pitfalls": [
+   "A device that boots into OOBE before any profile exists can cache an empty profile. Create and assign the profile first, then restart the device.",
+   "Re-using a pre-provisioned or self-deploying device returns 0x80180014 until you select Unblock device on its Autopilot record. The same code appears when Windows (MDM) is blocked in a device platform restriction.",
+   "Known policy conflicts during device ESP: AppLocker CSP, DeviceLock password rules that break autologon after reboot, disabling the Microsoft Account Sign-in Assistant (wlidsvc), AutoAdminLogon = 0, and PreferredAadTenantDomainName. Target those to users or apply after enrollment.",
+   "Classic ESP can't install LOB (MSI) and Win32 apps at the same time ('Another installation is in progress'). Use one type, or device preparation, which supports both.",
+   "Deleting the Entra device object created at registration breaks Autopilot targeting and join. Recover by deleting and re-importing the Autopilot device, not by recreating the Entra object."
+  ],
+  "done_when": [
+   "The failing phase is identified from the deployment report, Autopilot event IDs or the profile registry values.",
+   "An MDM diagnostics zip or the Intune auto-collected logs for the device are saved with the ticket.",
+   "The fix is applied and a rerun reaches the desktop (classic) or Success in the device preparation report."
+  ],
+  "troubleshooting": [
+   {
+    "symptom": "Event 807 or 815 in the Autopilot log.",
+    "fix": "Confirm the hash is registered and the device is in a group targeted by a deployment profile; Sync in Intune, then restart OOBE."
+   },
+   {
+    "symptom": "Event 908 SerialNumberMismatch / ProductKeyIdMismatch, or Fix pending after a repair.",
+    "fix": "Hardware changed (e.g. motherboard). Deregister and re-register the device with a fresh hash."
+   },
+   {
+    "symptom": "'Can't connect to the URL of your organization's MDM terms of use'.",
+    "cause": "Usually licensing.",
+    "fix": "Give the user a valid Intune, EMS or Microsoft 365 license that includes Intune."
+   },
+   {
+    "symptom": "Join type shows Microsoft Entra registered instead of joined.",
+    "fix": "The device was workplace joined before. Delete it from Intune and Autopilot in the documented order, re-register and redeploy."
+   },
+   {
+    "symptom": "Error 80180018 on the Something went wrong page.",
+    "fix": "Check user licensing and the user's device limits: the Entra join limit (default 50) and any Intune device limit restriction."
+   }
+  ],
+  "rollback": [
+   "Turn the Debug channel of DeviceManagement-Enterprise-Diagnostics-Provider back off and delete exported zips and CSVs from the device and your workstation; they contain device and user identifiers.",
+   "If you changed the ESP profile to show the diagnostics page for a pilot, set Turn on log collection and diagnostics page for end users back to No when the pilot ends, if you don't want users to see it.",
+   "If you unblocked a device or moved a device between profiles, verify the Autopilot record shows the intended profile and assignment status before handing it back."
+  ],
+  "markers": {
+   "steps": "official",
+   "pitfalls": "official",
+   "troubleshooting": "official",
+   "rollback": "practical"
+  },
+  "sources": [
+   {
+    "title": "Windows Autopilot troubleshooting FAQ",
+    "url": "https://learn.microsoft.com/en-us/autopilot/troubleshooting",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Windows Autopilot device preparation troubleshooting FAQ",
+    "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/troubleshooting-faq",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Device preparation reporting and monitoring",
+    "url": "https://learn.microsoft.com/en-us/autopilot/device-preparation/reporting-monitoring",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Collect MDM logs",
+    "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm-collect-logs",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Device action: Collect diagnostics",
+    "url": "https://learn.microsoft.com/en-us/intune/device-management/actions/collect-diagnostics",
+    "checked": "2026-10-31"
+   },
+   {
+    "title": "Windows Autopilot registration overview (incl. deregister)",
+    "url": "https://learn.microsoft.com/en-us/autopilot/registration-overview",
+    "checked": "2026-10-31"
+   }
+  ],
+  "last_verified": "2026-10-31",
+  "verified_by": "Pascal",
+  "created": "2026-10-31",
+  "updated": "2026-10-31",
+  "screenshots": []
+ },
+ {
   "id": "purview-oversharing-assessment",
   "status": "published",
   "order": 200,

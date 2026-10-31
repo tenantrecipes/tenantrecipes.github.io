@@ -1,6 +1,15 @@
 [
- {"date": "2026-10-31", "kind": "site", "text": "Homepage: new \"Explore by task\" hubs (Secure, Manage, Deploy AI, Automate) that link straight into filtered recipes, guides, security entries, tools and policy templates. Compact header that stays on screen while you scroll, on desktop and mobile."},
-  {
+ {
+  "date": "2026-10-31",
+  "kind": "site",
+  "text": "Three new Windows Autopilot recipes: device preparation with Entra join and a provisioning-owned device group, hardware hash import vs corporate identifiers (CSV and Graph), and enrollment troubleshooting with event IDs, registry values and MDM diagnostics. The Manage task hub on the homepage now links to Autopilot."
+ },
+ {
+  "date": "2026-10-31",
+  "kind": "site",
+  "text": "Homepage: new \"Explore by task\" hubs (Secure, Manage, Deploy AI, Automate) that link straight into filtered recipes, guides, security entries, tools and policy templates. Compact header that stays on screen while you scroll, on desktop and mobile."
+ },
+ {
   "date": "2026-10-31",
   "kind": "site",
   "text": "Content markers on recipes: Official guidance, Practical insight and Tested configuration (tested only with a named test environment and date; see the methodology page). Recipes can now carry Troubleshooting and Rollback sections, starting with the legacy authentication and phishing-resistant MFA recipes."
