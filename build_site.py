@@ -120,6 +120,10 @@ def json_ld(path, title, desc, og_type):
     return '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + '</script>'
 
 
+GC = (getattr(C, "GOATCOUNTER_CODE", "") or "").strip().lower()
+if GC and not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,49}", GC):
+    sys.exit(f"site_config.GOATCOUNTER_CODE must be just the site code (e.g. 'abc' from abc.goatcounter.com), got {GC!r}")
+
 def head(title, desc, rel, path, og_type="website"):
     url = canon(path)
     og, og_alt = UX.og_image(path, RID)
@@ -154,6 +158,8 @@ def head(title, desc, rel, path, og_type="website"):
     tags.append(f'<link rel="stylesheet" href="{rel}assets/style.css">')
     tags.append(f'<script src="{rel}assets/ui.js" defer></script>')
     tags.append(f'<script src="{rel}assets/search.js" defer></script>')
+    if GC:
+        tags.append(f'<script data-goatcounter="https://{GC}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>')
     return "".join(tags)
 
 
@@ -199,8 +205,8 @@ def ad_slot(name):
 def signup(rel, source, heading=True):
     """Buttondown embed form. The username comes ONLY from site_config.BUTTONDOWN_USERNAME."""
     u = E(C.BUTTONDOWN_USERNAME)
-    h = ('<h2>The weekly Tenant Recipes brief</h2><p>Every week: what changed in Copilot, Intune, Entra and Purview '
-         '— and what you should do about it. 5 minutes, no fluff.</p>') if heading else ""
+    h = ('<h2>The Tenant Recipes Weekly Brief</h2><p>Every Tuesday: 3 Microsoft changes you should know, 2 security updates worth '
+         'investigating, 1 configuration tip and 1 thing to review in your tenant. 5 minutes, no fluff.</p>') if heading else ""
     guard = (' onsubmit="alert(\'Newsletter signup is not live yet: set BUTTONDOWN_USERNAME in site_config.py.\');return false"'
              if BD_PLACEHOLDER else "")
     note = ('<p class="todo">Not live yet: set BUTTONDOWN_USERNAME in site_config.py and rebuild.</p>'
@@ -452,27 +458,38 @@ def build():
         '<meta name="robots" content="noindex"><script>location.replace("search/index.html"+location.search)</script>'
         '<meta http-equiv="refresh" content="0; url=search/index.html"></head><body><p>Search has moved to <a href="search/index.html">the new search page</a>.</p></body></html>\n')
 
-    pages.append(page("newsletter.html", f"The weekly Tenant Recipes brief (free newsletter) | {C.SITE_NAME}",
-                      "A free weekly 5-minute brief on what changed in Copilot, Intune, Entra and Purview, and what admins should do about it.",
+    pages.append(page("newsletter.html", f"The Tenant Recipes Weekly Brief (free newsletter) | {C.SITE_NAME}",
+                      "A free 5-minute weekly brief for Microsoft 365 admins: 3 Microsoft changes, 2 security updates, 1 configuration tip and 1 thing to review in your tenant.",
                       lambda rel: (
         T.page_hero(rel, T.crumbs_dark(rel, "newsletter.html", [("Home", rel + "index.html"), ("Newsletter", None)]), "Newsletter",
-                    "The weekly Tenant Recipes brief", "One short email every Tuesday morning (CET) for Microsoft 365 "
-                    "admins who were handed “roll out Copilot and agents safely”.", kind="page")
-        + '<main class="wrap pg"><article class="prose doc"><ul><li><strong>Top story</strong>: the one change that matters this week, '
-        'with an admin take.</li><li><strong>Copilot · Intune · Entra &amp; Purview</strong>: short items with what to do, each linked to the source.</li>'
-        '<li><strong>Recipe of the week</strong>: a hands-on playbook from this site.</li></ul><p>5 minutes, no fluff, free. <a href="newsletter-sample.html">See a sample issue</a>.</p></article>'
+                    "The Tenant Recipes Weekly Brief", "One short email every Tuesday (CET) for people who run Microsoft 365 tenants. "
+                    "Same four sections every week, so you can scan it in five minutes.", kind="page")
+        + '<main class="wrap pg"><article class="prose doc"><ul>'
+        '<li><strong>3 Microsoft changes you should know</strong>: what changes, from when, and what to do.</li>'
+        '<li><strong>2 security updates worth investigating</strong>: exploited or high-impact issues and what to check first.</li>'
+        '<li><strong>1 practical configuration tip</strong>: one setting, with the recipe that has the steps, the check and the rollback.</li>'
+        '<li><strong>1 thing to review in your tenant</strong>: one report, assignment or exception worth a look this week.</li></ul>'
+        '<p>Every item links to a fact-checked page with the official sources. Free, no fluff. <a href="newsletter-sample.html">See a sample issue</a>.</p></article>'
         + signup(rel, "newsletter-page", heading=False) + '</main>')))
 
     host = E(C.HOSTING_PROVIDER)
-    pages.append(page("privacy.html", f"Privacy policy | {C.SITE_NAME}", "How Tenant Recipes handles personal data: no cookies, no analytics, and a newsletter you can leave with one click.", lambda rel: (
+    pages.append(page("privacy.html", f"Privacy policy | {C.SITE_NAME}", ("How Tenant Recipes handles personal data: no cookies, cookie-free aggregate visitor counts, and a newsletter you can leave with one click." if GC else "How Tenant Recipes handles personal data: no cookies, no analytics, and a newsletter you can leave with one click."), lambda rel: (
         T.page_hero(rel, T.crumbs_dark(rel, "privacy.html", [("Home", rel + "index.html"), ("Privacy policy", None)]), "Legal", "Privacy policy",
-                    f"Last updated: {TODAY}. No cookies, no analytics, no ad trackers.", kind="page")
+                    f"Last updated: {TODAY}. No cookies, no ad trackers" + (", only cookie-free aggregate visitor counts." if GC else ", no analytics."), kind="page")
         + f'<main class="wrap pg"><article class="prose doc">'
         f'<p>Tenant Recipes is a personal project based in {E(C.OWNER_COUNTRY)}. {E(C.OWNER_NAME)} is the data controller for the '
         f'personal data described here. We collect as little as possible.</p>'
-        '<h2>Visiting the site</h2><p>The site uses no cookies, no analytics and no advertising trackers. '
+        + ('<h2>Visiting the site</h2><p>The site uses no cookies and no advertising trackers. '
         f'Like any website, our hosting provider ({host}) processes technical data such as your IP address and browser type in server logs '
         'to deliver and protect the site. We do not use these logs to identify you.</p>'
+        + ('<h2>Visitor statistics</h2><p>To see which pages are useful, we count page views with '
+           '<a href="https://www.goatcounter.com">GoatCounter</a>. It sets no cookies, uses no local storage and builds no profile of you. '
+           'It keeps only aggregate counts per page and per day or hour, such as the page, the referring site, browser and operating system, '
+           'screen width, language and country (derived from the IP address, which is not stored). These counts cannot be linked to each other or to a person. '
+           'The legal basis is our legitimate interest in knowing how the site is used (GDPR Art. 6(1)(f)). See GoatCounter’s '
+           '<a href="https://www.goatcounter.com/help/privacy">privacy policy</a>. Browsers with an ad or tracker blocker usually block the counter, '
+           'and that is fine.</p>' if GC else '<p>We do not run analytics.</p>'))
+        + ''
         '<h2>Newsletter</h2><p>If you subscribe, your email address (and the page you signed up from) is stored by our newsletter provider, '
         '<a href="https://buttondown.com/legal/privacy">Buttondown</a>, which processes it on our behalf and may store data outside the EU/EEA '
         'under appropriate safeguards. We use your address only to send the newsletter. The legal basis is your consent (GDPR Art. 6(1)(a)); '
@@ -541,8 +558,8 @@ def build():
     pages.append(page(f"guides/{Q.SLUG}.html", f"{Q.TITLE} | {C.SITE_NAME}", Q.DESC,
                       lambda rel: UX.quick_body(rel, Q, RID, '<div class="wrap">' + signup(rel, "quick-" + Q.SLUG) + '</div>'), "article"))
     pages.append(page("newsletter-sample.html", f"Sample issue of the weekly brief | {C.SITE_NAME}",
-                      "See what the free weekly Tenant Recipes brief looks like: a top story with an admin take, short items, a patch-first list and a recipe of the week.",
-                      lambda rel: UX.sample_issue_body(rel, R, CY.load(), GUIDES) + f'<div class="wrap">{signup(rel, "newsletter-sample")}</div>'))
+                      "See what the free Tenant Recipes Weekly Brief looks like: 3 Microsoft changes, 2 security updates, 1 configuration tip and 1 thing to review in your tenant.",
+                      lambda rel: UX.sample_issue_body(rel, R, CY.load(), GUIDES, NEWS) + f'<div class="wrap">{signup(rel, "newsletter-sample")}</div>'))
 
     # Markdown checklists (download buttons)
     (DIST / "recipes" / "checklists").mkdir(parents=True, exist_ok=True)

@@ -49,9 +49,10 @@ See `README.md` ("Ad slots"). `ADS_ENABLED = False` in `site_config.py` (default
 - New recipe = new file `data/recipes/<id>.json` (schema in `RECIPES.md`), then `python3 build.py`.
 - `build.py` exits non-zero on invalid recipes or broken links, so CI never deploys a broken site.
 - Use `"status": "needs-review"` for recipes that failed fact-checking; only `published` ones are built.
-- Newsletter drafts: `python3 tools/newsletter_draft.py --issue 2 --recipes id1,id2` writes
-  `newsletters/drafts/issue-002.md` with teaser links + UTM tags. Drafts are never sent automatically;
-  KP approves and sends from Buttondown.
+- Newsletter drafts ("The Tenant Recipes Weekly Brief": 3 changes, 2 security updates, 1 tip, 1 thing to review):
+  `python3 tools/newsletter_draft.py --issue 2 --changes id,id,id --security id,id --tip id --review id` writes
+  `newsletters/drafts/issue-002.md` with UTM-tagged links. Format and Monday-draft rules: `NEWSLETTER.md`.
+  Drafts are never sent automatically; KP approves, then the issue is scheduled in Buttondown for Tuesday 15:00 (Stockholm).
 
 ## SEO (technical)
 
@@ -66,3 +67,29 @@ See `README.md` ("Ad slots"). `ADS_ENABLED = False` in `site_config.py` (default
 - `tools/check_meta.py` fails the build on missing/duplicate titles or descriptions, missing OG tags or canonical.
 - Search Console (needs the site owner): add the property for the live domain, verify it, then submit
   `sitemap.xml`. Redo this after the move to the custom domain (plus a change-of-address if available).
+
+## Analytics (cookie-free, GoatCounter)
+
+The site is ready for [GoatCounter](https://www.goatcounter.com): no cookies, no local storage, no personal data
+stored, only aggregate counts. It is free for sites of this size ("reasonable public usage"), so no consent
+banner is needed for it. Until a site code is set, **nothing** is added to the pages and the privacy policy says "no analytics".
+
+Steps for the site owner:
+1. Sign up at **https://www.goatcounter.com/signup**. Use the brand mailbox, not a personal or work address.
+   - *Code*: pick e.g. `tenantrecipes`. This becomes `https://tenantrecipes.goatcounter.com` (the dashboard).
+   - *Site domain*: `tenantrecipes.github.io` (change it in GoatCounter settings when the custom domain is live).
+   - Choose a strong password (save it in the password manager) and confirm the email.
+2. In `site_config.py` set only the code, nothing else:
+   ```python
+   GOATCOUNTER_CODE = "tenantrecipes"   # the "abc" in https://abc.goatcounter.com
+   ```
+   Not the script, not the URL, not a password or API key. The build refuses anything other than a plain code.
+3. Rebuild and push (`python3 build.py`, commit, push). Every page then loads
+   `<script data-goatcounter="https://<code>.goatcounter.com/count" async src="https://gc.zgo.at/count.js">`,
+   and the privacy policy and "How we verify" page switch automatically to the GoatCounter text.
+4. Check: open the live site with the ad blocker off. A page view should show in the dashboard within about 10 seconds.
+5. Optional, in GoatCounter settings: turn off screen size collection if not needed, and use "Ignore IPs", or open the site once with
+   `#toggle-goatcounter` at the end of the URL, so your own visits are not counted.
+
+To turn analytics off again: set `GOATCOUNTER_CODE = ""` and rebuild.
+

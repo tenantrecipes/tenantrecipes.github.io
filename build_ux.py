@@ -197,7 +197,7 @@ def screenshots(r, rel):
 def news_mid(rel, source):
     u = esc(C.BUTTONDOWN_USERNAME)
     return (f'<aside class="nm" aria-label="Newsletter"><div class="nm-t"><p class="nm-h">Get changes like this in your inbox</p>'
-            f'<p>The weekly Tenant Recipes brief: what changed in Copilot, Intune, Entra and Purview, and what to do about it. 5 minutes, no fluff. '
+            f'<p>The Tenant Recipes Weekly Brief: 3 Microsoft changes, 2 security updates, 1 configuration tip and 1 thing to review in your tenant. 5 minutes, no fluff. '
             f'<a href="{rel}newsletter-sample.html">See a sample issue</a>.</p></div>'
             f'<form class="bd-form" action="https://buttondown.com/api/emails/embed-subscribe/{u}" method="post" target="_blank">'
             f'<label class="sr" for="nm-{source}">Email address</label>'
@@ -293,31 +293,38 @@ def quick_body(rel, Q, RID, page_signup):
 
 
 # ---------------------------------------------------------------- sample newsletter issue
-def sample_issue_body(rel, R, CY, guides):
-    """A clearly labelled example issue assembled only from pages already published (and fact-checked) on the site."""
-    news = [r for r in R if "News / Retirement" in tags_for(r)]
-    news.sort(key=lambda r: (r.get("created", ""), r["id"]), reverse=True)
-    top = news[0] if news else R[0]
-    rest = [r for r in news if r["id"] != top["id"]][:4]
+def sample_issue_body(rel, R, CY, guides, NEWS=()):
+    """A clearly labelled example issue in the fixed Weekly Brief format (NEWSLETTER.md), assembled only from pages
+    already published (and fact-checked) on the site: 3 Microsoft changes, 2 security updates, 1 tip, 1 thing to review."""
+    rid = {r["id"]: r for r in R}
+    changes = [("news/" + n["id"] + ".html", n["title"], n["summary"], (n.get("todo") or [""])[0])
+               for n in sorted(NEWS, key=lambda n: (n.get("date", ""), n["id"]), reverse=True)]
+    if len(changes) < 3:
+        news = sorted([r for r in R if "News / Retirement" in tags_for(r)], key=lambda r: (r.get("created", ""), r["id"]), reverse=True)
+        changes += [("recipes/" + r["id"] + ".html", r["title"], r["problem"], "") for r in news]
+    changes = changes[:3]
     vulns = sorted([e for e in CY if e["type"] == "vulnerability" and e.get("exploited")],
-                   key=lambda e: e.get("kev_added") or e.get("advisory_date") or "", reverse=True)[:2]
-    rotw = next((r for r in R if r["id"] == "ca-break-glass"), R[0])
-    li = lambda href, title, text: f'<li><a href="{href}"><strong>{esc(title)}</strong></a> {esc(text)}</li>'
-    g = guides[0]
-    first = re.sub(r"`", "", top["steps"][0])
+                   key=lambda e: (e.get("vendor") == "Microsoft", e.get("kev_added") or e.get("advisory_date") or ""), reverse=True)[:2]
+    tip = rid.get("ca-break-glass") or R[0]
+    review = rid.get("pim-least-privilege-daily-ops") or rid.get("purview-audit-copilot") or R[-1]
+    first = lambda t: (t.split(". ")[0].rstrip(".") + ".") if t else ""
+    def li(href, title, text, label="", action=""):
+        act = f' <strong>{label}</strong> {esc(action)}' if action else ""
+        return f'<li><a href="{href}"><strong>{esc(title)}</strong></a> {esc(first(text))}{act}</li>'
     return (T.page_hero(rel, T.crumbs_dark(rel, "newsletter-sample.html", [("Home", rel + "index.html"), ("Newsletter", rel + "newsletter.html"), ("Sample issue", None)]),
-                        "Newsletter · example", "What the weekly brief looks like",
-                        "A sample issue, assembled from pages already published on this site, so you can see the format before you subscribe.", kind="page")
+                        "Newsletter · example", "What the Weekly Brief looks like",
+                        "A sample issue in the fixed weekly format, assembled from pages already published on this site, so you can see it before you subscribe.", kind="page")
             + '<main class="wrap pg"><article class="doc nl">'
             '<p class="nl-flag" role="note"><strong>Example issue.</strong> This page shows the format only. It was not sent to anyone, '
             'and every item links to a fact-checked page on Tenant Recipes, where you will find the Microsoft or vendor sources.</p>'
-            f'<div class="nl-mail"><p class="nl-meta">From: Tenant Recipes · Subject: <strong>{esc(top["title"])}</strong> (+ {len(rest) + len(vulns)} more)</p>'
-            f'<h2>Top story</h2><h3><a href="{rel}recipes/{top["id"]}.html">{esc(top["title"])}</a></h3><p>{esc(top["problem"])}</p>'
-            f'<p><strong>Admin take:</strong> start here: {esc(first)}</p>'
-            '<h2>Also this week</h2><ul>' + "".join(li(f'{rel}recipes/{r["id"]}.html', r["title"], r["problem"].split(". ")[0] + ".") for r in rest) + '</ul>'
-            + ('<h2>Patch first</h2><ul>' + "".join(li(f'{rel}security/{e["id"]}.html', e["title"], e["summary"].split(". ")[0] + ".") for e in vulns) + '</ul>' if vulns else "")
-            + f'<h2>Recipe of the week</h2><p><a href="{rel}recipes/{rotw["id"]}.html"><strong>{esc(rotw["title"])}</strong></a>. {esc(rotw["problem"])}</p>'
-            f'<h2>From the guides</h2><p><a href="{rel}guides/{g.SLUG}.html">{esc(g.TITLE)}</a>: {len(g.PHASES)} phases with a printable checklist.</p>'
+            f'<div class="nl-mail"><p class="nl-meta">From: Tenant Recipes · Subject: <strong>The Tenant Recipes Weekly Brief</strong> · 5-minute read</p>'
+            '<h2>3 Microsoft changes you should know</h2><ol>'
+            + "".join(li(rel + u, t, s, "Do:", d) for u, t, s, d in changes) + '</ol>'
+            + ('<h2>2 security updates worth investigating</h2><ol>'
+               + "".join(li(f'{rel}security/{e["id"]}.html', e["title"], e["summary"], "Check first:", first(e.get("action") or "")) for e in vulns) + '</ol>' if vulns else "")
+            + f'<h2>1 practical configuration tip</h2><p><a href="{rel}recipes/{tip["id"]}.html"><strong>{esc(tip["title"])}</strong></a>. {esc(tip["problem"])} '
+            'The recipe has the steps, a check that it worked and the rollback.</p>'
+            f'<h2>1 thing to review in your tenant</h2><p><a href="{rel}recipes/{review["id"]}.html"><strong>{esc(review["title"])}</strong></a>. {esc(first(review["problem"]))}</p>'
             '<p class="fine">You get this because you subscribed on tenantrecipes.github.io. One click to unsubscribe in every real issue.</p></div>'
             '</article></main>')
 
@@ -347,7 +354,7 @@ def og_image(path, RID):
     if path.startswith("security/"):
         return "og/security.png", "Tenant Recipes security: vulnerability watch and hardening"
     if path.startswith("newsletter"):
-        return "og/newsletter.png", "The weekly Tenant Recipes brief"
+        return "og/newsletter.png", "The Tenant Recipes Weekly Brief"
     return "og-image.png", f"{C.SITE_NAME}: {C.SITE_TAGLINE}"
 
 

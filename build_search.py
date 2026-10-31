@@ -70,9 +70,9 @@ def build_index(R, CY, guides, Q, AREA, tags_for, site_notes, extra=()):
                     ("About Tenant Recipes", "about.html", "Independence, editorial standards, corrections and contact."),
                     ("Methodology: how we fact-check", "methodology.html", "Source hierarchy and verification process."),
                     ("About the editor", "author/index.html", "Who writes and reviews Tenant Recipes, focus areas and editorial principles."),
-                    ("Newsletter", "newsletter.html", "The free weekly Tenant Recipes brief."),
+                    ("Newsletter", "newsletter.html", "The free Tenant Recipes Weekly Brief."),
                     ("Microsoft cloud status (Azure, Microsoft 365, Power Platform)", "status/index.html", "Unofficial mirror of Microsoft's public status sources: outages, active incidents and the last 30 days."),
-                    ("Sample newsletter issue", "newsletter-sample.html", "What the weekly brief looks like.")):
+                    ("Sample newsletter issue", "newsletter-sample.html", "What the Weekly Brief looks like.")):
         doc(t=t, k="Page", c="Site", s=s, u=u)
     for d in extra:
         doc(**d)

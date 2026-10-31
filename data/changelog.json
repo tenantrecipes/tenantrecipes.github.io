@@ -2,6 +2,11 @@
  {
   "date": "2026-10-31",
   "kind": "site",
+  "text": "The newsletter is now The Tenant Recipes Weekly Brief with a fixed format: 3 Microsoft changes you should know, 2 security updates worth investigating, 1 practical configuration tip and 1 thing to review in your tenant. The newsletter page and the sample issue show the new format."
+ },
+ {
+  "date": "2026-10-31",
+  "kind": "site",
   "text": "Three problem-oriented recipes: Conditional Access mistakes that cause production lockouts, why Intune devices stay non-compliant (causes and diagnosis), and PIM least privilege without breaking daily operations. Each has troubleshooting and rollback."
  },
  {

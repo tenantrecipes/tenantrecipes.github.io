@@ -1,21 +1,20 @@
-# Tenant Recipes Weekly — Issue #{issue} ({date})
-*Practical AI news for Microsoft 365 admins. 5 minutes, no fluff.*
+# The Tenant Recipes Weekly Brief — Issue #{issue} ({date})
+*What changed in Microsoft 365 this week and what to do about it. A 5-minute read for people who run tenants.*
 
-<!-- DRAFT: needs KP's approval before sending. Nothing is sent automatically. -->
+<!-- DRAFT: needs KP's approval before it is scheduled. Nothing is sent automatically.
+     Format and rules: NEWSLETTER.md. Every link uses UTM tags (utm_campaign=issue-{issue}). -->
 
-## Top story
-**{top_story_title}**
-{top_story_teaser}
-**Admin take:** {admin_take}
-Source: {top_story_source}
+## 3 Microsoft changes you should know
+{changes}
 
-## This week's recipes
-{recipe_teasers}
+## 2 security updates worth investigating
+{security}
 
-## Quick hits
-- Copilot: {copilot_item}
-- Intune: {intune_item}
-- Entra & Purview: {entra_purview_item}
+## 1 practical configuration tip
+{tip}
+
+## 1 thing to review in your tenant
+{review}
 
 <!-- SPONSOR SLOT (empty until a sponsor is signed) -->
 

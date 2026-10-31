@@ -27,6 +27,12 @@ HOSTING_PROVIDER = "GitHub Pages"
 # the vulnerability watch and hardening on /security/). Ad network code is never added automatically; see README.md.
 ADS_ENABLED = False
 
+# Cookie-free, privacy-friendly page-view counting with GoatCounter (https://www.goatcounter.com).
+# >>> CHANGE ME after signup: only the site code, i.e. "abc" from https://abc.goatcounter.com (lowercase, no URL).
+#     While it is "", NOTHING is added to the pages and the privacy policy keeps saying "no analytics".
+#     When set, every page loads https://gc.zgo.at/count.js and the privacy policy describes GoatCounter. See DEPLOY.md.
+GOATCOUNTER_CODE = ""
+
 # UTM parameters added to links in newsletter drafts.
 UTM_SOURCE = "newsletter"
 UTM_MEDIUM = "email"

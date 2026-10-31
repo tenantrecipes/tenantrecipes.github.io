@@ -312,7 +312,9 @@ def methodology_body(rel):
         f'<a href="{rel}changelog/index.html">changelog</a>. We do not silently rewrite history: if a recipe turns out to be wrong in a way that could have caused harm, '
         'we say so on the page.</p>'
         '<h2>Independence</h2><p>Tenant Recipes is not affiliated with Microsoft or any vendor, has no sponsors today and uses no affiliate links. '
-        'The site sets no cookies and runs no analytics or ad trackers (see the <a href="' + rel + 'privacy.html">privacy policy</a>).</p>'
+        + ('The site sets no cookies and runs no ad trackers; it only counts page views in aggregate with cookie-free GoatCounter'
+           if (getattr(C, "GOATCOUNTER_CODE", "") or "").strip() else 'The site sets no cookies and runs no analytics or ad trackers')
+        + ' (see the <a href="' + rel + 'privacy.html">privacy policy</a>).</p>'
         '</article></main>')
 
 
@@ -403,7 +405,7 @@ def search_index(R, CY, guides, AREA, extra=()):
                     ("Methodology: how we fact-check", "methodology.html", "Source hierarchy and verification process."),
                     ("About the editor", "author/index.html", "Who writes and reviews Tenant Recipes, focus areas and editorial principles."),
                     ("Changelog", "changelog.html", "Every new page, update and correction."),
-                    ("Newsletter", "newsletter.html", "The free weekly Tenant Recipes brief.")):
+                    ("Newsletter", "newsletter.html", "The free Tenant Recipes Weekly Brief.")):
         idx.append({"k": "Page", "c": "Site", "t": t, "u": u, "s": s, "x": ""})
     return "window.SEARCH=" + json.dumps(idx, ensure_ascii=False) + ";"
 
