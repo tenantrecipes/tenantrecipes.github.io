@@ -66,3 +66,10 @@ var on=false;function upd(){var s=(window.scrollY||document.documentElement.scro
 b.tabIndex=-1;window.addEventListener("scroll",upd,{passive:true});upd();
 b.addEventListener("click",function(){var rm=matchMedia("(prefers-reduced-motion: reduce)").matches;window.scrollTo({top:0,behavior:rm?"auto":"smooth"});
  var t=document.getElementById("top");if(t)t.focus({preventScroll:true})});})();
+/* What's new bar under the header: toggle the dropdown list; Escape, outside click or following a link closes it. */
+(function(){var w=document.getElementById("wn");if(!w)return;var b=w.querySelector(".wn-x");if(!b)return;b.hidden=false;
+function set(o){w.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false")}
+b.addEventListener("click",function(e){e.stopPropagation();set(!w.classList.contains("open"))});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&w.classList.contains("open")){set(false);b.focus()}});
+document.addEventListener("click",function(e){if(w.classList.contains("open")&&!(e.target.closest&&e.target.closest("#wn")))set(false)});
+window.addEventListener("pageshow",function(){set(false)});})();

@@ -145,3 +145,10 @@ Shown at `/news/` (newest first, category filter), on the homepage "Latest news"
 | `sources` | yes | `[{title, url, checked}]` as for recipes; `last_verified` is required. |
 
 Exploited vulnerabilities (`data/cyber`, `type: vulnerability`, `exploited: true`) appear automatically as category "Security incidents" and link to their `/security/<id>.html` page; do not duplicate them in `data/news`.
+
+## Changelog entry for every publish
+
+When you publish a new (or meaningfully updated) recipe, guide, tool, policy, news item or site feature,
+add a curated note at the **top** of `data/changelog.json`. That file feeds both the site-wide What's new
+bar under the sticky header and the `/changelog/` page. Schema and time rules: see the "What's new bar and
+changelog" section of `DEPLOY.md`. Prefer a real Europe/Stockholm publish time; omit `time` rather than invent one.

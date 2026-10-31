@@ -706,3 +706,57 @@ header.sh .nv-md{margin-top:4px;max-height:calc(100vh - 60px);max-height:calc(10
 .ct-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0 24px}
 .ct-c{border:1px solid var(--line,#e3e6ef);border-radius:12px;padding:14px 16px;background:#fff}
 .ct-c h3{margin:0 0 6px;font-size:1rem}.ct-c p{margin:0 0 8px;font-size:.92rem}.ct-c p:last-child{margin:0;font-weight:600}
+
+/* ---- What's new bar (2026-10-31): thin ticker at the bottom edge of the sticky header. Collapsed it shows the
+   newest 1-2 entries inline; the toggle opens a dropdown (absolute, so the sticky header height never changes).
+   Times are Europe/Stockholm. Source: data/changelog.json. ---- */
+.wn{border-top:1px solid #eef1f6;background:#fff}
+.wn-in{position:relative;display:flex;align-items:center;gap:10px;max-width:1320px;margin:0 auto;padding:0 16px;min-height:30px}
+.wn-h{display:inline-flex;align-items:center;gap:5px;flex:none;color:var(--ink-3);font-size:.72rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;text-decoration:none}
+.wn-h .ic{width:13px;height:13px;color:var(--brand)}
+.wn-h:hover{color:var(--brand)}
+/* collapsed: horizontal list, newest first, clipped to one line */
+.wn-l{list-style:none;display:flex;align-items:center;gap:0;margin:0;padding:0;min-width:0;flex:1;overflow:hidden}
+.wn-l>li{min-width:0}
+.wn-l>li+li{border-left:1px solid #eef1f6;padding-left:12px;margin-left:12px}
+.wn-l>li:nth-child(n+3){display:none}        /* collapsed: show up to 2 newest */
+.wn-all{display:none}
+.wn-l>li>a{display:flex;align-items:center;gap:8px;min-width:0;padding:4px 0;text-decoration:none;color:var(--ink)}
+.wn-l time{flex:none;color:var(--ink-3);font-size:.74rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wn-k{flex:none;padding:1px 6px;border-radius:5px;font-size:.66rem;font-weight:800;letter-spacing:.02em;text-transform:uppercase;background:#eef1f6;color:var(--ink-2)}
+.wn-guide{background:#e7efff;color:#1b4fb8}.wn-recipe{background:#e8f7ef;color:#0f7a4f}.wn-news{background:#fff1e3;color:#b45309}
+.wn-security{background:#fde9e7;color:#b3261e}.wn-tool{background:#efe9ff;color:#6a3fd1}.wn-policy{background:#e6f6f8;color:#0b6b78}.wn-site{background:#eef1f6;color:var(--ink-2)}
+.wn-l b{font-weight:650;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wn-l .wn-d{color:var(--ink-3);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.wn-l>li>a:hover b{color:var(--brand)}
+.wn-x{flex:none;display:inline-flex;align-items:center;gap:4px;margin-left:auto;padding:3px 8px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink-2);font-size:.72rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.wn-x:hover{border-color:var(--brand);color:var(--brand)}
+.wn-x .ic{width:14px;height:14px;transition:transform .15s ease}
+.wn-x[aria-expanded="true"] .ic{transform:rotate(180deg)}
+/* expanded: dropdown panel, does not affect sticky header height */
+.wn.open .wn-l{position:absolute;left:8px;right:8px;top:calc(100% + 1px);z-index:60;flex-direction:column;align-items:stretch;gap:0;overflow:auto;max-height:min(70vh,440px);
+ background:#fff;border:1px solid var(--line);border-radius:0 0 12px 12px;box-shadow:var(--sh-3);padding:4px 0}
+.wn.open .wn-l>li{min-width:0}
+.wn.open .wn-l>li+li{border-left:0;padding-left:0;margin-left:0;border-top:1px solid var(--line-2)}
+.wn.open .wn-l>li:nth-child(n+3){display:block}
+.wn.open .wn-l>li>a{flex-wrap:wrap;gap:6px 8px;padding:9px 16px}
+.wn.open .wn-l b{white-space:normal}
+.wn.open .wn-l .wn-d{white-space:normal;flex-basis:100%;font-size:.84rem;line-height:1.4}
+.wn.open .wn-all{display:block}
+.wn.open .wn-all a{display:block;padding:10px 16px;font-size:.82rem;font-weight:700;color:var(--brand);text-decoration:none}
+.wn.open .wn-all a:hover{text-decoration:underline}
+.cl-tm{color:var(--ink-3);font-variant-numeric:tabular-nums;font-size:.85em;margin-right:2px}
+@media (max-width:760px){
+ .wn-in{padding:0 12px;gap:8px}
+ .wn-l>li:nth-child(n+2){display:none}       /* mobile collapsed: only the newest entry */
+ .wn-l .wn-d{display:none}                    /* keep one compact line on phones */
+ .wn-x{margin-left:8px}
+ .wn.open .wn-l{left:6px;right:6px}
+ .wn.open .wn-l>li:nth-child(n+2){display:block}
+ .wn.open .wn-l .wn-d{display:block}
+}
+html{scroll-padding-top:86px}                 /* header 44 + what's-new bar ~30 + breathing room */
+.gd-toc{top:86px;max-height:calc(100vh - 100px)}.pg-side{top:90px}.gd-phase,.gd-step{scroll-margin-top:86px}
+.wn-l b{flex-shrink:0;max-width:52%}.wn-cs{display:none}
+@media (max-width:760px){.wn-h span,.wn-c{display:none}.wn-cs{display:inline}.wn-l b{flex-shrink:1;max-width:none}.wn-l>li{flex:1}}
+.wn.open .wn-l b{max-width:none;flex-shrink:1}

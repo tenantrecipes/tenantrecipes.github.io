@@ -68,7 +68,36 @@ See `README.md` ("Ad slots"). `ADS_ENABLED = False` in `site_config.py` (default
 - Search Console (needs the site owner): add the property for the live domain, verify it, then submit
   `sitemap.xml`. Redo this after the move to the custom domain (plus a change-of-address if available).
 
+## What's new bar and changelog
+
+Every page carries a thin **"What's new"** ticker at the bottom edge of the sticky header
+(logo left, search + menu right). It sticks with the header (it lives *inside* `header.sh`, so the sticky
+unit is ~76 px: 44 px nav + ~30 px ticker). Collapsed it shows the newest 1–2 entries; the toggle opens an
+absolute dropdown of the latest 8 so the sticky height never jumps. "All updates →" goes to `/changelog/`.
+
+**Source of truth:** `data/changelog.json` — same file that feeds `/changelog/` and the search index.
+Do not invent a parallel feed. Schema per entry:
+
+```json
+{
+  "date": "2026-10-31",          // required, YYYY-MM-DD (Europe/Stockholm calendar day)
+  "time": "08:38",               // optional HH:MM Europe/Stockholm; omit rather than invent a clock
+  "kind": "site",                // legacy bucket; keep "site" for curated notes
+  "type": "Guide",               // Guide | Recipe | News | Security | Tool | Policy | Site — used as the badge
+  "title": "Short title",        // linked title in the bar
+  "blurb": "One-line description shown next to the title.",
+  "url": "guides/slug.html",     // relative to the site root; used as the link target
+  "text": "Full sentence for the changelog page and Atom feed."
+}
+```
+
+When you publish something new, **append an entry at the top** of `data/changelog.json` with the Stockholm
+date and the real publish time (or leave `time` out if you only know the day). Prefer the committer time of
+the publishing commit for `time` — never invent a clock. The build sorts by `(date, time)` descending and
+renders the bar + `/changelog/` automatically.
+
 ## Analytics (cookie-free, GoatCounter)
+
 
 The site is ready for [GoatCounter](https://www.goatcounter.com): no cookies, no local storage, no personal data
 stored, only aggregate counts. It is free for sites of this size ("reasonable public usage"), so no consent

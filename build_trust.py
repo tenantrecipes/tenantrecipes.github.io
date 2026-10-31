@@ -42,7 +42,69 @@ def nav(rel):
             f'<button type="button" class="nv-mb" aria-expanded="false" aria-controls="nv-menu" aria-label="Menu">'
             f'<svg class="ic ic-o" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
             f'<svg class="ic ic-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></nav>'
-            f'<div class="nv-md" id="nv-menu" role="navigation" aria-label="All sections" hidden>{menu}</div></header>')
+            f'<div class="nv-md" id="nv-menu" role="navigation" aria-label="All sections" hidden>{menu}</div>{whats_new_bar(rel)}</header>')
+
+
+# ---------------------------------------------------------------- What's new bar (under the header, every page)
+WN_N = 8        # entries in the expanded list
+WN_TYPES = {"guide", "recipe", "news", "security", "tool", "policy", "site"}
+
+
+def _changelog_sorted():
+    """data/changelog.json newest first (date, then optional HH:MM Europe/Stockholm time)."""
+    site = json.loads((ROOT / "data" / "changelog.json").read_text())
+    return sorted(site, key=lambda x: (x["date"], x.get("time", "")), reverse=True)
+
+
+def _wn_iso(d, t):
+    """ISO datetime with the correct Stockholm offset (CET/CEST), or the bare date when no time is logged."""
+    if not t:
+        return d
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.datetime.fromisoformat(f"{d}T{t}").replace(tzinfo=ZoneInfo("Europe/Stockholm")).isoformat(timespec="minutes")
+    except Exception:
+        return f"{d}T{t}"
+
+
+def _wn_title(x):
+    if x.get("title"):
+        return x["title"]
+    t = x["text"].split(". ")[0]
+    return t if len(t) <= 70 else t[:69].rsplit(" ", 1)[0] + "…"
+
+
+def _wn_blurb(x):
+    if x.get("blurb"):
+        return x["blurb"]
+    rest = x["text"][len(x["text"].split(". ")[0]):].lstrip(". ")
+    return rest if len(rest) <= 110 else rest[:109].rsplit(" ", 1)[0] + "…"
+
+
+def whats_new_bar(rel):
+    """Thin bar at the bottom edge of the sticky header: the latest data/changelog.json entries (date, Stockholm time,
+    type, linked title, one-line blurb). Collapsed it shows the newest entry (two on wide screens); the toggle opens a
+    dropdown with the latest WN_N entries, positioned absolutely so the sticky header never changes height."""
+    items = _changelog_sorted()[:WN_N]
+    if not items:
+        return ""
+    week = (TODAY - datetime.timedelta(days=6)).isoformat()
+    n_week = sum(1 for x in _changelog_sorted() if x["date"] >= week)
+    lis = ""
+    for x in items:
+        ty = (x.get("type") or "Site").strip()
+        k = ty.lower() if ty.lower() in WN_TYPES else "site"
+        when = fmt(x["date"]).rsplit(" ", 1)[0] + (f' {x["time"]}' if x.get("time") else "")
+        href = rel + (x.get("url") or f'changelog/index.html#d-{x["date"]}')
+        lis += (f'<li><a href="{esc(href)}"><time datetime="{_wn_iso(x["date"], x.get("time"))}">{esc(when)}</time>'
+                f'<span class="wn-k wn-{k}">{esc(ty)}</span><b>{esc(_wn_title(x))}</b><span class="wn-d">{esc(_wn_blurb(x))}</span></a></li>')
+    cnt = f"{n_week} update{'s' if n_week != 1 else ''} this week" if n_week else f"Latest {len(items)}"
+    return (f'<div class="wn" id="wn"><div class="wn-in">'
+            f'<a class="wn-h" href="{rel}changelog/index.html">{icon("clock")}<span>What\'s new</span></a>'
+            f'<ol class="wn-l" id="wn-l" aria-label="Latest updates (times in Stockholm time)">{lis}'
+            f'<li class="wn-all"><a href="{rel}changelog/index.html">All updates and the full changelog →</a></li></ol>'
+            f'<button type="button" class="wn-x" aria-expanded="false" aria-controls="wn-l" hidden><span class="wn-c">{esc(cnt)}</span><span class="wn-cs">{n_week or len(items)} new</span>'
+            f'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div></div>')
 
 
 def ad_slot(name):
@@ -418,7 +480,9 @@ def changelog_entries(R, CY, guides, rel=""):
         days.setdefault(d, []).append(html)
     site = json.loads((ROOT / "data" / "changelog.json").read_text())
     for s in site:
-        add(s["date"], f'<li><span class="cl-k cl-site">Site</span>{esc(s["text"])}</li>')
+        tm = f'<time class="cl-tm" datetime="{_wn_iso(s["date"], s.get("time"))}">{s["time"]}</time> ' if s.get("time") else ""
+        lk = f' <a href="{rel}{esc(s["url"])}">Open →</a>' if s.get("url") else ""
+        add(s["date"], f'<li>{tm}<span class="cl-k cl-site">{esc(s.get("type") or "Site")}</span>{esc(s["text"])}{lk}</li>')
     upd = {}
     for kind, items, pre in (("Recipe", R, "recipes/"), ("Security", CY, "security/")):
         for it in items:

@@ -1,137 +1,292 @@
 [
  {
   "date": "2026-10-31",
+  "time": "08:48",
   "kind": "site",
+  "type": "Site",
+  "title": "What's new bar under the header",
+  "blurb": "Every page shows the latest updates (date, Stockholm time, type, title and one-line description) right under the sticky header.",
+  "url": "changelog/index.html",
+  "text": "A compact What's new ticker sits under the sticky header on every page: date and Stockholm time, a type badge (Guide, Recipe, News, Security, Tool, Policy, Site), a linked title and a one-line description. Expand it for the latest eight updates, or open the full changelog. Fed from data/changelog.json — the same source as /changelog/."
+ },
+ {
+  "date": "2026-10-31",
+  "time": "08:38",
+  "kind": "site",
+  "type": "Guide",
+  "title": "Admin By Request from zero to production",
+  "blurb": "Just-in-time local admin: problem, setup, Intune deploy, pilot and rollback. Not sponsored.",
+  "url": "guides/admin-by-request-endpoint-privilege.html",
   "text": "New pillar guide: Admin By Request from zero to production. Why standing local admin rights and fully locked-down users both fail, then an end-to-end setup: licensing and the free plan, portal SSO, the Entra ID Connector, Run As Admin vs Admin Session with approval and MFA, lockdown, pre-approvals and malware scanning, Intune deployment for Windows and macOS, removing existing local admins, pilot to rollout, audit and SIEM, troubleshooting and rollback. Not sponsored. Printable checklist included."
  },
  {
   "date": "2026-10-31",
+  "time": "08:31",
   "kind": "site",
+  "type": "Guide",
+  "title": "Azure Arc onboarding at enterprise scale",
+  "blurb": "11 phases: agent, Windows/Linux, identities, proxy, Policy, RBAC, PowerShell, Monitor, Defender.",
+  "url": "guides/azure-arc-onboarding-enterprise-scale.html",
   "text": "New pillar guide: Azure Arc Onboarding at Enterprise Scale. 11 phases from pilot to offboarding: landing zone and resource providers, RBAC, service principals and managed identities, proxy, Private Link and Arc gateway, the Connected Machine agent and its local lockdown, Windows and Linux onboarding (Group Policy, Configuration Manager, Ansible), automated onboarding with PowerShell, Azure Policy, Azure Monitor Agent, Defender for Cloud, troubleshooting and verification. Hands over to the Azure Update Manager guide for patching. Printable checklist included."
  },
  {
   "date": "2026-10-31",
+  "time": "08:31",
   "kind": "site",
+  "type": "Site",
+  "title": "Contact & corrections",
+  "blurb": "Report an error or suggest an edit on every page, plus a contact page and security.txt.",
+  "url": "contact/index.html",
+  "text": "Contact and corrections: a new contact page (report an error, outdated information or a broken link, suggest a topic, responsible disclosure), Suggest an edit and Report an error links on every page, and a security.txt file."
+ },
+ {
+  "date": "2026-10-31",
+  "time": "07:20",
+  "kind": "site",
+  "type": "Guide",
+  "title": "Azure Update Manager at enterprise scale",
+  "blurb": "Patch framework for 10 to several hundred servers: rings, maintenance configs, dynamic scopes.",
+  "url": "guides/azure-update-manager-enterprise-patching.html",
   "text": "New pillar guide: Azure Update Manager at enterprise scale. A patch framework for 10 to several hundred Windows Server and Linux servers across Azure VMs and Azure Arc: rings anchored to Patch Tuesday, maintenance configurations in Bicep and CLI, reboot policy, dynamic scopes and Azure Policy, pre/post events with snapshots and cancellation, compliance reporting, alerts, troubleshooting and rollback. Printable checklist included."
  },
  {
   "date": "2026-10-31",
+  "time": "06:45",
   "kind": "site",
+  "type": "Guide",
+  "title": "Cloud hardening under attack simulation",
+  "blurb": "ScubaGear → Monkey365 → Maester → Prowler → ROADtools → AADInternals, ending in remediation.",
+  "url": "guides/cloud-hardening-adversary-emulation.html",
   "text": "New pillar guide: Cloud hardening under attack simulation. Chains ScubaGear, Monkey365, Maester, Prowler, ROADtools and AADInternals from baseline measurement through authorized directory enumeration to detection validation and remediation. Defensive use only; printable checklist included."
  },
  {
   "date": "2026-10-31",
+  "time": "03:16",
   "kind": "site",
+  "type": "Site",
+  "title": "The Tenant Recipes Weekly Brief",
+  "blurb": "New fixed newsletter format: 3 changes, 2 security updates, 1 tip, 1 thing to review.",
+  "url": "newsletter.html",
   "text": "The newsletter is now The Tenant Recipes Weekly Brief with a fixed format: 3 Microsoft changes you should know, 2 security updates worth investigating, 1 practical configuration tip and 1 thing to review in your tenant. The newsletter page and the sample issue show the new format."
  },
  {
   "date": "2026-10-31",
+  "time": "01:54",
   "kind": "site",
+  "type": "Recipe",
+  "title": "Three problem-oriented recipes",
+  "blurb": "CA lockout mistakes, non-compliant Intune devices, PIM least privilege — with rollback.",
+  "url": "recipes/ca-production-lockout-mistakes.html",
   "text": "Three problem-oriented recipes: Conditional Access mistakes that cause production lockouts, why Intune devices stay non-compliant (causes and diagnosis), and PIM least privilege without breaking daily operations. Each has troubleshooting and rollback."
  },
  {
   "date": "2026-10-31",
+  "time": "01:54",
   "kind": "site",
+  "type": "Site",
+  "title": "Internal linking by topic cluster",
+  "blurb": "Recipes link to related recipes in Identity, Devices and Copilot clusters; two homepage tracks.",
+  "url": "index.html",
   "text": "Internal linking by topic cluster: recipes now link to curated related recipes and to more pages in their cluster (Identity & access, Devices & Windows, Copilot, agents & data protection), and news items list related recipes. The homepage leads with Microsoft Cloud & Modern Workplace; Cybersecurity & Infrastructure is now a separate, secondary track."
  },
  {
   "date": "2026-10-31",
+  "time": "01:38",
   "kind": "site",
+  "type": "Recipe",
+  "title": "Three Windows Autopilot recipes",
+  "blurb": "Device preparation, hash vs corporate identifiers, and enrollment troubleshooting.",
+  "url": "recipes/autopilot-device-preparation-entra-join.html",
   "text": "Three new Windows Autopilot recipes: device preparation with Entra join and a provisioning-owned device group, hardware hash import vs corporate identifiers (CSV and Graph), and enrollment troubleshooting with event IDs, registry values and MDM diagnostics. The Manage task hub on the homepage now links to Autopilot."
  },
  {
   "date": "2026-10-31",
+  "time": "01:13",
   "kind": "site",
+  "type": "Site",
+  "title": "Explore by task + compact sticky header",
+  "blurb": "Secure, Manage, Deploy AI and Automate hubs on the homepage; 44px header that stays on screen.",
+  "url": "index.html",
   "text": "Homepage: new \"Explore by task\" hubs (Secure, Manage, Deploy AI, Automate) that link straight into filtered recipes, guides, security entries, tools and policy templates. Compact header that stays on screen while you scroll, on desktop and mobile."
  },
  {
   "date": "2026-10-31",
+  "time": "01:00",
   "kind": "site",
+  "type": "Site",
+  "title": "Content markers, troubleshooting and rollback",
+  "blurb": "Official guidance, Practical insight and Tested configuration markers on recipes.",
+  "url": "methodology.html",
   "text": "Content markers on recipes: Official guidance, Practical insight and Tested configuration (tested only with a named test environment and date; see the methodology page). Recipes can now carry Troubleshooting and Rollback sections, starting with the legacy authentication and phishing-resistant MFA recipes."
  },
  {
   "date": "2026-10-30",
+  "time": "23:24",
   "kind": "site",
+  "type": "Site",
+  "title": "Microsoft cloud status page",
+  "blurb": "Unofficial mirror of Microsoft's public status sources, checked every 15 minutes.",
+  "url": "status/index.html",
   "text": "New Microsoft cloud status page: an unofficial mirror of Microsoft's public status sources for Azure, Microsoft 365 admin center, Power Platform admin center, consumer services and Azure DevOps, checked every 15 minutes."
  },
  {
-  "kind": "site",
   "date": "2026-10-30",
+  "time": "23:19",
+  "kind": "site",
+  "type": "News",
+  "title": "News & retirements section",
+  "blurb": "Microsoft 365 changes and retirements with dates, impact, actions and an Atom feed.",
+  "url": "news/index.html",
   "text": "New: a News section with Microsoft 365 changes and retirements (effective dates, why it matters, what to do, primary source) and exploited vulnerabilities, a category filter, a Latest news strip on the homepage and an Atom feed at /news/feed.xml."
  },
  {
-  "kind": "site",
   "date": "2026-10-30",
+  "time": "23:15",
+  "kind": "site",
+  "type": "Policy",
+  "title": "IT checklists: onboarding, offboarding, role change",
+  "blurb": "Microsoft Learn links per step, with Word and Markdown downloads.",
+  "url": "policies/index.html",
   "text": "New: IT checklists for onboarding, offboarding (planned and immediate) and role changes, with Microsoft Learn links for each Microsoft 365 step, Word and Markdown downloads, and a Policies / Checklists filter on the policy templates page."
  },
  {
-  "kind": "site",
   "date": "2026-10-30",
+  "time": "22:51",
+  "kind": "site",
+  "type": "Policy",
+  "title": "Ten IT security policy templates",
+  "blurb": "Plain-language policies with ISO 27001, NIST CSF 2.0 and CIS v8 references.",
+  "url": "policies/index.html",
   "text": "New: Policy templates. Ten plain-language IT security policies (acceptable use, password and MFA, BYOD, AI and Copilot, information classification, incident response, backup, access management, patching, third-party security) with placeholders, ISO 27001, NIST CSF 2.0 and CIS v8 references, and Word and Markdown downloads."
  },
  {
-  "kind": "site",
   "date": "2026-10-30",
+  "time": "22:42",
+  "kind": "site",
+  "type": "Tool",
+  "title": "Security tools & testing",
+  "blurb": "Free and open-source tools with examples, pitfalls and a permission reminder.",
+  "url": "tools/index.html",
   "text": "New: Security tools & testing. 17 free and open-source tools (domain and mail checks, external exposure, Microsoft 365 and Entra, Active Directory, vulnerability scanning, web apps, Windows hardening, breach exposure), each with a short example, pitfalls and a permission reminder, plus a method for scoping an internal pentest."
  },
  {
-  "kind": "site",
   "date": "2026-10-30",
+  "time": "22:35",
+  "kind": "site",
+  "type": "Site",
+  "title": "One search for everything",
+  "blurb": "Instant results across recipes, guides, vulnerabilities and news — press / anywhere.",
+  "url": "search/index.html",
   "text": "One search for everything: instant results for recipes, guides, vulnerabilities, hardening and news, with suggestions as you type, typo tolerance and common questions. Open it from the header on any page or press /."
  },
  {
-  "kind": "site",
   "date": "2026-10-30",
+  "time": "22:25",
+  "kind": "site",
+  "type": "Security",
+  "title": "Security filters and Patch Tuesday countdown",
+  "blurb": "Category filter, scan-friendly vulnerability cards and four new exploited CVEs.",
+  "url": "security/index.html",
   "text": "Security: category filter (Client, Server, Network, Web/Runtime, Virtualization), the vulnerability watch as easy-to-scan cards with a one-line 'What to do', a Patch Tuesday countdown, and four more exploited vulnerabilities (Cisco Secure Email Gateway, Fortinet, Atlassian Data Center, Citrix NetScaler)."
  },
  {
-  "kind": "site",
   "date": "2026-10-30",
+  "time": "22:25",
+  "kind": "site",
+  "type": "Site",
+  "title": "Easier reading and finding",
+  "blurb": "Homepage search, shortcuts to News and What's new, more readable text.",
+  "url": "changelog/index.html",
   "text": "Easier reading and finding: search at the top of the homepage with News & retirements and What's new shortcuts, more readable text and spacing across the site, and this What's new page."
  },
  {
-  "kind": "site",
   "date": "2026-10-30",
+  "time": "21:05",
+  "kind": "site",
+  "type": "Security",
+  "title": "Eight new exploited vulnerabilities",
+  "blurb": "From the CISA KEV catalog: Ivanti, GitLab, PAN-OS, BeyondTrust and more.",
+  "url": "security/index.html",
   "text": "Security: eight new exploited vulnerabilities from the CISA KEV catalog: the Ivanti Connect Secure zero-day chain (CVE-2026-104935, CVE-2026-111357, CVE-2026-118527), GitLab CI/CD regex RCE (CVE-2026-97229), the Brotli decoder flaw in Node.js and other products (CVE-2026-111497), PAN-OS management RCE (CVE-2026-0322), BeyondTrust Remote Support (CVE-2026-102764), VeloCloud Orchestrator (CVE-2026-114625), Collabora CODE for Nextcloud (CVE-2026-110447) and Adobe Commerce (CVE-2026-48356)."
  },
  {
-  "kind": "site",
   "date": "2026-10-30",
+  "time": "18:44",
+  "kind": "site",
+  "type": "Site",
+  "title": "Easier to find, use and share",
+  "blurb": "Copy steps, checklist downloads, Done-when criteria and a Copilot license quick guide.",
+  "url": "guides/copilot-license-checks.html",
   "text": "Easier to find, use and share: search and topic filters on the homepage, Start-here cards, Copy steps and Download checklist buttons plus Done-when criteria on every recipe, related recipes and back-to-guide links, a one-page quick guide (5 things to check before assigning Copilot licenses), PDF checklists for both pillar guides, a sample newsletter issue and link-preview images."
  },
  {
-  "kind": "site",
   "date": "2026-10-30",
+  "time": "18:04",
+  "kind": "site",
+  "type": "Site",
+  "title": "Design refresh",
+  "blurb": "Consistent page intros, Verification cards, numbered steps and copy buttons.",
+  "url": "index.html",
   "text": "Design refresh: consistent page intros, a Verification card at the top of every recipe, guide and security page, numbered steps, pitfall callouts, copy buttons on commands, and an About-the-editor note."
  },
  {
   "date": "2026-10-30",
+  "time": "17:08",
   "kind": "site",
+  "type": "Site",
+  "title": "Trust & transparency update",
+  "blurb": "About, Methodology, changelog, source panels and Report-an-error links.",
+  "url": "about.html",
   "text": "Trust & transparency update: rewritten About page, new Methodology page, this changelog, per-page source and verification panels, \"Report an error\" links on every page, site-wide search, breadcrumbs, Atom feed and a new footer."
  },
  {
   "date": "2026-10-30",
+  "time": "17:08",
   "kind": "site",
+  "type": "Security",
+  "title": "New Cybersecurity section",
+  "blurb": "Vulnerability watch for exploited CVEs plus hardening recipes.",
+  "url": "security/index.html",
   "text": "New Cybersecurity section: a vulnerability watch for exploited CVEs and hardening recipes for network, endpoints, servers, services and VMware."
  },
  {
   "date": "2026-10-30",
+  "time": "17:08",
   "kind": "site",
+  "type": "Guide",
+  "title": "Secure Microsoft Copilot rollout",
+  "blurb": "9-phase pillar guide with a printable checklist.",
+  "url": "guides/secure-copilot-rollout.html",
   "text": "New pillar guide: how to roll out Microsoft Copilot without opening a hole in your tenant (9 phases, printable checklist)."
  },
  {
   "date": "2026-10-30",
+  "time": "17:08",
   "kind": "site",
+  "type": "Site",
+  "title": "Full fact-check pass",
+  "blurb": "Every recipe checked against Microsoft Learn; 18 recipes corrected.",
+  "url": "methodology.html",
   "text": "Full fact-check pass of every recipe against current Microsoft Learn pages; 18 recipes corrected."
  },
  {
   "date": "2026-10-30",
+  "time": "17:08",
   "kind": "site",
+  "type": "Site",
+  "title": "New homepage and logo",
+  "blurb": "Plus the Identity & threat protection track.",
+  "url": "index.html",
   "text": "New homepage, logo and Identity & threat protection track."
  },
  {
   "date": "2026-10-30",
+  "time": "17:08",
   "kind": "site",
+  "type": "Site",
+  "title": "Tenant Recipes launched",
+  "blurb": "Live on GitHub Pages.",
+  "url": "index.html",
   "text": "Tenant Recipes launched on GitHub Pages."
  }
 ]
