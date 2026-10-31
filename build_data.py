@@ -54,6 +54,9 @@ def validate(r, fname):
             errs.append(f"screenshot file must live under assets/screenshots/ and exist: {sh['src']}")
     if r["last_verified"] is not None and not DATE.match(str(r["last_verified"])):
         errs.append("'last_verified' must be YYYY-MM-DD or null")
+    for h in r.get("history") or []:  # optional per-page version notes
+        if not (isinstance(h, dict) and DATE.match(str(h.get("date"))) and isinstance(h.get("note"), str) and h["note"].strip()):
+            errs.append(f"history items need date (YYYY-MM-DD) and note: {h}")
     errs += MK.validate(r)  # markers, notes, tested, troubleshooting, rollback (all optional)
     return errs
 

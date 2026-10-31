@@ -28,6 +28,7 @@ import build_news as NW
 import build_status as BST
 import build_markers as MK
 import build_tiers as TR
+import build_history as HI
 
 DIST = ROOT / "dist"
 R = json.load(open(ROOT / "data" / "recipes.json"))
@@ -97,7 +98,7 @@ def page_dates(path):
         return e.get("created") or e.get("published") or e.get("kev_added"), e.get("updated") or e.get("last_verified")
     for g in GUIDES + [Q]:
         if path == f"guides/{g.SLUG}.html":
-            return None, g.VERIFIED
+            return getattr(g, "PUBLISHED", None), getattr(g, "UPDATED", None) or g.VERIFIED
     return DATES.get(path, (None, None))
 
 
@@ -401,8 +402,8 @@ def guide_page(g):
             f'<ol class="gd-strip">{strip}</ol></div></section>'
             f'<div class="wrap gd-grid"><aside class="gd-toc" aria-label="Table of contents"><p>On this page</p><ol>{toc}'
             f'<li><a href="#checklist">Printable checklist</a></li></ol></aside>'
-            f'<div class="gd-body">{T.guide_verify_card(rel, g)}{T.author_box(rel)}{notice}<div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} {esc(getattr(g, "TIME_NOTE", "Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers."))}</p></div>'
-            f'{problem}{phases}'
+            f'<div class="gd-body">{HI.dates_bar(g.PUBLISHED, getattr(g, "UPDATED", None) or g.VERIFIED, g.VERIFIED)}{T.guide_verify_card(rel, g)}{T.author_box(rel)}{notice}<div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} {esc(getattr(g, "TIME_NOTE", "Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers."))}</p></div>'
+            f'{HI.guide_sources(g)}{problem}{phases}'
             f'<section class="gd-check" id="checklist" aria-labelledby="ck-h"><div class="gd-ph-h"><span class="gd-num">Checklist</span><h2 id="ck-h">The printable checklist</h2></div>'
             f'<p>Tick items as you go (saved in this browser only), then print or save as PDF for your change board.</p>'
             f'<p class="gd-ck-btns"><button class="btn p" type="button" id="ck-print">Print checklist</button> '
@@ -410,6 +411,7 @@ def guide_page(g):
             f'<a class="btn" href="{rel}guides/checklists/{g.SLUG}.md" download="{g.SLUG}-checklist.md">Markdown (.md)</a> '
             f'<button class="btn" type="button" id="ck-reset">Clear ticks</button> <span id="ck-n" class="fine"></span></p>'
             f'<ol class="gd-ck">{check}</ol><p class="fine">{esc(g.TITLE)} · {C.SITE_NAME} · verified {g.VERIFIED} · {SITE}/guides/{g.SLUG}.html</p></section>'
+            + HI.history_html(f"guides/{g.SLUG}.html", g.PUBLISHED, getattr(g, "UPDATED", None) or g.VERIFIED, g.VERIFIED, getattr(g, "HISTORY", ())) +
             f'<section class="vs" id="verified"><h2>Verification &amp; corrections</h2><p class="fine">Every step above lists the {SL.lower()} it was checked against '
             f'(open “{SL}” under each step). Guide last verified <strong>{fmt_date(g.VERIFIED)}</strong>. '
             f'<a href="{rel}methodology.html">How we verify</a> · <a href="{rel}changelog/index.html">Changelog</a></p>'
@@ -576,7 +578,7 @@ def build():
                      + (T.chip("clock", f'First published {fmt_date(r["created"])}') if r.get("created") else ""))
             toc = ([("problem", "The problem"), ("steps", "Steps")] + ([("done", "Done when")] if r.get("done_when") else [])
                    + ([("pitfalls", "Pitfalls")] if r["pitfalls"] else []) + ([("troubleshooting", "Troubleshooting")] if r.get("troubleshooting") else [])
-                   + ([("rollback", "Rollback")] if r.get("rollback") else []) + [("next", "Related & next steps"), ("verified", "Sources & corrections")])
+                   + ([("rollback", "Rollback")] if r.get("rollback") else []) + [("next", "Related & next steps"), ("history", "Version history"), ("verified", "Sources & corrections")])
             pg = G2 if r["id"] in {x for p in G2.PHASES for st in p["steps"] for x in st["rec"]} else G1
             promo = (f'<a class="ps-promo" href="{rel}guides/{pg.SLUG}.html"><span class="ps-k">Pillar guide</span><strong>{esc(pg.SHORT)}</strong>'
                      f'<span>{len(pg.PHASES)} phases · printable checklist {T.icon("arrow")}</span></a>')
@@ -585,9 +587,11 @@ def build():
             return (T.page_hero(rel, T.crumbs_dark(rel, path, [("Home", rel + "index.html"), ("Recipes", rel + "index.html#library"), (r["category"], None)]),
                                 f'{TR.badge(rel, "recipe")} {T.icon("layers")}{esc(r["category"])}', esc(r["title"]), "", chips, kind="recipe")
                     + '<main class="wrap pg"><div class="pg-grid"><article class="doc">'
+                    + HI.dates_bar(r.get("created"), r.get("updated"), r.get("last_verified"))
                     + T.verify_card(rel, r, "Microsoft sources")
                     + UX.back_to_guide(rel, r, refs, pg)
                     + f'<section id="problem" class="co co-info"><p class="co-h">{T.icon("target")}The problem</p><p>{esc(r["problem"])}</p></section>'
+                    + HI.recipe_sources(r)
                     + UX.toolbar(rel, r) + ad_slot("recipe-after-intro")
                     + f'<h2 id="steps" class="h-ic">{T.icon("list")}Steps{MK.section_badge(rel, r, "steps", fmt_date)}</h2><ol class="steps">' + "".join(f'<li><div>{step_html(s)}</div></li>' for s in r["steps"]) + '</ol>'
                     + MK.notes_html(rel, r, step_html, fmt_date)
@@ -600,6 +604,7 @@ def build():
                     + (f'<p class="tgs"><span class="fine">Topics:</span> {tags}</p>' if tags else "")
                     + f'<div class="grid nx-g">{UX.related_cards(rel, rel_items)}</div>'
                     + BL.cluster_box(rel, r, R, {x["id"] for x in rel_items}, NEWS, esc) + f'{UX.back_to_guide(rel, r, refs, pg)}</section>'
+                    + HI.history_html(path, r.get("created"), r.get("updated"), r.get("last_verified"), [(h["date"], h["note"]) for h in r.get("history") or []])
                     + T.trust_bottom(rel, path, r["title"], r, "Verified against") + '</article>'
                     + T.side_nav(rel, toc, [(x["title"], f'{rel}recipes/{x["id"]}.html') for x in same], f'More in {r["category"]}', promo)
                     + '</div>' + signup(rel, "recipe-" + r["id"]) + '</main>')

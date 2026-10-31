@@ -256,6 +256,7 @@ def search_bar(rel, R, n_sec):
 
 # ---------------------------------------------------------------- quick guide page
 def quick_body(rel, Q, RID, page_signup):
+    import build_history as HI
     def srcs(keys):
         return "".join(f'<li><a href="{E(Q.S[k][1])}">{esc(Q.S[k][0])}</a></li>' for k in keys)
 
@@ -279,11 +280,14 @@ def quick_body(rel, Q, RID, page_signup):
                         "and to our hands-on recipe.",
                         T.chip("check", f"Verified {T.fmt(Q.VERIFIED)}") + T.chip("link", f"{len(allsrc)} Microsoft sources") + T.chip("list", "Printable PDF"), kind="page")
             + f'<main class="wrap pg"><article class="doc qg">'
+            + HI.dates_bar(Q.PUBLISHED, getattr(Q, "UPDATED", None) or Q.VERIFIED, Q.VERIFIED)
+            + HI.sources_top([(Q.S[k][0], Q.S[k][1], "") for k in allsrc], "Sources", note="Every check below was compared with these Microsoft Learn pages.") +
             f'<div class="rx"><a class="btn p rx-b" href="{pdf}" download>{T.icon("book")}<span>Download the 1-page PDF</span></a>'
             f'<button class="btn rx-b" type="button" data-print="1">{T.icon("list")}<span>Print</span></button></div>'
             f'<ol class="qg-l">{items}</ol>'
             f'<section class="co co-info"><p class="co-h">{T.icon("arrow")}{esc(th["t"])}</p><p>{esc(th["text"])}</p><div class="gd-recs">{recs(th["rec"])}</div></section>'
-            + news_mid(rel, "quick-" + Q.SLUG) + T.author_box(rel) +
+            + news_mid(rel, "quick-" + Q.SLUG) + T.author_box(rel)
+            + HI.history_html(f"guides/{Q.SLUG}.html", Q.PUBLISHED, getattr(Q, "UPDATED", None) or Q.VERIFIED, Q.VERIFIED, getattr(Q, "HISTORY", ())) +
             f'<section class="vs" id="verified"><h2>Verification &amp; corrections</h2><p class="fine">Every item was checked against these Microsoft Learn pages on '
             f'<strong>{T.fmt(Q.VERIFIED)}</strong>. The wording is ours: always confirm against the source before you act.</p>'
             f'<ul class="vs-l">{srcs(allsrc)}</ul><div class="vs-f"><p>Spotted something wrong or outdated?</p>'

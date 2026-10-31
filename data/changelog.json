@@ -1,6 +1,16 @@
 [
  {
   "date": "2026-10-31",
+  "time": "09:57",
+  "kind": "site",
+  "type": "Site",
+  "title": "Dates, version history and sources on every page",
+  "blurb": "Published / last updated / last verified, a version history and a sources block near the top of every guide and recipe.",
+  "url": "methodology.html",
+  "text": "Every recipe and guide now shows Published, Last updated and Last verified dates at the top, a Sources block right after the intro (key sources with citation counts on guides), and a Version history assembled from the publish date, changelog notes and verification dates."
+ },
+ {
+  "date": "2026-10-31",
   "time": "09:55",
   "kind": "site",
   "type": "Site",

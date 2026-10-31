@@ -26,7 +26,8 @@ and only publishes `"status": "published"`. Run `python3 build.py` after adding 
   "verified_by": "KP",                     // person or pipeline that verified, or null
   "created": "2026-10-12",
   "updated": "2026-11-02",
-  "screenshots": []                        // optional, REAL screenshots only (never mock-ups): see below
+  "screenshots": [],                       // optional, REAL screenshots only (never mock-ups): see below
+  "history": [{"date": "2026-11-05", "note": "Added rollback for the report-only step."}]   // optional version notes
 }
 ```
 (Comments above are for explanation only; real files must be plain JSON.)
@@ -99,6 +100,8 @@ The rest is automatic (`build_links.py`): every recipe, news item and security e
 (Identity & access, Devices & Windows, Copilot, agents & data protection). Recipe pages get a "More in this topic cluster" list; news items and Microsoft/Windows
 security entries get related recipes when they share a specific cluster keyword. New recipes should set `related` to 2–3 recipes in a *neighbouring* cluster
 (for example a CA recipe → device compliance or PIM), because same-cluster links are already added automatically.
+
+Every recipe page shows Published (`created`), Last updated (`updated`) and Last verified at the top, a Sources block after the problem, and a Version history built from `created`, `updated`, `last_verified`, optional `history` notes and `data/changelog.json` entries whose `url` is the page (see `build_history.py`).
 
 Recipe pages show "Last verified against Microsoft docs: <date>" when `last_verified` is set,
 otherwise a notice that the recipe has not yet been re-verified.
