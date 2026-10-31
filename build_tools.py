@@ -111,7 +111,7 @@ def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 'w.addEventListener("click",function(ev){var b=ev.target.closest("button[data-f]");if(!b)return;var f=b.getAttribute("data-f");'
                 'w.querySelectorAll("button").forEach(function(x){var on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on?"true":"false")});'
                 'var k=0;document.querySelectorAll("#tools [data-cat]").forEach(function(r){var s=!f||r.getAttribute("data-cat")===f;r.hidden=!s;if(s)k++});'
-                'n.textContent=f?k+" item"+(k===1?"":"s")+" in "+b.firstChild.textContent.trim():"";})})();</script>')
+                'n.textContent=f?k+" item"+(k===1?"":"s")+" in "+b.firstChild.textContent.trim():"";});var u=new URLSearchParams(location.search).get("f");if(u)document.addEventListener("DOMContentLoaded",function(){var b0=w.querySelector(\'button[data-f="\'+u.replace(/[^a-z0-9-]/g,"")+\'"]\');if(b0)b0.click()})})();</script>')
         st = "".join(f'<div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in
                      [("Tools", len(tools)), ("Methods", len(methods)), ("Free or open source", sum(1 for e in tools if e["cost"] != "freemium")),
                       ("Official sources", len({s["url"] for e in ents for s in e["sources"]}))])

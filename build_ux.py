@@ -443,7 +443,7 @@ def carousel(rel, slides, n_recipes, last_verified, top="", lead=""):
         dots += f'<button type="button" class="car-dot" aria-controls="car-s{i}" aria-label="Show slide {i + 1}: {esc(s["t"])}"{" aria-current=true" if i == 0 else ""}></button>'
     arrow = lambda d: f'<svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path d="{"M15 5l-7 7 7 7" if d < 0 else "M9 5l7 7-7 7"}"/></svg>'
     return (f'<section class="hx car" aria-labelledby="hx-title"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>'
-            f'<div class="wrap"><h1 id="hx-title" class="car-h1">Fact-checked Copilot, Intune &amp; security recipes for Microsoft 365 admins</h1>{lead}'
+            f'<div class="wrap"><h1 id="hx-title" class="car-h1">Independent Microsoft Cloud, Security &amp; Automation playbooks</h1><p class="car-sub">A knowledge base for solving real admin problems: exact settings, scripts, rollback and a source for every claim. <a href="#tasks">Explore by task ↓</a></p>{lead}'
             f'<p class="hx-badge car-badge"><span class="dot" aria-hidden="true"></span>{n_recipes} recipes, every one checked against its sources · last verified {T.fmt(last_verified)}</p>{top}'
             f'<div class="car-box" aria-roledescription="carousel" aria-label="Featured articles" role="region">'
             f'<div class="car-vp" id="car-vp" aria-live="off" tabindex="-1">{items}</div>'
@@ -452,3 +452,58 @@ def carousel(rel, slides, n_recipes, last_verified, top="", lead=""):
             f'<button type="button" class="car-nav car-next" aria-label="Next slide" aria-controls="car-vp">{arrow(1)}</button>'
             f'<button type="button" class="car-play" aria-label="Pause automatic slide show" hidden>'
             f'<svg class="car-pi" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path class="pp-pause" d="M8 5v14M16 5v14"/><path class="pp-play" d="M8 5l11 7-11 7z"/></svg></button></div></div></div></section>')
+
+
+# ---------------------------------------------------------------- homepage task hubs (2026-10-31)
+def task_hubs(rel, R, guides, quick, CYL, tools, pols):
+    """'What are you trying to solve?': four task hubs that deep-link into existing content. Counts computed from data."""
+    from urllib.parse import quote_plus as qp
+    G1, G2 = guides[0], guides[1]
+    tc = dict(tag_counts(R))
+    tag = lambda t: f'{rel}?t={qp(t)}#library'
+    exploited = sum(1 for e in CYL if e["type"] == "vulnerability" and e.get("exploited"))
+    m365_tools = sum(1 for e in tools if e["category"] in ("M365 & Entra", "Cloud assessment"))
+    ai_n = sum(1 for r in R if {"Copilot", "Agents", "Licensing", "Prompts"} & set(tags_for(r)))
+    sec_n = sum(1 for r in R if {"Conditional Access", "Identity", "Purview & DLP", "Security"} & set(tags_for(r)))
+    pid = {p["id"] for p in pols}
+    L = lambda u, t, n=None: f'<li><a href="{u}">{t}' + (f' <span>{n}</span>' if n else "") + '</a></li>'
+    hubs = [
+        ("shield", "Secure", "Identity, Conditional Access, Defender, Purview",
+         "Close sign-in gaps, stop oversharing and patch what is being exploited.",
+         [L(tag("Conditional Access"), "Conditional Access", tc.get("Conditional Access")),
+          L(tag("Identity"), "Identity &amp; threat protection", tc.get("Identity")),
+          L(tag("Purview & DLP"), "Purview &amp; DLP", tc.get("Purview & DLP")),
+          L(f'{rel}security/index.html#watch', "Exploited CVEs to patch", exploited or None),
+          L(f'{rel}policies/index.html', "Security policy templates", len(pols))],
+         f'{rel}?t=Security#library', f"All {tc.get('Security', sec_n)} security recipes"),
+        ("layers", "Manage", "Intune, Windows, devices",
+         "Compliance baselines, hardened Windows 11 and clean joiner/leaver handling.",
+         [L(tag("Intune"), "Intune &amp; device recipes", tc.get("Intune")),
+          L(f'{rel}guides/{G2.SLUG}.html', "Windows 11 CIS hardening guide"),
+          L(f'{rel}security/endpoint.html', "Endpoint &amp; client security"),
+          L(f'{rel}security/harden-windows-laps.html', "Windows LAPS hardening")]
+         + ([L(f'{rel}policies/onboarding-checklist.html', "Joiner / leaver checklists")] if "onboarding-checklist" in pid else []),
+         f'{rel}guides/{G2.SLUG}.html', "Open the Windows 11 guide"),
+        ("target", "Deploy AI", "Copilot, agents, governance",
+         "License, scope and govern Copilot and Copilot Studio agents before users find the gaps.",
+         [L(f'{rel}guides/{G1.SLUG}.html', "Secure Copilot rollout guide"),
+          L(f'{rel}guides/{quick.SLUG}.html', "Copilot pre-flight checks"),
+          L(tag("Copilot"), "Copilot recipes", tc.get("Copilot")),
+          L(tag("Agents"), "Agents &amp; Copilot Studio", tc.get("Agents")),
+          L(tag("Licensing"), "Licensing &amp; reporting", tc.get("Licensing"))]
+         + ([L(f'{rel}policies/ai-copilot-use-policy.html', "AI use policy template")] if "ai-copilot-use-policy" in pid else []),
+         f'{rel}guides/{G1.SLUG}.html', "Start with the rollout guide"),
+        ("list", "Automate", "PowerShell, Graph, scripts, tools",
+         "Copy-paste PowerShell and Graph, plus assessment and pentest tooling for the tenant and beyond.",
+         [L(tag("PowerShell & Graph"), "PowerShell &amp; Graph recipes", tc.get("PowerShell & Graph")),
+          L(tag("Prompts"), "Admin prompt templates", tc.get("Prompts")),
+          L(f'{rel}tools/index.html?f=m365-entra#tools', "M365 &amp; Entra assessment tools", m365_tools or None),
+          L(f'{rel}tools/index.html', "All security &amp; pentest tools", len(tools))],
+         f'{rel}tools/index.html', "Open the tools"),
+    ]
+    cards = "".join(
+        f'<div class="tk-c tk-{i}"><p class="sh-k">{T.icon(ic)}{esc(k)}</p><h3>{esc(scope)}</h3><p class="tk-d">{esc(d)}</p>'
+        f'<ul class="tk-l">{"".join(li)}</ul><a class="sh-go" href="{go}">{esc(gol)} {T.icon("arrow")}</a></div>'
+        for i, (ic, k, scope, d, li, go, gol) in enumerate(hubs, 1))
+    return (f'<section class="tk-hub wrap" id="tasks" aria-labelledby="tk-h"><p class="sec-k">Explore by task</p>'
+            f'<h2 id="tk-h">What are you trying to solve?</h2><div class="tk-g">{cards}</div></section>')

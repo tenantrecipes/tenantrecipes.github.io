@@ -209,7 +209,7 @@ def build(page, R, esc, step_html, signup, fmt_date, E, SITE_NAME):
                 'w.querySelectorAll("button").forEach(function(x){var on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on?"true":"false")});'
                 'var k=0;document.querySelectorAll("#watch [data-cat],#hardening [data-cat]").forEach(function(r){var s=!f||r.getAttribute("data-cat")===f;r.hidden=!s;if(s)k++});'
                 'n.textContent=f?k+" entr"+(k===1?"y":"ies")+" in "+b.firstChild.textContent.trim():"";'
-                'document.querySelectorAll(".cy-empty").forEach(function(m){var sec=m.closest("section");m.hidden=!!sec.querySelector("[data-cat]:not([hidden])")})})})();</script>')
+                'document.querySelectorAll(".cy-empty").forEach(function(m){var sec=m.closest("section");m.hidden=!!sec.querySelector("[data-cat]:not([hidden])")})});var u=new URLSearchParams(location.search).get("f");if(u)document.addEventListener("DOMContentLoaded",function(){var b0=w.querySelector(\'button[data-f="\'+u.replace(/[^a-z0-9-]/g,"")+\'"]\');if(b0)b0.click()})})();</script>')
         return (hero(rel, f'<a href="{rel}index.html">Home</a> / Security', f'Fact-checked against vendor advisories and CISA · last verified {fmt_date(last)}',
                      'Cybersecurity beyond the tenant.<br><span class="grad">Patch what is exploited. Harden what is exposed.</span>',
                      'A vulnerability watch for the CVEs that are actually being exploited, plus hardening recipes for network, endpoints, servers, '

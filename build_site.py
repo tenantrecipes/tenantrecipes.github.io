@@ -416,11 +416,12 @@ def build():
     pages = []
     n = len(R)
 
-    pages.append(page("index.html", f"{C.SITE_NAME}: Microsoft 365, Copilot & security playbooks for admins",
+    pages.append(page("index.html", f"{C.SITE_NAME}: Microsoft Cloud, Security & Automation playbooks for admins",
                       "Fact-checked playbooks for Microsoft 365 admins: Copilot rollout, Conditional Access, Intune, Purview, exploited CVEs, pentest tools and policy templates.", lambda rel: (
         UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
                     CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1),
                     UX.search_bar(rel, R, len(CY.load())) + BST.pill(rel) + f'<script src="{rel}assets/status.js" defer></script>')
+        + UX.task_hubs(rel, R, GUIDES, Q, CY.load(), TL.load(), PL.load())
         + NW.latest_strip(rel, esc, fmt_date, CY.load())
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
         + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):] +
