@@ -15,8 +15,9 @@ import azure_arc_onboarding_enterprise_scale as G5
 import admin_by_request_endpoint_privilege as GABR
 import admin_by_request_intune_win32_packaging as GABRP
 import entra_private_access_vpn_replacement as GPA
+import adcs_hardening_tier0 as GADCS
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA]
+GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
@@ -486,7 +487,7 @@ def guides_index():
                   'b.forEach(function(y){y.classList.toggle("on",y===x);y.setAttribute("aria-pressed",y===x)});s.forEach(function(z){z.hidden=x.dataset.tier!=="all"&&z.dataset.tier!==x.dataset.tier})})})})();</script>'
                 + f'{signup(rel, "guides-index")}</main>')
     return page("guides/index.html", f"Guides: pillar guides, technical guides and recipes for Microsoft Cloud admins | {C.SITE_NAME}",
-                "Pillar guides for whole areas (Copilot, Windows 11 CIS, Azure Arc, Update Manager, Entra Private Access), technical deep dives and short recipes, all fact-checked with printable checklists.", body)
+                "Pillar guides for whole areas (Copilot, Windows 11 CIS, Azure Arc, Update Manager, Entra Private Access, AD CS hardening), technical deep dives and short recipes, all fact-checked with printable checklists.", body)
 
 
 def build():

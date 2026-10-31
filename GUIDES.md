@@ -30,7 +30,7 @@ so older guides need no manual history.
 
 Current assignments (2026-10-31): Pillar = secure-copilot-rollout, windows-11-cis-hardening, cloud-hardening-adversary-emulation,
 azure-update-manager-enterprise-patching, azure-arc-onboarding-enterprise-scale, admin-by-request-endpoint-privilege (zero-to-production programme),
-entra-private-access-vpn-replacement. Technical = admin-by-request-intune-win32-packaging, copilot-license-checks (quick guide). All 51 recipes = Recipe.
+entra-private-access-vpn-replacement, adcs-hardening-tier0. Technical = admin-by-request-intune-win32-packaging, copilot-license-checks (quick guide). All 51 recipes = Recipe.
 
 ## Code Library (`data/code/<id>.json` → `/code/`)
 
@@ -40,3 +40,17 @@ Copy-ready snippets built by `build_code.py`. Each snippet must come from an exi
 `notes` (before-you-run warnings), `source` (`{"kind": "guide", "slug", "anchor", "label"}` or `{"kind": "recipe", "id", "label"}`),
 `refs` (official references, https), `created`, `last_verified`. The build fails on an unknown language, guide slug or recipe id.
 Use `<placeholders>` for tenant-specific values and never include secrets.
+
+## Project-guide queue (evening routine state)
+
+The evening routine writes one project guide per run in the order **1 → 2 → 3 → 5** (4 is already covered by the Entra Private Access guide).
+Before writing, check this table and `data/guides/` so nothing is written twice; after publishing, mark the row done and move "Next".
+
+| # | Project guide | Status | Module / slug |
+|---|---|---|---|
+| 1 | AD CS hardening as Tier 0 | **Done 2026-10-31** (written ahead of the evening run) | `adcs_hardening_tier0.py` / `adcs-hardening-tier0` |
+| 2 | (per routine prompt) | **Next** | — |
+| 3 | (per routine prompt) | Queued | — |
+| 5 | (per routine prompt) | Queued | — |
+
+Next run: start with guide **2**. Do not write another AD CS guide; extend `adcs-hardening-tier0` via `HISTORY` instead if sources change.

@@ -8,7 +8,7 @@ import sys, json, re, hashlib, shutil, subprocess, tempfile, pathlib, html
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT)); sys.path.insert(0, str(ROOT / "data" / "guides"))
 import site_config as C
-import secure_copilot_rollout as G1, windows_11_cis_hardening as G2, cloud_hardening_adversary_emulation as G3, azure_update_manager_enterprise_patching as G4, azure_arc_onboarding_enterprise_scale as G5, admin_by_request_endpoint_privilege as GABR, admin_by_request_intune_win32_packaging as GABRP, entra_private_access_vpn_replacement as GPA, quick_copilot_license_checks as Q
+import secure_copilot_rollout as G1, windows_11_cis_hardening as G2, cloud_hardening_adversary_emulation as G3, azure_update_manager_enterprise_patching as G4, azure_arc_onboarding_enterprise_scale as G5, admin_by_request_endpoint_privilege as GABR, admin_by_request_intune_win32_packaging as GABRP, entra_private_access_vpn_replacement as GPA, adcs_hardening_tier0 as GADCS, quick_copilot_license_checks as Q
 DL, OG = ROOT / "downloads", ROOT / "assets" / "og"
 MANIFEST = DL / "manifest.json"
 SITE = C.SITE_URL.rstrip("/")
@@ -135,6 +135,8 @@ def og_specs():
         f"{len(GABRP.PHASES)} phases · {ns(GABRP)} steps · IntuneWinAppUtil, detection, supersedence, IME logs", ["Win32 app", "IntuneWinAppUtil", "Intune", "Admin By Request"], "#2f6b3a")
     out["guide-entra-private-access-vpn-replacement"] = og_html("Pillar guide", "Replace VPN with Entra Private Access",
         f"{len(GPA.PHASES)} phases · {ns(GPA)} steps · connectors, Quick Access, CA compliant device", ["ZTNA", "Conditional Access", "Intune", "GSA client"], "#5b2c6f")
+    out["guide-adcs-hardening-tier0"] = og_html("Pillar guide", "Harden AD CS as Tier 0",
+        f"{len(GADCS.PHASES)} phases · {ns(GADCS)} steps · ESC1–ESC16, NTLM relay, strong mapping, detection", ["AD CS", "ESC1/ESC8", "KB5014754", "Defender for Identity"], "#8a2b2b")
     out["quick-copilot-license-checks"] = og_html("Quick guide · 1 page", "5 things to check before you assign Copilot licenses",
         "Base licenses, mailboxes, update channel, network and oversharing. Free PDF.", ["Checklist", "Microsoft Learn sources"], "#e39a1f")
     out["guides"] = og_html("Guides", "Fact-checked playbooks for Microsoft 365 and Windows admins", "Phased guides with printable checklists.", ["Copilot", "Windows 11", "Azure Arc", "Server patching"])
@@ -160,7 +162,7 @@ def generate(force=False):
     flags = [ch, "--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1", "--run-all-compositor-stages-before-draw"]
     with tempfile.TemporaryDirectory() as td:
         td = pathlib.Path(td)
-        docs = {f"{G1.SLUG}-checklist": checklist_html(G1), f"{G2.SLUG}-checklist": checklist_html(G2), f"{G3.SLUG}-checklist": checklist_html(G3), f"{G4.SLUG}-checklist": checklist_html(G4), f"{G5.SLUG}-checklist": checklist_html(G5), f"{GABR.SLUG}-checklist": checklist_html(GABR), f"{GABRP.SLUG}-checklist": checklist_html(GABRP), f"{GPA.SLUG}-checklist": checklist_html(GPA), Q.SLUG: quick_html()}
+        docs = {f"{G1.SLUG}-checklist": checklist_html(G1), f"{G2.SLUG}-checklist": checklist_html(G2), f"{G3.SLUG}-checklist": checklist_html(G3), f"{G4.SLUG}-checklist": checklist_html(G4), f"{G5.SLUG}-checklist": checklist_html(G5), f"{GABR.SLUG}-checklist": checklist_html(GABR), f"{GABRP.SLUG}-checklist": checklist_html(GABRP), f"{GPA.SLUG}-checklist": checklist_html(GPA), f"{GADCS.SLUG}-checklist": checklist_html(GADCS), Q.SLUG: quick_html()}
         for name, doc in docs.items():
             src = td / f"{name}.html"; src.write_text(doc)
             run(flags + ["--no-pdf-header-footer", f"--print-to-pdf={DL / (name + '.pdf')}", src.as_uri()])

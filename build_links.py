@@ -24,7 +24,7 @@ CLUSTERS = [
 LABEL = {c: l for c, l, _, _ in CLUSTERS}
 # Extra pages that belong to a cluster (shown in the recipe cluster box after the recipes)
 EXTRA = {
-    "identity": [("Cloud hardening + adversary emulation", "guides/cloud-hardening-adversary-emulation.html"), ("Replace VPN with Entra Private Access", "guides/entra-private-access-vpn-replacement.html")],
+    "identity": [("Cloud hardening + adversary emulation", "guides/cloud-hardening-adversary-emulation.html"), ("Replace VPN with Entra Private Access", "guides/entra-private-access-vpn-replacement.html"), ("Harden AD CS as Tier 0 (ESC1–ESC16)", "guides/adcs-hardening-tier0.html")],
     "devices": [("Windows 11 CIS hardening guide", "guides/windows-11-cis-hardening.html"), ("Azure Arc onboarding at enterprise scale", "guides/azure-arc-onboarding-enterprise-scale.html"), ("Azure Update Manager at enterprise scale", "guides/azure-update-manager-enterprise-patching.html"), ("Remove local admin rights with Admin By Request", "guides/admin-by-request-endpoint-privilege.html"), ("Package Admin By Request for Intune (Win32)", "guides/admin-by-request-intune-win32-packaging.html"), ("Windows LAPS hardening", "security/harden-windows-laps.html")],
     "ai": [("Secure Copilot rollout guide", "guides/secure-copilot-rollout.html"), ("Copilot license pre-flight checks", "guides/copilot-license-checks.html")],
 }

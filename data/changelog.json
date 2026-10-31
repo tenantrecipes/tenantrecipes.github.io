@@ -1,6 +1,16 @@
 [
  {
   "date": "2026-10-31",
+  "time": "12:47",
+  "kind": "site",
+  "type": "Guide",
+  "title": "New pillar guide: harden AD CS as Tier 0",
+  "blurb": "ESC1–ESC16 template and CA fixes, NTLM relay to Web Enrollment (ESC8), strong certificate mapping, detection, incident response and rollback.",
+  "url": "guides/adcs-hardening-tier0.html",
+  "text": "New pillar guide: Harden Active Directory Certificate Services as Tier 0. Nine phases and 32 steps: inventory and assessment with Locksmith, Certipy and Defender for Identity; fixing vulnerable templates (ESC1–ESC4, ESC9, ESC13, ESC15) and CA settings (ESC6, ESC7, ESC11, ESC16); stopping NTLM relay to Web Enrollment (ESC8, KB5005413); strong certificate mapping on domain controllers (KB5014754, ESC10, ESC14); Tier 0 operation and CA backup; Certification Services auditing and AD CS detections; troubleshooting, incident response and rollback. Prompted by Microsoft's 30 October 2026 write-up of ESC1 and ESC8 intrusions."
+ },
+ {
+  "date": "2026-10-31",
   "time": "10:07",
   "kind": "site",
   "type": "Site",
