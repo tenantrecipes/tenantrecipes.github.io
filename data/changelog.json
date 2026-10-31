@@ -4,6 +4,16 @@
   "time": "08:53",
   "kind": "site",
   "type": "Guide",
+  "title": "Replace VPN with Microsoft Entra Private Access",
+  "blurb": "ZTNA playbook: connectors, Quick Access vs per-app, GSA client via Intune, CA requiring compliant devices, VPN retirement.",
+  "url": "guides/entra-private-access-vpn-replacement.html",
+  "text": "New pillar guide: Replace VPN with Microsoft Entra Private Access. Why traditional VPN fails Zero Trust, licensing and roles, private network connectors with HA, Quick Access versus per-app Enterprise applications and private DNS, Windows Global Secure Access client via Intune with lockdown, Conditional Access that requires compliant devices (report-only first, break-glass), Intune compliance, pilot and VPN retirement, monitoring with NetworkAccessTraffic export, troubleshooting and rollback. Printable checklist included."
+ },
+ {
+  "date": "2026-10-31",
+  "time": "08:53",
+  "kind": "site",
+  "type": "Guide",
   "title": "Package Admin By Request for Intune",
   "blurb": "IntuneWinAppUtil.exe to a production Win32 app: commands, detection, supersedence, IME logs, rollback.",
   "url": "guides/admin-by-request-intune-win32-packaging.html",

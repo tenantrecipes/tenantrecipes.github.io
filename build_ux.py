@@ -355,6 +355,8 @@ def og_image(path, RID):
         return "og/guide-azure-arc-onboarding-enterprise-scale.png", "Tenant Recipes guide: Azure Arc onboarding at enterprise scale"
     if path.startswith("guides/admin-by-request-endpoint-privilege"):
         return "og/guide-admin-by-request-endpoint-privilege.png", "Tenant Recipes guide: remove local admin rights with Admin By Request"
+    if path.startswith("guides/entra-private-access-vpn-replacement"):
+        return "og/guide-entra-private-access-vpn-replacement.png", "Tenant Recipes guide: replace VPN with Entra Private Access"
     if path.startswith("guides/admin-by-request-intune-win32-packaging"):
         return "og/guide-admin-by-request-intune-win32-packaging.png", "Tenant Recipes guide: package Admin By Request for Intune"
     if path.startswith("guides/copilot-license-checks"):
@@ -490,6 +492,7 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
     G5 = guides[4] if len(guides) > 4 else None
     GABR = next((g for g in guides if g.SLUG == "admin-by-request-endpoint-privilege"), None)
     GABRP = next((g for g in guides if g.SLUG == "admin-by-request-intune-win32-packaging"), None)
+    GPA = next((g for g in guides if g.SLUG == "entra-private-access-vpn-replacement"), None)
     tc = dict(tag_counts(R))
     tag = lambda t: f'{rel}?t={qp(t)}#library'
     exploited = sum(1 for e in CYL if e["type"] == "vulnerability" and e.get("exploited"))
@@ -503,6 +506,7 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
         ("shield", "Secure", "Identity, Conditional Access, Defender, Purview",
          "Close sign-in gaps, stop oversharing and patch what is being exploited.",
          ([L(f'{rel}guides/{G3.SLUG}.html', "Cloud hardening + adversary emulation")] if G3 else [])
+         + ([L(f'{rel}guides/{GPA.SLUG}.html', "Replace VPN with Entra Private Access")] if GPA else [])
          + [L(tag("Conditional Access"), "Conditional Access", tc.get("Conditional Access")),
           L(tag("Identity"), "Identity &amp; threat protection", tc.get("Identity")),
           L(tag("Purview & DLP"), "Purview &amp; DLP", tc.get("Purview & DLP")),
