@@ -347,6 +347,8 @@ def og_image(path, RID):
         return "og/guide-secure-copilot-rollout.png", "Tenant Recipes guide: secure Copilot rollout"
     if path.startswith("guides/windows-11-cis-hardening"):
         return "og/guide-windows-11-cis-hardening.png", "Tenant Recipes guide: Windows 11 hardening with the CIS Benchmark"
+    if path.startswith("guides/cloud-hardening-adversary-emulation"):
+        return "og/guide-cloud-hardening-adversary-emulation.png", "Tenant Recipes guide: cloud hardening under attack simulation"
     if path.startswith("guides/copilot-license-checks"):
         return "og/quick-copilot-license-checks.png", "Tenant Recipes quick guide: 5 checks before Copilot licenses"
     if path.startswith("guides/"):
@@ -475,6 +477,7 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
     """'What are you trying to solve?': four task hubs that deep-link into existing content. Counts computed from data."""
     from urllib.parse import quote_plus as qp
     G1, G2 = guides[0], guides[1]
+    G3 = guides[2] if len(guides) > 2 else None
     tc = dict(tag_counts(R))
     tag = lambda t: f'{rel}?t={qp(t)}#library'
     exploited = sum(1 for e in CYL if e["type"] == "vulnerability" and e.get("exploited"))
@@ -487,12 +490,14 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
     hubs = [
         ("shield", "Secure", "Identity, Conditional Access, Defender, Purview",
          "Close sign-in gaps, stop oversharing and patch what is being exploited.",
-         [L(tag("Conditional Access"), "Conditional Access", tc.get("Conditional Access")),
+         ([L(f'{rel}guides/{G3.SLUG}.html', "Cloud hardening + adversary emulation")] if G3 else [])
+         + [L(tag("Conditional Access"), "Conditional Access", tc.get("Conditional Access")),
           L(tag("Identity"), "Identity &amp; threat protection", tc.get("Identity")),
           L(tag("Purview & DLP"), "Purview &amp; DLP", tc.get("Purview & DLP")),
           L(f'{rel}recipes/ca-production-lockout-mistakes.html', "CA mistakes that cause lockouts") if any(r["id"] == "ca-production-lockout-mistakes" for r in R) else "",
           L(f'{rel}policies/index.html', "Security policy templates", len(pols))],
-         f'{rel}?t=Security#library', f"All {tc.get('Security', sec_n)} security recipes"),
+         (f'{rel}guides/{G3.SLUG}.html' if G3 else f'{rel}?t=Security#library'),
+         ("Open the cloud hardening guide" if G3 else f"All {tc.get('Security', sec_n)} security recipes")),
         ("layers", "Manage", "Intune, Windows, Autopilot, devices",
          "Autopilot provisioning, compliance baselines, hardened Windows 11 and clean joiner/leaver handling.",
          [L(tag("Intune"), "Intune &amp; device recipes", tc.get("Intune"))]
@@ -516,7 +521,8 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
          [L(tag("PowerShell & Graph"), "PowerShell &amp; Graph recipes", tc.get("PowerShell & Graph")),
           L(tag("Prompts"), "Admin prompt templates", tc.get("Prompts")),
           L(f'{rel}tools/index.html?f=m365-entra#tools', "M365 &amp; Entra assessment tools", m365_tools or None),
-          L(f'{rel}tools/index.html', "All security &amp; pentest tools", len(tools))],
+          L(f'{rel}tools/index.html', "All security &amp; pentest tools", len(tools))]
+         + ([L(f'{rel}guides/{G3.SLUG}.html', "Project: chain the M365/Entra tools")] if G3 else []),
          f'{rel}tools/index.html', "Open the tools"),
     ]
     cards = "".join(

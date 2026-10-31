@@ -9,8 +9,9 @@ import site_config as C
 sys.path.insert(0, str(ROOT / "data" / "guides"))
 import secure_copilot_rollout as G1
 import windows_11_cis_hardening as G2
+import cloud_hardening_adversary_emulation as G3
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2]
+GUIDES = [G1, G2, G3]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
@@ -305,6 +306,7 @@ def _txt(s):
 def guide_page(g):
     RID = {r["id"]: r for r in R}
     SEC = {e["id"]: e for e in CY.load()}
+    TOOLS = {e["id"]: e for e in TL.load()}
     SL = getattr(g, "SRC_LABEL", "Microsoft sources")
     for ph in g.PHASES:
         for st in ph["steps"]:
@@ -314,13 +316,16 @@ def guide_page(g):
             for sid in st.get("sec", []):
                 if sid not in SEC:
                     sys.exit(f"Guide {g.SLUG}: unknown security entry id {sid}")
+            for tid in st.get("tools", []):
+                if tid not in TOOLS:
+                    sys.exit(f"Guide {g.SLUG}: unknown tool id {tid}")
             if st.get("marker") and st["marker"] not in MK.MARKERS:
                 sys.exit(f"Guide {g.SLUG}: unknown marker {st['marker']} on step {st['t']}")
             if st.get("marker") == "tested" and MK.validate_tested(st.get("tested"), st["t"]):
                 sys.exit(f"Guide {g.SLUG}: " + "; ".join(MK.validate_tested(st.get("tested"), st["t"])))
     nsteps = sum(len(p["steps"]) for p in g.PHASES)
     nsrc = len({u for p in g.PHASES for s in p["steps"] for _, u in s["src"]})
-    nrec = len({r for p in g.PHASES for s in p["steps"] for r in s["rec"] + s.get("sec", [])})
+    nrec = len({r for p in g.PHASES for s in p["steps"] for r in s["rec"] + s.get("sec", []) + s.get("tools", [])})
 
     def body(rel):
         toc, phases, strip = "", "", ""
@@ -334,13 +339,14 @@ def guide_page(g):
             steps = ""
             for j, st in enumerate(ph["steps"], 1):
                 recs = ("".join(f'<a class="gd-chip" href="{rel}recipes/{rid}.html">{esc(RID[rid]["title"])}</a>' for rid in st["rec"])
-                        + "".join(f'<a class="gd-chip" href="{rel}security/{sid}.html">{esc(SEC[sid]["title"])}</a>' for sid in st.get("sec", [])))
+                        + "".join(f'<a class="gd-chip" href="{rel}security/{sid}.html">{esc(SEC[sid]["title"])}</a>' for sid in st.get("sec", []))
+                        + "".join(f'<a class="gd-chip" href="{rel}tools/{tid}.html">{esc(TOOLS[tid]["name"])}</a>' for tid in st.get("tools", [])))
                 srcs = "".join(f'<li><a href="{E(u)}">{esc(t)}</a></li>' for t, u in st["src"])
                 steps += (f'<div class="gd-step" id="{pid}-s{j}"><h3><span>{i}.{j}</span> {esc(st["t"])}{MK.badge(rel, st.get("marker"), st.get("tested"), fmt_date)}</h3>'
                           f'<p class="gd-done"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 6.8"/></svg>Done when: {_txt(st["check"])}</p>'
                           '<h4>Do this</h4><ul class="gd-do">' + "".join(f'<li>{_txt(x)}</li>' for x in st["do"]) + '</ul>'
                           + ('<div class="gd-pit"><h4>Pitfalls</h4><ul>' + "".join(f'<li>{_txt(x)}</li>' for x in st["pit"]) + '</ul></div>' if st["pit"] else "")
-                          + (f'<div class="gd-recs"><h4>Hands-on recipes</h4>{recs}</div>' if recs else "")
+                          + (f'<div class="gd-recs"><h4>Related on this site</h4>{recs}</div>' if recs else "")
                           + (f'<details class="gd-src"><summary>{SL} ({len(st["src"])})</summary><ul>{srcs}</ul></details>' if srcs else "")
                           + '</div>')
             if i == 2:
@@ -410,8 +416,8 @@ def guides_index():
         return (T.page_hero(rel, T.crumbs_dark(rel, "guides/index.html", [("Home", rel + "index.html"), ("Guides", None)]), "Guides",
                             "Long-form playbooks", "Phased, fact-checked guides that tie the recipes together. Every claim links to its official source.", kind="page")
                 + f'<main class="wrap pg"><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
-    return page("guides/index.html", f"Guides: Copilot rollout, Windows 11 hardening and quick checks | {C.SITE_NAME}",
-                "Long-form, fact-checked playbooks for Microsoft 365 and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
+    return page("guides/index.html", f"Guides: Copilot, Windows 11, cloud hardening and quick checks | {C.SITE_NAME}",
+                "Long-form, fact-checked playbooks for Microsoft 365, Entra hardening under attack simulation, and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
 
 
 def build():

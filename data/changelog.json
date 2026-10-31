@@ -2,6 +2,11 @@
  {
   "date": "2026-10-31",
   "kind": "site",
+  "text": "New pillar guide: Cloud hardening under attack simulation. Chains ScubaGear, Monkey365, Maester, Prowler, ROADtools and AADInternals from baseline measurement through authorized directory enumeration to detection validation and remediation. Defensive use only; printable checklist included."
+ },
+ {
+  "date": "2026-10-31",
+  "kind": "site",
   "text": "The newsletter is now The Tenant Recipes Weekly Brief with a fixed format: 3 Microsoft changes you should know, 2 security updates worth investigating, 1 practical configuration tip and 1 thing to review in your tenant. The newsletter page and the sample issue show the new format."
  },
  {
