@@ -1,6 +1,16 @@
 [
  {
   "date": "2026-10-31",
+  "time": "08:53",
+  "kind": "site",
+  "type": "Guide",
+  "title": "Package Admin By Request for Intune",
+  "blurb": "IntuneWinAppUtil.exe to a production Win32 app: commands, detection, supersedence, IME logs, rollback.",
+  "url": "guides/admin-by-request-intune-win32-packaging.html",
+  "text": "New technical guide: Package Admin By Request for Intune. Companion to the Admin By Request pillar guide: get the Win32 Content Prep Tool, lay out source and output folders, package the tenant MSI with IntuneWinAppUtil.exe, set install and version-independent uninstall commands, file-version detection, requirements, pilot-to-wave assignments, verification, Intune supersedence vs vendor Auto-Update, IME logs and error codes, and rollback. Not sponsored. Printable checklist included."
+ },
+ {
+  "date": "2026-10-31",
   "time": "08:48",
   "kind": "site",
   "type": "Site",

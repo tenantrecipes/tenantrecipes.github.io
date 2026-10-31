@@ -13,8 +13,9 @@ import cloud_hardening_adversary_emulation as G3
 import azure_update_manager_enterprise_patching as G4
 import azure_arc_onboarding_enterprise_scale as G5
 import admin_by_request_endpoint_privilege as GABR
+import admin_by_request_intune_win32_packaging as GABRP
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2, G3, G4, G5, GABR]
+GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
@@ -434,7 +435,7 @@ def guides_index():
                             "Long-form playbooks", "Phased, fact-checked guides that tie the recipes together. Every claim links to its official source.", kind="page")
                 + f'<main class="wrap pg"><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
     return page("guides/index.html", f"Guides: Copilot, Windows 11, cloud hardening, Azure Arc, Update Manager, Admin By Request and quick checks | {C.SITE_NAME}",
-                "Long-form, fact-checked playbooks for Microsoft 365, Entra hardening under attack simulation, Azure Arc onboarding, Azure Update Manager server patching, removing local admin rights with Admin By Request and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
+                "Long-form, fact-checked playbooks for Microsoft 365, Entra hardening under attack simulation, Azure Arc onboarding, Azure Update Manager server patching, removing local admin rights with Admin By Request, packaging its client for Intune, and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
 
 
 def build():
