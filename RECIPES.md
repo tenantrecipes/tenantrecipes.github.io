@@ -152,6 +152,13 @@ Shown at `/news/` (newest first, category filter), on the homepage "Latest news"
 
 Exploited vulnerabilities (`data/cyber`, `type: vulnerability`, `exploited: true`) appear automatically as category "Security incidents" and link to their `/security/<id>.html` page; do not duplicate them in `data/news`.
 
+## OG image for every page
+
+Every new recipe, guide, tool, code snippet, security or news page must have its own Open Graph image. It is automatic:
+`python3 build.py` renders a branded card (title + content type, see `DESIGN.md`) for each page without a hand-made one,
+caches it by title, and wires it into `og:image` and `twitter:image`. Commit the new `assets/og/p/*.jpg` and
+`assets/og/p/manifest.json` with the page. `tools/check_meta.py` warns when a page still uses a generic image.
+
 ## Changelog entry for every publish
 
 When you publish a new (or meaningfully updated) recipe, guide, tool, policy, news item or site feature,

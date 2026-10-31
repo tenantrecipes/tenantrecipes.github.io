@@ -11,3 +11,5 @@ newsletter-001.md
 backup*/
 *.tar.gz
 data/status.json
+# Build cache (list of pages for tools/make_page_og.py)
+.cache/

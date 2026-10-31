@@ -349,8 +349,17 @@ OG_CATS = {
 }
 
 
+# Per-page override: exact page path -> (image under assets/, alt text). Images are made by tools/make_shareables.py (og_specs).
+OG_PAGES = {
+    "code/ca-policy-generator.html": ("og/tool-ca-policy-generator.png", "Tenant Recipes: Conditional Access Policy Generator, Graph JSON and PowerShell, report-only by default"),
+    "tools/mail-dns-checker.html": ("og/tool-mail-dns-checker.png", "Tenant Recipes: Mail DNS Checker for SPF, DKIM, DMARC, MTA-STS and CAA, graded A to F"),
+}
+
+
 def og_image(path, RID):
-    """Return (file under assets/og/, alt text)."""
+    """Return (file under assets/, alt text)."""
+    if path in OG_PAGES:
+        return OG_PAGES[path]
     if path.startswith("recipes/"):
         r = RID.get(path[8:-5])
         if r:
@@ -382,6 +391,62 @@ def og_image(path, RID):
     if path.startswith("newsletter"):
         return "og/newsletter.png", "The Tenant Recipes Weekly Brief"
     return "og-image.png", f"{C.SITE_NAME}: {C.SITE_TAGLINE}"
+
+
+# ---------------------------------------------------------------- automatic per-page OG images
+# Pages whose og_image() is only a generic section/category/default image get their own card
+# (title + content type, site brand), made by tools/make_page_og.py and committed under assets/og/p/.
+# Hand-made images (OG_PAGES, guide-*, quick guide, newsletter, home page) always win.
+import hashlib as _hl, json as _json, pathlib as _pl, re as _re
+_OG_GENERIC = _re.compile(r"^(og-image\.png|og/(cat-[a-z-]+|security|guides)\.png)$")
+_OG_DIR = _pl.Path(__file__).resolve().parent / "assets" / "og" / "p"
+OG_AUTO_VERSION = "1"   # bump to regenerate every auto card after a template change
+OG_AUTO = {}            # path -> spec, filled during the build, written to .cache/og-pages.json
+_OG_SECTIONS = {  # first path segment -> (label for a page, label for the section index, accent colour)
+    "guides": ("Guide", "Guides", "#1f7bff"), "tools": ("Tool", "Tools", "#0f7a4f"), "code": ("Code", "Code Library", "#7a4dff"),
+    "recipes": ("Recipe", "Recipes", "#1f7bff"), "security": ("Security", "Security", "#b3261e"), "policies": ("Policy", "Policies", "#0b6e99"),
+    "news": ("News", "News", "#e39a1f"), "status": ("Status", "Status", "#0b6e99"), "author": ("About", "About", "#5b2c6f"),
+    "contact": ("Contact", "Contact", "#5b2c6f"), "changelog": ("What's new", "What's new", "#e39a1f"), "search": ("Search", "Search", "#1f7bff"),
+}
+
+
+def og_auto_slug(path):
+    return path[:-5].replace("/", "--")
+
+
+def og_auto_hash(spec):
+    return _hl.sha256(_json.dumps([OG_AUTO_VERSION, spec["kicker"], spec["title"], spec["accent"]]).encode()).hexdigest()[:16]
+
+
+def _og_manifest():
+    f = _OG_DIR / "manifest.json"
+    return _json.loads(f.read_text()) if f.exists() else {}
+
+
+def og_for(path, RID, title):
+    """og_image() plus the automatic per-page card when only a generic image exists. Returns (file under assets/, alt)."""
+    f, alt = og_image(path, RID)
+    if path == "index.html" or not _OG_GENERIC.match(f):
+        return f, alt
+    t = title.split(" | ")[0].strip()
+    seg = path.split("/")[0] if "/" in path else ""
+    lab, idx_lab, accent = _OG_SECTIONS.get(seg, (C.SITE_NAME, C.SITE_NAME, "#7a4dff"))
+    kicker = idx_lab if path.endswith("index.html") else lab
+    if seg == "recipes" and path[8:-5] in RID:
+        cat = RID[path[8:-5]]["category"]
+        kicker = f"Recipe · {cat}"
+    spec = {"path": path, "slug": og_auto_slug(path), "kicker": kicker, "title": t, "accent": accent}
+    spec["hash"] = og_auto_hash(spec)
+    OG_AUTO[path] = spec
+    if _og_manifest().get(spec["slug"]) == spec["hash"] and (_OG_DIR / f'{spec["slug"]}.jpg').exists():
+        return f'og/p/{spec["slug"]}.jpg', f"{C.SITE_NAME} {kicker.split(' · ')[0].lower()}: {t}"
+    return f, alt   # card missing or stale (e.g. CI without Chrome): fall back to the generic image
+
+
+def write_og_pages(root):
+    d = _pl.Path(root) / ".cache"
+    d.mkdir(exist_ok=True)
+    (d / "og-pages.json").write_text(_json.dumps(sorted(OG_AUTO.values(), key=lambda s: s["path"]), indent=1))
 
 
 # ---------------------------------------------------------------- share buttons (plain links, no third-party scripts)

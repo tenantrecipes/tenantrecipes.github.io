@@ -28,6 +28,11 @@ Register the module in `build_site.py` (`GUIDES = [...]`). Version history on th
 `PUBLISHED`, `UPDATED`/`VERIFIED`, `HISTORY` and every `data/changelog.json` entry whose `url` points to the page,
 so older guides need no manual history.
 
+**Every new page must have its own OG image.** The build does this automatically (`tools/make_page_og.py`, cached per page,
+layout in `DESIGN.md`): run `python3 build.py` and commit the new `assets/og/p/*.jpg` and `assets/og/p/manifest.json` together with the page.
+A pillar or technical guide may get a hand-made card instead (add it to `og_specs()` in `tools/make_shareables.py` and `og_image()`/`OG_PAGES`
+in `build_ux.py`). `tools/check_meta.py` warns about any page that still falls back to a generic image.
+
 Current assignments (2026-10-31): Pillar = secure-copilot-rollout, windows-11-cis-hardening, cloud-hardening-adversary-emulation,
 azure-update-manager-enterprise-patching, azure-arc-onboarding-enterprise-scale, admin-by-request-endpoint-privilege (zero-to-production programme),
 entra-private-access-vpn-replacement, adcs-hardening-tier0. Technical = admin-by-request-intune-win32-packaging, copilot-license-checks (quick guide). All 51 recipes = Recipe.

@@ -142,6 +142,10 @@ def og_specs():
     out["guides"] = og_html("Guides", "Fact-checked playbooks for Microsoft 365 and Windows admins", "Phased guides with printable checklists.", ["Copilot", "Windows 11", "Azure Arc", "Server patching"])
     out["security"] = og_html("Security", "Patch what is exploited. Harden what is exposed.",
         "Vulnerability watch and hardening recipes, checked against vendor advisories and CISA.", ["Exploited CVEs", "Network", "Servers", "VMware"], "#b3261e")
+    out["tool-ca-policy-generator"] = og_html("Free tool", "Conditional Access Policy Generator",
+        "Graph JSON + PowerShell · report-only by default", ["Graph JSON", "PowerShell", "Break-glass excluded", "Runs in your browser"], "#1f7bff")
+    out["tool-mail-dns-checker"] = og_html("Free tool", "Mail DNS Checker",
+        "SPF · DKIM · DMARC · MTA-STS · CAA — graded A–F", ["SPF", "DKIM", "DMARC", "MTA-STS", "TLS-RPT", "CAA"], "#0f7a4f")
     out["newsletter"] = og_html("Free weekly brief", "What changed in Copilot, Intune, Entra and Purview", "And what admins should do about it. 5 minutes, no fluff.", ["Weekly", "Free", "Sources linked"])
     return out
 

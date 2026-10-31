@@ -4,7 +4,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 import site_config as C
 DIST, SITE = ROOT / "dist", C.SITE_URL.rstrip("/")
-titles, descs, errs = {}, {}, []
+titles, descs, errs, warns = {}, {}, [], []
 for f in sorted(DIST.rglob("*.html")):
     if f.name == "404.html":
         continue
@@ -32,9 +32,16 @@ for f in sorted(DIST.rglob("*.html")):
     img = re.search(r'property="og:image" content="([^"]+)"', h)
     if img and SITE and img.group(1).startswith(SITE) and not (DIST / img.group(1)[len(SITE) + 1:]).exists():
         errs.append(f"{p}: og:image not found: {img.group(1)}")
+    # every content page should have its own OG image (DESIGN.md); generic images only mean a card was not rendered yet
+    if img and p not in ("index.html", "search.html", "changelog.html") and re.search(r"/assets/(og-image\.png|og/(cat-[a-z-]+|security|guides)\.png)$", img.group(1)):
+        warns.append(f"{p}: generic og:image (run python3 build.py on a machine with Chrome + Pillow and commit assets/og/p/)")
 errs += [f"duplicate title on {v}" for k, v in titles.items() if len(v) > 1]
 errs += [f"duplicate description on {v}" for k, v in descs.items() if len(v) > 1]
 print(f"Checked meta on {sum(len(v) for v in titles.values())} pages: {len(errs)} problems")
 for e in errs:
     print("  META", e)
+if warns:
+    print(f"WARNING: {len(warns)} pages use a generic OG image")
+    for w in warns:
+        print("  OG", w)
 sys.exit(1 if errs else 0)

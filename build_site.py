@@ -120,7 +120,7 @@ def json_ld(path, title, desc, og_type):
         ld = {"@context": "https://schema.org", "@type": "TechArticle", "headline": title.split(" | ")[0][:110],
               "description": desc, "url": canon(path), "mainEntityOfPage": canon(path), "inLanguage": "en",
               "author": {"@type": "Organization", "name": f"{C.SITE_NAME} editor", "url": canon("author/index.html")},
-              "publisher": org, "image": f"{SITE}/assets/{UX.og_image(path, RID)[0]}"}
+              "publisher": org, "image": f"{SITE}/assets/{UX.og_for(path, RID, title)[0]}"}
         if pub:
             ld["datePublished"] = pub
         if mod:
@@ -135,9 +135,9 @@ GC = (getattr(C, "GOATCOUNTER_CODE", "") or "").strip().lower()
 if GC and not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,49}", GC):
     sys.exit(f"site_config.GOATCOUNTER_CODE must be just the site code (e.g. 'abc' from abc.goatcounter.com), got {GC!r}")
 
-def head(title, desc, rel, path, og_type="website"):
+def head(title, desc, rel, path, og_type="website", og_auto=True):
     url = canon(path)
-    og, og_alt = UX.og_image(path, RID)
+    og, og_alt = UX.og_for(path, RID, title) if og_auto else UX.og_image(path, RID)
     img = f"{SITE}/assets/{og}" if SITE else f"{rel}assets/{og}"
     tags = [
         '<meta charset="utf-8">',
@@ -530,12 +530,12 @@ def build():
                       lambda rel: T.changelog_body(rel, T.changelog_entries(R, CY.load(), GUIDES, rel))))
     # old URL: redirect stub (not in sitemap)
     (DIST / "changelog.html").write_text(
-        f'<!doctype html><html lang="en"><head>{head("Changelog moved | " + C.SITE_NAME, "The Tenant Recipes changelog has moved to the What is new page, which lists every new and updated page.", "", "changelog/index.html")}'
+        f'<!doctype html><html lang="en"><head>{head("Changelog moved | " + C.SITE_NAME, "The Tenant Recipes changelog has moved to the What is new page, which lists every new and updated page.", "", "changelog/index.html", og_auto=False)}'
         '<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=changelog/index.html"></head>'
         '<body><p>The changelog has moved to <a href="changelog/index.html">What\'s new</a>.</p></body></html>\n')
     pages.append(page("search/index.html", f"Search recipes, guides, CVEs and news | {C.SITE_NAME}", "Search every Tenant Recipes recipe, guide, vulnerability, hardening recipe and news item in your browser, with suggestions and typo tolerance.", BS.search_body))
     (DIST / "search.html").write_text(
-        f'<!doctype html><html lang="en"><head>{head("Search moved | " + C.SITE_NAME, "Tenant Recipes search has moved to a new page that searches recipes, guides, vulnerabilities and news.", "", "search/index.html")}'
+        f'<!doctype html><html lang="en"><head>{head("Search moved | " + C.SITE_NAME, "Tenant Recipes search has moved to a new page that searches recipes, guides, vulnerabilities and news.", "", "search/index.html", og_auto=False)}'
         '<meta name="robots" content="noindex"><script>location.replace("search/index.html"+location.search)</script>'
         '<meta http-equiv="refresh" content="0; url=search/index.html"></head><body><p>Search has moved to <a href="search/index.html">the new search page</a>.</p></body></html>\n')
 
@@ -664,7 +664,8 @@ def build():
         f'<p>That recipe may have moved. <a href="{home}">Browse all recipes</a>.</p></body></html>\n')
 
     # static assets
-    shutil.copytree(ROOT / "assets", DIST / "assets")
+    UX.write_og_pages(ROOT)   # list of pages that want an automatic OG card (tools/make_page_og.py)
+    shutil.copytree(ROOT / "assets", DIST / "assets", ignore=shutil.ignore_patterns("manifest.json"))
     shutil.copytree(ROOT / "downloads", DIST / "downloads", ignore=shutil.ignore_patterns("manifest.json"))
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
