@@ -430,6 +430,7 @@ _SHARE_RULES = [  # (path regex, top-insert regex (insert AFTER match), bottom-i
     (r"^guides/copilot-license-checks\.html$", r'data-print="1">.*?</button></div>', r'<section class="vs" id="verified"'),
     (r"^guides/(?!index)[^/]+\.html$", r'<div class="gd-body">', r'<section class="vs" id="verified"'),
     (r"^security/[a-z0-9-]+-[a-z0-9-]+\.html$", r'<article class="doc">', r'<section class="vs" id="verified"'),
+    (r"^(code/(?!index)[^/]+|tools/mail-dns-checker)\.html$", r'<article class="doc[^"]*"><p class="pd">.*?</p>', r'</article>'),
     (r"^newsletter-sample\.html$", r'<article class="doc nl">', r'</article></main>'),
 ]
 
