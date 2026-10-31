@@ -780,3 +780,16 @@ html{scroll-padding-top:86px}                 /* header 44 + what's-new bar ~30 
 .vh{margin:22px 0}.vh h2{font-size:1.15rem}.vh-l{list-style:none;margin:0;padding:0;border-left:2px solid #d7deec}
 .vh-l li{position:relative;padding:4px 0 8px 16px;font-size:.92rem}.vh-l li::before{content:"";position:absolute;left:-6px;top:10px;width:10px;height:10px;border-radius:50%;background:#0f6cbd}
 .vh-l time{font-weight:700;margin-right:8px;white-space:nowrap}.vh-k{display:inline-block;font-size:.7rem;font-weight:750;text-transform:uppercase;letter-spacing:.05em;background:#eef2fb;color:#24407a;border-radius:999px;padding:1px 8px;margin-right:8px}
+/* mobile pass 2026-10-31: no overflow at 320px, larger tap targets on touch screens */
+.news input[type=email]{max-width:100%;min-width:0;box-sizing:border-box}
+@media (max-width:480px){.news{padding:20px 16px}.news .bd-form{flex-wrap:wrap}.news input[type=email]{flex:1 1 100%;width:100%}.news .bd-form .btn{flex:1 1 100%}
+ .co-h,h2.h-ic{flex-wrap:wrap}h2 .mk,.co-h .mk{margin-left:0}.pd{font-size:.82rem;gap:4px 12px}}
+@media (pointer:coarse){.wn-x{min-height:32px;padding:4px 12px}.wn-h{min-height:32px;min-width:32px;justify-content:center}
+ .car-dot{position:relative}.car-dot::after{content:"";position:absolute;inset:-14px -4px}
+ .crumb a{display:inline-block;padding:6px 0}}
+@media (max-width:480px){.nm{padding:16px}.nm .bd-form{flex:1 1 100%;min-width:0}.nm .bd-form .btn{flex:none}}
+/* long identifiers (resource providers, cmdlets, URLs) must wrap on phones instead of widening the page */
+.doc :not(pre)>code,.gd-body :not(pre)>code,.gd-phase :not(pre)>code,.co :not(pre)>code{overflow-wrap:anywhere;word-break:break-word}
+.gd-body a,.doc a{overflow-wrap:anywhere}
+@media (max-width:480px){.gd-time{white-space:normal}}
+.gd-grid>*,.pg-grid>*{min-width:0}.gd-body,.doc{overflow-wrap:break-word}@media (max-width:400px){.gd-body,.doc{overflow-wrap:anywhere}}

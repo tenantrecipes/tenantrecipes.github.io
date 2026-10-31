@@ -187,7 +187,15 @@ def screenshots(r, rel):
     shots = r.get("screenshots") or []
     if not shots:
         return ""
-    figs = "".join(f'<figure class="shot"><img src="{rel}{esc(s["src"])}" alt="{esc(s["alt"])}" loading="lazy">'
+    def wh(src):
+        try:
+            from PIL import Image
+            import pathlib
+            with Image.open(pathlib.Path(__file__).resolve().parent / src) as im:
+                return f' width="{im.width}" height="{im.height}"'
+        except Exception:
+            return ""
+    figs = "".join(f'<figure class="shot"><img src="{rel}{esc(s["src"])}" alt="{esc(s["alt"])}"{wh(s["src"])} loading="lazy" decoding="async">'
                    f'<figcaption>{esc(s["caption"])} <span class="fine">Screenshot taken {T.fmt(s["date"])}. Portal labels may have changed since.</span></figcaption></figure>'
                    for s in shots)
     return f'<section class="shots" aria-label="Screenshots">{figs}</section>'
@@ -462,6 +470,24 @@ def featured(R, CY, guides, Q):
     return slides
 
 
+def _webp(img):
+    """WebP copies (1200w + 640w) of a carousel image, committed next to the PNG in assets/og/.
+    Regenerated when the PNG is newer and Pillow is installed; without them the <picture> keeps only the PNG."""
+    import pathlib
+    png = pathlib.Path(__file__).resolve().parent / "assets" / img
+    big, small = png.with_suffix(".webp"), png.with_name(png.stem + "-640.webp")
+    try:
+        from PIL import Image
+        if png.exists() and (not big.exists() or big.stat().st_mtime < png.stat().st_mtime):
+            with Image.open(png) as im:
+                im = im.convert("RGB")
+                im.save(big, "WEBP", quality=82, method=6)
+                im.resize((640, round(640 * im.height / im.width)), Image.LANCZOS).save(small, "WEBP", quality=80, method=6)
+    except ImportError:
+        pass
+    return big.exists() and small.exists()
+
+
 def carousel(rel, slides, n_recipes, last_verified, top="", lead=""):
     n = len(slides)
     items, dots = "", ""
@@ -471,7 +497,11 @@ def carousel(rel, slides, n_recipes, last_verified, top="", lead=""):
                   f'<div class="car-tx"><p class="car-k">{esc(s["k"])}</p><h2 class="car-t"><a href="{rel}{s["u"]}">{esc(s["t"])}</a></h2>'
                   f'<p class="car-sum">{esc(s["s"])}</p><p class="car-m">{T.icon("clock")}{esc(s["dl"])} <time datetime="{s["d"]}">{T.fmt(s["d"])}</time></p>'
                   f'<a class="btn hx-p car-cta" href="{rel}{s["u"]}" tabindex="-1" aria-hidden="true">{esc(s["cta"])} →</a></div>'
-                  f'<a class="car-img" href="{rel}{s["u"]}" tabindex="-1" aria-hidden="true"><img src="{rel}assets/{s["img"]}" alt="" width="1200" height="630" {load}></a></div>')
+                  f'<a class="car-img" href="{rel}{s["u"]}" tabindex="-1" aria-hidden="true"><picture>'
+                  # the image is hidden below 860px (CSS), so phones get a 1x1 placeholder instead of a 1200px PNG
+                  f'<source media="(max-width: 860px)" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">'
+                  + (f'<source type="image/webp" srcset="{rel}assets/{s["img"][:-4]}-640.webp 640w, {rel}assets/{s["img"][:-4]}.webp 1200w" sizes="(max-width: 1200px) 45vw, 540px">' if _webp(s["img"]) else "") +
+                  f'<img src="{rel}assets/{s["img"]}" alt="" width="1200" height="630" decoding="async" {load}></picture></a></div>')
         dots += f'<button type="button" class="car-dot" aria-controls="car-s{i}" aria-label="Show slide {i + 1}: {esc(s["t"])}"{" aria-current=true" if i == 0 else ""}></button>'
     arrow = lambda d: f'<svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path d="{"M15 5l-7 7 7 7" if d < 0 else "M9 5l7 7-7 7"}"/></svg>'
     return (f'<section class="hx car" aria-labelledby="hx-title"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>'

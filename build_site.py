@@ -355,7 +355,7 @@ def guide_page(g):
                         + "".join(f'<a class="gd-chip" href="{rel}guides/{gs}.html">Guide: {esc(GS[gs].SHORT)}</a>' for gs in st.get("guides", [])))
                 srcs = "".join(f'<li><a href="{E(u)}">{esc(t)}</a></li>' for t, u in st["src"])
                 steps += (f'<div class="gd-step" id="{pid}-s{j}"><h3><span>{i}.{j}</span> {esc(st["t"])}{MK.badge(rel, st.get("marker"), st.get("tested"), fmt_date)}</h3>'
-                          f'<p class="gd-done"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 6.8"/></svg>Done when: {_txt(st["check"])}</p>'
+                          f'<p class="gd-done"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 6.8"/></svg><span>Done when: {_txt(st["check"])}</span></p>'
                           '<h4>Do this</h4><ul class="gd-do">' + "".join(f'<li>{_txt(x)}</li>' for x in st["do"]) + '</ul>'
                           + ('<div class="gd-pit"><h4>Pitfalls</h4><ul>' + "".join(f'<li>{_txt(x)}</li>' for x in st["pit"]) + '</ul></div>' if st["pit"] else "")
                           + (f'<div class="gd-recs"><h4>Related on this site</h4>{recs}</div>' if recs else "")
@@ -485,7 +485,7 @@ def build():
         f'<p id="count" class="fine" aria-live="polite"></p><div class="grid" id="grid"></div>'
         f'<noscript><ul>' + "".join(f'<li><a href="recipes/{r["id"]}.html">{esc(r["title"])}</a></li>' for r in R) + '</ul></noscript>'
         f'{ad_slot("index-bottom")}{signup(rel, "index")}</main>'
-        f'<script src="data/recipes.js"></script><script src="assets/app.js"></script><script src="assets/carousel.js" defer></script>')))
+        f'<script src="data/recipes.js" defer></script><script src="assets/app.js" defer></script><script src="assets/carousel.js" defer></script>')))
 
     stats = (len(R), len(CY.load()), len(GUIDES), len({s["url"] for r in R for s in r["sources"]} | {s["url"] for e in CY.load() for s in e["sources"]}))
     pages.append(page("about.html", f"About Tenant Recipes: independent, fact-checked and source-linked | {C.SITE_NAME}", "Who edits Tenant Recipes, why there is no personal byline, how every recipe is fact-checked against primary sources, and how to report an error.",
@@ -665,6 +665,24 @@ def build():
           + ("  (Buttondown username not set: form not live)" if BD_PLACEHOLDER else ""))
 
 
+def _min_css(css):
+    """Conservative CSS minifier: drops comments and collapses whitespace around braces/semicolons only
+    (never inside selectors, so descendant combinators and ':' pseudo-classes are untouched)."""
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    css = re.sub(r"\s*\n\s*", "\n", css)
+    css = re.sub(r"\s*([{};])\s*", r"\1", css)
+    css = re.sub(r";}", "}", css)
+    return css.replace("\n", " ").strip() + "\n"
+
+
+def optimise_assets():
+    """Performance pass on dist/ only (sources stay readable): minified style.css."""
+    f = DIST / "assets" / "style.css"
+    before = f.stat().st_size
+    f.write_text(_min_css(f.read_text()))
+    print(f"Assets: style.css {before // 1024} KB -> {f.stat().st_size // 1024} KB (minified)")
+
+
 def fingerprint_assets():
     """Cache-busting + no-CSS safety net for every page in dist/.
     1) CSS/JS references get ?v=<content hash>, so a browser never combines new HTML with an old cached
@@ -672,6 +690,7 @@ def fingerprint_assets():
     2) Inline SVG icons without explicit size get width/height="1em", so they stay icon-sized even if
        the stylesheet is missing or outdated (CSS still overrides these presentation attributes)."""
     import hashlib, re
+    optimise_assets()
     def ver(rel_path):
         f = DIST / rel_path
         return hashlib.sha256(f.read_bytes()).hexdigest()[:10] if f.exists() else None

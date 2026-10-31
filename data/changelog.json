@@ -1,6 +1,16 @@
 [
  {
   "date": "2026-10-31",
+  "time": "10:03",
+  "kind": "site",
+  "type": "Site",
+  "title": "Mobile and performance pass",
+  "blurb": "No horizontal scroll at 320–375 px, bigger tap targets, no hidden hero image on phones, WebP, minified CSS, deferred scripts.",
+  "url": "index.html",
+  "text": "Mobile and performance pass: guides no longer scroll sideways on 320–375 px screens (long identifiers wrap), larger touch targets in the What's new bar and carousel, phones no longer download the hidden 1200 px carousel image, desktop gets WebP versions, the stylesheet is minified at build time and the homepage library scripts are deferred."
+ },
+ {
+  "date": "2026-10-31",
   "time": "09:57",
   "kind": "site",
   "type": "Site",

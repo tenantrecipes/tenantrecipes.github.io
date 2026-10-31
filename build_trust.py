@@ -124,7 +124,7 @@ def footer(rel, guide_slug, path="", title="", updated=None):
            f'<a href="{edit_url(path, title or C.SITE_NAME) if path else REPO + "/issues/new/choose"}" rel="nofollow">Suggest an edit</a>'
            f'<a href="{rel}contact/index.html">Contact</a></div>') if updated else ""
     return ('<footer class="sf">' + bar + '<div class="sf-in">'
-            f'<div class="sf-brand"><img src="{rel}assets/logo-dark.svg" alt="Tenant Recipes" width="140" height="32">'
+            f'<div class="sf-brand"><img src="{rel}assets/logo-dark.svg" alt="Tenant Recipes" width="140" height="32" loading="lazy" decoding="async">'
             '<p>Fact-checked AI &amp; security recipes for Microsoft 365 admins. An independent project — not affiliated with Microsoft or any vendor.</p>'
             f'<p class="sf-ed">{EDITOR}</p></div>'
             + col("Content", [("Recipes", f"{rel}index.html#library"), ("Guides", f"{rel}guides/index.html"),
