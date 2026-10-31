@@ -190,7 +190,9 @@ the Defender portal. Do not type them from memory: Microsoft assigns parts of th
       and move to `p=reject` after a week or two of clean reports. The domain only sends through Microsoft 365.
 - [ ] Optional hardening: MTA-STS (`_mta-sts` TXT + policy file on `https://mta-sts.tenantrecipes.com`) and TLS-RPT
       (`_smtp._tls` TXT `v=TLSRPTv1; rua=mailto:tlsrpt@tenantrecipes.com`).
-- After that: set `CONTACT_EMAIL` in `site_config.py` to the brand mailbox and rebuild.
+- [ ] Create the aliases `contact@tenantrecipes.com` and `security@tenantrecipes.com` (plus `dmarc@` / `tlsrpt@` for reports if used)
+      and send a test mail to each. Only then set `CONTACT_EMAIL = "contact@tenantrecipes.com"` and
+      `SECURITY_EMAIL = "security@tenantrecipes.com"` in `site_config.py`, add the security address to `SECURITY.md`, and rebuild.
 
 ### GitHub account `tenantrecipes`
 - [ ] 2FA on the account (passkey or authenticator app, recovery codes in the password manager). Cannot be checked or

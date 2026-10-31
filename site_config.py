@@ -14,8 +14,12 @@ SITE_URL = "https://tenantrecipes.com"
 
 # Contact address shown on /contact/, About/Privacy and in security.txt. Leave "" to tell readers to use GitHub issues
 # or reply to any newsletter email. Only a brand address on the site's own domain, never a personal one.
-# TODO: fill in when the domain's mailbox exists (e.g. "editor@<domain>"), then rebuild.
+# TODO: set to "contact@tenantrecipes.com" ONLY after the owner confirms the alias receives mail, then rebuild.
 CONTACT_EMAIL = ""
+
+# Security contact for /.well-known/security.txt and the security section on /contact/ (falls back to CONTACT_EMAIL).
+# TODO: set to "security@tenantrecipes.com" ONLY after the owner confirms the alias receives mail; also update SECURITY.md.
+SECURITY_EMAIL = ""
 
 # Name of the person responsible for the site (shown in the privacy policy as data controller).
 OWNER_NAME = "Tenant Recipes"

@@ -342,7 +342,8 @@ def contact_body(rel):
             if C.CONTACT_EMAIL else
             '<p>There is no public email address yet. Until there is, GitHub issues are the primary channel, and newsletter subscribers can simply '
             'reply to any newsletter email; replies reach the editors privately.</p>')
-    sec_mail = (f' or email <a href="mailto:{esc(C.CONTACT_EMAIL)}">{esc(C.CONTACT_EMAIL)}</a> with "Security" in the subject' if C.CONTACT_EMAIL else "")
+    _sec = getattr(C, "SECURITY_EMAIL", "") or C.CONTACT_EMAIL
+    sec_mail = (f' or email <a href="mailto:{esc(_sec)}">{esc(_sec)}</a> with "Security" in the subject' if _sec else "")
     return (
         page_hero(rel, crumbs_dark(rel, "contact/index.html", [("Home", rel + "index.html"), ("About", rel + "about.html"), ("Contact", None)]),
                   "Contact &amp; corrections", "Contact Tenant Recipes",
@@ -389,8 +390,9 @@ def security_txt():
     """RFC 9116 security.txt (served at /.well-known/security.txt and /security.txt). Expires about one year after the build."""
     exp = (datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0) + datetime.timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%SZ")
     lines = []
-    if C.CONTACT_EMAIL:
-        lines.append(f"Contact: mailto:{C.CONTACT_EMAIL}")
+    sec = getattr(C, "SECURITY_EMAIL", "") or C.CONTACT_EMAIL
+    if sec:
+        lines.append(f"Contact: mailto:{sec}")
     lines += [f"Contact: {REPO}/security/advisories/new", f"Contact: {SITE}/contact/#security", f"Expires: {exp}",
               "Preferred-Languages: en, sv", f"Canonical: {SITE}/.well-known/security.txt", f"Policy: {SITE}/contact/#security"]
     return "\n".join(lines) + "\n"
