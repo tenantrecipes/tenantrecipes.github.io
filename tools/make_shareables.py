@@ -8,7 +8,7 @@ import sys, json, re, hashlib, shutil, subprocess, tempfile, pathlib, html
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT)); sys.path.insert(0, str(ROOT / "data" / "guides"))
 import site_config as C
-import secure_copilot_rollout as G1, windows_11_cis_hardening as G2, cloud_hardening_adversary_emulation as G3, quick_copilot_license_checks as Q
+import secure_copilot_rollout as G1, windows_11_cis_hardening as G2, cloud_hardening_adversary_emulation as G3, azure_update_manager_enterprise_patching as G4, quick_copilot_license_checks as Q
 DL, OG = ROOT / "downloads", ROOT / "assets" / "og"
 MANIFEST = DL / "manifest.json"
 SITE = C.SITE_URL.rstrip("/")
@@ -125,9 +125,11 @@ def og_specs():
         f"{len(G2.PHASES)} phases · {ns(G2)} steps · Level 1 vs 2, Intune vs GPO, compliance scans", ["CIS", "Security baselines", "BitLocker", "ASR"], "#0f7a4f")
     out["guide-cloud-hardening-adversary-emulation"] = og_html("Pillar guide", "Cloud hardening under attack simulation",
         f"{len(G3.PHASES)} phases · {ns(G3)} steps · ScubaGear to ROADtools to remediation", ["ScubaGear", "Maester", "ROADtools", "Prowler"], "#7a2f9b")
+    out["guide-azure-update-manager-enterprise-patching"] = og_html("Pillar guide", "Azure Update Manager at enterprise scale",
+        f"{len(G4.PHASES)} phases · {ns(G4)} steps · rings, maintenance configurations, Arc, pre/post events", ["Azure Arc", "Rings", "Dynamic scopes", "Rollback"], "#0b6e99")
     out["quick-copilot-license-checks"] = og_html("Quick guide · 1 page", "5 things to check before you assign Copilot licenses",
         "Base licenses, mailboxes, update channel, network and oversharing. Free PDF.", ["Checklist", "Microsoft Learn sources"], "#e39a1f")
-    out["guides"] = og_html("Guides", "Fact-checked playbooks for Microsoft 365 and Windows admins", "Phased guides with printable checklists.", ["Copilot", "Windows 11", "Cloud hardening", "Quick guides"])
+    out["guides"] = og_html("Guides", "Fact-checked playbooks for Microsoft 365 and Windows admins", "Phased guides with printable checklists.", ["Copilot", "Windows 11", "Cloud hardening", "Server patching"])
     out["security"] = og_html("Security", "Patch what is exploited. Harden what is exposed.",
         "Vulnerability watch and hardening recipes, checked against vendor advisories and CISA.", ["Exploited CVEs", "Network", "Servers", "VMware"], "#b3261e")
     out["newsletter"] = og_html("Free weekly brief", "What changed in Copilot, Intune, Entra and Purview", "And what admins should do about it. 5 minutes, no fluff.", ["Weekly", "Free", "Sources linked"])
@@ -150,7 +152,7 @@ def generate(force=False):
     flags = [ch, "--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1", "--run-all-compositor-stages-before-draw"]
     with tempfile.TemporaryDirectory() as td:
         td = pathlib.Path(td)
-        docs = {f"{G1.SLUG}-checklist": checklist_html(G1), f"{G2.SLUG}-checklist": checklist_html(G2), f"{G3.SLUG}-checklist": checklist_html(G3), Q.SLUG: quick_html()}
+        docs = {f"{G1.SLUG}-checklist": checklist_html(G1), f"{G2.SLUG}-checklist": checklist_html(G2), f"{G3.SLUG}-checklist": checklist_html(G3), f"{G4.SLUG}-checklist": checklist_html(G4), Q.SLUG: quick_html()}
         for name, doc in docs.items():
             src = td / f"{name}.html"; src.write_text(doc)
             run(flags + ["--no-pdf-header-footer", f"--print-to-pdf={DL / (name + '.pdf')}", src.as_uri()])

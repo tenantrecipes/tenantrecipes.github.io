@@ -2,6 +2,11 @@
  {
   "date": "2026-10-31",
   "kind": "site",
+  "text": "New pillar guide: Azure Update Manager at enterprise scale. A patch framework for 10 to several hundred Windows Server and Linux servers across Azure VMs and Azure Arc: rings anchored to Patch Tuesday, maintenance configurations in Bicep and CLI, reboot policy, dynamic scopes and Azure Policy, pre/post events with snapshots and cancellation, compliance reporting, alerts, troubleshooting and rollback. Printable checklist included."
+ },
+ {
+  "date": "2026-10-31",
+  "kind": "site",
   "text": "New pillar guide: Cloud hardening under attack simulation. Chains ScubaGear, Monkey365, Maester, Prowler, ROADtools and AADInternals from baseline measurement through authorized directory enumeration to detection validation and remediation. Defensive use only; printable checklist included."
  },
  {

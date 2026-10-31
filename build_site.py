@@ -10,8 +10,9 @@ sys.path.insert(0, str(ROOT / "data" / "guides"))
 import secure_copilot_rollout as G1
 import windows_11_cis_hardening as G2
 import cloud_hardening_adversary_emulation as G3
+import azure_update_manager_enterprise_patching as G4
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2, G3]
+GUIDES = [G1, G2, G3, G4]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
@@ -416,8 +417,8 @@ def guides_index():
         return (T.page_hero(rel, T.crumbs_dark(rel, "guides/index.html", [("Home", rel + "index.html"), ("Guides", None)]), "Guides",
                             "Long-form playbooks", "Phased, fact-checked guides that tie the recipes together. Every claim links to its official source.", kind="page")
                 + f'<main class="wrap pg"><div class="grid">{cards}</div>{signup(rel, "guides-index")}</main>')
-    return page("guides/index.html", f"Guides: Copilot, Windows 11, cloud hardening and quick checks | {C.SITE_NAME}",
-                "Long-form, fact-checked playbooks for Microsoft 365, Entra hardening under attack simulation, and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
+    return page("guides/index.html", f"Guides: Copilot, Windows 11, cloud hardening, Azure Update Manager and quick checks | {C.SITE_NAME}",
+                "Long-form, fact-checked playbooks for Microsoft 365, Entra hardening under attack simulation, Azure Update Manager server patching and Windows admins, plus one-page quick guides with printable PDF checklists.", body)
 
 
 def build():

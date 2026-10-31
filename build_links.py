@@ -25,7 +25,7 @@ LABEL = {c: l for c, l, _, _ in CLUSTERS}
 # Extra pages that belong to a cluster (shown in the recipe cluster box after the recipes)
 EXTRA = {
     "identity": [("Cloud hardening + adversary emulation", "guides/cloud-hardening-adversary-emulation.html")],
-    "devices": [("Windows 11 CIS hardening guide", "guides/windows-11-cis-hardening.html"), ("Windows LAPS hardening", "security/harden-windows-laps.html")],
+    "devices": [("Windows 11 CIS hardening guide", "guides/windows-11-cis-hardening.html"), ("Azure Update Manager at enterprise scale", "guides/azure-update-manager-enterprise-patching.html"), ("Windows LAPS hardening", "security/harden-windows-laps.html")],
     "ai": [("Secure Copilot rollout guide", "guides/secure-copilot-rollout.html"), ("Copilot license pre-flight checks", "guides/copilot-license-checks.html")],
 }
 
