@@ -176,6 +176,31 @@ def nav(rel):
     return T.nav(rel)
 
 
+# AI / LLM crawlers that are refused (search engines such as Googlebot and Bingbot stay allowed).
+AI_BOTS = ["GPTBot", "ChatGPT-User", "OAI-SearchBot", "CCBot", "ClaudeBot", "anthropic-ai", "Claude-Web", "Google-Extended",
+           "Applebot-Extended", "PerplexityBot", "Bytespider", "Amazonbot", "meta-externalagent", "FacebookBot", "cohere-ai",
+           "Diffbot", "Omgilibot", "ImagesiftBot", "YouBot", "Timpibot"]
+
+
+def robots_txt():
+    out = ["# Search engines are welcome. AI training and bulk scraping are not: see /ai.txt and /about.html#terms.", "",
+           "User-agent: Googlebot", "Allow: /", "", "User-agent: Bingbot", "Allow: /", ""]
+    for b in AI_BOTS:
+        out += [f"User-agent: {b}", "Disallow: /", ""]
+    out += ["User-agent: *", "Allow: /", ""]
+    if SITE:
+        out.append(f"Sitemap: {SITE}/sitemap.xml")
+    return "\n".join(out) + "\n"
+
+
+def ai_txt():
+    return ("# ai.txt: Tenant Recipes does not permit use of this site's content for AI/ML training,\n"
+            "# dataset building or bulk scraping without prior written permission. Terms: "
+            + (f"{SITE}/about.html#terms" if SITE else "/about.html#terms") + "\n\n"
+            "User-Agent: *\nDisallow: /\n"
+            "Disallow: *.html\nDisallow: *.txt\nDisallow: *.json\nDisallow: *.png\nDisallow: *.jpg\nDisallow: *.webp\nDisallow: *.svg\n")
+
+
 def footer(rel, path="", title="", updated=None):
     return T.footer(rel, G1.SLUG, path, title, updated or SITE_LAST)
 
@@ -655,8 +680,8 @@ def build():
         (DIST / ".well-known").mkdir(exist_ok=True)
         (DIST / ".well-known" / "security.txt").write_text(T.security_txt())
         (DIST / "security.txt").write_text(T.security_txt())
-    robots = "User-agent: *\nAllow: /\n" + (f"Sitemap: {SITE}/sitemap.xml\n" if SITE else "")
-    (DIST / "robots.txt").write_text(robots)
+    (DIST / "robots.txt").write_text(robots_txt())
+    (DIST / "ai.txt").write_text(ai_txt())
     if SITE:
         urls = "".join(f"<url><loc>{canon(p)}</loc>" + (f"<lastmod>{LASTMOD[p]}</lastmod>" if LASTMOD.get(p) else "") + "</url>"
                        for p in dict.fromkeys(pages))

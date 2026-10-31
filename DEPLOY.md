@@ -200,3 +200,31 @@ the Defender portal. Do not type them from memory: Microsoft assigns parts of th
 - [x] Repo ruleset `protect-main`: blocks deletion and force-push of `main` (normal pushes and the status workflow still work).
 - [x] Secret scanning + push protection on; Dependabot vulnerability alerts on; private vulnerability reporting on.
 - [x] Default workflow token permission is read-only; only the Pages workflow asks for `contents`/`pages`/`id-token` write.
+
+### Anti-scraping (AI crawlers)
+- [x] `robots.txt` (generated in `build_site.py`, list in `AI_BOTS`): Googlebot, Bingbot and `*` allowed; known AI
+      crawlers (GPTBot, ChatGPT-User, OAI-SearchBot, CCBot, ClaudeBot, anthropic-ai, Claude-Web, Google-Extended,
+      Applebot-Extended, PerplexityBot, Bytespider, Amazonbot, meta-externalagent, FacebookBot, cohere-ai, Diffbot,
+      Omgilibot, ImagesiftBot, YouBot, Timpibot) get `Disallow: /`. `Google-Extended` only opts out of Gemini training,
+      not Google Search. Well-behaved bots honour this; scrapers that ignore it need the proxy below.
+- [x] `<meta name="robots" content="noai, noimageai">` on every page (`tools/security_meta.py`, merged with any existing
+      `noindex`); `tools/check_meta.py` fails the build if a page lacks it.
+- [x] `/ai.txt` disallowing AI training; Terms of use at `/about.html#terms` (footer: Legal > Terms of use).
+
+### TODO: Cloudflare (free plan) in front — after the M365 mail DNS is done
+Do this only after MX/SPF/DKIM/DMARC for M365 are in place and verified, so the mail records are copied over intact.
+- [ ] Add `tenantrecipes.com` to Cloudflare (free), let it import the zone, compare every record with Loopia
+      (A x4, `www` CNAME, `_github-pages-challenge-tenantrecipes` TXT, MX, SPF, DKIM CNAMEs, DMARC, autodiscover, CAA).
+      Keep the GitHub Pages records **DNS only** (grey) until the certificate question is settled, then proxy.
+- [ ] Move the nameservers at Loopia to the two Cloudflare nameservers. If DNSSEC is on at Loopia: turn it off
+      first, then re-enable it in Cloudflare and add the new DS record at Loopia.
+- [ ] SSL/TLS mode **Full (strict)**; Always Use HTTPS; minimum TLS 1.2; keep GitHub "Enforce HTTPS" on.
+- [ ] Security > Bots: **Block AI bots** (all pages) and **Bot Fight Mode** on. Check that Googlebot/Bingbot still
+      reach the site (Search Console URL inspection) after enabling.
+- [ ] Rate limiting rule (free plan allows one): for example more than ~60 requests per 10 s per IP -> block/challenge.
+- [ ] WAF custom rules: challenge empty or known-bad user agents, block requests for `/.git`, `/wp-*`, `*.php`.
+- [ ] Response headers (Transform Rules): HSTS `max-age=63072000; includeSubDomains` (preload only once stable),
+      `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Content-Security-Policy: frame-ancestors 'none'`,
+      `Referrer-Policy`, `Permissions-Policy` (target set above).
+- [ ] Re-check CAA: Cloudflare edge certificates need its CAs (letsencrypt.org, pki.goog, ssl.com) allowed.
+- [ ] Verify afterwards: `curl -sI https://tenantrecipes.com/` shows the headers; GitHub Pages settings still green.

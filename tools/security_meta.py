@@ -3,7 +3,8 @@
 Injects into every page, right after <meta charset>:
   - a per-page Content-Security-Policy <meta> with sha256 hashes for each inline <script>/<style>
     (no 'unsafe-inline', no 'unsafe-eval'); GoatCounter hosts are only allowed when GOATCOUNTER_CODE is set,
-  - <meta name="referrer" content="strict-origin-when-cross-origin">.
+  - <meta name="referrer" content="strict-origin-when-cross-origin">,
+  - <meta name="robots" content="noai, noimageai"> (merged into an existing robots meta such as noindex).
 Not possible via <meta> (browsers ignore it there): HSTS, X-Frame-Options, frame-ancestors, X-Content-Type-Options,
 Permissions-Policy. See DEPLOY.md "Security checklist". Fails the build if a page has inline event handlers or
 style="" attributes, since the policy would silently break them.
@@ -44,10 +45,32 @@ def policy(scripts, styles):
     ])
 
 
+ROBOTS = re.compile(r'<meta name="robots" content="([^"]*)">', re.I)
+NOAI = ["noai", "noimageai"]
+
+
+def add_noai(t):
+    """Signal 'no AI training' on every page; merges into an existing robots meta (keeps noindex etc.)."""
+    m = ROBOTS.search(t)
+    if m:
+        vals = [v.strip() for v in m.group(1).split(",") if v.strip()]
+        vals += [v for v in NOAI if v not in [x.lower() for x in vals]]
+        return t[:m.start()] + f'<meta name="robots" content="{", ".join(vals)}">' + t[m.end():]
+    tag = '<meta name="robots" content="noai, noimageai">'
+    new, k = re.subn(r'(<meta charset="utf-8">)', lambda mm: mm.group(1) + tag, t, count=1, flags=re.I)
+    if not k:
+        new, k = re.subn(r"(<head[^>]*>)", lambda mm: mm.group(1) + tag, t, count=1, flags=re.I)
+    return new
+
+
 def main():
     bad, n = [], 0
     for p in sorted(DIST.rglob("*.html")):
         t = p.read_text(encoding="utf-8")
+        t2 = add_noai(t)
+        if t2 != t:
+            p.write_text(t2, encoding="utf-8")
+            t = t2
         if MARK in t:
             continue
         if re.search(r"<[a-z][^>]*\son[a-z]+\s*=", t, re.I) or re.search(r"<[a-z][^>]*\sstyle\s*=", t, re.I):

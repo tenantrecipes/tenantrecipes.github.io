@@ -135,7 +135,7 @@ def footer(rel, guide_slug, path="", title="", updated=None):
                             ("Contact &amp; corrections", f"{rel}contact/index.html"), ("Report an issue", f"{REPO}/issues/new/choose")])
             + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Sample issue", f"{rel}newsletter-sample.html"), (f"X (@{C.X_HANDLE})", f"https://x.com/{C.X_HANDLE}"), ("Atom / RSS feed", f"{rel}feed.xml"),
                                    ("Suggest a recipe", f"{REPO}/issues/new?template=suggest-recipe.yml")])
-            + col("Legal", [("Privacy policy", f"{rel}privacy.html"), ("Disclaimer", f"{rel}about.html#disclaimer")])
+            + col("Legal", [("Privacy policy", f"{rel}privacy.html"), ("Disclaimer", f"{rel}about.html#disclaimer"), ("Terms of use", f"{rel}about.html#terms")])
             + f'</div><p class="sf-ind">{icon("shield")}<strong>Independent, not affiliated with Microsoft.</strong> No sponsors, no affiliate links; every claim links to its source.</p>'
             f'<p class="sf-b">© {TODAY.year} Tenant Recipes · Microsoft, Microsoft 365, Copilot, Entra, Intune and Purview are trademarks of the Microsoft group of companies. '
             'Other product names belong to their owners.</p></footer>')
@@ -269,6 +269,10 @@ def about_body(rel, stats):
         '<h2 id="disclaimer">Disclaimer</h2><p class="fine">Recipes are provided as-is for information. Settings, licensing and portal labels change; '
         'always confirm against the linked official documentation and test in a non-production tenant or pilot group first. '
         'You are responsible for changes you make in your environment. Product names are trademarks of their owners.</p>'
+        '<h2 id="terms">Terms of use</h2><p class="fine">You are welcome to read, link to and quote short excerpts with attribution. '
+        'The content of this site may not be used to train, fine-tune or evaluate AI/machine-learning models, or be collected by bulk scraping '
+        f'or automated download, without prior written permission. Search-engine indexing is allowed. See <a href="{rel}robots.txt">robots.txt</a> '
+        f'and <a href="{rel}ai.txt">ai.txt</a>.</p>'
         '</article></main>')
 
 
