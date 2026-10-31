@@ -153,11 +153,11 @@ def to_markdown(e):
         if s.get("links"):
             L += ["Microsoft Learn: " + "; ".join(f"[{l['t']}]({l['u']})" for l in s["links"]), ""]
     if e.get("related"):
-        L += ["## Related", ""] + [f"- Access management policy template: https://tenantrecipes.github.io/policies/{r}.html" if r == "access-management-policy" else f"- https://tenantrecipes.github.io/policies/{r}.html" for r in e["related"]] + [""]
+        L += ["## Related", ""] + [f"- Access management policy template: https://tenantrecipes.com/policies/{r}.html" if r == "access-management-policy" else f"- https://tenantrecipes.com/policies/{r}.html" for r in e["related"]] + [""]
     L += ["## Framework references", "", "Indicative mapping prepared by Tenant Recipes; confirm against your own statement of applicability.", ""]
     L += [f"- **{a}:** {b}" for a, b in fw_rows(e)] + [""]
     L += ["## Placeholders to replace", ""] + [f"- `{{{{{k}}}}}`: {d}" for k, d in ph_list(e)] + [""]
-    L += ["---", "", "Template from Tenant Recipes (https://tenantrecipes.github.io/policies/). Free to adapt for use in your organization.",
+    L += ["---", "", "Template from Tenant Recipes (https://tenantrecipes.com/policies/). Free to adapt for use in your organization.",
           "Independent and not affiliated with Microsoft, ISO, NIST or CIS.", ""]
     return "\n".join(L)
 
@@ -222,7 +222,7 @@ def to_docx(e, path):
     if e.get("related"):
         d.add_heading("Related", 1)
         for r in e["related"]:
-            para(f"Access management policy template: https://tenantrecipes.github.io/policies/{r}.html" if r == "access-management-policy" else f"https://tenantrecipes.github.io/policies/{r}.html", "List Bullet")
+            para(f"Access management policy template: https://tenantrecipes.com/policies/{r}.html" if r == "access-management-policy" else f"https://tenantrecipes.com/policies/{r}.html", "List Bullet")
     d.add_heading("Framework references", 1)
     para("Indicative mapping prepared by Tenant Recipes; confirm against your own statement of applicability.")
     for a, b in fw_rows(e):
@@ -230,7 +230,7 @@ def to_docx(e, path):
     d.add_heading("Placeholders to replace", 1)
     for k, v in ph_list(e):
         para("{{" + k + "}}" + f": {v}", "List Bullet")
-    para("Template from Tenant Recipes (tenantrecipes.github.io/policies/). Independent and not affiliated with Microsoft, ISO, NIST or CIS.")
+    para("Template from Tenant Recipes (tenantrecipes.com/policies/). Independent and not affiliated with Microsoft, ISO, NIST or CIS.")
     cp = d.core_properties
     cp.title = e["title"]; cp.author = "Tenant Recipes"; cp.last_modified_by = "Tenant Recipes"; cp.comments = NOTICE
     cp.created = cp.modified = dt.datetime.fromisoformat(e["updated"] + "T00:00:00")

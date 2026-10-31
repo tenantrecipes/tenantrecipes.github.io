@@ -1,4 +1,6 @@
-# Deploying Tenant Recipes (free, no custom domain)
+# Deploying Tenant Recipes
+
+Production: **https://tenantrecipes.com** (GitHub Pages via Actions, custom domain set in the Pages settings; `www` and `tenantrecipes.github.io` redirect to it). See the security checklist at the end.
 
 Everything the site needs is built into `dist/`. All links are relative, so it works on a free
 subdomain (`*.netlify.app`) or a GitHub Pages sub-path (`https://<user>.github.io/<repo>/`).
@@ -38,9 +40,10 @@ Note: Netlify Drop does not run `netlify.toml` builds; you always drop the built
 prospects), `screenshots/` and newsletter drafts out of Git. Double-check with `git status` before the first push.
 Netlify Drop never uploads anything except `dist/`.
 
-## Adding a custom domain later
-Netlify: Domain management > Add a domain. GitHub Pages: Settings > Pages > Custom domain.
-Then update `SITE_URL` and rebuild. Nothing else changes.
+## Custom domain
+Live as `tenantrecipes.com` since 2026-10-31. GitHub Pages: Settings > Pages > Custom domain (with an Actions deployment no
+`CNAME` file is needed). `SITE_URL` in `site_config.py` drives canonical, sitemap, robots, RSS, Open Graph, security.txt
+and newsletter links. Links to the GitHub repo/issues stay on `github.com/tenantrecipes/tenantrecipes.github.io`.
 
 ## Ad slots
 See `README.md` ("Ad slots"). `ADS_ENABLED = False` in `site_config.py` (default) renders nothing.
@@ -106,7 +109,7 @@ banner is needed for it. Until a site code is set, **nothing** is added to the p
 Steps for the site owner:
 1. Sign up at **https://www.goatcounter.com/signup**. Use the brand mailbox, not a personal or work address.
    - *Code*: pick e.g. `tenantrecipes`. This becomes `https://tenantrecipes.goatcounter.com` (the dashboard).
-   - *Site domain*: `tenantrecipes.github.io` (change it in GoatCounter settings when the custom domain is live).
+   - *Site domain*: `tenantrecipes.com`.
    - Choose a strong password (save it in the password manager) and confirm the email.
 2. In `site_config.py` set only the code, nothing else:
    ```python
@@ -122,3 +125,76 @@ Steps for the site owner:
 
 To turn analytics off again: set `GOATCOUNTER_CODE = ""` and rebuild.
 
+
+## Security checklist (tenantrecipes.com)
+
+Status legend: [x] done, [ ] owner action.
+
+### DNS (Loopia)
+- [x] Apex `@`: four A records 185.199.108.153, .109, .110, .111 (GitHub Pages). AAAA optional.
+- [x] `www`: CNAME to `tenantrecipes.github.io`. Nothing else on `www`.
+- [x] No wildcard (`*`) records. GitHub warns that wildcards pointing at Pages allow domain takeover. Never add one.
+- [ ] Verify the domain for GitHub Pages (account Settings > Pages > Add a domain): GitHub shows a TXT record
+      `_github-pages-challenge-tenantrecipes` with a one-time value. Add it in Loopia and keep it. This blocks other
+      GitHub accounts from claiming the domain or its subdomains. Not available via the REST API.
+- [ ] CAA (after the HTTPS certificate is issued): `@ CAA 0 issue "letsencrypt.org"` and `@ CAA 0 issuewild ";"`.
+      GitHub Pages certificates come from Let's Encrypt; any other CA is then refused. Re-check if you add a service
+      that needs another CA (for example a third-party mail or marketing host on a subdomain).
+- [ ] Optional: enable DNSSEC in Loopia if offered for .com.
+
+### HTTPS
+- [x] Custom domain set via API; certificate requested from Let's Encrypt (state is visible with
+      `gh api repos/tenantrecipes/tenantrecipes.github.io/pages --jq .https_certificate`).
+- [x] Certificate approved (Let's Encrypt, apex + www, auto-renewed by GitHub) and **Enforce HTTPS** on (2026-10-31):
+      `http://` -> `https://`, `www` and `tenantrecipes.github.io` -> `https://tenantrecipes.com/` (301).
+- HSTS: checked 2026-10-31, GitHub Pages sends **no** `Strict-Transport-Security` header on custom domains, and the repo
+  cannot add one (a meta tag does not work for HSTS). HSTS and preload need a proxy/CDN in front (see below).
+
+### Headers and browser policy
+GitHub Pages cannot set custom HTTP headers (`_headers` and `netlify.toml` only work on Netlify). What the site does instead:
+- [x] `tools/security_meta.py` (runs in `build.py`) adds a per-page `Content-Security-Policy` meta tag to every page:
+      `default-src 'self'`, sha256 hashes for each inline script/style (no `unsafe-inline`, no `unsafe-eval`),
+      `object-src 'none'`, `frame-src 'none'`, `base-uri 'self'`, `form-action 'self' https://buttondown.com`,
+      `upgrade-insecure-requests`. GoatCounter hosts are allowed only when `GOATCOUNTER_CODE` is set.
+      The build fails if a page gains inline event handlers (`onclick=`) or `style=""` attributes.
+- [x] `<meta name="referrer" content="strict-origin-when-cross-origin">` on every page.
+- [x] Clickjacking: `assets/ui.js` hides the page and breaks out when it is loaded inside a frame (X-Frame-Options and
+      CSP `frame-ancestors` are ignored in meta tags).
+- Not possible on GitHub Pages (checked 2026-10-31, none of these headers are sent): HSTS, X-Frame-Options,
+  `frame-ancestors`, X-Content-Type-Options, Permissions-Policy. GitHub serves correct `Content-Type` values, which
+  limits the sniffing risk. For full header control later: a proxy/CDN in front (for example Cloudflare with
+  Transform/Response Header rules; certificate issuance must then be handled at the proxy) or Netlify hosting, where
+  `netlify.toml` already carries headers. Target set: `Strict-Transport-Security: max-age=63072000; includeSubDomains`,
+  `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY` + `frame-ancestors 'none'`,
+  `Referrer-Policy: strict-origin-when-cross-origin`,
+  `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()`.
+
+### Privacy
+- [x] No cookies, no local storage, no tracking while `GOATCOUNTER_CODE` is empty. GoatCounter is cookie-free when enabled.
+- [x] `/.well-known/security.txt` and `/security.txt` (RFC 9116) on the new domain; private vulnerability reporting
+      on the GitHub repo is enabled.
+
+### Mail (Microsoft 365) - owner action when the domain is added to the tenant
+Copy every value from the Microsoft 365 admin center (Settings > Domains > tenantrecipes.com > DNS records) or
+the Defender portal. Do not type them from memory: Microsoft assigns parts of them per tenant.
+- [ ] TXT `@`: `MS=ms########` (domain verification, value from the admin center).
+- [ ] MX `@`: the exact host the admin center shows (`tenantrecipes-com.mail.protection.outlook.com` or the newer
+      `...mx.microsoft` form for new domains), priority 0. Remove any Loopia MX records.
+- [ ] TXT `@` (SPF, only one SPF record): `v=spf1 include:spf.protection.outlook.com -all`
+- [ ] CNAME `autodiscover` -> `autodiscover.outlook.com`
+- [ ] DKIM: CNAME `selector1._domainkey` and `selector2._domainkey` with the targets from
+      `Get-DkimSigningConfig -Identity tenantrecipes.com | Format-List Selector1CNAME,Selector2CNAME`
+      (new domains use `selector1-tenantrecipes-com._domainkey.<tenant>.<x>-v1.dkim.mail.microsoft`). Then enable
+      DKIM signing for the domain in Defender > Email authentication settings.
+- [ ] DMARC TXT `_dmarc`: start with `v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s; rua=mailto:dmarc@tenantrecipes.com`
+      and move to `p=reject` after a week or two of clean reports. The domain only sends through Microsoft 365.
+- [ ] Optional hardening: MTA-STS (`_mta-sts` TXT + policy file on `https://mta-sts.tenantrecipes.com`) and TLS-RPT
+      (`_smtp._tls` TXT `v=TLSRPTv1; rua=mailto:tlsrpt@tenantrecipes.com`).
+- After that: set `CONTACT_EMAIL` in `site_config.py` to the brand mailbox and rebuild.
+
+### GitHub account `tenantrecipes`
+- [ ] 2FA on the account (passkey or authenticator app, recovery codes in the password manager). Cannot be checked or
+      enabled via the API with the current token.
+- [x] Repo ruleset `protect-main`: blocks deletion and force-push of `main` (normal pushes and the status workflow still work).
+- [x] Secret scanning + push protection on; Dependabot vulnerability alerts on; private vulnerability reporting on.
+- [x] Default workflow token permission is read-only; only the Pages workflow asks for `contents`/`pages`/`id-token` write.

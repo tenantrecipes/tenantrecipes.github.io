@@ -1,7 +1,7 @@
 # Tenant Recipes
 
 Fact-checked, source-linked recipes for Microsoft 365 admins, plus guides and a security section.
-Live at https://tenantrecipes.github.io/. An independent project, not affiliated with Microsoft or any vendor.
+Live at https://tenantrecipes.com/. An independent project, not affiliated with Microsoft or any vendor.
 
 ## Build
 

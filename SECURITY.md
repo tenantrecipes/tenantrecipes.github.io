@@ -10,4 +10,4 @@ Do not open a public issue.
 
 Vulnerabilities in Microsoft or other vendors' products should be reported to that vendor (for Microsoft: https://msrc.microsoft.com/report/vulnerability).
 
-More: https://tenantrecipes.github.io/contact/#security
+More: https://tenantrecipes.com/contact/#security

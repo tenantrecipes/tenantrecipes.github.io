@@ -7,10 +7,10 @@
 #     While it is still "BUTTONDOWN_USERNAME", the signup form is shown but marked as not live.
 BUTTONDOWN_USERNAME = "tenantrecipes"
 
-# Public URL of the site, no trailing slash. Leave "" until the first deploy, then set e.g.
-# "https://tenantrecipes.netlify.app" or "https://<github-user>.github.io/tenantrecipes".
+# Public URL of the site, no trailing slash, no www. Production custom domain (GitHub Pages).
+# Changing it updates canonical, sitemap, robots, RSS, og:, security.txt and newsletter links on the next build.
 # Needed for absolute share-image URLs (LinkedIn/X previews), canonical links, sitemap and newsletter links.
-SITE_URL = "https://tenantrecipes.github.io"
+SITE_URL = "https://tenantrecipes.com"
 
 # Contact address shown on /contact/, About/Privacy and in security.txt. Leave "" to tell readers to use GitHub issues
 # or reply to any newsletter email. Only a brand address on the site's own domain, never a personal one.

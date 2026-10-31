@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "status.json"
 HIST = ROOT / "data" / "status-history.json"
-UA = {"User-Agent": "TenantRecipesStatusMirror/1.0 (+https://tenantrecipes.github.io/status/)"}
+UA = {"User-Agent": "TenantRecipesStatusMirror/1.0 (+https://tenantrecipes.com/status/)"}
 OK = {"available", "operational", "healthy", "ok", "none"}
 NOW = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)
 
@@ -136,7 +136,7 @@ def main():
         HIST.write_text(json.dumps(hist[:100], indent=1, ensure_ascii=False) + "\n")
     deployed = None
     try:
-        deployed = json.loads(get("https://tenantrecipes.github.io/status/status.json", 15)[1]).get("fingerprint")
+        deployed = json.loads(get("https://tenantrecipes.com/status/status.json", 15)[1]).get("fingerprint")
     except Exception:
         pass
     print(f"overall={overall} reachable={len(reach)}/{len(sources)} active={len(active)} fingerprint={fp} deployed={deployed}")

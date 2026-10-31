@@ -55,7 +55,7 @@ Checklist owner: {{OWNER}}. Approved by: {{APPROVER}}. Effective from: {{EFFECTI
 
 ## Related
 
-- Access management policy template: https://tenantrecipes.github.io/policies/access-management-policy.html
+- Access management policy template: https://tenantrecipes.com/policies/access-management-policy.html
 
 ## Framework references
 
@@ -82,5 +82,5 @@ Indicative mapping prepared by Tenant Recipes; confirm against your own statemen
 
 ---
 
-Template from Tenant Recipes (https://tenantrecipes.github.io/policies/). Free to adapt for use in your organization.
+Template from Tenant Recipes (https://tenantrecipes.com/policies/). Free to adapt for use in your organization.
 Independent and not affiliated with Microsoft, ISO, NIST or CIS.

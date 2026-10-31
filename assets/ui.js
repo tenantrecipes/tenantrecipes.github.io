@@ -1,4 +1,6 @@
 /* Tenant Recipes UI: copy buttons on code blocks, "Copy steps" and print buttons. No dependencies. */
+/* Clickjacking guard: GitHub Pages cannot send X-Frame-Options / frame-ancestors, so refuse to render inside a frame. */
+if(window.top!==window.self){document.documentElement.style.display="none";try{window.top.location.replace(window.self.location.href)}catch(e){}}
 document.addEventListener("DOMContentLoaded",function(){
 function copy(t,b,lab){function ok(){b.classList.add("ok");var s=b.querySelector("span")||b;var o=s.textContent;s.textContent="Copied";setTimeout(function(){s.textContent=lab||o;b.classList.remove("ok")},1600)}
 if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(ok,function(){})}else{var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){}a.remove()}}

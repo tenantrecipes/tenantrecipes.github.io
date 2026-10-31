@@ -337,7 +337,7 @@ def sample_issue_body(rel, R, CY, guides, NEWS=()):
             + f'<h2>1 practical configuration tip</h2><p><a href="{rel}recipes/{tip["id"]}.html"><strong>{esc(tip["title"])}</strong></a>. {esc(tip["problem"])} '
             'The recipe has the steps, a check that it worked and the rollback.</p>'
             f'<h2>1 thing to review in your tenant</h2><p><a href="{rel}recipes/{review["id"]}.html"><strong>{esc(review["title"])}</strong></a>. {esc(first(review["problem"]))}</p>'
-            '<p class="fine">You get this because you subscribed on tenantrecipes.github.io. One click to unsubscribe in every real issue.</p></div>'
+            '<p class="fine">You get this because you subscribed on tenantrecipes.com. One click to unsubscribe in every real issue.</p></div>'
             '</article></main>')
 
 
