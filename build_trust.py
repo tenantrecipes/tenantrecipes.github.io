@@ -58,7 +58,9 @@ def footer(rel, guide_slug, path="", title="", updated=None):
     rep = report_url(path, title or C.SITE_NAME) if path else f"{REPO}/issues/new/choose"
     bar = (f'<div class="sf-pg"><span>{icon("clock")}Last updated <time datetime="{updated}">{fmt(updated)}</time></span>'
            f'<a href="{rel}methodology.html">{icon("shield")}Methodology: how we verify</a>'
-           f'<a href="{rep}" rel="nofollow">{icon("alert")}Report an error on this page</a></div>') if updated else ""
+           f'<a href="{rep}" rel="nofollow">{icon("alert")}Report an error on this page</a>'
+           f'<a href="{edit_url(path, title or C.SITE_NAME) if path else REPO + "/issues/new/choose"}" rel="nofollow">Suggest an edit</a>'
+           f'<a href="{rel}contact/index.html">Contact</a></div>') if updated else ""
     return ('<footer class="sf">' + bar + '<div class="sf-in">'
             f'<div class="sf-brand"><img src="{rel}assets/logo-dark.svg" alt="Tenant Recipes" width="140" height="32">'
             '<p>Fact-checked AI &amp; security recipes for Microsoft 365 admins. An independent project — not affiliated with Microsoft or any vendor.</p>'
@@ -67,7 +69,7 @@ def footer(rel, guide_slug, path="", title="", updated=None):
                               ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Windows 11 CIS hardening", f"{rel}guides/windows-11-cis-hardening.html"), ("Cloud hardening + adversary emulation", f"{rel}guides/cloud-hardening-adversary-emulation.html"), ("Azure Update Manager at scale", f"{rel}guides/azure-update-manager-enterprise-patching.html"), ("News &amp; retirements", f"{rel}news/index.html"), ("Microsoft cloud status", f"{rel}status/index.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"), ("Security tools &amp; testing", f"{rel}tools/index.html"), ("Policy templates", f"{rel}policies/index.html"), ("Quick guide: 5 Copilot license checks", f"{rel}guides/copilot-license-checks.html"),
                               ("Search", f"{rel}search/index.html")])
             + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("Editor", f"{rel}author/index.html"), ("What's new (changelog)", f"{rel}changelog/index.html"),
-                            ("Report an issue", f"{REPO}/issues/new/choose")])
+                            ("Contact &amp; corrections", f"{rel}contact/index.html"), ("Report an issue", f"{REPO}/issues/new/choose")])
             + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Sample issue", f"{rel}newsletter-sample.html"), (f"X (@{C.X_HANDLE})", f"https://x.com/{C.X_HANDLE}"), ("Atom / RSS feed", f"{rel}feed.xml"),
                                    ("Suggest a recipe", f"{REPO}/issues/new?template=suggest-recipe.yml")])
             + col("Legal", [("Privacy policy", f"{rel}privacy.html"), ("Disclaimer", f"{rel}about.html#disclaimer")])
@@ -106,6 +108,13 @@ def _abs(path, href):
 def report_url(path, title):
     url = f"{SITE}/{path}"
     return (f"{REPO}/issues/new?template=report-error.yml&amp;title={quote('[Error] ' + title)}"
+            f"&amp;page_url={quote(url, safe='')}")
+
+
+def edit_url(path, title):
+    """Pre-filled 'outdated information / suggest an edit' issue for one page (title + URL in the form)."""
+    url = f"{SITE}/{path}"
+    return (f"{REPO}/issues/new?template=outdated-info.yml&amp;title={quote('[Edit] ' + title)}"
             f"&amp;page_url={quote(url, safe='')}")
 
 
@@ -193,7 +202,7 @@ def about_body(rel, stats):
         '<h2>Corrections</h2><p>Found an error? Every recipe, guide and security page has a <em>Report an error on this page</em> link that opens a '
         f'pre-filled <a href="{REPO}/issues">GitHub issue</a>. Confirmed errors are fixed, the page\'s "last updated" date changes, and the fix is '
         f'listed in the <a href="{rel}changelog/index.html">changelog</a>. You can also <a href="{REPO}/issues/new?template=suggest-recipe.yml">suggest a recipe</a>.</p>'
-        '<h2>Contact</h2><p>' + contact_html() + '</p>'
+        '<h2>Contact</h2><p>' + contact_html() + f' All contact routes, including how to report a security problem, are on the <a href="{rel}contact/index.html">contact page</a>.</p>'
         '<h2 id="disclaimer">Disclaimer</h2><p class="fine">Recipes are provided as-is for information. Settings, licensing and portal labels change; '
         'always confirm against the linked official documentation and test in a non-production tenant or pilot group first. '
         'You are responsible for changes you make in your environment. Product names are trademarks of their owners.</p>'
@@ -248,6 +257,7 @@ def author_body(rel):
         '<h2>Get in touch</h2><ul>'
         f'<li><a href="{REPO}/issues/new/choose">Report an error</a> (public GitHub issue, please leave out confidential details).</li>'
         f'<li><a href="{REPO}/issues/new?template=suggest-recipe.yml">Suggest a recipe</a>.</li>'
+        f'<li>All contact routes and responsible disclosure: <a href="{rel}contact/index.html">contact page</a>.</li>'
         f'<li>Read more <a href="{rel}about.html">about Tenant Recipes</a>.</li></ul>'
         '</article></main>')
 
@@ -259,6 +269,68 @@ def contact_html():
     return (f'The fastest way to reach the editor is a <a href="{REPO}/issues/new/choose">GitHub issue</a> (public — please leave out confidential details). '
             'Newsletter subscribers can also simply reply to any newsletter email; replies reach the editor privately. '
             'Sponsorship enquiries: open an issue and we will get back to you.')
+
+
+def contact_body(rel):
+    """/contact/: every way to reach the editors. No personal identity; GitHub issues are the primary channel until CONTACT_EMAIL is set."""
+    new = f"{REPO}/issues/new"
+    card = lambda h, d, links: (f'<div class="ct-c"><h3>{h}</h3><p>{d}</p><p>' + " · ".join(f'<a href="{u}" rel="nofollow">{t}</a>' for t, u in links) + '</p></div>')
+    mail = (f'<p>Email: <a href="mailto:{esc(C.CONTACT_EMAIL)}">{esc(C.CONTACT_EMAIL)}</a> (read by the editors; we aim to reply within a few working days).</p>'
+            if C.CONTACT_EMAIL else
+            '<p>There is no public email address yet. Until there is, GitHub issues are the primary channel, and newsletter subscribers can simply '
+            'reply to any newsletter email; replies reach the editors privately.</p>')
+    sec_mail = (f' or email <a href="mailto:{esc(C.CONTACT_EMAIL)}">{esc(C.CONTACT_EMAIL)}</a> with "Security" in the subject' if C.CONTACT_EMAIL else "")
+    return (
+        page_hero(rel, crumbs_dark(rel, "contact/index.html", [("Home", rel + "index.html"), ("About", rel + "about.html"), ("Contact", None)]),
+                  "Contact &amp; corrections", "Contact Tenant Recipes",
+                  'Found a mistake, a setting that moved, a broken link, or a topic we should cover? This page lists every way to reach the editors '
+                  'and what happens next.', kind="page")
+        + '<main class="wrap pg"><article class="prose doc">'
+        + '<aside class="co co-warn" role="note"><p class="co-h">' + icon("alert") + 'Issues are public</p>'
+        '<p>GitHub issues can be read by anyone. Never include tenant names, domain names, user names, object IDs, screenshots with personal data, '
+        'logs, passwords, keys or other confidential details. Describe the problem in general terms instead.</p></aside>'
+        '<h2>Report a problem with a page</h2>'
+        '<p>Every recipe, guide, security entry, tool page and policy template has links at the bottom: <em>Report an error on this page</em> and '
+        '<em>Suggest an edit</em>. They open a GitHub issue with the page title and URL already filled in. You can also start here:</p>'
+        '<div class="ct-g">'
+        + card("Content error", "A step, setting name, licence requirement or statement is wrong.", [("Report an error", f"{new}?template=report-error.yml")])
+        + card("Outdated information", "A portal path, feature name, default or date has changed since the page was verified.", [("Report outdated info", f"{new}?template=outdated-info.yml")])
+        + card("Broken link", "A link on the site, or a source we cite, no longer works.", [("Report a broken link", f"{new}?template=broken-link.yml")])
+        + card("Suggest a topic", "A task, problem or tool you would like a recipe or guide for.", [("Suggest a topic", f"{new}?template=suggest-recipe.yml")])
+        + '</div>'
+        '<h2>What happens next</h2><ol>'
+        '<li>The editors read every issue and check the claim against the primary source (see the <a href="' + rel + 'methodology.html">methodology</a>).</li>'
+        '<li>Confirmed errors are fixed, the page\'s "last updated" date changes and the correction is listed in the '
+        f'<a href="{rel}changelog/index.html">changelog</a>.</li>'
+        '<li>The issue is closed with a short note on what changed, or why nothing changed.</li></ol>'
+        '<h2>Contact the editors</h2>' + mail +
+        f'<p>Prefer GitHub? <a href="{new}/choose" rel="nofollow">Open an issue</a> and choose the closest template. Sponsorship and partnership enquiries are '
+        'welcome the same way; the site currently has no sponsors and no affiliate links (see <a href="' + rel + 'about.html">About</a>).</p>'
+        '<h2 id="security">Report a security problem (responsible disclosure)</h2>'
+        '<p>If you find a security problem with this website or its repository, for example a script or link that could be abused, please report it '
+        f'<strong>privately</strong>: use <a href="{REPO}/security/advisories/new" rel="nofollow">GitHub private vulnerability reporting</a>{sec_mail}. '
+        'Do not open a public issue for security problems.</p><ul>'
+        '<li>Include the affected URL, what you observed and how to reproduce it.</li>'
+        '<li>Test only against this website, do not access other people\'s data, and do not run denial-of-service or automated high-volume scans.</li>'
+        '<li>Give us reasonable time to fix the problem before you publish anything. We will confirm receipt and keep you updated.</li>'
+        '<li>This is a volunteer project: there is no bug bounty, but we are happy to credit you in the changelog if you want.</li></ul>'
+        '<p class="fine">Vulnerabilities in Microsoft or other vendors\' products are not ours to fix: report those to the vendor, for Microsoft via the '
+        '<a href="https://msrc.microsoft.com/report/vulnerability">Microsoft Security Response Center</a>. Our machine-readable contact file is at '
+        f'<a href="{rel}.well-known/security.txt">/.well-known/security.txt</a>.</p>'
+        '<h2>Privacy</h2><p>Contacting us through GitHub is subject to GitHub\'s own terms and privacy statement. We do not use contact forms, '
+        f'cookies or tracking for any of this. See the <a href="{rel}privacy.html">privacy policy</a>.</p>'
+        '</article></main>')
+
+
+def security_txt():
+    """RFC 9116 security.txt (served at /.well-known/security.txt and /security.txt). Expires about one year after the build."""
+    exp = (datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0) + datetime.timedelta(days=365)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    lines = []
+    if C.CONTACT_EMAIL:
+        lines.append(f"Contact: mailto:{C.CONTACT_EMAIL}")
+    lines += [f"Contact: {REPO}/security/advisories/new", f"Contact: {SITE}/contact/#security", f"Expires: {exp}",
+              "Preferred-Languages: en, sv", f"Canonical: {SITE}/.well-known/security.txt", f"Policy: {SITE}/contact/#security"]
+    return "\n".join(lines) + "\n"
 
 
 def methodology_body(rel):
@@ -402,6 +474,7 @@ def search_index(R, CY, guides, AREA, extra=()):
             idx.append({"k": "Guide", "c": f"Phase {i}", "t": f'{g.SHORT}: {ph["title"]}', "u": f'guides/{g.SLUG}.html#phase-{i}-{ph["id"]}',
                         "s": ph["goal"], "x": " ".join(st["t"] + " " + " ".join(st["do"]) for st in ph["steps"])})
     for t, u, s in (("About Tenant Recipes", "about.html", "Who runs the site, independence, corrections and contact."),
+                    ("Contact and corrections", "contact/index.html", "Report an error, suggest a topic, report a security problem or contact the editor."),
                     ("Methodology: how we fact-check", "methodology.html", "Source hierarchy and verification process."),
                     ("About the editor", "author/index.html", "Who writes and reviews Tenant Recipes, focus areas and editorial principles."),
                     ("Changelog", "changelog.html", "Every new page, update and correction."),

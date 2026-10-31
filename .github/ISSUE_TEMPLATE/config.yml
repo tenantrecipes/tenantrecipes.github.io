@@ -1,5 +1,11 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Report a security problem (private)
+    url: https://github.com/tenantrecipes/tenantrecipes.github.io/security/advisories/new
+    about: Security issues with this website or repository. Please report privately, never in a public issue.
+  - name: Contact and corrections
+    url: https://tenantrecipes.github.io/contact/
+    about: All ways to reach the editors and what happens after you report something.
   - name: How Tenant Recipes verifies content
     url: https://tenantrecipes.github.io/methodology.html
     about: Read the fact-check process and source hierarchy before reporting.

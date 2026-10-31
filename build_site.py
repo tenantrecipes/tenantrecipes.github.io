@@ -450,6 +450,9 @@ def build():
     pages.append(page("author/index.html", f"About the editor: who writes and reviews Tenant Recipes | {C.SITE_NAME}",
                       "Tenant Recipes is written and technically reviewed by an anonymous editor: IT professional since 1999, Microsoft-focused since 2013. Focus areas, fact-checking and principles.",
                       T.author_body))
+    pages.append(page("contact/index.html", f"Contact, corrections and security reports | {C.SITE_NAME}",
+                      "How to reach the Tenant Recipes editors: report an error or outdated step, flag a broken link, suggest a topic, or report a security problem privately.",
+                      T.contact_body))
     pages.append(page("methodology.html", f"Methodology: how every page is fact-checked | {C.SITE_NAME}",
                       "The source hierarchy, verification steps and re-check schedule behind every Tenant Recipes recipe, guide, CVE entry and template.", T.methodology_body))
     pages.append(page("changelog/index.html", f"What's new: changelog of recipes, guides and security entries | {C.SITE_NAME}", "Every new recipe, guide and security entry, every re-verification and every correction on Tenant Recipes, newest first.",
@@ -600,6 +603,10 @@ def build():
         (DIST / "news" / "feed.xml").write_text(NW.feed(SITE, C.SITE_NAME, CY.load()))
     shutil.copy(ROOT / "favicon.ico", DIST / "favicon.ico")
     (DIST / ".nojekyll").write_text("")  # GitHub Pages: serve files as-is
+    if SITE:  # RFC 9116 security.txt (needs include-hidden-files in the Pages workflow for /.well-known/)
+        (DIST / ".well-known").mkdir(exist_ok=True)
+        (DIST / ".well-known" / "security.txt").write_text(T.security_txt())
+        (DIST / "security.txt").write_text(T.security_txt())
     robots = "User-agent: *\nAllow: /\n" + (f"Sitemap: {SITE}/sitemap.xml\n" if SITE else "")
     (DIST / "robots.txt").write_text(robots)
     if SITE:

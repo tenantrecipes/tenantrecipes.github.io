@@ -1,0 +1,33 @@
+name: Outdated information / suggest an edit
+description: A portal path, feature name, default, date or licence changed since the page was verified, or you have an improvement.
+title: "[Edit] "
+labels: ["outdated"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping keep Tenant Recipes current. Issues are public — leave out tenant names, user names, IDs, logs and other confidential data.
+  - type: input
+    id: page_url
+    attributes:
+      label: Page URL
+      placeholder: https://tenantrecipes.github.io/recipes/...
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: What changed, or what should be improved?
+      description: Quote the step or sentence, and describe what you see today (portal path, new name, new default, new date).
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: Microsoft Learn page, Message center ID, roadmap item or vendor advisory that shows the current state.
+  - type: input
+    id: observed
+    attributes:
+      label: When did you observe it? (optional)
+      placeholder: e.g. 2026-10-30, commercial cloud

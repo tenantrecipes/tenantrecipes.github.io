@@ -1,5 +1,5 @@
-name: Report an error
-description: Something on a page is wrong, outdated or unclear.
+name: Content error
+description: A step, setting, licence requirement or statement on a page is wrong or unclear.
 title: "[Error] "
 labels: ["error-report"]
 body:

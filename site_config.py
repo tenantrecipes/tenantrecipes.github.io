@@ -12,7 +12,9 @@ BUTTONDOWN_USERNAME = "tenantrecipes"
 # Needed for absolute share-image URLs (LinkedIn/X previews), canonical links, sitemap and newsletter links.
 SITE_URL = "https://tenantrecipes.github.io"
 
-# Contact address shown on About/Privacy. Leave "" to tell readers to reply to any newsletter email.
+# Contact address shown on /contact/, About/Privacy and in security.txt. Leave "" to tell readers to use GitHub issues
+# or reply to any newsletter email. Only a brand address on the site's own domain, never a personal one.
+# TODO: fill in when the domain's mailbox exists (e.g. "editor@<domain>"), then rebuild.
 CONTACT_EMAIL = ""
 
 # Name of the person responsible for the site (shown in the privacy policy as data controller).

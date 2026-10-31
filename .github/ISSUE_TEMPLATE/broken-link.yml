@@ -1,0 +1,37 @@
+name: Broken link
+description: A link on the site, or a source we cite, no longer works or points to the wrong page.
+title: "[Link] "
+labels: ["broken-link"]
+body:
+  - type: markdown
+    attributes:
+      value: Issues are public — please leave out anything confidential.
+  - type: input
+    id: page_url
+    attributes:
+      label: Page with the broken link
+      placeholder: https://tenantrecipes.github.io/...
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: The broken link
+      placeholder: https://learn.microsoft.com/...
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What happens?
+      options:
+        - Page not found (404)
+        - Redirects to an unrelated page
+        - Content moved (new URL below)
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: replacement
+    attributes:
+      label: Correct or replacement URL (if you know it)

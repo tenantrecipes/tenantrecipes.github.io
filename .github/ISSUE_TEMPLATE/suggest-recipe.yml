@@ -1,5 +1,5 @@
-name: Suggest a recipe
-description: A task or change you'd like a step-by-step recipe for.
+name: Topic suggestion
+description: A task, problem or tool you would like a recipe or guide for.
 title: "[Suggestion] "
 labels: ["recipe-suggestion"]
 body:

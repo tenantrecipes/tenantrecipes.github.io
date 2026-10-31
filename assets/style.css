@@ -702,3 +702,7 @@ header.sh .nv-md{margin-top:4px;max-height:calc(100vh - 60px);max-height:calc(10
 .t2-l a{display:flex;justify-content:space-between;gap:8px;padding:6px 0;color:var(--ink);text-decoration:none;font-weight:550}.t2-l a:hover{color:var(--brand)}
 .t2-l a span{color:var(--ink-3);font-size:.82rem;font-variant-numeric:tabular-nums}
 @media (max-width:760px){.t2-in{grid-template-columns:1fr}}
+/* contact page */
+.ct-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0 24px}
+.ct-c{border:1px solid var(--line,#e3e6ef);border-radius:12px;padding:14px 16px;background:#fff}
+.ct-c h3{margin:0 0 6px;font-size:1rem}.ct-c p{margin:0 0 8px;font-size:.92rem}.ct-c p:last-child{margin:0;font-weight:600}

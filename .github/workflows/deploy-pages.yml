@@ -55,6 +55,7 @@ jobs:
         if: steps.gate.outputs.deploy == 'true'
         with:
           path: dist
+          include-hidden-files: true   # serve /.well-known/security.txt
   deploy:
     needs: build
     if: needs.build.outputs.deploy == 'true'
