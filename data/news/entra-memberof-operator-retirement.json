@@ -1,0 +1,57 @@
+{
+ "id": "entra-memberof-operator-retirement",
+ "title": "Entra ID memberOf rule operator stops processing on 3 November 2026: dynamic groups, AUs and access packages freeze",
+ "date": "2026-11-02",
+ "category": "Entra",
+ "summary": "The preview memberOf operator in Microsoft Entra dynamic membership rules (for example user.memberof -any (group.objectId -in ['<id>'])) is retired worldwide on 3 November 2026. From that date, dynamic groups, dynamic administrative units and entitlement management auto-assignment policies that use memberOf stop re-evaluating and keep their last known membership. Microsoft says even a single memberOf rule could slow dynamic membership processing for the whole tenant, which is why the preview is ending rather than going GA.",
+ "why": "A frozen group fails silently. Joiners stop getting licences, app access and Conditional Access targeting, while leavers keep them, and nothing errors in the portal. Dynamic AUs that freeze also leave delegated admins with the wrong scope, which is an access-control problem rather than a convenience one.",
+ "todo": [
+  "Find every dynamic group whose rule contains memberof: `Get-MgGroup -All -Filter \"groupTypes/any(c:c eq 'DynamicMembership')\" -Property Id,DisplayName,MembershipRule | Where-Object MembershipRule -match 'memberof'`.",
+  "Check dynamic administrative units the same way with `Get-MgDirectoryAdministrativeUnit -All -Property Id,DisplayName,MembershipRule`, and review access package auto-assignment policies (automaticRequestSettings / allowedTargetScope with a membership rule) in entitlement management.",
+  "Rewrite each rule with supported attributes (department, extensionAttribute, companyName, employeeType and so on), or convert the group or AU to assigned membership and populate it from the source groups before you switch.",
+  "Validate the new membership against the old before changing rules, and check what depends on the group: Conditional Access, group-based licensing, Intune assignments, Teams and SharePoint access.",
+  "If your tenant has Microsoft Entra ID Governance, check Message center for MC1488839: Microsoft has told those tenants that existing memberOf configurations keep processing until 31 March 2027 while a replacement is built. Confirm it applies to you before relying on it."
+ ],
+ "effective": "2026-11-03",
+ "effective_note": "Worldwide; tenants with Entra ID Governance may have an extension to 31 March 2027 (MC1488839)",
+ "sources": [
+  {
+   "title": "Configure dynamic membership groups with the memberOf operator (preview): Migrate before the preview ends",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-rule-member-of",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Message center MC1529463: Final reminder to replace MemberOf rule operator configurations by November 3, 2026 (archive)",
+   "url": "https://mc.merill.net/message/MC1529463",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Dynamic membership rules for groups in Microsoft Entra ID",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "accessPackageAutomaticRequestSettings resource type (Microsoft Graph)",
+   "url": "https://learn.microsoft.com/en-us/graph/api/resources/accesspackageautomaticrequestsettings?view=graph-rest-1.0",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "MC1488839: Support for existing MemberOf configurations extended through March 31, 2027 for Entra ID Governance tenants (ChangeCockpit mirror)",
+   "url": "https://mc.changecockpit.cloud/change/MC1488839",
+   "checked": "2026-11-02"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-11-02",
+ "primary": {
+  "title": "Configure dynamic membership groups with the memberOf operator (preview): Migrate before the preview ends",
+  "url": "https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-rule-member-of",
+  "checked": "2026-11-02"
+ },
+ "related": [
+  {
+   "title": "Why Intune devices stay non-compliant (group targeting is one cause)",
+   "url": "recipes/intune-devices-stay-noncompliant.html"
+  }
+ ]
+}

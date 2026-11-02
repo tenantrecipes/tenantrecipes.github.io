@@ -1,0 +1,45 @@
+{
+ "id": "emudhra-ca-keys-distrusted",
+ "title": "Windows and Edge distrust eMudhra CAs after private keys were exposed",
+ "date": "2026-11-02",
+ "category": "Windows",
+ "summary": "Private keys for eight eMudhra G3B/G3C intermediate CAs (six TLS, two code signing) were recoverable, so anyone holding them could mint trusted-looking certificates or sign code. On 20 October 2026 Microsoft blocked the eight keys by SPKI in the Windows Disallowed Certificate Trust List and in the Edge/WebView2 CRLSet. On 26 October an out-of-band Windows update removed six eMudhra G3 roots and an AAA Certificate Services cross-sign from the Windows trust list, and Edge followed on 27 October.",
+ "why": "Two things can bite you: internal or partner services with certificates chaining to the removed roots will start failing TLS, and disconnected or image-based machines that don't pull certificate trust list updates keep trusting certificates an attacker could forge, including signed malware.",
+ "todo": [
+  "Check whether anything you run or depend on chains to eMudhra: scan internal TLS endpoints and code-signing chains against the certificate list in the Microsoft Trusted Root Program announcement, and replace those certificates now.",
+  "Confirm automatic root and disallowed CTL updates reach clients and servers. For offline or proxied networks, distribute the updated CTLs as described in 'Configure trusted roots and disallowed certificates'.",
+  "Redeploy VM Scale Sets and single-instance VMs from the updated Azure Marketplace images if they are disconnected from Windows Update.",
+  "Do not re-add the removed roots locally to fix a broken app without a risk decision; software that doesn't check revocation or the disallowed list would then accept forged certificates."
+ ],
+ "effective": "2026-10-26",
+ "effective_note": "Disallowed CTL and Edge CRLSet block on 20 Oct; root removal 26 Oct (Windows) and 27 Oct (Edge)",
+ "sources": [
+  {
+   "title": "MSRC: Microsoft's response to compromised eMudhra certificate authority keys",
+   "url": "https://www.microsoft.com/en-us/msrc/blog/2026/10/microsoft-response-to-compromised-emudhra-certificate-authority-keys",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Message center MC1529467: Updates to address compromised eMudhra certificate authority keys (archive)",
+   "url": "https://mc.merill.net/message/MC1529467",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Microsoft Trusted Root Program: Announcements (26 October 2026, eMudhra)",
+   "url": "https://github.com/TrustedRootProgram/Program-Requirements/blob/main/Announcements.md",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Configure trusted roots and disallowed certificates in Windows",
+   "url": "https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/configure-trusted-roots-disallowed-certificates",
+   "checked": "2026-11-02"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-11-02",
+ "primary": {
+  "title": "MSRC: Microsoft's response to compromised eMudhra certificate authority keys",
+  "url": "https://www.microsoft.com/en-us/msrc/blog/2026/10/microsoft-response-to-compromised-emudhra-certificate-authority-keys",
+  "checked": "2026-11-02"
+ }
+}

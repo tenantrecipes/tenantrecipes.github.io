@@ -1,0 +1,60 @@
+{
+ "id": "adcs-teams-helpdesk-esc1-esc8",
+ "title": "Fake help desk on Teams to domain admin via AD CS: Microsoft details ESC1 and ESC8 intrusions",
+ "date": "2026-11-02",
+ "category": "Security incidents",
+ "summary": "Microsoft Threat Intelligence described two intrusions that started with external Teams chats and calls impersonating IT support, followed by a user-approved Quick Assist session that dropped portable Python, Bun or Java runtimes into a KB-named folder under AppData. In one case the attacker abused an ESC1-vulnerable template to get certificates for 11 privileged accounts and ran DCSync; one account excluded from automatic attack disruption was then used to exfiltrate file-server data with a renamed Rclone. In the other, PetitPotam coerced a domain controller into NTLM that was relayed to AD CS Web Enrollment (ESC8), and the resulting DC certificate was used for PKINIT. No Teams vulnerability was involved.",
+ "why": "The chain needs no malware attachment and no CVE: just one user saying yes to a 'support' call and one weak template or an NTLM-enabled /certsrv endpoint. A certificate survives password resets and reimaging, so incident response has to revoke certificates and deal with issued Kerberos tickets as separate steps.",
+ "todo": [
+  "Run Locksmith or Certipy (find) against your CAs and fix any ESC1 template (enrollee supplies subject plus client authentication EKU plus broad enrollment rights) and any ESC8 exposure: remove Web Enrollment if unused, otherwise require HTTPS with Extended Protection for Authentication and disable NTLM per KB5005413.",
+  "Restrict Teams external access to allowed domains and make sure users see External and suspected-scam labels; set a rule that IT never starts Quick Assist from an inbound call.",
+  "Block or audit portable runtimes (bun.exe, java.exe, python.exe) launched from user-writable paths with App Control for Business, and hunt with the KQL in Microsoft's post (KB-prefixed AppData folders, connections to 88/445/636).",
+  "Review exclusions from Defender automatic attack disruption: in Case 1 the one excluded privileged account was the one that led to data theft.",
+  "Turn on Certification Services auditing (success and failure) and the CA audit filter so you can find the serial number of any rogue certificate to revoke."
+ ],
+ "effective": null,
+ "effective_note": "Active technique reported on 30 October 2026",
+ "sources": [
+  {
+   "title": "Microsoft Security Blog: From help desk impersonation to AD CS abuse: Investigating ESC1 and ESC8 intrusion paths",
+   "url": "https://www.microsoft.com/en-us/security/blog/2026/10/30/help-desk-impersonation-ad-cs-abuse-investigating-esc1-esc8-intrusion-paths/",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "KB5005413: Mitigating NTLM relay attacks on Active Directory Certificate Services (AD CS)",
+   "url": "https://support.microsoft.com/en-us/servicing/os/windows-server/2021/07/kb5005413-mitigating-ntlm-relay-attacks-on-active-directory-certificate-services-ad-cs",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Defender for Identity: certificate (AD CS) security posture assessments",
+   "url": "https://learn.microsoft.com/en-us/defender-for-identity/security-posture-assessments/certificates",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Teams security best practices for safer messaging",
+   "url": "https://learn.microsoft.com/en-us/microsoftteams/teams-security-best-practices-for-safer-messaging",
+   "checked": "2026-11-02"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-11-02",
+ "primary": {
+  "title": "Microsoft Security Blog: From help desk impersonation to AD CS abuse: Investigating ESC1 and ESC8 intrusion paths",
+  "url": "https://www.microsoft.com/en-us/security/blog/2026/10/30/help-desk-impersonation-ad-cs-abuse-investigating-esc1-esc8-intrusion-paths/",
+  "checked": "2026-11-02"
+ },
+ "related": [
+  {
+   "title": "Pillar guide: Harden AD CS as Tier 0 (ESC1-ESC16, ESC8 relay, detection, rollback)",
+   "url": "guides/adcs-hardening-tier0.html"
+  },
+  {
+   "title": "Defender for Teams: ZAP and QR-code phishing",
+   "url": "recipes/defender-teams-zap-qr-phishing.html"
+  },
+  {
+   "title": "Hardening: SMB and LDAP signing against relay",
+   "url": "security/harden-smb-ldap-signing-relay.html"
+  }
+ ]
+}

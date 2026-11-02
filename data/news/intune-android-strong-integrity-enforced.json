@@ -1,0 +1,60 @@
+{
+ "id": "intune-android-strong-integrity-enforced",
+ "title": "Intune now enforces Google's stricter Play strong integrity verdict on Android 13 and later",
+ "date": "2026-11-02",
+ "category": "Intune",
+ "summary": "Since 31 October 2026, Intune evaluates Google's updated strong integrity definition for Android 13 and later: the device needs hardware-backed attestation and a security patch released within the last 12 months. Until that date Intune had applied Google's backward-compatibility handling to soften the change (MC1287362). Devices that fail now drop to device integrity, so app protection policies and compliance policies set to 'Check strong integrity' block or mark them noncompliant.",
+ "why": "This hits older or poorly maintained Android phones that still look healthy, often in field and frontline fleets where OEM updates stopped. If Conditional Access requires a compliant device or an app protection policy, those users lose Outlook and Teams without having changed anything.",
+ "todo": [
+  "List Android 13+ devices whose security patch level is older than 12 months, using the app protection status report (last Android security patch) and device inventory for enrolled devices.",
+  "Find policies that use 'Check strong integrity': compliance policies (Play Integrity verdict) and app protection conditional launch (Play integrity verdict, required device integrity).",
+  "Add a 'Minimum security patch level' compliance setting and a 'Min patch version' conditional launch with Warn so users see the problem before a block, and use a noncompliance grace period while you chase updates.",
+  "Retire or replace devices that no longer receive OEM security updates; there is no supported way to make them pass strong integrity."
+ ],
+ "effective": "2026-10-31",
+ "effective_note": "Android 12 and earlier are not affected",
+ "sources": [
+  {
+   "title": "Android Enterprise compliance settings in Microsoft Intune (Play Integrity verdict)",
+   "url": "https://learn.microsoft.com/en-us/intune/device-security/compliance/ref-android-enterprise-settings",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Google: Improved verdicts in Android 13 and later devices (Play Integrity)",
+   "url": "https://developer.android.com/google/play/integrity/improvements",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Android app protection policy settings in Microsoft Intune (conditional launch)",
+   "url": "https://learn.microsoft.com/en-us/intune/app-management/protection/ref-settings-android",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Intune Customer Success: Changes to Google Play strong integrity for Android 13 or above",
+   "url": "https://techcommunity.microsoft.com/blog/intunecustomersuccess/support-tip-changes-to-google-play-strong-integrity-for-android-13-or-above/4435130",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "MC1287362: Plan for Change: Google Play strong integrity definition update for Android 13 or above (ChangeCockpit mirror)",
+   "url": "https://mc.changecockpit.cloud/change/MC1287362",
+   "checked": "2026-11-02"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-11-02",
+ "primary": {
+  "title": "Android Enterprise compliance settings in Microsoft Intune (Play Integrity verdict)",
+  "url": "https://learn.microsoft.com/en-us/intune/device-security/compliance/ref-android-enterprise-settings",
+  "checked": "2026-11-02"
+ },
+ "related": [
+  {
+   "title": "Why Intune devices stay non-compliant",
+   "url": "recipes/intune-devices-stay-noncompliant.html"
+  },
+  {
+   "title": "Intune compliance baseline",
+   "url": "recipes/intune-compliance-baseline.html"
+  }
+ ]
+}

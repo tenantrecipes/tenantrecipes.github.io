@@ -3,12 +3,13 @@
  "title": "Microsoft-provided SMS and voice MFA retires on 1 February 2027",
  "date": "2026-10-30",
  "category": "Entra",
- "summary": "Microsoft is retiring the SMS and voice authentication methods it provides in Microsoft Entra ID and is moving users to passkeys by default. From 1 February 2027, users whose only MFA method is SMS or voice will be asked to register a passkey before they can sign in. Global Administrators and external users follow on 1 July 2027.",
- "why": "If many users still rely on text messages or phone calls, they will all hit a blocking registration prompt on the same day, and your service desk will feel it. Passkeys are also phishing-resistant, so moving early improves security.",
+ "summary": "Microsoft is retiring the SMS and voice authentication it delivers itself in Microsoft Entra ID, including for SSPR, and is moving users to passkeys by default. From 1 February 2027, users whose only MFA method is SMS or voice get a blocking prompt to register a passkey; Global Administrators and external users follow on 1 July 2027, while internal guests stay on the February date. Update 2 November 2026: Choose Your Own Telephony provider (CYOT) became generally available on 30 October 2026, so tenants with a real need can keep SMS and voice through a provider bought in Microsoft Security Store.",
+ "why": "If many users still rely on text messages or phone calls, they will all hit a blocking registration prompt on the same day, and your service desk will feel it. CYOT is a paid escape hatch, not a default: it needs an Azure subscription and a provider contract, so decide early who genuinely needs telephony. Passkeys are phishing-resistant, so moving early improves security.",
  "todo": [
-  "Find who still depends on SMS or voice with the usage tools linked from Microsoft's retirement guide.",
-  "Enable passkeys (FIDO2) for those users and run a registration campaign well before the date.",
-  "Plan separately for admins and external users, who have until 1 July 2027."
+  "Find who still depends on SMS or voice with the usage script and the entra-sms-voice-usage-analyzer linked from Microsoft's retirement guide.",
+  "Enable passkeys (FIDO2) for those users and run a registration campaign well before the date; remember SSPR is in scope too.",
+  "Only for users with a business, regulatory or technical need: compare the telephony providers (Soprano and Telesign at launch), check you have an eligible paid Azure subscription and Owner (or Contributor plus Role Based Access Control Administrator) to buy in Security Store, start CYOT in evaluation mode and ramp traffic in stages.",
+  "Plan separately for Global Administrators and external users, who have until 1 July 2027; internal guest users follow the 1 February date."
  ],
  "effective": "2027-02-01",
  "effective_note": "1 July 2027 for Global Administrators and external users",
@@ -17,25 +18,35 @@
   {
    "title": "Passkeys by default and retirement of Microsoft-provided SMS and voice authentication",
    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement",
-   "checked": "2026-10-30"
+   "checked": "2026-11-02"
   },
   {
    "title": "SMS and voice retirement FAQ",
    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement-faq",
-   "checked": "2026-10-30"
+   "checked": "2026-11-02"
   },
   {
    "title": "Message center MC1426371: Passkeys by default and retirement of SMS and voice (archive)",
    "url": "https://mc.merill.net/message/MC1426371",
    "checked": "2026-10-30"
+  },
+  {
+   "title": "Message center MC1519855: Choose your own telephony provider now generally available (archive)",
+   "url": "https://mc.merill.net/message/MC1519855",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Choose a telephony provider for SMS and voice authentication",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-phone-providers",
+   "checked": "2026-11-02"
   }
  ],
  "status": "published",
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-02",
  "primary": {
   "title": "Passkeys by default and retirement of Microsoft-provided SMS and voice authentication",
   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement",
-  "checked": "2026-10-30"
+  "checked": "2026-11-02"
  },
  "related": [
   {

@@ -1,0 +1,41 @@
+{
+ "id": "windows-ntlmv1-sso-enforce-mschapv2",
+ "title": "October 2026 Windows updates block NTLMv1-derived SSO by default: PEAP-MSCHAPv2 Wi-Fi and VPN can break",
+ "date": "2026-11-02",
+ "category": "Windows",
+ "summary": "From the October 13, 2026 security update, Windows 11 24H2, 25H2, 26H1 and 26H2 and Windows Server 2025 treat a missing BlockNtlmv1SSO value as Enforce (1) instead of Audit (0), so Windows refuses to derive NTLMv1 credentials for single sign-on. This only applies where Credential Guard is off; with Credential Guard on, those credentials were already unavailable. Domain-joined Wi-Fi, wired 802.1X and VPN profiles that rely on PEAP-MSCHAPv2 or EAP-MSCHAPv2 with saved Windows credentials stop connecting automatically, while typing credentials manually still works.",
+ "why": "Many corporate Wi-Fi and Always On VPN setups still use MS-CHAPv2 against NPS. After the October update rolls through, users can find themselves without network access at the login screen, which also blocks Group Policy and logon scripts. Microsoft's article was last revised on 19 October 2026, so expect more tickets as November rings complete.",
+ "todo": [
+  "Search the Microsoft-Windows-NTLM/Operational log for event 4025 (blocked) and 4024 (audit) to find devices and profiles that depend on NTLMv1-derived SSO; collect them centrally via Defender or your SIEM.",
+  "Move Wi-Fi, wired and VPN profiles to certificate-based EAP-TLS or PEAP-TLS, deployed with Intune SCEP or PKCS certificates. This is the permanent fix and is also what Credential Guard requires.",
+  "Only as a scoped, temporary exception, set `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\BlockNtlmv1SSO` (REG_DWORD) to 0 on affected devices; no restart is needed. Track and remove it.",
+  "Keep or turn on Credential Guard where hardware allows instead of disabling it to fix connectivity."
+ ],
+ "effective": "2026-10-13",
+ "effective_note": "Applies to devices with Credential Guard disabled and no BlockNtlmv1SSO value set",
+ "sources": [
+  {
+   "title": "Manage NTLMv1 changes and prevent network authentication issues in Windows (KB5066470)",
+   "url": "https://support.microsoft.com/en-us/servicing/os/windows/docs/2025/08/upcoming-changes-to-ntlmv1-in-windows-11-version-24h2-and-windows-server-2025",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "Considerations and known issues when using Credential Guard (Wi-Fi and VPN)",
+   "url": "https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/considerations-known-issues",
+   "checked": "2026-11-02"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-11-02",
+ "primary": {
+  "title": "Manage NTLMv1 changes and prevent network authentication issues in Windows (KB5066470)",
+  "url": "https://support.microsoft.com/en-us/servicing/os/windows/docs/2025/08/upcoming-changes-to-ntlmv1-in-windows-11-version-24h2-and-windows-server-2025",
+  "checked": "2026-11-02"
+ },
+ "related": [
+  {
+   "title": "Hardening: SMB and LDAP signing against relay",
+   "url": "security/harden-smb-ldap-signing-relay.html"
+  }
+ ]
+}

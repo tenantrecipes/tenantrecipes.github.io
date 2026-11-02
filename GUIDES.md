@@ -54,8 +54,8 @@ Before writing, check this table and `data/guides/` so nothing is written twice;
 | # | Project guide | Status | Module / slug |
 |---|---|---|---|
 | 1 | AD CS hardening as Tier 0 | **Done 2026-10-31** (written ahead of the evening run) | `adcs_hardening_tier0.py` / `adcs-hardening-tier0` |
-| 2 | (per routine prompt) | **Next** | — |
-| 3 | (per routine prompt) | Queued | — |
+| 2 | Internal purple team: network listening to compromised hybrid identity | **Done 2026-11-02** | `purple_team_hybrid_identity.py` / `purple-team-hybrid-identity` |
+| 3 | (per routine prompt) | **Next** | — |
 | 5 | (per routine prompt) | Queued | — |
 
-Next run: start with guide **2**. Do not write another AD CS guide; extend `adcs-hardening-tier0` via `HISTORY` instead if sources change.
+Next run: start with guide **3**. Do not re-write guide 2 (purple-team-hybrid-identity) or the AD CS guide; extend an existing guide via `HISTORY` instead if sources change.

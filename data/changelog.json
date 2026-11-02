@@ -1,5 +1,105 @@
 [
  {
+  "date": "2026-11-02",
+  "time": "21:30",
+  "kind": "guide",
+  "type": "Guide",
+  "title": "New pillar guide: internal purple team to hybrid identity",
+  "blurb": "Responder → NetExec → Hashcat → BloodHound CE → ROADtools → AADInternals, then detection and remediation.",
+  "url": "guides/purple-team-hybrid-identity.html",
+  "text": "New pillar guide (project guide 2): Internal purple team from quiet network listening to compromised hybrid identity. Nine phases and 25 steps chain Responder, NetExec, Hashcat, BloodHound CE, ROADtools and AADInternals under written authorization, then prove detection and close with remediation. Defensive use only."
+ },
+ {
+  "date": "2026-11-02",
+  "time": "21:20",
+  "kind": "site",
+  "type": "News",
+  "title": "News: Entra memberOf operator stops on 3 November",
+  "blurb": "Dynamic groups, AUs and access package auto-assignment using memberOf freeze from 3 Nov 2026; how to find and replace them.",
+  "url": "news/entra-memberof-operator-retirement.html",
+  "text": "News: the preview memberOf operator in Entra dynamic membership rules is retired worldwide on 3 November 2026 (MC1529463). Groups, dynamic administrative units and entitlement management auto-assignment policies that use it stop updating and keep their last membership. Graph PowerShell to find them, replacement options, and the Entra ID Governance extension to 31 March 2027 (MC1488839)."
+ },
+ {
+  "date": "2026-11-02",
+  "time": "21:20",
+  "kind": "site",
+  "type": "News",
+  "title": "News: Intune enforces Android strong integrity",
+  "blurb": "Android 13+ devices need hardware attestation and a patch from the last 12 months since 31 Oct 2026.",
+  "url": "news/intune-android-strong-integrity-enforced.html",
+  "text": "News: since 31 October 2026 Intune enforces Google's updated Play strong integrity verdict on Android 13 and later (MC1287362). Devices without a security patch from the last 12 months fall to device integrity and can be blocked by app protection or marked noncompliant. How to find them and warn users first."
+ },
+ {
+  "date": "2026-11-02",
+  "time": "21:20",
+  "kind": "site",
+  "type": "News",
+  "title": "News: Teams help desk impersonation to AD CS ESC1/ESC8",
+  "blurb": "Microsoft's 30 Oct write-up: Quick Assist, portable runtimes, ESC1 template abuse, PetitPotam relay to Web Enrollment.",
+  "url": "news/adcs-teams-helpdesk-esc1-esc8.html",
+  "text": "News: Microsoft Threat Intelligence described two intrusions that began with fake IT support on Teams and Quick Assist and ended in AD CS abuse (ESC1 certificates for privileged accounts plus DCSync; PetitPotam relayed to Web Enrollment for a DC certificate and PKINIT). What to fix, with links to our AD CS Tier 0 guide."
+ },
+ {
+  "date": "2026-11-02",
+  "time": "21:20",
+  "kind": "site",
+  "type": "News",
+  "title": "News: NTLMv1-derived SSO blocked by default",
+  "blurb": "October 2026 updates enforce BlockNtlmv1SSO where Credential Guard is off; PEAP-MSCHAPv2 Wi-Fi and VPN can fail.",
+  "url": "news/windows-ntlmv1-sso-enforce-mschapv2.html",
+  "text": "News: from the 13 October 2026 security update, Windows 11 24H2 and later and Windows Server 2025 default BlockNtlmv1SSO to Enforce when the value is not set (KB5066470). MS-CHAPv2-based Wi-Fi, wired and VPN single sign-on can stop working. Event IDs 4024/4025, the temporary registry exception and the EAP-TLS fix."
+ },
+ {
+  "date": "2026-11-02",
+  "time": "21:20",
+  "kind": "site",
+  "type": "News",
+  "title": "News: Windows and Edge distrust eMudhra CAs",
+  "blurb": "Eight exposed eMudhra intermediate keys blocked on 20 Oct; six G3 roots and a cross-sign removed 26–27 Oct.",
+  "url": "news/emudhra-ca-keys-distrusted.html",
+  "text": "News: Microsoft blocked eight compromised eMudhra intermediate CA keys in the Windows Disallowed CTL and the Edge/WebView2 CRLSet on 20 October 2026, then removed six eMudhra G3 roots and an AAA Certificate Services cross-sign from the Windows (26 Oct) and Edge (27 Oct) trust lists. What to check for dependent certificates and disconnected devices."
+ },
+ {
+  "date": "2026-11-02",
+  "time": "21:20",
+  "kind": "site",
+  "type": "News",
+  "title": "News: CallActivityEvents for Teams calls in Defender XDR",
+  "blurb": "New advanced hunting table for Teams call and meeting activity (Defender for Office 365 P2), rolling out in November.",
+  "url": "news/defender-teams-callactivityevents.html",
+  "text": "News: Defender XDR advanced hunting gets a CallActivityEvents table for Teams calls and meetings (MC1532241), joinable with MessageEvents on ThreadId, also via the streaming API and Sentinel. Rolling out early to mid November 2026 for Defender for Office 365 Plan 2."
+ },
+ {
+  "date": "2026-11-02",
+  "time": "21:20",
+  "kind": "site",
+  "type": "News",
+  "title": "Updated: SMS and voice MFA retirement",
+  "blurb": "Choose Your Own Telephony provider is GA (30 Oct); SSPR and internal guests in scope for 1 February 2027.",
+  "url": "news/sms-voice-mfa-retirement-2027.html",
+  "text": "Updated news: Choose Your Own Telephony provider (CYOT) for Entra SMS and voice became generally available on 30 October 2026 (MC1519855), bought through Microsoft Security Store. Added purchasing prerequisites, SSPR scope and the internal guest date (1 February 2027)."
+ },
+ {
+  "date": "2026-11-02",
+  "time": "21:05",
+  "kind": "security",
+  "type": "Security",
+  "title": "Windows Update Stack EoP in KEV (CVE-2026-81963)",
+  "blurb": "Link-following in the Windows Update Stack to SYSTEM; Microsoft Exploitation Detected; CISA KEV since 8 September 2026.",
+  "url": "security/windows-update-stack-eop-cve-2026-81963.html",
+  "text": "New security post for CVE-2026-81963 (Windows Update Stack elevation of privilege). Local low-privileged attacker to SYSTEM, CVSS 3.1 7.8 Important, exploited. Fixed in the 8 September 2026 Windows updates. Backfill from the KEV backlog (added to KEV 8 September 2026)."
+ },
+ {
+  "date": "2026-11-02",
+  "time": "21:05",
+  "kind": "security",
+  "type": "Security",
+  "title": "Windows ALPC EoP in KEV (CVE-2026-85880)",
+  "blurb": "ALPC heap overflow with AppContainer escape; Microsoft Exploitation Detected; CISA KEV since 8 September 2026.",
+  "url": "security/windows-alpc-eop-cve-2026-85880.html",
+  "text": "New security post for CVE-2026-85880 (Windows ALPC elevation of privilege). Low-privilege AppContainer escape path, CVSS 3.1 7.8 Important, exploited. Fixed in the 8 September 2026 updates across Windows 10/11 and Server 2012–2025. Backfill from the KEV backlog."
+ },
+ {
   "date": "2026-10-31",
   "time": "12:57",
   "kind": "site",
@@ -388,5 +488,15 @@
   "blurb": "Live on GitHub Pages.",
   "url": "index.html",
   "text": "Tenant Recipes launched on GitHub Pages."
+ },
+ {
+  "date": "2026-11-02",
+  "time": "20:59",
+  "kind": "site",
+  "type": "Guide",
+  "title": "New pillar guide: internal purple team, network to hybrid identity",
+  "blurb": "One authorized attack path end to end: Responder, NetExec, Hashcat, BloodHound CE, ROADtools and AADInternals, then detection and remediation of the on-prem-to-cloud seam.",
+  "url": "guides/purple-team-hybrid-identity.html",
+  "text": "New pillar guide: Internal purple team, from quiet network listening to compromised hybrid identity. Nine phases and 25 steps that follow a single authorized path from on-premises name-resolution poisoning to a fully enumerated Entra tenant: authorization, SOC notification and a contained lab; quiet LLMNR/NBT-NS/mDNS capture of NetNTLMv2 with Responder (analyze-first); credential validation and lateral reconnaissance with NetExec; offline cracking with Hashcat (mode 5600, lab or authorized material only); attack-path mapping with BloodHound CE including hybrid edges (SharpHound + AzureHound); cloud directory enumeration with ROADtools; deep, read-first hybrid checks with AADInternals (PHS/PTA/federation, Seamless SSO, sync); detection validation across Defender for Identity, Windows events (4624/4625/4776) and Entra sign-in/audit logs; and remediation (disable LLMNR/NBT-NS/mDNS, require SMB signing, NTLM auditing, Windows LAPS and tiering, Conditional Access and PIM fixes, retest and wipe). Defensive use only, on your own systems or with written authorization. The on-premises-rooted counterpart to the cloud-hardening-adversary-emulation guide."
  }
 ]

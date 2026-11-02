@@ -1,0 +1,44 @@
+{
+ "id": "defender-teams-callactivityevents",
+ "title": "Defender XDR adds CallActivityEvents for hunting suspicious Teams calls and meetings",
+ "date": "2026-11-02",
+ "category": "Defender",
+ "summary": "A new CallActivityEvents table in Defender XDR advanced hunting records activities in Teams calls and meetings, including who initiated them, the initiator's account type, organization and tenant, the organizer, and whether the action succeeded. You can join it to MessageEvents on ThreadId to see the chat that went with a call. It requires Defender for Office 365 Plan 2 and rolls out worldwide from early to mid November 2026, also through the streaming API and Sentinel.",
+ "why": "Help desk impersonation over Teams voice is now a common first step, for example in Microsoft's ESC1/ESC8 cases, and until now call activity was hard to hunt. With this table you can find external 'IT support' callers who reached several users, then pivot to the Quick Assist session that followed.",
+ "todo": [
+  "Check the table appears in your tenant once the rollout reaches you, and review the schema on Microsoft Learn.",
+  "Write a hunting query for calls initiated by external tenants to many internal users within a short window, and correlate it with Quick Assist or other remote-support process starts in DeviceProcessEvents.",
+  "If you stream advanced hunting data to Sentinel or a SIEM, add the new table and estimate the ingestion volume first."
+ ],
+ "effective": null,
+ "effective_note": "Rolling out early to mid November 2026; Defender for Office 365 Plan 2",
+ "sources": [
+  {
+   "title": "Message center MC1532241: Investigate suspicious Microsoft Teams calls and meetings with advanced hunting (archive)",
+   "url": "https://mc.merill.net/message/MC1532241",
+   "checked": "2026-11-02"
+  },
+  {
+   "title": "CallActivityEvents table in the advanced hunting schema",
+   "url": "https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-callactivityevents-table",
+   "checked": "2026-11-02"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-11-02",
+ "primary": {
+  "title": "Message center MC1532241: Investigate suspicious Microsoft Teams calls and meetings with advanced hunting (archive)",
+  "url": "https://mc.merill.net/message/MC1532241",
+  "checked": "2026-11-02"
+ },
+ "related": [
+  {
+   "title": "News: Fake help desk on Teams to domain admin via AD CS",
+   "url": "news/adcs-teams-helpdesk-esc1-esc8.html"
+  },
+  {
+   "title": "Defender for Teams: ZAP and QR-code phishing",
+   "url": "recipes/defender-teams-zap-qr-phishing.html"
+  }
+ ]
+}
