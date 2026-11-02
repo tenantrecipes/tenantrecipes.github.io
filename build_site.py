@@ -170,7 +170,7 @@ def head(title, desc, rel, path, og_type="website", og_auto=True):
     tags.append(f'<script src="{rel}assets/ui.js" defer></script>')
     tags.append(f'<script src="{rel}assets/search.js" defer></script>')
     if GC:
-        tags.append(f'<script data-goatcounter="https://{GC}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>')
+        tags.append(f'<script data-goatcounter="https://{GC}.goatcounter.com/count" async src="{rel}assets/goatcounter.js"></script>')
     return "".join(tags)
 
 
@@ -660,7 +660,9 @@ def build():
     (DIST / "404.html").write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
         '<title>Not found | Tenant Recipes</title><meta name="robots" content="noindex"><style>body{font-family:system-ui,Segoe UI,sans-serif;text-align:center;padding:80px 20px;'
-        'color:#1b1b1f}a{color:#0f6cbd}</style></head><body><h1>Page not found</h1>'
+        'color:#1b1b1f}a{color:#0f6cbd}</style>'
+        + (f'<script data-goatcounter="https://{GC}.goatcounter.com/count" async src="{home}assets/goatcounter.js"></script>' if GC else '')
+        + '</head><body><h1>Page not found</h1>'
         f'<p>That recipe may have moved. <a href="{home}">Browse all recipes</a>.</p></body></html>\n')
 
     # static assets

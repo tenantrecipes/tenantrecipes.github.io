@@ -117,7 +117,7 @@ Steps for the site owner:
    ```
    Not the script, not the URL, not a password or API key. The build refuses anything other than a plain code.
 3. Rebuild and push (`python3 build.py`, commit, push). Every page then loads
-   `<script data-goatcounter="https://<code>.goatcounter.com/count" async src="https://gc.zgo.at/count.js">`,
+   `<script data-goatcounter="https://<code>.goatcounter.com/count" async src="/assets/goatcounter.js">` (count.js is self-hosted, so no third-party script host is allowed in the CSP; only `connect-src`/`img-src https://<code>.goatcounter.com`),
    and the privacy policy and "How we verify" page switch automatically to the GoatCounter text.
 4. Check: open the live site with the ad blocker off. A page view should show in the dashboard within about 10 seconds.
 5. Optional, in GoatCounter settings: turn off screen size collection if not needed, and use "Ignore IPs", or open the site once with

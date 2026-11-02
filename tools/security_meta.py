@@ -2,7 +2,7 @@
 
 Injects into every page, right after <meta charset>:
   - a per-page Content-Security-Policy <meta> with sha256 hashes for each inline <script>/<style>
-    (no 'unsafe-inline', no 'unsafe-eval'); GoatCounter hosts are only allowed when GOATCOUNTER_CODE is set,
+    (no 'unsafe-inline', no 'unsafe-eval'); GoatCounter's endpoint (connect-src/img-src) is only allowed when GOATCOUNTER_CODE is set; count.js is self-hosted,
   - <meta name="referrer" content="strict-origin-when-cross-origin">,
   - <meta name="robots" content="noai, noimageai"> (merged into an existing robots meta such as noindex).
 Not possible via <meta> (browsers ignore it there): HSTS, X-Frame-Options, frame-ancestors, X-Content-Type-Options,
@@ -28,11 +28,10 @@ def h(s):
 
 
 def policy(scripts, styles, connect=""):
-    gc_script = " https://gc.zgo.at" if GC else ""
     gc_conn = f" https://{GC}.goatcounter.com" if GC else ""
     return "; ".join([
         "default-src 'self'",
-        "script-src 'self'" + "".join(" " + x for x in scripts) + gc_script,
+        "script-src 'self'" + "".join(" " + x for x in scripts),  # GoatCounter count.js is self-hosted (assets/goatcounter.js)
         "style-src 'self'" + "".join(" " + x for x in styles),
         "img-src 'self' data:" + gc_conn,
         "connect-src 'self'" + ((" " + connect) if connect else "") + gc_conn,
