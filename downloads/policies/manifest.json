@@ -4,12 +4,12 @@
  "ai-copilot-use-policy": "f6b45c7dcf977bf9",
  "backup-recovery-policy": "22d04644fdec2c13",
  "byod-mobile-device-policy": "9ad6d946d8af137b",
- "incident-response-policy": "152ff673318c3530",
+ "incident-response-policy": "2c442545d8f506b5",
  "information-classification-policy": "169e1a0a98198e65",
  "offboarding-checklist": "aff9b7f6893137fd",
  "onboarding-checklist": "486d93d3791417b1",
  "password-mfa-policy": "fb0aafd05e133015",
- "patch-management-policy": "327962e26e1fe9ba",
+ "patch-management-policy": "639303803624727d",
  "role-change-checklist": "67c1b95e2de912f7",
  "third-party-security-policy": "aba9632d6db48b88"
 }

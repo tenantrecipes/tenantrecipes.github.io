@@ -102,8 +102,15 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-03",
  "created": "2026-10-30",
- "updated": "2026-10-30",
- "order": 60
+ "updated": "2026-11-03",
+ "order": 60,
+ "verified_by": "Pascal",
+ "history": [
+  {
+   "date": "2026-11-03",
+   "note": "Re-verified CSF respond/recover theme mappings (RS.* / RC.*) and CIS Control 17; ISO Organizational/Technological themes unchanged."
+  }
+ ]
 }

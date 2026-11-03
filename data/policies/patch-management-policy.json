@@ -89,8 +89,15 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-03",
  "created": "2026-10-30",
- "updated": "2026-10-30",
- "order": 90
+ "updated": "2026-11-03",
+ "order": 90,
+ "verified_by": "Pascal",
+ "history": [
+  {
+   "date": "2026-11-03",
+   "note": "Re-verified framework mappings against NIST CSF 2.0 function themes (PR.PS / ID.RA style patch cadence) and CIS Control 7; ISO kept at theme level only."
+  }
+ ]
 }

@@ -33,9 +33,9 @@ layout in `DESIGN.md`): run `python3 build.py` and commit the new `assets/og/p/*
 A pillar or technical guide may get a hand-made card instead (add it to `og_specs()` in `tools/make_shareables.py` and `og_image()`/`OG_PAGES`
 in `build_ux.py`). `tools/check_meta.py` warns about any page that still falls back to a generic image.
 
-Current assignments (2026-10-31): Pillar = secure-copilot-rollout, windows-11-cis-hardening, cloud-hardening-adversary-emulation,
+Current assignments (2026-11-03): Pillar = secure-copilot-rollout, windows-11-cis-hardening, cloud-hardening-adversary-emulation, azure-update-manager-enterprise-patching, azure-arc-onboarding-enterprise-scale, admin-by-request-endpoint-privilege (zero-to-production programme), entra-private-access-vpn-replacement, adcs-hardening-tier0, purple-team-hybrid-identity, external-attack-surface-osint. Technical = admin-by-request-intune-win32-packaging, copilot-license-checks (quick guide). All recipes = Recipe.
 azure-update-manager-enterprise-patching, azure-arc-onboarding-enterprise-scale, admin-by-request-endpoint-privilege (zero-to-production programme),
-entra-private-access-vpn-replacement, adcs-hardening-tier0. Technical = admin-by-request-intune-win32-packaging, copilot-license-checks (quick guide). All 51 recipes = Recipe.
+entra-private-access-vpn-replacement, adcs-hardening-tier0, purple-team-hybrid-identity, external-attack-surface-osint. Technical = admin-by-request-intune-win32-packaging, copilot-license-checks (quick guide). All 51 recipes = Recipe.
 
 ## Code Library (`data/code/<id>.json` → `/code/`)
 
@@ -55,7 +55,7 @@ Before writing, check this table and `data/guides/` so nothing is written twice;
 |---|---|---|---|
 | 1 | AD CS hardening as Tier 0 | **Done 2026-10-31** (written ahead of the evening run) | `adcs_hardening_tier0.py` / `adcs-hardening-tier0` |
 | 2 | Internal purple team: network listening to compromised hybrid identity | **Done 2026-11-02** | `purple_team_hybrid_identity.py` / `purple-team-hybrid-identity` |
-| 3 | (per routine prompt) | **Next** | — |
-| 5 | (per routine prompt) | Queued | — |
+| 3 | Map your entire external attack surface: OSINT to verified exposure | **Done 2026-11-03** | `external_attack_surface_osint.py` / `external-attack-surface-osint` |
+| 5 | Pivot and lateral movement in a segmented network – post-exploitation end-to-end | **Next** | — |
 
-Next run: start with guide **3**. Do not re-write guide 2 (purple-team-hybrid-identity) or the AD CS guide; extend an existing guide via `HISTORY` instead if sources change.
+Next run: start with guide **5** (Ligolo-ng → NetExec → Impacket → Evil-WinRM → Metasploit, + Responder). Do not re-write guides 1–3 or the Entra Private Access guide; extend an existing guide via `HISTORY` instead if sources change.

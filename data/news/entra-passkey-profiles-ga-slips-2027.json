@@ -1,0 +1,44 @@
+{
+ "id": "entra-passkey-profiles-ga-slips-2027",
+ "status": "published",
+ "title": "Entra passkey profiles and Windows passkeys GA slipped to July 2027",
+ "date": "2026-11-03",
+ "category": "Entra",
+ "summary": "Message Center updates move general availability of Entra ID passkey profiles (and migration for existing FIDO2 passkey tenants) and of Microsoft Entra passkeys on Windows from the previous late-2026 targets to 2 July 2027 (MC1221452 and MC1282568 timeline updates). Preview and interim guidance remain available; the calendar commitment for GA is what changed.",
+ "why": "Programmes that assumed passkey-profile GA before end of 2026 need a replan. Phishing-resistant MFA for admins should not wait on that GA \u2014 use existing authentication strengths and passkey (FIDO2) methods that are already supported, and treat profiles as the later management plane improvement.",
+ "todo": [
+  "Update roadmap and CAB dates that assumed 2026 GA for passkey profiles / Windows passkeys.",
+  "Keep rolling out passkeys with today's authentication method policies and Conditional Access authentication strengths.",
+  "Watch MC1221452 and MC1282568 for further timeline changes rather than third-party roundups."
+ ],
+ "effective": "2027-07-02",
+ "effective_note": "Updated GA target 2 July 2027 per Message Center timeline changes (MC1221452, MC1282568).",
+ "primary": {
+  "title": "Microsoft Entra releases and announcements (What's new)",
+  "url": "https://learn.microsoft.com/en-us/entra/fundamentals/whats-new"
+ },
+ "related": [
+  {
+   "title": "Entra News #173 (passkey timeline notes)",
+   "url": "https://entra.news/p/entra-news-173-this-week-in-microsoft"
+  }
+ ],
+ "sources": [
+  {
+   "title": "2026 CW 44 Microsoft 365 Message Center changes (cloudscout) \u2013 MC1221452 / MC1282568 timeline updates",
+   "url": "https://app.cloudscout.one/2026/2026-cw-44-microsoft-365-message-center-changes/",
+   "checked": "2026-11-03"
+  },
+  {
+   "title": "Entra News #173 \u2013 This week in Microsoft Entra",
+   "url": "https://entra.news/p/entra-news-173-this-week-in-microsoft",
+   "checked": "2026-11-03"
+  },
+  {
+   "title": "Microsoft Entra releases and announcements",
+   "url": "https://learn.microsoft.com/en-us/entra/fundamentals/whats-new",
+   "checked": "2026-11-03"
+  }
+ ],
+ "last_verified": "2026-11-03"
+}

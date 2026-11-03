@@ -1,0 +1,40 @@
+{
+ "id": "entra-agent-ca-protections-preview",
+ "status": "published",
+ "title": "Conditional Access preview extends controls to agent user accounts (risk, compliance, CSA)",
+ "date": "2026-11-03",
+ "category": "Copilot/AI",
+ "summary": "Microsoft Entra What's new lists a public preview that widens Conditional Access for AI agents that have a user account. Admins can include or exclude individual agents or group them with custom security attributes, apply agent-risk based controls, require compliant devices (including Windows 365 for Agents), and use device platform, filter-for-devices and compliant-network conditions for agents that run on endpoints.",
+ "why": "Agent identities that act as users inherit the blast radius of those users. Tenant-wide user CA alone will not express agent risk or agent-specific device requirements; this preview is the control plane for that gap as Agent 365 and Copilot agents spread.",
+ "todo": [
+  "Inventory which agents have user accounts and which already fall under existing user-targeted CA.",
+  "Pilot agent-risk and compliant-device rules in Report-only against a non-production agent set.",
+  "Align with your agent-creation controls (who may create agents) before enforcement.",
+  "Read the Learn targeting guidance linked from What's new before designing exclusions."
+ ],
+ "effective": null,
+ "effective_note": "Public preview per Microsoft Entra What's new (checked 2026-11-03).",
+ "primary": {
+  "title": "Microsoft Entra releases and announcements \u2013 extended CA for agent user accounts",
+  "url": "https://learn.microsoft.com/en-us/entra/fundamentals/whats-new"
+ },
+ "related": [
+  {
+   "title": "Regular users can create agents in Microsoft Entra from 4 November 2026 unless you change the default",
+   "url": "news/entra-agent-blueprint-default.html"
+  },
+  {
+   "title": "Run every new Conditional Access policy in Report-only first",
+   "url": "recipes/ca-report-only-first.html"
+  }
+ ],
+ "recipe": "ca-report-only-first",
+ "sources": [
+  {
+   "title": "Microsoft Entra releases and announcements",
+   "url": "https://learn.microsoft.com/en-us/entra/fundamentals/whats-new",
+   "checked": "2026-11-03"
+  }
+ ],
+ "last_verified": "2026-11-03"
+}

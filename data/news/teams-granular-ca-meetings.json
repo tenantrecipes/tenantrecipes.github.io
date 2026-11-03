@@ -1,0 +1,45 @@
+{
+ "id": "teams-granular-ca-meetings",
+ "status": "published",
+ "title": "Teams adds granular Conditional Access for selected meetings (preview late Nov 2026, GA Jan 2027)",
+ "date": "2026-11-03",
+ "category": "M365",
+ "summary": "Message Center MC1532256 announces granular Conditional Access for Microsoft Teams meetings. Admins will publish authentication contexts and Conditional Access policies, then enable meeting authentication requirements through Teams meeting policies so organizers can require extra verification (MFA, compliant device, location) before attendees join a protected meeting. Public preview worldwide is expected late November 2026; general availability early to late January 2027.",
+ "why": "Board meetings, M&A bridges and incident bridges often need stronger gates than the tenant-wide Teams baseline. This lets you raise the bar per meeting without forcing every standup through the same control \u2014 but only after Entra authentication contexts and Teams policies are wired correctly.",
+ "todo": [
+  "Design the authentication contexts and Conditional Access policies you will allow organizers to pick (keep break-glass exclusions).",
+  "Plan how contexts will be published to Teams and which meeting policies get Conditional Access attendee verification (`Set-CsTeamsMeetingPolicy -ConditionalAccessAttendeeVerification $true` when the feature is live).",
+  "Pilot with a small organizer group in preview before making contexts available broadly.",
+  "Document the attendee experience for guests and external participants so meeting owners do not discover it live."
+ ],
+ "effective": "2026-11-30",
+ "effective_note": "Public preview late November 2026; GA early\u2013late January 2027 (MC1532256).",
+ "primary": {
+  "title": "MC1532256 \u2013 Microsoft Teams: Granular Conditional Access for Teams meetings",
+  "url": "https://mc.merill.net/message/MC1532256"
+ },
+ "related": [
+  {
+   "title": "Run every new Conditional Access policy in Report-only first",
+   "url": "recipes/ca-report-only-first.html"
+  },
+  {
+   "title": "What are Microsoft Entra Conditional Access policy plans? (preview)",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policy-plans"
+  }
+ ],
+ "recipe": "ca-report-only-first",
+ "sources": [
+  {
+   "title": "MC1532256 \u2013 Microsoft Teams: Granular Conditional Access for Teams meetings",
+   "url": "https://mc.merill.net/message/MC1532256",
+   "checked": "2026-11-03"
+  },
+  {
+   "title": "Set-CsTeamsMeetingPolicy (-ConditionalAccessAttendeeVerification)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoftteams/set-csteamsmeetingpolicy",
+   "checked": "2026-11-03"
+  }
+ ],
+ "last_verified": "2026-11-03"
+}

@@ -1,0 +1,49 @@
+{
+ "id": "entra-ca-policy-plans-preview",
+ "status": "published",
+ "title": "Entra Conditional Access policy plans enter public preview: shared conditions, many rules",
+ "date": "2026-11-03",
+ "category": "Entra",
+ "summary": "Microsoft Entra Conditional Access policy plans are in public preview. A plan groups related rules under shared assignments and conditions so common targeting and emergency-access exclusions are defined once, then each rule adds the grant and session controls for its scenario. Existing standalone Conditional Access policies keep working; at sign-in every applicable policy and every applicable plan rule must be satisfied. Migrating selected policies into a plan is supported; migrated rules start Off.",
+ "why": "Policy sprawl and missed break-glass exclusions are how tenants lock themselves out. Plans attack both problems, but preview behaviour still matters: location-conditioned plan rules currently issue one-hour tokens without instant IP enforcement, and plans accumulate with your existing policies rather than replacing them.",
+ "todo": [
+  "Read the Learn concept and migration articles before touching production policies.",
+  "Pilot with a Conditional Access Administrator on a low-risk objective (for example one shared break-glass exclusion set) and leave migrated rules Off or Report-only until sign-in evidence looks right.",
+  "Do not delete working standalone policies until the equivalent plan rules are proven; plans are additive during evaluation.",
+  "Track the location-condition preview limitation if you rely on named locations for near-real-time IP enforcement."
+ ],
+ "effective": null,
+ "effective_note": "Public preview as of the Learn documentation checked 2026-11-03; no single GA date in the concept article.",
+ "primary": {
+  "title": "What are Microsoft Entra Conditional Access policy plans? (preview)",
+  "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policy-plans"
+ },
+ "related": [
+  {
+   "title": "Migrate Conditional Access policies to a policy plan (preview)",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/how-to-migrate-conditional-access-policy-plan"
+  },
+  {
+   "title": "Keep break-glass accounts out of every AI-era CA policy",
+   "url": "recipes/ca-break-glass.html"
+  },
+  {
+   "title": "Run every new Conditional Access policy in Report-only first",
+   "url": "recipes/ca-report-only-first.html"
+  }
+ ],
+ "recipe": "ca-report-only-first",
+ "sources": [
+  {
+   "title": "What are Microsoft Entra Conditional Access policy plans? (preview)",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-policy-plans",
+   "checked": "2026-11-03"
+  },
+  {
+   "title": "Migrate Conditional Access policies to a policy plan (preview)",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/how-to-migrate-conditional-access-policy-plan",
+   "checked": "2026-11-03"
+  }
+ ],
+ "last_verified": "2026-11-03"
+}
