@@ -1,0 +1,45 @@
+{
+ "id": "entra-global-secure-access-combined-offering",
+ "title": "Entra Private Access and Internet Access can now be bought together as one Global Secure Access offering",
+ "date": "2026-11-02",
+ "category": "Entra",
+ "summary": "From 2 November 2026 Microsoft sells Microsoft Entra Private Access and Microsoft Entra Internet Access together as a single Microsoft Entra Global Secure Access offering. Microsoft states that this is a new way to buy, not a new product, and both products stay available separately. Microsoft Entra Suite includes the offering, and Microsoft 365 E7 includes Entra Suite.",
+ "why": "Nothing changes in the product or the admin center, so existing deployments need no action. The change matters at purchase time: if you plan both ZTNA for private apps and a secure web gateway, one offering may be simpler than two standalone licences, and Entra Suite or Microsoft 365 E7 tenants already have both. Microsoft did not publish prices or part numbers in the announcement, and the licensing section on Learn had not been updated when we checked on 3 November 2026.",
+ "todo": [
+  "Check what you already own: Entra Suite or Microsoft 365 E7 includes Global Secure Access, so do not buy Private Access or Internet Access on top.",
+  "If you are scoping a VPN replacement and expect to add Internet Access later, ask your licensing partner to price the combined offering against Private Access alone.",
+  "Keep Microsoft Entra ID P1 or P2 in the plan; Learn still lists it as the prerequisite for the Private Access and Internet Access profiles.",
+  "Re-check the Global Secure Access licensing section on Learn before you sign, since it had not yet been updated for the combined offering."
+ ],
+ "effective": "2026-11-02",
+ "sources": [
+  {
+   "title": "Microsoft Entra blog: Global Secure Access — Private Access and Internet Access in one offering",
+   "url": "https://techcommunity.microsoft.com/blog/microsoft-entra-blog/global-secure-access-private-access-and-internet-access-in-one-offering/4569098",
+   "checked": "2026-11-03"
+  },
+  {
+   "title": "What is Global Secure Access? (licensing overview)",
+   "url": "https://learn.microsoft.com/en-us/entra/global-secure-access/overview-what-is-global-secure-access",
+   "checked": "2026-11-03"
+  },
+  {
+   "title": "Traffic forwarding profiles: licensing per profile",
+   "url": "https://learn.microsoft.com/en-us/entra/global-secure-access/concept-traffic-forwarding",
+   "checked": "2026-11-03"
+  }
+ ],
+ "status": "published",
+ "last_verified": "2026-11-03",
+ "primary": {
+  "title": "Microsoft Entra blog: Global Secure Access — Private Access and Internet Access in one offering",
+  "url": "https://techcommunity.microsoft.com/blog/microsoft-entra-blog/global-secure-access-private-access-and-internet-access-in-one-offering/4569098",
+  "checked": "2026-11-03"
+ },
+ "related": [
+  {
+   "title": "Replace VPN with Microsoft Entra Private Access (pillar guide)",
+   "url": "guides/entra-private-access-vpn-replacement.html"
+  }
+ ]
+}

@@ -498,5 +498,25 @@
   "blurb": "One authorized attack path end to end: Responder, NetExec, Hashcat, BloodHound CE, ROADtools and AADInternals, then detection and remediation of the on-prem-to-cloud seam.",
   "url": "guides/purple-team-hybrid-identity.html",
   "text": "New pillar guide: Internal purple team, from quiet network listening to compromised hybrid identity. Nine phases and 25 steps that follow a single authorized path from on-premises name-resolution poisoning to a fully enumerated Entra tenant: authorization, SOC notification and a contained lab; quiet LLMNR/NBT-NS/mDNS capture of NetNTLMv2 with Responder (analyze-first); credential validation and lateral reconnaissance with NetExec; offline cracking with Hashcat (mode 5600, lab or authorized material only); attack-path mapping with BloodHound CE including hybrid edges (SharpHound + AzureHound); cloud directory enumeration with ROADtools; deep, read-first hybrid checks with AADInternals (PHS/PTA/federation, Seamless SSO, sync); detection validation across Defender for Identity, Windows events (4624/4625/4776) and Entra sign-in/audit logs; and remediation (disable LLMNR/NBT-NS/mDNS, require SMB signing, NTLM auditing, Windows LAPS and tiering, Conditional Access and PIM fixes, retest and wipe). Defensive use only, on your own systems or with written authorization. The on-premises-rooted counterpart to the cloud-hardening-adversary-emulation guide."
+ },
+ {
+  "date": "2026-11-03",
+  "time": "16:55",
+  "kind": "site",
+  "type": "Guide",
+  "title": "Updated: Replace VPN with Entra Private Access",
+  "blurb": "Combined Global Secure Access offering and M365 E7 in licensing; custom profiles marked preview; Home Network Support; Universal CAE signals; session affinity; Health and Alerts.",
+  "url": "guides/entra-private-access-vpn-replacement.html",
+  "text": "Updated pillar guide: Replace VPN with Microsoft Entra Private Access. Licensing now covers the combined Microsoft Entra Global Secure Access offering (available from 2 November 2026) and Microsoft 365 E7 via Entra Suite, with Entra ID P1/P2 still the prerequisite. Custom Private Access traffic forwarding profiles are marked preview, Home Network Support (preview) is added for home-subnet overlaps, the Universal CAE device and risk signals are described, connector Session Affinity is named with its Graph-only configuration, and Global Secure Access alerts and Health and Alerts (preview) join the monitoring phase. Re-verified 3 November 2026."
+ },
+ {
+  "date": "2026-11-03",
+  "time": "16:56",
+  "kind": "site",
+  "type": "News",
+  "title": "News: Private Access and Internet Access in one Global Secure Access offering",
+  "blurb": "A buying change from 2 November 2026, not a product change; Entra Suite and Microsoft 365 E7 already include it.",
+  "url": "news/entra-global-secure-access-combined-offering.html",
+  "text": "New news item: from 2 November 2026 Microsoft Entra Private Access and Internet Access can be purchased together as one Microsoft Entra Global Secure Access offering. Both stay available separately; Entra Suite includes the offering and Microsoft 365 E7 includes Entra Suite."
  }
 ]

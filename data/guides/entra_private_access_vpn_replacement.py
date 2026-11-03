@@ -2,7 +2,8 @@
 Covers why VPN fails, licensing and roles, private network connectors, Quick Access vs per-app Enterprise apps,
 the Windows Global Secure Access client via Intune, Conditional Access requiring compliant devices, Intune compliance,
 pilot and VPN retirement, monitoring, troubleshooting and rollback.
-Fact-checked against Microsoft Learn on 2026-10-31. Setting names are as shown in Learn on that date.
+Fact-checked against Microsoft Learn on 2026-10-31; licensing and Global Secure Access feature updates re-checked on 2026-11-03
+against the Microsoft Entra blog (2026-11-02) and Learn. Setting names are as shown in Learn on those dates.
 Text in `backticks` renders as <code>. 'rec' = recipe ids, 'tools' = tools ids under /tools/, 'sec' = cyber ids.
 Security-first: private-app traffic is granted only from compliant devices under Conditional Access."""
 
@@ -16,7 +17,8 @@ DESC = ("An expert, end-to-end playbook for replacing traditional VPN with Micro
         "Quick Access versus per-app Enterprise applications, the Windows Global Secure Access client via Intune, "
         "Conditional Access that requires compliant devices, Intune compliance, pilot and VPN retirement, "
         "monitoring, troubleshooting and rollback.")
-VERIFIED = "2026-10-31"
+UPDATED = "2026-11-03"
+VERIFIED = "2026-11-03"
 BADGE = "fact-checked against Microsoft Learn"
 SRC_LABEL = "Official sources"
 TIME_NOTE = ("Time estimates are our planning figures for a mid-size tenant (roughly 500–5,000 Windows endpoints and a handful of private networks), not Microsoft numbers. "
@@ -49,6 +51,7 @@ L = {
     "zt": ("Zero Trust overview (Microsoft)", "https://learn.microsoft.com/en-us/security/zero-trust/zero-trust-overview"),
     "app_proxy": ("What is Microsoft Entra application proxy?", "https://learn.microsoft.com/en-us/entra/identity/app-proxy/overview-what-is-app-proxy"),
     "get_started": ("Quickstart: Global Secure Access in the Microsoft Entra admin center", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-get-started-with-global-secure-access"),
+    "gsa_offer": ("Microsoft Entra blog: Global Secure Access — Private Access and Internet Access in one offering (2 Nov 2026)", "https://techcommunity.microsoft.com/blog/microsoft-entra-blog/global-secure-access-private-access-and-internet-access-in-one-offering/4569098"),
     "limits": ("Known limitations for Global Secure Access", "https://learn.microsoft.com/en-us/entra/global-secure-access/reference-current-known-limitations"),
     # Connectors
     "conn_howto": ("How to configure connectors for Microsoft Entra Private Access", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-configure-connectors"),
@@ -61,10 +64,12 @@ L = {
     "perapp": ("Configure per-app access using Global Secure Access applications", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-configure-per-app-access"),
     "app_disc": ("Application discovery for Global Secure Access", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-application-discovery"),
     "kerb_sso": ("Use Kerberos for SSO with Microsoft Entra Private Access", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-configure-kerberos-sso"),
+    "home_net": ("Configure home network support for Microsoft Entra Private Access (preview)", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-configure-home-network-support"),
     "ila": ("Enable Intelligent Local Access", "https://learn.microsoft.com/en-us/entra/global-secure-access/enable-intelligent-local-access"),
     # Traffic profiles
     "pa_profile": ("Manage Private Access traffic forwarding profiles", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-manage-private-access-profile"),
     "tf_concept": ("Traffic forwarding profiles (concept)", "https://learn.microsoft.com/en-us/entra/global-secure-access/concept-traffic-forwarding"),
+    "create_profile": ("Create a Private Access traffic forwarding profile (preview)", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-create-traffic-forwarding-profile"),
     "assign_profile": ("Assign users and devices to traffic forwarding profiles", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-manage-users-groups-assignment"),
     # Client
     "client_win": ("Install the Global Secure Access client for Windows", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-install-windows-client"),
@@ -94,6 +99,7 @@ L = {
     "logs_concept": ("Global Secure Access logs and monitoring", "https://learn.microsoft.com/en-us/entra/global-secure-access/concept-global-secure-access-logs-monitoring"),
     "traffic_logs": ("Global Secure Access network traffic logs", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-view-traffic-logs"),
     "dash": ("Global Secure Access dashboard", "https://learn.microsoft.com/en-us/entra/global-secure-access/concept-traffic-dashboard"),
+    "alerts": ("Global Secure Access alerts", "https://learn.microsoft.com/en-us/entra/global-secure-access/concept-alerts"),
     "audit": ("Global Secure Access audit logs", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-access-audit-logs"),
     "enriched": ("Enriched Microsoft 365 logs", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-view-enriched-logs"),
     "sentinel": ("Integrate Global Secure Access with Microsoft Sentinel", "https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-sentinel-integration"),
@@ -146,14 +152,17 @@ PHASES = [
   "goal": "Licensed users, least-privilege admin roles, Global Secure Access reachable in the portal, and a clear plan for when the Private Access traffic forwarding profile will be enabled.",
   "steps": [
    {"t": "Confirm licensing before you build anything",
-    "check": "Every user who will use Private Access has Microsoft Entra ID P1 or P2 *and* Microsoft Entra Private Access (standalone) or Microsoft Entra Suite; guest licensing is checked against the current Learn page",
+    "check": "Every user who will use Private Access has Microsoft Entra ID P1 or P2 *and* one licence that includes Private Access (standalone Private Access, the combined Global Secure Access offering, Microsoft Entra Suite, or Microsoft 365 E7); guest licensing is checked against the current Learn page",
     "do": ["Microsoft Entra Private Access capabilities are included in the Microsoft Entra Suite licence and as a standalone product. The same applies to Microsoft Entra Internet Access.",
+           "Since 2 November 2026 Microsoft also sells Private Access and Internet Access together as one Microsoft Entra Global Secure Access offering. Microsoft is explicit that this is a packaging change, not a new product, and both remain available on their own. Entra Suite includes that offering (plus ID Governance, ID Protection and Verified ID), and Microsoft 365 E7 includes Entra Suite.",
+           "Practical consequence: if Internet Access is on your roadmap after the VPN project, price the combined offering against Private Access alone before you buy; if you already hold Entra Suite or Microsoft 365 E7, you need no separate Private Access purchase. Get prices and part numbers from your licensing partner — Microsoft did not publish them in the announcement.",
+           "As of 3 November 2026 the licensing section on Learn still lists only Entra Suite and the standalone products; the combined offering is described in the Microsoft Entra blog post linked below. Expect Learn to catch up and re-check before you sign.",
            "To use Private Access or Internet Access, users also need Microsoft Entra ID P1 or P2. Most Global Secure Access services are licensed per user unless Learn says otherwise.",
            "The feature comparison on the Global Secure Access overview is the source of truth for which traffic profile unlocks Quick Access, per-app TCP/UDP, private DNS, App Discovery and related capabilities. Re-read it before you budget; names and bundling change.",
-           "Remote network (branch) connectivity is a separate capability with its own licence floor (combined P1 + Internet Access seats) and does **not** acquire Private Access traffic — Private Access requires the Global Secure Access client. Do not buy remote networks expecting them to replace VPN for private apps."],
+           "Remote network (branch) connectivity is a separate capability with its own licence floor (combined P1 + Internet Access seats) and does not acquire Private Access traffic — Private Access requires the Global Secure Access client. Do not buy remote networks expecting them to replace VPN for private apps."],
     "pit": ["Trial licences expire while connectors and CA policies are still in report-only. Put the renewal date on the project plan.",
             "Guest / B2B Private Access has its own licensing notes and preview limitations — verify before promising partner access."],
-    "rec": [], "tools": [], "src": S("gsa_what"),
+    "rec": [], "tools": [], "src": S("gsa_what", "gsa_offer", "tf_concept"),
     "marker": "official"},
    {"t": "Assign least-privilege roles for the build",
     "check": "Named admins hold Global Secure Access Administrator for GSA features, Application Administrator for connectors and Enterprise apps, Conditional Access Administrator for CA policies, and (for Intune) the Intune roles needed to deploy the client — preferably via PIM",
@@ -168,10 +177,10 @@ PHASES = [
     "check": "An admin can open Global Secure Access in the Entra admin center, and the runbook states that the Private Access traffic forwarding profile stays off until Quick Access or at least one Enterprise app, users and a report-only CA policy exist",
     "do": ["Sign in to the Microsoft Entra admin center and browse to Global Secure Access. If the blade is missing, fix licensing and role assignment before continuing.",
            "Under `Connect > Traffic forwarding` you will later enable the Private Access profile. You *can* enable it early, but with no apps and no profile assignment there is nothing useful to forward — and an early enable with a wide Quick Access is how you create an accidental second VPN.",
-           "Decide now whether you will use only the default Private Access profile or also custom profiles (up to 10 custom profiles per Learn). Custom profiles need an application in the default profile first, and switching some profile versions is irreversible — read the Private Access profile article before you experiment in production.",
+           "Decide now whether you will use only the default Private Access profile or also custom profiles. Multiple / custom Private Access traffic forwarding profiles are in preview (up to 10 custom profiles during preview, per Learn), so keep production on the default profile unless you accept preview terms. Custom profiles need an application in the default profile first, and switching some profile versions is irreversible — read the Private Access profile article before you experiment in production.",
            "Skim the known limitations article once: Private Access traffic is client-only (not remote networks), CA targets apps not the Private Access tunnel, nested groups are unsupported for Enterprise app assignment, and overlapping segments between apps are restricted."],
     "pit": ["Enabling all three traffic profiles 'to see what happens' mixes Internet Access and Microsoft traffic into a Private Access project and blows the test matrix."],
-    "rec": [], "tools": [], "src": S("get_started", "pa_profile", "tf_concept", "limits"),
+    "rec": [], "tools": [], "src": S("get_started", "pa_profile", "create_profile", "tf_concept", "limits"),
     "marker": "official"},
   ]},
 
@@ -222,8 +231,9 @@ PHASES = [
            "Destination types: IP, FQDN (including `*.contoso.com` wildcards), CIDR, or IP-to-IP range. Specify ports/protocols (common: 22, 80, 443, 445, 3389). Up to 500 segments on Quick Access.",
            "Assign users and groups on the Enterprise app that Quick Access creates. Nested groups are not supported — flatten to direct group assignment.",
            "Prefer FQDNs over raw subnets where DNS is stable; prefer specific ports over 1–65535. Wide subnets recreate VPN. Where you must publish a subnet temporarily, document the expiry and the per-app replacements."],
-    "pit": ["Enabling Quick Access with a /8 and all ports, then flipping the Private Access profile on for everyone, is how you ship a cloud VPN with extra steps."],
-    "rec": [], "tools": [], "src": S("qa", "pa_concept"),
+    "pit": ["Enabling Quick Access with a /8 and all ports, then flipping the Private Access profile on for everyone, is how you ship a cloud VPN with extra steps.",
+            "Broad RFC 1918 segments (for example `192.168.0.0/16`) collide with users' home subnets: the client acquires traffic meant for the home printer or router and breaks it. Fix the segment first (narrower ranges, FQDNs). Home Network Support (preview) is the option for what remains: an admin enables `Allow local subnet bypass` on the Private Access profile (v2 traffic forwarding experience), then the user turns on `Prefer Local Network` in the client. It covers only the directly connected IPv4 RFC 1918 subnet, not IPv6, routed networks behind the home gateway or mobile clients, and it affects Private Access traffic only. Treat the bypass as a conscious exception: a user's local subnet then wins over a published segment with the same addresses."],
+    "rec": [], "tools": [], "src": S("qa", "pa_concept", "home_net"),
     "marker": "official"},
    {"t": "Enable private DNS suffixes for internal names and Kerberos",
     "check": "Private DNS is enabled on Quick Access with at least the Active Directory forest / primary internal suffixes; a pilot client resolves an internal FQDN only when the GSA client is connected",
@@ -238,10 +248,10 @@ PHASES = [
     "do": ["Create apps under `Global Secure Access > Applications > Enterprise applications > New application`. Same segment model as Quick Access (FQDN/IP/CIDR/ports). NetBIOS names are not supported — use FQDNs.",
            "Enterprise app segments take priority over overlapping Quick Access segments. When you move a segment, remove it from Quick Access (split subnets if needed). Users who only had Quick Access access are blocked until assigned to the new Enterprise app — allow ~15 minutes for client sync.",
            "Use Application discovery (`Applications > Application discovery`) after Quick Access has traffic: it lists destinations users actually hit so you can `Add to new application` or `Add to existing application` with real usage data. New apps created from discovery inherit Quick Access assignments — tighten them immediately.",
-           "Optional: set `trafficRoutingMethod` to `sessionPersistence` via Microsoft Graph for apps that need sticky connector egress IPs (Global Secure Access apps only, not classic Application Proxy)."],
+           "Optional: connector routing per Global Secure Access app is Random by default. Microsoft markets the alternative as Smart Load Balancing with Session Affinity (generally available per the November 2026 Entra blog); Learn calls it session persistence. It keeps one user and device on the same connector for a session, which helps apps that depend on connector egress IP or ACLs. As of 3 November 2026 Learn documents it only through Microsoft Graph beta (`trafficRoutingMethod` = `sessionPersistence`), not as a portal setting, and only for Global Secure Access apps, not classic Application Proxy. A latency-based Performance mode is listed separately as preview."],
     "pit": ["Overlapping segments between two Enterprise apps are not allowed (Quick Access overlap is the special case for VPN replacement). Validate before save.",
             "Intelligent Local Access (bypass the cloud when the client is on the corporate network) is powerful but easy to mis-scope — enable per documented private network, and verify with Advanced diagnostics that matching traffic shows Action `Local` / Connection Status `Bypassed`."],
-    "rec": [], "tools": [], "src": S("perapp", "app_disc", "ila", "pa_concept"),
+    "rec": [], "tools": [], "src": S("perapp", "app_disc", "conn_groups", "ila", "pa_concept", "gsa_offer"),
     "marker": "official"},
    {"t": "Publish domain controllers only when you need Kerberos SSO",
     "check": "If password or Windows Hello for Business SSO to on-premises resources is required, a dedicated Enterprise app publishes only the DCs in the connector site's AD site with the documented ports, and WHFB cloud Kerberos trust is configured when passwordless is in use",
@@ -317,10 +327,11 @@ PHASES = [
     "do": ["From the Enterprise app blade choose Conditional Access > New policy (pre-selects the app), or create under Entra ID > Conditional Access.",
            "Include the pilot group first, not all users. Exclude break-glass / emergency access accounts per Microsoft guidance. Exclude directory sync and automation accounts; use workload identity CA if you must cover service principals.",
            "Leave session controls alone until baseline grant works. Set Enable policy to Report-only and wait for What if / sign-in log Report-only results before On.",
-           "Universal Continuous Access Evaluation applies short-lived tokens and near-real-time revocation for GSA on Windows clients that support it — know that recovery prompts appear in the tray after revoke."],
+           "Universal Continuous Access Evaluation applies short-lived tokens and near-real-time revocation for GSA on Windows clients that support it — know that recovery prompts appear in the tray after revoke.",
+           "Universal CAE is what makes the compliant-device rule hold for the whole session, not just at sign-in. Besides user events (account disabled or deleted, password change or reset, MFA enabled, admin revokes refresh tokens), it reacts to device and risk signals that Microsoft announced as generally available in November 2026: the device used for GSA access is disabled, deleted or turns non-compliant, or ID Protection flags high user risk. The user must then re-authenticate and CA is evaluated again — the destination app does not need to support CAE itself."],
     "pit": ["Nested groups in the *Enterprise app* assignment silently drop users; CA can include nested groups, but the app assignment cannot. Align both."],
     "rec": ["ca-report-only-first", "ca-break-glass", "ca-production-lockout-mistakes"], "tools": [],
-    "src": S("ca_pa", "ca_report", "break_glass", "cae"),
+    "src": S("ca_pa", "ca_report", "break_glass", "cae", "gsa_offer"),
     "marker": "official"},
    {"t": "Add the hardened and risk layers",
     "check": "Tier-0 Private Access apps require phishing-resistant authentication strength; risk policies are either linked or explicitly deferred with a reason",
@@ -406,9 +417,10 @@ PHASES = [
     "do": ["Traffic logs (preview) show sessions/connections/transactions with connectionId and action Allowed/Denied. Filter on Private Access during the pilot.",
            "Connection logs (preview) aggregate transactions with device and policy context.",
            "Audit logs capture configuration changes to forwarding profiles and related objects (retention depends on Entra licence).",
-           "Enriched Microsoft 365 logs matter mainly if you also enable Microsoft traffic — optional here."],
+           "Enriched Microsoft 365 logs matter mainly if you also enable Microsoft traffic — optional here.",
+           "Review Global Secure Access alerts as part of the daily pilot check: they carry severity, related entities and MITRE mapping, cover both deployment/health problems and security detections, and follow the Sentinel alert schema. Microsoft announced Health and Alerts for Global Secure Access as public preview in November 2026 to surface connectivity and deployment issues inside the Entra admin center — useful during the pilot, but keep your own connector and Denied-traffic checks until it is generally available."],
     "pit": ["Portal retention for traffic logs is short (documented around 30 days). Export before you need history for an incident."],
-    "rec": [], "tools": [], "src": S("logs_concept", "traffic_logs", "dash", "audit", "enriched"),
+    "rec": [], "tools": [], "src": S("logs_concept", "traffic_logs", "dash", "alerts", "audit", "enriched", "gsa_offer"),
     "marker": "official"},
    {"t": "Export NetworkAccess* tables to Log Analytics / Sentinel",
     "check": "A diagnostic setting sends at least `NetworkAccessTrafficLogs` (and ideally Connection, Alerts) to a Log Analytics workspace; a saved query shows Denied Private Access attempts",
