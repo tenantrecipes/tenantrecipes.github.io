@@ -1,0 +1,44 @@
+{
+ "id": "cisa-bod-26-04-risk-based-patching",
+ "status": "published",
+ "title": "CISA BOD 26-04 replaces the fixed KEV clock with risk-based remediation deadlines",
+ "date": "2026-11-04",
+ "category": "Regulation",
+ "summary": "CISA's Binding Operational Directive 26-04, 'Prioritizing Security Updates Based on Risk', consolidates and supersedes the older BOD 19-02 (remediating critical/high internet-facing vulnerabilities) and BOD 22-01 (the Known Exploited Vulnerabilities programme). It moves federal civilian agencies from a single fixed KEV due-date toward remediation windows driven by each asset's internet exposure and risk, and it is paired with CISA forensic-triage implementation guidance. Recent KEV entries already cite BOD 26-04 in their required-action text.",
+ "why": "The directive only binds US federal civilian agencies, but it is the clearest signal yet of how CISA expects everyone to prioritise patching: by exposure and exploitability rather than CVSS alone. If you run a KEV-aligned SLA, your internal policy language and tooling assumptions (fixed 14/21-day clocks, 'critical first') need to match the new exposure-weighted model, and the forensic-triage guidance raises the bar on what 'remediated' means for an internet-facing asset.",
+ "todo": [
+  "Re-read your vulnerability-management policy against BOD 26-04's risk/exposure model; update any text that still references BOD 19-02 or BOD 22-01.",
+  "Make sure your asset inventory records internet exposure per asset, because that now drives the deadline, not just the severity.",
+  "Keep KEV ingestion automated (the `known_exploited_vulnerabilities.json` feed) and map each KEV item to exposure before assigning an internal due date.",
+  "Add CISA's forensic-triage expectations to your incident runbooks for exploited, internet-facing systems."
+ ],
+ "effective": null,
+ "effective_note": "BOD 26-04 supersedes and revokes BOD 19-02 and BOD 22-01 (CISA Cybersecurity Directives page, checked 2026-11-04).",
+ "primary": {
+  "title": "CISA Cybersecurity Directives (BOD 26-04: Prioritizing Security Updates Based on Risk)",
+  "url": "https://www.cisa.gov/news-events/directives"
+ },
+ "related": [
+  {
+   "title": "WordPress Core upgrade-window RCE (CVE-2026-119977), in CISA KEV",
+   "url": "security/wordpress-core-toctou-rce-cve-2026-119977.html"
+  },
+  {
+   "title": "Map your entire external attack surface: OSINT to verified exposure",
+   "url": "guides/external-attack-surface-osint.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "CISA Cybersecurity Directives",
+   "url": "https://www.cisa.gov/news-events/directives",
+   "checked": "2026-11-04"
+  },
+  {
+   "title": "CISA Known Exploited Vulnerabilities Catalog",
+   "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+   "checked": "2026-11-04"
+  }
+ ],
+ "last_verified": "2026-11-04"
+}

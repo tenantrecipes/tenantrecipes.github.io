@@ -18,8 +18,9 @@ import entra_private_access_vpn_replacement as GPA
 import adcs_hardening_tier0 as GADCS
 import purple_team_hybrid_identity as GPTH
 import external_attack_surface_osint as GEAS
+import pivot_lateral_movement_segmented as GPLM
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS, GPTH, GEAS]
+GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS, GPTH, GEAS, GPLM]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX

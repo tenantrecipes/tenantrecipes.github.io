@@ -56,6 +56,6 @@ Before writing, check this table and `data/guides/` so nothing is written twice;
 | 1 | AD CS hardening as Tier 0 | **Done 2026-10-31** (written ahead of the evening run) | `adcs_hardening_tier0.py` / `adcs-hardening-tier0` |
 | 2 | Internal purple team: network listening to compromised hybrid identity | **Done 2026-11-02** | `purple_team_hybrid_identity.py` / `purple-team-hybrid-identity` |
 | 3 | Map your entire external attack surface: OSINT to verified exposure | **Done 2026-11-03** | `external_attack_surface_osint.py` / `external-attack-surface-osint` |
-| 5 | Pivot and lateral movement in a segmented network – post-exploitation end-to-end | **Next** | — |
+| 5 | Pivot and lateral movement in a segmented network – post-exploitation end-to-end | **Done 2026-11-04** | `pivot_lateral_movement_segmented.py` / `pivot-lateral-movement-segmented` |
 
-Next run: start with guide **5** (Ligolo-ng → NetExec → Impacket → Evil-WinRM → Metasploit, + Responder). Do not re-write guides 1–3 or the Entra Private Access guide; extend an existing guide via `HISTORY` instead if sources change.
+All five project guides (1, 2, 3, 4-via-Entra-Private-Access, 5) are now **COMPLETE** as of 2026-11-04. The evening routine no longer writes a new project guide each run; instead deepen existing guides via `HISTORY` when sources change, and keep growing breadth (new /tools/ or /code/ pages) and height (troubleshooting, detections, internal links).

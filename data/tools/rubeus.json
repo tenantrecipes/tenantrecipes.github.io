@@ -1,0 +1,44 @@
+{
+ "id": "rubeus",
+ "name": "Rubeus",
+ "vendor": "GhostPack (community)",
+ "category": "Credential access",
+ "what": "A C# toolset for raw Kerberos interaction and abuse during an authorized Active Directory assessment. It performs ticket requests and renewals, Kerberoasting and AS-REP roasting, overpass-the-hash (pass-the-key), pass-the-ticket, ticket extraction from LSASS-free memory where possible, S4U constrained/resource-based delegation abuse, and golden/silver ticket forging when you already hold the relevant keys. It is the Windows-native counterpart to Impacket's Kerberos scripts.",
+ "when": "On an internal or assumed-breach engagement with written scope, when you need to harvest roastable service accounts, convert an NT hash or AES key into a usable TGT, or exercise delegation paths that BloodHound flagged — all against a domain you own or are authorized to test.",
+ "license": "BSD-3-Clause",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://github.com/GhostPack/Rubeus",
+ "repo": "https://github.com/GhostPack/Rubeus",
+ "example": [
+  "Build from source or use your team's vetted build on an approved assessment host; record the commit you used.",
+  "Enumerate roastable accounts and request service tickets: `Rubeus.exe kerberoast /outfile:hashes.txt` (scope to specific SPNs rather than the whole domain to stay quiet).",
+  "AS-REP roast accounts without Kerberos pre-auth: `Rubeus.exe asreproast /format:hashcat /outfile:asrep.txt`, then crack offline with Hashcat.",
+  "Overpass-the-hash to obtain a TGT from a captured key: `Rubeus.exe asktgt /user:<svc> /aes256:<key> /ptt`, then act within scope.",
+  "Hand the SPNs, accounts and ticket activity to the blue team so Kerberos detections (roasting, encryption-downgrade, anomalous TGS requests) can be tuned."
+ ],
+ "pitfalls": [
+  "You may only run this against systems you own or hold written authorization to test; Kerberos ticket abuse against others is illegal.",
+  "Kerberoasting at scale and RC4 encryption-type downgrades are noisy and trip modern detections (event 4769 patterns, Defender for Identity) — scope SPNs and agree thresholds with the SOC first.",
+  "Golden/silver ticket forging requires you to already possess the krbtgt or service key; it is a persistence/impact demonstration, not an initial-access exploit, and must be explicitly in the rules of engagement.",
+  "Keep cracked credentials, extracted tickets and keys in the engagement vault and wipe them at close."
+ ],
+ "sources": [
+  {
+   "title": "GhostPack/Rubeus on GitHub",
+   "url": "https://github.com/GhostPack/Rubeus",
+   "checked": "2026-11-04"
+  },
+  {
+   "title": "MITRE ATT&CK T1558: Steal or Forge Kerberos Tickets",
+   "url": "https://attack.mitre.org/techniques/T1558/",
+   "checked": "2026-11-04"
+  }
+ ],
+ "order": 340,
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-11-04",
+ "created": "2026-11-04",
+ "updated": "2026-11-04"
+}
