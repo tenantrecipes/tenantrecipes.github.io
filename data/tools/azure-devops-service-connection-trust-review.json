@@ -1,0 +1,52 @@
+{
+  "id": "azure-devops-service-connection-trust-review",
+  "status": "published",
+  "kind": "method",
+  "name": "Azure DevOps service-connection trust review",
+  "category": "Methods",
+  "what": "A read-first method to map who can turn an Azure DevOps pipeline into an Azure workload identity, then verify resource checks and narrow authorizations.",
+  "when": "Before WIF migration, production pipeline onboarding, a project-scope change or investigation of suspicious workload identity use. Documentation-verified method; not lab-tested.",
+  "cost": "free",
+  "cost_note": "The manual review method is free; Azure DevOps, agents, Azure resources and log ingestion can require paid services. No paid scanning product is required.",
+  "url": "https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops",
+  "example": [
+    "Get written scope and read access. List each production connection under `Project settings > Service connections`; record ID, identity IDs, authentication type, Azure role scope and owner. Never export secret values.",
+    "Record explicit pipeline authorizations, connection administrators, resource checks and bypass authorities. Flag `Grant access permission to all pipelines`; do not change it during the read-only inventory.",
+    "Trace the authorized pipeline to YAML/templates, repository policies, variable groups, environment and agent pool. Record who can edit each path and whether a self-hosted agent has another production identity or private-network route.",
+    "Have the Azure owner verify all identity grants, including Key Vault data access and inherited Azure RBAC. WIF does not remove excessive resource permissions.",
+    "Propose branch control on the actual credential resource, using fully qualified allowed branches and a deliberate unknown-protection decision. Propose independent approval and required templates where appropriate.",
+    "With separate change/test approval, validate allowed branch, disallowed branch and unauthorized-pipeline paths against a harmless target. Record fresh run IDs and target outcomes; the inventory alone changes nothing.",
+    "Keep a dated evidence matrix: connection → identity → target roles → authorized pipelines → checks → editors/administrators → agent trust. Store it in an approved private change record, with exceptions and review date."
+  ],
+  "pitfalls": [
+    "An environment approval is not proof that every use of the service connection is gated. Review and protect the connection itself.",
+    "WIF eliminates a stored secret, not malicious code running in an authorized pipeline. Review issuer-side governance and Azure permissions together.",
+    "Resource administrators can bypass certain checks. A branch marked protected may have only one policy; validate the actual required review.",
+    "Keep this method read-only until the change owner approves a pilot; never make unreviewed production changes to prove a finding."
+  ],
+  "sources": [
+    {
+      "title": "Microsoft Learn: service connections",
+      "url": "https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops",
+      "checked": "2026-11-05"
+    },
+    {
+      "title": "Microsoft Learn: approvals and checks",
+      "url": "https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops",
+      "checked": "2026-11-05"
+    },
+    {
+      "title": "Microsoft Learn: secure Azure Pipelines",
+      "url": "https://learn.microsoft.com/en-us/azure/devops/pipelines/security/overview?view=azure-devops",
+      "checked": "2026-11-05"
+    },
+    {
+      "title": "Microsoft Learn: job access tokens and repository protection",
+      "url": "https://learn.microsoft.com/en-us/azure/devops/pipelines/process/access-tokens?view=azure-devops",
+      "checked": "2026-11-05"
+    }
+  ],
+  "last_verified": "2026-11-05",
+  "created": "2026-11-05",
+  "updated": "2026-11-05"
+}

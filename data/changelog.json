@@ -1,4 +1,40 @@
 [
+{
+    "date": "2026-11-05",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Azure DevOps hardening after Key Eater",
+    "blurb": "Eight-phase trust-boundary playbook: source-qualified incident context, WIF, PATs, production checks, job tokens, agents, read-only KQL and rollback.",
+    "url": "guides/azure-devops-hardening-key-eater.html",
+    "text": "Eight-phase trust-boundary playbook: source-qualified incident context, WIF, PATs, production checks, job tokens, agents, read-only KQL and rollback."
+},
+{
+    "date": "2026-11-05",
+    "kind": "site",
+    "type": "News",
+    "title": "Key Eater: what is reported and what remains unknown",
+    "blurb": "Todyl campaign reporting separated from Microsoft-documented controls; no worm, platform exploit or confirmed AI direction asserted.",
+    "url": "news/key-eater-workload-identity-azure-devops.html",
+    "text": "Todyl campaign reporting separated from Microsoft-documented controls; no worm, platform exploit or confirmed AI direction asserted."
+},
+{
+    "date": "2026-11-05",
+    "kind": "site",
+    "type": "Tool",
+    "title": "Azure DevOps service-connection trust review",
+    "blurb": "New read-first method for mapping deployment identity trust and planning allowed/denied-path verification.",
+    "url": "tools/azure-devops-service-connection-trust-review.html",
+    "text": "New read-first method for mapping deployment identity trust and planning allowed/denied-path verification."
+},
+{
+    "date": "2026-11-05",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Cloud hardening: workload CA coverage troubleshooting",
+    "blurb": "Added identity-type, direct-assignment and Report-only checks plus DevOps trust links. Existing full-guide verification date retained.",
+    "url": "guides/cloud-hardening-adversary-emulation.html",
+    "text": "Added identity-type, direct-assignment and Report-only checks plus DevOps trust links. Existing full-guide verification date retained."
+},
  {
   "date": "2026-11-04",
   "time": "21:20",

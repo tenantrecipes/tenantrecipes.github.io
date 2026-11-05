@@ -1,0 +1,56 @@
+{
+  "id": "key-eater-workload-identity-azure-devops",
+  "status": "published",
+  "title": "Key Eater report puts Azure DevOps workload trust and stolen app credentials under scrutiny",
+  "date": "2026-11-05",
+  "category": "Security incidents",
+  "summary": "Todyl reports an operator using stolen Entra application credentials, an Azure DevOps federated workload identity and replayed Azure DevOps user sessions in activity beginning 1 November 2026. Its latest update describes scripted, human-directed activity rather than a worm and states that no Microsoft vulnerability is involved. The initial credential source and any AI role remain unconfirmed; Microsoft documentation below verifies defensive controls, not the campaign.",
+  "why": "Secretless pipelines still rely on the integrity of their issuing system and its resource permissions. MSP and production deployment identities deserve review alongside developer sessions, PAT exceptions and downstream credentials.",
+  "todo": [
+    "Preserve available Entra, DevOps and resource logs; record gaps before rotating or removing credentials.",
+    "Review production service-connection authorization, resource checks, Azure RBAC and agent trust; do not assume WIF alone prevents abuse.",
+    "Use the related expert guide for separate user/workload Conditional Access boundaries, PAT policies and read-only hunting examples.",
+    "Treat Todyl indicators as dated investigation leads, not attribution for an entire ASN. Do not claim confirmed AI direction, initial-access mechanism or PAT abuse."
+  ],
+  "effective": null,
+  "effective_note": "Incident reporting, not a product rollout: Todyl source published 3 November and last updated 4 November 2026 when checked on 5 November.",
+  "primary": {
+    "title": "Todyl: Key Eater investigation (updated 4 November 2026)",
+    "url": "https://www.todyl.com/blog/stolen-app-credentials-real-access-an-actor-is-signing-into-entra-id-and-azure-devops-as-your-workloads"
+  },
+  "related": [
+    {
+      "title": "Azure DevOps hardening after Key Eater",
+      "url": "guides/azure-devops-hardening-key-eater.html"
+    },
+    {
+      "title": "Azure DevOps service-connection trust review",
+      "url": "tools/azure-devops-service-connection-trust-review.html"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Todyl: Key Eater investigation (updated 4 November 2026)",
+      "url": "https://www.todyl.com/blog/stolen-app-credentials-real-access-an-actor-is-signing-into-entra-id-and-azure-devops-as-your-workloads",
+      "checked": "2026-11-05"
+    },
+    {
+      "title": "Microsoft Learn: secure Azure Pipelines",
+      "url": "https://learn.microsoft.com/en-us/azure/devops/pipelines/security/overview?view=azure-devops",
+      "checked": "2026-11-05"
+    },
+    {
+      "title": "Microsoft Learn: Conditional Access for workload identities",
+      "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/workload-identity",
+      "checked": "2026-11-05"
+    },
+    {
+      "title": "Microsoft Learn: Azure DevOps auditing (public preview)",
+      "url": "https://learn.microsoft.com/en-us/azure/devops/organizations/audit/azure-devops-auditing?view=azure-devops",
+      "checked": "2026-11-05"
+    }
+  ],
+  "last_verified": "2026-11-05",
+  "created": "2026-11-05",
+  "updated": "2026-11-05"
+}

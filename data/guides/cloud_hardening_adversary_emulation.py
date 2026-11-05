@@ -14,6 +14,8 @@ DESC = ("An expert project playbook that chains ScubaGear, Monkey365, Maester, P
         "establish a measurable Entra/M365 baseline, run authorized directory enumeration as adversary emulation, "
         "then close the loop with detection validation and remediation. Defensive use only.")
 VERIFIED = "2026-10-31"
+UPDATED = "2026-11-05"
+HISTORY = [("2026-11-05", "Added workload Conditional Access coverage troubleshooting and Azure DevOps trust review; new section checked against Microsoft Learn, not lab-tested. Earlier sections not fully re-verified.")]
 BADGE = "fact-checked against vendor docs and Microsoft Learn"
 SRC_LABEL = "Official sources"
 TIME_NOTE = ("Time estimates are our planning figures for a mid-size hybrid tenant (a few thousand users), not vendor numbers. "
@@ -347,3 +349,20 @@ PHASES = [
     "marker": "practical"},
   ]},
 ]
+
+
+# Incremental depth update: only this added step rechecked 2026-11-05.
+PHASES[-1]["steps"].append({
+ "t": "Troubleshoot a workload policy that appears to do nothing",
+ "check": "The evidence names the service-principal object, supported identity type, policy mode and sign-in policy result; unsupported paths have separate controls",
+ "do": [
+  "First check identity type: Microsoft workload Conditional Access supports eligible single-tenant service principals registered in your tenant, not managed identities, multitenant apps or third-party SaaS. A user CA policy is not a workload policy.",
+  "Assign the service principal directly as a workload identity; group membership does not enforce the policy for it. Use its Enterprise applications service-principal Object ID, not the app registration Object ID.",
+  "Creating or modifying workload CA policies requires Workload Identities Premium. In service-principal sign-in logs inspect Conditional Access and Report-only results: Report-only evaluates but does not block. If no records exist, record the logging gap instead of asserting successful enforcement.",
+  "For Azure DevOps-issued workload trust, inventory who can edit the pipeline, administer or use its service connection, and run code on its agent. Federation removes a stored secret but does not make those issuers safe. Follow the dedicated Azure DevOps guide for resource-owner checks and acceptance evidence.",
+  "For a faulty pilot policy, use the approved rollback to Report-only or Off and validate expected access. Do not re-enable a known-compromised identity as rollback. This section was documentation-checked on 5 November 2026; it is not a new full-guide verification or lab test."
+ ],
+ "pit": ["An unsupported identity missing from a CA report is not proof of protection. Keep a written coverage-gap register and assign least-privilege, resource-network and pipeline-governance controls."],
+ "src": S("workload"), "rec": [], "tools": ["azure-devops-service-connection-trust-review"],
+ "guides": ["azure-devops-hardening-key-eater"], "marker": "practical"
+})

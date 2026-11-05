@@ -59,3 +59,9 @@ Before writing, check this table and `data/guides/` so nothing is written twice;
 | 5 | Pivot and lateral movement in a segmented network – post-exploitation end-to-end | **Done 2026-11-04** | `pivot_lateral_movement_segmented.py` / `pivot-lateral-movement-segmented` |
 
 All five project guides (1, 2, 3, 4-via-Entra-Private-Access, 5) are now **COMPLETE** as of 2026-11-04. The evening routine no longer writes a new project guide each run; instead deepen existing guides via `HISTORY` when sources change, and keep growing breadth (new /tools/ or /code/ pages) and height (troubleshooting, detections, internal links).
+
+## Priority editorial queue (state updated 2026-11-05)
+
+- **Done 2026-11-05:** Azure DevOps hardening / Key Eater expert pillar (`azure_devops_hardening_key_eater.py`, `azure-devops-hardening-key-eater`), related source-qualified news, new service-connection trust-review method, and workload-CA troubleshooting depth in the cloud-hardening guide. Documentation verified; no lab testing claimed.
+- **Next:** Enterprise AI governance pillar for Copilot and third-party enterprise LLMs (including Claude/Anthropic, Grok and ChatGPT): security, permissions, data handling, procurement and controlled adoption first. Do not reduce this to a consumer tips hub.
+- Continue breadth + height and the ordinary fact-check backlog. This queue update does not modify the scheduled routine itself.
