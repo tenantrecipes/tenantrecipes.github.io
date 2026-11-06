@@ -602,6 +602,7 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
     GADCS = next((g for g in guides if g.SLUG == "adcs-hardening-tier0"), None)
     GPTH = next((g for g in guides if g.SLUG == "purple-team-hybrid-identity"), None)
     GEAS = next((g for g in guides if g.SLUG == "external-attack-surface-osint"), None)
+    GAIG = next((g for g in guides if g.SLUG == "enterprise-ai-governance"), None)
     tc = dict(tag_counts(R))
     tag = lambda t: f'{rel}?t={qp(t)}#library'
     exploited = sum(1 for e in CYL if e["type"] == "vulnerability" and e.get("exploited"))
@@ -640,14 +641,16 @@ def task_hubs(rel, R, guides, quick, CYL, tools, pols):
          + ([L(f'{rel}policies/onboarding-checklist.html', "Joiner / leaver checklists")] if "onboarding-checklist" in pid else []),
          f'{rel}guides/{G2.SLUG}.html', "Open the Windows 11 guide"),
         ("target", "Deploy AI", "Copilot, agents, governance",
-         "License, scope and govern Copilot and Copilot Studio agents before users find the gaps.",
-         [L(f'{rel}guides/{G1.SLUG}.html', "Secure Copilot rollout guide"),
+         "Govern Copilot and third-party enterprise LLMs before users find the gaps.",
+         ([L(f'{rel}guides/{GAIG.SLUG}.html', "Enterprise AI governance (all LLMs)")] if GAIG else [])
+         + [L(f'{rel}guides/{G1.SLUG}.html', "Secure Copilot rollout guide"),
           L(f'{rel}guides/{quick.SLUG}.html', "Copilot pre-flight checks"),
           L(tag("Copilot"), "Copilot recipes", tc.get("Copilot")),
           L(tag("Agents"), "Agents &amp; Copilot Studio", tc.get("Agents")),
           L(tag("Licensing"), "Licensing &amp; reporting", tc.get("Licensing"))]
          + ([L(f'{rel}policies/ai-copilot-use-policy.html', "AI use policy template")] if "ai-copilot-use-policy" in pid else []),
-         f'{rel}guides/{G1.SLUG}.html', "Start with the rollout guide"),
+         (f'{rel}guides/{GAIG.SLUG}.html' if GAIG else f'{rel}guides/{G1.SLUG}.html'),
+         ("Open the AI governance guide" if GAIG else "Start with the rollout guide")),
         ("list", "Automate", "PowerShell, Graph, scripts, tools",
          "Copy-paste PowerShell and Graph, plus assessment and pentest tooling for the tenant and beyond.",
          [L(f'{rel}code/index.html', "Code Library: copy-ready snippets", len(list((__import__("pathlib").Path(__file__).resolve().parent / "data" / "code").glob("*.json"))) or None),

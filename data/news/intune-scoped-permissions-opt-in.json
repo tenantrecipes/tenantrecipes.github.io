@@ -1,0 +1,30 @@
+{
+  "id": "intune-scoped-permissions-opt-in",
+  "status": "published",
+  "title": "Intune Scoped permissions preview: stop RBAC merging across scope tags",
+  "date": "2026-11-06",
+  "category": "Intune",
+  "summary": "Microsoft Intune's Scoped permissions opt-in public preview (introduced March 2026) changes how permissions apply when an admin has multiple role assignments with different scope tags. Today's default behaviour merges permissions that share a category (for example Mobile Apps) across those assignments, which can grant broader access than intended. With Scoped permissions enabled, each assignment's permissions stay inside its own scope tag. Microsoft documents that the new behaviour will become the default for all tenants in a future release, and that enabling the toggle is a one-way tenant action that cannot be reversed.",
+  "why": "Distributed IT teams that stacked regional role assignments on the same security groups may be living on merged permissions without noticing. When Scoped permissions become the default, those admins lose the accidental extra access. Running the Permissions Assessment Report now is the only way to see the blast radius before you opt in — or before Microsoft flips the default.",
+  "todo": [
+    "In Intune admin center go to Tenant administration > Roles > Settings and Generate Report (Permissions Assessment Report). Export it.",
+    "Fix role assignments that relied on merging: split groups, narrow roles, or add explicit assignments so New Permissions match the intended regional access.",
+    "Tell affected admins before you enable the Scoped permissions toggle. Enabling is one-way.",
+    "Prefer a least-privileged custom Intune role with Organization Update to flip the setting; avoid standing Intune Administrator where possible."
+  ],
+  "effective": null,
+  "effective_note": "Opt-in public preview now; Microsoft Learn states it will become the default for all tenants in a future release (no calendar date on the Learn page when checked 2026-11-06). Enabling cannot be undone.",
+  "primary": {
+    "title": "Microsoft Learn: RBAC and scope tags — Scoped permissions",
+    "url": "https://learn.microsoft.com/en-us/intune/fundamentals/role-based-access-control/scope-tags"
+  },
+  "related": [],
+  "sources": [
+    {
+      "title": "Microsoft Learn: Use RBAC and scope tags for distributed IT",
+      "url": "https://learn.microsoft.com/en-us/intune/fundamentals/role-based-access-control/scope-tags",
+      "checked": "2026-11-06"
+    }
+  ],
+  "last_verified": "2026-11-06"
+}

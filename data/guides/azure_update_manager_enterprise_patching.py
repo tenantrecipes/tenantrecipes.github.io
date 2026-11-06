@@ -14,6 +14,8 @@ DESC = ("An expert playbook for building a production patch framework with Azure
         "ring design, maintenance configurations as code, reboot policy, dynamic scopes, pre/post events with snapshots and cancellation, "
         "compliance reporting, alerting, troubleshooting and rollback for Windows Server and Linux.")
 VERIFIED = "2026-10-31"
+UPDATED = "2026-11-06"
+HISTORY = [("2026-11-06", "Cross-linked Windows Update certificate rotation May/June 2027 readiness for cloud Windows Update paths; WSUS exemption noted.")]
 BADGE = "fact-checked against Microsoft Learn"
 SRC_LABEL = "Microsoft sources"
 TIME_NOTE = ("Time estimates are our planning figures for an estate of roughly 50–300 servers split across Azure and on-premises, not Microsoft numbers. "
@@ -30,6 +32,7 @@ INTRO = [
     "What changes with size is how much you automate: at ten servers static assignments are fine; at a few hundred, tags, Azure Policy and dynamic scopes do the work.",
     "This is not an introduction to Update Manager. We assume you know Azure Resource Manager, RBAC, Azure Policy and Windows Update/WSUS or Linux package management, "
     "and we focus on the design decisions, limits and failure modes that decide whether the framework survives its first year.",
+    "Separately, Microsoft is rotating Windows Update trust certificates that expire on 17 May and 19 June 2027. Devices on cloud Windows Update that lack the replacement certificates lose update access after those dates; Microsoft states WSUS-managed devices are not affected. Keep rings current and track the version-specific security-update floors — see the related news post.",
 ]
 NAMING = ("Scope: Windows Server and Linux servers only. Windows 10/11 clients, virtual machine scale sets and AKS nodes are not managed by Update Manager — Microsoft points to Intune, scale set automatic upgrades and AKS node updates respectively. "
           "Tenant Recipes is not affiliated with Microsoft. Nothing on this page has been lab-tested by us; it is verified against Microsoft documentation.")

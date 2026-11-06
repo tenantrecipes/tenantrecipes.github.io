@@ -1,0 +1,50 @@
+{
+  "id": "enterprise-ai-approved-inventory",
+  "status": "published",
+  "kind": "method",
+  "name": "Enterprise AI approved-tools inventory",
+  "category": "Methods",
+  "what": "A read-first method to build and maintain the approved / conditional / denied inventory for Microsoft Copilot and third-party enterprise LLMs, with identity, retention and data-class fields an auditor can check.",
+  "when": "Before the first multi-vendor AI pilot, during shadow-AI discovery, or when renewing AI contracts. Documentation-verified method; not lab-tested.",
+  "cost": "free",
+  "cost_note": "The inventory method is free. Discovery tooling (Defender for Cloud Apps, Purview DSPM for AI, SWG logs) and enterprise AI licences are separate paid services.",
+  "url": "https://learn.microsoft.com/en-us/purview/ai-microsoft-purview",
+  "example": [
+    "Create a private inventory (change/Grc system, not a public wiki) with columns: tool, vendor SKU (Enterprise vs consumer), IdP/SSO, Entra app ID, Conditional Access coverage, allowed data classifications, residency/inference region, retention or ZDR notes, training stance, audit/export path, DPA status, business owner, security review date, exception expiry.",
+    "Seed Microsoft Copilot / Copilot Chat / Copilot Studio, then any ChatGPT Enterprise, Claude Enterprise or Grok enterprise contracts. Mark consumer ChatGPT, consumer Copilot and personal Grok as Denied for company data.",
+    "Run Defender for Cloud Apps / Shadow IT discovery for the Generative AI category and Purview DSPM for AI insights. Triage each discovered app into Approve / Conditional / Block with an owner.",
+    "For each Approve candidate, capture the primary vendor privacy/admin URL for training and retention (do not paste marketing claims). Confirm SSO is enforceable before inviting seats.",
+    "Publish a short employee-facing approved list linked from the AI use policy. Schedule a 90-day re-review. Store exceptions with expiry and compensating controls.",
+    "Keep API keys, IDE assistants and agent platforms in the same inventory as chat UIs — separate rows when retention/ZDR rules differ from the chat product."
+  ],
+  "pitfalls": [
+    "Mixing consumer and Enterprise SKUs in one row hides the control gap.",
+    "An inventory without review dates becomes shelfware; discovery without an approved alternative drives shadow use onto personal phones.",
+    "Keep this method documentation-led until change owners approve pilots; do not enable production connectors to 'test' the spreadsheet."
+  ],
+  "sources": [
+    {
+      "title": "Microsoft Learn: Purview protections for Copilot and other generative AI apps",
+      "url": "https://learn.microsoft.com/en-us/purview/ai-microsoft-purview",
+      "checked": "2026-11-06"
+    },
+    {
+      "title": "Microsoft Learn: Secure generative AI with Microsoft Entra",
+      "url": "https://learn.microsoft.com/en-us/entra/architecture/secure-generative-ai",
+      "checked": "2026-11-06"
+    },
+    {
+      "title": "OpenAI: Enterprise privacy",
+      "url": "https://openai.com/enterprise-privacy/",
+      "checked": "2026-11-06"
+    },
+    {
+      "title": "xAI / SpaceXSI: Enterprise FAQs",
+      "url": "https://x.ai/legal/faq-enterprise",
+      "checked": "2026-11-06"
+    }
+  ],
+  "last_verified": "2026-11-06",
+  "created": "2026-11-06",
+  "updated": "2026-11-06"
+}

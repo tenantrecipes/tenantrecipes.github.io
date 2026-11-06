@@ -1,0 +1,49 @@
+{
+  "id": "windows-update-certificate-rotation-2027",
+  "status": "published",
+  "title": "Prepare for Windows Update certificate rotation in May/June 2027",
+  "date": "2026-11-06",
+  "category": "Windows",
+  "summary": "Microsoft will rotate Windows Update trust certificates that expire on 17 May 2027 and 19 June 2027. Devices that do not hold the replacement certificates will lose access to Windows Update services after the applicable date. Most in-support devices that are current with monthly quality updates need no extra work; older or lagging builds need a specific security update (or a move to a supported Windows version). Microsoft states that devices receiving updates from WSUS are not affected by this rotation.",
+  "why": "This is a quiet fleet-hygiene deadline, not a Patch Tuesday surprise. Intune and Windows Update for Business estates that drift off current monthly security updates — plus lingering Windows 10 LTSC 2019 / Server 2016/2019 pockets — are the populations that fail first. Treat the May/June 2027 dates as planning milestones for update-ring compliance and unsupported OS upgrades, not as an extension of those products' support lifecycles.",
+  "todo": [
+    "Identify devices by Windows version and quality-update level (Intune Windows Update Distribution Report, update rings, compliance policies). Flag builds below the required security-update floor in the Microsoft table.",
+    "Keep supported devices on current monthly security updates. Windows 11 25H2 and later: no extra action for this rotation. Windows 11 24H2 and Windows Server 2025: September 2025 security update or later before 19 June 2027. Other in-support Windows 11, Windows Server 2022 and in-support Windows 10: July 2026 security update or later before 19 June 2027. Windows 10 Enterprise 2019 LTSC, Windows Server 2019 and Windows Server 2016: July 2026 security update or later before 17 May 2027.",
+    "Plan upgrades for unsupported Windows versions; they lose Windows Update access after the expirations. Use Microsoft Update Catalog or your management tools to stage the required updates on lagging supported devices.",
+    "Record which devices get updates from WSUS (Microsoft's exemption) versus cloud Windows Update / WUfB. Do not assume Configuration Manager alone means WSUS path — check the actual update source."
+  ],
+  "effective": "2027-05-17",
+  "effective_note": "Certificate expirations: 17 May 2027 and 19 June 2027 (version-specific action deadlines in Microsoft's table). Announced 8 October 2026; Message Center + Windows IT Pro Blog. Checked 2026-11-06.",
+  "primary": {
+    "title": "Prepare for Windows Update certificate rotation in 2027 (Windows IT Pro Blog)",
+    "url": "https://techcommunity.microsoft.com/blog/windows-itpro-blog/prepare-for-windows-update-certificate-rotation-in-2027/4562463"
+  },
+  "related": [
+    {
+      "title": "Azure Update Manager enterprise patching",
+      "url": "guides/azure-update-manager-enterprise-patching.html"
+    },
+    {
+      "title": "Windows 11 CIS hardening",
+      "url": "guides/windows-11-cis-hardening.html"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Windows IT Pro Blog: Prepare for Windows Update certificate rotation in 2027",
+      "url": "https://techcommunity.microsoft.com/blog/windows-itpro-blog/prepare-for-windows-update-certificate-rotation-in-2027/4562463",
+      "checked": "2026-11-06"
+    },
+    {
+      "title": "Microsoft Learn: Windows message center",
+      "url": "https://learn.microsoft.com/en-us/windows/release-health/windows-message-center",
+      "checked": "2026-11-06"
+    },
+    {
+      "title": "BleepingComputer: Outdated Windows devices will stop receiving security updates",
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-outdated-windows-devices-will-lose-security-protection-next-year/",
+      "checked": "2026-11-06"
+    }
+  ],
+  "last_verified": "2026-11-06"
+}

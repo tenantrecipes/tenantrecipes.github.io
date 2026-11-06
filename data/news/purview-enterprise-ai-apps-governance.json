@@ -1,0 +1,48 @@
+{
+  "id": "purview-enterprise-ai-apps-governance",
+  "date": "2026-11-06",
+  "status": "published",
+  "title": "Purview treats ChatGPT Enterprise and Claude Enterprise as first-class enterprise AI apps",
+  "category": "Purview",
+  "summary": "Microsoft Purview's generative AI documentation groups supported apps into Copilot experiences, Enterprise AI apps, and Other AI apps. The Enterprise AI apps category explicitly includes Entra-registered AI apps, Microsoft Foundry, ChatGPT Enterprise and Anthropic Claude (Enterprise), while browser-detected Generative AI (ChatGPT consumer, Google Gemini, consumer Microsoft Copilot, DeepSeek and peers) lands under Other AI apps in Defender for Cloud Apps. DSPM / DSPM for AI remains the recommended front door for discovery, oversharing insights and one-click policy recommendations.",
+  "why": "If your AI programme only hardens Microsoft Copilot, Purview is already telling you the rest of the estate is visible — and differently controlled. Use the Enterprise AI vs Other AI split to drive approved inventory, SSO and Endpoint DLP rather than a single 'block all AI' reflex.",
+  "todo": [
+    "Open DSPM / DSPM for AI and review which Enterprise AI apps versus Other AI apps appear for your tenant.",
+    "Align the approved-tools inventory with Purview's categories: Enterprise SKUs behind SSO; consumer Generative AI as Denied for company data.",
+    "Pair Endpoint DLP and Cloud App controls for unsanctioned browser AI with Conditional Access on Entra-registered enterprise AI apps.",
+    "Read the enterprise AI governance pillar for the multi-vendor control plane that sits above Copilot-only rollout work."
+  ],
+  "effective": null,
+  "effective_note": "Capability documentation on Microsoft Learn (Purview AI protections page), checked 2026-11-06. Not a new product launch announcement.",
+  "primary": {
+    "title": "Microsoft Learn: Purview protections for Copilot and other generative AI apps",
+    "url": "https://learn.microsoft.com/en-us/purview/ai-microsoft-purview"
+  },
+  "related": [
+    {
+      "title": "Enterprise AI governance for Copilot and every enterprise LLM",
+      "url": "guides/enterprise-ai-governance.html"
+    },
+    {
+      "title": "Secure Copilot rollout",
+      "url": "guides/secure-copilot-rollout.html"
+    },
+    {
+      "title": "Enterprise AI approved-tools inventory",
+      "url": "tools/enterprise-ai-approved-inventory.html"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Microsoft Learn: Purview protections for Copilot and other generative AI apps",
+      "url": "https://learn.microsoft.com/en-us/purview/ai-microsoft-purview",
+      "checked": "2026-11-06"
+    },
+    {
+      "title": "Microsoft Learn: Security for Microsoft Copilot",
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/security-microsoft-copilot",
+      "checked": "2026-11-06"
+    }
+  ],
+  "last_verified": "2026-11-06"
+}

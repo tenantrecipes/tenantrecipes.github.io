@@ -33,7 +33,7 @@ layout in `DESIGN.md`): run `python3 build.py` and commit the new `assets/og/p/*
 A pillar or technical guide may get a hand-made card instead (add it to `og_specs()` in `tools/make_shareables.py` and `og_image()`/`OG_PAGES`
 in `build_ux.py`). `tools/check_meta.py` warns about any page that still falls back to a generic image.
 
-Current assignments (2026-11-03): Pillar = secure-copilot-rollout, windows-11-cis-hardening, cloud-hardening-adversary-emulation, azure-update-manager-enterprise-patching, azure-arc-onboarding-enterprise-scale, admin-by-request-endpoint-privilege (zero-to-production programme), entra-private-access-vpn-replacement, adcs-hardening-tier0, purple-team-hybrid-identity, external-attack-surface-osint. Technical = admin-by-request-intune-win32-packaging, copilot-license-checks (quick guide). All recipes = Recipe.
+Current assignments (2026-11-06): Pillar = secure-copilot-rollout, enterprise-ai-governance, windows-11-cis-hardening, cloud-hardening-adversary-emulation, azure-update-manager-enterprise-patching, azure-arc-onboarding-enterprise-scale, admin-by-request-endpoint-privilege (zero-to-production programme), entra-private-access-vpn-replacement, adcs-hardening-tier0, purple-team-hybrid-identity, external-attack-surface-osint, azure-devops-hardening-key-eater, pivot-lateral-movement-segmented. Technical = admin-by-request-intune-win32-packaging, copilot-license-checks (quick guide). All recipes = Recipe.
 azure-update-manager-enterprise-patching, azure-arc-onboarding-enterprise-scale, admin-by-request-endpoint-privilege (zero-to-production programme),
 entra-private-access-vpn-replacement, adcs-hardening-tier0, purple-team-hybrid-identity, external-attack-surface-osint. Technical = admin-by-request-intune-win32-packaging, copilot-license-checks (quick guide). All 51 recipes = Recipe.
 
@@ -60,8 +60,8 @@ Before writing, check this table and `data/guides/` so nothing is written twice;
 
 All five project guides (1, 2, 3, 4-via-Entra-Private-Access, 5) are now **COMPLETE** as of 2026-11-04. The evening routine no longer writes a new project guide each run; instead deepen existing guides via `HISTORY` when sources change, and keep growing breadth (new /tools/ or /code/ pages) and height (troubleshooting, detections, internal links).
 
-## Priority editorial queue (state updated 2026-11-05)
+## Priority editorial queue (state updated 2026-11-06)
 
 - **Done 2026-11-05:** Azure DevOps hardening / Key Eater expert pillar (`azure_devops_hardening_key_eater.py`, `azure-devops-hardening-key-eater`), related source-qualified news, new service-connection trust-review method, and workload-CA troubleshooting depth in the cloud-hardening guide. Documentation verified; no lab testing claimed.
-- **Next:** Enterprise AI governance pillar for Copilot and third-party enterprise LLMs (including Claude/Anthropic, Grok and ChatGPT): security, permissions, data handling, procurement and controlled adoption first. Do not reduce this to a consumer tips hub.
-- Continue breadth + height and the ordinary fact-check backlog. This queue update does not modify the scheduled routine itself.
+- **Done 2026-11-06:** Enterprise AI governance pillar for Copilot and third-party enterprise LLMs (`enterprise_ai_governance.py`, `enterprise-ai-governance`): approved inventory, shadow AI, SSO/CA, data boundaries/retention, Purview/DLP, AI Act/NIS2 hooks, link to secure Copilot rollout. Documentation verified; no lab testing claimed. Deploy AI homepage hub updated; dedicated `/ai/` hub page deferred.
+- **Next:** Dedicated `/ai/` hub page collecting Copilot + enterprise AI governance + third-party LLM material (beyond the existing Deploy AI task hub). Continue breadth + height and the ordinary fact-check backlog. This queue update does not modify the scheduled routine itself.

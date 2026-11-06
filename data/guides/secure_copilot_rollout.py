@@ -11,6 +11,8 @@ DESC = ("A phased, fact-checked checklist for Microsoft 365 admins: licensing, a
         "a deep oversharing clean-up (EEEU, sharing links, broken inheritance, ownerless sites, public teams, guests), "
         "sensitivity labels and DLP for Copilot, devices, agents, pilot, audit and adoption.")
 VERIFIED = "2026-10-30"
+UPDATED = "2026-11-06"
+HISTORY = [("2026-11-06", "Linked the new enterprise AI governance pillar for multi-vendor LLM controls; Copilot-specific phases unchanged.")]
 
 INTRO = [
     "Copilot doesn't create new permissions. It works in the security context of the signed-in user and finds what that user can already open. "
@@ -18,6 +20,8 @@ INTRO = [
     "That's why most of this guide is about the work before you assign licenses: finding and closing overshared content, tightening identity, "
     "and putting labels and DLP in place. Then you pilot, monitor and scale. Each step has concrete actions, the pitfalls, "
     "links to our hands-on recipes and the Microsoft Learn pages we checked it against.",
+    "For the cross-vendor control plane — approved inventory, shadow AI, SSO/Conditional Access to ChatGPT Enterprise / Claude / Grok, "
+    "retention boundaries and AI Act/NIS2 hooks — use the enterprise AI governance pillar. This Copilot guide stays the deep oversharing and rollout path.",
 ]
 NAMING = ("Naming: Microsoft 365 Copilot is now called Microsoft Copilot, and Microsoft 365 Copilot Chat is now Microsoft Copilot Chat. "
           "Some admin center labels and Microsoft Learn pages still use the old names.")
@@ -99,7 +103,7 @@ PHASES = [
            "Assign the SharePoint Advanced Management Administrator role to whoever runs the clean-up. It adds viewing metadata across content and removing permissions at scale on top of SharePoint Administrator."],
     "pit": ["Some SAM features, such as restricted site creation, still need the SAM Plan 1 add-on even with Copilot.",
             "A good reason to buy and assign a single Copilot license (for the admin running the project) early: it unlocks SAM for the clean-up before anyone else gets Copilot."],
-    "rec": ["copilot-readiness-checklist"], "src": S("setup", "req", "samreq")},
+    "rec": ["copilot-readiness-checklist"], "src": S("setup", "req", "samreq"), "guides": ["enterprise-ai-governance"]},
   ]},
  {
   "id": "identity", "title": "Admin roles & identity hardening", "time": "1–2 weeks", "deep": False,

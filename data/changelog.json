@@ -1,5 +1,41 @@
 [
-{
+  {
+    "date": "2026-11-06",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Enterprise AI governance for Copilot and every enterprise LLM",
+    "blurb": "Eight-phase multi-vendor AI governance pillar: inventory, shadow AI, SSO/CA, retention, Purview/DLP, AI Act/NIS2. Documentation verified only.",
+    "url": "guides/enterprise-ai-governance.html",
+    "text": "Eight-phase multi-vendor AI governance pillar: inventory, shadow AI, SSO/CA, retention, Purview/DLP, AI Act/NIS2. Documentation verified only."
+  },
+  {
+    "date": "2026-11-06",
+    "kind": "site",
+    "type": "News",
+    "title": "Windows Update certificate rotation May/June 2027",
+    "blurb": "Action table by Windows version; WSUS-managed devices not affected; Intune readiness tips.",
+    "url": "news/windows-update-certificate-rotation-2027.html",
+    "text": "Action table by Windows version; WSUS-managed devices not affected; Intune readiness tips."
+  },
+  {
+    "date": "2026-11-06",
+    "kind": "site",
+    "type": "Tool",
+    "title": "Enterprise AI approved-tools inventory",
+    "blurb": "Read-first method for Approved/Conditional/Denied AI inventory across Copilot and third-party enterprise LLMs.",
+    "url": "tools/enterprise-ai-approved-inventory.html",
+    "text": "Read-first method for Approved/Conditional/Denied AI inventory across Copilot and third-party enterprise LLMs."
+  },
+  {
+    "date": "2026-11-06",
+    "kind": "site",
+    "type": "Policy",
+    "title": "AI use policy expanded to third-party enterprise LLMs",
+    "blurb": "Template now covers ChatGPT Enterprise, Claude Enterprise and Grok enterprise offerings alongside Copilot.",
+    "url": "policies/ai-copilot-use-policy.html",
+    "text": "Template now covers ChatGPT Enterprise, Claude Enterprise and Grok enterprise offerings alongside Copilot."
+  },
+  {
     "date": "2026-11-05",
     "kind": "site",
     "type": "Guide",
@@ -7,8 +43,8 @@
     "blurb": "Eight-phase trust-boundary playbook: source-qualified incident context, WIF, PATs, production checks, job tokens, agents, read-only KQL and rollback.",
     "url": "guides/azure-devops-hardening-key-eater.html",
     "text": "Eight-phase trust-boundary playbook: source-qualified incident context, WIF, PATs, production checks, job tokens, agents, read-only KQL and rollback."
-},
-{
+  },
+  {
     "date": "2026-11-05",
     "kind": "site",
     "type": "News",
@@ -16,8 +52,8 @@
     "blurb": "Todyl campaign reporting separated from Microsoft-documented controls; no worm, platform exploit or confirmed AI direction asserted.",
     "url": "news/key-eater-workload-identity-azure-devops.html",
     "text": "Todyl campaign reporting separated from Microsoft-documented controls; no worm, platform exploit or confirmed AI direction asserted."
-},
-{
+  },
+  {
     "date": "2026-11-05",
     "kind": "site",
     "type": "Tool",
@@ -25,8 +61,8 @@
     "blurb": "New read-first method for mapping deployment identity trust and planning allowed/denied-path verification.",
     "url": "tools/azure-devops-service-connection-trust-review.html",
     "text": "New read-first method for mapping deployment identity trust and planning allowed/denied-path verification."
-},
-{
+  },
+  {
     "date": "2026-11-05",
     "kind": "site",
     "type": "Guide",
@@ -34,595 +70,595 @@
     "blurb": "Added identity-type, direct-assignment and Report-only checks plus DevOps trust links. Existing full-guide verification date retained.",
     "url": "guides/cloud-hardening-adversary-emulation.html",
     "text": "Added identity-type, direct-assignment and Report-only checks plus DevOps trust links. Existing full-guide verification date retained."
-},
- {
-  "date": "2026-11-04",
-  "time": "21:20",
-  "kind": "guide",
-  "type": "Guide",
-  "title": "New pillar guide: pivot and lateral movement in a segmented network",
-  "blurb": "Ligolo-ng → Responder → NetExec → Impacket → Evil-WinRM → Metasploit, then detection and remediation.",
-  "url": "guides/pivot-lateral-movement-segmented.html",
-  "text": "New pillar guide (project guide 5, final in the series): post-exploitation end to end across a segmented network. Nine phases chain Ligolo-ng, Responder, NetExec, Impacket, Evil-WinRM and Metasploit under written authorization, then prove detection and remediate. The five-guide project series is now complete. Defensive use only."
- },
- {
-  "date": "2026-11-04",
-  "time": "21:20",
-  "kind": "security",
-  "type": "Security",
-  "title": "KEV: WordPress Core upgrade-window RCE and a chained Linux kernel flaw",
-  "blurb": "Two new CISA KEV entries: WordPress Core CVE-2026-119977 (unauth RCE) and Linux kernel CVE-2026-46300.",
-  "url": "security/",
-  "text": "Added two exploited vulnerabilities to /security/: WordPress Core CVE-2026-119977, an unauthenticated upgrade-window RCE (CVSS 8.1, KEV 3 Nov 2026, fixed in 7.1.4), and Linux kernel CVE-2026-46300 (CVSS 7.8, KEV 28 Oct 2026) chained with the PHP CVE-2026-109618/109619 pair for root webshells."
- },
- {
-  "date": "2026-11-04",
-  "time": "21:20",
-  "kind": "tool",
-  "type": "Tool",
-  "title": "New tool page: Rubeus (Kerberos abuse)",
-  "blurb": "Kerberoasting, AS-REP roasting, overpass-the-hash, pass-the-ticket and S4U for authorized AD assessments.",
-  "url": "tools/rubeus.html",
-  "text": "New Tools entry: Rubeus, the GhostPack C# toolset for raw Kerberos interaction and abuse during authorized Active Directory assessments – Kerberoasting, AS-REP roasting, overpass-the-hash, pass-the-ticket and delegation abuse. Authorized testing only."
- },
- {
-  "date": "2026-11-04",
-  "time": "21:20",
-  "kind": "news",
-  "type": "News",
-  "title": "CISA BOD 26-04 moves patching to risk-based deadlines",
-  "blurb": "BOD 26-04 supersedes BOD 19-02 and BOD 22-01, replacing the fixed KEV clock with exposure-weighted remediation.",
-  "url": "news/cisa-bod-26-04-risk-based-patching.html",
-  "text": "News: CISA Binding Operational Directive 26-04, 'Prioritizing Security Updates Based on Risk', consolidates and supersedes BOD 19-02 and BOD 22-01, shifting federal remediation deadlines from a fixed KEV clock to each asset's internet exposure and risk."
- },
- {
-  "date": "2026-11-03",
-  "time": "21:20",
-  "kind": "guide",
-  "type": "Guide",
-  "title": "New pillar guide: map your external attack surface",
-  "blurb": "crt.sh → Amass → Shodan → Nmap → Nuclei → HIBP, then ffuf/Burp, detection and remediation.",
-  "url": "guides/external-attack-surface-osint.html",
-  "text": "New pillar guide (project guide 3): Map your entire external attack surface from OSINT to verified exposure. Nine phases chain crt.sh, OWASP Amass, Shodan, Nmap, Nuclei, Have I Been Pwned, ffuf and Burp Suite under written authorization, then prove detection and remediate. Defensive use only."
- },
- {
-  "date": "2026-11-03",
-  "time": "21:20",
-  "kind": "security",
-  "type": "Security",
-  "title": "KEV backlog: SonicWall, Check Point, Cisco ISE/FMC/SD-WAN, F5, Citrix, Fortinet, N-able, ConnectWise",
-  "blurb": "Ten exploited edge/RMM advisories from the September 2026 KEV window added to /security/.",
-  "url": "security/",
-  "text": "Published ten KEV-backed vulnerability entries covering SonicWall SMA1000, Check Point Gateway/Management, Cisco ISE, FMC, Catalyst SD-WAN Manager, F5 BIG-IP APM, Citrix NetScaler auth bypass, Fortinet heap overflow, N-able N-central and ConnectWise ScreenConnect."
- },
- {
-  "date": "2026-11-03",
-  "time": "21:20",
-  "kind": "news",
-  "type": "News",
-  "title": "CA policy plans, Teams meeting CA, passkey GA slip, agent CA preview",
-  "blurb": "Four Entra/Teams/Copilot admin news items from Learn and Message Center mirrors.",
-  "url": "news/",
-  "text": "News: Conditional Access policy plans preview, Teams granular Conditional Access for meetings, passkey profiles GA moved to July 2027, and Conditional Access protections for agent user accounts."
- },
- {
-  "date": "2026-11-02",
-  "time": "21:30",
-  "kind": "guide",
-  "type": "Guide",
-  "title": "New pillar guide: internal purple team to hybrid identity",
-  "blurb": "Responder → NetExec → Hashcat → BloodHound CE → ROADtools → AADInternals, then detection and remediation.",
-  "url": "guides/purple-team-hybrid-identity.html",
-  "text": "New pillar guide (project guide 2): Internal purple team from quiet network listening to compromised hybrid identity. Nine phases and 25 steps chain Responder, NetExec, Hashcat, BloodHound CE, ROADtools and AADInternals under written authorization, then prove detection and close with remediation. Defensive use only."
- },
- {
-  "date": "2026-11-02",
-  "time": "21:20",
-  "kind": "site",
-  "type": "News",
-  "title": "News: Entra memberOf operator stops on 3 November",
-  "blurb": "Dynamic groups, AUs and access package auto-assignment using memberOf freeze from 3 Nov 2026; how to find and replace them.",
-  "url": "news/entra-memberof-operator-retirement.html",
-  "text": "News: the preview memberOf operator in Entra dynamic membership rules is retired worldwide on 3 November 2026 (MC1529463). Groups, dynamic administrative units and entitlement management auto-assignment policies that use it stop updating and keep their last membership. Graph PowerShell to find them, replacement options, and the Entra ID Governance extension to 31 March 2027 (MC1488839)."
- },
- {
-  "date": "2026-11-02",
-  "time": "21:20",
-  "kind": "site",
-  "type": "News",
-  "title": "News: Intune enforces Android strong integrity",
-  "blurb": "Android 13+ devices need hardware attestation and a patch from the last 12 months since 31 Oct 2026.",
-  "url": "news/intune-android-strong-integrity-enforced.html",
-  "text": "News: since 31 October 2026 Intune enforces Google's updated Play strong integrity verdict on Android 13 and later (MC1287362). Devices without a security patch from the last 12 months fall to device integrity and can be blocked by app protection or marked noncompliant. How to find them and warn users first."
- },
- {
-  "date": "2026-11-02",
-  "time": "21:20",
-  "kind": "site",
-  "type": "News",
-  "title": "News: Teams help desk impersonation to AD CS ESC1/ESC8",
-  "blurb": "Microsoft's 30 Oct write-up: Quick Assist, portable runtimes, ESC1 template abuse, PetitPotam relay to Web Enrollment.",
-  "url": "news/adcs-teams-helpdesk-esc1-esc8.html",
-  "text": "News: Microsoft Threat Intelligence described two intrusions that began with fake IT support on Teams and Quick Assist and ended in AD CS abuse (ESC1 certificates for privileged accounts plus DCSync; PetitPotam relayed to Web Enrollment for a DC certificate and PKINIT). What to fix, with links to our AD CS Tier 0 guide."
- },
- {
-  "date": "2026-11-02",
-  "time": "21:20",
-  "kind": "site",
-  "type": "News",
-  "title": "News: NTLMv1-derived SSO blocked by default",
-  "blurb": "October 2026 updates enforce BlockNtlmv1SSO where Credential Guard is off; PEAP-MSCHAPv2 Wi-Fi and VPN can fail.",
-  "url": "news/windows-ntlmv1-sso-enforce-mschapv2.html",
-  "text": "News: from the 13 October 2026 security update, Windows 11 24H2 and later and Windows Server 2025 default BlockNtlmv1SSO to Enforce when the value is not set (KB5066470). MS-CHAPv2-based Wi-Fi, wired and VPN single sign-on can stop working. Event IDs 4024/4025, the temporary registry exception and the EAP-TLS fix."
- },
- {
-  "date": "2026-11-02",
-  "time": "21:20",
-  "kind": "site",
-  "type": "News",
-  "title": "News: Windows and Edge distrust eMudhra CAs",
-  "blurb": "Eight exposed eMudhra intermediate keys blocked on 20 Oct; six G3 roots and a cross-sign removed 26–27 Oct.",
-  "url": "news/emudhra-ca-keys-distrusted.html",
-  "text": "News: Microsoft blocked eight compromised eMudhra intermediate CA keys in the Windows Disallowed CTL and the Edge/WebView2 CRLSet on 20 October 2026, then removed six eMudhra G3 roots and an AAA Certificate Services cross-sign from the Windows (26 Oct) and Edge (27 Oct) trust lists. What to check for dependent certificates and disconnected devices."
- },
- {
-  "date": "2026-11-02",
-  "time": "21:20",
-  "kind": "site",
-  "type": "News",
-  "title": "News: CallActivityEvents for Teams calls in Defender XDR",
-  "blurb": "New advanced hunting table for Teams call and meeting activity (Defender for Office 365 P2), rolling out in November.",
-  "url": "news/defender-teams-callactivityevents.html",
-  "text": "News: Defender XDR advanced hunting gets a CallActivityEvents table for Teams calls and meetings (MC1532241), joinable with MessageEvents on ThreadId, also via the streaming API and Sentinel. Rolling out early to mid November 2026 for Defender for Office 365 Plan 2."
- },
- {
-  "date": "2026-11-02",
-  "time": "21:20",
-  "kind": "site",
-  "type": "News",
-  "title": "Updated: SMS and voice MFA retirement",
-  "blurb": "Choose Your Own Telephony provider is GA (30 Oct); SSPR and internal guests in scope for 1 February 2027.",
-  "url": "news/sms-voice-mfa-retirement-2027.html",
-  "text": "Updated news: Choose Your Own Telephony provider (CYOT) for Entra SMS and voice became generally available on 30 October 2026 (MC1519855), bought through Microsoft Security Store. Added purchasing prerequisites, SSPR scope and the internal guest date (1 February 2027)."
- },
- {
-  "date": "2026-11-02",
-  "time": "21:05",
-  "kind": "security",
-  "type": "Security",
-  "title": "Windows Update Stack EoP in KEV (CVE-2026-81963)",
-  "blurb": "Link-following in the Windows Update Stack to SYSTEM; Microsoft Exploitation Detected; CISA KEV since 8 September 2026.",
-  "url": "security/windows-update-stack-eop-cve-2026-81963.html",
-  "text": "New security post for CVE-2026-81963 (Windows Update Stack elevation of privilege). Local low-privileged attacker to SYSTEM, CVSS 3.1 7.8 Important, exploited. Fixed in the 8 September 2026 Windows updates. Backfill from the KEV backlog (added to KEV 8 September 2026)."
- },
- {
-  "date": "2026-11-02",
-  "time": "21:05",
-  "kind": "security",
-  "type": "Security",
-  "title": "Windows ALPC EoP in KEV (CVE-2026-85880)",
-  "blurb": "ALPC heap overflow with AppContainer escape; Microsoft Exploitation Detected; CISA KEV since 8 September 2026.",
-  "url": "security/windows-alpc-eop-cve-2026-85880.html",
-  "text": "New security post for CVE-2026-85880 (Windows ALPC elevation of privilege). Low-privilege AppContainer escape path, CVSS 3.1 7.8 Important, exploited. Fixed in the 8 September 2026 updates across Windows 10/11 and Server 2012–2025. Backfill from the KEV backlog."
- },
- {
-  "date": "2026-10-31",
-  "time": "12:57",
-  "kind": "site",
-  "type": "Site",
-  "title": "New tool: Conditional Access policy generator",
-  "blurb": "Pick a scenario, get Graph JSON and New-MgIdentityConditionalAccessPolicy PowerShell. Report-only by default, break-glass excluded, runs in your browser.",
-  "url": "code/ca-policy-generator.html",
-  "text": "New interactive Conditional Access policy generator in the Code Library. Nine scenarios (MFA for all users, block legacy authentication, require a compliant device, phishing-resistant MFA for admin roles, sign-in risk MFA or block, high user risk with password change, block device code flow, protect security info registration). Options for pilot group, break-glass group exclusion, Directory Synchronization Accounts exclusion, authentication strength and policy state. Output is Microsoft Graph v1.0 JSON and Microsoft Graph PowerShell, checked against the conditionalAccessPolicy schema; the state defaults to report-only. Everything runs in your browser and nothing is sent anywhere."
- },
- {
-  "date": "2026-10-31",
-  "time": "12:57",
-  "kind": "site",
-  "type": "Site",
-  "title": "New tool: mail DNS checker",
-  "blurb": "Graded check of MX, SPF (lookup count), DMARC, Microsoft 365 DKIM, MTA-STS, TLS-RPT, CAA and DNSSEC, with links to Microsoft Learn. Nothing is stored.",
-  "url": "tools/mail-dns-checker.html",
-  "text": "New mail DNS checker under Tools. Type a domain and your browser queries public DNS-over-HTTPS resolvers (Cloudflare, with Google as fallback) directly: MX, SPF including the 10-lookup limit and -all/~all, DMARC policy, pct, rua and alignment, the Microsoft 365 DKIM selector1/selector2 CNAMEs, MTA-STS, TLS-RPT, CAA and DNSSEC. The result is an A–F grade with concrete fixes and links to Microsoft Learn and the RFCs. Tenant Recipes stores nothing and the domain is not put in the URL."
- },
- {
-  "date": "2026-10-31",
-  "time": "12:57",
-  "kind": "site",
-  "type": "Site",
-  "title": "Code Library: 12 new snippets",
-  "blurb": "KQL for legacy auth, report-only CA impact, break-glass sign-ins, device code flow and ZAP; PowerShell for licences, admin roles, consent, phone MFA, Intune, Autopilot and Copilot audit.",
-  "url": "code/index.html",
-  "text": "Twelve new Code Library snippets, now 22 in total. KQL: legacy authentication sign-ins, Conditional Access report-only impact, break-glass account sign-in alert, device code flow audit, and ZAP post-delivery actions. PowerShell (Microsoft Graph, Exchange Online): licence inventory to CSV, privileged role assignments, user consent setting, users with phone-based MFA, non-compliant Intune devices, Autopilot device inventory, and a Copilot audit log search. Each one is syntax-checked and links to its guide or recipe and the official reference."
- },
- {
-  "date": "2026-10-31",
-  "time": "12:47",
-  "kind": "site",
-  "type": "Guide",
-  "title": "New pillar guide: harden AD CS as Tier 0",
-  "blurb": "ESC1–ESC16 template and CA fixes, NTLM relay to Web Enrollment (ESC8), strong certificate mapping, detection, incident response and rollback.",
-  "url": "guides/adcs-hardening-tier0.html",
-  "text": "New pillar guide: Harden Active Directory Certificate Services as Tier 0. Nine phases and 32 steps: inventory and assessment with Locksmith, Certipy and Defender for Identity; fixing vulnerable templates (ESC1–ESC4, ESC9, ESC13, ESC15) and CA settings (ESC6, ESC7, ESC11, ESC16); stopping NTLM relay to Web Enrollment (ESC8, KB5005413); strong certificate mapping on domain controllers (KB5014754, ESC10, ESC14); Tier 0 operation and CA backup; Certification Services auditing and AD CS detections; troubleshooting, incident response and rollback. Prompted by Microsoft's 30 October 2026 write-up of ESC1 and ESC8 intrusions."
- },
- {
-  "date": "2026-10-31",
-  "time": "10:07",
-  "kind": "site",
-  "type": "Site",
-  "title": "Code Library: 10 copy-ready snippets",
-  "blurb": "PowerShell, Azure CLI, azcmagent, Bicep, KQL and Graph/JSON, filterable by language and topic, each linked to its guide.",
-  "url": "code/index.html",
-  "text": "New Code Library at /code/: 10 copy-ready snippets condensed from our guides and recipes (IntuneWinAppUtil packaging, Arc resource providers, Connect-AzConnectedMachine, azcmagent connect and local lockdown, Resource Graph inventory, Update Manager maintenance configuration in Azure CLI and Bicep, Conditional Access exclusion check, Autopilot Graph import). Filter by language and topic; every snippet links to the step it belongs to and to the official reference."
- },
- {
-  "date": "2026-10-31",
-  "time": "10:03",
-  "kind": "site",
-  "type": "Site",
-  "title": "Mobile and performance pass",
-  "blurb": "No horizontal scroll at 320–375 px, bigger tap targets, no hidden hero image on phones, WebP, minified CSS, deferred scripts.",
-  "url": "index.html",
-  "text": "Mobile and performance pass: guides no longer scroll sideways on 320–375 px screens (long identifiers wrap), larger touch targets in the What's new bar and carousel, phones no longer download the hidden 1200 px carousel image, desktop gets WebP versions, the stylesheet is minified at build time and the homepage library scripts are deferred."
- },
- {
-  "date": "2026-10-31",
-  "time": "09:57",
-  "kind": "site",
-  "type": "Site",
-  "title": "Dates, version history and sources on every page",
-  "blurb": "Published / last updated / last verified, a version history and a sources block near the top of every guide and recipe.",
-  "url": "methodology.html",
-  "text": "Every recipe and guide now shows Published, Last updated and Last verified dates at the top, a Sources block right after the intro (key sources with citation counts on guides), and a Version history assembled from the publish date, changelog notes and verification dates."
- },
- {
-  "date": "2026-10-31",
-  "time": "09:55",
-  "kind": "site",
-  "type": "Site",
-  "title": "Three content levels: Pillar, Technical, Recipe",
-  "blurb": "Every guide and recipe now carries a level badge; /guides/ groups and filters by level.",
-  "url": "guides/index.html",
-  "text": "Content is now explicitly organised in three levels: Pillar guides (end-to-end programmes for a whole area), Technical guides (deep dives into one component) and Recipes (one concrete fix). Each page shows its level badge, the guides index groups and filters by level, and the homepage task hubs show live counts per level."
- },
- {
-  "date": "2026-10-31",
-  "time": "08:53",
-  "kind": "site",
-  "type": "Guide",
-  "title": "Replace VPN with Microsoft Entra Private Access",
-  "blurb": "ZTNA playbook: connectors, Quick Access vs per-app, GSA client via Intune, CA requiring compliant devices, VPN retirement.",
-  "url": "guides/entra-private-access-vpn-replacement.html",
-  "text": "New pillar guide: Replace VPN with Microsoft Entra Private Access. Why traditional VPN fails Zero Trust, licensing and roles, private network connectors with HA, Quick Access versus per-app Enterprise applications and private DNS, Windows Global Secure Access client via Intune with lockdown, Conditional Access that requires compliant devices (report-only first, break-glass), Intune compliance, pilot and VPN retirement, monitoring with NetworkAccessTraffic export, troubleshooting and rollback. Printable checklist included."
- },
- {
-  "date": "2026-10-31",
-  "time": "08:53",
-  "kind": "site",
-  "type": "Guide",
-  "title": "Package Admin By Request for Intune",
-  "blurb": "IntuneWinAppUtil.exe to a production Win32 app: commands, detection, supersedence, IME logs, rollback.",
-  "url": "guides/admin-by-request-intune-win32-packaging.html",
-  "text": "New technical guide: Package Admin By Request for Intune. Companion to the Admin By Request pillar guide: get the Win32 Content Prep Tool, lay out source and output folders, package the tenant MSI with IntuneWinAppUtil.exe, set install and version-independent uninstall commands, file-version detection, requirements, pilot-to-wave assignments, verification, Intune supersedence vs vendor Auto-Update, IME logs and error codes, and rollback. Not sponsored. Printable checklist included."
- },
- {
-  "date": "2026-10-31",
-  "time": "08:48",
-  "kind": "site",
-  "type": "Site",
-  "title": "What's new bar under the header",
-  "blurb": "Every page shows the latest updates (date, Stockholm time, type, title and one-line description) right under the sticky header.",
-  "url": "changelog/index.html",
-  "text": "A compact What's new ticker sits under the sticky header on every page: date and Stockholm time, a type badge (Guide, Recipe, News, Security, Tool, Policy, Site), a linked title and a one-line description. Expand it for the latest eight updates, or open the full changelog. Fed from data/changelog.json — the same source as /changelog/."
- },
- {
-  "date": "2026-10-31",
-  "time": "08:38",
-  "kind": "site",
-  "type": "Guide",
-  "title": "Admin By Request from zero to production",
-  "blurb": "Just-in-time local admin: problem, setup, Intune deploy, pilot and rollback. Not sponsored.",
-  "url": "guides/admin-by-request-endpoint-privilege.html",
-  "text": "New pillar guide: Admin By Request from zero to production. Why standing local admin rights and fully locked-down users both fail, then an end-to-end setup: licensing and the free plan, portal SSO, the Entra ID Connector, Run As Admin vs Admin Session with approval and MFA, lockdown, pre-approvals and malware scanning, Intune deployment for Windows and macOS, removing existing local admins, pilot to rollout, audit and SIEM, troubleshooting and rollback. Not sponsored. Printable checklist included."
- },
- {
-  "date": "2026-10-31",
-  "time": "08:31",
-  "kind": "site",
-  "type": "Guide",
-  "title": "Azure Arc onboarding at enterprise scale",
-  "blurb": "11 phases: agent, Windows/Linux, identities, proxy, Policy, RBAC, PowerShell, Monitor, Defender.",
-  "url": "guides/azure-arc-onboarding-enterprise-scale.html",
-  "text": "New pillar guide: Azure Arc Onboarding at Enterprise Scale. 11 phases from pilot to offboarding: landing zone and resource providers, RBAC, service principals and managed identities, proxy, Private Link and Arc gateway, the Connected Machine agent and its local lockdown, Windows and Linux onboarding (Group Policy, Configuration Manager, Ansible), automated onboarding with PowerShell, Azure Policy, Azure Monitor Agent, Defender for Cloud, troubleshooting and verification. Hands over to the Azure Update Manager guide for patching. Printable checklist included."
- },
- {
-  "date": "2026-10-31",
-  "time": "08:31",
-  "kind": "site",
-  "type": "Site",
-  "title": "Contact & corrections",
-  "blurb": "Report an error or suggest an edit on every page, plus a contact page and security.txt.",
-  "url": "contact/index.html",
-  "text": "Contact and corrections: a new contact page (report an error, outdated information or a broken link, suggest a topic, responsible disclosure), Suggest an edit and Report an error links on every page, and a security.txt file."
- },
- {
-  "date": "2026-10-31",
-  "time": "07:20",
-  "kind": "site",
-  "type": "Guide",
-  "title": "Azure Update Manager at enterprise scale",
-  "blurb": "Patch framework for 10 to several hundred servers: rings, maintenance configs, dynamic scopes.",
-  "url": "guides/azure-update-manager-enterprise-patching.html",
-  "text": "New pillar guide: Azure Update Manager at enterprise scale. A patch framework for 10 to several hundred Windows Server and Linux servers across Azure VMs and Azure Arc: rings anchored to Patch Tuesday, maintenance configurations in Bicep and CLI, reboot policy, dynamic scopes and Azure Policy, pre/post events with snapshots and cancellation, compliance reporting, alerts, troubleshooting and rollback. Printable checklist included."
- },
- {
-  "date": "2026-10-31",
-  "time": "06:45",
-  "kind": "site",
-  "type": "Guide",
-  "title": "Cloud hardening under attack simulation",
-  "blurb": "ScubaGear → Monkey365 → Maester → Prowler → ROADtools → AADInternals, ending in remediation.",
-  "url": "guides/cloud-hardening-adversary-emulation.html",
-  "text": "New pillar guide: Cloud hardening under attack simulation. Chains ScubaGear, Monkey365, Maester, Prowler, ROADtools and AADInternals from baseline measurement through authorized directory enumeration to detection validation and remediation. Defensive use only; printable checklist included."
- },
- {
-  "date": "2026-10-31",
-  "time": "03:16",
-  "kind": "site",
-  "type": "Site",
-  "title": "The Tenant Recipes Weekly Brief",
-  "blurb": "New fixed newsletter format: 3 changes, 2 security updates, 1 tip, 1 thing to review.",
-  "url": "newsletter.html",
-  "text": "The newsletter is now The Tenant Recipes Weekly Brief with a fixed format: 3 Microsoft changes you should know, 2 security updates worth investigating, 1 practical configuration tip and 1 thing to review in your tenant. The newsletter page and the sample issue show the new format."
- },
- {
-  "date": "2026-10-31",
-  "time": "01:54",
-  "kind": "site",
-  "type": "Recipe",
-  "title": "Three problem-oriented recipes",
-  "blurb": "CA lockout mistakes, non-compliant Intune devices, PIM least privilege — with rollback.",
-  "url": "recipes/ca-production-lockout-mistakes.html",
-  "text": "Three problem-oriented recipes: Conditional Access mistakes that cause production lockouts, why Intune devices stay non-compliant (causes and diagnosis), and PIM least privilege without breaking daily operations. Each has troubleshooting and rollback."
- },
- {
-  "date": "2026-10-31",
-  "time": "01:54",
-  "kind": "site",
-  "type": "Site",
-  "title": "Internal linking by topic cluster",
-  "blurb": "Recipes link to related recipes in Identity, Devices and Copilot clusters; two homepage tracks.",
-  "url": "index.html",
-  "text": "Internal linking by topic cluster: recipes now link to curated related recipes and to more pages in their cluster (Identity & access, Devices & Windows, Copilot, agents & data protection), and news items list related recipes. The homepage leads with Microsoft Cloud & Modern Workplace; Cybersecurity & Infrastructure is now a separate, secondary track."
- },
- {
-  "date": "2026-10-31",
-  "time": "01:38",
-  "kind": "site",
-  "type": "Recipe",
-  "title": "Three Windows Autopilot recipes",
-  "blurb": "Device preparation, hash vs corporate identifiers, and enrollment troubleshooting.",
-  "url": "recipes/autopilot-device-preparation-entra-join.html",
-  "text": "Three new Windows Autopilot recipes: device preparation with Entra join and a provisioning-owned device group, hardware hash import vs corporate identifiers (CSV and Graph), and enrollment troubleshooting with event IDs, registry values and MDM diagnostics. The Manage task hub on the homepage now links to Autopilot."
- },
- {
-  "date": "2026-10-31",
-  "time": "01:13",
-  "kind": "site",
-  "type": "Site",
-  "title": "Explore by task + compact sticky header",
-  "blurb": "Secure, Manage, Deploy AI and Automate hubs on the homepage; 44px header that stays on screen.",
-  "url": "index.html",
-  "text": "Homepage: new \"Explore by task\" hubs (Secure, Manage, Deploy AI, Automate) that link straight into filtered recipes, guides, security entries, tools and policy templates. Compact header that stays on screen while you scroll, on desktop and mobile."
- },
- {
-  "date": "2026-10-31",
-  "time": "01:00",
-  "kind": "site",
-  "type": "Site",
-  "title": "Content markers, troubleshooting and rollback",
-  "blurb": "Official guidance, Practical insight and Tested configuration markers on recipes.",
-  "url": "methodology.html",
-  "text": "Content markers on recipes: Official guidance, Practical insight and Tested configuration (tested only with a named test environment and date; see the methodology page). Recipes can now carry Troubleshooting and Rollback sections, starting with the legacy authentication and phishing-resistant MFA recipes."
- },
- {
-  "date": "2026-10-30",
-  "time": "23:24",
-  "kind": "site",
-  "type": "Site",
-  "title": "Microsoft cloud status page",
-  "blurb": "Unofficial mirror of Microsoft's public status sources, checked every 15 minutes.",
-  "url": "status/index.html",
-  "text": "New Microsoft cloud status page: an unofficial mirror of Microsoft's public status sources for Azure, Microsoft 365 admin center, Power Platform admin center, consumer services and Azure DevOps, checked every 15 minutes."
- },
- {
-  "date": "2026-10-30",
-  "time": "23:19",
-  "kind": "site",
-  "type": "News",
-  "title": "News & retirements section",
-  "blurb": "Microsoft 365 changes and retirements with dates, impact, actions and an Atom feed.",
-  "url": "news/index.html",
-  "text": "New: a News section with Microsoft 365 changes and retirements (effective dates, why it matters, what to do, primary source) and exploited vulnerabilities, a category filter, a Latest news strip on the homepage and an Atom feed at /news/feed.xml."
- },
- {
-  "date": "2026-10-30",
-  "time": "23:15",
-  "kind": "site",
-  "type": "Policy",
-  "title": "IT checklists: onboarding, offboarding, role change",
-  "blurb": "Microsoft Learn links per step, with Word and Markdown downloads.",
-  "url": "policies/index.html",
-  "text": "New: IT checklists for onboarding, offboarding (planned and immediate) and role changes, with Microsoft Learn links for each Microsoft 365 step, Word and Markdown downloads, and a Policies / Checklists filter on the policy templates page."
- },
- {
-  "date": "2026-10-30",
-  "time": "22:51",
-  "kind": "site",
-  "type": "Policy",
-  "title": "Ten IT security policy templates",
-  "blurb": "Plain-language policies with ISO 27001, NIST CSF 2.0 and CIS v8 references.",
-  "url": "policies/index.html",
-  "text": "New: Policy templates. Ten plain-language IT security policies (acceptable use, password and MFA, BYOD, AI and Copilot, information classification, incident response, backup, access management, patching, third-party security) with placeholders, ISO 27001, NIST CSF 2.0 and CIS v8 references, and Word and Markdown downloads."
- },
- {
-  "date": "2026-10-30",
-  "time": "22:42",
-  "kind": "site",
-  "type": "Tool",
-  "title": "Security tools & testing",
-  "blurb": "Free and open-source tools with examples, pitfalls and a permission reminder.",
-  "url": "tools/index.html",
-  "text": "New: Security tools & testing. 17 free and open-source tools (domain and mail checks, external exposure, Microsoft 365 and Entra, Active Directory, vulnerability scanning, web apps, Windows hardening, breach exposure), each with a short example, pitfalls and a permission reminder, plus a method for scoping an internal pentest."
- },
- {
-  "date": "2026-10-30",
-  "time": "22:35",
-  "kind": "site",
-  "type": "Site",
-  "title": "One search for everything",
-  "blurb": "Instant results across recipes, guides, vulnerabilities and news — press / anywhere.",
-  "url": "search/index.html",
-  "text": "One search for everything: instant results for recipes, guides, vulnerabilities, hardening and news, with suggestions as you type, typo tolerance and common questions. Open it from the header on any page or press /."
- },
- {
-  "date": "2026-10-30",
-  "time": "22:25",
-  "kind": "site",
-  "type": "Security",
-  "title": "Security filters and Patch Tuesday countdown",
-  "blurb": "Category filter, scan-friendly vulnerability cards and four new exploited CVEs.",
-  "url": "security/index.html",
-  "text": "Security: category filter (Client, Server, Network, Web/Runtime, Virtualization), the vulnerability watch as easy-to-scan cards with a one-line 'What to do', a Patch Tuesday countdown, and four more exploited vulnerabilities (Cisco Secure Email Gateway, Fortinet, Atlassian Data Center, Citrix NetScaler)."
- },
- {
-  "date": "2026-10-30",
-  "time": "22:25",
-  "kind": "site",
-  "type": "Site",
-  "title": "Easier reading and finding",
-  "blurb": "Homepage search, shortcuts to News and What's new, more readable text.",
-  "url": "changelog/index.html",
-  "text": "Easier reading and finding: search at the top of the homepage with News & retirements and What's new shortcuts, more readable text and spacing across the site, and this What's new page."
- },
- {
-  "date": "2026-10-30",
-  "time": "21:05",
-  "kind": "site",
-  "type": "Security",
-  "title": "Eight new exploited vulnerabilities",
-  "blurb": "From the CISA KEV catalog: Ivanti, GitLab, PAN-OS, BeyondTrust and more.",
-  "url": "security/index.html",
-  "text": "Security: eight new exploited vulnerabilities from the CISA KEV catalog: the Ivanti Connect Secure zero-day chain (CVE-2026-104935, CVE-2026-111357, CVE-2026-118527), GitLab CI/CD regex RCE (CVE-2026-97229), the Brotli decoder flaw in Node.js and other products (CVE-2026-111497), PAN-OS management RCE (CVE-2026-0322), BeyondTrust Remote Support (CVE-2026-102764), VeloCloud Orchestrator (CVE-2026-114625), Collabora CODE for Nextcloud (CVE-2026-110447) and Adobe Commerce (CVE-2026-48356)."
- },
- {
-  "date": "2026-10-30",
-  "time": "18:44",
-  "kind": "site",
-  "type": "Site",
-  "title": "Easier to find, use and share",
-  "blurb": "Copy steps, checklist downloads, Done-when criteria and a Copilot license quick guide.",
-  "url": "guides/copilot-license-checks.html",
-  "text": "Easier to find, use and share: search and topic filters on the homepage, Start-here cards, Copy steps and Download checklist buttons plus Done-when criteria on every recipe, related recipes and back-to-guide links, a one-page quick guide (5 things to check before assigning Copilot licenses), PDF checklists for both pillar guides, a sample newsletter issue and link-preview images."
- },
- {
-  "date": "2026-10-30",
-  "time": "18:04",
-  "kind": "site",
-  "type": "Site",
-  "title": "Design refresh",
-  "blurb": "Consistent page intros, Verification cards, numbered steps and copy buttons.",
-  "url": "index.html",
-  "text": "Design refresh: consistent page intros, a Verification card at the top of every recipe, guide and security page, numbered steps, pitfall callouts, copy buttons on commands, and an About-the-editor note."
- },
- {
-  "date": "2026-10-30",
-  "time": "17:08",
-  "kind": "site",
-  "type": "Site",
-  "title": "Trust & transparency update",
-  "blurb": "About, Methodology, changelog, source panels and Report-an-error links.",
-  "url": "about.html",
-  "text": "Trust & transparency update: rewritten About page, new Methodology page, this changelog, per-page source and verification panels, \"Report an error\" links on every page, site-wide search, breadcrumbs, Atom feed and a new footer."
- },
- {
-  "date": "2026-10-30",
-  "time": "17:08",
-  "kind": "site",
-  "type": "Security",
-  "title": "New Cybersecurity section",
-  "blurb": "Vulnerability watch for exploited CVEs plus hardening recipes.",
-  "url": "security/index.html",
-  "text": "New Cybersecurity section: a vulnerability watch for exploited CVEs and hardening recipes for network, endpoints, servers, services and VMware."
- },
- {
-  "date": "2026-10-30",
-  "time": "17:08",
-  "kind": "site",
-  "type": "Guide",
-  "title": "Secure Microsoft Copilot rollout",
-  "blurb": "9-phase pillar guide with a printable checklist.",
-  "url": "guides/secure-copilot-rollout.html",
-  "text": "New pillar guide: how to roll out Microsoft Copilot without opening a hole in your tenant (9 phases, printable checklist)."
- },
- {
-  "date": "2026-10-30",
-  "time": "17:08",
-  "kind": "site",
-  "type": "Site",
-  "title": "Full fact-check pass",
-  "blurb": "Every recipe checked against Microsoft Learn; 18 recipes corrected.",
-  "url": "methodology.html",
-  "text": "Full fact-check pass of every recipe against current Microsoft Learn pages; 18 recipes corrected."
- },
- {
-  "date": "2026-10-30",
-  "time": "17:08",
-  "kind": "site",
-  "type": "Site",
-  "title": "New homepage and logo",
-  "blurb": "Plus the Identity & threat protection track.",
-  "url": "index.html",
-  "text": "New homepage, logo and Identity & threat protection track."
- },
- {
-  "date": "2026-10-30",
-  "time": "17:08",
-  "kind": "site",
-  "type": "Site",
-  "title": "Tenant Recipes launched",
-  "blurb": "Live on GitHub Pages.",
-  "url": "index.html",
-  "text": "Tenant Recipes launched on GitHub Pages."
- },
- {
-  "date": "2026-11-02",
-  "time": "20:59",
-  "kind": "site",
-  "type": "Guide",
-  "title": "New pillar guide: internal purple team, network to hybrid identity",
-  "blurb": "One authorized attack path end to end: Responder, NetExec, Hashcat, BloodHound CE, ROADtools and AADInternals, then detection and remediation of the on-prem-to-cloud seam.",
-  "url": "guides/purple-team-hybrid-identity.html",
-  "text": "New pillar guide: Internal purple team, from quiet network listening to compromised hybrid identity. Nine phases and 25 steps that follow a single authorized path from on-premises name-resolution poisoning to a fully enumerated Entra tenant: authorization, SOC notification and a contained lab; quiet LLMNR/NBT-NS/mDNS capture of NetNTLMv2 with Responder (analyze-first); credential validation and lateral reconnaissance with NetExec; offline cracking with Hashcat (mode 5600, lab or authorized material only); attack-path mapping with BloodHound CE including hybrid edges (SharpHound + AzureHound); cloud directory enumeration with ROADtools; deep, read-first hybrid checks with AADInternals (PHS/PTA/federation, Seamless SSO, sync); detection validation across Defender for Identity, Windows events (4624/4625/4776) and Entra sign-in/audit logs; and remediation (disable LLMNR/NBT-NS/mDNS, require SMB signing, NTLM auditing, Windows LAPS and tiering, Conditional Access and PIM fixes, retest and wipe). Defensive use only, on your own systems or with written authorization. The on-premises-rooted counterpart to the cloud-hardening-adversary-emulation guide."
- },
- {
-  "date": "2026-11-03",
-  "time": "16:55",
-  "kind": "site",
-  "type": "Guide",
-  "title": "Updated: Replace VPN with Entra Private Access",
-  "blurb": "Combined Global Secure Access offering and M365 E7 in licensing; custom profiles marked preview; Home Network Support; Universal CAE signals; session affinity; Health and Alerts.",
-  "url": "guides/entra-private-access-vpn-replacement.html",
-  "text": "Updated pillar guide: Replace VPN with Microsoft Entra Private Access. Licensing now covers the combined Microsoft Entra Global Secure Access offering (available from 2 November 2026) and Microsoft 365 E7 via Entra Suite, with Entra ID P1/P2 still the prerequisite. Custom Private Access traffic forwarding profiles are marked preview, Home Network Support (preview) is added for home-subnet overlaps, the Universal CAE device and risk signals are described, connector Session Affinity is named with its Graph-only configuration, and Global Secure Access alerts and Health and Alerts (preview) join the monitoring phase. Re-verified 3 November 2026."
- },
- {
-  "date": "2026-11-03",
-  "time": "16:56",
-  "kind": "site",
-  "type": "News",
-  "title": "News: Private Access and Internet Access in one Global Secure Access offering",
-  "blurb": "A buying change from 2 November 2026, not a product change; Entra Suite and Microsoft 365 E7 already include it.",
-  "url": "news/entra-global-secure-access-combined-offering.html",
-  "text": "New news item: from 2 November 2026 Microsoft Entra Private Access and Internet Access can be purchased together as one Microsoft Entra Global Secure Access offering. Both stay available separately; Entra Suite includes the offering and Microsoft 365 E7 includes Entra Suite."
- }
+  },
+  {
+    "date": "2026-11-04",
+    "time": "21:20",
+    "kind": "guide",
+    "type": "Guide",
+    "title": "New pillar guide: pivot and lateral movement in a segmented network",
+    "blurb": "Ligolo-ng \u2192 Responder \u2192 NetExec \u2192 Impacket \u2192 Evil-WinRM \u2192 Metasploit, then detection and remediation.",
+    "url": "guides/pivot-lateral-movement-segmented.html",
+    "text": "New pillar guide (project guide 5, final in the series): post-exploitation end to end across a segmented network. Nine phases chain Ligolo-ng, Responder, NetExec, Impacket, Evil-WinRM and Metasploit under written authorization, then prove detection and remediate. The five-guide project series is now complete. Defensive use only."
+  },
+  {
+    "date": "2026-11-04",
+    "time": "21:20",
+    "kind": "security",
+    "type": "Security",
+    "title": "KEV: WordPress Core upgrade-window RCE and a chained Linux kernel flaw",
+    "blurb": "Two new CISA KEV entries: WordPress Core CVE-2026-119977 (unauth RCE) and Linux kernel CVE-2026-46300.",
+    "url": "security/",
+    "text": "Added two exploited vulnerabilities to /security/: WordPress Core CVE-2026-119977, an unauthenticated upgrade-window RCE (CVSS 8.1, KEV 3 Nov 2026, fixed in 7.1.4), and Linux kernel CVE-2026-46300 (CVSS 7.8, KEV 28 Oct 2026) chained with the PHP CVE-2026-109618/109619 pair for root webshells."
+  },
+  {
+    "date": "2026-11-04",
+    "time": "21:20",
+    "kind": "tool",
+    "type": "Tool",
+    "title": "New tool page: Rubeus (Kerberos abuse)",
+    "blurb": "Kerberoasting, AS-REP roasting, overpass-the-hash, pass-the-ticket and S4U for authorized AD assessments.",
+    "url": "tools/rubeus.html",
+    "text": "New Tools entry: Rubeus, the GhostPack C# toolset for raw Kerberos interaction and abuse during authorized Active Directory assessments \u2013 Kerberoasting, AS-REP roasting, overpass-the-hash, pass-the-ticket and delegation abuse. Authorized testing only."
+  },
+  {
+    "date": "2026-11-04",
+    "time": "21:20",
+    "kind": "news",
+    "type": "News",
+    "title": "CISA BOD 26-04 moves patching to risk-based deadlines",
+    "blurb": "BOD 26-04 supersedes BOD 19-02 and BOD 22-01, replacing the fixed KEV clock with exposure-weighted remediation.",
+    "url": "news/cisa-bod-26-04-risk-based-patching.html",
+    "text": "News: CISA Binding Operational Directive 26-04, 'Prioritizing Security Updates Based on Risk', consolidates and supersedes BOD 19-02 and BOD 22-01, shifting federal remediation deadlines from a fixed KEV clock to each asset's internet exposure and risk."
+  },
+  {
+    "date": "2026-11-03",
+    "time": "21:20",
+    "kind": "guide",
+    "type": "Guide",
+    "title": "New pillar guide: map your external attack surface",
+    "blurb": "crt.sh \u2192 Amass \u2192 Shodan \u2192 Nmap \u2192 Nuclei \u2192 HIBP, then ffuf/Burp, detection and remediation.",
+    "url": "guides/external-attack-surface-osint.html",
+    "text": "New pillar guide (project guide 3): Map your entire external attack surface from OSINT to verified exposure. Nine phases chain crt.sh, OWASP Amass, Shodan, Nmap, Nuclei, Have I Been Pwned, ffuf and Burp Suite under written authorization, then prove detection and remediate. Defensive use only."
+  },
+  {
+    "date": "2026-11-03",
+    "time": "21:20",
+    "kind": "security",
+    "type": "Security",
+    "title": "KEV backlog: SonicWall, Check Point, Cisco ISE/FMC/SD-WAN, F5, Citrix, Fortinet, N-able, ConnectWise",
+    "blurb": "Ten exploited edge/RMM advisories from the September 2026 KEV window added to /security/.",
+    "url": "security/",
+    "text": "Published ten KEV-backed vulnerability entries covering SonicWall SMA1000, Check Point Gateway/Management, Cisco ISE, FMC, Catalyst SD-WAN Manager, F5 BIG-IP APM, Citrix NetScaler auth bypass, Fortinet heap overflow, N-able N-central and ConnectWise ScreenConnect."
+  },
+  {
+    "date": "2026-11-03",
+    "time": "21:20",
+    "kind": "news",
+    "type": "News",
+    "title": "CA policy plans, Teams meeting CA, passkey GA slip, agent CA preview",
+    "blurb": "Four Entra/Teams/Copilot admin news items from Learn and Message Center mirrors.",
+    "url": "news/",
+    "text": "News: Conditional Access policy plans preview, Teams granular Conditional Access for meetings, passkey profiles GA moved to July 2027, and Conditional Access protections for agent user accounts."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "21:30",
+    "kind": "guide",
+    "type": "Guide",
+    "title": "New pillar guide: internal purple team to hybrid identity",
+    "blurb": "Responder \u2192 NetExec \u2192 Hashcat \u2192 BloodHound CE \u2192 ROADtools \u2192 AADInternals, then detection and remediation.",
+    "url": "guides/purple-team-hybrid-identity.html",
+    "text": "New pillar guide (project guide 2): Internal purple team from quiet network listening to compromised hybrid identity. Nine phases and 25 steps chain Responder, NetExec, Hashcat, BloodHound CE, ROADtools and AADInternals under written authorization, then prove detection and close with remediation. Defensive use only."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "21:20",
+    "kind": "site",
+    "type": "News",
+    "title": "News: Entra memberOf operator stops on 3 November",
+    "blurb": "Dynamic groups, AUs and access package auto-assignment using memberOf freeze from 3 Nov 2026; how to find and replace them.",
+    "url": "news/entra-memberof-operator-retirement.html",
+    "text": "News: the preview memberOf operator in Entra dynamic membership rules is retired worldwide on 3 November 2026 (MC1529463). Groups, dynamic administrative units and entitlement management auto-assignment policies that use it stop updating and keep their last membership. Graph PowerShell to find them, replacement options, and the Entra ID Governance extension to 31 March 2027 (MC1488839)."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "21:20",
+    "kind": "site",
+    "type": "News",
+    "title": "News: Intune enforces Android strong integrity",
+    "blurb": "Android 13+ devices need hardware attestation and a patch from the last 12 months since 31 Oct 2026.",
+    "url": "news/intune-android-strong-integrity-enforced.html",
+    "text": "News: since 31 October 2026 Intune enforces Google's updated Play strong integrity verdict on Android 13 and later (MC1287362). Devices without a security patch from the last 12 months fall to device integrity and can be blocked by app protection or marked noncompliant. How to find them and warn users first."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "21:20",
+    "kind": "site",
+    "type": "News",
+    "title": "News: Teams help desk impersonation to AD CS ESC1/ESC8",
+    "blurb": "Microsoft's 30 Oct write-up: Quick Assist, portable runtimes, ESC1 template abuse, PetitPotam relay to Web Enrollment.",
+    "url": "news/adcs-teams-helpdesk-esc1-esc8.html",
+    "text": "News: Microsoft Threat Intelligence described two intrusions that began with fake IT support on Teams and Quick Assist and ended in AD CS abuse (ESC1 certificates for privileged accounts plus DCSync; PetitPotam relayed to Web Enrollment for a DC certificate and PKINIT). What to fix, with links to our AD CS Tier 0 guide."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "21:20",
+    "kind": "site",
+    "type": "News",
+    "title": "News: NTLMv1-derived SSO blocked by default",
+    "blurb": "October 2026 updates enforce BlockNtlmv1SSO where Credential Guard is off; PEAP-MSCHAPv2 Wi-Fi and VPN can fail.",
+    "url": "news/windows-ntlmv1-sso-enforce-mschapv2.html",
+    "text": "News: from the 13 October 2026 security update, Windows 11 24H2 and later and Windows Server 2025 default BlockNtlmv1SSO to Enforce when the value is not set (KB5066470). MS-CHAPv2-based Wi-Fi, wired and VPN single sign-on can stop working. Event IDs 4024/4025, the temporary registry exception and the EAP-TLS fix."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "21:20",
+    "kind": "site",
+    "type": "News",
+    "title": "News: Windows and Edge distrust eMudhra CAs",
+    "blurb": "Eight exposed eMudhra intermediate keys blocked on 20 Oct; six G3 roots and a cross-sign removed 26\u201327 Oct.",
+    "url": "news/emudhra-ca-keys-distrusted.html",
+    "text": "News: Microsoft blocked eight compromised eMudhra intermediate CA keys in the Windows Disallowed CTL and the Edge/WebView2 CRLSet on 20 October 2026, then removed six eMudhra G3 roots and an AAA Certificate Services cross-sign from the Windows (26 Oct) and Edge (27 Oct) trust lists. What to check for dependent certificates and disconnected devices."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "21:20",
+    "kind": "site",
+    "type": "News",
+    "title": "News: CallActivityEvents for Teams calls in Defender XDR",
+    "blurb": "New advanced hunting table for Teams call and meeting activity (Defender for Office 365 P2), rolling out in November.",
+    "url": "news/defender-teams-callactivityevents.html",
+    "text": "News: Defender XDR advanced hunting gets a CallActivityEvents table for Teams calls and meetings (MC1532241), joinable with MessageEvents on ThreadId, also via the streaming API and Sentinel. Rolling out early to mid November 2026 for Defender for Office 365 Plan 2."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "21:20",
+    "kind": "site",
+    "type": "News",
+    "title": "Updated: SMS and voice MFA retirement",
+    "blurb": "Choose Your Own Telephony provider is GA (30 Oct); SSPR and internal guests in scope for 1 February 2027.",
+    "url": "news/sms-voice-mfa-retirement-2027.html",
+    "text": "Updated news: Choose Your Own Telephony provider (CYOT) for Entra SMS and voice became generally available on 30 October 2026 (MC1519855), bought through Microsoft Security Store. Added purchasing prerequisites, SSPR scope and the internal guest date (1 February 2027)."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "21:05",
+    "kind": "security",
+    "type": "Security",
+    "title": "Windows Update Stack EoP in KEV (CVE-2026-81963)",
+    "blurb": "Link-following in the Windows Update Stack to SYSTEM; Microsoft Exploitation Detected; CISA KEV since 8 September 2026.",
+    "url": "security/windows-update-stack-eop-cve-2026-81963.html",
+    "text": "New security post for CVE-2026-81963 (Windows Update Stack elevation of privilege). Local low-privileged attacker to SYSTEM, CVSS 3.1 7.8 Important, exploited. Fixed in the 8 September 2026 Windows updates. Backfill from the KEV backlog (added to KEV 8 September 2026)."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "21:05",
+    "kind": "security",
+    "type": "Security",
+    "title": "Windows ALPC EoP in KEV (CVE-2026-85880)",
+    "blurb": "ALPC heap overflow with AppContainer escape; Microsoft Exploitation Detected; CISA KEV since 8 September 2026.",
+    "url": "security/windows-alpc-eop-cve-2026-85880.html",
+    "text": "New security post for CVE-2026-85880 (Windows ALPC elevation of privilege). Low-privilege AppContainer escape path, CVSS 3.1 7.8 Important, exploited. Fixed in the 8 September 2026 updates across Windows 10/11 and Server 2012\u20132025. Backfill from the KEV backlog."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "12:57",
+    "kind": "site",
+    "type": "Site",
+    "title": "New tool: Conditional Access policy generator",
+    "blurb": "Pick a scenario, get Graph JSON and New-MgIdentityConditionalAccessPolicy PowerShell. Report-only by default, break-glass excluded, runs in your browser.",
+    "url": "code/ca-policy-generator.html",
+    "text": "New interactive Conditional Access policy generator in the Code Library. Nine scenarios (MFA for all users, block legacy authentication, require a compliant device, phishing-resistant MFA for admin roles, sign-in risk MFA or block, high user risk with password change, block device code flow, protect security info registration). Options for pilot group, break-glass group exclusion, Directory Synchronization Accounts exclusion, authentication strength and policy state. Output is Microsoft Graph v1.0 JSON and Microsoft Graph PowerShell, checked against the conditionalAccessPolicy schema; the state defaults to report-only. Everything runs in your browser and nothing is sent anywhere."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "12:57",
+    "kind": "site",
+    "type": "Site",
+    "title": "New tool: mail DNS checker",
+    "blurb": "Graded check of MX, SPF (lookup count), DMARC, Microsoft 365 DKIM, MTA-STS, TLS-RPT, CAA and DNSSEC, with links to Microsoft Learn. Nothing is stored.",
+    "url": "tools/mail-dns-checker.html",
+    "text": "New mail DNS checker under Tools. Type a domain and your browser queries public DNS-over-HTTPS resolvers (Cloudflare, with Google as fallback) directly: MX, SPF including the 10-lookup limit and -all/~all, DMARC policy, pct, rua and alignment, the Microsoft 365 DKIM selector1/selector2 CNAMEs, MTA-STS, TLS-RPT, CAA and DNSSEC. The result is an A\u2013F grade with concrete fixes and links to Microsoft Learn and the RFCs. Tenant Recipes stores nothing and the domain is not put in the URL."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "12:57",
+    "kind": "site",
+    "type": "Site",
+    "title": "Code Library: 12 new snippets",
+    "blurb": "KQL for legacy auth, report-only CA impact, break-glass sign-ins, device code flow and ZAP; PowerShell for licences, admin roles, consent, phone MFA, Intune, Autopilot and Copilot audit.",
+    "url": "code/index.html",
+    "text": "Twelve new Code Library snippets, now 22 in total. KQL: legacy authentication sign-ins, Conditional Access report-only impact, break-glass account sign-in alert, device code flow audit, and ZAP post-delivery actions. PowerShell (Microsoft Graph, Exchange Online): licence inventory to CSV, privileged role assignments, user consent setting, users with phone-based MFA, non-compliant Intune devices, Autopilot device inventory, and a Copilot audit log search. Each one is syntax-checked and links to its guide or recipe and the official reference."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "12:47",
+    "kind": "site",
+    "type": "Guide",
+    "title": "New pillar guide: harden AD CS as Tier 0",
+    "blurb": "ESC1\u2013ESC16 template and CA fixes, NTLM relay to Web Enrollment (ESC8), strong certificate mapping, detection, incident response and rollback.",
+    "url": "guides/adcs-hardening-tier0.html",
+    "text": "New pillar guide: Harden Active Directory Certificate Services as Tier 0. Nine phases and 32 steps: inventory and assessment with Locksmith, Certipy and Defender for Identity; fixing vulnerable templates (ESC1\u2013ESC4, ESC9, ESC13, ESC15) and CA settings (ESC6, ESC7, ESC11, ESC16); stopping NTLM relay to Web Enrollment (ESC8, KB5005413); strong certificate mapping on domain controllers (KB5014754, ESC10, ESC14); Tier 0 operation and CA backup; Certification Services auditing and AD CS detections; troubleshooting, incident response and rollback. Prompted by Microsoft's 30 October 2026 write-up of ESC1 and ESC8 intrusions."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "10:07",
+    "kind": "site",
+    "type": "Site",
+    "title": "Code Library: 10 copy-ready snippets",
+    "blurb": "PowerShell, Azure CLI, azcmagent, Bicep, KQL and Graph/JSON, filterable by language and topic, each linked to its guide.",
+    "url": "code/index.html",
+    "text": "New Code Library at /code/: 10 copy-ready snippets condensed from our guides and recipes (IntuneWinAppUtil packaging, Arc resource providers, Connect-AzConnectedMachine, azcmagent connect and local lockdown, Resource Graph inventory, Update Manager maintenance configuration in Azure CLI and Bicep, Conditional Access exclusion check, Autopilot Graph import). Filter by language and topic; every snippet links to the step it belongs to and to the official reference."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "10:03",
+    "kind": "site",
+    "type": "Site",
+    "title": "Mobile and performance pass",
+    "blurb": "No horizontal scroll at 320\u2013375 px, bigger tap targets, no hidden hero image on phones, WebP, minified CSS, deferred scripts.",
+    "url": "index.html",
+    "text": "Mobile and performance pass: guides no longer scroll sideways on 320\u2013375 px screens (long identifiers wrap), larger touch targets in the What's new bar and carousel, phones no longer download the hidden 1200 px carousel image, desktop gets WebP versions, the stylesheet is minified at build time and the homepage library scripts are deferred."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "09:57",
+    "kind": "site",
+    "type": "Site",
+    "title": "Dates, version history and sources on every page",
+    "blurb": "Published / last updated / last verified, a version history and a sources block near the top of every guide and recipe.",
+    "url": "methodology.html",
+    "text": "Every recipe and guide now shows Published, Last updated and Last verified dates at the top, a Sources block right after the intro (key sources with citation counts on guides), and a Version history assembled from the publish date, changelog notes and verification dates."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "09:55",
+    "kind": "site",
+    "type": "Site",
+    "title": "Three content levels: Pillar, Technical, Recipe",
+    "blurb": "Every guide and recipe now carries a level badge; /guides/ groups and filters by level.",
+    "url": "guides/index.html",
+    "text": "Content is now explicitly organised in three levels: Pillar guides (end-to-end programmes for a whole area), Technical guides (deep dives into one component) and Recipes (one concrete fix). Each page shows its level badge, the guides index groups and filters by level, and the homepage task hubs show live counts per level."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "08:53",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Replace VPN with Microsoft Entra Private Access",
+    "blurb": "ZTNA playbook: connectors, Quick Access vs per-app, GSA client via Intune, CA requiring compliant devices, VPN retirement.",
+    "url": "guides/entra-private-access-vpn-replacement.html",
+    "text": "New pillar guide: Replace VPN with Microsoft Entra Private Access. Why traditional VPN fails Zero Trust, licensing and roles, private network connectors with HA, Quick Access versus per-app Enterprise applications and private DNS, Windows Global Secure Access client via Intune with lockdown, Conditional Access that requires compliant devices (report-only first, break-glass), Intune compliance, pilot and VPN retirement, monitoring with NetworkAccessTraffic export, troubleshooting and rollback. Printable checklist included."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "08:53",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Package Admin By Request for Intune",
+    "blurb": "IntuneWinAppUtil.exe to a production Win32 app: commands, detection, supersedence, IME logs, rollback.",
+    "url": "guides/admin-by-request-intune-win32-packaging.html",
+    "text": "New technical guide: Package Admin By Request for Intune. Companion to the Admin By Request pillar guide: get the Win32 Content Prep Tool, lay out source and output folders, package the tenant MSI with IntuneWinAppUtil.exe, set install and version-independent uninstall commands, file-version detection, requirements, pilot-to-wave assignments, verification, Intune supersedence vs vendor Auto-Update, IME logs and error codes, and rollback. Not sponsored. Printable checklist included."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "08:48",
+    "kind": "site",
+    "type": "Site",
+    "title": "What's new bar under the header",
+    "blurb": "Every page shows the latest updates (date, Stockholm time, type, title and one-line description) right under the sticky header.",
+    "url": "changelog/index.html",
+    "text": "A compact What's new ticker sits under the sticky header on every page: date and Stockholm time, a type badge (Guide, Recipe, News, Security, Tool, Policy, Site), a linked title and a one-line description. Expand it for the latest eight updates, or open the full changelog. Fed from data/changelog.json \u2014 the same source as /changelog/."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "08:38",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Admin By Request from zero to production",
+    "blurb": "Just-in-time local admin: problem, setup, Intune deploy, pilot and rollback. Not sponsored.",
+    "url": "guides/admin-by-request-endpoint-privilege.html",
+    "text": "New pillar guide: Admin By Request from zero to production. Why standing local admin rights and fully locked-down users both fail, then an end-to-end setup: licensing and the free plan, portal SSO, the Entra ID Connector, Run As Admin vs Admin Session with approval and MFA, lockdown, pre-approvals and malware scanning, Intune deployment for Windows and macOS, removing existing local admins, pilot to rollout, audit and SIEM, troubleshooting and rollback. Not sponsored. Printable checklist included."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "08:31",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Azure Arc onboarding at enterprise scale",
+    "blurb": "11 phases: agent, Windows/Linux, identities, proxy, Policy, RBAC, PowerShell, Monitor, Defender.",
+    "url": "guides/azure-arc-onboarding-enterprise-scale.html",
+    "text": "New pillar guide: Azure Arc Onboarding at Enterprise Scale. 11 phases from pilot to offboarding: landing zone and resource providers, RBAC, service principals and managed identities, proxy, Private Link and Arc gateway, the Connected Machine agent and its local lockdown, Windows and Linux onboarding (Group Policy, Configuration Manager, Ansible), automated onboarding with PowerShell, Azure Policy, Azure Monitor Agent, Defender for Cloud, troubleshooting and verification. Hands over to the Azure Update Manager guide for patching. Printable checklist included."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "08:31",
+    "kind": "site",
+    "type": "Site",
+    "title": "Contact & corrections",
+    "blurb": "Report an error or suggest an edit on every page, plus a contact page and security.txt.",
+    "url": "contact/index.html",
+    "text": "Contact and corrections: a new contact page (report an error, outdated information or a broken link, suggest a topic, responsible disclosure), Suggest an edit and Report an error links on every page, and a security.txt file."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "07:20",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Azure Update Manager at enterprise scale",
+    "blurb": "Patch framework for 10 to several hundred servers: rings, maintenance configs, dynamic scopes.",
+    "url": "guides/azure-update-manager-enterprise-patching.html",
+    "text": "New pillar guide: Azure Update Manager at enterprise scale. A patch framework for 10 to several hundred Windows Server and Linux servers across Azure VMs and Azure Arc: rings anchored to Patch Tuesday, maintenance configurations in Bicep and CLI, reboot policy, dynamic scopes and Azure Policy, pre/post events with snapshots and cancellation, compliance reporting, alerts, troubleshooting and rollback. Printable checklist included."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "06:45",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Cloud hardening under attack simulation",
+    "blurb": "ScubaGear \u2192 Monkey365 \u2192 Maester \u2192 Prowler \u2192 ROADtools \u2192 AADInternals, ending in remediation.",
+    "url": "guides/cloud-hardening-adversary-emulation.html",
+    "text": "New pillar guide: Cloud hardening under attack simulation. Chains ScubaGear, Monkey365, Maester, Prowler, ROADtools and AADInternals from baseline measurement through authorized directory enumeration to detection validation and remediation. Defensive use only; printable checklist included."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "03:16",
+    "kind": "site",
+    "type": "Site",
+    "title": "The Tenant Recipes Weekly Brief",
+    "blurb": "New fixed newsletter format: 3 changes, 2 security updates, 1 tip, 1 thing to review.",
+    "url": "newsletter.html",
+    "text": "The newsletter is now The Tenant Recipes Weekly Brief with a fixed format: 3 Microsoft changes you should know, 2 security updates worth investigating, 1 practical configuration tip and 1 thing to review in your tenant. The newsletter page and the sample issue show the new format."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "01:54",
+    "kind": "site",
+    "type": "Recipe",
+    "title": "Three problem-oriented recipes",
+    "blurb": "CA lockout mistakes, non-compliant Intune devices, PIM least privilege \u2014 with rollback.",
+    "url": "recipes/ca-production-lockout-mistakes.html",
+    "text": "Three problem-oriented recipes: Conditional Access mistakes that cause production lockouts, why Intune devices stay non-compliant (causes and diagnosis), and PIM least privilege without breaking daily operations. Each has troubleshooting and rollback."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "01:54",
+    "kind": "site",
+    "type": "Site",
+    "title": "Internal linking by topic cluster",
+    "blurb": "Recipes link to related recipes in Identity, Devices and Copilot clusters; two homepage tracks.",
+    "url": "index.html",
+    "text": "Internal linking by topic cluster: recipes now link to curated related recipes and to more pages in their cluster (Identity & access, Devices & Windows, Copilot, agents & data protection), and news items list related recipes. The homepage leads with Microsoft Cloud & Modern Workplace; Cybersecurity & Infrastructure is now a separate, secondary track."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "01:38",
+    "kind": "site",
+    "type": "Recipe",
+    "title": "Three Windows Autopilot recipes",
+    "blurb": "Device preparation, hash vs corporate identifiers, and enrollment troubleshooting.",
+    "url": "recipes/autopilot-device-preparation-entra-join.html",
+    "text": "Three new Windows Autopilot recipes: device preparation with Entra join and a provisioning-owned device group, hardware hash import vs corporate identifiers (CSV and Graph), and enrollment troubleshooting with event IDs, registry values and MDM diagnostics. The Manage task hub on the homepage now links to Autopilot."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "01:13",
+    "kind": "site",
+    "type": "Site",
+    "title": "Explore by task + compact sticky header",
+    "blurb": "Secure, Manage, Deploy AI and Automate hubs on the homepage; 44px header that stays on screen.",
+    "url": "index.html",
+    "text": "Homepage: new \"Explore by task\" hubs (Secure, Manage, Deploy AI, Automate) that link straight into filtered recipes, guides, security entries, tools and policy templates. Compact header that stays on screen while you scroll, on desktop and mobile."
+  },
+  {
+    "date": "2026-10-31",
+    "time": "01:00",
+    "kind": "site",
+    "type": "Site",
+    "title": "Content markers, troubleshooting and rollback",
+    "blurb": "Official guidance, Practical insight and Tested configuration markers on recipes.",
+    "url": "methodology.html",
+    "text": "Content markers on recipes: Official guidance, Practical insight and Tested configuration (tested only with a named test environment and date; see the methodology page). Recipes can now carry Troubleshooting and Rollback sections, starting with the legacy authentication and phishing-resistant MFA recipes."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "23:24",
+    "kind": "site",
+    "type": "Site",
+    "title": "Microsoft cloud status page",
+    "blurb": "Unofficial mirror of Microsoft's public status sources, checked every 15 minutes.",
+    "url": "status/index.html",
+    "text": "New Microsoft cloud status page: an unofficial mirror of Microsoft's public status sources for Azure, Microsoft 365 admin center, Power Platform admin center, consumer services and Azure DevOps, checked every 15 minutes."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "23:19",
+    "kind": "site",
+    "type": "News",
+    "title": "News & retirements section",
+    "blurb": "Microsoft 365 changes and retirements with dates, impact, actions and an Atom feed.",
+    "url": "news/index.html",
+    "text": "New: a News section with Microsoft 365 changes and retirements (effective dates, why it matters, what to do, primary source) and exploited vulnerabilities, a category filter, a Latest news strip on the homepage and an Atom feed at /news/feed.xml."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "23:15",
+    "kind": "site",
+    "type": "Policy",
+    "title": "IT checklists: onboarding, offboarding, role change",
+    "blurb": "Microsoft Learn links per step, with Word and Markdown downloads.",
+    "url": "policies/index.html",
+    "text": "New: IT checklists for onboarding, offboarding (planned and immediate) and role changes, with Microsoft Learn links for each Microsoft 365 step, Word and Markdown downloads, and a Policies / Checklists filter on the policy templates page."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "22:51",
+    "kind": "site",
+    "type": "Policy",
+    "title": "Ten IT security policy templates",
+    "blurb": "Plain-language policies with ISO 27001, NIST CSF 2.0 and CIS v8 references.",
+    "url": "policies/index.html",
+    "text": "New: Policy templates. Ten plain-language IT security policies (acceptable use, password and MFA, BYOD, AI and Copilot, information classification, incident response, backup, access management, patching, third-party security) with placeholders, ISO 27001, NIST CSF 2.0 and CIS v8 references, and Word and Markdown downloads."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "22:42",
+    "kind": "site",
+    "type": "Tool",
+    "title": "Security tools & testing",
+    "blurb": "Free and open-source tools with examples, pitfalls and a permission reminder.",
+    "url": "tools/index.html",
+    "text": "New: Security tools & testing. 17 free and open-source tools (domain and mail checks, external exposure, Microsoft 365 and Entra, Active Directory, vulnerability scanning, web apps, Windows hardening, breach exposure), each with a short example, pitfalls and a permission reminder, plus a method for scoping an internal pentest."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "22:35",
+    "kind": "site",
+    "type": "Site",
+    "title": "One search for everything",
+    "blurb": "Instant results across recipes, guides, vulnerabilities and news \u2014 press / anywhere.",
+    "url": "search/index.html",
+    "text": "One search for everything: instant results for recipes, guides, vulnerabilities, hardening and news, with suggestions as you type, typo tolerance and common questions. Open it from the header on any page or press /."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "22:25",
+    "kind": "site",
+    "type": "Security",
+    "title": "Security filters and Patch Tuesday countdown",
+    "blurb": "Category filter, scan-friendly vulnerability cards and four new exploited CVEs.",
+    "url": "security/index.html",
+    "text": "Security: category filter (Client, Server, Network, Web/Runtime, Virtualization), the vulnerability watch as easy-to-scan cards with a one-line 'What to do', a Patch Tuesday countdown, and four more exploited vulnerabilities (Cisco Secure Email Gateway, Fortinet, Atlassian Data Center, Citrix NetScaler)."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "22:25",
+    "kind": "site",
+    "type": "Site",
+    "title": "Easier reading and finding",
+    "blurb": "Homepage search, shortcuts to News and What's new, more readable text.",
+    "url": "changelog/index.html",
+    "text": "Easier reading and finding: search at the top of the homepage with News & retirements and What's new shortcuts, more readable text and spacing across the site, and this What's new page."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "21:05",
+    "kind": "site",
+    "type": "Security",
+    "title": "Eight new exploited vulnerabilities",
+    "blurb": "From the CISA KEV catalog: Ivanti, GitLab, PAN-OS, BeyondTrust and more.",
+    "url": "security/index.html",
+    "text": "Security: eight new exploited vulnerabilities from the CISA KEV catalog: the Ivanti Connect Secure zero-day chain (CVE-2026-104935, CVE-2026-111357, CVE-2026-118527), GitLab CI/CD regex RCE (CVE-2026-97229), the Brotli decoder flaw in Node.js and other products (CVE-2026-111497), PAN-OS management RCE (CVE-2026-0322), BeyondTrust Remote Support (CVE-2026-102764), VeloCloud Orchestrator (CVE-2026-114625), Collabora CODE for Nextcloud (CVE-2026-110447) and Adobe Commerce (CVE-2026-48356)."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "18:44",
+    "kind": "site",
+    "type": "Site",
+    "title": "Easier to find, use and share",
+    "blurb": "Copy steps, checklist downloads, Done-when criteria and a Copilot license quick guide.",
+    "url": "guides/copilot-license-checks.html",
+    "text": "Easier to find, use and share: search and topic filters on the homepage, Start-here cards, Copy steps and Download checklist buttons plus Done-when criteria on every recipe, related recipes and back-to-guide links, a one-page quick guide (5 things to check before assigning Copilot licenses), PDF checklists for both pillar guides, a sample newsletter issue and link-preview images."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "18:04",
+    "kind": "site",
+    "type": "Site",
+    "title": "Design refresh",
+    "blurb": "Consistent page intros, Verification cards, numbered steps and copy buttons.",
+    "url": "index.html",
+    "text": "Design refresh: consistent page intros, a Verification card at the top of every recipe, guide and security page, numbered steps, pitfall callouts, copy buttons on commands, and an About-the-editor note."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "17:08",
+    "kind": "site",
+    "type": "Site",
+    "title": "Trust & transparency update",
+    "blurb": "About, Methodology, changelog, source panels and Report-an-error links.",
+    "url": "about.html",
+    "text": "Trust & transparency update: rewritten About page, new Methodology page, this changelog, per-page source and verification panels, \"Report an error\" links on every page, site-wide search, breadcrumbs, Atom feed and a new footer."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "17:08",
+    "kind": "site",
+    "type": "Security",
+    "title": "New Cybersecurity section",
+    "blurb": "Vulnerability watch for exploited CVEs plus hardening recipes.",
+    "url": "security/index.html",
+    "text": "New Cybersecurity section: a vulnerability watch for exploited CVEs and hardening recipes for network, endpoints, servers, services and VMware."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "17:08",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Secure Microsoft Copilot rollout",
+    "blurb": "9-phase pillar guide with a printable checklist.",
+    "url": "guides/secure-copilot-rollout.html",
+    "text": "New pillar guide: how to roll out Microsoft Copilot without opening a hole in your tenant (9 phases, printable checklist)."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "17:08",
+    "kind": "site",
+    "type": "Site",
+    "title": "Full fact-check pass",
+    "blurb": "Every recipe checked against Microsoft Learn; 18 recipes corrected.",
+    "url": "methodology.html",
+    "text": "Full fact-check pass of every recipe against current Microsoft Learn pages; 18 recipes corrected."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "17:08",
+    "kind": "site",
+    "type": "Site",
+    "title": "New homepage and logo",
+    "blurb": "Plus the Identity & threat protection track.",
+    "url": "index.html",
+    "text": "New homepage, logo and Identity & threat protection track."
+  },
+  {
+    "date": "2026-10-30",
+    "time": "17:08",
+    "kind": "site",
+    "type": "Site",
+    "title": "Tenant Recipes launched",
+    "blurb": "Live on GitHub Pages.",
+    "url": "index.html",
+    "text": "Tenant Recipes launched on GitHub Pages."
+  },
+  {
+    "date": "2026-11-02",
+    "time": "20:59",
+    "kind": "site",
+    "type": "Guide",
+    "title": "New pillar guide: internal purple team, network to hybrid identity",
+    "blurb": "One authorized attack path end to end: Responder, NetExec, Hashcat, BloodHound CE, ROADtools and AADInternals, then detection and remediation of the on-prem-to-cloud seam.",
+    "url": "guides/purple-team-hybrid-identity.html",
+    "text": "New pillar guide: Internal purple team, from quiet network listening to compromised hybrid identity. Nine phases and 25 steps that follow a single authorized path from on-premises name-resolution poisoning to a fully enumerated Entra tenant: authorization, SOC notification and a contained lab; quiet LLMNR/NBT-NS/mDNS capture of NetNTLMv2 with Responder (analyze-first); credential validation and lateral reconnaissance with NetExec; offline cracking with Hashcat (mode 5600, lab or authorized material only); attack-path mapping with BloodHound CE including hybrid edges (SharpHound + AzureHound); cloud directory enumeration with ROADtools; deep, read-first hybrid checks with AADInternals (PHS/PTA/federation, Seamless SSO, sync); detection validation across Defender for Identity, Windows events (4624/4625/4776) and Entra sign-in/audit logs; and remediation (disable LLMNR/NBT-NS/mDNS, require SMB signing, NTLM auditing, Windows LAPS and tiering, Conditional Access and PIM fixes, retest and wipe). Defensive use only, on your own systems or with written authorization. The on-premises-rooted counterpart to the cloud-hardening-adversary-emulation guide."
+  },
+  {
+    "date": "2026-11-03",
+    "time": "16:55",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Updated: Replace VPN with Entra Private Access",
+    "blurb": "Combined Global Secure Access offering and M365 E7 in licensing; custom profiles marked preview; Home Network Support; Universal CAE signals; session affinity; Health and Alerts.",
+    "url": "guides/entra-private-access-vpn-replacement.html",
+    "text": "Updated pillar guide: Replace VPN with Microsoft Entra Private Access. Licensing now covers the combined Microsoft Entra Global Secure Access offering (available from 2 November 2026) and Microsoft 365 E7 via Entra Suite, with Entra ID P1/P2 still the prerequisite. Custom Private Access traffic forwarding profiles are marked preview, Home Network Support (preview) is added for home-subnet overlaps, the Universal CAE device and risk signals are described, connector Session Affinity is named with its Graph-only configuration, and Global Secure Access alerts and Health and Alerts (preview) join the monitoring phase. Re-verified 3 November 2026."
+  },
+  {
+    "date": "2026-11-03",
+    "time": "16:56",
+    "kind": "site",
+    "type": "News",
+    "title": "News: Private Access and Internet Access in one Global Secure Access offering",
+    "blurb": "A buying change from 2 November 2026, not a product change; Entra Suite and Microsoft 365 E7 already include it.",
+    "url": "news/entra-global-secure-access-combined-offering.html",
+    "text": "New news item: from 2 November 2026 Microsoft Entra Private Access and Internet Access can be purchased together as one Microsoft Entra Global Secure Access offering. Both stay available separately; Entra Suite includes the offering and Microsoft 365 E7 includes Entra Suite."
+  }
 ]

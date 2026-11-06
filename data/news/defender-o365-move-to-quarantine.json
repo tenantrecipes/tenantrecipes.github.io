@@ -1,0 +1,35 @@
+{
+  "id": "defender-o365-move-to-quarantine",
+  "status": "published",
+  "title": "Defender for Office 365 adds Move to Quarantine remediation (MC1523084)",
+  "date": "2026-11-06",
+  "category": "Defender",
+  "summary": "Microsoft Defender for Office 365 Plan 2 is adding a Move to Quarantine remediation action so authorised admins can move suspicious messages from supported mailbox locations into Defender quarantine for investigation, release or permanent delete. Message Center MC1523084 (updated 5 November 2026) schedules worldwide GA from late November 2026 through mid-January 2027. The Search and Purge role is required to approve remediation; admins pick the quarantine policy that governs end-user interaction (default: admin-only).",
+  "why": "Soft-delete and hard-delete are blunt. Move to Quarantine keeps the message under Defender's quarantine workflow with an Admin triggered reason, which is safer for messages that bypassed initial detection but still need human review. SOC playbooks and role assignments need a small update before analysts start using it in anger.",
+  "todo": [
+    "Confirm Defender for Office 365 Plan 2 (or an eligible suite that includes it) and that responders hold the Search and Purge role.",
+    "Review quarantine policies: who can preview, release or permanently delete admin-triggered quarantined mail.",
+    "Update email threat-response playbooks and analyst training to prefer Move to Quarantine over immediate hard-delete when investigation is still open.",
+    "Watch Unified Action Center for remediation status and partial failures when a selection spans unsupported locations."
+  ],
+  "effective": "2026-11-30",
+  "effective_note": "GA worldwide begins late November 2026 and is expected to complete by mid-January 2027 (MC1523084 timeline updated 5 November 2026). No enablement action required. Checked 2026-11-06.",
+  "primary": {
+    "title": "MC1523084 — Move email messages to quarantine with a new remediation action",
+    "url": "https://mc.merill.net/message/MC1523084"
+  },
+  "related": [],
+  "sources": [
+    {
+      "title": "MC1523084 (Microsoft 365 Message Center archive via Merill)",
+      "url": "https://mc.merill.net/message/MC1523084",
+      "checked": "2026-11-06"
+    },
+    {
+      "title": "Microsoft Learn: Remediate malicious email that was delivered in Office 365",
+      "url": "https://learn.microsoft.com/en-us/defender-office-365/remediate-malicious-email-delivered-office-365",
+      "checked": "2026-11-06"
+    }
+  ],
+  "last_verified": "2026-11-06"
+}

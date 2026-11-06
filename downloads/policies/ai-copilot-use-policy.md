@@ -1,10 +1,10 @@
-# AI and Microsoft Copilot Use Policy
+# AI, Microsoft Copilot and enterprise LLM use policy
 
 > **Template, not legal advice. Adapt it with your legal and HR teams before you adopt it.**
 
 | | |
 |---|---|
-| Purpose | Sets the rules for using generative AI tools, including Microsoft 365 Copilot, so that people can benefit from them without leaking information or relying on wrong answers. |
+| Purpose | Sets the rules for using generative AI tools — Microsoft Copilot and approved third-party enterprise LLMs — so people can benefit without leaking information or relying on wrong answers. |
 | Audience | All employees and contractors who use generative AI for work, plus IT, security, legal and data owners who approve AI tools. |
 | Review | Every 6 months, because AI tools, features and regulations change quickly. |
 | Owner | {{OWNER}} |
@@ -22,15 +22,17 @@ It covers chat assistants, AI features in business apps, coding assistants and a
 
 ## 3. Approved tools
 
-- Only the AI tools listed in {{APPROVED_AI_TOOLS}} may be used with company information.
+- Only the AI tools listed in {{APPROVED_AI_TOOLS}} may be used with company information. Consumer ChatGPT, consumer Microsoft Copilot (personal Microsoft account) and personal Grok accounts are not approved for company data.
 - Microsoft 365 Copilot works with the files, mail and chats you already have access to. Before it is enabled, data owners review and fix oversharing (broad sharing links, 'Everyone' permissions and public Teams or sites).
-- New AI tools, plug-ins and agents are approved by IT and security before use.
+- Third-party enterprise LLMs (for example ChatGPT Enterprise, Claude Enterprise or an approved Grok enterprise offering) require SSO through the company identity provider, a recorded retention and training stance, and security approval before seats are assigned.
+- New AI tools, plug-ins, agents, API keys and IDE assistants are approved by IT and security before use. Personal API keys against company data are treated as shadow AI.
 
 ## 4. What you may not put into AI tools
 
-- Information classified as Confidential or Restricted, unless the tool is approved for that level.
-- Personal data about customers or colleagues, passwords, keys, source code secrets or security details, in any tool that is not approved.
-- Anything you are not allowed to share with the provider of the tool.
+- Information classified as Confidential or Restricted, unless the specific approved tool is listed for that level in {{APPROVED_AI_TOOLS}}.
+- Personal data about customers or colleagues, passwords, keys, source code secrets or security details, in any tool that is not approved for that class.
+- Anything you are not allowed to share with the provider of the tool under the company DPA and data-residency rules.
+- Company information pasted into a consumer or personal AI account, even if you believe the text is anonymised.
 
 ## 5. Using AI output
 
@@ -41,9 +43,9 @@ It covers chat assistants, AI features in business apps, coding assistants and a
 
 ## 6. Security and monitoring
 
-- Sensitivity labels and data loss prevention apply to AI features in the same way as to other apps.
+- Sensitivity labels and data loss prevention apply to AI features in the same way as to other apps, including Endpoint DLP controls for unsanctioned generative AI sites where deployed.
 - AI interactions in company tools may be logged and retained for security, compliance and legal holds.
-- Report suspicious AI behaviour, prompt injection or a possible data leak to {{SECURITY_CONTACT}}.
+- Report suspicious AI behaviour, prompt injection, unsanctioned tools or a possible data leak to {{SECURITY_CONTACT}}.
 
 ## 7. Training
 
