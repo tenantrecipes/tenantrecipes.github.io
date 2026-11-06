@@ -897,7 +897,9 @@ body.mdc-has-report #mdc-report{display:block}
 }
 
 /* ---- IT link hub (/links/, /links/ai/) ---- */
-.lh-toc{margin:0 0 18px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+/* Reset legacy global nav flex/fixed-height rules: TOCs must size to their contents. */
+nav.lh-toc{display:block;height:auto;min-height:0;position:static;flex:none;margin:0 0 18px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.lh-toc a{margin-left:0}
 .lh-toc .ps-h{margin:0 0 8px;display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .lh-toc ol{margin:0;padding-left:1.2em;columns:2;gap:24px}
 .lh-toc li{break-inside:avoid;margin:.2em 0}
