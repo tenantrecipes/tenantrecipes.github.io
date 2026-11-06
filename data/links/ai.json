@@ -1,0 +1,431 @@
+{
+  "id": "ai",
+  "title": "AI link department",
+  "short": "Enterprise assistants, model APIs, open/local models, RAG, agents and AI governance",
+  "description": "Dedicated AI bookmarks for enterprise IT: multi-vendor assistants, model/API docs, open and local inference, RAG/vector tools, agent frameworks, evaluation/observability, and governance (AI Act, NIST, OWASP) — with clear docs vs product vs community labels.",
+  "checked": "2026-11-06",
+  "intro": "AI changes quickly. These links help you find vendor docs and public standards. A listing is not permission to send company data to a model or SaaS. Prefer enterprise contracts, SSO/Conditional Access, retention controls and an approved-tools inventory before any production use.",
+  "guardrails": "Do not paste secrets, personal data or regulated content into consumer AI tools. Treat prompts and uploads as potentially retained by the provider unless your contract and admin settings say otherwise. Cross-check decisions against your organisation’s AI policy.",
+  "parent": {
+    "label": "IT link hub",
+    "url": "links/index.html"
+  },
+  "related_internal": [
+    {
+      "label": "Enterprise AI governance guide",
+      "url": "guides/enterprise-ai-governance.html",
+      "note": "Tenant Recipes pillar for Copilot and third-party enterprise LLMs."
+    },
+    {
+      "label": "Secure Copilot rollout guide",
+      "url": "guides/secure-copilot-rollout.html",
+      "note": "Microsoft 365 Copilot rollout programme on this site."
+    },
+    {
+      "label": "AI approved-tools inventory method",
+      "url": "tools/enterprise-ai-approved-inventory.html",
+      "note": "Approved / Conditional / Denied inventory method."
+    },
+    {
+      "label": "AI / Copilot use policy template",
+      "url": "policies/ai-copilot-use-policy.html",
+      "note": "Editable policy covering Copilot and other enterprise LLMs."
+    }
+  ],
+  "sections": [
+    {
+      "id": "assistants",
+      "title": "Enterprise assistants (multi-vendor)",
+      "blurb": "Product and admin documentation for enterprise assistant offerings. Consumer chat URLs are omitted on purpose.",
+      "links": [
+        {
+          "label": "Microsoft 365 Copilot documentation",
+          "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/",
+          "note": "Admin and architecture docs for Microsoft 365 Copilot.",
+          "kind": "docs"
+        },
+        {
+          "label": "Microsoft Copilot Studio documentation",
+          "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/",
+          "note": "Build/extend copilots in Copilot Studio.",
+          "kind": "docs"
+        },
+        {
+          "label": "Microsoft Security Copilot documentation",
+          "url": "https://learn.microsoft.com/en-us/copilot/security/",
+          "note": "Security operations assistant docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "ChatGPT Enterprise (OpenAI)",
+          "url": "https://openai.com/chatgpt/enterprise/",
+          "note": "Product page for ChatGPT Enterprise (contracted workspace).",
+          "kind": "product",
+          "status": "auth"
+        },
+        {
+          "label": "OpenAI Business / Enterprise docs hub",
+          "url": "https://help.openai.com/en/collections/5953048-chatgpt-enterprise",
+          "note": "Help center collection for ChatGPT Enterprise admins.",
+          "kind": "docs",
+          "status": "auth"
+        },
+        {
+          "label": "Anthropic Claude for Enterprise / Team",
+          "url": "https://www.anthropic.com/claude",
+          "note": "Claude product page; confirm current enterprise SKUs with Anthropic.",
+          "kind": "product"
+        },
+        {
+          "label": "Anthropic commercial docs / console",
+          "url": "https://docs.anthropic.com/",
+          "note": "API and product documentation for Claude.",
+          "kind": "docs"
+        },
+        {
+          "label": "Google Workspace",
+          "url": "https://workspace.google.com/",
+          "note": "Google Workspace home — confirm Gemini admin docs in your Workspace Admin Help.",
+          "kind": "docs"
+        },
+        {
+          "label": "Google Cloud Vertex AI / Gemini docs",
+          "url": "https://cloud.google.com/vertex-ai/generative-ai/docs",
+          "note": "Enterprise Gemini on Vertex AI.",
+          "kind": "docs"
+        },
+        {
+          "label": "Amazon Bedrock documentation",
+          "url": "https://docs.aws.amazon.com/bedrock/",
+          "note": "Managed multi-model API on AWS.",
+          "kind": "docs"
+        },
+        {
+          "label": "IBM watsonx",
+          "url": "https://www.ibm.com/products/watsonx",
+          "note": "IBM watsonx product page (docs host challenged the checker).",
+          "kind": "docs"
+        },
+        {
+          "label": "xAI Grok / API docs",
+          "url": "https://docs.x.ai/",
+          "note": "xAI API documentation (confirm enterprise terms separately).",
+          "kind": "docs"
+        }
+      ]
+    },
+    {
+      "id": "model-api",
+      "title": "Model & API documentation",
+      "blurb": "Developer-facing API references. Useful for integration design; still subject to data-handling rules.",
+      "links": [
+        {
+          "label": "OpenAI API reference",
+          "url": "https://platform.openai.com/docs/api-reference",
+          "note": "HTTP API for OpenAI models.",
+          "kind": "docs"
+        },
+        {
+          "label": "Anthropic API docs",
+          "url": "https://docs.anthropic.com/en/api/getting-started",
+          "note": "Messages API and related Claude APIs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Google Gemini API docs",
+          "url": "https://ai.google.dev/gemini-api/docs",
+          "note": "Gemini developer API docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Azure OpenAI Service documentation",
+          "url": "https://learn.microsoft.com/en-us/azure/ai-services/openai/",
+          "note": "OpenAI models via Azure with enterprise controls.",
+          "kind": "docs"
+        },
+        {
+          "label": "Mistral AI docs",
+          "url": "https://docs.mistral.ai/",
+          "note": "Mistral API and model docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Cohere documentation",
+          "url": "https://docs.cohere.com/",
+          "note": "Cohere NLP/LLM API docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Hugging Face Hub docs",
+          "url": "https://huggingface.co/docs/hub/index",
+          "note": "Model/dataset hub documentation.",
+          "kind": "docs"
+        }
+      ]
+    },
+    {
+      "id": "open-local",
+      "title": "Open models & local inference",
+      "blurb": "Run-your-own stacks. Local does not automatically mean compliant — you still own patching, access control and data residency.",
+      "links": [
+        {
+          "label": "Ollama",
+          "url": "https://ollama.com/",
+          "note": "Local model runner product/site.",
+          "kind": "product"
+        },
+        {
+          "label": "Ollama GitHub",
+          "url": "https://github.com/ollama/ollama",
+          "note": "Source and issues for Ollama.",
+          "kind": "community"
+        },
+        {
+          "label": "llama.cpp",
+          "url": "https://github.com/ggml-org/llama.cpp",
+          "note": "Efficient local LLM inference (GGUF).",
+          "kind": "community"
+        },
+        {
+          "label": "vLLM documentation",
+          "url": "https://docs.vllm.ai/",
+          "note": "High-throughput LLM serving engine.",
+          "kind": "docs"
+        },
+        {
+          "label": "LM Studio",
+          "url": "https://lmstudio.ai/",
+          "note": "Desktop app for running local models.",
+          "kind": "product"
+        },
+        {
+          "label": "Hugging Face Transformers docs",
+          "url": "https://huggingface.co/docs/transformers",
+          "note": "Model library documentation.",
+          "kind": "docs"
+        },
+        {
+          "label": "PyTorch documentation",
+          "url": "https://pytorch.org/docs/stable/index.html",
+          "note": "ML framework commonly used for local training/inference.",
+          "kind": "docs"
+        },
+        {
+          "label": "Meta Llama (model cards / licence)",
+          "url": "https://www.llama.com/",
+          "note": "Llama model family product/licence portal.",
+          "kind": "product"
+        }
+      ]
+    },
+    {
+      "id": "rag-retrieval",
+      "title": "RAG, retrieval & vector tooling",
+      "blurb": "Building blocks for retrieval-augmented generation. Validate licences and hosting before production.",
+      "links": [
+        {
+          "label": "LangChain documentation",
+          "url": "https://python.langchain.com/docs/introduction/",
+          "note": "Popular orchestration framework docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "LlamaIndex documentation",
+          "url": "https://docs.llamaindex.ai/",
+          "note": "Data framework for LLM apps / RAG.",
+          "kind": "docs"
+        },
+        {
+          "label": "Haystack documentation",
+          "url": "https://docs.haystack.deepset.ai/",
+          "note": "Open-source NLP/RAG framework.",
+          "kind": "docs"
+        },
+        {
+          "label": "OpenAI embeddings guide",
+          "url": "https://platform.openai.com/docs/guides/embeddings",
+          "note": "Embeddings concepts for retrieval.",
+          "kind": "docs"
+        },
+        {
+          "label": "Pinecone documentation",
+          "url": "https://docs.pinecone.io/",
+          "note": "Managed vector database docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Weaviate documentation",
+          "url": "https://weaviate.io/developers/weaviate",
+          "note": "Open-source vector database docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Qdrant documentation",
+          "url": "https://qdrant.tech/documentation/",
+          "note": "Vector search engine docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Chroma documentation",
+          "url": "https://docs.trychroma.com/",
+          "note": "Embedded/open vector DB docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "pgvector",
+          "url": "https://github.com/pgvector/pgvector",
+          "note": "PostgreSQL extension for vector similarity.",
+          "kind": "community"
+        }
+      ]
+    },
+    {
+      "id": "agents-eval",
+      "title": "Agents, frameworks, evaluation & observability",
+      "blurb": "Agent tooling and eval/observability projects. Agent autonomy increases data-exfiltration and change-control risk — govern carefully.",
+      "links": [
+        {
+          "label": "OpenAI Agents / Assistants docs",
+          "url": "https://platform.openai.com/docs/guides/agents",
+          "note": "OpenAI guidance for agent-style apps (verify current product name).",
+          "kind": "docs"
+        },
+        {
+          "label": "Semantic Kernel documentation",
+          "url": "https://learn.microsoft.com/en-us/semantic-kernel/",
+          "note": "Microsoft open-source orchestration SDK.",
+          "kind": "docs"
+        },
+        {
+          "label": "AutoGen (Microsoft)",
+          "url": "https://microsoft.github.io/autogen/",
+          "note": "Multi-agent framework documentation.",
+          "kind": "docs"
+        },
+        {
+          "label": "CrewAI documentation",
+          "url": "https://docs.crewai.com/",
+          "note": "Multi-agent orchestration framework.",
+          "kind": "docs"
+        },
+        {
+          "label": "LangGraph documentation",
+          "url": "https://langchain-ai.github.io/langgraph/",
+          "note": "Graph-based agent workflows in the LangChain ecosystem.",
+          "kind": "docs"
+        },
+        {
+          "label": "OpenAI Evals",
+          "url": "https://github.com/openai/evals",
+          "note": "Evaluation framework for model behaviours.",
+          "kind": "community"
+        },
+        {
+          "label": "Ragas documentation",
+          "url": "https://docs.ragas.io/",
+          "note": "RAG evaluation metrics/toolkit.",
+          "kind": "docs"
+        },
+        {
+          "label": "LangSmith documentation",
+          "url": "https://docs.smith.langchain.com/",
+          "note": "Tracing/eval product in LangChain ecosystem.",
+          "kind": "docs"
+        },
+        {
+          "label": "Phoenix (Arize) docs",
+          "url": "https://docs.arize.com/phoenix",
+          "note": "Open-source LLM observability.",
+          "kind": "docs"
+        },
+        {
+          "label": "OpenTelemetry GenAI semantic conventions",
+          "url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/",
+          "note": "Telemetry conventions for GenAI systems.",
+          "kind": "standard"
+        }
+      ]
+    },
+    {
+      "id": "ai-governance",
+      "title": "Enterprise security, privacy & AI governance",
+      "blurb": "Standards and frameworks for governing AI systems. Pair with your internal policy and the Tenant Recipes governance pillar.",
+      "links": [
+        {
+          "label": "NIST AI Risk Management Framework",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "note": "Voluntary AI risk management framework.",
+          "kind": "standard"
+        },
+        {
+          "label": "NIST Generative AI Profile (AI 600-1)",
+          "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+          "note": "Generative AI profile for the AI RMF.",
+          "kind": "standard"
+        },
+        {
+          "label": "EU Artificial Intelligence Act portal",
+          "url": "https://artificialintelligenceact.eu/",
+          "note": "Navigational portal for the EU AI Act.",
+          "kind": "standard"
+        },
+        {
+          "label": "EUR-Lex AI Act regulation page",
+          "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+          "note": "Official EU AI Act publication entry.",
+          "kind": "standard"
+        },
+        {
+          "label": "OWASP Top 10 for LLM Applications",
+          "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+          "note": "LLM application security risks list.",
+          "kind": "standard"
+        },
+        {
+          "label": "OWASP GenAI Security Project",
+          "url": "https://genai.owasp.org/",
+          "note": "OWASP GenAI security project hub.",
+          "kind": "standard"
+        },
+        {
+          "label": "ISO/IEC 42001 overview",
+          "url": "https://www.iso.org/standard/81230.html",
+          "note": "AI management system standard (purchase for full text).",
+          "kind": "standard",
+          "status": "auth"
+        },
+        {
+          "label": "ENISA publications",
+          "url": "https://www.enisa.europa.eu/publications",
+          "note": "ENISA publications index (AI topic path 404’d at check time).",
+          "kind": "docs"
+        },
+        {
+          "label": "CISA AI guidance landing",
+          "url": "https://www.cisa.gov/ai",
+          "note": "US CISA artificial intelligence resources.",
+          "kind": "docs"
+        },
+        {
+          "label": "Azure AI Studio GenAI evaluation concepts",
+          "url": "https://learn.microsoft.com/en-us/azure/ai-studio/concepts/evaluation-approach-gen-ai",
+          "note": "Azure AI evaluation / responsible GenAI concepts on Learn (marketing page timed out).",
+          "kind": "docs"
+        },
+        {
+          "label": "Google Secure AI Framework (SAIF)",
+          "url": "https://safety.google/cybersecurity-advancements/saif/",
+          "note": "Google’s secure AI framework overview.",
+          "kind": "docs"
+        },
+        {
+          "label": "Tenant Recipes: Enterprise AI governance",
+          "url": "guides/enterprise-ai-governance.html",
+          "note": "Site pillar: inventory, shadow AI, SSO/CA, retention, DLP, AI Act/NIS2 hooks.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    }
+  ]
+}

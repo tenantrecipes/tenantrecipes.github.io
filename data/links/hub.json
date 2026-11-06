@@ -1,0 +1,1563 @@
+{
+  "id": "hub",
+  "title": "IT link hub",
+  "short": "Curated portals, docs and tools across networking, cloud, security, ops and AI",
+  "description": "A vendor-neutral directory of useful IT links: networking, email, Linux, Windows, multi-cloud, DevOps, identity, security, ITSM, compliance and a dedicated AI link department — plus a condensed Microsoft aka.ms set.",
+  "checked": "2026-11-06",
+  "intro": "Bookmarks for day-to-day IT work across disciplines, not only Microsoft admin portals. Prefer official docs and stable product pages. Listings are not an endorsement to put company data into any SaaS or model — see the AI department for governance links.",
+  "guardrails": "External sites have their own terms and privacy policies. Prefer read-only docs first; never paste secrets or regulated data into public tools.",
+  "sections": [
+    {
+      "id": "ai-department",
+      "title": "AI link department",
+      "blurb": "Enterprise assistants, model APIs, open/local models, RAG, agents and AI governance — on its own page so it can stay deep without crowding this hub.",
+      "featured": true,
+      "links": [
+        {
+          "label": "Open the AI link department",
+          "url": "links/ai/index.html",
+          "note": "Dedicated page: assistants, APIs, open models, RAG, agents, evaluation and governance (AI Act, NIST, OWASP).",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "Enterprise AI governance guide (Tenant Recipes)",
+          "url": "guides/enterprise-ai-governance.html",
+          "note": "Pillar playbook for Copilot and third-party enterprise LLMs: inventory, SSO/CA, retention, DLP, AI Act/NIS2 hooks.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "AI approved-tools inventory method",
+          "url": "tools/enterprise-ai-approved-inventory.html",
+          "note": "Read-first method to maintain Approved / Conditional / Denied AI tools.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "NIST AI Risk Management Framework",
+          "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+          "note": "US voluntary AI risk framework used in many enterprise programmes.",
+          "kind": "standard"
+        },
+        {
+          "label": "EU Artificial Intelligence Act (official text portal)",
+          "url": "https://artificialintelligenceact.eu/",
+          "note": "Independent explainer portal pointing at the official EU AI Act materials.",
+          "kind": "standard"
+        }
+      ]
+    },
+    {
+      "id": "networking",
+      "title": "Networking, DNS & TLS",
+      "blurb": "DNS, certificates, routing and packet-level references used in hybrid and internet-facing estates.",
+      "links": [
+        {
+          "label": "IANA Root Zone Database",
+          "url": "https://www.iana.org/domains/root/db",
+          "note": "Authoritative TLD delegation data.",
+          "kind": "docs"
+        },
+        {
+          "label": "ICANN Lookup",
+          "url": "https://lookup.icann.org/",
+          "note": "Public RDAP/WHOIS-style domain lookup.",
+          "kind": "tool"
+        },
+        {
+          "label": "DNS Flag Day",
+          "url": "https://www.dnsflagday.net/",
+          "note": "Industry coordination notes for DNS resolver/server interoperability.",
+          "kind": "community"
+        },
+        {
+          "label": "RFC 1035 — Domain names (DNS)",
+          "url": "https://www.rfc-editor.org/rfc/rfc1035",
+          "note": "Classic DNS protocol specification.",
+          "kind": "standard"
+        },
+        {
+          "label": "RFC 8499 — DNS Terminology",
+          "url": "https://www.rfc-editor.org/rfc/rfc8499",
+          "note": "Shared vocabulary for DNS discussions.",
+          "kind": "standard"
+        },
+        {
+          "label": "Let's Encrypt Documentation",
+          "url": "https://letsencrypt.org/docs/",
+          "note": "ACMEv2 public CA docs for automated TLS certificates.",
+          "kind": "docs"
+        },
+        {
+          "label": "Mozilla SSL Configuration Generator",
+          "url": "https://ssl-config.mozilla.org/",
+          "note": "Opinionated TLS cipher/protocol configs for common servers.",
+          "kind": "tool"
+        },
+        {
+          "label": "SSL Labs Server Test",
+          "url": "https://www.ssllabs.com/ssltest/",
+          "note": "Public TLS configuration tester for internet-facing HTTPS.",
+          "kind": "tool"
+        },
+        {
+          "label": "Security Headers (scanner)",
+          "url": "https://securityheaders.com/",
+          "note": "Checks common HTTP security response headers.",
+          "kind": "tool"
+        },
+        {
+          "label": "Cloudflare Learning Center — DNS",
+          "url": "https://www.cloudflare.com/learning/dns/what-is-dns/",
+          "note": "Plain-language DNS primers (vendor learning site).",
+          "kind": "docs",
+          "status": "blocked"
+        },
+        {
+          "label": "RIPE NCC Docs",
+          "url": "https://www.ripe.net/manage-ips-and-asns/",
+          "note": "European RIR resources for IP/ASN management.",
+          "kind": "docs"
+        },
+        {
+          "label": "ARIN",
+          "url": "https://www.arin.net/",
+          "note": "North American RIR for IP/ASN registration.",
+          "kind": "docs"
+        },
+        {
+          "label": "BGP tools (bgp.he.net)",
+          "url": "https://bgp.he.net/",
+          "note": "Public BGP/ASN looking-glass style explorer.",
+          "kind": "tool"
+        },
+        {
+          "label": "Wireshark Documentation",
+          "url": "https://www.wireshark.org/docs/",
+          "note": "Packet capture/analysis handbook.",
+          "kind": "docs"
+        },
+        {
+          "label": "tcpdump man page",
+          "url": "https://www.tcpdump.org/manpages/tcpdump.1.html",
+          "note": "Classic CLI packet filter reference.",
+          "kind": "docs"
+        },
+        {
+          "label": "MX Toolbox",
+          "url": "https://mxtoolbox.com/",
+          "note": "Public DNS/mail blacklists and related lookups.",
+          "kind": "tool"
+        },
+        {
+          "label": "crt.sh",
+          "url": "https://crt.sh/",
+          "note": "Certificate Transparency log search.",
+          "kind": "tool",
+          "status": "timeout"
+        }
+      ]
+    },
+    {
+      "id": "email-comms",
+      "title": "Email & communications",
+      "blurb": "SMTP authentication, spam controls and voice/meeting-related standards and vendor docs.",
+      "links": [
+        {
+          "label": "RFC 7208 — SPF",
+          "url": "https://www.rfc-editor.org/rfc/rfc7208",
+          "note": "Sender Policy Framework for SMTP authorization.",
+          "kind": "standard"
+        },
+        {
+          "label": "RFC 6376 — DKIM",
+          "url": "https://www.rfc-editor.org/rfc/rfc6376",
+          "note": "DomainKeys Identified Mail signatures.",
+          "kind": "standard"
+        },
+        {
+          "label": "RFC 7489 — DMARC",
+          "url": "https://www.rfc-editor.org/rfc/rfc7489",
+          "note": "DMARC policy and reporting.",
+          "kind": "standard"
+        },
+        {
+          "label": "MTA-STS (RFC 8461)",
+          "url": "https://www.rfc-editor.org/rfc/rfc8461",
+          "note": "SMTP MTA Strict Transport Security.",
+          "kind": "standard"
+        },
+        {
+          "label": "DMARC.org overview",
+          "url": "https://dmarc.org/",
+          "note": "Community overview of DMARC adoption.",
+          "kind": "community"
+        },
+        {
+          "label": "Google Workspace Admin documentation",
+          "url": "https://developers.google.com/workspace/admin",
+          "note": "Google Workspace Admin SDK / admin developer docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Exchange Online protection overview (Microsoft Learn)",
+          "url": "https://learn.microsoft.com/en-us/defender-office-365/eop-about",
+          "note": "Microsoft mail filtering concepts (Learn).",
+          "kind": "docs"
+        },
+        {
+          "label": "Postfix documentation",
+          "url": "https://www.postfix.org/documentation.html",
+          "note": "Postfix MTA documentation.",
+          "kind": "docs"
+        },
+        {
+          "label": "Dovecot documentation",
+          "url": "https://doc.dovecot.org/",
+          "note": "IMAP/POP3 server documentation.",
+          "kind": "docs"
+        },
+        {
+          "label": "RFC 3261 — SIP",
+          "url": "https://datatracker.ietf.org/doc/html/rfc3261",
+          "note": "SIP: Session Initiation Protocol (RFC 3261) — SIP Forum site blocked from checker.",
+          "kind": "community"
+        },
+        {
+          "label": "WebRTC official site",
+          "url": "https://webrtc.org/",
+          "note": "Browser real-time media standards and samples.",
+          "kind": "docs"
+        }
+      ]
+    },
+    {
+      "id": "collaboration",
+      "title": "Collaboration & productivity platforms",
+      "blurb": "Common enterprise collaboration suites and open alternatives — docs and admin entry points.",
+      "links": [
+        {
+          "label": "Microsoft 365 admin center",
+          "url": "https://admin.cloud.microsoft/",
+          "note": "Microsoft 365 admin center (cloud hostname).",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Google Workspace Admin console",
+          "url": "https://admin.google.com/",
+          "note": "Google Workspace Admin console (sign-in; HEAD may return 204).",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Slack Help Center (admins)",
+          "url": "https://slack.com/help/categories/360000049043",
+          "note": "Workspace admin and security topics.",
+          "kind": "docs"
+        },
+        {
+          "label": "Zoom Admin documentation",
+          "url": "https://support.zoom.com/hc/en-us/categories/200275837",
+          "note": "Zoom account/admin product docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Atlassian support / admin help",
+          "url": "https://support.atlassian.com/",
+          "note": "Atlassian support home — org-admin paths change frequently.",
+          "kind": "docs"
+        },
+        {
+          "label": "Notion Help & admin",
+          "url": "https://www.notion.com/help",
+          "note": "Workspace admin and security help.",
+          "kind": "docs"
+        },
+        {
+          "label": "Mattermost docs",
+          "url": "https://docs.mattermost.com/",
+          "note": "Self-hosted/team messaging platform docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Nextcloud documentation",
+          "url": "https://docs.nextcloud.com/",
+          "note": "Self-hosted files/collab suite docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Rocket.Chat docs",
+          "url": "https://docs.rocket.chat/",
+          "note": "Open-source team chat documentation.",
+          "kind": "docs"
+        }
+      ]
+    },
+    {
+      "id": "windows-ad",
+      "title": "Windows Server & Active Directory",
+      "blurb": "Directory services, Group Policy, certificates and Windows server references.",
+      "links": [
+        {
+          "label": "Windows Server documentation (Learn)",
+          "url": "https://learn.microsoft.com/en-us/windows-server/",
+          "note": "Official Windows Server docs hub.",
+          "kind": "docs"
+        },
+        {
+          "label": "Active Directory Domain Services overview",
+          "url": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview",
+          "note": "AD DS concepts on Microsoft Learn.",
+          "kind": "docs"
+        },
+        {
+          "label": "Group Policy documentation",
+          "url": "https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-overview",
+          "note": "GPO overview and related docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "AD CS overview",
+          "url": "https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/active-directory-certificate-services-overview",
+          "note": "Enterprise PKI on Windows.",
+          "kind": "docs"
+        },
+        {
+          "label": "Windows LAPS (Learn)",
+          "url": "https://aka.ms/windowsLAPS",
+          "note": "Local admin password solution docs.",
+          "kind": "docs",
+          "aka": "aka.ms/windowsLAPS"
+        },
+        {
+          "label": "Sysinternals",
+          "url": "https://aka.ms/sysinternals",
+          "note": "Windows troubleshooting utilities suite.",
+          "kind": "tool",
+          "aka": "aka.ms/sysinternals"
+        },
+        {
+          "label": "CIS Benchmarks (account required for downloads)",
+          "url": "https://www.cisecurity.org/cis-benchmarks",
+          "note": "Consensus hardening benchmarks; downloads need a CIS account.",
+          "kind": "standard"
+        },
+        {
+          "label": "Tenant Recipes: Windows 11 CIS hardening",
+          "url": "guides/windows-11-cis-hardening.html",
+          "note": "Pillar guide mapping CIS controls to practical steps.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "Tenant Recipes: AD CS Tier 0 hardening",
+          "url": "guides/adcs-hardening-tier0.html",
+          "note": "ESC1–ESC16 focused AD CS hardening programme.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    },
+    {
+      "id": "linux",
+      "title": "Linux & Unix",
+      "blurb": "Distributions, init/systemd and common admin references.",
+      "links": [
+        {
+          "label": "Linux Kernel documentation",
+          "url": "https://docs.kernel.org/",
+          "note": "Upstream kernel docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "systemd documentation",
+          "url": "https://systemd.io/",
+          "note": "Init/service manager docs and design notes.",
+          "kind": "docs"
+        },
+        {
+          "label": "Red Hat Enterprise Linux documentation",
+          "url": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux",
+          "note": "RHEL admin manuals.",
+          "kind": "docs",
+          "status": "auth"
+        },
+        {
+          "label": "Ubuntu Server documentation",
+          "url": "https://ubuntu.com/server/docs",
+          "note": "Canonical Ubuntu Server docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Debian Administrator's Handbook",
+          "url": "https://debian-handbook.info/",
+          "note": "Community Debian admin book.",
+          "kind": "docs"
+        },
+        {
+          "label": "SUSE Linux Enterprise documentation",
+          "url": "https://documentation.suse.com/",
+          "note": "SUSE product documentation.",
+          "kind": "docs"
+        },
+        {
+          "label": "ArchWiki",
+          "url": "https://wiki.archlinux.org/",
+          "note": "Dense community wiki often useful beyond Arch.",
+          "kind": "community"
+        },
+        {
+          "label": "FreeBSD Handbook",
+          "url": "https://docs.freebsd.org/en/books/handbook/",
+          "note": "FreeBSD system administration handbook.",
+          "kind": "docs"
+        },
+        {
+          "label": "OpenSSH manual pages",
+          "url": "https://www.openssh.com/manual.html",
+          "note": "SSH server/client official manuals.",
+          "kind": "docs"
+        },
+        {
+          "label": "GNU Coreutils manual",
+          "url": "https://www.gnu.org/software/coreutils/manual/",
+          "note": "Classic Unix userland utilities.",
+          "kind": "docs",
+          "status": "blocked"
+        }
+      ]
+    },
+    {
+      "id": "cloud-multi",
+      "title": "Cloud platforms (AWS, GCP, Azure & multi-cloud)",
+      "blurb": "Official documentation and consoles across major public clouds — not Azure-only.",
+      "links": [
+        {
+          "label": "AWS Documentation",
+          "url": "https://docs.aws.amazon.com/",
+          "note": "Amazon Web Services docs home.",
+          "kind": "docs"
+        },
+        {
+          "label": "AWS Management Console",
+          "url": "https://console.aws.amazon.com/",
+          "note": "AWS console (sign-in).",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "AWS Well-Architected",
+          "url": "https://aws.amazon.com/architecture/well-architected/",
+          "note": "AWS architectural guidance framework.",
+          "kind": "docs"
+        },
+        {
+          "label": "Google Cloud documentation",
+          "url": "https://cloud.google.com/docs",
+          "note": "GCP product documentation.",
+          "kind": "docs"
+        },
+        {
+          "label": "Google Cloud Console",
+          "url": "https://console.cloud.google.com/",
+          "note": "GCP console (sign-in).",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Google Cloud Architecture Framework",
+          "url": "https://cloud.google.com/architecture/framework",
+          "note": "GCP architecture guidance.",
+          "kind": "docs"
+        },
+        {
+          "label": "Microsoft Azure documentation",
+          "url": "https://learn.microsoft.com/en-us/azure/",
+          "note": "Azure docs on Microsoft Learn.",
+          "kind": "docs"
+        },
+        {
+          "label": "Azure portal",
+          "url": "https://portal.azure.com/",
+          "note": "Azure management portal (sign-in).",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Azure Architecture Center",
+          "url": "https://learn.microsoft.com/en-us/azure/architecture/",
+          "note": "Reference architectures and patterns.",
+          "kind": "docs"
+        },
+        {
+          "label": "CNCF Cloud Native Landscape",
+          "url": "https://landscape.cncf.io/",
+          "note": "Map of cloud-native projects and products.",
+          "kind": "community"
+        },
+        {
+          "label": "OpenTofu documentation",
+          "url": "https://opentofu.org/docs/",
+          "note": "Open-source Terraform-compatible IaC tool docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Tenant Recipes: Azure Arc at scale",
+          "url": "guides/azure-arc-onboarding-enterprise-scale.html",
+          "note": "Hybrid server onboarding programme.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "Tenant Recipes: Azure Update Manager",
+          "url": "guides/azure-update-manager-enterprise-patching.html",
+          "note": "Enterprise patching with Azure Update Manager.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    },
+    {
+      "id": "virt-storage-backup",
+      "title": "Virtualization, storage, backup & recovery",
+      "blurb": "Hypervisors, software-defined storage and backup/DR references.",
+      "links": [
+        {
+          "label": "VMware documentation (Broadcom)",
+          "url": "https://techdocs.broadcom.com/us/en/vmware-cis.html",
+          "note": "vSphere and related product docs after Broadcom acquisition.",
+          "kind": "docs"
+        },
+        {
+          "label": "Proxmox VE documentation",
+          "url": "https://pve.proxmox.com/pve-docs/",
+          "note": "Open-source virtualization platform docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "KVM (kernel docs)",
+          "url": "https://www.kernel.org/doc/html/latest/virt/kvm/index.html",
+          "note": "KVM documentation in the Linux kernel docs tree.",
+          "kind": "docs"
+        },
+        {
+          "label": "Hyper-V documentation (Learn)",
+          "url": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-overview",
+          "note": "Microsoft Hyper-V overview and docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Ceph documentation",
+          "url": "https://docs.ceph.com/en/latest/",
+          "note": "Distributed storage platform docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "MinIO documentation",
+          "url": "https://min.io/docs/minio/linux/index.html",
+          "note": "S3-compatible object storage docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Veeam Help Center",
+          "url": "https://helpcenter.veeam.com/",
+          "note": "Backup/replication product documentation.",
+          "kind": "docs"
+        },
+        {
+          "label": "Bacula documentation",
+          "url": "https://www.bacula.org/documentation/",
+          "note": "Open-source backup system docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "restic documentation",
+          "url": "https://restic.readthedocs.io/",
+          "note": "Deduplicating backup tool docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "NIST SP 800-34 Rev. 1 Contingency Planning",
+          "url": "https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final",
+          "note": "NIST contingency planning guide for federal information systems (SP 800-34).",
+          "kind": "standard"
+        }
+      ]
+    },
+    {
+      "id": "monitoring-sre",
+      "title": "Monitoring, SRE & incidents",
+      "blurb": "Metrics, logs, tracing, status pages and incident practice.",
+      "links": [
+        {
+          "label": "Prometheus documentation",
+          "url": "https://prometheus.io/docs/introduction/overview/",
+          "note": "Metrics/monitoring system docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Grafana documentation",
+          "url": "https://grafana.com/docs/",
+          "note": "Dashboards and observability stack docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "OpenTelemetry documentation",
+          "url": "https://opentelemetry.io/docs/",
+          "note": "Vendor-neutral telemetry standards and SDKs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Elastic Observability docs",
+          "url": "https://www.elastic.co/guide/en/observability/current/index.html",
+          "note": "ELK/Elastic observability docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Datadog documentation",
+          "url": "https://docs.datadoghq.com/",
+          "note": "SaaS monitoring product docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "PagerDuty documentation",
+          "url": "https://www.pagerduty.com/docs/",
+          "note": "Incident alerting/on-call product docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Google SRE Book (free)",
+          "url": "https://sre.google/sre-book/table-of-contents/",
+          "note": "Classic Site Reliability Engineering book.",
+          "kind": "docs"
+        },
+        {
+          "label": "Google SRE Workbook",
+          "url": "https://sre.google/workbook/table-of-contents/",
+          "note": "Practical SRE companion workbook.",
+          "kind": "docs"
+        },
+        {
+          "label": "Statuspage (Atlassian) docs",
+          "url": "https://support.atlassian.com/statuspage/",
+          "note": "Public status page product help.",
+          "kind": "docs"
+        },
+        {
+          "label": "Tenant Recipes: Microsoft cloud status mirror",
+          "url": "status/index.html",
+          "note": "Unofficial mirror of Microsoft public status sources.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    },
+    {
+      "id": "automation-iac",
+      "title": "Automation, scripting & infrastructure as code",
+      "blurb": "Shell/PowerShell, configuration management and declarative infra.",
+      "links": [
+        {
+          "label": "PowerShell documentation",
+          "url": "https://learn.microsoft.com/en-us/powershell/",
+          "note": "Microsoft PowerShell docs hub.",
+          "kind": "docs"
+        },
+        {
+          "label": "Python documentation",
+          "url": "https://docs.python.org/3/",
+          "note": "Language reference and library docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Ansible documentation",
+          "url": "https://docs.ansible.com/",
+          "note": "Agentless configuration management docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Puppet documentation",
+          "url": "https://www.puppet.com/docs",
+          "note": "Configuration management product docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Chef documentation",
+          "url": "https://docs.chef.io/",
+          "note": "Infrastructure automation docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Terraform documentation (HashiCorp)",
+          "url": "https://developer.hashicorp.com/terraform/docs",
+          "note": "HashiCorp Terraform IaC docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "OpenTofu documentation",
+          "url": "https://opentofu.org/docs/",
+          "note": "Open IaC tool compatible with Terraform workflows.",
+          "kind": "docs"
+        },
+        {
+          "label": "Pulumi documentation",
+          "url": "https://www.pulumi.com/docs/",
+          "note": "Programming-language IaC docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Azure Bicep (aka.ms/bicep)",
+          "url": "https://aka.ms/bicep",
+          "note": "Azure-native DSL for ARM templates.",
+          "kind": "docs",
+          "aka": "aka.ms/bicep"
+        },
+        {
+          "label": "AWS CloudFormation User Guide",
+          "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html",
+          "note": "AWS native IaC docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Google Cloud Deployment Manager",
+          "url": "https://cloud.google.com/infrastructure-manager/docs",
+          "note": "Google Cloud Infrastructure Manager (Deployment Manager successor docs).",
+          "kind": "docs"
+        }
+      ]
+    },
+    {
+      "id": "devops-containers",
+      "title": "Development, Git, CI/CD, containers & Kubernetes",
+      "blurb": "Source control, pipelines and container platforms.",
+      "links": [
+        {
+          "label": "Git documentation",
+          "url": "https://git-scm.com/doc",
+          "note": "Official Git reference and book links.",
+          "kind": "docs"
+        },
+        {
+          "label": "GitHub Docs",
+          "url": "https://docs.github.com/",
+          "note": "GitHub product documentation.",
+          "kind": "docs"
+        },
+        {
+          "label": "GitLab documentation",
+          "url": "https://docs.gitlab.com/",
+          "note": "GitLab DevSecOps platform docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Azure DevOps documentation",
+          "url": "https://learn.microsoft.com/en-us/azure/devops/",
+          "note": "Azure Boards/Repos/Pipelines docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Jenkins documentation",
+          "url": "https://www.jenkins.io/doc/",
+          "note": "Open-source CI server docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Docker documentation",
+          "url": "https://docs.docker.com/",
+          "note": "Container engine and Compose docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Kubernetes documentation",
+          "url": "https://kubernetes.io/docs/home/",
+          "note": "Official Kubernetes docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Helm documentation",
+          "url": "https://helm.sh/docs/",
+          "note": "Kubernetes package manager docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "OCI Image Spec",
+          "url": "https://github.com/opencontainers/image-spec",
+          "note": "Open Container Initiative image format.",
+          "kind": "standard"
+        },
+        {
+          "label": "CNCF projects",
+          "url": "https://www.cncf.io/projects/",
+          "note": "Graduated/incubating cloud-native projects.",
+          "kind": "community"
+        },
+        {
+          "label": "Tenant Recipes: Azure DevOps hardening",
+          "url": "guides/azure-devops-hardening-key-eater.html",
+          "note": "Pipeline/workload-identity trust hardening pillar.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "Tenant Recipes: Code Library",
+          "url": "code/index.html",
+          "note": "Copy-ready snippets tied to guides on this site.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    },
+    {
+      "id": "identity-zt",
+      "title": "Identity, PAM & zero trust",
+      "blurb": "IdP patterns, privileged access and zero-trust architecture references across vendors.",
+      "links": [
+        {
+          "label": "NIST SP 800-207 Zero Trust Architecture",
+          "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
+          "note": "Foundational zero-trust architecture publication.",
+          "kind": "standard"
+        },
+        {
+          "label": "NIST Digital Identity Guidelines (SP 800-63)",
+          "url": "https://pages.nist.gov/800-63-3/",
+          "note": "Authenticator and identity proofing guidance.",
+          "kind": "standard"
+        },
+        {
+          "label": "OAuth 2.1 (draft / IETF)",
+          "url": "https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1",
+          "note": "Evolving OAuth security profile work.",
+          "kind": "standard"
+        },
+        {
+          "label": "OpenID Connect Core",
+          "url": "https://openid.net/specs/openid-connect-core-1_0.html",
+          "note": "OIDC authentication layer on OAuth 2.0.",
+          "kind": "standard"
+        },
+        {
+          "label": "SAML 2.0 (OASIS)",
+          "url": "https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0.html",
+          "note": "SAML technical overview.",
+          "kind": "standard"
+        },
+        {
+          "label": "Okta Docs",
+          "url": "https://developer.okta.com/docs/",
+          "note": "Okta identity platform developer/admin docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Auth0 Documentation",
+          "url": "https://auth0.com/docs",
+          "note": "Auth0 identity platform docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Keycloak documentation",
+          "url": "https://www.keycloak.org/documentation",
+          "note": "Open-source IdP docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "CyberArk Privileged Access (product)",
+          "url": "https://www.cyberark.com/products/privileged-access-management/",
+          "note": "CyberArk privileged access product overview (docs portal returned 404 from checker).",
+          "kind": "docs"
+        },
+        {
+          "label": "Microsoft Entra documentation",
+          "url": "https://learn.microsoft.com/en-us/entra/",
+          "note": "Entra ID / ID Governance docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "aka.ms/conditionalaccess",
+          "url": "https://aka.ms/conditionalaccess",
+          "note": "Conditional Access overview on Learn.",
+          "kind": "docs",
+          "aka": "aka.ms/conditionalaccess"
+        },
+        {
+          "label": "Tenant Recipes: Entra Private Access guide",
+          "url": "guides/entra-private-access-vpn-replacement.html",
+          "note": "Replace VPN with Entra Private Access programme.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    },
+    {
+      "id": "endpoint-mgmt",
+      "title": "Endpoint management (multi-vendor)",
+      "blurb": "MDM/UEM and endpoint privilege across ecosystems — not Intune-only.",
+      "links": [
+        {
+          "label": "Microsoft Intune documentation",
+          "url": "https://aka.ms/IntuneDocs",
+          "note": "Intune/MEM docs on Learn (aka.ms/intune is a known 404).",
+          "kind": "docs",
+          "aka": "aka.ms/IntuneDocs"
+        },
+        {
+          "label": "Intune admin center",
+          "url": "https://intune.microsoft.com/",
+          "note": "Endpoint management portal (sign-in).",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Apple Platform Deployment",
+          "url": "https://support.apple.com/guide/deployment/welcome/web",
+          "note": "Apple business/education deployment guide.",
+          "kind": "docs"
+        },
+        {
+          "label": "Android Enterprise documentation",
+          "url": "https://developers.google.com/android/management",
+          "note": "Android Enterprise management APIs/docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Jamf Documentation",
+          "url": "https://learn.jamf.com/",
+          "note": "Apple device management product docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "VMware Workspace ONE docs (Omnissa)",
+          "url": "https://docs.omnissa.com/",
+          "note": "Workspace ONE / UEM documentation home.",
+          "kind": "docs"
+        },
+        {
+          "label": "Microsoft Autopilot docs",
+          "url": "https://aka.ms/autopilotdocs",
+          "note": "Windows Autopilot Learn hub.",
+          "kind": "docs",
+          "aka": "aka.ms/autopilotdocs"
+        },
+        {
+          "label": "Tenant Recipes: Admin By Request",
+          "url": "guides/admin-by-request-endpoint-privilege.html",
+          "note": "JIT elevation / remove standing local admin.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    },
+    {
+      "id": "security-defense",
+      "title": "Security defense, SOC, threat intel & vulnerabilities",
+      "blurb": "Defensive references, vulnerability databases and threat-intel frameworks. Not a substitute for your own detection engineering.",
+      "links": [
+        {
+          "label": "MITRE ATT&CK",
+          "url": "https://attack.mitre.org/",
+          "note": "Adversary tactics/techniques knowledge base.",
+          "kind": "standard"
+        },
+        {
+          "label": "MITRE D3FEND",
+          "url": "https://d3fend.mitre.org/",
+          "note": "Defensive countermeasure knowledge graph.",
+          "kind": "standard"
+        },
+        {
+          "label": "NVD — National Vulnerability Database",
+          "url": "https://nvd.nist.gov/",
+          "note": "CVE enrichment and CVSS data from NIST.",
+          "kind": "standard"
+        },
+        {
+          "label": "CVE Program",
+          "url": "https://www.cve.org/",
+          "note": "CVE identification programme home.",
+          "kind": "standard"
+        },
+        {
+          "label": "CISA Known Exploited Vulnerabilities (KEV)",
+          "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+          "note": "Actively exploited CVE catalog used in many patch SLAs.",
+          "kind": "standard"
+        },
+        {
+          "label": "FIRST CVSS",
+          "url": "https://www.first.org/cvss/",
+          "note": "Common Vulnerability Scoring System.",
+          "kind": "standard"
+        },
+        {
+          "label": "OWASP Top Ten",
+          "url": "https://owasp.org/www-project-top-ten/",
+          "note": "Widely cited web app risk categories.",
+          "kind": "standard"
+        },
+        {
+          "label": "SigmaHQ rules",
+          "url": "https://github.com/SigmaHQ/sigma",
+          "note": "Generic SIEM detection rule format and rulesets.",
+          "kind": "community"
+        },
+        {
+          "label": "YARA documentation",
+          "url": "https://yara.readthedocs.io/",
+          "note": "Pattern-matching tool used in malware research.",
+          "kind": "docs"
+        },
+        {
+          "label": "MISP project",
+          "url": "https://www.misp-project.org/",
+          "note": "Open-source threat intel sharing platform.",
+          "kind": "community"
+        },
+        {
+          "label": "Microsoft Defender portal",
+          "url": "https://security.microsoft.com/",
+          "note": "Microsoft security portal (sign-in).",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Tenant Recipes: security watch",
+          "url": "security/index.html",
+          "note": "CVE/hardening watch curated on this site.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    },
+    {
+      "id": "security-testing",
+      "title": "Authorized security testing references",
+      "blurb": "Standards and tooling docs for tests you are explicitly authorized to run. Unauthorized use is illegal.",
+      "links": [
+        {
+          "label": "OWASP WSTG",
+          "url": "https://owasp.org/www-project-web-security-testing-guide/",
+          "note": "Web security testing guide.",
+          "kind": "standard"
+        },
+        {
+          "label": "OWASP ASVS",
+          "url": "https://owasp.org/www-project-application-security-verification-standard/",
+          "note": "Application security verification standard.",
+          "kind": "standard"
+        },
+        {
+          "label": "Nmap Reference Guide",
+          "url": "https://nmap.org/book/man.html",
+          "note": "Network scanner documentation.",
+          "kind": "docs"
+        },
+        {
+          "label": "OWASP ZAP Getting Started",
+          "url": "https://www.zaproxy.org/getting-started/",
+          "note": "Open-source web app scanner intro.",
+          "kind": "docs"
+        },
+        {
+          "label": "Metasploit documentation",
+          "url": "https://docs.metasploit.com/",
+          "note": "Exploitation framework docs for authorized labs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Tenant Recipes: security tools directory",
+          "url": "tools/index.html",
+          "note": "Fact-checked tool pages with permission notices.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "Tenant Recipes: internal pentest scoping method",
+          "url": "tools/internal-pentest-scoping.html",
+          "note": "Authorization, scope and reporting method.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "Tenant Recipes: purple team hybrid identity",
+          "url": "guides/purple-team-hybrid-identity.html",
+          "note": "End-to-end purple-team programme on hybrid identity.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    },
+    {
+      "id": "itsm-ops",
+      "title": "ITSM, asset, change & project management",
+      "blurb": "Service management practices and common ITSM platforms.",
+      "links": [
+        {
+          "label": "ITIL (Axelos / PeopleCert overview)",
+          "url": "https://www.peoplecert.org/browse-certifications/it-governance-and-service-management/ITIL-1",
+          "note": "ITIL certification/framework overview (commercial steward).",
+          "kind": "standard"
+        },
+        {
+          "label": "FitSM (ITEMO)",
+          "url": "https://www.fitsm.eu/",
+          "note": "Lightweight free IT service management standard.",
+          "kind": "standard"
+        },
+        {
+          "label": "ServiceNow product documentation",
+          "url": "https://docs.servicenow.com/",
+          "note": "ITSM/platform product docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "Jira Service Management Cloud docs",
+          "url": "https://support.atlassian.com/jira-service-management-cloud/",
+          "note": "Atlassian ITSM cloud help.",
+          "kind": "docs"
+        },
+        {
+          "label": "Freshservice helpdesk docs",
+          "url": "https://support.freshservice.com/support/home",
+          "note": "ITSM SaaS help center.",
+          "kind": "docs"
+        },
+        {
+          "label": "GLPI project",
+          "url": "https://glpi-project.org/",
+          "note": "Open-source IT asset/helpdesk suite.",
+          "kind": "product"
+        },
+        {
+          "label": "Snipe-IT documentation",
+          "url": "https://snipe-it.readme.io/",
+          "note": "Open-source asset management docs.",
+          "kind": "docs"
+        },
+        {
+          "label": "PMBOK / PMI standards overview",
+          "url": "https://www.pmi.org/standards",
+          "note": "Project management standards body.",
+          "kind": "standard",
+          "status": "auth"
+        }
+      ]
+    },
+    {
+      "id": "governance-compliance",
+      "title": "Governance, compliance, standards & privacy",
+      "blurb": "Frameworks and regulators commonly referenced in enterprise IT programmes.",
+      "links": [
+        {
+          "label": "ISO/IEC 27001 overview (ISO)",
+          "url": "https://www.iso.org/standard/27001",
+          "note": "Information security management standard (purchase for full text).",
+          "kind": "standard",
+          "status": "auth"
+        },
+        {
+          "label": "ISO/IEC 27002 overview (ISO)",
+          "url": "https://www.iso.org/standard/75652.html",
+          "note": "Controls guidance companion to 27001.",
+          "kind": "standard",
+          "status": "auth"
+        },
+        {
+          "label": "SOC 2 (AICPA)",
+          "url": "https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2",
+          "note": "Trust Services Criteria overview pages.",
+          "kind": "standard"
+        },
+        {
+          "label": "CIS Controls",
+          "url": "https://www.cisecurity.org/controls",
+          "note": "Prioritized defensive controls set.",
+          "kind": "standard"
+        },
+        {
+          "label": "NIST Cybersecurity Framework",
+          "url": "https://www.nist.gov/cyberframework",
+          "note": "CSF for cybersecurity programmes.",
+          "kind": "standard"
+        },
+        {
+          "label": "ENISA publications",
+          "url": "https://www.enisa.europa.eu/publications",
+          "note": "EU agency cybersecurity publications.",
+          "kind": "docs"
+        },
+        {
+          "label": "GDPR official text (EUR-Lex)",
+          "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+          "note": "EU General Data Protection Regulation.",
+          "kind": "standard"
+        },
+        {
+          "label": "European Data Protection Board (EDPB)",
+          "url": "https://edpb.europa.eu/edpb_en",
+          "note": "EU DPA coordination body. Swedish IMY site was not reachable from the checker; use your national DPA for local guidance.",
+          "kind": "docs"
+        },
+        {
+          "label": "NIS2 Directive (European Commission)",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/nis2-directive",
+          "note": "European Commission NIS2 directive policy page.",
+          "kind": "standard"
+        },
+        {
+          "label": "Tenant Recipes: policy templates",
+          "url": "policies/index.html",
+          "note": "Editable policy starters maintained on this site.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    },
+    {
+      "id": "docs-training",
+      "title": "Documentation & training",
+      "blurb": "Learning platforms and documentation practice — not a course catalogue endorsement.",
+      "links": [
+        {
+          "label": "Microsoft Learn",
+          "url": "https://aka.ms/Learn",
+          "note": "Free Microsoft technical learning paths.",
+          "kind": "docs",
+          "aka": "aka.ms/Learn"
+        },
+        {
+          "label": "AWS Skill Builder",
+          "url": "https://skillbuilder.aws/",
+          "note": "AWS training portal.",
+          "kind": "docs"
+        },
+        {
+          "label": "Google Cloud Skills Boost",
+          "url": "https://www.cloudskillsboost.google/",
+          "note": "GCP labs and learning paths.",
+          "kind": "docs",
+          "status": "auth"
+        },
+        {
+          "label": "Linux Foundation Training",
+          "url": "https://training.linuxfoundation.org/",
+          "note": "Linux/cloud-native training catalogue.",
+          "kind": "docs"
+        },
+        {
+          "label": "OWASP projects",
+          "url": "https://owasp.org/projects/",
+          "note": "Application security project directory.",
+          "kind": "community"
+        },
+        {
+          "label": "Diátaxis documentation framework",
+          "url": "https://diataxis.fr/",
+          "note": "Tutorial/how-to/explanation/reference split for docs design.",
+          "kind": "community"
+        },
+        {
+          "label": "Write the Docs",
+          "url": "https://www.writethedocs.org/",
+          "note": "Community for software documentation practitioners.",
+          "kind": "community"
+        },
+        {
+          "label": "Tenant Recipes: methodology",
+          "url": "methodology.html",
+          "note": "How this site fact-checks pages against primary sources.",
+          "kind": "docs",
+          "internal": true
+        }
+      ]
+    },
+    {
+      "id": "microsoft-portals",
+      "title": "Microsoft admin portals",
+      "blurb": "Sign-in portals for Microsoft cloud admins. Kept for convenience; the rest of this hub is intentionally multi-vendor.",
+      "links": [
+        {
+          "label": "Microsoft 365 admin center",
+          "url": "https://admin.cloud.microsoft/",
+          "note": "Microsoft 365 admin center (cloud hostname).",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Microsoft Entra admin center",
+          "url": "https://entra.microsoft.com/",
+          "note": "Identity administration.",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Intune admin center",
+          "url": "https://intune.microsoft.com/",
+          "note": "Endpoint management.",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Microsoft Defender portal",
+          "url": "https://security.microsoft.com/",
+          "note": "Security operations portal.",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Microsoft Purview compliance portal",
+          "url": "https://compliance.microsoft.com/",
+          "note": "Compliance/Purview portal.",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Azure portal",
+          "url": "https://portal.azure.com/",
+          "note": "Azure resource management.",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "Power Platform admin center",
+          "url": "https://admin.powerplatform.microsoft.com/",
+          "note": "Power Platform environments.",
+          "kind": "portal",
+          "status": "auth"
+        },
+        {
+          "label": "aka.ms/MessageCenter",
+          "url": "https://aka.ms/MessageCenter",
+          "note": "Message Center announcements.",
+          "kind": "portal",
+          "aka": "aka.ms/MessageCenter"
+        },
+        {
+          "label": "aka.ms/ge (Graph Explorer)",
+          "url": "https://aka.ms/ge",
+          "note": "Interactive Microsoft Graph queries.",
+          "kind": "tool",
+          "aka": "aka.ms/ge"
+        }
+      ]
+    },
+    {
+      "id": "microsoft-aka",
+      "title": "Microsoft aka.ms shortcuts (condensed)",
+      "blurb": "Stable shorts fact-checked earlier. Dead Bing redirects and aka.ms/intune (404) stay omitted. Microsoft is one vendor among many on this hub.",
+      "links": [
+        {
+          "label": "Azure portal",
+          "url": "https://aka.ms/AzurePortal",
+          "note": "Azure portal shortcut.",
+          "kind": "docs",
+          "aka": "aka.ms/AzurePortal",
+          "status": "auth"
+        },
+        {
+          "label": "Graph Explorer",
+          "url": "https://aka.ms/ge",
+          "note": "Interactive Graph queries.",
+          "kind": "docs",
+          "aka": "aka.ms/ge"
+        },
+        {
+          "label": "Microsoft Learn",
+          "url": "https://aka.ms/Learn",
+          "note": "Training hub.",
+          "kind": "docs",
+          "aka": "aka.ms/Learn"
+        },
+        {
+          "label": "PIM",
+          "url": "https://aka.ms/pim",
+          "note": "Privileged Identity Management blade.",
+          "kind": "docs",
+          "aka": "aka.ms/pim",
+          "status": "auth"
+        },
+        {
+          "label": "Message Center",
+          "url": "https://aka.ms/MessageCenter",
+          "note": "M365 Message Center.",
+          "kind": "docs",
+          "aka": "aka.ms/MessageCenter"
+        },
+        {
+          "label": "Azure Service Health",
+          "url": "https://aka.ms/azureservicehealth",
+          "note": "Azure Service Health blade.",
+          "kind": "docs",
+          "aka": "aka.ms/azureservicehealth",
+          "status": "auth"
+        },
+        {
+          "label": "Azure status (public)",
+          "url": "https://aka.ms/AzureStatus",
+          "note": "Public Azure status page.",
+          "kind": "docs",
+          "aka": "aka.ms/AzureStatus"
+        },
+        {
+          "label": "Microsoft 365 roadmap",
+          "url": "https://aka.ms/M365Roadmap",
+          "note": "Public roadmap.",
+          "kind": "docs",
+          "aka": "aka.ms/M365Roadmap",
+          "status": "blocked"
+        },
+        {
+          "label": "SSPR",
+          "url": "https://aka.ms/sspr",
+          "note": "Self-service password reset.",
+          "kind": "docs",
+          "aka": "aka.ms/sspr"
+        },
+        {
+          "label": "Security info / MFA setup",
+          "url": "https://aka.ms/ssprsetup",
+          "note": "My Sign-ins security info.",
+          "kind": "docs",
+          "aka": "aka.ms/ssprsetup"
+        },
+        {
+          "label": "My Apps",
+          "url": "https://aka.ms/myapps",
+          "note": "End-user My Apps.",
+          "kind": "docs",
+          "aka": "aka.ms/myapps"
+        },
+        {
+          "label": "My Account",
+          "url": "https://aka.ms/myaccount",
+          "note": "End-user account portal.",
+          "kind": "docs",
+          "aka": "aka.ms/myaccount"
+        },
+        {
+          "label": "Conditional Access overview",
+          "url": "https://aka.ms/conditionalaccess",
+          "note": "Learn overview.",
+          "kind": "docs",
+          "aka": "aka.ms/conditionalaccess"
+        },
+        {
+          "label": "App registrations",
+          "url": "https://aka.ms/AppRegistrations",
+          "note": "Entra app registrations.",
+          "kind": "docs",
+          "aka": "aka.ms/AppRegistrations",
+          "status": "auth"
+        },
+        {
+          "label": "Identity Protection",
+          "url": "https://aka.ms/identityprotection",
+          "note": "Identity Protection blade.",
+          "kind": "docs",
+          "aka": "aka.ms/identityprotection",
+          "status": "auth"
+        },
+        {
+          "label": "Secure Score",
+          "url": "https://aka.ms/SecureScore",
+          "note": "Microsoft Secure Score.",
+          "kind": "docs",
+          "aka": "aka.ms/SecureScore"
+        },
+        {
+          "label": "Break-glass guidance",
+          "url": "https://aka.ms/breakglass",
+          "note": "Emergency access Learn article.",
+          "kind": "docs",
+          "aka": "aka.ms/breakglass"
+        },
+        {
+          "label": "Intune docs",
+          "url": "https://aka.ms/IntuneDocs",
+          "note": "Use this; aka.ms/intune 404s.",
+          "kind": "docs",
+          "aka": "aka.ms/IntuneDocs"
+        },
+        {
+          "label": "Autopilot docs",
+          "url": "https://aka.ms/autopilotdocs",
+          "note": "Windows Autopilot Learn.",
+          "kind": "docs",
+          "aka": "aka.ms/autopilotdocs"
+        },
+        {
+          "label": "WUFB",
+          "url": "https://aka.ms/WUFB",
+          "note": "Windows Update for Business.",
+          "kind": "docs",
+          "aka": "aka.ms/WUFB"
+        },
+        {
+          "label": "Windows LAPS",
+          "url": "https://aka.ms/windowsLAPS",
+          "note": "LAPS Learn docs.",
+          "kind": "docs",
+          "aka": "aka.ms/windowsLAPS"
+        },
+        {
+          "label": "Global Secure Access",
+          "url": "https://aka.ms/GSA",
+          "note": "GSA / Private Access Learn.",
+          "kind": "docs",
+          "aka": "aka.ms/GSA"
+        },
+        {
+          "label": "Sysinternals",
+          "url": "https://aka.ms/sysinternals",
+          "note": "Sysinternals suite.",
+          "kind": "docs",
+          "aka": "aka.ms/sysinternals"
+        },
+        {
+          "label": "Cloud Shell",
+          "url": "https://aka.ms/CloudShell",
+          "note": "Azure Cloud Shell Learn.",
+          "kind": "docs",
+          "aka": "aka.ms/CloudShell"
+        },
+        {
+          "label": "Bicep",
+          "url": "https://aka.ms/bicep",
+          "note": "Bicep language overview.",
+          "kind": "docs",
+          "aka": "aka.ms/bicep"
+        },
+        {
+          "label": "KQL",
+          "url": "https://aka.ms/KQL",
+          "note": "Kusto query language.",
+          "kind": "docs",
+          "aka": "aka.ms/KQL"
+        },
+        {
+          "label": "Azure Arc",
+          "url": "https://aka.ms/AzureArc",
+          "note": "Azure Arc product page.",
+          "kind": "docs",
+          "aka": "aka.ms/AzureArc"
+        },
+        {
+          "label": "Update Manager",
+          "url": "https://aka.ms/UpdateManager",
+          "note": "Azure Update Manager.",
+          "kind": "docs",
+          "aka": "aka.ms/UpdateManager"
+        },
+        {
+          "label": "Microsoft Graph docs",
+          "url": "https://aka.ms/microsoftgraphdocs",
+          "note": "Graph API reference.",
+          "kind": "docs",
+          "aka": "aka.ms/microsoftgraphdocs"
+        }
+      ]
+    }
+  ],
+  "omitted_note": "aka.ms omissions after checks: aka.ms/intune (404), GraphExplorer/AzureADRoles/M365Admin and other Bing dead-ends, plus wrong-product shorts such as aka.ms/copilot → GitHub Copilot auth. Re-check when Microsoft changes redirects."
+}

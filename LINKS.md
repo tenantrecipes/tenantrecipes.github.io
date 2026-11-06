@@ -1,23 +1,24 @@
-# Admin link hub (`/links/`)
+# IT link hub (`/links/`) and AI department (`/links/ai/`)
 
-Curated portals, Microsoft Learn docs and **stable** `aka.ms` shortcuts for day-to-day Microsoft 365 / Entra / Intune / Defender / Azure / Copilot admin work.
+Vendor-neutral curated directories for day-to-day IT work. English UI. Microsoft aka.ms is kept but must not dominate.
 
 ## Files
 
 | Path | Role |
 |---|---|
-| `data/links.json` | All sections and links (edit this) |
-| `build_linkhub.py` | Builds `dist/links/index.html` and search entry |
-| `assets/style.css` (`.lh-*`) | Layout for the hub |
+| `data/links/hub.json` | Main hub sections/links |
+| `data/links/ai.json` | AI department page |
+| `build_linkhub.py` | Builds both pages + search entries |
+| `assets/links.js` | Client filter/search (CSP `self`) |
+| `assets/style.css` (`.lh-*`) | Layout |
 
 ## Rules
 
-1. **Fact-check every new aka.ms** with a redirect follow before adding it. Reject Bing `?ref=aka&shorturl=…` dead ends, 404s, eng.ms / internal SharePoint, and wrong-product landings (e.g. `aka.ms/copilot` → GitHub Copilot).
-2. Prefer **current portal hostnames** (`entra.microsoft.com`, `intune.microsoft.com`, `security.microsoft.com`, …) over fragile portal shorts.
-3. Keep the **aka.ms** section featured and first — that was an explicit product ask.
-4. Language: English UI copy (matches the rest of the site).
-5. Update the JSON `"checked"` date when you re-verify the list.
-6. Do **not** push/publish without Krister’s OK. Nav already includes **Links**; confirm he wants it in the main header (it is crowded).
+1. Fact-check new external URLs before publish. Prefer official docs. Mark auth walls as portals; do not invent aka.ms shorts.
+2. Every link needs a short `note` (what it is useful for) and a `kind`: `docs` | `product` | `tool` | `community` | `standard` | `portal`.
+3. AI listings are **not** approval to upload company data — keep guardrails text and cross-links to the enterprise AI governance guide.
+4. Do not conflate `/links/ai/` with the planned editorial `/ai/` hub.
+5. Update `"checked"` when re-verifying. Do not push without Krister’s OK.
 
 ## Rebuild
 
@@ -25,4 +26,4 @@ Curated portals, Microsoft Learn docs and **stable** `aka.ms` shortcuts for day-
 python3 build.py
 ```
 
-Then review `dist/links/index.html` locally. Commit only after approval.
+Preview: `dist/links/index.html` and `dist/links/ai/index.html`.
