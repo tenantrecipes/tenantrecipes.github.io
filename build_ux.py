@@ -410,7 +410,7 @@ _OG_SECTIONS = {  # first path segment -> (label for a page, label for the secti
     "guides": ("Guide", "Guides", "#1f7bff"), "tools": ("Tool", "Tools", "#0f7a4f"), "code": ("Code", "Code Library", "#7a4dff"),
     "recipes": ("Recipe", "Recipes", "#1f7bff"), "security": ("Security", "Security", "#b3261e"), "policies": ("Policy", "Policies", "#0b6e99"),
     "news": ("News", "News", "#e39a1f"), "status": ("Status", "Status", "#0b6e99"), "author": ("About", "About", "#5b2c6f"),
-    "contact": ("Contact", "Contact", "#5b2c6f"), "changelog": ("What's new", "What's new", "#e39a1f"), "search": ("Search", "Search", "#1f7bff"),
+    "contact": ("Contact", "Contact", "#5b2c6f"), "changelog": ("What's new", "What's new", "#e39a1f"), "search": ("Search", "Search", "#1f7bff"), "links": ("Links", "Admin links", "#1f6feb"),
 }
 
 

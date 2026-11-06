@@ -895,3 +895,23 @@ body.mdc-has-report #mdc-report{display:block}
 .mdr-links{list-style:none;padding:0!important}.mdr-links li{margin:1px 0}.mdr-url{display:block;font-size:7.5pt;color:#5d667c;word-break:break-all}
 .mdr-disc{margin-top:14px;padding:10px 14px;background:#f5f7fb;border-radius:8px;font-size:8.3pt;color:#3b4357;break-inside:avoid}.mdr-disc .mdr-h2{border:0;margin-top:0;font-size:10.5pt}.mdr-src{font-weight:600}
 }
+
+/* ---- Admin link hub (/links/) ---- */
+.lh-toc{margin:0 0 22px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.lh-toc .ps-h{margin:0 0 8px;display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.lh-toc ol{margin:0;padding-left:1.2em;columns:2;gap:24px}
+.lh-toc li{break-inside:avoid;margin:.2em 0}
+@media (max-width:560px){.lh-toc ol{columns:1}}
+.lh-sec{margin:28px 0 8px;padding-top:8px;border-top:1px solid var(--line)}
+.lh-sec:first-of-type{border-top:0;padding-top:0}
+.lh-feat{padding:16px;margin-top:20px;background:linear-gradient(180deg,#eef4ff,#fff);border:1px solid #c9daf8;border-radius:14px}
+.lh-feat h2{margin-top:0}
+.lh-list{list-style:none;padding:0!important;margin:10px 0 0;display:grid;gap:6px}
+.lh-a{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.9fr);gap:4px 14px;align-items:baseline;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit}
+.lh-a:hover{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+.lh-lab{font-weight:650;color:var(--brand-ink)}
+.lh-ext{font-weight:500;opacity:.55;margin-left:.25em}
+.lh-aka{font-size:.82rem;color:var(--brand);background:#eef4ff;padding:.1em .45em;border-radius:6px;justify-self:start}
+.lh-note{grid-column:1/-1;font-size:.82rem;color:var(--ink-3)}
+@media (max-width:640px){.lh-a{grid-template-columns:1fr}.lh-aka{margin-top:2px}}
+.lh-omit{margin-top:28px;padding-top:14px;border-top:1px dashed var(--line)}

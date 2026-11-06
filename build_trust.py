@@ -24,7 +24,7 @@ def fmt(iso):
 
 # ---------------------------------------------------------------- header / footer
 NAV_LINKS = [("Recipes", "index.html#library"), ("Guides", "guides/index.html"), ("News", "news/index.html"), ("Security", "security/index.html"), ("Tools", "tools/index.html"), ("Code", "code/index.html"), ("Policies", "policies/index.html"),
-             ("What's new", "changelog/index.html"), ("Status", "status/index.html"), ("About", "about.html")]
+             ("Links", "links/index.html"), ("What's new", "changelog/index.html"), ("Status", "status/index.html"), ("About", "about.html")]
 
 
 def nav(rel):
@@ -130,7 +130,7 @@ def footer(rel, guide_slug, path="", title="", updated=None):
             + col("Content", [("Recipes", f"{rel}index.html#library"), ("Guides", f"{rel}guides/index.html"),
                               ("Secure Copilot rollout", f"{rel}guides/{guide_slug}.html"), ("Windows 11 CIS hardening", f"{rel}guides/windows-11-cis-hardening.html"), ("Cloud hardening + adversary emulation", f"{rel}guides/cloud-hardening-adversary-emulation.html"), ("Azure Arc onboarding at scale", f"{rel}guides/azure-arc-onboarding-enterprise-scale.html"), ("Azure Update Manager at scale", f"{rel}guides/azure-update-manager-enterprise-patching.html"), ("Admin By Request: just-in-time admin", f"{rel}guides/admin-by-request-endpoint-privilege.html"),
                               ("Entra Private Access: replace VPN", f"{rel}guides/entra-private-access-vpn-replacement.html"), ("AD CS hardening (Tier 0)", f"{rel}guides/adcs-hardening-tier0.html"), ("Admin By Request: Intune Win32 packaging", f"{rel}guides/admin-by-request-intune-win32-packaging.html"), ("News &amp; retirements", f"{rel}news/index.html"), ("Microsoft cloud status", f"{rel}status/index.html"), ("Security &amp; vulnerability watch", f"{rel}security/index.html"), ("Security tools &amp; testing", f"{rel}tools/index.html"), ("Policy templates", f"{rel}policies/index.html"), ("Quick guide: 5 Copilot license checks", f"{rel}guides/copilot-license-checks.html"),
-                              ("Code Library", f"{rel}code/index.html"), ("Search", f"{rel}search/index.html")])
+                              ("Code Library", f"{rel}code/index.html"), ("Admin link hub", f"{rel}links/index.html"), ("Search", f"{rel}search/index.html")])
             + col("Trust", [("About", f"{rel}about.html"), ("Methodology", f"{rel}methodology.html"), ("Editor", f"{rel}author/index.html"), ("What's new (changelog)", f"{rel}changelog/index.html"),
                             ("Contact &amp; corrections", f"{rel}contact/index.html"), ("Report an issue", f"{REPO}/issues/new/choose")])
             + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Sample issue", f"{rel}newsletter-sample.html"), (f"X (@{C.X_HANDLE})", f"https://x.com/{C.X_HANDLE}"), ("Atom / RSS feed", f"{rel}feed.xml"),
