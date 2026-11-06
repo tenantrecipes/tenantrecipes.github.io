@@ -12,7 +12,8 @@ GUARD = ("Before any pilot: only approved tools, only data classes your policy a
 TRACKS = [
  ("start", "1. Start here: inventory, ownership and approval",
   "Know which AI tools are in use, who owns each one, and which are approved, conditional or denied — before you scale anything.",
-  [("Enterprise AI governance (pillar)", "guides/enterprise-ai-governance.html", "Guide", "The end-to-end programme: inventory, shadow AI, SSO, retention, DLP and regulation hooks."),
+  [("Approve and deploy an AI service, any vendor", "guides/enterprise-ai-service-approval.html", "Guide", "Runbook per service: intake, data classes, contract checks, decision record, pilot, launch, revocation, reapproval."),
+   ("Enterprise AI governance (pillar)", "guides/enterprise-ai-governance.html", "Guide", "The end-to-end programme: inventory, shadow AI, SSO, retention, DLP and regulation hooks."),
    ("AI approved-tools inventory method", "tools/enterprise-ai-approved-inventory.html", "Method", "Build the Approved / Conditional / Denied register an auditor can check."),
    ("AI and Copilot use policy template", "policies/ai-copilot-use-policy.html", "Policy", "A starting policy covering Copilot and third-party enterprise LLMs."),
    ("Copilot readiness check", "recipes/copilot-readiness-checklist.html", "Recipe", "Pre-flight checks before Microsoft Copilot licences are assigned.")], ""),
@@ -31,7 +32,7 @@ TRACKS = [
    ("5 checks before Copilot licences", "guides/copilot-license-checks.html", "Quick guide", "Short pre-flight list."),
    ("Pilot group licensing", "recipes/copilot-pilot-group-licensing.html", "Recipe", "Group-based licensing for a controlled pilot."),
    ("Copilot Chat vs licensed Copilot", "recipes/copilot-chat-pay-as-you-go.html", "Recipe", "Understand what users get before you buy.")],
-  "No dedicated deployment guides for ChatGPT Enterprise, Claude or Gemini exist on this site yet. Apply the vendor-neutral governance guide and use the vendor admin docs in the AI link directory."),
+  "No vendor-specific deployment guides for ChatGPT Enterprise, Claude or Gemini exist on this site yet. Use the vendor-neutral approval runbook in path 1 and use the vendor admin docs in the AI link directory."),
  ("ops", "4. Technology and operations: integrations, agents, logging, cost",
   "Agents and connectors widen what AI can touch. Decide who may build them, keep them inside governed environments, and measure use.",
   [("Decide who can create agents", "recipes/agents-restrict-blueprint-creation.html", "Recipe", "Control agent creation in Entra."),

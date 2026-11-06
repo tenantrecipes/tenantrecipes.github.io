@@ -21,8 +21,9 @@ import external_attack_surface_osint as GEAS
 import pivot_lateral_movement_segmented as GPLM
 import azure_devops_hardening_key_eater as GADO
 import enterprise_ai_governance as GAIG
+import enterprise_ai_service_approval as GAIA
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS, GPTH, GEAS, GPLM, GADO, GAIG]
+GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS, GPTH, GEAS, GPLM, GADO, GAIG, GAIA]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
