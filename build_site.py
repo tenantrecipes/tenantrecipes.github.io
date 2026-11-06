@@ -37,6 +37,7 @@ import build_tiers as TR
 import build_history as HI
 import build_code as CODE
 import build_linkhub as LH
+import build_aihub as AIH
 import build_apps as AP
 
 DIST = ROOT / "dist"
@@ -510,6 +511,7 @@ def build():
         UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
                     CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1),
                     UX.search_bar(rel, R, len(CY.load())) + BST.pill(rel) + f'<script src="{rel}assets/status.js" defer></script>')
+        + AIH.home_promo(rel)
         + UX.task_hubs(rel, R, GUIDES, Q, CY.load(), TL.load(), PL.load())
         + NW.latest_strip(rel, esc, fmt_date, CY.load())
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
@@ -601,6 +603,7 @@ def build():
     pages += NW.build(page, esc, step_html, signup, fmt_date, E, C.SITE_NAME, CY.load())
     pages += CODE.build(page, esc, fmt_date, signup, C.SITE_NAME, set(RID), {g.SLUG for g in GUIDES + [Q]})
     pages += LH.build(page, esc, signup, C.SITE_NAME)
+    pages += AIH.build(page, C.SITE_NAME)
     pages += AP.build(page, esc, fmt_date, signup, C.SITE_NAME)
 
     refs = UX.guide_refs(GUIDES)
@@ -679,7 +682,7 @@ def build():
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
     idx = BS.build_index(R, CY.load(), GUIDES, Q, CY.AREA, UX.tags_for, json.load(open(ROOT / "data" / "changelog.json")),
-                         TL.search_docs() + PL.search_docs() + NW.search_docs(CY.load()) + CODE.search_docs() + AP.search_docs() + LH.search_docs())
+                         TL.search_docs() + PL.search_docs() + NW.search_docs(CY.load()) + CODE.search_docs() + AP.search_docs() + LH.search_docs() + AIH.search_docs())
     (DIST / "search").mkdir(exist_ok=True)
     (DIST / "search" / "index.json").write_text(json.dumps(idx, ensure_ascii=False, separators=(",", ":")))
     print(f"Search index: {len(idx['docs'])} docs, {len(idx['sug'])} suggestions, {len(idx['syn'])} synonym groups, {len(idx['q'])} questions")
