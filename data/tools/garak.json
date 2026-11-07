@@ -1,0 +1,54 @@
+{
+ "id": "garak",
+ "status": "published",
+ "kind": "tool",
+ "name": "garak",
+ "vendor": "NVIDIA (open source)",
+ "category": "Vulnerability scanning",
+ "what": "An open-source LLM vulnerability scanner (\"nmap for LLMs\") that runs probe families against a model or LLM-backed application — prompt injection, encoding-based injection, jailbreaks (DAN-style), data leakage/training-data replay, package hallucination, XSS-style exfiltration, toxicity — and scores each with detectors.",
+ "when": "Before you approve or scale an internal LLM app, RAG chatbot or agent endpoint (your own Azure OpenAI/Foundry, Bedrock, Hugging Face or REST-exposed deployment), and as a regression gate after prompt, model or guardrail changes. It complements governance: the approved-inventory says what may run, garak shows how the app fails. Only test endpoints you own or are contracted to test; probing third-party SaaS chat products is outside most terms of service.",
+ "license": "Apache-2.0",
+ "cost": "open source",
+ "cost_note": "The tool is free; every probe generates real model calls, so API-hosted targets incur token costs (default 10 generations per prompt).",
+ "url": "https://garak.ai/",
+ "repo": "https://github.com/NVIDIA/garak",
+ "example": [
+  "Install in an isolated environment (Python 3.11+): `python -m pip install -U garak`, then `garak --list_probes` to see probe families.",
+  "Scope narrowly first — for an OpenAI-API-compatible test deployment: `export OPENAI_API_KEY=<test-key>` then `python3 -m garak --target_type openai --target_name <model> --spec probes.encoding` (encoding-based prompt injection).",
+  "For your own LLM app behind an HTTP API, use the REST generator (`--target_type rest`) with a short config describing the endpoint, request template and response field (see the rest generator reference).",
+  "Add `probes.promptinject`, `probes.dan`, `probes.leakreplay` and `probes.packagehallucination` once the baseline run is stable; run against the full application (system prompt + guardrails), not just the bare model.",
+  "Read results per probe/detector (FAIL rate per generations); keep the per-run JSONL report and hit log as evidence and diff them between releases."
+ ],
+ "pitfalls": [
+  "A clean garak run is not proof of safety — probes are a sample of known techniques, and detectors produce false positives and negatives; triage hits manually.",
+  "Running every probe by default against a paid API can be slow and expensive; use --spec to scope.",
+  "Never point it at production endpoints with real user data in context or at vendors' consumer chat services; use a dedicated test deployment and a test key.",
+  "Indirect prompt injection via documents and tool/MCP responses needs scenario testing beyond a model-level scan."
+ ],
+ "sources": [
+  {
+   "title": "garak on GitHub (README: install, probes, logging)",
+   "url": "https://github.com/NVIDIA/garak",
+   "checked": "2026-11-07"
+  },
+  {
+   "title": "garak user guide",
+   "url": "https://docs.garak.ai/",
+   "checked": "2026-11-07"
+  },
+  {
+   "title": "garak reference: REST generator",
+   "url": "https://reference.garak.ai/en/latest/garak.generators.rest.html",
+   "checked": "2026-11-07"
+  },
+  {
+   "title": "garak on PyPI",
+   "url": "https://pypi.org/project/garak/",
+   "checked": "2026-11-07"
+  }
+ ],
+ "last_verified": "2026-11-07",
+ "created": "2026-11-07",
+ "updated": "2026-11-07",
+ "order": 95
+}

@@ -2711,12 +2711,14 @@
   "problem": "You want Copilot usage in Power BI or a scheduled report.",
   "steps": [
    "Grant Reports.Read.All (application, or delegated for a user with e.g. Reports Reader or AI Administrator).",
-   "Call `GET https://graph.microsoft.com/v1.0/copilot/reports/getMicrosoft365CopilotUsageUserDetail(period='D30')` (also UserCountSummary and UserCountTrend) — now available in v1.0, not only beta.",
+   "Call `GET https://graph.microsoft.com/v1.0/copilot/reports/getMicrosoft365CopilotUsageUserDetail(period='D28')` (also UserCountSummary and UserCountTrend). The default report version is v2, which accepts D7, D28, D90, D180 and ALL; D30 is only valid with `version='v1'`. v1.0 returns a CSV stream, beta returns JSON.",
    "Schedule with Azure Automation or a Logic App and store the results."
   ],
   "pitfalls": [
    "The API only covers users with a Copilot license — unlicensed Copilot Chat usage isn't in Graph reports; use the admin center Copilot Chat report or the audit log.",
-   "Usernames are concealed unless the reports privacy setting is changed."
+   "Usernames are concealed unless the reports privacy setting is changed.",
+   "Copying older examples with period='D30' against the default v2 report: use D28, or request version='v1' explicitly if you need the v1 column set.",
+   "Delegated calls also need the signed-in user in a report-reading role (for example Reports Reader or AI Administrator) — the Graph permission alone is not enough."
   ],
   "done_when": [
    "A scheduled job calls the Copilot usage report API with Reports.Read.All and stores the results where Power BI (or your report) can read them."
@@ -2725,18 +2727,18 @@
    {
     "title": "copilotReportRoot resource type",
     "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/api/admin-settings/reports/resources/copilotreportroot",
-    "checked": "2026-10-30"
+    "checked": "2026-11-07"
    },
    {
     "title": "copilotReportRoot: getMicrosoft365CopilotUsageUserDetail",
     "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/api/admin-settings/reports/copilotreportroot-getmicrosoft365copilotusageuserdetail",
-    "checked": "2026-10-30"
+    "checked": "2026-11-07"
    }
   ],
-  "last_verified": "2026-10-30",
+  "last_verified": "2026-11-07",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-11-07",
   "screenshots": [],
   "markers": {
    "steps": "official"

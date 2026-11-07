@@ -1,5 +1,104 @@
 [
   {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "Tool",
+    "title": "garak \u2013 LLM vulnerability scanner",
+    "blurb": "Open-source probes for prompt injection, jailbreaks, leakage and package hallucination against your own LLM apps; scoped-run examples and pitfalls.",
+    "url": "tools/garak.html",
+    "text": "Open-source probes for prompt injection, jailbreaks, leakage and package hallucination against your own LLM apps; scoped-run examples and pitfalls."
+  },
+  {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "News",
+    "title": "Defender local AI agent + MCP discovery GA; MXC GA",
+    "blurb": "50+ local agents and their MCP servers inventoried in Defender (MDE P2+); OS-enforced agent containment GA; runtime protection still preview.",
+    "url": "news/defender-local-ai-agent-discovery-mxc-ga.html",
+    "text": "50+ local agents and their MCP servers inventoried in Defender (MDE P2+); OS-enforced agent containment GA; runtime protection still preview."
+  },
+  {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "News",
+    "title": "Entra GA: passkey-first MFA, WHfB/Platform SSO standalone MFA, risk-aware CAE",
+    "blurb": "Phishing-resistant from the first MFA registration; device-bound credentials satisfy authentication strengths; Universal CAE reacts to device and user risk.",
+    "url": "news/entra-phishing-resistant-first-mfa-whfb-standalone.html",
+    "text": "Phishing-resistant from the first MFA registration; device-bound credentials satisfy authentication strengths; Universal CAE reacts to device and user risk."
+  },
+  {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "News",
+    "title": "Targeted release frozen now, retired January 2027",
+    "blurb": "Rebuild pilot rings with Frontier, Standard and Deferred release before Targeted release disappears.",
+    "url": "news/m365-targeted-release-retirement-2027.html",
+    "text": "Rebuild pilot rings with Frontier, Standard and Deferred release before Targeted release disappears."
+  },
+  {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "News",
+    "title": "Project usage report retires 4 December 2026",
+    "blurb": "Export Project activity by 20 November; switch to the Planner usage report.",
+    "url": "news/m365-project-usage-report-retirement.html",
+    "text": "Export Project activity by 20 November; switch to the Planner usage report."
+  },
+  {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "Security",
+    "title": "SonicWall SonicOS SSLVPN SAML/MFA bypass (CVE-2026-19868, KEV)",
+    "blurb": "Credentials for an alternate auth method skip SAML-enforced MFA; Gen7 fix 7.3.4-7013; KEV due 20 Nov.",
+    "url": "security/sonicwall-sonicos-sslvpn-saml-mfa-bypass-cve-2026-19868.html",
+    "text": "Credentials for an alternate auth method skip SAML-enforced MFA; Gen7 fix 7.3.4-7013; KEV due 20 Nov."
+  },
+  {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "Security",
+    "title": "Apple Pointer Authentication bypass (CVE-2024-27834, KEV)",
+    "blurb": "2024 chain primitive now on KEV; enforce current minimum OS versions in MDM compliance.",
+    "url": "security/apple-pointer-auth-bypass-cve-2024-27834.html",
+    "text": "2024 chain primitive now on KEV; enforce current minimum OS versions in MDM compliance."
+  },
+  {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "Tool",
+    "title": "Export Copilot user activity CSV from Graph v1.0",
+    "blurb": "Invoke-MgGraphRequest snippet for the D28 Copilot usage report plus a no-activity list.",
+    "url": "code/graph-copilot-usage-csv.html",
+    "text": "Invoke-MgGraphRequest snippet for the D28 Copilot usage report plus a no-activity list."
+  },
+  {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Enterprise AI governance: endpoint agent discovery and LLM test gate",
+    "blurb": "Discovery phase now uses Defender local AI agent/MCP inventory; pilot phase adds a scoped garak scan for in-house LLM apps.",
+    "url": "guides/enterprise-ai-governance.html",
+    "text": "Discovery phase now uses Defender local AI agent/MCP inventory; pilot phase adds a scoped garak scan for in-house LLM apps."
+  },
+  {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "Recipe",
+    "title": "Copilot usage via Graph: D28/v2 correction",
+    "blurb": "Default v2 report uses D28 (D30 only with version='v1'); CSV vs JSON and role requirements clarified.",
+    "url": "recipes/copilot-usage-graph.html",
+    "text": "Default v2 report uses D28 (D30 only with version='v1'); CSV vs JSON and role requirements clarified."
+  },
+  {
+    "date": "2026-11-07",
+    "kind": "site",
+    "type": "Policy",
+    "title": "Password & MFA and AI use policies refreshed",
+    "blurb": "Passkey-first registration and contracted telephony for SMS/voice; local AI agents and MCP servers brought into the AI policy.",
+    "url": "policies/password-mfa-policy.html",
+    "text": "Passkey-first registration and contracted telephony for SMS/voice; local AI agents and MCP servers brought into the AI policy."
+  },
+  {
     "date": "2026-11-06",
     "kind": "site",
     "type": "Guide",

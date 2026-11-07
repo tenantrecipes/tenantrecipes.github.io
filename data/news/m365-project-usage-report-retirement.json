@@ -1,0 +1,39 @@
+{
+ "id": "m365-project-usage-report-retirement",
+ "status": "published",
+ "title": "Project usage report leaves the Microsoft 365 admin center on 4 December 2026 — export by 20 November",
+ "date": "2026-11-07",
+ "category": "Retirements",
+ "summary": "Message Center MC1539001 retires the Project usage report (Project activity) under Reports > Usage in the Microsoft 365 admin center on 4 December 2026, following the retirement of Project Online and Project for the web. Historical data will no longer be accessible there, so Microsoft asks admins who rely on it to export by 20 November 2026 and use the Planner usage report instead. The Project desktop client stays supported under its own lifecycle.",
+ "why": "Licence true-up and chargeback scripts often scrape this report to justify Project seats. Once it is gone, the only evidence of historical Project Online/web usage is whatever you exported — relevant if you are still reclaiming Project Plan licences after the Project Online retirement.",
+ "todo": [
+  "Export Project activity for the longest available period before 20 November 2026 and store it with your licence records.",
+  "Repoint dashboards and Graph/automation jobs that read the Project activity report to the Planner usage report.",
+  "Use the exported last-activity data to remove remaining Project Online / Project for the web licences that no longer have a service behind them."
+ ],
+ "effective": "2026-12-04",
+ "effective_note": "Export recommended by 20 November 2026. Worldwide and GCC; MC1539001 last updated 5 November 2026. Checked 2026-11-07.",
+ "primary": {
+  "title": "Message Center MC1539001: Microsoft 365 admin center Project usage report retirement (archive)",
+  "url": "https://mc.merill.net/message/MC1539001"
+ },
+ "related": [
+  {
+   "title": "License inventory script",
+   "url": "recipes/license-inventory-script.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Message Center MC1539001 (archive)",
+   "url": "https://mc.merill.net/message/MC1539001",
+   "checked": "2026-11-07"
+  },
+  {
+   "title": "Neowin: Microsoft retiring M365 Project usage report next month",
+   "url": "https://www.neowin.net/news/microsoft-retiring-m365-project-usage-report-next-month/",
+   "checked": "2026-11-07"
+  }
+ ],
+ "last_verified": "2026-11-07"
+}

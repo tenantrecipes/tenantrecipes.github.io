@@ -1,0 +1,47 @@
+{
+ "id": "entra-phishing-resistant-first-mfa-whfb-standalone",
+ "status": "published",
+ "title": "Entra GA: passkey as first MFA method, WHfB and macOS Platform SSO as standalone MFA, risk-aware Universal CAE",
+ "date": "2026-11-07",
+ "category": "Entra",
+ "summary": "Microsoft's November 2026 Entra roundup moves three authentication controls to general availability. Users can register a passkey or another passwordless method as their very first MFA method (rollout through February 2027), and Windows Hello for Business and macOS Platform SSO now count as standalone MFA factors for step-up, authentication strengths and sign-in frequency (rollout from early November 2026). Universal Continuous Access Evaluation now also reacts to device disablement, device non-compliance and high user risk, with the Global Secure Access client forcing reauthentication within two minutes.",
+ "why": "This closes the bootstrap gap that kept phishable methods in the registration path: new joiners no longer need an Authenticator or SMS factor first. Device-bound credentials satisfying authentication strengths changes how you design admin and step-up policies — test which CA policies now pass on WHfB alone before users discover it. Risk-aware Universal CAE only helps where traffic actually flows through Global Secure Access.",
+ "todo": [
+  "Review authentication method registration campaigns and TAP onboarding flows so new users land on a passkey or passwordless method first; remove SMS/voice from the default registration path ahead of the 1 February 2027 Microsoft-provided SMS/voice retirement.",
+  "List Conditional Access policies that use authentication strengths or sign-in frequency and validate in report-only/What If how WHfB and Platform SSO sign-ins evaluate after the rollout reaches your tenant.",
+  "If you run Global Secure Access, confirm Universal CAE is enabled and that device compliance and user risk signals (Intune, ID Protection) are healthy — stale compliance becomes a fast lockout trigger.",
+  "Keep break-glass accounts on FIDO2 keys and excluded only where required; re-test them after any authentication-strength change."
+ ],
+ "effective_note": "GA announced 6 November 2026; passkey-first rollout continues through February 2027, WHfB/Platform SSO standalone MFA rollout begins early November 2026. Checked 2026-11-07.",
+ "primary": {
+  "title": "What's new in Microsoft Entra: November 2026 (Microsoft Entra Blog)",
+  "url": "https://techcommunity.microsoft.com/blog/microsoft-entra-blog/what%E2%80%99s-new-in-microsoft-entra-november-2026/4556457"
+ },
+ "related": [
+  {
+   "title": "Move users off SMS and voice MFA before 1 February 2027",
+   "url": "recipes/entra-sms-voice-retirement-passkeys.html"
+  },
+  {
+   "title": "Microsoft-provided SMS and voice MFA retires on 1 February 2027",
+   "url": "news/sms-voice-mfa-retirement-2027.html"
+  },
+  {
+   "title": "Entra passkey profiles and Windows passkeys GA slipped to July 2027",
+   "url": "news/entra-passkey-profiles-ga-slips-2027.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Entra Blog: What's new in Microsoft Entra – November 2026",
+   "url": "https://techcommunity.microsoft.com/blog/microsoft-entra-blog/what%E2%80%99s-new-in-microsoft-entra-november-2026/4556457",
+   "checked": "2026-11-07"
+  },
+  {
+   "title": "Microsoft Learn: Microsoft Entra releases and announcements",
+   "url": "https://learn.microsoft.com/en-us/entra/fundamentals/whats-new",
+   "checked": "2026-11-07"
+  }
+ ],
+ "last_verified": "2026-11-07"
+}

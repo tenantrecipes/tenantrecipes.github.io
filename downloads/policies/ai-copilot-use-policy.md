@@ -26,6 +26,7 @@ It covers chat assistants, AI features in business apps, coding assistants and a
 - Microsoft 365 Copilot works with the files, mail and chats you already have access to. Before it is enabled, data owners review and fix oversharing (broad sharing links, 'Everyone' permissions and public Teams or sites).
 - Third-party enterprise LLMs (for example ChatGPT Enterprise, Claude Enterprise or an approved Grok enterprise offering) require SSO through the company identity provider, a recorded retention and training stance, and security approval before seats are assigned.
 - New AI tools, plug-ins, agents, API keys and IDE assistants are approved by IT and security before use. Personal API keys against company data are treated as shadow AI.
+- Local AI agents (coding command-line agents, desktop agents, agentic IDEs and editor extensions) and the MCP servers or connectors they use are AI tools under this policy. They act with your account's access to files, credentials and systems, so only agents and MCP servers listed in {{APPROVED_AI_TOOLS}} may be installed or configured on company devices, and IT may inventory them through endpoint security tools.
 
 ## 4. What you may not put into AI tools
 

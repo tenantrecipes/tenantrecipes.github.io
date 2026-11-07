@@ -1,0 +1,36 @@
+{
+ "id": "graph-copilot-usage-csv",
+ "status": "published",
+ "title": "Export Microsoft 365 Copilot user activity (CSV) from Microsoft Graph v1.0",
+ "lang": "powershell",
+ "tags": [
+  "Copilot",
+  "Graph",
+  "Reporting"
+ ],
+ "summary": "Download the 28-day Microsoft 365 Copilot usage user-detail report from the v1.0 copilot/reports endpoint as CSV with Microsoft Graph PowerShell and list licensed users with no recent activity.",
+ "code": "Connect-MgGraph -Scopes 'Reports.Read.All'\n\n# v1.0 returns a CSV stream; default report version is v2 (periods D7, D28, D90, D180, ALL)\n$uri = \"https://graph.microsoft.com/v1.0/copilot/reports/getMicrosoft365CopilotUsageUserDetail(period='D28')\"\nInvoke-MgGraphRequest -Method GET -Uri $uri -OutputFilePath .\\copilot-usage-D28.csv\n\n$rows = Import-Csv .\\copilot-usage-D28.csv\n$rows | Where-Object { -not $_.'Last Activity Date' } |\n  Select-Object 'User Principal Name', 'Display Name' |\n  Export-Csv .\\copilot-no-activity-D28.csv -NoTypeInformation -Encoding UTF8",
+ "notes": [
+  "Delegated use needs Reports.Read.All plus a report-reading role (for example Reports Reader or AI Administrator); application permission Reports.Read.All works for automation.",
+  "Only users with a Microsoft 365 Copilot licence appear; unlicensed Copilot Chat usage is in the admin center Copilot Chat report or the audit log.",
+  "If the reports privacy setting conceals user details, names and UPNs come back as hashes.",
+  "D30 is only valid with version='v1'; the default v2 report uses D28."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "copilot-usage-graph",
+  "label": "Pull Copilot usage via Microsoft Graph reports API"
+ },
+ "refs": [
+  {
+   "title": "copilotReportRoot: getMicrosoft365CopilotUsageUserDetail",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/api/admin-settings/reports/copilotreportroot-getmicrosoft365copilotusageuserdetail"
+  },
+  {
+   "title": "Invoke-MgGraphRequest",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.authentication/invoke-mggraphrequest"
+  }
+ ],
+ "created": "2026-11-07",
+ "last_verified": "2026-11-07"
+}

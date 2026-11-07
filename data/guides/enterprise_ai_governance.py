@@ -5,7 +5,7 @@ SLUG = "enterprise-ai-governance"
 TIER = "pillar"
 PUBLISHED = "2026-11-06"
 VERIFIED = "2026-11-06"
-UPDATED = "2026-11-06"
+UPDATED = "2026-11-07"
 TITLE = "Enterprise AI governance for Copilot and every enterprise LLM"
 SHORT = "Enterprise AI governance"
 DESC = ("A multi-vendor enterprise AI governance programme: approved inventory, shadow AI discovery, "
@@ -42,6 +42,9 @@ HISTORY = [
     ("2026-11-06",
      "Published eight-phase enterprise AI governance pillar covering Copilot and third-party enterprise LLMs; "
      "documentation verified only."),
+    ("2026-11-07",
+     "Discovery phase: added Defender local AI agent and MCP server discovery (GA, MDE P2+) for endpoint agents; "
+     "pilot phase: added a garak scan of your own LLM apps as a pre-scale gate. Documentation verified only."),
 ]
 
 L = {
@@ -87,6 +90,9 @@ L = {
                   "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689"),
     "nis2": ("Directive (EU) 2022/2555 (NIS2)",
              "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"),
+    "mde_agents": ("Microsoft Defender XDR Blog: Discover local AI agents with Microsoft Defender (GA)",
+                   "https://techcommunity.microsoft.com/blog/microsoftthreatprotectionblog/now-generally-available-discover-local-ai-agents-with-microsoft-defender/4568216"),
+    "garak": ("garak – LLM vulnerability scanner (GitHub)", "https://github.com/NVIDIA/garak"),
     "mdca": ("Microsoft Learn: Discover and manage Shadow IT (Defender for Cloud Apps)",
              "https://learn.microsoft.com/en-us/defender-cloud-apps/tutorial-shadow-it"),
 }
@@ -151,9 +157,11 @@ PHASES = [
     "check": "API keys, IDE plugins and agent platforms appear in the same inventory as chat UIs",
     "do": ["Chat UIs are only half the surface. Inventory Claude API / OpenAI API / Grok API keys, Azure OpenAI / Microsoft Foundry deployments, Copilot Studio agents, GitHub Copilot (if in scope for your programme), and MCP or connector hosts.",
            "Ask who holds the billing account and where keys live. Keys in personal cloud tenants are shadow AI even when the model brand matches an approved vendor.",
-           "For each API path, record retention/ZDR eligibility separately from the chat product — Anthropic and OpenAI document different retention rules for API vs workspace products."],
-    "pit": ["Assuming 'we bought Enterprise chat, so the API is covered' is usually wrong; ZDR and retention are product-specific."],
-    "src": S("claude_retention", "openai_privacy", "xai_faq", "purview_ai"),
+           "For each API path, record retention/ZDR eligibility separately from the chat product — Anthropic and OpenAI document different retention rules for API vs workspace products.",
+           "Where devices are onboarded to Defender for Endpoint P2 or higher, use local AI agent discovery (GA since 29 October 2026): Assets lists supported coding CLIs, desktop agents, agentic IDEs and VS Code extensions per device and account, including configured local and remote MCP servers. Reconcile that list against the inventory instead of relying on interviews alone."],
+    "pit": ["Assuming 'we bought Enterprise chat, so the API is covered' is usually wrong; ZDR and retention are product-specific.",
+            "Endpoint agent discovery only covers onboarded devices and agents in Microsoft's support matrix; renamed, unsupported or personal-device agents still need interviews and network signals."],
+    "src": S("claude_retention", "openai_privacy", "xai_faq", "purview_ai", "mde_agents"),
     "rec": [], "tools": [], "guides": []},
    {"t": "Publish the first approved list and the denial list",
     "check": "Employees can see which tools are approved, conditional or denied for company data",
@@ -322,10 +330,12 @@ PHASES = [
     "check": "Each pilot has seat cap, data-class limit, SSO/CA evidence, and a kill switch owner",
     "do": ["Run separate pilots for Copilot vs each third-party Enterprise LLM. Do not 'bundle' them into one uncontrolled wave.",
            "Success criteria: SSO enforced, CA report-only reviewed, DLP/DSPM alerts triaged, no Restricted data incidents, user literacy completed.",
-           "Stop criteria: unsanctioned connectors enabled, training-opt-in flipped without approval, CA gaps, or legal hold inability to produce prompts/responses."],
-    "pit": ["Scaling seats to hit adoption KPIs before oversharing cleanup is the classic Copilot failure mode — see the rollout guide."],
-    "src": S("found", "copilot_sec", "openai_admin"),
-    "rec": [], "tools": [], "guides": ["secure-copilot-rollout"]},
+           "Stop criteria: unsanctioned connectors enabled, training-opt-in flipped without approval, CA gaps, or legal hold inability to produce prompts/responses.",
+           "For LLM apps, RAG bots or agents your organisation builds itself, add an adversarial test gate before scaling: a scoped garak run (prompt injection, encoding, leakage, package hallucination) against a test deployment of the full app, with hits triaged and the report kept as pilot evidence."],
+    "pit": ["Scaling seats to hit adoption KPIs before oversharing cleanup is the classic Copilot failure mode — see the rollout guide.",
+            "A clean automated LLM scan is a sample, not a guarantee; indirect injection through documents and tool responses needs scenario tests."],
+    "src": S("found", "copilot_sec", "openai_admin", "garak"),
+    "rec": [], "tools": ["garak"], "guides": ["secure-copilot-rollout"]},
    {"t": "Operational metrics for the AI risk owner",
     "check": "Monthly pack covers inventory freshness, shadow-AI top apps, CA coverage, DSPM open items and exception ageing",
     "do": ["Report: number of Approved / Conditional / Denied tools; shadow-AI apps still in use; % of AI apps behind SSO+CA; open DSPM/IR recommendations; overdue inventory reviews; literacy completion.",

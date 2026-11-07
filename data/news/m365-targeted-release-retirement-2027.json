@@ -1,0 +1,40 @@
+{
+ "id": "m365-targeted-release-retirement-2027",
+ "status": "published",
+ "title": "Targeted release is frozen in November 2026 and retires in January 2027 — move pilots to Frontier, Standard or Deferred",
+ "date": "2026-11-07",
+ "category": "Retirements",
+ "summary": "Microsoft is retiring Targeted release for Microsoft 365 services in January 2027 and, from November 2026, admins can no longer add, remove or modify Targeted release enrollment. After retirement, users previously in Targeted release receive features according to the audience-based model: Frontier (pre-GA), Standard release (at GA, the default) or Deferred release (major features roughly 30 days after GA). Microsoft 365 Apps update channels, Windows update channels and Microsoft 365 Insider programs are not affected, and GCC, GCC High and DoD stay on Standard release only.",
+ "why": "Many change-management processes use a Targeted release pilot group as the early-warning ring for Teams, SharePoint, OneDrive, Outlook on the web and admin center changes. If you do nothing, that group silently falls back to your GA preference and you lose the ring. Microsoft's recommended mapping for a select-users pilot is Deferred release for the organisation with the validation group assigned to Standard release.",
+ "todo": [
+  "Export the current Targeted release membership (Settings > Org settings > Organization profile > Release preferences) now — it is frozen this month.",
+  "Rebuild the ring: Deferred release for the tenant, with pilot, support and security validation users assigned to Standard release; add Frontier only for users who should see pre-GA features.",
+  "Update runbooks, CAB templates and Message Center triage that reference Targeted release; Message Center keeps tagging Frontier/Standard/Deferred.",
+  "Do not confuse this with Microsoft 365 Apps channels (Current, Monthly Enterprise, Semi-Annual) — those are unchanged."
+ ],
+ "effective": "2027-01-01",
+ "effective_note": "Enrollment frozen in November 2026; retirement in January 2027 (Microsoft gives the month, not a day). Checked 2026-11-07.",
+ "primary": {
+  "title": "Microsoft Learn: Plan for the retirement of Targeted release in Microsoft 365",
+  "url": "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/targeted-release-retirement?view=o365-worldwide"
+ },
+ "related": [
+  {
+   "title": "Deploy Microsoft 365 Apps with the right update channel",
+   "url": "recipes/intune-deploy-m365-apps-channel.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Learn: Plan for the retirement of Targeted release in Microsoft 365",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/targeted-release-retirement?view=o365-worldwide",
+   "checked": "2026-11-07"
+  },
+  {
+   "title": "Microsoft Learn: Set up the Standard or Targeted release options",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/release-options-in-office-365",
+   "checked": "2026-11-07"
+  }
+ ],
+ "last_verified": "2026-11-07"
+}

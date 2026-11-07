@@ -8,7 +8,7 @@
  "todo": [
   "Find who still depends on SMS or voice with the usage script and the entra-sms-voice-usage-analyzer linked from Microsoft's retirement guide.",
   "Enable passkeys (FIDO2) for those users and run a registration campaign well before the date; remember SSPR is in scope too.",
-  "Only for users with a business, regulatory or technical need: compare the telephony providers (Soprano and Telesign at launch), check you have an eligible paid Azure subscription and Owner (or Contributor plus Role Based Access Control Administrator) to buy in Security Store, start CYOT in evaluation mode and ramp traffic in stages.",
+  "Only for users with a business, regulatory or technical need: compare the telephony providers (Microsoft's November 2026 Entra update lists Soprano, Telesign and Infobip), check you have an eligible paid Azure subscription and Owner (or Contributor plus Role Based Access Control Administrator) to buy in Security Store, start CYOT in evaluation mode and ramp traffic in stages.",
   "Plan separately for Global Administrators and external users, who have until 1 July 2027; internal guest users follow the 1 February date."
  ],
  "effective": "2027-02-01",
@@ -39,10 +39,15 @@
    "title": "Choose a telephony provider for SMS and voice authentication",
    "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-phone-providers",
    "checked": "2026-11-02"
+  },
+  {
+   "title": "Microsoft Entra Blog: What's new in Microsoft Entra – November 2026 (CYOT providers incl. Infobip)",
+   "url": "https://techcommunity.microsoft.com/blog/microsoft-entra-blog/what%E2%80%99s-new-in-microsoft-entra-november-2026/4556457",
+   "checked": "2026-11-07"
   }
  ],
  "status": "published",
- "last_verified": "2026-11-02",
+ "last_verified": "2026-11-07",
  "primary": {
   "title": "Passkeys by default and retirement of Microsoft-provided SMS and voice authentication",
   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-sms-voice-retirement",
@@ -52,6 +57,10 @@
   {
    "title": "Move users off SMS and voice MFA before Microsoft-provided SMS and voice retire on 1 February 2027",
    "url": "recipes/entra-sms-voice-retirement-passkeys.html"
+  },
+  {
+   "title": "Entra GA: passkey as first MFA method, WHfB and Platform SSO as standalone MFA",
+   "url": "news/entra-phishing-resistant-first-mfa-whfb-standalone.html"
   }
  ]
 }

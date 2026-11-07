@@ -1,0 +1,48 @@
+{
+ "id": "defender-local-ai-agent-discovery-mxc-ga",
+ "status": "published",
+ "title": "Defender discovers local AI agents and their MCP servers (GA); Microsoft Execution Containers GA for agent containment",
+ "date": "2026-11-07",
+ "category": "Defender",
+ "summary": "Microsoft Defender now generally discovers more than 50 local AI agents and their configured MCP servers on onboarded Windows and macOS devices, including coding CLIs (Claude Code, Codex CLI, Gemini CLI, GitHub Copilot CLI), desktop apps, agentic IDEs such as Cursor and VS Code extensions. Discovered agents appear under Assets with device, account, version and MCP context, feed the exposure graph and advanced hunting, and require Defender for Endpoint P2 or higher. Runtime prompt-injection protection for Windows agents (audit or block) remains in preview, while Microsoft Execution Containers (MXC), an OS-enforced least-privilege containment layer for AI agents on Windows, reached general availability in the November 2026 security update.",
+ "why": "Local agents run with the user's tokens, files and credentials and can reach arbitrary tools through MCP — the shadow-AI surface that CASB and SWG discovery never sees. For governance teams this is the first first-party inventory of endpoint agents that maps to your approved/conditional/denied list; for red and purple teams it is a new telemetry source to validate (and a reminder that unsupported or renamed agents fall outside the matrix).",
+ "todo": [
+  "In the Defender portal, open Assets and export discovered local agents and MCP server configurations; reconcile them against your approved enterprise AI inventory and flag personal-key or unknown MCP endpoints.",
+  "Run Microsoft's ready-made advanced hunting queries for local agents and build a weekly diff of new agent/MCP combinations per device group.",
+  "Pilot runtime protection in Audit mode on a small device group for one to two weeks (Microsoft's recommendation) before Block; Intune-based deployment of the runtime profile is preview.",
+  "Evaluate MXC policies in validate/tune mode for developer workstations that run autonomous agents; Intune, Entra and Agent 365 integration is still described as upcoming.",
+  "Remember coverage limits: devices must be onboarded to MDE P2+, and only agents in Microsoft's support matrix are discovered."
+ ],
+ "effective_note": "Discovery GA announced 29 October 2026; MXC GA in Microsoft's November 2026 security update (5 November 2026). Runtime protection preview. Checked 2026-11-07.",
+ "primary": {
+  "title": "Now generally available: Discover local AI agents with Microsoft Defender (Microsoft Defender XDR Blog)",
+  "url": "https://techcommunity.microsoft.com/blog/microsoftthreatprotectionblog/now-generally-available-discover-local-ai-agents-with-microsoft-defender/4568216"
+ },
+ "related": [
+  {
+   "title": "Enterprise AI governance for Copilot and every enterprise LLM",
+   "url": "guides/enterprise-ai-governance.html"
+  },
+  {
+   "title": "Enterprise AI approved-tools inventory (method)",
+   "url": "tools/enterprise-ai-approved-inventory.html"
+  },
+  {
+   "title": "garak – LLM vulnerability scanner",
+   "url": "tools/garak.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Defender XDR Blog: Now generally available – Discover local AI agents with Microsoft Defender",
+   "url": "https://techcommunity.microsoft.com/blog/microsoftthreatprotectionblog/now-generally-available-discover-local-ai-agents-with-microsoft-defender/4568216",
+   "checked": "2026-11-07"
+  },
+  {
+   "title": "Microsoft Security Blog: What's new in Microsoft Security – November 2026",
+   "url": "https://www.microsoft.com/en-us/security/blog/2026/11/05/whats-new-in-microsoft-security-november-2026/",
+   "checked": "2026-11-07"
+  }
+ ],
+ "last_verified": "2026-11-07"
+}
