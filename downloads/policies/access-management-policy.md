@@ -18,13 +18,14 @@ People should have the access they need for their job, no more, and lose it when
 
 ## 2. Scope
 
-It covers all user, guest, administrator and service accounts in company systems and cloud services.
+It covers all user, guest, administrator, service and agent identities in company systems and cloud services.
 
 ## 3. Principles
 
 - Least privilege: grant the minimum access needed, preferably through role-based groups rather than individual permissions.
 - Separation of duties: one person should not be able to both request and approve their own access, or complete high-risk financial actions alone.
 - Every account belongs to one named person or, for service accounts, a named owner.
+- Every agent identity belongs to a named owner and has enough sponsors to remain accountable; unused agent identities are reviewed and disabled.
 
 ## 4. Joiners
 
@@ -43,9 +44,10 @@ It covers all user, guest, administrator and service accounts in company systems
 - Sessions and tokens are revoked, devices returned or wiped, and mailbox and files handed over to the manager according to retention rules.
 - Shared passwords the leaver knew are changed.
 
-## 7. Guests and privileged access
+## 7. Guests, agent identities and privileged access
 
-- Guest accounts have a sponsor and expire or are reviewed at least every {{ACCESS_REVIEW_MONTHS}} months.
+- Guest accounts have a named sponsor and expire or are reviewed at least every {{ACCESS_REVIEW_MONTHS}} months. Sponsors periodically confirm that the guest still needs access; unused guests and unredeemed invitations are disabled or deleted on a documented schedule.
+- Agent identities, including AI agents registered in the company directory, have a named owner and sponsors. Identities that issue no sign-in tokens for a defined period, lack sponsors or are not reconfirmed are disabled or deleted under this process.
 - Privileged roles are granted just-in-time where possible, and are reviewed at least quarterly.
 
 ## 8. Access reviews

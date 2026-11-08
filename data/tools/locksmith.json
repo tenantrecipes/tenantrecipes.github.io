@@ -1,0 +1,50 @@
+{
+ "id": "locksmith",
+ "status": "published",
+ "kind": "tool",
+ "name": "Locksmith",
+ "vendor": "Jake Hildreth (open source)",
+ "category": "Active Directory",
+ "what": "A PowerShell tool that finds common Active Directory Certificate Services misconfigurations (the ESC-class issues used in the community taxonomy) and can propose or apply fixes. It is the defensive complement to an authorised Certipy run: read-only modes write findings to the console or CSV, and a separate remediation mode offers to fix issues after warning about possible operational impact.",
+ "when": "At the start of an AD CS hardening programme, and again after you change templates, CA flags or enrollment endpoints. Use it on a domain-joined management host against forests you own or have written permission to assess.",
+ "license": "MIT with Commons Clause",
+ "cost": "open source",
+ "cost_note": "The Gallery module is free. The licence is MIT plus Commons Clause: you may not sell a product or service whose value derives substantially from Locksmith.",
+ "url": "https://github.com/jakehildreth/Locksmith",
+ "repo": "https://github.com/jakehildreth/Locksmith",
+ "example": [
+  "On a domain-joined host that already has the ActiveDirectory and ServerManager PowerShell modules, install from the PowerShell Gallery: `Install-Module -Name Locksmith -Scope CurrentUser` (Gallery release 2026.11.62109 was current when this page was checked on 8 November 2026).",
+  "Run a read-only forest scan that prints findings as a table (Mode 0, the default): `Invoke-Locksmith`.",
+  "For evidence you can attach to a change record, write issues to CSV with `Invoke-Locksmith -Mode 2` (creates ADCSIssues.CSV in the current directory) or issues plus example fixes with `Invoke-Locksmith -Mode 3` (ADCSRemediation.CSV).",
+  "Narrow the run with `-Scans` when you are chasing a specific class, for example `Invoke-Locksmith -Scans ESC1,ESC8`. Documented scan names include All, Auditing, ESC1 through ESC9, ESC11, ESC13, ESC15, ESC16, EKEUwu and PromptMe.",
+  "Map each row to the AD CS hardening guide and apply fixes through change control. Do not use Mode 4 (fix all issues) in production."
+ ],
+ "pitfalls": [
+  "Mode 4 identifies misconfigurations and offers to fix each one. The author describes it as an easy button and says Locksmith will warn when a fix may have operational impact — still treat it as a production change, not a scan.",
+  "Some checks and all remediation need administrative rights. A standard-user run under-reports CA-level issues such as ESC6 and ESC7.",
+  "The host must be domain-joined and the ActiveDirectory and ServerManager modules must be present before you import Locksmith.",
+  "Older bookmarks pointing at github.com/TrimarcJake/Locksmith redirect to jakehildreth/Locksmith; use the current repository and the PowerShell Gallery module name Locksmith.",
+  "Run it only against environments you own or have written permission to test."
+ ],
+ "sources": [
+  {
+   "title": "Locksmith on GitHub (README: install, modes, scans)",
+   "url": "https://github.com/jakehildreth/Locksmith",
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Locksmith documentation site",
+   "url": "https://jakehildreth.github.io/Locksmith/",
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Locksmith on the PowerShell Gallery",
+   "url": "https://www.powershellgallery.com/packages/Locksmith",
+   "checked": "2026-11-08"
+  }
+ ],
+ "last_verified": "2026-11-08",
+ "created": "2026-11-08",
+ "updated": "2026-11-08",
+ "order": 350
+}

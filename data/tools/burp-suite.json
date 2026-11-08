@@ -25,23 +25,28 @@
   {
    "title": "Burp Suite Community Edition download",
    "url": "https://portswigger.net/burp/communitydownload",
-   "checked": "2026-10-30"
+   "checked": "2026-11-08"
   },
   {
    "title": "Burp Suite Community terms",
    "url": "https://portswigger.net/burp/tc-community",
-   "checked": "2026-10-30"
+   "checked": "2026-11-08"
   },
   {
    "title": "Burp Suite subscription model",
    "url": "https://portswigger.net/support/burp-suite-licensing-model",
-   "checked": "2026-10-30"
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Download and install Burp Suite",
+   "url": "https://portswigger.net/burp/documentation/desktop/getting-started/download-and-install",
+   "checked": "2026-11-08"
   }
  ],
  "order": 270,
  "status": "published",
  "kind": "tool",
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-08",
  "created": "2026-10-30",
- "updated": "2026-10-30"
+ "updated": "2026-11-08"
 }

@@ -1,0 +1,36 @@
+{
+ "id": "invoke-locksmith-mode2",
+ "status": "published",
+ "title": "Export AD CS issues to CSV with Locksmith Mode 2",
+ "lang": "powershell",
+ "tags": [
+  "AD CS",
+  "Locksmith",
+  "Assessment"
+ ],
+ "summary": "Install the Locksmith module from the PowerShell Gallery and run a read-only Mode 2 scan that writes discovered AD CS issues to ADCSIssues.CSV.",
+ "code": "Install-Module -Name Locksmith -Scope CurrentUser\nImport-Module Locksmith\n# Domain-joined host with the ActiveDirectory and ServerManager modules.\n# Mode 2 writes ADCSIssues.CSV in the current directory and does not apply fixes.\nInvoke-Locksmith -Mode 2",
+ "notes": [
+  "Run only against forests you own or have written permission to assess.",
+  "Mode 2 and Mode 3 export findings; do not use Mode 4 (fix all issues) in production.",
+  "Some checks need administrative rights. A standard-user run can miss CA-level findings such as ESC6 and ESC7.",
+  "Locksmith is licensed MIT with Commons Clause: you may not sell a product or service whose value derives substantially from it."
+ ],
+ "source": {
+  "kind": "guide",
+  "slug": "adcs-hardening-tier0",
+  "label": "Run a defensive scanner: Locksmith in read-only mode"
+ },
+ "refs": [
+  {
+   "title": "Locksmith on GitHub",
+   "url": "https://github.com/jakehildreth/Locksmith"
+  },
+  {
+   "title": "Locksmith on the PowerShell Gallery",
+   "url": "https://www.powershellgallery.com/packages/Locksmith"
+  }
+ ],
+ "created": "2026-11-08",
+ "last_verified": "2026-11-08"
+}

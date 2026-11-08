@@ -18,6 +18,11 @@ DESC = ("An expert hardening programme for Active Directory Certificate Services
         "NTLM relay to Web Enrollment (ESC8), strong certificate mapping under KB5014754, Tier 0 operation and backup, auditing and detection, "
         "incident response, troubleshooting and rollback.")
 VERIFIED = "2026-10-31"
+UPDATED = "2026-11-08"
+HISTORY = [
+    ("2026-11-08",
+     "Assessment phase: linked the Locksmith tool page and noted the canonical repository is jakehildreth/Locksmith (the older TrimarcJake URL redirects there)."),
+]
 BADGE = "fact-checked against Microsoft Support, Microsoft Learn and SpecterOps research"
 SRC_LABEL = "Official sources"
 TIME_NOTE = ("Time estimates are our planning figures for a single forest with one or two enterprise CAs and a few dozen published templates, not Microsoft numbers. "
@@ -131,7 +136,7 @@ PHASES = [
            "Do not run Mode 4 (fix all issues) in production. Review each proposed fix and apply it through the phases below so every change has an owner and a rollback.",
            "PSPKIAudit from GhostPack is an alternative PowerShell auditor if you want a second opinion from the same host."],
     "pit": ["Some Locksmith checks need administrative rights. A partial run from a normal account under-reports CA-level issues such as ESC6 and ESC7."],
-    "rec": [], "tools": ["pingcastle", "purple-knight"], "src": S("locksmith", "pspki"),
+    "rec": [], "tools": ["locksmith", "pingcastle", "purple-knight"], "src": S("locksmith", "pspki"),
     "marker": "official"},
    {"t": "Confirm with an attacker's view: Certipy, with written authorisation",
     "check": "An authorised tester has run `certipy find` with `-vulnerable` from a normal domain user account, and every finding is mapped to Locksmith and Secure Score results",

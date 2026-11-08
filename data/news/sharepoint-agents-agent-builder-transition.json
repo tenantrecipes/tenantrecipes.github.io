@@ -1,0 +1,56 @@
+{
+ "id": "sharepoint-agents-agent-builder-transition",
+ "status": "published",
+ "title": "SharePoint and OneDrive agent creation moves to Copilot Agent Builder in mid-November 2026; .agent files retire after March 2027",
+ "date": "2026-11-08",
+ "category": "Copilot/AI",
+ "summary": "From mid-November 2026, creating an agent from SharePoint or OneDrive opens Microsoft Copilot Agent Builder instead of writing another .agent file, and new agents become Microsoft 365 declarative agents in the plugin ecosystem. Existing .agent files keep working through the end of March 2027; Microsoft plans to start disabling those experiences in early April 2027 and to finish by mid-April, covering SharePoint, OneDrive, Teams and the Copilot app. Upgrading an agent does not change SharePoint permissions, upgraded agents may need to be re-added to Teams chats or channels, and Agent Builder does not automatically grant broad access to the underlying files.",
+ "why": "Site-scoped .agent files are easy to lose track of on intranet pages and in Teams. If you wait until April 2027, those placements break together and you will not have time to choose the right replacement — Copilot in SharePoint, a skill, a declarative agent, or retirement.",
+ "todo": [
+  "Inventory existing agents: search SharePoint for `*.agent`, use site usage information, Purview audit data and SharePoint Agent Insights where you have them.",
+  "Give each agent an accountable owner and record its purpose, audience, knowledge sources, sharing model, business criticality and current access points (SharePoint pages, Agent Link web parts, Teams chats and channels).",
+  "Pick a destination by outcome: Copilot in SharePoint for site-level questions (requires a Microsoft 365 Copilot licence); convert a focused site task to a skill; upgrade to a Microsoft 365 declarative agent for a named experience across Microsoft 365; review an existing Copilot Studio agent's publishing configuration; or retire the agent.",
+  "After an upgrade, confirm intended users can reach both the replacement agent and every SharePoint knowledge source it cites. Agent Builder does not automatically broaden file and folder permissions.",
+  "Plan to re-add upgraded agents to Microsoft Teams chats or channels where they were pinned (message center MC1511052 and MC1511055). Review Agent Link web parts on high-traffic pages.",
+  "Check licensing before you communicate that an upgraded agent is ready: users with a Microsoft 365 Copilot add-on licence do not incur extra consumption for declarative agents, but eligible Copilot Chat users may incur Copilot Credits when an agent uses shared tenant data such as SharePoint.",
+  "Leave time for page updates, Teams replacements and user communication so the transition is finished before March 2027. The Agent Chat web part (roadmap 575298) is listed as a November 2026 preview and January 2027 general availability, and is still marked in development."
+ ],
+ "effective_note": "Creation and upgrade rollout begins mid-November 2026 and is expected to complete by early December 2026. .agent-based experiences stop working from early April 2027, with completion expected by mid-April 2027. Microsoft’s preparation post was published 30 October 2026 and updated 4 November 2026.",
+ "primary": {
+  "title": "SharePoint Agents are changing: what customers need to know for preparation (Microsoft Community Hub)",
+  "url": "https://techcommunity.microsoft.com/blog/microsoftmissioncriticalblog/sharepoint-agents-are-changing-what-customers-need-to-know-for-preparation/4568460"
+ },
+ "related": [
+  {
+   "title": "Enterprise AI governance for Copilot and every enterprise LLM",
+   "url": "guides/enterprise-ai-governance.html"
+  },
+  {
+   "title": "Secure Microsoft 365 Copilot rollout",
+   "url": "guides/secure-copilot-rollout.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Community Hub: SharePoint Agents are changing what customers need to know for preparation",
+   "url": "https://techcommunity.microsoft.com/blog/microsoftmissioncriticalblog/sharepoint-agents-are-changing-what-customers-need-to-know-for-preparation/4568460",
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Microsoft Support: Create an agent in SharePoint",
+   "url": "https://support.microsoft.com/en-us/sharepoint/copilot-in-sharepoint/create-an-agent-in-sharepoint",
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Microsoft Support: Get started with agents in SharePoint",
+   "url": "https://support.microsoft.com/en-us/sharepoint/copilot-in-sharepoint/get-started-with-agents-in-sharepoint",
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Message center MC1511052: Upcoming changes to Agents in SharePoint and OneDrive (archive)",
+   "url": "https://mc.merill.net/message/MC1511052",
+   "checked": "2026-11-08"
+  }
+ ],
+ "last_verified": "2026-11-08"
+}

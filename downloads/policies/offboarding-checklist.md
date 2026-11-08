@@ -45,6 +45,8 @@ Microsoft Learn: [Convert a user mailbox to a shared mailbox](https://learn.micr
 - [ ] Remove access to business applications that do not use single sign-on (finance, CRM, line-of-business apps).
 - [ ] Revoke third-party SaaS accounts, API keys and personal access tokens the user created; transfer ownership of app registrations, automations and shared resources.
 - [ ] Change shared passwords, service account secrets and door or alarm codes the user knew.
+- [ ] Transfer ownership of agent identities the leaver owns or sponsors, or disable agents that existed only for that person's work; do not leave agent identities without an accountable owner or sponsor.
+- [ ] Reassign guest sponsorships the leaver holds so external guests are not left unsponsored.
 
 Microsoft Learn: [What is Privileged Identity Management?](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure)
 
@@ -61,6 +63,7 @@ Microsoft Learn: [Wipe devices with Microsoft Intune](https://learn.microsoft.co
 - [ ] Review the sign-in and audit logs for the last days of employment for unusual downloads, forwarding rules or sharing.
 - [ ] Confirm no mail forwarding rules or external sharing links created by the user remain active unless approved.
 - [ ] Delete or keep the account according to the retention rules; record the decision.
+- [ ] Confirm no orphaned agent identities or unsponsored guests remain against the leaver's account.
 
 Microsoft Learn: [Search the audit log](https://learn.microsoft.com/en-us/purview/audit-search)
 

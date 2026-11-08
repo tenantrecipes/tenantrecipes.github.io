@@ -1,0 +1,41 @@
+{
+ "id": "intune-epm-network-settings",
+ "status": "published",
+ "title": "Intune Endpoint Privilege Management can now elevate IPv4, IPv6 and DNS changes for standard users",
+ "date": "2026-11-08",
+ "category": "Intune",
+ "summary": "Microsoft Intune Endpoint Privilege Management has a new Elevation system settings policy that lets standard users change IPv4, IPv6 and DNS server values on Windows network adapters without local administrator rights. Users make the change from Windows Company Portal under Help and support, and administrators can require a confirmation prompt plus an optional business justification, Windows authentication, or both. Devices also need an elevation settings policy that enables EPM, and Microsoft says the network-settings capability is rolling out gradually so it may not appear in every tenant yet.",
+ "why": "Changing an IP address or DNS server is a classic reason people are given local admin. Delegating only that setting keeps field staff and travellers productive without widening the local-administrator blast radius.",
+ "todo": [
+  "In the Intune admin center, go to Endpoint security > Endpoint Privilege Management > Policies > Create Policy. Set Platform to Windows and Profile to Elevation system settings policy.",
+  "Add a rule whose System setting is Network settings and whose Elevation type is User confirmed. Require a business justification, Windows authentication, or both if you want a recorded approval; justifications appear in reporting.",
+  "Assign the policy to a pilot group and confirm those devices also have an elevation settings policy that enables EPM. Without that second policy the system-settings elevation does not take effect.",
+  "After the next policy sync, have a pilot user open Windows Company Portal > Help and support > System settings > Edit settings, pick an adapter and change only the values you intend to allow.",
+  "Include at least one travel or offline scenario in the pilot: Microsoft documents that a user can make the change even when the device is offline, provided the policy and EPM component are already on the device.",
+  "If you do not see Elevation system settings policy in the tenant, wait for the gradual rollout rather than assuming a licence or RBAC fault."
+ ],
+ "effective_note": "Documented in Microsoft Learn and featured in the Microsoft Security Blog of 5 November 2026. Rolling out gradually; may not be in every tenant.",
+ "primary": {
+  "title": "Manage system settings with Endpoint Privilege Management (Microsoft Learn)",
+  "url": "https://learn.microsoft.com/en-us/intune/epm/manage-system-settings"
+ },
+ "related": [
+  {
+   "title": "Admin By Request endpoint privilege programme",
+   "url": "guides/admin-by-request-endpoint-privilege.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Learn: Manage system settings with Endpoint Privilege Management",
+   "url": "https://learn.microsoft.com/en-us/intune/epm/manage-system-settings",
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Microsoft Security Blog: What's new in Microsoft Security – November 2026",
+   "url": "https://www.microsoft.com/en-us/security/blog/2026/11/05/whats-new-in-microsoft-security-november-2026/",
+   "checked": "2026-11-08"
+  }
+ ],
+ "last_verified": "2026-11-08"
+}

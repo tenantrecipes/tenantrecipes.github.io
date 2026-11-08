@@ -1,0 +1,54 @@
+{
+ "id": "entra-agent-lifecycle-policies-preview",
+ "status": "published",
+ "title": "Entra preview: Agent ID lifecycle policies and a default inactivity policy that disables unused agents",
+ "date": "2026-11-08",
+ "category": "Entra",
+ "summary": "Microsoft Entra ID Governance has added Agent ID lifecycle policies in public preview, so unused or unowned agent identities can be notified, disabled or deleted automatically. A default inactivity policy is available to every tenant without a licence: owners and sponsors are notified after 60 days with no tokens issued, the identity is disabled at 90 days and deleted at 455 days. Custom policies add periodic reconfirmation, a minimum sponsor count and inactivity monitoring, with actions to disable, delete, or disable then delete after a grace period. Preview features have no service-level agreement and Microsoft does not recommend them for production workloads.",
+ "why": "Agent identities keep the permissions they were given long after the task that justified them has finished. The default policy is a no-licence cleanup path; licensed custom policies let you insist on sponsors and periodic reconfirmation before an agent can keep running.",
+ "todo": [
+  "In the Microsoft Entra admin center, open ID Governance > Lifecycle Workflows > Lifecycle Policies > Agent ID (Preview) as a Lifecycle Workflows Administrator, AI Administrator or Agent ID Administrator.",
+  "Review Default Agent Identity Inactivity Lifecycle Policy. Enable it only after you understand the 60 / 90 / 455-day timeline; set the scope to All Agent IDs or All Agent IDs except selected, and exclude seasonal or limited-use agents that are meant to stay dormant.",
+  "Add fallback notification recipients (individual or group mailboxes) so inactivity alerts still arrive when an agent has no owner or sponsor.",
+  "If you have Microsoft Agent 365 with Entra ID P1 or Microsoft 365 E3 (or Microsoft 365 E7), create custom policies for periodic reconfirmation (30–730 days), minimum sponsors and inactivity. Pilot against Specific agents first. When scopes overlap, the highest-priority custom policy wins; the default inactivity policy is always applied last.",
+  "Confirm sponsors and owners can reconfirm (Extend), update sponsors or disable an agent in the Manage Agents experience at `https://myaccount.microsoft.com/agents`.",
+  "Treat the feature as preview: do not present it as a production SLA control, and keep a documented exception list for any excluded identities."
+ ],
+ "effective_note": "Public preview as documented on 8 November 2026. No single general-availability date.",
+ "primary": {
+  "title": "Entra Agent ID lifecycle policies (Microsoft Learn)",
+  "url": "https://learn.microsoft.com/en-us/entra/id-governance/agent-lifecycle-policies"
+ },
+ "related": [
+  {
+   "title": "Enterprise AI governance for Copilot and every enterprise LLM",
+   "url": "guides/enterprise-ai-governance.html"
+  },
+  {
+   "title": "Regular users can create agents in Microsoft Entra from 4 November 2026 unless you opt out",
+   "url": "news/entra-agent-blueprint-default.html"
+  },
+  {
+   "title": "AI, Microsoft Copilot and enterprise LLM use policy",
+   "url": "policies/ai-copilot-use-policy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Learn: Entra Agent ID lifecycle policies",
+   "url": "https://learn.microsoft.com/en-us/entra/id-governance/agent-lifecycle-policies",
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Microsoft Learn: Microsoft Entra Agent ID default inactivity policy",
+   "url": "https://learn.microsoft.com/en-us/entra/id-governance/agent-default-inactivity-policy",
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Microsoft Entra Blog: What's new in Microsoft Entra – November 2026",
+   "url": "https://techcommunity.microsoft.com/blog/microsoft-entra-blog/what%E2%80%99s-new-in-microsoft-entra-november-2026/4556457",
+   "checked": "2026-11-08"
+  }
+ ],
+ "last_verified": "2026-11-08"
+}

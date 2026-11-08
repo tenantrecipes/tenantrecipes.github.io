@@ -5,7 +5,7 @@ SLUG = "enterprise-ai-governance"
 TIER = "pillar"
 PUBLISHED = "2026-11-06"
 VERIFIED = "2026-11-06"
-UPDATED = "2026-11-07"
+UPDATED = "2026-11-08"
 TITLE = "Enterprise AI governance for Copilot and every enterprise LLM"
 SHORT = "Enterprise AI governance"
 DESC = ("A multi-vendor enterprise AI governance programme: approved inventory, shadow AI discovery, "
@@ -45,6 +45,9 @@ HISTORY = [
     ("2026-11-07",
      "Discovery phase: added Defender local AI agent and MCP server discovery (GA, MDE P2+) for endpoint agents; "
      "pilot phase: added a garak scan of your own LLM apps as a pre-scale gate. Documentation verified only."),
+    ("2026-11-08",
+     "Identity phase: added Entra Agent ID default inactivity policy and custom lifecycle policies (preview) "
+     "so unused or unsponsored agent identities can be notified, disabled or deleted. Documentation verified only."),
 ]
 
 L = {
@@ -95,6 +98,10 @@ L = {
     "garak": ("garak – LLM vulnerability scanner (GitHub)", "https://github.com/NVIDIA/garak"),
     "mdca": ("Microsoft Learn: Discover and manage Shadow IT (Defender for Cloud Apps)",
              "https://learn.microsoft.com/en-us/defender-cloud-apps/tutorial-shadow-it"),
+    "agent_lifecycle": ("Microsoft Learn: Entra Agent ID lifecycle policies (preview)",
+                        "https://learn.microsoft.com/en-us/entra/id-governance/agent-lifecycle-policies"),
+    "agent_default_inactivity": ("Microsoft Learn: Microsoft Entra Agent ID default inactivity policy (preview)",
+                                 "https://learn.microsoft.com/en-us/entra/id-governance/agent-default-inactivity-policy"),
 }
 
 
@@ -207,6 +214,17 @@ PHASES = [
     "pit": ["Consent phishing does not need a stolen password — it needs an over-permissioned app."],
     "src": S("consent", "secure_genai", "copilot_sec"),
     "rec": ["entra-user-consent-restrict", "agents-restrict-blueprint-creation"], "tools": [], "guides": []},
+   {"t": "Apply Entra Agent ID lifecycle controls so unused agents do not linger",
+    "check": "Default inactivity policy scope is reviewed; excluded seasonal agents are documented; custom policies (if licensed) are piloted against a small set first",
+    "do": ["Open ID Governance > Lifecycle Workflows > Lifecycle Policies > Agent ID (Preview). Microsoft documents a default inactivity policy that every tenant can use without a licence: notify owners and sponsors after 60 days with no tokens issued, disable the identity at 90 days and delete it at 455 days. Those intervals are not customisable on the default policy.",
+           "Enable the default policy only after you set its scope (All Agent IDs, or All Agent IDs except selected) and add fallback notification recipients for agents that have no owner or sponsor. Exclude seasonal or limited-use agents that are meant to stay dormant.",
+           "If you have Microsoft Agent 365 with Entra ID P1 or Microsoft 365 E3 (or Microsoft 365 E7), create custom policies for periodic reconfirmation (30–730 days), a minimum sponsor count and inactivity monitoring. Actions are disable, delete, or disable then delete after a grace period. Pilot against Specific agents first.",
+           "When more than one custom policy matches an agent, the highest-priority policy applies. The default inactivity policy is always last. Sponsors and owners act in the Manage Agents experience (`https://myaccount.microsoft.com/agents`).",
+           "This capability is in preview: no service-level agreement, and Microsoft does not recommend preview features for production workloads."],
+    "pit": ["Leaving the default policy scoped to every agent without exclusions will eventually disable identities that are supposed to sit idle between seasonal peaks.",
+            "A disabled agent can be recovered by an owner or administrator; sponsors cannot re-enable or restore it."],
+    "src": S("agent_lifecycle", "agent_default_inactivity", "secure_genai"),
+    "rec": ["agents-restrict-blueprint-creation"], "tools": [], "guides": []},
   ]},
  {
   "id": "data-boundaries",

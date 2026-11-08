@@ -1,9 +1,99 @@
 [
   {
+    "date": "2026-11-08",
+    "kind": "site",
+    "type": "News",
+    "title": "Entra preview: Agent ID lifecycle policies",
+    "blurb": "Default inactivity policy (no licence) notifies at 60 days, disables at 90 and deletes at 455; custom policies add sponsors and reconfirmation.",
+    "url": "news/entra-agent-lifecycle-policies-preview.html",
+    "text": "Default inactivity policy (no licence) notifies at 60 days, disables at 90 and deletes at 455; custom policies add sponsors and reconfirmation."
+  },
+  {
+    "date": "2026-11-08",
+    "kind": "site",
+    "type": "News",
+    "title": "Entra preview: guest lifecycle policies",
+    "blurb": "Sponsor attestation, activity, access packages and unredeemed invitations can disable or delete stale guests. Preview; needs ID Governance plus the guest meter.",
+    "url": "news/entra-guest-lifecycle-policies-preview.html",
+    "text": "Sponsor attestation, activity, access packages and unredeemed invitations can disable or delete stale guests. Preview; needs ID Governance plus the guest meter."
+  },
+  {
+    "date": "2026-11-08",
+    "kind": "site",
+    "type": "News",
+    "title": "Intune EPM elevates IPv4, IPv6 and DNS changes",
+    "blurb": "Standard users can change adapter addressing from Company Portal without local admin; optional justification and Windows authentication. Gradual rollout.",
+    "url": "news/intune-epm-network-settings.html",
+    "text": "Standard users can change adapter addressing from Company Portal without local admin; optional justification and Windows authentication. Gradual rollout."
+  },
+  {
+    "date": "2026-11-08",
+    "kind": "site",
+    "type": "News",
+    "title": "SharePoint agents move to Copilot Agent Builder",
+    "blurb": "New agents become declarative agents from mid-November 2026; .agent files keep working until March 2027 and stop in April 2027.",
+    "url": "news/sharepoint-agents-agent-builder-transition.html",
+    "text": "New agents become declarative agents from mid-November 2026; .agent files keep working until March 2027 and stop in April 2027."
+  },
+  {
+    "date": "2026-11-08",
+    "kind": "site",
+    "type": "Security",
+    "title": "Cisco Secure Email Gateway SQL injection (CVE-2026-76461, KEV)",
+    "blurb": "Unauthenticated root via a crafted email; fix 16.5.0-780 or listed builds. 15.5.5-014 needs Retro Remediation Engine 4.0.2+ after the 3 Nov update.",
+    "url": "security/cisco-seg-sqli-cve-2026-76461.html",
+    "text": "Unauthenticated root via a crafted email; fix 16.5.0-780 or listed builds. 15.5.5-014 needs Retro Remediation Engine 4.0.2+ after the 3 Nov update."
+  },
+  {
+    "date": "2026-11-08",
+    "kind": "site",
+    "type": "Security",
+    "title": "WSO2 API platform JWT bypass (CVE-2026-5430, KEV)",
+    "blurb": "Vendor: unsupported JWT algorithm skips authentication (CVSS 10). CISA KEV added 24 Sep; apply the WSO2-2026-5328 update levels.",
+    "url": "security/wso2-jwt-auth-bypass-cve-2026-5430.html",
+    "text": "Vendor: unsupported JWT algorithm skips authentication (CVSS 10). CISA KEV added 24 Sep; apply the WSO2-2026-5328 update levels."
+  },
+  {
+    "date": "2026-11-08",
+    "kind": "site",
+    "type": "Tool",
+    "title": "Locksmith – AD CS misconfiguration scanner",
+    "blurb": "PowerShell Gallery module that finds ESC-class AD CS issues and can export them to CSV; Mode 4 is not for production.",
+    "url": "tools/locksmith.html",
+    "text": "PowerShell Gallery module that finds ESC-class AD CS issues and can export them to CSV; Mode 4 is not for production."
+  },
+  {
+    "date": "2026-11-08",
+    "kind": "site",
+    "type": "Tool",
+    "title": "Export AD CS issues to CSV with Locksmith Mode 2",
+    "blurb": "Install-Module Locksmith and Invoke-Locksmith -Mode 2, taken from the AD CS hardening guide.",
+    "url": "code/invoke-locksmith-mode2.html",
+    "text": "Install-Module Locksmith and Invoke-Locksmith -Mode 2, taken from the AD CS hardening guide."
+  },
+  {
+    "date": "2026-11-08",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Enterprise AI governance: Entra Agent ID lifecycle",
+    "blurb": "Identity phase now covers the default inactivity policy and custom Agent ID lifecycle policies (preview).",
+    "url": "guides/enterprise-ai-governance.html",
+    "text": "Identity phase now covers the default inactivity policy and custom Agent ID lifecycle policies (preview)."
+  },
+  {
+    "date": "2026-11-08",
+    "kind": "site",
+    "type": "Policy",
+    "title": "Access management and offboarding cover agent identities",
+    "blurb": "Policies now require owners and sponsors for agent identities, and offboarding transfers or disables agents the leaver owned.",
+    "url": "policies/access-management-policy.html",
+    "text": "Policies now require owners and sponsors for agent identities, and offboarding transfers or disables agents the leaver owned."
+  },
+  {
     "date": "2026-11-07",
     "kind": "site",
     "type": "Tool",
-    "title": "garak \u2013 LLM vulnerability scanner",
+    "title": "garak – LLM vulnerability scanner",
     "blurb": "Open-source probes for prompt injection, jailbreaks, leakage and package hallucination against your own LLM apps; scoped-run examples and pitfalls.",
     "url": "tools/garak.html",
     "text": "Open-source probes for prompt injection, jailbreaks, leakage and package hallucination against your own LLM apps; scoped-run examples and pitfalls."
@@ -176,7 +266,7 @@
     "kind": "guide",
     "type": "Guide",
     "title": "New pillar guide: pivot and lateral movement in a segmented network",
-    "blurb": "Ligolo-ng \u2192 Responder \u2192 NetExec \u2192 Impacket \u2192 Evil-WinRM \u2192 Metasploit, then detection and remediation.",
+    "blurb": "Ligolo-ng → Responder → NetExec → Impacket → Evil-WinRM → Metasploit, then detection and remediation.",
     "url": "guides/pivot-lateral-movement-segmented.html",
     "text": "New pillar guide (project guide 5, final in the series): post-exploitation end to end across a segmented network. Nine phases chain Ligolo-ng, Responder, NetExec, Impacket, Evil-WinRM and Metasploit under written authorization, then prove detection and remediate. The five-guide project series is now complete. Defensive use only."
   },
@@ -198,7 +288,7 @@
     "title": "New tool page: Rubeus (Kerberos abuse)",
     "blurb": "Kerberoasting, AS-REP roasting, overpass-the-hash, pass-the-ticket and S4U for authorized AD assessments.",
     "url": "tools/rubeus.html",
-    "text": "New Tools entry: Rubeus, the GhostPack C# toolset for raw Kerberos interaction and abuse during authorized Active Directory assessments \u2013 Kerberoasting, AS-REP roasting, overpass-the-hash, pass-the-ticket and delegation abuse. Authorized testing only."
+    "text": "New Tools entry: Rubeus, the GhostPack C# toolset for raw Kerberos interaction and abuse during authorized Active Directory assessments – Kerberoasting, AS-REP roasting, overpass-the-hash, pass-the-ticket and delegation abuse. Authorized testing only."
   },
   {
     "date": "2026-11-04",
@@ -216,7 +306,7 @@
     "kind": "guide",
     "type": "Guide",
     "title": "New pillar guide: map your external attack surface",
-    "blurb": "crt.sh \u2192 Amass \u2192 Shodan \u2192 Nmap \u2192 Nuclei \u2192 HIBP, then ffuf/Burp, detection and remediation.",
+    "blurb": "crt.sh → Amass → Shodan → Nmap → Nuclei → HIBP, then ffuf/Burp, detection and remediation.",
     "url": "guides/external-attack-surface-osint.html",
     "text": "New pillar guide (project guide 3): Map your entire external attack surface from OSINT to verified exposure. Nine phases chain crt.sh, OWASP Amass, Shodan, Nmap, Nuclei, Have I Been Pwned, ffuf and Burp Suite under written authorization, then prove detection and remediate. Defensive use only."
   },
@@ -246,7 +336,7 @@
     "kind": "guide",
     "type": "Guide",
     "title": "New pillar guide: internal purple team to hybrid identity",
-    "blurb": "Responder \u2192 NetExec \u2192 Hashcat \u2192 BloodHound CE \u2192 ROADtools \u2192 AADInternals, then detection and remediation.",
+    "blurb": "Responder → NetExec → Hashcat → BloodHound CE → ROADtools → AADInternals, then detection and remediation.",
     "url": "guides/purple-team-hybrid-identity.html",
     "text": "New pillar guide (project guide 2): Internal purple team from quiet network listening to compromised hybrid identity. Nine phases and 25 steps chain Responder, NetExec, Hashcat, BloodHound CE, ROADtools and AADInternals under written authorization, then prove detection and close with remediation. Defensive use only."
   },
@@ -296,7 +386,7 @@
     "kind": "site",
     "type": "News",
     "title": "News: Windows and Edge distrust eMudhra CAs",
-    "blurb": "Eight exposed eMudhra intermediate keys blocked on 20 Oct; six G3 roots and a cross-sign removed 26\u201327 Oct.",
+    "blurb": "Eight exposed eMudhra intermediate keys blocked on 20 Oct; six G3 roots and a cross-sign removed 26–27 Oct.",
     "url": "news/emudhra-ca-keys-distrusted.html",
     "text": "News: Microsoft blocked eight compromised eMudhra intermediate CA keys in the Windows Disallowed CTL and the Edge/WebView2 CRLSet on 20 October 2026, then removed six eMudhra G3 roots and an AAA Certificate Services cross-sign from the Windows (26 Oct) and Edge (27 Oct) trust lists. What to check for dependent certificates and disconnected devices."
   },
@@ -338,7 +428,7 @@
     "title": "Windows ALPC EoP in KEV (CVE-2026-85880)",
     "blurb": "ALPC heap overflow with AppContainer escape; Microsoft Exploitation Detected; CISA KEV since 8 September 2026.",
     "url": "security/windows-alpc-eop-cve-2026-85880.html",
-    "text": "New security post for CVE-2026-85880 (Windows ALPC elevation of privilege). Low-privilege AppContainer escape path, CVSS 3.1 7.8 Important, exploited. Fixed in the 8 September 2026 updates across Windows 10/11 and Server 2012\u20132025. Backfill from the KEV backlog."
+    "text": "New security post for CVE-2026-85880 (Windows ALPC elevation of privilege). Low-privilege AppContainer escape path, CVSS 3.1 7.8 Important, exploited. Fixed in the 8 September 2026 updates across Windows 10/11 and Server 2012–2025. Backfill from the KEV backlog."
   },
   {
     "date": "2026-10-31",
@@ -358,7 +448,7 @@
     "title": "New tool: mail DNS checker",
     "blurb": "Graded check of MX, SPF (lookup count), DMARC, Microsoft 365 DKIM, MTA-STS, TLS-RPT, CAA and DNSSEC, with links to Microsoft Learn. Nothing is stored.",
     "url": "tools/mail-dns-checker.html",
-    "text": "New mail DNS checker under Tools. Type a domain and your browser queries public DNS-over-HTTPS resolvers (Cloudflare, with Google as fallback) directly: MX, SPF including the 10-lookup limit and -all/~all, DMARC policy, pct, rua and alignment, the Microsoft 365 DKIM selector1/selector2 CNAMEs, MTA-STS, TLS-RPT, CAA and DNSSEC. The result is an A\u2013F grade with concrete fixes and links to Microsoft Learn and the RFCs. Tenant Recipes stores nothing and the domain is not put in the URL."
+    "text": "New mail DNS checker under Tools. Type a domain and your browser queries public DNS-over-HTTPS resolvers (Cloudflare, with Google as fallback) directly: MX, SPF including the 10-lookup limit and -all/~all, DMARC policy, pct, rua and alignment, the Microsoft 365 DKIM selector1/selector2 CNAMEs, MTA-STS, TLS-RPT, CAA and DNSSEC. The result is an A–F grade with concrete fixes and links to Microsoft Learn and the RFCs. Tenant Recipes stores nothing and the domain is not put in the URL."
   },
   {
     "date": "2026-10-31",
@@ -376,9 +466,9 @@
     "kind": "site",
     "type": "Guide",
     "title": "New pillar guide: harden AD CS as Tier 0",
-    "blurb": "ESC1\u2013ESC16 template and CA fixes, NTLM relay to Web Enrollment (ESC8), strong certificate mapping, detection, incident response and rollback.",
+    "blurb": "ESC1–ESC16 template and CA fixes, NTLM relay to Web Enrollment (ESC8), strong certificate mapping, detection, incident response and rollback.",
     "url": "guides/adcs-hardening-tier0.html",
-    "text": "New pillar guide: Harden Active Directory Certificate Services as Tier 0. Nine phases and 32 steps: inventory and assessment with Locksmith, Certipy and Defender for Identity; fixing vulnerable templates (ESC1\u2013ESC4, ESC9, ESC13, ESC15) and CA settings (ESC6, ESC7, ESC11, ESC16); stopping NTLM relay to Web Enrollment (ESC8, KB5005413); strong certificate mapping on domain controllers (KB5014754, ESC10, ESC14); Tier 0 operation and CA backup; Certification Services auditing and AD CS detections; troubleshooting, incident response and rollback. Prompted by Microsoft's 30 October 2026 write-up of ESC1 and ESC8 intrusions."
+    "text": "New pillar guide: Harden Active Directory Certificate Services as Tier 0. Nine phases and 32 steps: inventory and assessment with Locksmith, Certipy and Defender for Identity; fixing vulnerable templates (ESC1–ESC4, ESC9, ESC13, ESC15) and CA settings (ESC6, ESC7, ESC11, ESC16); stopping NTLM relay to Web Enrollment (ESC8, KB5005413); strong certificate mapping on domain controllers (KB5014754, ESC10, ESC14); Tier 0 operation and CA backup; Certification Services auditing and AD CS detections; troubleshooting, incident response and rollback. Prompted by Microsoft's 30 October 2026 write-up of ESC1 and ESC8 intrusions."
   },
   {
     "date": "2026-10-31",
@@ -396,9 +486,9 @@
     "kind": "site",
     "type": "Site",
     "title": "Mobile and performance pass",
-    "blurb": "No horizontal scroll at 320\u2013375 px, bigger tap targets, no hidden hero image on phones, WebP, minified CSS, deferred scripts.",
+    "blurb": "No horizontal scroll at 320–375 px, bigger tap targets, no hidden hero image on phones, WebP, minified CSS, deferred scripts.",
     "url": "index.html",
-    "text": "Mobile and performance pass: guides no longer scroll sideways on 320\u2013375 px screens (long identifiers wrap), larger touch targets in the What's new bar and carousel, phones no longer download the hidden 1200 px carousel image, desktop gets WebP versions, the stylesheet is minified at build time and the homepage library scripts are deferred."
+    "text": "Mobile and performance pass: guides no longer scroll sideways on 320–375 px screens (long identifiers wrap), larger touch targets in the What's new bar and carousel, phones no longer download the hidden 1200 px carousel image, desktop gets WebP versions, the stylesheet is minified at build time and the homepage library scripts are deferred."
   },
   {
     "date": "2026-10-31",
@@ -448,7 +538,7 @@
     "title": "What's new bar under the header",
     "blurb": "Every page shows the latest updates (date, Stockholm time, type, title and one-line description) right under the sticky header.",
     "url": "changelog/index.html",
-    "text": "A compact What's new ticker sits under the sticky header on every page: date and Stockholm time, a type badge (Guide, Recipe, News, Security, Tool, Policy, Site), a linked title and a one-line description. Expand it for the latest eight updates, or open the full changelog. Fed from data/changelog.json \u2014 the same source as /changelog/."
+    "text": "A compact What's new ticker sits under the sticky header on every page: date and Stockholm time, a type badge (Guide, Recipe, News, Security, Tool, Policy, Site), a linked title and a one-line description. Expand it for the latest eight updates, or open the full changelog. Fed from data/changelog.json — the same source as /changelog/."
   },
   {
     "date": "2026-10-31",
@@ -496,7 +586,7 @@
     "kind": "site",
     "type": "Guide",
     "title": "Cloud hardening under attack simulation",
-    "blurb": "ScubaGear \u2192 Monkey365 \u2192 Maester \u2192 Prowler \u2192 ROADtools \u2192 AADInternals, ending in remediation.",
+    "blurb": "ScubaGear → Monkey365 → Maester → Prowler → ROADtools → AADInternals, ending in remediation.",
     "url": "guides/cloud-hardening-adversary-emulation.html",
     "text": "New pillar guide: Cloud hardening under attack simulation. Chains ScubaGear, Monkey365, Maester, Prowler, ROADtools and AADInternals from baseline measurement through authorized directory enumeration to detection validation and remediation. Defensive use only; printable checklist included."
   },
@@ -516,7 +606,7 @@
     "kind": "site",
     "type": "Recipe",
     "title": "Three problem-oriented recipes",
-    "blurb": "CA lockout mistakes, non-compliant Intune devices, PIM least privilege \u2014 with rollback.",
+    "blurb": "CA lockout mistakes, non-compliant Intune devices, PIM least privilege — with rollback.",
     "url": "recipes/ca-production-lockout-mistakes.html",
     "text": "Three problem-oriented recipes: Conditional Access mistakes that cause production lockouts, why Intune devices stay non-compliant (causes and diagnosis), and PIM least privilege without breaking daily operations. Each has troubleshooting and rollback."
   },
@@ -616,7 +706,7 @@
     "kind": "site",
     "type": "Site",
     "title": "One search for everything",
-    "blurb": "Instant results across recipes, guides, vulnerabilities and news \u2014 press / anywhere.",
+    "blurb": "Instant results across recipes, guides, vulnerabilities and news — press / anywhere.",
     "url": "search/index.html",
     "text": "One search for everything: instant results for recipes, guides, vulnerabilities, hardening and news, with suggestions as you type, typo tolerance and common questions. Open it from the header on any page or press /."
   },

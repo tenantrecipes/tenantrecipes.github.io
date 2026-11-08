@@ -1,0 +1,55 @@
+{
+ "id": "entra-guest-lifecycle-policies-preview",
+ "status": "published",
+ "title": "Entra preview: guest lifecycle policies that disable or delete stale external accounts",
+ "date": "2026-11-08",
+ "category": "Entra",
+ "summary": "Guest lifecycle policies in Microsoft Entra ID Governance Lifecycle Workflows are in public preview and let you enforce sponsor attestation, recent activity, access-package assignment, a minimum sponsor count and invitation redemption at tenant scale. A policy can disable guests, delete them, or disable them and then delete them after a grace period, with notifications to sponsors and guests before and when enforcement runs. The preview is available in the public cloud, needs an Entra ID Governance licence plus a connected Azure subscription for the guest add-on meter, and is not recommended for production workloads.",
+ "why": "Stale B2B guests remain a common path into Teams, SharePoint and line-of-business apps long after the project that invited them has ended. Policy-based cleanup scales better than one-off access reviews once guest counts are large, but the preview billing and enforcement model needs a careful pilot.",
+ "todo": [
+  "Confirm the tenant has Microsoft Entra ID Governance and a connected Azure subscription for the guest monthly-active-user meter before you enable a policy.",
+  "Open ID Governance > Lifecycle Workflows > Lifecycle Policies > Guest Lifecycle Policies and create a policy as a Lifecycle Workflows Administrator.",
+  "Start with a limited scope (supported attributes or direct group membership). Nested groups are not evaluated, and `userType` must be Guest regardless of how the account was invited.",
+  "Configure only the rules you intend to enforce: sponsor attestation (default 90 days, range 30–365), activity (default 90 days, range 30–730), access-package assignment expiration, minimum sponsors (default 1, range 1–5) and guest redemption for invitations still in PendingAcceptance (default 30 days, range 1–30).",
+  "Prefer Disable, then delete (grace period 7–90 days, default 30) so you have a recovery window, and keep a pre-action grace of at least one day (default seven) so sponsors see the notification before access is removed.",
+  "Make sure in-scope guests have sponsors with a usable mail attribute. A guest is assigned to only one policy at a time (highest precedence wins). A tenant can have up to 20 guest lifecycle policies, and enabled policies are evaluated once per day.",
+  "Pilot, then review compliance state and processing errors before broadening the scope. This is preview: no production SLA."
+ ],
+ "effective_note": "Public preview in the public cloud as documented on 8 November 2026. No single general-availability date.",
+ "primary": {
+  "title": "Guest lifecycle policies in Lifecycle Workflows (Microsoft Learn)",
+  "url": "https://learn.microsoft.com/en-us/entra/id-governance/guest-lifecycle-policies"
+ },
+ "related": [
+  {
+   "title": "Access Management Policy",
+   "url": "policies/access-management-policy.html"
+  },
+  {
+   "title": "Employee Offboarding Checklist (IT)",
+   "url": "policies/offboarding-checklist.html"
+  },
+  {
+   "title": "Entra preview: Agent ID lifecycle policies",
+   "url": "news/entra-agent-lifecycle-policies-preview.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Learn: Guest lifecycle policies in Lifecycle Workflows",
+   "url": "https://learn.microsoft.com/en-us/entra/id-governance/guest-lifecycle-policies",
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Microsoft Learn: Microsoft Entra ID Governance licensing for guest users",
+   "url": "https://learn.microsoft.com/en-us/entra/id-governance/microsoft-entra-id-governance-licensing-for-guest-users",
+   "checked": "2026-11-08"
+  },
+  {
+   "title": "Microsoft Entra Blog: What's new in Microsoft Entra – November 2026",
+   "url": "https://techcommunity.microsoft.com/blog/microsoft-entra-blog/what%E2%80%99s-new-in-microsoft-entra-november-2026/4556457",
+   "checked": "2026-11-08"
+  }
+ ],
+ "last_verified": "2026-11-08"
+}
