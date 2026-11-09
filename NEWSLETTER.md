@@ -5,7 +5,7 @@ The evening routine follows this file when it writes the Monday draft. Change th
 ## Schedule and approval
 - **Monday:** the routine writes a draft to `newsletters/drafts/issue-NNN.md` (git-ignored, never published).
 - **KP approves** the draft. Nothing is sent or scheduled without his explicit approval.
-- **After approval:** the issue is scheduled in Buttondown (`tenantrecipes`) for **Tuesday 15:00 Europe/Stockholm**.
+- **After approval:** the issue is scheduled in Buttondown (`tenantrecipes`) for **Thursday 22:00 Europe/Stockholm** (changed from Tuesday 15:00 on 2026-11-05).
 
 ## Fixed format (always these four sections, in this order)
 Title: `The Tenant Recipes Weekly Brief — Issue #NNN (YYYY-MM-DD)`
