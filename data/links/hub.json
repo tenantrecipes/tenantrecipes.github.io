@@ -220,6 +220,13 @@
           "kind": "docs"
         },
         {
+          "label": "Tenant Recipes: SMTP AUTH Basic retirement",
+          "url": "guides/smtp-auth-basic-retirement.html",
+          "note": "Basic auth for Client Submission: timeline, inventory and migration paths before December 2026.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
           "label": "Postfix documentation",
           "url": "https://www.postfix.org/documentation.html",
           "note": "Postfix MTA documentation.",
@@ -898,6 +905,13 @@
           "label": "Tenant Recipes: Entra Private Access guide",
           "url": "guides/entra-private-access-vpn-replacement.html",
           "note": "Replace VPN with Entra Private Access programme.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "Tenant Recipes: SMTP AUTH Basic retirement",
+          "url": "guides/smtp-auth-basic-retirement.html",
+          "note": "Retire Basic SMTP AUTH: OAuth, Graph sendMail scoping, HVE and connector relay.",
           "kind": "docs",
           "internal": true
         }

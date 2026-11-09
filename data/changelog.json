@@ -3,6 +3,15 @@
     "date": "2026-11-09",
     "kind": "site",
     "type": "Guide",
+    "title": "SMTP AUTH Basic retirement",
+    "blurb": "Technical guide: Exchange Online SMTP AUTH Basic auth timeline, inventory, OAuth/Graph/HVE/relay alternatives and checklist before the December 2026 default disable.",
+    "url": "guides/smtp-auth-basic-retirement.html",
+    "text": "Technical guide: Exchange Online SMTP AUTH Basic auth timeline, inventory, OAuth/Graph/HVE/relay alternatives and checklist before the December 2026 default disable."
+  },
+  {
+    "date": "2026-11-09",
+    "kind": "site",
+    "type": "Guide",
     "title": "Secure your website",
     "blurb": "New pillar: accounts, DNS/TLS, security headers, CI SHA-pinning, third-party scripts, privacy and monitoring with a prioritised checklist.",
     "url": "guides/secure-your-website.html",
