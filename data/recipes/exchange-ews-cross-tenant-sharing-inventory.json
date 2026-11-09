@@ -1,0 +1,67 @@
+{
+ "id": "exchange-ews-cross-tenant-sharing-inventory",
+ "status": "published",
+ "tier": "recipe",
+ "order": 160,
+ "category": "Identity & threat protection",
+ "title": "Find cross-tenant Free/Busy, MailTips and calendar sharing that still depends on EWS",
+ "problem": "Organization Relationships and Sharing Policies that share Free/Busy, MailTips or calendars with other Microsoft 365 tenants depend on EWS, which Exchange Online is switching off. Before you move them to Microsoft 365 Cross-Tenant Access Policy you need an inventory of what exists, who it applies to and which partners are cloud-hosted.",
+ "steps": [
+  "Connect to Exchange Online PowerShell with an account that has the Organization Management role. Set `$FormatEnumerationLimit = -1` so long domain lists are not truncated.",
+  "List enabled Organization Relationships: `Get-OrganizationRelationship | Where-Object { $_.Enabled } | Format-List Name, DomainNames, FreeBusyAccessEnabled, FreeBusyAccessLevel, FreeBusyAccessScope, MailTipsAccessEnabled, MailTipsAccessLevel, MailTipsAccessScope, TargetSharingEpr, TargetAutodiscoverEpr, TargetApplicationUri`.",
+  "For each relationship with Free/Busy or MailTips enabled, decide whether the partner is in Microsoft 365: Microsoft's guide says a TargetSharingEpr or TargetAutodiscoverEpr containing outlook.com, office365.com or office365.us indicates a Microsoft 365-hosted partner; other values may indicate on-premises Exchange.",
+  "List Availability Address Spaces with `Get-AvailabilityAddressSpace | Format-List ForestName, AccessMethod, TargetAutodiscoverEpr, TargetServiceEpr, TargetTenantId`. Microsoft notes these do not depend on EWS for Microsoft 365 partners, so they are optional to migrate.",
+  "List Sharing Policies with `Get-SharingPolicy | Format-List Name, Enabled, Domains, Default` and note every domain rule with CalendarSharingFreeBusySimple, Detail or Reviewer, plus any Anonymous rule (published calendars).",
+  "Count which mailboxes each policy actually applies to: `Get-EXOMailbox -ResultSize Unlimited -RecipientTypeDetails UserMailbox,SharedMailbox -Properties SharingPolicy | Group-Object SharingPolicy | Select-Object Name, Count`.",
+  "Record each in-scope partner's Entra tenant ID (ask their admin) and whether they will also migrate — the new policy is inbound-only, so two-way sharing needs a policy in both tenants.",
+  "Hand the inventory to the migration: Free/Busy and MailTips can move to Cross-Tenant Access Policy now; keep calendar-sharing policies until XTAP calendar sharing has reached your tenant (Microsoft's worldwide target is 23 November 2026)."
+ ],
+ "pitfalls": [
+  "Removing a Sharing Policy that still serves an on-premises or hybrid partner: Cross-Tenant Access Policy only covers organizations hosted in Microsoft 365, so that partner loses sharing.",
+  "Reusing one Organization Relationship for other features such as cross-tenant mailbox migration. Microsoft says to move those to a separate relationship before migrating Free/Busy or MailTips.",
+  "Forgetting the Anonymous rule in a Sharing Policy: published calendar URLs are a separate scenario from partner sharing.",
+  "Assuming the partner side is done because yours is: each tenant controls inbound access only."
+ ],
+ "done_when": [
+  "Every enabled Organization Relationship, Availability Address Space and Sharing Policy is listed with partner domain, hosting (Microsoft 365 or on-premises), access level, scope and mailbox count.",
+  "Each Microsoft 365-hosted partner has a recorded tenant ID and an agreed migration owner on both sides.",
+  "On-premises and hybrid partners are flagged as out of scope for Cross-Tenant Access Policy."
+ ],
+ "troubleshooting": [
+  {
+   "symptom": "DomainNames or Domains output ends in '...'",
+   "cause": "PowerShell enumeration limit",
+   "fix": "Run `$FormatEnumerationLimit = -1` in the session before the Format-List commands."
+  },
+  {
+   "symptom": "Partners report that your free/busy disappeared before you migrated",
+   "cause": "EWS is being gradually disabled in Exchange Online",
+   "fix": "Check the EWS deprecation guidance; Microsoft documents keeping EWS enabled (EWSEnabled) as a bridge until the final shutdown on 1 April 2027."
+  }
+ ],
+ "markers": {
+  "steps": "official",
+  "pitfalls": "official"
+ },
+ "sources": [
+  {
+   "title": "Microsoft Learn: Migrate to Microsoft 365 Cross-Tenant Access Policy for sharing Free/Busy, Calendars, and MailTips",
+   "url": "https://learn.microsoft.com/en-us/exchange/sharing/migrate-to-m365-xtap",
+   "checked": "2026-11-09"
+  },
+  {
+   "title": "Microsoft Learn: Deprecation of EWS in Exchange Online",
+   "url": "https://learn.microsoft.com/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online",
+   "checked": "2026-11-09"
+  },
+  {
+   "title": "Exchange Team Blog: Cross-tenant Free/Busy, MailTips and Calendar Sharing are moving to Cross-Tenant Access Policy",
+   "url": "https://techcommunity.microsoft.com/blog/exchange/cross-tenant-freebusy-mailtips-and-calendar-sharing-are-moving-to-cross-tenant-a/4545169",
+   "checked": "2026-11-09"
+  }
+ ],
+ "last_verified": "2026-11-09",
+ "verified_by": "Pascal",
+ "created": "2026-11-09",
+ "updated": "2026-11-09"
+}

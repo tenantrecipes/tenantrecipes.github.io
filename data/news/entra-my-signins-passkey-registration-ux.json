@@ -1,0 +1,38 @@
+{
+ "id": "entra-my-signins-passkey-registration-ux",
+ "status": "published",
+ "title": "Entra My Sign-ins changes the Authenticator passkey registration flow from mid-November",
+ "date": "2026-11-09",
+ "category": "Entra",
+ "summary": "Microsoft Entra is updating the passkey registration experience in My Sign-ins for users who register a passkey in Microsoft Authenticator (MC1545694, published 9 November 2026). Users see an extra checkbox, updated link text and guided steps to open Authenticator and tap + to start registration; if direct registration in Authenticator fails, the new link text points them to the WebAuthn registration flow. General availability rolls out from mid-November 2026 and is expected to complete by end-November 2027.",
+ "why": "Passkey rollouts live or die on self-service registration. Screenshots in your registration campaign, helpdesk scripts and the 'register a passkey first' onboarding flow will drift from what users actually see for up to a year while the rollout progresses.",
+ "todo": [
+  "Update user-facing passkey registration guides and helpdesk scripts to mention the new checkbox and the Authenticator + button step.",
+  "Keep a WebAuthn fallback path documented, since the new link text explicitly routes failed Authenticator registrations there.",
+  "Expect mixed UI across users for months; avoid screenshots that only match one version."
+ ],
+ "effective_note": "Rollout mid-November 2026 to end-November 2027 (MC1545694).",
+ "primary": {
+  "title": "MC1545694: Updated passkey registration experience in My Sign-ins (Message center archive)",
+  "url": "https://message.cengizyilmaz.net/message/mc1545694-microsoft-entra-updated-passkey-registration-experience-in-my-signins"
+ },
+ "related": [
+  {
+   "title": "Entra phishing-resistant MFA as first method",
+   "url": "news/entra-phishing-resistant-first-mfa-whfb-standalone.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Message center archive: MC1545694",
+   "url": "https://message.cengizyilmaz.net/message/mc1545694-microsoft-entra-updated-passkey-registration-experience-in-my-signins",
+   "checked": "2026-11-09"
+  },
+  {
+   "title": "Microsoft Learn: Enable passkeys (FIDO2) in Microsoft Entra ID",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-enable-passkey-fido2",
+   "checked": "2026-11-09"
+  }
+ ],
+ "last_verified": "2026-11-09"
+}

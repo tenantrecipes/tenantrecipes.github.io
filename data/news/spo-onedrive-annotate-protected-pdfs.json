@@ -1,0 +1,40 @@
+{
+ "id": "spo-onedrive-annotate-protected-pdfs",
+ "status": "published",
+ "title": "SharePoint and OneDrive on the web will let users annotate label-encrypted PDFs from late January 2027",
+ "date": "2026-11-09",
+ "category": "Purview",
+ "summary": "From late January 2027 (Worldwide, GCC, GCC High and DoD), the OneDrive for Business and SharePoint web PDF viewer will support annotation of PDFs encrypted with Microsoft Purview sensitivity labels. Users with editing usage rights can ink, highlight, add text, notes, signatures, stamps, bookmarks and form fields, and the label, encryption and usage rights are preserved on save, while view-only users still get a read-only document. There is no feature-specific admin control — existing label usage rights decide who can annotate — and OneDrive consumer is not in scope.",
+ "why": "Today users often strip or downgrade a label to sign or mark up a protected PDF, which is exactly the leak path labels are meant to close. This removes that excuse — but it also means every label that grants Edit to broad groups now grants in-browser modification of regulated PDFs too.",
+ "todo": [
+  "Review which encrypting labels grant Edit, Co-Author or Full Control to large groups (All employees, partner domains) and tighten to Viewer where markup is not needed.",
+  "Check your label-downgrade and label-removal audit events for PDFs now, so you can measure whether the workaround volume drops after rollout.",
+  "Update helpdesk guidance: annotating a protected PDF in the browser no longer requires removing the label.",
+  "Remember there is no on/off switch for this feature; usage rights are the only control."
+ ],
+ "effective": "2027-01-25",
+ "effective_note": "Microsoft gives 'late January 2027' for start and completion (MC1545696, published 9 November 2026); the date shown is an approximation.",
+ "primary": {
+  "title": "MC1545696: OneDrive and SharePoint – Annotate sensitivity-label protected PDFs on the web (Message center archive)",
+  "url": "https://message.cengizyilmaz.net/message/mc1545696-microsoft-onedrive-and-sharepoint-annotate-sensitivitylabel-protected-pdfs-on-the-web"
+ },
+ "related": [
+  {
+   "title": "Sensitivity labels for Copilot recipe",
+   "url": "recipes/purview-sensitivity-labels-copilot.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Message center archive: MC1545696",
+   "url": "https://message.cengizyilmaz.net/message/mc1545696-microsoft-onedrive-and-sharepoint-annotate-sensitivitylabel-protected-pdfs-on-the-web",
+   "checked": "2026-11-09"
+  },
+  {
+   "title": "Microsoft Learn: Enable sensitivity labels for Office files in SharePoint and OneDrive",
+   "url": "https://learn.microsoft.com/en-us/purview/sensitivity-labels-sharepoint-onedrive-files",
+   "checked": "2026-11-09"
+  }
+ ],
+ "last_verified": "2026-11-09"
+}

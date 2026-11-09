@@ -24,6 +24,8 @@ It covers operating systems, applications, firmware, network and security device
 
 IT keeps an up-to-date inventory of hardware and software with an owner for each system. Systems that are not in the inventory cannot be patched reliably and must be added or removed.
 
+The inventory includes self-hosted AI and developer platforms (for example AI gateways, model-serving clusters and MCP servers) and appliances built on Linux distributions, not only Windows servers and clients.
+
 ## 4. Timelines
 
 - Vulnerabilities known to be exploited (for example listed in the CISA Known Exploited Vulnerabilities catalog) on internet-facing systems: fix or mitigate as fast as possible, and within {{PATCH_DAYS_CRITICAL}} days at the most.
@@ -42,6 +44,8 @@ IT keeps an up-to-date inventory of hardware and software with an owner for each
 
 - Vulnerability scans run at least monthly on internal systems and at least weekly on internet-facing systems.
 - Patch compliance is reported monthly to {{OWNER}}, including overdue items and exceptions.
+- A fix counts as deployed only when the patched code is actually running: services and daemons are restarted (or the host rebooted) after a package update, and the running version is checked, not just the installed package.
+- For vulnerabilities known to be exploited, the system owner also checks for signs of compromise (unexpected accounts, keys, tokens or configuration changes) before closing the ticket, and rotates credentials that may have been exposed.
 
 ## 7. Exceptions
 

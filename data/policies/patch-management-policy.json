@@ -41,7 +41,8 @@
   {
    "h": "Inventory",
    "p": [
-    "IT keeps an up-to-date inventory of hardware and software with an owner for each system. Systems that are not in the inventory cannot be patched reliably and must be added or removed."
+    "IT keeps an up-to-date inventory of hardware and software with an owner for each system. Systems that are not in the inventory cannot be patched reliably and must be added or removed.",
+    "The inventory includes self-hosted AI and developer platforms (for example AI gateways, model-serving clusters and MCP servers) and appliances built on Linux distributions, not only Windows servers and clients."
    ]
   },
   {
@@ -66,7 +67,9 @@
    "h": "Verification",
    "items": [
     "Vulnerability scans run at least monthly on internal systems and at least weekly on internet-facing systems.",
-    "Patch compliance is reported monthly to {{OWNER}}, including overdue items and exceptions."
+    "Patch compliance is reported monthly to {{OWNER}}, including overdue items and exceptions.",
+    "A fix counts as deployed only when the patched code is actually running: services and daemons are restarted (or the host rebooted) after a package update, and the running version is checked, not just the installed package.",
+    "For vulnerabilities known to be exploited, the system owner also checks for signs of compromise (unexpected accounts, keys, tokens or configuration changes) before closing the ticket, and rotates credentials that may have been exposed."
    ]
   },
   {
@@ -89,15 +92,19 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-03",
+ "last_verified": "2026-11-09",
  "created": "2026-10-30",
- "updated": "2026-11-03",
+ "updated": "2026-11-09",
  "order": 90,
  "verified_by": "Pascal",
  "history": [
   {
    "date": "2026-11-03",
    "note": "Re-verified framework mappings against NIST CSF 2.0 function themes (PR.PS / ID.RA style patch cadence) and CIS Control 7; ISO kept at theme level only."
+  },
+  {
+   "date": "2026-11-09",
+   "note": "Added running-version and restart verification, compromise check before closing exploited-vulnerability tickets, and AI/developer platforms and Linux-based appliances to the inventory scope."
   }
  ]
 }

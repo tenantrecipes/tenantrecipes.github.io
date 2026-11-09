@@ -1,0 +1,54 @@
+{
+ "id": "exchange-cross-tenant-calendar-sharing-xtap-slips",
+ "status": "published",
+ "title": "Cross-tenant calendar sharing via Cross-Tenant Access Policy slips to 23 November — keep EWS sharing alive until then",
+ "date": "2026-11-09",
+ "category": "M365",
+ "summary": "Microsoft updated message MC1446796 on 9 November 2026: worldwide rollout of Calendar Sharing through Microsoft 365 Cross-Tenant Access Policy (XTAP) is now expected to complete by 23 November 2026, previously 3 November. Free/Busy and MailTips via XTAP were due by 15 September 2026, and the GCC, GCC High and DoD rollout remains paused. The feature replaces the EWS-based Organization Relationships and Sharing Policies used for cross-tenant Free/Busy, MailTips and calendar sharing, which are affected as EWS is gradually disabled from 1 October 2026. Microsoft's EWSEnabled extension keeps EWS available until the final shutdown on 1 April 2027.",
+ "why": "Tenants that disabled EWS early, or are on the gradual EWS shutdown, can lose partner calendar sharing before the replacement exists in their tenant. Migrating sharing policies before XTAP calendar sharing reaches you means there is nothing to migrate to.",
+ "todo": [
+  "Run `Get-OrganizationRelationship | fl Name,DomainNames,Enabled,FreeBusyAccessEnabled,MailTipsAccessEnabled` and `Get-SharingPolicy | fl Name,Domains,Enabled,Default` to find cross-tenant sharing that still depends on EWS.",
+  "Move Free/Busy and MailTips to XTAP now (already available) using the Learn migration guide; leave calendar-sharing policies in place until XTAP calendar sharing is visible in your tenant.",
+  "If partners report missing calendars, check whether EWS has been disabled for the tenant and use the documented EWSEnabled extension as a bridge — it ends on 1 April 2027.",
+  "Hybrid tenants are out of scope for XTAP: plan the move to the dedicated Exchange hybrid app instead."
+ ],
+ "effective": "2026-11-23",
+ "effective_note": "Worldwide completion date for XTAP Calendar Sharing per the 9 November 2026 update of MC1446796; Gov clouds paused.",
+ "primary": {
+  "title": "Microsoft Learn: Migrate to Microsoft 365 Cross-Tenant Access Policy for Free/Busy, calendars and MailTips",
+  "url": "https://learn.microsoft.com/exchange/sharing/migrate-to-m365-xtap"
+ },
+ "related": [
+  {
+   "title": "Recipe: find cross-tenant sharing that still depends on EWS",
+   "url": "recipes/exchange-ews-cross-tenant-sharing-inventory.html"
+  },
+  {
+   "title": "SMTP AUTH Basic retirement guide",
+   "url": "guides/smtp-auth-basic-retirement.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Learn: Migrate to Microsoft 365 Cross-Tenant Access Policy",
+   "url": "https://learn.microsoft.com/exchange/sharing/migrate-to-m365-xtap",
+   "checked": "2026-11-09"
+  },
+  {
+   "title": "Microsoft Learn: Deprecation of EWS in Exchange Online",
+   "url": "https://learn.microsoft.com/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online",
+   "checked": "2026-11-09"
+  },
+  {
+   "title": "Exchange Team Blog: Cross-tenant Free/Busy, MailTips and Calendar Sharing are moving to Cross-Tenant Access Policy",
+   "url": "https://techcommunity.microsoft.com/blog/exchange/cross-tenant-freebusy-mailtips-and-calendar-sharing-are-moving-to-cross-tenant-a/4545169",
+   "checked": "2026-11-09"
+  },
+  {
+   "title": "MC1446796 as updated 9 November 2026 (reproduced by Modern Workspace Pro)",
+   "url": "https://mwpro.co.uk/blog/2026/11/09/mc1446796-exchange-online-pauses-gov-rollout-and-shifts-cross-tenant-sharing-from-ews-to-microsoft-365-cross-tenant-access-policy/",
+   "checked": "2026-11-09"
+  }
+ ],
+ "last_verified": "2026-11-09"
+}

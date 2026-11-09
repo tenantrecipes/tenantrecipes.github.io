@@ -1,0 +1,31 @@
+{
+ "id": "exo-ews-cross-tenant-sharing-inventory",
+ "status": "published",
+ "title": "Inventory EWS-dependent cross-tenant sharing in Exchange Online",
+ "lang": "powershell",
+ "tags": [
+  "Exchange Online",
+  "EWS",
+  "Cross-tenant"
+ ],
+ "summary": "Read-only Exchange Online PowerShell that lists enabled Organization Relationships, Availability Address Spaces, Sharing Policies and how many mailboxes each Sharing Policy covers, as input to the Cross-Tenant Access Policy migration.",
+ "code": "Connect-ExchangeOnline\n$FormatEnumerationLimit = -1\n\n# Free/Busy and MailTips partners (EWS-based)\nGet-OrganizationRelationship | Where-Object { $_.Enabled } |\n  Format-List Name, DomainNames, FreeBusyAccessEnabled, FreeBusyAccessLevel, FreeBusyAccessScope, MailTipsAccessEnabled, MailTipsAccessLevel, MailTipsAccessScope, TargetSharingEpr, TargetAutodiscoverEpr, TargetApplicationUri\n\n# Availability Address Spaces (not EWS-dependent for Microsoft 365 partners; optional to migrate)\nGet-AvailabilityAddressSpace | Format-List ForestName, AccessMethod, TargetAutodiscoverEpr, TargetServiceEpr, TargetTenantId\n\n# Calendar sharing policies and their mailbox coverage\nGet-SharingPolicy | Format-List Name, Enabled, Domains, Default\nGet-EXOMailbox -ResultSize Unlimited -RecipientTypeDetails UserMailbox,SharedMailbox -Properties SharingPolicy |\n  Group-Object SharingPolicy | Select-Object Name, Count",
+ "notes": [
+  "Read-only. Requires the Organization Management role in Exchange Online.",
+  "Cross-Tenant Access Policy only covers partners hosted in Microsoft 365; keep policies that serve on-premises or hybrid partners.",
+  "Do not remove calendar Sharing Policies until XTAP calendar sharing has reached your tenant."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "exchange-ews-cross-tenant-sharing-inventory",
+  "label": "Find cross-tenant sharing that still depends on EWS"
+ },
+ "refs": [
+  {
+   "title": "Microsoft Learn: Migrate to Microsoft 365 Cross-Tenant Access Policy",
+   "url": "https://learn.microsoft.com/en-us/exchange/sharing/migrate-to-m365-xtap"
+  }
+ ],
+ "created": "2026-11-09",
+ "last_verified": "2026-11-09"
+}

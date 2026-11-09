@@ -38,6 +38,7 @@ It covers chat assistants, AI features in business apps, coding assistants and a
 ## 5. Using AI output
 
 - You are responsible for anything you produce with AI. Check facts, figures, quotes and references before you use them.
+- Interactive outputs that an AI tool builds for you, such as calculators, dashboards, forms or simulations, are AI output too. Check their inputs and logic before you rely on them or share them.
 - Do not use AI output alone for decisions about people, such as hiring, performance or credit.
 - Be open about AI use when a customer, colleague or reader would reasonably expect to know.
 - Respect copyright and licences; do not ask tools to reproduce protected material.
@@ -45,6 +46,7 @@ It covers chat assistants, AI features in business apps, coding assistants and a
 ## 6. Security and monitoring
 
 - Sensitivity labels and data loss prevention apply to AI features in the same way as to other apps, including Endpoint DLP controls for unsanctioned generative AI sites where deployed.
+- Self-hosted AI infrastructure, such as AI gateways, model-serving clusters and MCP servers, must be in the approved AI inventory with a named owner, must not be reachable from the internet without authentication, and is patched under the patch management policy.
 - AI interactions in company tools may be logged and retained for security, compliance and legal holds.
 - Report suspicious AI behaviour, prompt injection, unsanctioned tools or a possible data leak to {{SECURITY_CONTACT}}.
 

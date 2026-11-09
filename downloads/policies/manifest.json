@@ -1,7 +1,7 @@
 {
  "acceptable-use-policy": "07888e8121819365",
  "access-management-policy": "147ed16808dec45e",
- "ai-copilot-use-policy": "0fa6454729992b62",
+ "ai-copilot-use-policy": "b67f0ce7a6b0876c",
  "backup-recovery-policy": "22d04644fdec2c13",
  "byod-mobile-device-policy": "9ad6d946d8af137b",
  "incident-response-policy": "2c442545d8f506b5",
@@ -9,7 +9,7 @@
  "offboarding-checklist": "c784e135c962a630",
  "onboarding-checklist": "486d93d3791417b1",
  "password-mfa-policy": "669952957d8bfc79",
- "patch-management-policy": "639303803624727d",
+ "patch-management-policy": "1a46b5ea0ab6d111",
  "role-change-checklist": "67c1b95e2de912f7",
  "third-party-security-policy": "aba9632d6db48b88"
 }

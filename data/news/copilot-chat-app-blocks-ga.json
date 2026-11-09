@@ -1,0 +1,43 @@
+{
+ "id": "copilot-chat-app-blocks-ga",
+ "status": "published",
+ "title": "Copilot Chat App Blocks are GA: interactive dashboards and forms rendered inside the conversation",
+ "date": "2026-11-09",
+ "category": "Copilot/AI",
+ "summary": "Microsoft has announced general availability of App Blocks in Microsoft 365 Copilot Chat (MC1545695, published 9 November 2026). App Blocks turn a prompt and its data into interactive in-conversation experiences such as calculators, dashboards, forms, planners, visualisations, simulations and comparison tools, and can retrieve current information and render it interactively. It applies to both Microsoft 365 Copilot (licensed) and Copilot Chat users, worldwide, with rollout from late October to early November 2026. Microsoft lists no admin action and no compliance considerations; previews now render inline instead of in a separate app canvas.",
+ "why": "Microsoft says there is nothing to configure, but a generated, interactive artefact built from grounded tenant data is still output that users will screenshot, share and act on. Your AI acceptable-use rules and DLP coverage should treat it the same way as any other Copilot response.",
+ "todo": [
+  "Update user training that still shows the side-by-side app canvas, as Microsoft recommends.",
+  "Confirm your Copilot acceptable-use policy covers interactive outputs (calculators, simulations) used for decisions — they are AI-generated and need the same human review.",
+  "Check that Purview DLP for the Microsoft 365 Copilot location and Copilot audit are in place, so grounded data surfaced in App Blocks is governed like any other Copilot interaction.",
+  "Do not treat 'no compliance considerations identified' as your risk assessment; record the feature in your AI service inventory."
+ ],
+ "effective_note": "GA worldwide, rolling out late October to early November 2026 (MC1545695).",
+ "primary": {
+  "title": "MC1545695: App Blocks in M365 Copilot (Message center archive)",
+  "url": "https://message.cengizyilmaz.net/message/mc1545695-app-blocks-in-m365-copilot"
+ },
+ "related": [
+  {
+   "title": "Enterprise AI governance pillar",
+   "url": "guides/enterprise-ai-governance.html"
+  },
+  {
+   "title": "Purview DLP for the Copilot location",
+   "url": "recipes/purview-dlp-copilot-location.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Message center archive: MC1545695",
+   "url": "https://message.cengizyilmaz.net/message/mc1545695-app-blocks-in-m365-copilot",
+   "checked": "2026-11-09"
+  },
+  {
+   "title": "Modern Workspace Pro: MC1545695 App Blocks",
+   "url": "https://mwpro.co.uk/blog/2026/11/09/mc1545695-microsoft-365-copilot-chat-adds-app-blocks-for-interactive-in-conversation-experiences/",
+   "checked": "2026-11-09"
+  }
+ ],
+ "last_verified": "2026-11-09"
+}

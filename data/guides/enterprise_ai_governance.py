@@ -5,7 +5,7 @@ SLUG = "enterprise-ai-governance"
 TIER = "pillar"
 PUBLISHED = "2026-11-06"
 VERIFIED = "2026-11-06"
-UPDATED = "2026-11-08"
+UPDATED = "2026-11-09"
 TITLE = "Enterprise AI governance for Copilot and every enterprise LLM"
 SHORT = "Enterprise AI governance"
 DESC = ("A multi-vendor enterprise AI governance programme: approved inventory, shadow AI discovery, "
@@ -48,9 +48,16 @@ HISTORY = [
     ("2026-11-08",
      "Identity phase: added Entra Agent ID default inactivity policy and custom lifecycle policies (preview) "
      "so unused or unsponsored agent identities can be notified, disabled or deleted. Documentation verified only."),
+    ("2026-11-09",
+     "Discovery phase: added self-hosted AI infrastructure (AI gateways, model-serving clusters, MCP hosts) to the inventory, "
+     "with the LiteLLM CVE-2026-59822 and GPUStack CVE-2026-102895 KEV entries as reasons. Documentation verified only."),
 ]
 
 L = {
+    "litellm_ghsa": ("GitHub advisory GHSA-7488-6r32-c95q: LiteLLM MCP authentication bypass (CVE-2026-59822)",
+                     "https://github.com/BerriAI/litellm/security/advisories/GHSA-7488-6r32-c95q"),
+    "gpustack_ghsa": ("GitHub advisory GHSA-gj9m-f8ph-pmhr: GPUStack loopback admin bypass (CVE-2026-102895)",
+                      "https://github.com/gpustack/gpustack/security/advisories/GHSA-gj9m-f8ph-pmhr"),
     "purview_ai": ("Microsoft Learn: Purview protections for Copilot and other generative AI apps",
                    "https://learn.microsoft.com/en-us/purview/ai-microsoft-purview"),
     "secure_genai": ("Microsoft Learn: Secure generative AI with Microsoft Entra",
@@ -165,10 +172,12 @@ PHASES = [
     "do": ["Chat UIs are only half the surface. Inventory Claude API / OpenAI API / Grok API keys, Azure OpenAI / Microsoft Foundry deployments, Copilot Studio agents, GitHub Copilot (if in scope for your programme), and MCP or connector hosts.",
            "Ask who holds the billing account and where keys live. Keys in personal cloud tenants are shadow AI even when the model brand matches an approved vendor.",
            "For each API path, record retention/ZDR eligibility separately from the chat product — Anthropic and OpenAI document different retention rules for API vs workspace products.",
-           "Where devices are onboarded to Defender for Endpoint P2 or higher, use local AI agent discovery (GA since 29 October 2026): Assets lists supported coding CLIs, desktop agents, agentic IDEs and VS Code extensions per device and account, including configured local and remote MCP servers. Reconcile that list against the inventory instead of relying on interviews alone."],
+           "Where devices are onboarded to Defender for Endpoint P2 or higher, use local AI agent discovery (GA since 29 October 2026): Assets lists supported coding CLIs, desktop agents, agentic IDEs and VS Code extensions per device and account, including configured local and remote MCP servers. Reconcile that list against the inventory instead of relying on interviews alone.",
+           "Add self-hosted AI infrastructure as its own inventory class: AI gateways/proxies (for example LiteLLM), model-serving and GPU cluster managers (for example GPUStack) and MCP servers. Each gets an owner, an exposure flag (internet / internal / lab), an authentication method and a patch SLA. Both of those examples have CISA KEV-listed authentication bypasses in 2026 (CVE-2026-59822 reaches configured MCP tools with a fabricated Bearer token; CVE-2026-102895 grants admin when a same-host reverse proxy makes requests look like loopback)."],
     "pit": ["Assuming 'we bought Enterprise chat, so the API is covered' is usually wrong; ZDR and retention are product-specific.",
-            "Endpoint agent discovery only covers onboarded devices and agents in Microsoft's support matrix; renamed, unsupported or personal-device agents still need interviews and network signals."],
-    "src": S("claude_retention", "openai_privacy", "xai_faq", "purview_ai", "mde_agents"),
+            "Endpoint agent discovery only covers onboarded devices and agents in Microsoft's support matrix; renamed, unsupported or personal-device agents still need interviews and network signals.",
+            "An AI gateway concentrates every downstream API key and MCP tool credential in one service. Treat it as a tier-1 asset: no unauthenticated internet exposure, and rotate keys after any exploited vulnerability, not just patch."],
+    "src": S("claude_retention", "openai_privacy", "xai_faq", "purview_ai", "mde_agents", "litellm_ghsa", "gpustack_ghsa"),
     "rec": [], "tools": [], "guides": []},
    {"t": "Publish the first approved list and the denial list",
     "check": "Employees can see which tools are approved, conditional or denied for company data",

@@ -1,0 +1,44 @@
+{
+ "id": "purview-dspm-partner-integrations-retirement",
+ "status": "published",
+ "title": "Purview DSPM drops its Varonis, BigID, Cyera and OneTrust preview connectors on 7 December 2026",
+ "date": "2026-11-09",
+ "category": "Retirements",
+ "summary": "Microsoft is retiring the public-preview partner integrations that bring selected non-Microsoft data sources into Microsoft Purview Data Security Posture Management (DSPM) on 7 December 2026: Varonis for Salesforce, BigID for Databricks, Cyera for Snowflake and OneTrust for Google Cloud Platform. From that date you can no longer connect those sources, and data from them is no longer ingested, processed or shown in DSPM. Microsoft says other DSPM capabilities are unaffected, frames the change as rethinking how non-Microsoft signals come into Purview, and applies it to Worldwide, GCC, GCC High and DoD.",
+ "why": "If you sold DSPM internally as the single pane for Salesforce, Databricks, Snowflake or GCP data risk, that coverage disappears in four weeks with no announced replacement. Any posture report, AI-readiness assessment or audit evidence that pulls these sources from DSPM will silently shrink.",
+ "todo": [
+  "Check whether any of the four partner connectors are configured in Purview DSPM and which reports, dashboards or audit packs consume their findings.",
+  "Export the current findings for those sources before 7 December 2026 so you keep a baseline for comparison.",
+  "Move monitoring of those sources back to the partner's own console (Varonis, BigID, Cyera, OneTrust) or another tool, and update the data-owner runbook accordingly.",
+  "Tell risk and compliance owners that DSPM coverage of non-Microsoft sources is narrowing, so nobody reads an empty panel as 'no risk'."
+ ],
+ "effective": "2026-12-07",
+ "effective_note": "Message center MC1545691 (Plan for change), published 9 November 2026.",
+ "primary": {
+  "title": "MC1545691: Microsoft Purview – Retirement of select DSPM partner integrations (Message center archive)",
+  "url": "https://message.cengizyilmaz.net/message/mc1545691-microsoft-purview-retirement-of-select-dspm-partner-integrations"
+ },
+ "related": [
+  {
+   "title": "Purview oversharing assessment recipe",
+   "url": "recipes/purview-oversharing-assessment.html"
+  },
+  {
+   "title": "Enterprise AI governance pillar",
+   "url": "guides/enterprise-ai-governance.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Message center archive: MC1545691",
+   "url": "https://message.cengizyilmaz.net/message/mc1545691-microsoft-purview-retirement-of-select-dspm-partner-integrations",
+   "checked": "2026-11-09"
+  },
+  {
+   "title": "Microsoft Learn: Data Security Posture Management",
+   "url": "https://learn.microsoft.com/en-us/purview/data-security-posture-management",
+   "checked": "2026-11-09"
+  }
+ ],
+ "last_verified": "2026-11-09"
+}

@@ -1,0 +1,50 @@
+{
+ "id": "ssh-audit",
+ "status": "published",
+ "kind": "tool",
+ "name": "ssh-audit",
+ "vendor": "Joe Testa / Positron Security (open source)",
+ "category": "Vulnerability scanning",
+ "what": "A Python tool that connects to SSH servers (or acts as a server to test SSH clients) and reports the banner, software version, key-exchange, host-key, cipher and MAC algorithms with fail/warn/info ratings. It also checks configurations against built-in or custom policies and can print platform hardening guides. It does not test authentication, so it cannot confirm or exploit auth bypasses such as CVE-2026-123158; use it to find and baseline sshd fleets.",
+ "when": "When you need a quick inventory of which SSH daemons are listening and what they announce (for example, to find OpenSSH builds on Alpine after an advisory), and as a recurring policy check on jump hosts, Linux servers and network appliances you own or are authorised to assess.",
+ "license": "MIT",
+ "cost": "open source",
+ "url": "https://github.com/jtesta/ssh-audit",
+ "repo": "https://github.com/jtesta/ssh-audit",
+ "example": [
+  "Install from PyPI with `pip3 install ssh-audit` (release 3.9.0 was current when checked on 9 November 2026), or use the Docker image `positronsecurity/ssh-audit`.",
+  "Audit one host without the connection-rate test: `ssh-audit --skip-rate-test bastion01.example.internal`. Exit code 0 means every algorithm is rated secure.",
+  "Audit a list of in-scope hosts (`HOST[:PORT]` per line) and keep machine-readable output: `ssh-audit --skip-rate-test -T in-scope-ssh.txt -jj > ssh-audit.json`, then filter the JSON for the banner and software fields.",
+  "Baseline a known-good server as a custom policy with `ssh-audit -M hardened_policy.txt gold-host`, then check the fleet against it with `ssh-audit -P hardened_policy.txt -T in-scope-ssh.txt`. List built-in policies with `ssh-audit -L`.",
+  "Print a vendor-neutral hardening config for a platform with `ssh-audit --list-hardening-guides` and `ssh-audit --get-hardening-guide \"<platform name>\"`, and review it before applying through change control."
+ ],
+ "pitfalls": [
+  "A standard audit runs a connection-rate test (to infer DHEat exposure) unless you pass `--skip-rate-test`; on fragile appliances or rate-limited jump hosts, skip it.",
+  "`--dheat` actively runs the DHEat denial-of-service attack (CVE-2002-20001) against the target. Never run it outside an agreed test window with written authorisation.",
+  "The banner shows the upstream version (for example OpenSSH_10.0), not the distribution patch level. A backported fix such as Alpine 3.22's 10.0_p1-r11 still announces 10.0 — confirm the package version on the host.",
+  "It audits algorithms and policy, not authentication settings like PasswordAuthentication or UsePAM; check those with `sshd -T` on the host.",
+  "Only test systems you own or have written permission to test."
+ ],
+ "sources": [
+  {
+   "title": "ssh-audit on GitHub (README: usage, policies, hardening guides)",
+   "url": "https://github.com/jtesta/ssh-audit",
+   "checked": "2026-11-09"
+  },
+  {
+   "title": "ssh-audit on PyPI",
+   "url": "https://pypi.org/project/ssh-audit/",
+   "checked": "2026-11-09"
+  }
+ ],
+ "related": [
+  {
+   "title": "OpenSSH musl/no-PAM password bypass (CVE-2026-123158)",
+   "url": "security/openssh-musl-nopam-password-bypass-cve-2026-123158.html"
+  }
+ ],
+ "last_verified": "2026-11-09",
+ "created": "2026-11-09",
+ "updated": "2026-11-09",
+ "order": 360
+}
