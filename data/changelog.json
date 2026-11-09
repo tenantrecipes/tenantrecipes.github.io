@@ -1,5 +1,14 @@
 [
   {
+    "date": "2026-11-09",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Secure your website",
+    "blurb": "New pillar: accounts, DNS/TLS, security headers, CI SHA-pinning, third-party scripts, privacy and monitoring with a prioritised checklist.",
+    "url": "guides/secure-your-website.html",
+    "text": "New pillar: accounts, DNS/TLS, security headers, CI SHA-pinning, third-party scripts, privacy and monitoring with a prioritised checklist."
+  },
+  {
     "date": "2026-11-08",
     "kind": "site",
     "type": "News",
