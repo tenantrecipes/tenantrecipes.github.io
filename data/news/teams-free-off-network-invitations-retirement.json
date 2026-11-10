@@ -1,0 +1,34 @@
+{
+ "id": "teams-free-off-network-invitations-retirement",
+ "status": "published",
+ "title": "Teams retires off-network invitations that onboard external people to Teams Free; federation with Teams Free stays",
+ "date": "2026-11-10",
+ "category": "Retirements",
+ "summary": "MC1546409 says Microsoft Teams will retire the flow that lets work or school users invite someone who cannot be found in Teams to create a Teams Free account and join a chat, both by email invitation and by sharing a link to chat. Rollout starts in early December 2026 and should complete by late December. Chat with existing Teams Free users remains available, subject to your external-access policies, and team, channel and meeting collaboration does not change.",
+ "why": "A user-driven path that pulled unmanaged consumer accounts into business chats disappears, which narrows an external-collaboration channel you could not govern well. Expect helpdesk tickets from users who relied on it; the supported alternatives are guest access or the external person creating a Teams Free account independently.",
+ "todo": [
+  "Update user and helpdesk guidance before 6 December 2026, as Microsoft recommends.",
+  "Review the Teams external access setting for chat with unmanaged Teams accounts and decide whether chat with Teams Free users should be allowed at all.",
+  "Point recurring external collaboration to B2B guest access, where Conditional Access and access reviews apply."
+ ],
+ "effective": null,
+ "effective_note": "Rolling out early to late December 2026, worldwide (MC1546409).",
+ "primary": {
+  "title": "MC1546409: Retirement of off-network invitations to Teams Free (Message center mirror)",
+  "url": "https://mwpro.co.uk/blog/2026/11/10/mc1546409-microsoft-teams-retires-off-network-invitations-to-teams-free-chats/"
+ },
+ "related": [
+  {
+   "title": "Microsoft Learn: Manage external meetings and chat with people outside your organization",
+   "url": "https://learn.microsoft.com/en-us/microsoftteams/trusted-organizations-external-meetings-chat"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Modern Workspace Pro: MC1546409 (message text)",
+   "url": "https://mwpro.co.uk/blog/2026/11/10/mc1546409-microsoft-teams-retires-off-network-invitations-to-teams-free-chats/",
+   "checked": "2026-11-10"
+  }
+ ],
+ "last_verified": "2026-11-10"
+}

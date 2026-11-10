@@ -1,5 +1,104 @@
 [
   {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "Guide",
+    "title": "OneDrive on unmanaged devices: session control",
+    "blurb": "Technical guide: produce the monitored-session notice and Download blocked message with Conditional Access App Control and Defender for Cloud Apps session policies; SharePoint app-enforced alternative, gaps, testing and rollback.",
+    "url": "guides/mdca-session-control-unmanaged-devices.html",
+    "text": "Technical guide: produce the monitored-session notice and Download blocked message with Conditional Access App Control and Defender for Cloud Apps session policies; SharePoint app-enforced alternative, gaps, testing and rollback."
+  },
+  {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "Security",
+    "title": "Patch Tuesday November 2026",
+    "blurb": "1,095 Microsoft CVEs, 64 Critical; Outlook NTLM-leak CVE-2026-124194 exploited and in KEV; Windows Search via Exchange (9.8), Exchange SE and AD DS RCE.",
+    "url": "security/patch-tuesday-2026-11.html",
+    "text": "1,095 Microsoft CVEs, 64 Critical; Outlook NTLM-leak CVE-2026-124194 exploited and in KEV; Windows Search via Exchange (9.8), Exchange SE and AD DS RCE."
+  },
+  {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "Security",
+    "title": "Barracuda ESG pre-auth bypass + root RCE (KEV)",
+    "blurb": "CVE-2026-116606 and CVE-2026-111560 chained to root on Email Security Gateway; exploited, KEV due 13 November with forensic triage.",
+    "url": "security/barracuda-esg-config-import-bypass-cve-2026-116606.html",
+    "text": "CVE-2026-116606 and CVE-2026-111560 chained to root on Email Security Gateway; exploited, KEV due 13 November with forensic triage."
+  },
+  {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "Security",
+    "title": "Cisco BroadWorks OCI-P XXE (CVE-2026-20320, KEV)",
+    "blurb": "Unauthenticated file read through the OCI XML parser; fixed in RI.2026.07, no workaround; added to KEV 10 November.",
+    "url": "security/cisco-broadworks-oci-xxe-cve-2026-20320.html",
+    "text": "Unauthenticated file read through the OCI XML parser; fixed in RI.2026.07, no workaround; added to KEV 10 November."
+  },
+  {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "Security",
+    "title": "Starlette Host-header auth bypass (CVE-2026-48710, KEV)",
+    "blurb": "BadHost: request.url diverges from the routed path, bypassing path-based auth in FastAPI apps and AI gateways; fixed in starlette 1.0.1.",
+    "url": "security/starlette-host-header-path-bypass-cve-2026-48710.html",
+    "text": "BadHost: request.url diverges from the routed path, bypassing path-based auth in FastAPI apps and AI gateways; fixed in starlette 1.0.1."
+  },
+  {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "News",
+    "title": "Claude in Copilot default-on for UK tenants 9 Dec",
+    "blurb": "MC1546435: UK tenants without an Anthropic selection switch to All users; the Microsoft 365 apps-only option is retired.",
+    "url": "news/copilot-claude-default-on-uk-2026-12.html",
+    "text": "MC1546435: UK tenants without an Anthropic selection switch to All users; the Microsoft 365 apps-only option is retired."
+  },
+  {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "News",
+    "title": "Power BI standalone Copilot retires January 2027",
+    "blurb": "MC1546429: Microsoft 365 Copilot in Power BI on by default from 8 December; two tenant settings are removed.",
+    "url": "news/powerbi-standalone-copilot-retirement.html",
+    "text": "MC1546429: Microsoft 365 Copilot in Power BI on by default from 8 December; two tenant settings are removed."
+  },
+  {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "News",
+    "title": "Teams retires off-network Teams Free invitations",
+    "blurb": "MC1546409: email and link-to-chat onboarding of Teams Free accounts ends in December; federation stays.",
+    "url": "news/teams-free-off-network-invitations-retirement.html",
+    "text": "MC1546409: email and link-to-chat onboarding of Teams Free accounts ends in December; federation stays."
+  },
+  {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "News",
+    "title": "Teams auto-recording options follow meeting policy",
+    "blurb": "MC1508234: organisers see only policy-allowed automatic options, plus a new Record only choice.",
+    "url": "news/teams-auto-recording-policy-alignment.html",
+    "text": "MC1508234: organisers see only policy-allowed automatic options, plus a new Record only choice."
+  },
+  {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "Tool",
+    "title": "MSRC Security Updates API (CVRF)",
+    "blurb": "Pull a Patch Tuesday month as JSON or via the MsrcSecurityUpdates module and build your own triage list.",
+    "url": "tools/msrc-security-updates-api.html",
+    "text": "Pull a Patch Tuesday month as JSON or via the MsrcSecurityUpdates module and build your own triage list."
+  },
+  {
+    "date": "2026-11-10",
+    "kind": "site",
+    "type": "Policy",
+    "title": "AI use and BYOD policies updated",
+    "blurb": "AI subprocessor settings are IT-scoped and reviewed before default changes; unmanaged PCs get browser-only, monitored access.",
+    "url": "policies/ai-copilot-use-policy.html",
+    "text": "AI subprocessor settings are IT-scoped and reviewed before default changes; unmanaged PCs get browser-only, monitored access."
+  },
+  {
     "date": "2026-11-09",
     "kind": "site",
     "type": "Guide",

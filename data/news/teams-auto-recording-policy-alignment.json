@@ -1,0 +1,40 @@
+{
+ "id": "teams-auto-recording-policy-alignment",
+ "status": "published",
+ "title": "Teams meeting options will only show the automatic recording/transcription choices your meeting policy allows, plus a new 'Record only'",
+ "date": "2026-11-10",
+ "category": "M365",
+ "summary": "MC1508234 (updated 10 November 2026 with a new timeline) changes the 'Record and transcribe automatically' setting in Meeting options so organisers see only the options permitted by their effective Teams meeting policy, whether assigned directly, through a group or via the global policy. A new 'Record only' option starts recording without transcription. Targeted Release now starts mid-November and completes by end of November 2026; general availability runs from early to mid-December 2026.",
+ "why": "If recording is allowed but transcription is blocked (common where transcripts feed Copilot or eDiscovery concerns), organisers previously saw choices they could not use. After this change the policy matrix is enforced in the UI, so your recording and transcription policy split becomes visible to users — check it is the split you intended.",
+ "todo": [
+  "List effective meeting policies with `Get-CsTeamsMeetingPolicy | Select-Object Identity,AllowCloudRecording,AllowTranscription` and compare with what each group should see.",
+  "Tell organisers about 'Record only' and that available options now follow policy.",
+  "If transcripts are what feed Copilot in meetings, confirm the transcription policy for groups where Copilot is or is not wanted."
+ ],
+ "effective": null,
+ "effective_note": "Targeted Release mid- to end-November 2026; GA early to mid-December 2026 (MC1508234, updated 10 November 2026).",
+ "primary": {
+  "title": "MC1508234: Automatic recording and transcription options align with admin policies (Message center mirror)",
+  "url": "https://mwpro.co.uk/blog/2026/11/10/mc1508234-microsoft-teams-aligns-automatic-recording-and-transcription-with-admin-policies-and-adds-record-only-option/"
+ },
+ "related": [
+  {
+   "title": "Copilot in Teams meetings and transcription",
+   "url": "recipes/copilot-teams-meeting-transcription.html"
+  }
+ ],
+ "recipe": "copilot-teams-meeting-transcription",
+ "sources": [
+  {
+   "title": "Modern Workspace Pro: MC1508234 (message text, updated 10 November 2026)",
+   "url": "https://mwpro.co.uk/blog/2026/11/10/mc1508234-microsoft-teams-aligns-automatic-recording-and-transcription-with-admin-policies-and-adds-record-only-option/",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "Microsoft Learn: Set-CsTeamsMeetingPolicy (AllowCloudRecording, AllowTranscription)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/teams/set-csteamsmeetingpolicy",
+   "checked": "2026-11-10"
+  }
+ ],
+ "last_verified": "2026-11-10"
+}

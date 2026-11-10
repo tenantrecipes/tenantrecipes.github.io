@@ -39,6 +39,7 @@ It covers company-owned devices and personal devices (BYOD) used to access compa
 - Copying company data to personal apps or storage, or taking screenshots of restricted information, may be blocked.
 - IT can remove company data and accounts from the device, but does not wipe your personal content and does not see your personal photos, messages or browsing.
 - Access may be limited to web or approved apps if the device does not meet the requirements above.
+- On personal computers, company files may be opened in a web browser only. Downloads, printing and sync can be blocked or monitored for devices that are not managed, and a notice tells you when a session is monitored.
 
 ## 6. Loss, theft and leaving
 

@@ -265,16 +265,55 @@
     "title": "Manage Microsoft Copilot in Teams meetings and events",
     "url": "https://learn.microsoft.com/en-us/microsoftteams/copilot-teams-transcription",
     "checked": "2026-10-30"
+   },
+   {
+    "title": "MC1508234: Automatic recording and transcription options align with admin policies (Message center mirror)",
+    "url": "https://mwpro.co.uk/blog/2026/11/10/mc1508234-microsoft-teams-aligns-automatic-recording-and-transcription-with-admin-policies-and-adds-record-only-option/",
+    "checked": "2026-11-10"
+   },
+   {
+    "title": "Microsoft Learn: Set-CsTeamsMeetingPolicy",
+    "url": "https://learn.microsoft.com/en-us/powershell/module/teams/set-csteamsmeetingpolicy",
+    "checked": "2026-11-10"
    }
   ],
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-11-10",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical",
+   "rollback": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "The organiser does not see 'Record and transcribe' or 'Transcribe only' under Record and transcribe automatically",
+    "cause": "Since MC1508234 (Targeted Release from mid-November 2026, GA December 2026) Meeting options only show the automatic options the organiser's effective meeting policy allows; with transcription blocked only 'Record only' and 'Off' remain",
+    "fix": "Check the organiser's effective policy (direct, group or global) with `Get-CsTeamsMeetingPolicy -Identity <policy> | Select-Object AllowCloudRecording,AllowTranscription` and change `AllowTranscription` on the policy if transcripts should be possible."
+   },
+   {
+    "symptom": "No automatic recording/transcription setting at all in Meeting options",
+    "cause": "Per MC1508234, when both recording and transcription are blocked by policy the automatic setting is not shown",
+    "fix": "Expected behaviour; allow at least one of `AllowCloudRecording` or `AllowTranscription` in the policy if needed."
+   },
+   {
+    "symptom": "Meetings recorded with 'Record only' have no Copilot recap",
+    "cause": "'Record only' starts recording without a transcript, and Copilot after the meeting needs a transcript",
+    "fix": "Use 'Record and transcribe' for meetings where Copilot after the meeting is wanted, or set the Copilot policy to require a saved transcript."
+   }
+  ],
+  "rollback": [
+   "Set the meeting policy's Copilot value back to the previous setting with `Set-CsTeamsMeetingPolicy -Identity <policy> -Copilot <previous value>` and confirm with `Get-CsTeamsMeetingPolicy -Identity <policy> | Select-Object Copilot,AllowTranscription`.",
+   "If transcription was enabled only for the pilot, remove the pilot users from the policy assignment so they fall back to the previous group or global policy."
+  ],
+  "history": [
+   {
+    "date": "2026-11-10",
+    "note": "Added troubleshooting for the policy-aligned automatic recording/transcription options and the new 'Record only' option (MC1508234), plus rollback."
+   }
+  ]
  },
  {
   "id": "ca-require-mfa-copilot",
@@ -949,16 +988,41 @@
     "title": "Channel unification: SAEC to MEC",
     "url": "https://learn.microsoft.com/en-us/microsoft-365-apps/updates/unified-update-channels",
     "checked": "2026-10-30"
+   },
+   {
+    "title": "Microsoft Learn: Microsoft 365 Apps security updates release notes",
+    "url": "https://learn.microsoft.com/en-us/officeupdates/microsoft365-apps-security-updates",
+    "checked": "2026-11-10"
    }
   ],
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-11-10",
   "screenshots": [],
   "markers": {
-   "steps": "official"
-  }
+   "steps": "official",
+   "troubleshooting": "practical"
+  },
+  "troubleshooting": [
+   {
+    "symptom": "After Patch Tuesday some devices still run an Outlook/Office build without the month's security fixes",
+    "cause": "Each channel gets its own security build; devices on a slower channel, with updates paused, or with a conflicting update policy stay behind",
+    "fix": "Compare installed builds in the Microsoft 365 Apps admin center inventory with the fixed build for each channel in the Microsoft 365 Apps security updates release notes, and resolve conflicting channel or update-deadline policies before forcing an update."
+   },
+   {
+    "symptom": "Office LTSC 2021/2024 devices are not covered by the channel report",
+    "cause": "Volume-licensed LTSC builds use their own servicing line, not Current or Monthly Enterprise Channel",
+    "fix": "Track LTSC builds separately against the fixed builds listed per CVE in the MSRC Security Update Guide (for November 2026: 16.0.14334.21048 for LTSC 2021 and 16.0.17932.21140 for LTSC 2024)."
+   }
+  ],
+  "history": [
+   {
+    "date": "2026-11-10",
+    "note": "Added troubleshooting for verifying Patch Tuesday security builds per channel and for Office LTSC, prompted by the exploited Outlook CVE-2026-124194."
+   }
+  ],
+  "related": []
  },
  {
   "id": "intune-compliance-baseline",

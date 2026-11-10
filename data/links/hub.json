@@ -914,6 +914,13 @@
           "note": "Retire Basic SMTP AUTH: OAuth, Graph sendMail scoping, HVE and connector relay.",
           "kind": "docs",
           "internal": true
+        },
+        {
+          "label": "Tenant Recipes: Session control for unmanaged devices",
+          "url": "guides/mdca-session-control-unmanaged-devices.html",
+          "note": "Conditional Access session controls, MDCA session policies and the SharePoint app-enforced alternative.",
+          "kind": "docs",
+          "internal": true
         }
       ]
     },
@@ -971,6 +978,13 @@
           "label": "Tenant Recipes: Admin By Request",
           "url": "guides/admin-by-request-endpoint-privilege.html",
           "note": "JIT elevation / remove standing local admin.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "Tenant Recipes: OneDrive on unmanaged devices",
+          "url": "guides/mdca-session-control-unmanaged-devices.html",
+          "note": "Monitored browser sessions and blocked downloads with Conditional Access App Control and Defender for Cloud Apps.",
           "kind": "docs",
           "internal": true
         }
@@ -1061,6 +1075,12 @@
           "note": "CVE/hardening watch curated on this site.",
           "kind": "docs",
           "internal": true
+        },
+        {
+          "label": "MSRC Security Updates API (CVRF)",
+          "url": "https://github.com/microsoft/MSRC-Microsoft-Security-Updates-API",
+          "note": "Machine-readable Patch Tuesday data and the MsrcSecurityUpdates PowerShell module.",
+          "kind": "tool"
         }
       ]
     },

@@ -1,0 +1,39 @@
+{
+ "id": "powerbi-standalone-copilot-retirement",
+ "status": "published",
+ "title": "Power BI retires the standalone Copilot (preview) in mid-January 2027; Microsoft 365 Copilot in Power BI is on by default from 8 December",
+ "date": "2026-11-10",
+ "category": "Retirements",
+ "summary": "MC1546429 says Power BI will retire the standalone Copilot preview experience — on the Power BI Home page, in the mobile apps, in Microsoft Teams and app-scoped Copilot — in mid-January 2027. From 8 December 2026, Microsoft 365 Copilot in Power BI (preview) is enabled by default worldwide. The standalone Copilot tenant setting and the 'Show Copilot in app navigation' setting are removed with the retirement.",
+ "why": "Two Fabric tenant settings you may have scoped carefully disappear, and a different Copilot surface is enabled by default. Your controls move from Power BI tenant settings to Microsoft 365 Copilot licensing, grounding and data-protection controls, so check that the people who could use the old experience are the ones you intend to have the new one.",
+ "todo": [
+  "Export or screenshot the current Copilot-related Fabric tenant settings and their security-group scopes before they are removed.",
+  "Review Microsoft 365 Copilot in Power BI and Microsoft Fabric (preview) requirements and availability before 8 December 2026.",
+  "Confirm sensitivity labels and Purview DLP coverage for semantic models and reports that Copilot can ground on.",
+  "Tell report authors and helpdesk that the Home-page, mobile and Teams entry points go away in January 2027."
+ ],
+ "effective": "2026-12-08",
+ "effective_note": "Microsoft 365 Copilot in Power BI default-on 8 December 2026; standalone Copilot retired mid-January 2027 (MC1546429).",
+ "primary": {
+  "title": "MC1546429: Power BI retiring standalone Copilot experiences (Message center mirror)",
+  "url": "https://mwpro.co.uk/blog/2026/11/10/mc1546429-power-bi-retires-standalone-copilot-and-shifts-to-microsoft-365-copilot-in-power-bi-and-fabric/"
+ },
+ "related": [
+  {
+   "title": "Secure Copilot rollout pillar",
+   "url": "guides/secure-copilot-rollout.html"
+  },
+  {
+   "title": "Purview sensitivity labels for Copilot",
+   "url": "recipes/purview-sensitivity-labels-copilot.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Modern Workspace Pro: MC1546429 (message text)",
+   "url": "https://mwpro.co.uk/blog/2026/11/10/mc1546429-power-bi-retires-standalone-copilot-and-shifts-to-microsoft-365-copilot-in-power-bi-and-fabric/",
+   "checked": "2026-11-10"
+  }
+ ],
+ "last_verified": "2026-11-10"
+}

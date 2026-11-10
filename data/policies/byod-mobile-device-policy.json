@@ -62,7 +62,8 @@
     "Company data on personal devices stays inside approved apps protected by app protection policies (for example Outlook, Teams and OneDrive).",
     "Copying company data to personal apps or storage, or taking screenshots of restricted information, may be blocked.",
     "IT can remove company data and accounts from the device, but does not wipe your personal content and does not see your personal photos, messages or browsing.",
-    "Access may be limited to web or approved apps if the device does not meet the requirements above."
+    "Access may be limited to web or approved apps if the device does not meet the requirements above.",
+    "On personal computers, company files may be opened in a web browser only. Downloads, printing and sync can be blocked or monitored for devices that are not managed, and a notice tells you when a session is monitored."
    ]
   },
   {
@@ -98,8 +99,14 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-10",
  "created": "2026-10-30",
- "updated": "2026-10-30",
- "order": 30
+ "updated": "2026-11-10",
+ "order": 30,
+ "history": [
+  {
+   "date": "2026-11-10",
+   "note": "Added browser-only access with monitored sessions and blocked downloads for unmanaged personal computers."
+  }
+ ]
 }

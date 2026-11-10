@@ -1,0 +1,128 @@
+{
+ "id": "patch-tuesday-2026-11",
+ "status": "published",
+ "order": 119,
+ "type": "vulnerability",
+ "area": "endpoint",
+ "category": "Client",
+ "patch_tuesday": true,
+ "title": "Patch Tuesday November 2026: 1,095 Microsoft CVEs, Outlook NTLM-leak zero-day exploited (CVE-2026-124194)",
+ "summary": "Microsoft's November 2026 release (10 November) lists 1,095 CVEs assigned by Microsoft in the Security Update Guide CVRF document, plus 247 third-party CVEs (Chromium, Linux and others) republished for Microsoft products. 64 of the Microsoft CVEs are rated Critical. One is marked exploited and none publicly disclosed: CVE-2026-124194, an Outlook spoofing flaw in which opening a crafted message file makes Outlook connect to an attacker-controlled location without the usual external-content warning and leak the user's NTLMv2 hash. CISA added it to KEV the same day (due 24 November 2026). Also notable: CVE-2026-116928 in Windows Search (CVSS 9.8), which Microsoft says is reachable through Exchange Server indexing an attachment with no user interaction, an Exchange Server SE RCE (CVE-2026-118207) and an AD DS RCE (CVE-2026-118146), both rated 'Exploitation More Likely'.",
+ "vendor": "Microsoft",
+ "product": "Windows, Microsoft 365 Apps / Office LTSC (Outlook), Exchange Server SE, Active Directory Domain Services and others",
+ "cves": [
+  {
+   "id": "CVE-2026-124194",
+   "cvss": 6.5,
+   "cvss_version": "3.1",
+   "cvss_source": "Microsoft",
+   "severity": "Moderate",
+   "note": "Outlook spoofing (CWE-356); Exploitation Detected; NTLMv2 hash disclosure; Preview Pane is not an attack vector. KEV 2026-11-10."
+  },
+  {
+   "id": "CVE-2026-116928",
+   "cvss": 9.8,
+   "cvss_version": "3.1",
+   "cvss_source": "Microsoft",
+   "severity": "Critical",
+   "note": "Windows Search RCE; Microsoft's FAQ says an email attachment indexed by Exchange Server triggers it without user interaction. Exploitation Less Likely."
+  },
+  {
+   "id": "CVE-2026-118207",
+   "cvss": 8.8,
+   "cvss_version": "3.1",
+   "cvss_source": "Microsoft",
+   "severity": "Critical",
+   "note": "Exchange Server Subscription Edition RTM RCE, authenticated low-privilege attacker; fixed in KB5133453 (build 15.02.2562.057). Exploitation More Likely."
+  },
+  {
+   "id": "CVE-2026-118146",
+   "cvss": 8.8,
+   "cvss_version": "3.1",
+   "cvss_source": "Microsoft",
+   "severity": "Critical",
+   "note": "Active Directory Domain Services RCE, authenticated low-privilege attacker. Exploitation More Likely."
+  },
+  {
+   "id": "CVE-2026-119952",
+   "cvss": 8.1,
+   "cvss_version": "3.1",
+   "cvss_source": "Microsoft",
+   "severity": "Critical",
+   "note": "Windows Schannel RCE (AC:H, no authentication). Exploitation More Likely."
+  }
+ ],
+ "severity": "Critical",
+ "exploited": true,
+ "kev_added": "2026-11-10",
+ "advisory_date": "2026-11-10",
+ "advisory_id": "MSRC Security Update Guide 2026-Nov",
+ "impact": "For CVE-2026-124194: an attacker who gets a user to open a crafted message file obtains that user's NTLMv2 hash, which can be relayed or cracked offline to act as the user. For the Critical bugs: remote code execution on Windows hosts, Exchange servers and domain controllers.",
+ "action": "Ship Outlook/Microsoft 365 Apps and Office LTSC builds first (KEV), then Exchange SE, domain controllers and the Windows cumulative update. Block outbound SMB/NTLM to the internet.",
+ "affected": [
+  "CVE-2026-124194: Microsoft 365 Apps for Enterprise (32/64-bit), Office LTSC 2021 and Office LTSC 2024 (32/64-bit) as listed by MSRC",
+  "CVE-2026-118207: Microsoft Exchange Server Subscription Edition RTM",
+  "CVE-2026-116928, CVE-2026-118146, CVE-2026-119952: supported Windows client and Windows Server versions listed per CVE in the Security Update Guide"
+ ],
+ "fixed": [
+  "Office LTSC 2021: build 16.0.14334.21048; Office LTSC 2024: build 16.0.17932.21140 (MSRC fixed builds for CVE-2026-124194)",
+  "Microsoft 365 Apps: the November 2026 security build of your update channel (see Microsoft 365 Apps security updates release notes)",
+  "Exchange Server SE: KB5133453 (build 15.02.2562.057)",
+  "Windows: the November 2026 cumulative updates, for example KB5131085 (Windows Server 2019, 10.0.17763.9487) and KB5131090 (Windows Server 2022, 10.0.20348.5870); check the per-CVE table for your build"
+ ],
+ "steps": [
+  "Treat CVE-2026-124194 as the emergency item: confirm Microsoft 365 Apps clients reach the November security build on every channel you run (Current, Monthly Enterprise, Semi-Annual Enterprise) and that Office LTSC 2021/2024 reach the fixed builds above. In Intune or Configuration Manager, report on Office build numbers rather than on 'update installed'.",
+  "Reduce the value of a leaked NTLMv2 hash while clients update: block outbound TCP 445 and WebDAV to the internet at the perimeter, add privileged and high-value users to Protected Users, and consider auditing outgoing NTLM with the 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' policy in Audit mode before enforcing it.",
+  "Hunt for exploitation attempts: in Defender XDR, look for Outlook (`outlook.exe`) initiating SMB or WebDAV connections to public IP addresses (`DeviceNetworkEvents` with `InitiatingProcessFileName =~ \"outlook.exe\"` and `RemotePort in (445, 80, 443)` to non-corporate addresses) and for message files (.msg/.eml) arriving from external senders and being opened shortly before.",
+  "Exchange Server SE: install KB5133453. Because Microsoft says CVE-2026-116928 is reachable through Exchange's attachment indexing, also apply the Windows cumulative update on every Exchange server in the same window, not only the Exchange SU.",
+  "Domain controllers: CVE-2026-118146 (AD DS RCE) needs only low-privileged authenticated access according to Microsoft; patch DCs in the first ring after your DC smoke tests.",
+  "Pull the full list for your estate from the CVRF API (`https://api.msrc.microsoft.com/cvrf/v3.0/cvrf/2026-Nov` with `Accept: application/json`) or the MsrcSecurityUpdates PowerShell module, filter on your products and 'Exploitation More Likely', and feed it to your change ticket."
+ ],
+ "pitfalls": [
+  "Ranking by CVSS: the only exploited CVE this month is rated Moderate 6.5; the CVSS 10.0 Entra Device Registration CVE (CVE-2026-109469) is a cloud-side fix that Microsoft says needs no customer action.",
+  "Counting third-party Chromium/Linux CVEs in the Security Update Guide as Microsoft CVEs; headline numbers differ between sources for this reason.",
+  "Assuming Preview Pane blocking helps: Microsoft says the Preview Pane is not the attack vector for CVE-2026-124194; the user has to open the file.",
+  "Patching Exchange SU but leaving the Windows CU for later on Exchange servers, which leaves the Windows Search path open."
+ ],
+ "sources": [
+  {
+   "title": "MSRC Security Update Guide: CVE-2026-124194",
+   "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-124194",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "MSRC CVRF API: November 2026 Security Updates (2026-Nov)",
+   "url": "https://api.msrc.microsoft.com/cvrf/v3.0/cvrf/2026-Nov",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "MSRC Security Update Guide: CVE-2026-116928 (Windows Search)",
+   "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-116928",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "MSRC Security Update Guide: CVE-2026-118207 (Exchange Server)",
+   "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118207",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "Microsoft Learn: Microsoft 365 Apps security updates release notes",
+   "url": "https://learn.microsoft.com/en-us/officeupdates/microsoft365-apps-security-updates",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "CISA Known Exploited Vulnerabilities Catalog (catalog version 2026.11.10)",
+   "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "NIST NVD: CVE-2026-124194",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-124194",
+   "checked": "2026-11-10"
+  }
+ ],
+ "last_verified": "2026-11-10",
+ "verified_by": "Pascal",
+ "created": "2026-11-10",
+ "updated": "2026-11-10"
+}

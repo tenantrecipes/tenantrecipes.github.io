@@ -1,0 +1,54 @@
+{
+ "id": "copilot-claude-default-on-uk-2026-12",
+ "status": "published",
+ "title": "Claude models in Microsoft Copilot switch on by default for UK tenants on 9 December; the 'Microsoft 365 apps only' option is retired",
+ "date": "2026-11-10",
+ "category": "Copilot/AI",
+ "summary": "MC1546435 (10 November 2026) says Microsoft will enable Anthropic's Claude models by default on 9 December 2026 for UK tenants that have made no selection for Anthropic under AI providers operating as Microsoft subprocessors. On the same date the option that allows Claude only in Copilot in Word, Excel and PowerPoint is retired and those tenants move to All users. Existing All users, No users and Specific users and groups selections are kept. Microsoft notes that UK tenants are not in scope for the EU Data Boundary and that 'Anthropic models with Data Retention' are governed by a separate setting.",
+ "why": "A default-on subprocessor change is a data-processing decision taken for you if you do nothing. Tenants that picked the narrow apps-only scope get a wider scope (Copilot, Researcher, Copilot Studio) without another prompt, which matters for DPIAs, records of processing and any vendor-approval register that lists Anthropic as approved only for document drafting.",
+ "todo": [
+  "Check the current value in Microsoft 365 admin center > Copilot > Settings > View all > AI providers operating as Microsoft subprocessors > Anthropic (AI Administrator or Global Administrator).",
+  "If you use 'All users for Microsoft 365 apps only', decide before 9 December 2026: No users, Specific users and groups (an Entra security group), or accept All users.",
+  "Record the decision and the processing location from the Microsoft Online Services Subprocessors List in your AI service inventory and DPIA.",
+  "Review the separate 'Anthropic models with Data Retention' setting; MC1546435 says it is not part of this change.",
+  "Tell the helpdesk and compliance team, as Microsoft recommends."
+ ],
+ "effective": "2026-12-09",
+ "effective_note": "UK tenants without an Anthropic selection, and tenants using the apps-only option, change on 9 December 2026 (MC1546435). Admins can disable Claude models at any time afterwards.",
+ "primary": {
+  "title": "MC1546435: Claude models in Microsoft Copilot enabled by default in the UK (Message center mirror)",
+  "url": "https://mwpro.co.uk/blog/2026/11/10/mc1546435-microsoft-copilot-enables-claude-models-by-default-in-the-uk-and-retires-limited-access-option/"
+ },
+ "related": [
+  {
+   "title": "Microsoft Learn: Anthropic models in Microsoft Online Services",
+   "url": "https://learn.microsoft.com/en-gb/microsoft-365/copilot/connect-to-ai-subprocessor"
+  },
+  {
+   "title": "Enterprise AI service approval guide",
+   "url": "guides/enterprise-ai-service-approval.html"
+  },
+  {
+   "title": "Enterprise AI governance pillar",
+   "url": "guides/enterprise-ai-governance.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Modern Workspace Pro: MC1546435 (message text)",
+   "url": "https://mwpro.co.uk/blog/2026/11/10/mc1546435-microsoft-copilot-enables-claude-models-by-default-in-the-uk-and-retires-limited-access-option/",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "Microsoft Learn: Anthropic models in Microsoft Online Services",
+   "url": "https://learn.microsoft.com/en-gb/microsoft-365/copilot/connect-to-ai-subprocessor",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "Microsoft Learn: Enable Claude models only for Copilot experiences in Microsoft 365 apps",
+   "url": "https://learn.microsoft.com/en-us/copilot/implement/copilot-anthropic-apps",
+   "checked": "2026-11-10"
+  }
+ ],
+ "last_verified": "2026-11-10"
+}

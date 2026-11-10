@@ -35,14 +35,39 @@
    "title": "Channel unification: SAEC to MEC",
    "url": "https://learn.microsoft.com/en-us/microsoft-365-apps/updates/unified-update-channels",
    "checked": "2026-10-30"
+  },
+  {
+   "title": "Microsoft Learn: Microsoft 365 Apps security updates release notes",
+   "url": "https://learn.microsoft.com/en-us/officeupdates/microsoft365-apps-security-updates",
+   "checked": "2026-11-10"
   }
  ],
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-11-10",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "After Patch Tuesday some devices still run an Outlook/Office build without the month's security fixes",
+   "cause": "Each channel gets its own security build; devices on a slower channel, with updates paused, or with a conflicting update policy stay behind",
+   "fix": "Compare installed builds in the Microsoft 365 Apps admin center inventory with the fixed build for each channel in the Microsoft 365 Apps security updates release notes, and resolve conflicting channel or update-deadline policies before forcing an update."
+  },
+  {
+   "symptom": "Office LTSC 2021/2024 devices are not covered by the channel report",
+   "cause": "Volume-licensed LTSC builds use their own servicing line, not Current or Monthly Enterprise Channel",
+   "fix": "Track LTSC builds separately against the fixed builds listed per CVE in the MSRC Security Update Guide (for November 2026: 16.0.14334.21048 for LTSC 2021 and 16.0.17932.21140 for LTSC 2024)."
+  }
+ ],
+ "history": [
+  {
+   "date": "2026-11-10",
+   "note": "Added troubleshooting for verifying Patch Tuesday security builds per channel and for Office LTSC, prompted by the exploited Outlook CVE-2026-124194."
+  }
+ ],
+ "related": []
 }

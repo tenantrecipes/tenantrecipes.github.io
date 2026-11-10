@@ -44,7 +44,8 @@
     "Microsoft 365 Copilot works with the files, mail and chats you already have access to. Before it is enabled, data owners review and fix oversharing (broad sharing links, 'Everyone' permissions and public Teams or sites).",
     "Third-party enterprise LLMs (for example ChatGPT Enterprise, Claude Enterprise or an approved Grok enterprise offering) require SSO through the company identity provider, a recorded retention and training stance, and security approval before seats are assigned.",
     "New AI tools, plug-ins, agents, API keys and IDE assistants are approved by IT and security before use. Personal API keys against company data are treated as shadow AI.",
-    "Local AI agents (coding command-line agents, desktop agents, agentic IDEs and editor extensions) and the MCP servers or connectors they use are AI tools under this policy. They act with your account's access to files, credentials and systems, so only agents and MCP servers listed in {{APPROVED_AI_TOOLS}} may be installed or configured on company devices, and IT may inventory them through endpoint security tools."
+    "Local AI agents (coding command-line agents, desktop agents, agentic IDEs and editor extensions) and the MCP servers or connectors they use are AI tools under this policy. They act with your account's access to files, credentials and systems, so only agents and MCP servers listed in {{APPROVED_AI_TOOLS}} may be installed or configured on company devices, and IT may inventory them through endpoint security tools.",
+    "Microsoft-managed AI subprocessors (for example Anthropic models in Microsoft Copilot) are approved only for the users and groups that IT has assigned in the admin center. IT reviews these settings before any announced default change takes effect and records the decision in the AI inventory."
    ]
   },
   {
@@ -101,11 +102,15 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-09",
+ "last_verified": "2026-11-10",
  "created": "2026-10-30",
- "updated": "2026-11-09",
+ "updated": "2026-11-10",
  "order": 40,
  "history": [
+  {
+   "date": "2026-11-10",
+   "note": "Added a rule that Microsoft-managed AI subprocessor settings (such as Anthropic models in Copilot) are scoped by IT and reviewed before default changes, after MC1546435."
+  },
   {
    "date": "2026-11-09",
    "note": "Added interactive AI-generated outputs to 'Using AI output', and an ownership/authentication/patching rule for self-hosted AI gateways, model-serving and MCP servers."

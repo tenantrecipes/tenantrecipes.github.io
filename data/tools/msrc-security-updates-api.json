@@ -1,0 +1,64 @@
+{
+ "id": "msrc-security-updates-api",
+ "status": "published",
+ "kind": "tool",
+ "name": "MSRC Security Updates API (CVRF) and MsrcSecurityUpdates module",
+ "vendor": "Microsoft Security Response Center (official, sample code open source)",
+ "category": "Leaks & threat intel",
+ "what": "The machine-readable source behind the Security Update Guide: one CVRF document per release (for example `2026-Nov`) with every CVE, its CVSS vector, severity, impact, exploitability index ('Exploited:Yes', 'Exploitation More Likely'), affected product IDs, KB numbers and fixed builds. Microsoft's MsrcSecurityUpdates PowerShell module wraps it with cmdlets such as Get-MsrcCvrfDocument, Get-MsrcCvrfCVESummary, Get-MsrcCvrfAffectedSoftware, Get-MsrcCvrfExploitabilityIndex and Get-MsrcSecurityBulletinHtml.",
+ "when": "On Patch Tuesday evening, when you want your own triage list instead of a press headline: filter the month to the products you run, pull exploited and 'More Likely' CVEs to the top, and paste KBs and fixed builds into the change ticket. Also useful to reconcile vendor counts, because the document mixes Microsoft-assigned CVEs with republished third-party ones (Chromium, Linux).",
+ "license": "Public API; sample code and module source on GitHub (MIT)",
+ "cost": "free",
+ "url": "https://msrc.microsoft.com/update-guide",
+ "repo": "https://github.com/microsoft/MSRC-Microsoft-Security-Updates-API",
+ "example": [
+  "List releases: `curl -s -H 'Accept: application/json' https://api.msrc.microsoft.com/cvrf/v3.0/updates` — each entry has an `ID` such as `2026-Nov` and a `CvrfUrl`.",
+  "Download a month as JSON: `curl -s -H 'Accept: application/json' https://api.msrc.microsoft.com/cvrf/v3.0/cvrf/2026-Nov -o 2026-Nov.json`. The November 2026 document is about 17 MB.",
+  "Install the module: `Install-Module -Name MsrcSecurityUpdates -Scope CurrentUser`, then `Import-Module MsrcSecurityUpdates`.",
+  "Summarise a month in PowerShell: `Get-MsrcCvrfDocument -ID 2026-Nov | Get-MsrcCvrfCVESummary` and filter the output on your products.",
+  "Build an HTML bulletin for a change board: `Get-MsrcCvrfDocument -ID 2026-Nov | Get-MsrcSecurityBulletinHtml | Out-File .\\2026-Nov.html`.",
+  "Find exploited CVEs yourself: in the JSON, each `Vulnerability[].Threats[]` item with `Type` 1 carries strings like `Publicly Disclosed:No;Exploited:Yes`; `Type` 3 is severity and `Type` 0 impact. `Notes[]` with `Type` 8 names the assigning CNA, so you can separate Microsoft CVEs from republished ones."
+ ],
+ "pitfalls": [
+  "Counting every `Vulnerability` entry as a Microsoft CVE: for November 2026 the document has 1,342 entries, of which 1,095 are assigned by Microsoft.",
+  "Cloud-service CVEs (for example in Entra or Azure OpenAI) can carry high CVSS scores but 'Customer Action Required: No' — read that note before escalating.",
+  "Product IDs are numeric; resolve them through `ProductTree` before filtering, or use Get-MsrcCvrfAffectedSoftware.",
+  "The module is sample code that Microsoft says to treat as custom code; pin and review the version you run in automation."
+ ],
+ "sources": [
+  {
+   "title": "MSRC Security Updates API: GitHub repository and README",
+   "url": "https://github.com/microsoft/MSRC-Microsoft-Security-Updates-API",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "MsrcSecurityUpdates sample-code README (cmdlets and examples)",
+   "url": "https://github.com/microsoft/MSRC-Microsoft-Security-Updates-API/blob/main/src/README.md",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "MsrcSecurityUpdates on the PowerShell Gallery",
+   "url": "https://www.powershellgallery.com/packages/MsrcSecurityUpdates",
+   "checked": "2026-11-10"
+  },
+  {
+   "title": "MSRC CVRF API: 2026-Nov document",
+   "url": "https://api.msrc.microsoft.com/cvrf/v3.0/cvrf/2026-Nov",
+   "checked": "2026-11-10"
+  }
+ ],
+ "related": [
+  {
+   "title": "Patch Tuesday November 2026",
+   "url": "security/patch-tuesday-2026-11.html"
+  },
+  {
+   "title": "Patch management policy template",
+   "url": "policies/patch-management-policy.html"
+  }
+ ],
+ "last_verified": "2026-11-10",
+ "created": "2026-11-10",
+ "updated": "2026-11-10",
+ "order": 370
+}
