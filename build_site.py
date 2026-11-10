@@ -24,8 +24,9 @@ import enterprise_ai_governance as GAIG
 import enterprise_ai_service_approval as GAIA
 import secure_your_website as GWEB
 import smtp_auth_basic_retirement as GSMTP
+import mdca_session_control_unmanaged_devices as GMDCA
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS, GPTH, GEAS, GPLM, GADO, GAIG, GAIA, GWEB, GSMTP]
+GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS, GPTH, GEAS, GPLM, GADO, GAIG, GAIA, GWEB, GSMTP, GMDCA]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
