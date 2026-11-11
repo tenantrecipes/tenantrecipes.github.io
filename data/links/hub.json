@@ -536,6 +536,13 @@
           "note": "Enterprise patching with Azure Update Manager.",
           "kind": "docs",
           "internal": true
+        },
+        {
+          "label": "Tenant Recipes: Arc + Update Manager weekend waves",
+          "url": "guides/arc-update-manager-weekend-waves.html",
+          "note": "Friday–Monday patch waves by criticality, with a redundant-pair rule and a Monday health gate.",
+          "kind": "docs",
+          "internal": true
         }
       ]
     },

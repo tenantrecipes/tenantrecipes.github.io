@@ -25,8 +25,9 @@ import enterprise_ai_service_approval as GAIA
 import secure_your_website as GWEB
 import smtp_auth_basic_retirement as GSMTP
 import mdca_session_control_unmanaged_devices as GMDCA
+import arc_update_manager_weekend_waves as GWAVES
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS, GPTH, GEAS, GPLM, GADO, GAIG, GAIA, GWEB, GSMTP, GMDCA]
+GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS, GPTH, GEAS, GPLM, GADO, GAIG, GAIA, GWEB, GSMTP, GMDCA, GWAVES]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
@@ -373,6 +374,9 @@ def guide_page(g):
                 sys.exit(f"Guide {g.SLUG}: unknown marker {st['marker']} on step {st['t']}")
             if st.get("marker") == "tested" and MK.validate_tested(st.get("tested"), st["t"]):
                 sys.exit(f"Guide {g.SLUG}: " + "; ".join(MK.validate_tested(st.get("tested"), st["t"])))
+            for item in st.get("code") or []:
+                if not (isinstance(item, (tuple, list)) and len(item) == 2 and all(isinstance(x, str) for x in item)):
+                    sys.exit(f"Guide {g.SLUG}: 'code' on step {st['t']} must be a list of (label, text) pairs")
     nsteps = sum(len(p["steps"]) for p in g.PHASES)
     nsrc = len({u for p in g.PHASES for s in p["steps"] for _, u in s["src"]} | {u for _, u in getattr(g, "PROBLEM", {}).get("src", [])})
     nrec = len({r for p in g.PHASES for s in p["steps"] for r in s["rec"] + s.get("sec", []) + s.get("tools", [])})
@@ -397,6 +401,7 @@ def guide_page(g):
                           f'<p class="gd-done"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3.2L15 6.8"/></svg><span>Done when: {_txt(st["check"])}</span></p>'
                           '<h4>Do this</h4><ul class="gd-do">' + "".join(f'<li>{_txt(x)}</li>' for x in st["do"]) + '</ul>'
                           + ('<div class="gd-pit"><h4>Pitfalls</h4><ul>' + "".join(f'<li>{_txt(x)}</li>' for x in st["pit"]) + '</ul></div>' if st["pit"] else "")
+                          + "".join(f'<div class="gd-code"><h4>{esc(lab)}</h4><pre class="cb"><code>{esc(txt)}</code></pre></div>' for lab, txt in st.get("code") or [])
                           + (f'<div class="gd-recs"><h4>Related on this site</h4>{recs}</div>' if recs else "")
                           + (f'<details class="gd-src"><summary>{SL} ({len(st["src"])})</summary><ul>{srcs}</ul></details>' if srcs else "")
                           + '</div>')

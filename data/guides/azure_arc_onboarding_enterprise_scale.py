@@ -462,7 +462,7 @@ PHASES += [
            "Keep one orchestrator per machine: if Configuration Manager or WSUS schedules patches today, decide the cut-over in the patch framework before attaching schedules."],
     "pit": ["Assigning the scheduled-patching policy during onboarding attaches freshly connected servers to production windows before anyone has checked their workloads."],
     "rec": [], "src": S("polref", "prereq"),
-    "guides": ["azure-update-manager-enterprise-patching"],
+    "guides": ["azure-update-manager-enterprise-patching", "arc-update-manager-weekend-waves"],
     "marker": "practical"},
   ]},
 
@@ -552,7 +552,7 @@ PHASES += [
            "Review this guide's checklist quarterly: new subscriptions, expiring onboarding secrets, agent versions and disconnected servers drift quietly."],
     "pit": ["Servers in monitor mode only accept monitoring and security extensions. Decide per Tier 0 server whether Azure patches it (full mode with an allowlist) or another process does."],
     "rec": ["intune-windows-autopatch"], "src": S("plan", "extsec", "prereq"),
-    "guides": ["azure-update-manager-enterprise-patching"],
+    "guides": ["azure-update-manager-enterprise-patching", "arc-update-manager-weekend-waves"],
     "marker": "practical"},
   ]},
 ]

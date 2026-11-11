@@ -2,6 +2,15 @@
   {
     "date": "2026-11-11",
     "kind": "site",
+    "type": "Guide",
+    "title": "Weekend patch waves with Azure Arc and Update Manager",
+    "blurb": "Technical guide: Arc-enable servers into a governed landing zone and patch in Friday–Monday waves by criticality, with Policy-enforced tags, a Resource Graph overview, a redundant-pair check and a Monday health gate.",
+    "url": "guides/arc-update-manager-weekend-waves.html",
+    "text": "Technical guide: Arc-enable servers into a governed landing zone and patch in Friday–Monday waves by criticality, with Policy-enforced tags, a Resource Graph overview, a redundant-pair check and a Monday health gate."
+  },
+  {
+    "date": "2026-11-11",
+    "kind": "site",
     "type": "News",
     "title": "Defender for Office 365: recipient conditions AND → OR",
     "blurb": "From early December, threat policies with users + groups + domains match any instead of all; the first edit to an existing policy converts it.",
