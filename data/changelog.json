@@ -1,5 +1,95 @@
 [
   {
+    "date": "2026-11-11",
+    "kind": "site",
+    "type": "News",
+    "title": "Defender for Office 365: recipient conditions AND → OR",
+    "blurb": "From early December, threat policies with users + groups + domains match any instead of all; the first edit to an existing policy converts it.",
+    "url": "news/mdo-recipient-conditions-and-to-or.html",
+    "text": "From early December, threat policies with users + groups + domains match any instead of all; the first edit to an existing policy converts it."
+  },
+  {
+    "date": "2026-11-11",
+    "kind": "site",
+    "type": "News",
+    "title": "Copilot Chat content source filters",
+    "blurb": "Per-prompt source selection including Graph and federated connectors, on by default for licensed users from mid-November.",
+    "url": "news/copilot-chat-content-source-filters.html",
+    "text": "Per-prompt source selection including Graph and federated connectors, on by default for licensed users from mid-November."
+  },
+  {
+    "date": "2026-11-11",
+    "kind": "site",
+    "type": "News",
+    "title": "Edge for Business DLP connectors: wider enforcement",
+    "blurb": "Roadmap: download/upload/paste/print enforcement with bypass justification and admin guidance, in development.",
+    "url": "news/edge-dlp-connectors-expanded-enforcement.html",
+    "text": "Roadmap: download/upload/paste/print enforcement with bypass justification and admin guidance, in development."
+  },
+  {
+    "date": "2026-11-11",
+    "kind": "site",
+    "type": "News",
+    "title": "Teams policy controls who can record and transcribe",
+    "blurb": "Roadmap for December: restrict recording/transcription start to organisers or presenters, optionally enforced by policy.",
+    "url": "news/teams-policy-who-can-record-transcribe.html",
+    "text": "Roadmap for December: restrict recording/transcription start to organisers or presenters, optionally enforced by policy."
+  },
+  {
+    "date": "2026-11-11",
+    "kind": "site",
+    "type": "Security",
+    "title": "Chromium XML use-after-free exploited (KEV)",
+    "blurb": "CVE-2026-125350 fixed in Chrome 157.0.8103.50; Microsoft says an Edge fix is in progress, current Edge Stable predates it.",
+    "url": "security/chromium-xml-uaf-cve-2026-125350.html",
+    "text": "CVE-2026-125350 fixed in Chrome 157.0.8103.50; Microsoft says an Edge fix is in progress, current Edge Stable predates it."
+  },
+  {
+    "date": "2026-11-11",
+    "kind": "site",
+    "type": "Security",
+    "title": "IBM Aspera Faspex authorization bypass (KEV)",
+    "blurb": "CVE-2026-123218, CVSS 9.8: authenticated user to full admin; fix 5.0.19 PL1, no workaround.",
+    "url": "security/ibm-aspera-faspex-authz-bypass-cve-2026-123218.html",
+    "text": "CVE-2026-123218, CVSS 9.8: authenticated user to full admin; fix 5.0.19 PL1, no workaround."
+  },
+  {
+    "date": "2026-11-11",
+    "kind": "site",
+    "type": "Tool",
+    "title": "ORCA: Defender for Office 365 configuration analyzer",
+    "blurb": "Read-only report on EOP/MDO policy settings with HTML, JSON and CSV output.",
+    "url": "tools/orca.html",
+    "text": "Read-only report on EOP/MDO policy settings with HTML, JSON and CSV output."
+  },
+  {
+    "date": "2026-11-11",
+    "kind": "site",
+    "type": "Recipe",
+    "title": "Find MDO policies that widen under OR logic",
+    "blurb": "Inventory threat policy rules that combine users, groups and domains before the December change; snippet included.",
+    "url": "recipes/mdo-recipient-conditions-or-audit.html",
+    "text": "Inventory threat policy rules that combine users, groups and domains before the December change; snippet included."
+  },
+  {
+    "date": "2026-11-11",
+    "kind": "site",
+    "type": "Guide",
+    "title": "Enterprise AI governance: Edge DLP connectors and connector approval",
+    "blurb": "DLP phase updated for Edge for Business connector enforcement (roadmap) and Copilot Chat content source filters.",
+    "url": "guides/enterprise-ai-governance.html",
+    "text": "DLP phase updated for Edge for Business connector enforcement (roadmap) and Copilot Chat content source filters."
+  },
+  {
+    "date": "2026-11-11",
+    "kind": "site",
+    "type": "Policy",
+    "title": "Patch management policy: downstream vendors",
+    "blurb": "Chromium-based browsers and appliances count as patched only when their own vendor ships the fix.",
+    "url": "policies/patch-management-policy.html",
+    "text": "Chromium-based browsers and appliances count as patched only when their own vendor ships the fix."
+  },
+  {
     "date": "2026-11-10",
     "kind": "site",
     "type": "Guide",

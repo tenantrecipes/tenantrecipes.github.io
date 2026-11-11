@@ -5,7 +5,7 @@ SLUG = "enterprise-ai-governance"
 TIER = "pillar"
 PUBLISHED = "2026-11-06"
 VERIFIED = "2026-11-06"
-UPDATED = "2026-11-09"
+UPDATED = "2026-11-11"
 TITLE = "Enterprise AI governance for Copilot and every enterprise LLM"
 SHORT = "Enterprise AI governance"
 DESC = ("A multi-vendor enterprise AI governance programme: approved inventory, shadow AI discovery, "
@@ -51,9 +51,17 @@ HISTORY = [
     ("2026-11-09",
      "Discovery phase: added self-hosted AI infrastructure (AI gateways, model-serving clusters, MCP hosts) to the inventory, "
      "with the LiteLLM CVE-2026-59822 and GPUStack CVE-2026-102895 KEV entries as reasons. Documentation verified only."),
+    ("2026-11-11",
+     "DLP phase: added the Edge for Business DLP Enterprise Connector roadmap item (RM579894: download/upload/paste/print "
+     "enforcement with bypass justification, in development) and a connector-approval check prompted by Copilot Chat "
+     "content source filters (MC1548004). Documentation verified only."),
 ]
 
 L = {
+    "edge_dlp_rm": ("RM579894: Microsoft Edge expanded enforcement controls for DLP connectors (roadmap archive)",
+                    "https://mc.merill.net/message/RM579894"),
+    "copilot_sources_mc": ("MC1548004: Copilot Chat content source filters (message text)",
+                           "https://mwpro.co.uk/blog/2026/11/11/mc1548004-microsoft-365-copilot-chat-adds-content-source-filters-for-targeted-responses/"),
     "litellm_ghsa": ("GitHub advisory GHSA-7488-6r32-c95q: LiteLLM MCP authentication bypass (CVE-2026-59822)",
                      "https://github.com/BerriAI/litellm/security/advisories/GHSA-7488-6r32-c95q"),
     "gpustack_ghsa": ("GitHub advisory GHSA-gj9m-f8ph-pmhr: GPUStack loopback admin bypass (CVE-2026-102895)",
@@ -299,10 +307,12 @@ PHASES = [
     "check": "Endpoint DLP warn/block actions cover paste/upload to unsanctioned generative AI sites for onboarded Windows endpoints",
     "do": ["Purview Endpoint DLP can warn or block sharing sensitive information with third-party generative AI sites accessed via browser on onboarded Windows endpoints (see Endpoint DLP activity tables in Learn).",
            "Pair with Cloud App / web category controls for Generative AI where your Secure Web Gateway or Defender for Cloud Apps session controls apply.",
-           "Document override / justify flows so business-critical exceptions are logged, not whispered."],
+           "Document override / justify flows so business-critical exceptions are logged, not whispered.",
+           "Edge for Business: Microsoft's roadmap (RM579894, published 11 Nov 2026, in development) adds DLP Enterprise Connector enforcement across download, upload, paste and print with required bypass justification and admin guidance text. Prepare justification categories that mirror your AI-use policy, but do not design around it until it is GA and documented on Learn.",
+           "Copilot Chat content source filters (MC1548004, from mid-Nov 2026) make every enabled Graph and federated connector a selectable source in the prompt box. Treat each connector as an inventory item with an owner and data scope; the filter narrows retrieval but does not change permissions."],
     "pit": ["Endpoint DLP does not cover phones or non-onboarded browsers — mobile and BYOD need Intune app protection / AI-use policy enforcement separately.",
             "Blocking without an approved Enterprise alternative drives people to personal phones."],
-    "src": S("purview_ai", "mdca"),
+    "src": S("purview_ai", "mdca", "edge_dlp_rm", "copilot_sources_mc"),
     "rec": [], "tools": [], "guides": []},
    {"t": "Insider risk, communication compliance and audit",
     "check": "Risky AI usage detections and audit search paths are documented for SOC / compliance",

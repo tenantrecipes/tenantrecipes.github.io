@@ -1,0 +1,53 @@
+{
+ "id": "orca",
+ "status": "published",
+ "kind": "tool",
+ "name": "ORCA – Microsoft Defender for Office 365 Recommended Configuration Analyzer",
+ "vendor": "Open source PowerShell module (Cam Murray, published on the PowerShell Gallery)",
+ "category": "M365 & Entra",
+ "what": "A read-only PowerShell report that checks Exchange Online Protection and Defender for Office 365 configuration — Safe Links, Safe Attachments, anti-phishing and anti-spoofing policies and EOP settings that affect MDO — against recommended values, and scores the result as a weighted Configuration Health Index. Output is HTML by default, or JSON/CSV for trending.",
+ "when": "Before and after you touch threat protection policies: as a baseline before the December 2026 AND→OR change to recipient conditions (MC1546447), after a tenant migration or merger, or as a recurring drift check where several admins edit MDO policies. Pair it with the recipient-condition audit, because ORCA scores settings, not who a rule targets.",
+ "license": "Open source on GitHub; the repository metadata shows no licence file, so review terms before redistributing",
+ "cost": "free",
+ "url": "https://www.powershellgallery.com/packages/ORCA",
+ "repo": "https://github.com/cammurray/orca",
+ "example": [
+  "Install prerequisites: `Install-Module -Name ExchangeOnlineManagement -Scope CurrentUser`, then `Install-Module ORCA`.",
+  "Run the default HTML report after `Connect-ExchangeOnline`: `Get-ORCAReport` (opens in the default browser).",
+  "Headless or for trending: `Invoke-ORCA -Output JSON` or `Invoke-ORCA -Output CSV` (CSV gives an overview file and a per-item detail file).",
+  "Save HTML without opening it, with the configuration embedded for a snapshot: `Invoke-ORCA -Output HTML -OutputOptions @{HTML=@{DisplayReport=$False;EmbedConfiguration=$True}}`.",
+  "Partner/MSP scenario: pass `-DelegatedOrganization <tenant>` to report on a tenant you have delegated rights to."
+ ],
+ "pitfalls": [
+  "Needs only view-only rights (the README names Global Reader or View-Only Organization Management); do not run it as Global Administrator out of habit.",
+  "`EmbedConfiguration` puts your policy configuration inside the HTML file — treat the report as internal, not something to email outside.",
+  "A high health index does not mean the right people are covered: ORCA evaluates settings, not the recipient scope of each rule.",
+  "It prompts to update when a newer version exists; pin and review versions you run in scheduled automation."
+ ],
+ "sources": [
+  {
+   "title": "ORCA README (GitHub)",
+   "url": "https://github.com/cammurray/orca",
+   "checked": "2026-11-11"
+  },
+  {
+   "title": "ORCA on the PowerShell Gallery",
+   "url": "https://www.powershellgallery.com/packages/ORCA",
+   "checked": "2026-11-11"
+  }
+ ],
+ "related": [
+  {
+   "title": "News: MDO recipient conditions switch from AND to OR",
+   "url": "news/mdo-recipient-conditions-and-to-or.html"
+  },
+  {
+   "title": "Recipe: find MDO policies that will widen under OR logic",
+   "url": "recipes/mdo-recipient-conditions-or-audit.html"
+  }
+ ],
+ "last_verified": "2026-11-11",
+ "created": "2026-11-11",
+ "updated": "2026-11-11",
+ "order": 380
+}

@@ -1,0 +1,44 @@
+{
+ "id": "mdo-recipient-conditions-and-to-or",
+ "status": "published",
+ "title": "Defender for Office 365 threat policies switch recipient conditions from AND to OR — and the first edit converts an existing policy",
+ "date": "2026-11-11",
+ "category": "Defender",
+ "summary": "MC1546447 (published 10 November 2026) changes how Defender for Office 365 threat protection policies evaluate recipient inclusion conditions when more than one condition type is set (users, groups, domains): from Match all (AND) to Match any (OR). Rollout to worldwide tenants is planned for early December 2026. New policies use OR by default; existing policies are not converted automatically, but switch to OR the moment an administrator modifies them, in the portal or via Exchange Online PowerShell.",
+ "why": "Microsoft Learn still documents today's behaviour: different condition types use AND, so 'Users: romain@contoso.com' plus 'Groups: Executives' only hits Romain if he is in Executives. Any policy built on that intersection (strict anti-phishing for a subset of a domain, Safe Attachments dynamic delivery for one business unit at one domain) silently widens on its next routine edit. The portal shows a confirmation; PowerShell only warns when the module is imported, so scripted changes are the risky path.",
+ "todo": [
+  "Inventory rules that combine more than one of SentTo, SentToMemberOf and RecipientDomainIs across Get-AntiPhishRule, Get-SafeLinksRule, Get-SafeAttachmentRule, Get-HostedContentFilterRule and Get-MalwareFilterRule (see the linked recipe).",
+  "For each hit, compute the OR population and decide: accept it, or replace the intersection with one dedicated group before anyone edits the policy.",
+  "Freeze scripted edits to these rules until December, or add an explicit scope review to the change template."
+ ],
+ "effective": null,
+ "effective_note": "Worldwide rollout planned for early December 2026 (MC1546447). Existing policies change only when modified.",
+ "primary": {
+  "title": "MC1546447: Updated recipient inclusion logic for threat protection policies (Message center archive)",
+  "url": "https://mc.merill.net/message/MC1546447"
+ },
+ "related": [
+  {
+   "title": "Recipe: find MDO policies that will widen under OR logic",
+   "url": "recipes/mdo-recipient-conditions-or-audit.html"
+  },
+  {
+   "title": "ORCA: Defender for Office 365 configuration analyzer",
+   "url": "tools/orca.html"
+  }
+ ],
+ "recipe": "mdo-recipient-conditions-or-audit",
+ "sources": [
+  {
+   "title": "MC1546447 message text (merill.net Message Center archive)",
+   "url": "https://mc.merill.net/message/MC1546447",
+   "checked": "2026-11-11"
+  },
+  {
+   "title": "Microsoft Learn: Configure anti-phishing policies in Microsoft Defender for Office 365 (current AND logic between condition types)",
+   "url": "https://learn.microsoft.com/en-us/defender-office-365/anti-phishing-policies-mdo-configure",
+   "checked": "2026-11-11"
+  }
+ ],
+ "last_verified": "2026-11-11"
+}

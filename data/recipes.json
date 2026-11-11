@@ -2121,6 +2121,67 @@
   "updated": "2026-11-09"
  },
  {
+  "id": "mdo-recipient-conditions-or-audit",
+  "status": "published",
+  "tier": "recipe",
+  "order": 161,
+  "category": "Identity & threat protection",
+  "title": "Find Defender for Office 365 policies that will widen when recipient conditions switch from AND to OR",
+  "problem": "From early December 2026 (MC1546447), Defender for Office 365 threat protection policies evaluate different recipient condition types (users, groups, domains) with OR instead of AND. Existing policies keep AND until someone edits them, and then the scope can grow from an intersection to a union. You need to know which rules depend on the intersection before the first routine edit.",
+  "steps": [
+   "Connect to Exchange Online PowerShell with a read-only role that can view MDO configuration (for example View-Only Organization Management or Security Reader).",
+   "List the rules behind custom policies: `Get-AntiPhishRule`, `Get-SafeLinksRule`, `Get-SafeAttachmentRule`, `Get-HostedContentFilterRule` and `Get-MalwareFilterRule`, selecting Name, State, Priority, SentTo, SentToMemberOf and RecipientDomainIs (snippet on the Code page).",
+   "Keep only rules where more than one of SentTo, SentToMemberOf and RecipientDomainIs is populated. Rules with a single condition type, even with many values, already use OR and are unaffected.",
+   "For each hit, compute today's population (members of the groups who are also listed users or in the listed domains) and the OR population (all of them). Record the difference per rule.",
+   "Decide per rule: accept the wider scope, or replace the intersection with one dedicated group (or a dynamic group) that contains exactly the intended recipients, and make that change deliberately in a change window.",
+   "Add a scope-review line to the change template for MDO policies and tell anyone who edits them by script that the PowerShell path only warns at module import.",
+   "Re-run the inventory after Microsoft's rollout and after any edit, and keep the output with the change record."
+  ],
+  "pitfalls": [
+   "Editing an unrelated setting (quarantine policy, notification) still converts the rule to OR — the trigger is any modification.",
+   "Exceptions (ExceptIfSentTo, ExceptIfSentToMemberOf, ExceptIfRecipientDomainIs) are not covered by the message; do not assume their logic changes too.",
+   "Preset security policies (Standard/Strict) are scoped through their own rules; check them separately if you scoped them by more than one condition type.",
+   "A wider strict policy is not automatically safer: aggressive quarantine or impersonation settings applied to a whole domain can block business mail."
+  ],
+  "done_when": [
+   "Every custom MDO threat policy rule with more than one recipient condition type is listed with its AND and OR populations.",
+   "Each such rule has a decision (accept or re-scope) and an owner, implemented before December 2026 or explicitly accepted.",
+   "The MDO change template includes a recipient-scope review."
+  ],
+  "troubleshooting": [
+   {
+    "symptom": "A cmdlet is not recognised",
+    "cause": "Defender for Office 365 cmdlets (Safe Links, Safe Attachments) are only available in tenants licensed for MDO",
+    "fix": "Skip those two cmdlets in EOP-only tenants; anti-phish, anti-spam and anti-malware rules still apply."
+   },
+   {
+    "symptom": "Group membership count looks wrong",
+    "cause": "SentToMemberOf accepts distribution groups and mail-enabled security groups; nested membership may differ from what you count in Entra",
+    "fix": "Expand membership with Get-DistributionGroupMember (recursively if needed) for the comparison."
+   }
+  ],
+  "markers": {
+   "steps": "official",
+   "pitfalls": "practical"
+  },
+  "sources": [
+   {
+    "title": "MC1546447: Updated recipient inclusion logic for threat protection policies (Message center archive)",
+    "url": "https://mc.merill.net/message/MC1546447",
+    "checked": "2026-11-11"
+   },
+   {
+    "title": "Microsoft Learn: Configure anti-phishing policies in Microsoft Defender for Office 365 (recipient conditions and current AND logic)",
+    "url": "https://learn.microsoft.com/en-us/defender-office-365/anti-phishing-policies-mdo-configure",
+    "checked": "2026-11-11"
+   }
+  ],
+  "last_verified": "2026-11-11",
+  "verified_by": "Pascal",
+  "created": "2026-11-11",
+  "updated": "2026-11-11"
+ },
+ {
   "id": "entra-sms-voice-retirement-passkeys",
   "status": "published",
   "tier": "recipe",

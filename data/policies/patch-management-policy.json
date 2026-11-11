@@ -60,7 +60,8 @@
    "items": [
     "Apply the vendor's workaround or another mitigation, such as blocking access or turning off the vulnerable feature.",
     "Record a time-limited exception with the risk owner's approval.",
-    "Plan to replace software and devices that no longer receive security updates."
+    "Plan to replace software and devices that no longer receive security updates.",
+    "Products that embed another vendor's code (for example Chromium-based browsers, or appliances built on open-source components) are patched only when their own vendor ships a fixed build. An upstream fix does not close the risk; track the downstream vendor's release notes and record an exception with a mitigation until it ships."
    ]
   },
   {
@@ -92,9 +93,9 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-09",
+ "last_verified": "2026-11-11",
  "created": "2026-10-30",
- "updated": "2026-11-09",
+ "updated": "2026-11-11",
  "order": 90,
  "verified_by": "Pascal",
  "history": [
@@ -105,6 +106,10 @@
   {
    "date": "2026-11-09",
    "note": "Added running-version and restart verification, compromise check before closing exploited-vulnerability tickets, and AI/developer platforms and Linux-based appliances to the inventory scope."
+  },
+  {
+   "date": "2026-11-11",
+   "note": "Added downstream-dependency rule: Chromium-based browsers and appliances count as patched only when their own vendor ships the fix (prompted by CVE-2026-125350, fixed in Chrome on 9 Nov 2026 while the Edge fix was still pending)."
   }
  ]
 }

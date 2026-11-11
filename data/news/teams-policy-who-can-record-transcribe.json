@@ -1,0 +1,39 @@
+{
+ "id": "teams-policy-who-can-record-transcribe",
+ "status": "published",
+ "title": "Teams meeting policy will decide who can start recording and transcription, and whether organisers can change it",
+ "date": "2026-11-11",
+ "category": "M365",
+ "summary": "Roadmap item RM579860 (published 11 November 2026, In development, GA targeted December 2026 for worldwide, GCC, GCC High and DoD) lets Teams administrators use meeting policies to control who can start recording and transcription: organisers and co-organisers only, or also presenters. Admins can also decide whether organisers may change the setting per meeting or whether the policy enforces it.",
+ "why": "It follows MC1508234 from yesterday, where Meeting options start showing only the automatic recording/transcription choices your policy allows. Together they move recording and transcript control (which feed Copilot in meetings, eDiscovery and retention) from organiser habit to admin policy. Decide the matrix before December rather than after a complaint.",
+ "todo": [
+  "Decide per policy group: who may start recording, who may start transcription, and whether organisers can override.",
+  "Map that against groups where Copilot in meetings is or is not wanted, since transcripts are its input.",
+  "Watch the roadmap for the actual policy parameter names before scripting anything."
+ ],
+ "effective": null,
+ "effective_note": "GA targeted December 2026 (RM579860); parameter names not yet published.",
+ "primary": {
+  "title": "RM579860: Microsoft Teams: Tenant policy controls who can record and transcribe (roadmap archive)",
+  "url": "https://mc.merill.net/message/RM579860"
+ },
+ "related": [
+  {
+   "title": "News: Meeting options align with recording/transcription policy (MC1508234)",
+   "url": "news/teams-auto-recording-policy-alignment.html"
+  },
+  {
+   "title": "Copilot in Teams meetings and transcription",
+   "url": "recipes/copilot-teams-meeting-transcription.html"
+  }
+ ],
+ "recipe": "copilot-teams-meeting-transcription",
+ "sources": [
+  {
+   "title": "RM579860 roadmap entry (merill.net archive)",
+   "url": "https://mc.merill.net/message/RM579860",
+   "checked": "2026-11-11"
+  }
+ ],
+ "last_verified": "2026-11-11"
+}

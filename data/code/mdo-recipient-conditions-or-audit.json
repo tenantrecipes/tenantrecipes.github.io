@@ -1,0 +1,31 @@
+{
+ "id": "mdo-recipient-conditions-or-audit",
+ "status": "published",
+ "title": "List MDO threat policy rules that combine recipient condition types",
+ "lang": "powershell",
+ "tags": [
+  "Defender for Office 365",
+  "Exchange Online",
+  "MC1546447"
+ ],
+ "summary": "Read-only Exchange Online PowerShell that lists anti-phish, Safe Links, Safe Attachments, anti-spam and anti-malware rules using more than one of SentTo, SentToMemberOf and RecipientDomainIs — the rules whose scope widens when Microsoft switches recipient conditions from AND to OR.",
+ "code": "Connect-ExchangeOnline\n$rules = @()\n$rules += Get-AntiPhishRule          | Select-Object @{n='Type';e={'AntiPhish'}}, Name, State, Priority, SentTo, SentToMemberOf, RecipientDomainIs\n$rules += Get-SafeLinksRule          | Select-Object @{n='Type';e={'SafeLinks'}}, Name, State, Priority, SentTo, SentToMemberOf, RecipientDomainIs\n$rules += Get-SafeAttachmentRule     | Select-Object @{n='Type';e={'SafeAttachments'}}, Name, State, Priority, SentTo, SentToMemberOf, RecipientDomainIs\n$rules += Get-HostedContentFilterRule| Select-Object @{n='Type';e={'AntiSpam'}}, Name, State, Priority, SentTo, SentToMemberOf, RecipientDomainIs\n$rules += Get-MalwareFilterRule      | Select-Object @{n='Type';e={'AntiMalware'}}, Name, State, Priority, SentTo, SentToMemberOf, RecipientDomainIs\n\n# Rules that combine more than one recipient condition type are the ones AND -> OR widens\n$rules | ForEach-Object {\n  $used  = @(); if ($_.SentTo) {$used+='Users'}; if ($_.SentToMemberOf) {$used+='Groups'}; if ($_.RecipientDomainIs) {$used+='Domains'}\n  $_ | Add-Member -NotePropertyName ConditionTypes -NotePropertyValue ($used -join '+') -PassThru\n} | Where-Object { $_.ConditionTypes -like '*+*' } |\n  Sort-Object Type, Priority |\n  Format-Table Type, Name, State, Priority, ConditionTypes -AutoSize",
+ "notes": [
+  "Read-only. Safe Links and Safe Attachments cmdlets exist only in tenants licensed for Defender for Office 365.",
+  "Exceptions (ExceptIf*) are not evaluated here.",
+  "Compute the actual AND vs OR populations before you change anything."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "mdo-recipient-conditions-or-audit",
+  "label": "Find MDO policies that will widen under OR logic"
+ },
+ "refs": [
+  {
+   "title": "Microsoft Learn: Configure anti-phishing policies in Defender for Office 365",
+   "url": "https://learn.microsoft.com/en-us/defender-office-365/anti-phishing-policies-mdo-configure"
+  }
+ ],
+ "created": "2026-11-11",
+ "last_verified": "2026-11-11"
+}

@@ -1,0 +1,39 @@
+{
+ "id": "edge-dlp-connectors-expanded-enforcement",
+ "status": "published",
+ "title": "Edge for Business DLP Enterprise Connectors: consistent enforcement for download, upload, paste and print, with bypass justification",
+ "date": "2026-11-11",
+ "category": "Purview",
+ "summary": "Roadmap item RM579894 (published 11 November 2026, status In development, general availability for worldwide tenants) expands the Data Loss Prevention Enterprise Connector capabilities in Microsoft Edge for Business. Administrators will be able to configure more consistent enforcement across download, upload, paste and print, require a justification when a user bypasses a block, and show administrator-defined guidance.",
+ "why": "Enterprise Connectors are how Edge for Business hands content inspection to a DLP provider. Paste and upload are exactly the paths employees use to move data into unsanctioned generative AI sites, and a required, logged bypass justification is the control most AI-use policies already ask for on paper. This is a roadmap entry, not GA: no date beyond 'in development' and no licensing detail yet.",
+ "todo": [
+  "If you use Edge for Business with a DLP connector, note which of download/upload/paste/print you enforce today and where users can silently override.",
+  "Prepare guidance text and justification categories that match your AI-use policy, so they are ready when the setting ships.",
+  "Do not plan around it until it reaches GA in the roadmap and Learn documents the settings."
+ ],
+ "effective": null,
+ "effective_note": "In development; general availability, no date published (RM579894, 11 November 2026).",
+ "primary": {
+  "title": "RM579894: Microsoft Edge: Expanded enforcement controls for Data Loss Prevention connectors (roadmap archive)",
+  "url": "https://mc.merill.net/message/RM579894"
+ },
+ "related": [
+  {
+   "title": "Enterprise AI governance: Endpoint DLP for third-party AI sites",
+   "url": "guides/enterprise-ai-governance.html"
+  },
+  {
+   "title": "AI and Copilot use policy template",
+   "url": "policies/ai-copilot-use-policy.html"
+  }
+ ],
+ "recipe": null,
+ "sources": [
+  {
+   "title": "RM579894 roadmap entry (merill.net archive)",
+   "url": "https://mc.merill.net/message/RM579894",
+   "checked": "2026-11-11"
+  }
+ ],
+ "last_verified": "2026-11-11"
+}
