@@ -1,20 +1,21 @@
 """Technical guide: OneDrive/SharePoint on unmanaged devices with
 Defender for Cloud Apps session control — the 'Access ... is monitored' notice and the
-'Download blocked' message, how to reproduce them deliberately, and what they do not cover.
+download-blocked message, how to reproduce them deliberately, and what they do not cover.
 Documentation checked against linked Microsoft Learn sources on 2026-11-10; not lab-tested.
 Approved for publication by the editor on 2026-11-10; registered in build_site.py.
+Revised 2026-11-11: user-facing messages described in text from Microsoft Learn only; no screenshots.
 """
 
 SLUG = "mdca-session-control-unmanaged-devices"
 TIER = "technical"
 PUBLISHED = "2026-11-10"
 VERIFIED = "2026-11-10"
-UPDATED = "2026-11-10"
+UPDATED = "2026-11-12"
 TITLE = "Monitored sessions and blocked downloads: OneDrive on unmanaged devices with Defender for Cloud Apps"
 SHORT = "OneDrive on unmanaged devices"
 DESC = (
-    "How to deliberately produce the 'Access to Microsoft OneDrive for Business is monitored' notice "
-    "and the 'Download blocked' message for users on unmanaged devices: licensing, defining a managed "
+    "How to deliberately produce the Defender for Cloud Apps monitored-access notice ('Access to … is "
+    "monitored') and the download-blocked message for users on unmanaged devices: licensing, defining a managed "
     "device, a Conditional Access policy with Conditional Access App Control, Defender for Cloud Apps "
     "session policies filtered by device, file extension and sensitivity label, user messages, the "
     "SharePoint app-enforced alternative, the gaps it leaves, testing and rollback. Documentation "
@@ -26,7 +27,7 @@ TIME_NOTE = (
     "Time estimates are Tenant Recipes planning figures for a mid-size tenant that already has Intune "
     "compliance or hybrid join in place, not Microsoft numbers."
 )
-CTA_FIRST = "Start by decoding the two screens →"
+CTA_FIRST = "Start with the two messages users see →"
 
 INTRO = [
     "A consultant finishes a workshop, gets home, and opens OneDrive on the web from a personal laptop "
@@ -47,7 +48,8 @@ INTRO = [
     "what is happening, why, and what to do instead (open it in the browser, use a managed laptop, "
     "ask the service desk). A silent block teaches users to look for workarounds; a clear message "
     "teaches them where the line is.",
-    "This guide shows how to produce both screens on purpose, how to choose between Defender for "
+    "This guide shows how to deliberately produce both the monitored-access notice and the "
+    "download-blocked message, how to choose between Defender for "
     "Cloud Apps session control and the simpler SharePoint/OneDrive app-enforced restrictions, and "
     "— just as important — what these controls do not protect against. Everything is checked against "
     "the linked Microsoft Learn articles; nothing here claims lab testing by Tenant Recipes.",
@@ -65,7 +67,7 @@ NOTICE = {
     "title": "Evidence boundary",
     "text": (
         "Every configuration step is taken from the Microsoft Learn articles linked under each step. "
-        "The exact on-screen wording of the end-user messages depends on whether the session runs "
+        "The exact wording of the end-user messages depends on whether the session runs "
         "through Microsoft Edge for Business in-browser protection or the reverse proxy, and on any "
         "custom text you configure; where Learn does not document the exact default wording we say "
         "so in 'What is not verified'. The opening scenario is a generic illustration, not a case "
@@ -74,6 +76,7 @@ NOTICE = {
 }
 
 HISTORY = [
+    ("2026-11-11", "Rewrote user-facing message descriptions; no screenshots. The monitored-access notice and the download-blocked message are now described in text from Microsoft Learn only, with the documented wording quoted and sourced; undocumented wording stays under 'What is not verified'."),
     ("2026-11-10", "Draft technical guide: reproduce the monitored-session notice and blocked-download message for OneDrive on unmanaged devices with Defender for Cloud Apps; documentation verified, not lab-tested."),
 ]
 
@@ -212,20 +215,19 @@ BOX_ALT = [
     "browser-only by design.",
 ]
 BOX_UNVERIFIED = [
-    "Exact default wording of the download popup. The wording 'Download blocked by your organization's "
-    "security policy' with a Microsoft Defender for Cloud Apps reference is how the message was described "
-    "to us; Microsoft Learn documents only that a 'Download restricted' message appears and the file is "
-    "replaced by a text file whose message you can configure (reverse proxy). The Edge for Business "
-    "in-browser popup text is not quoted on Learn. Expect the default wording to differ by delivery "
-    "path and over time.",
-    "'Hide for a week' on the monitored notice. Learn documents the notification on/off switch, default "
-    "versus custom message and a Preview link (Settings > Cloud apps > Conditional Access App Control > "
-    "User monitoring). An option on the notice to suppress it for a week is described only in older "
-    "third-party write-ups, not on Learn; check your own tenant's preview.",
-    "Exact notice text for OneDrive. Learn quotes the SharePoint variant: 'Access to Microsoft SharePoint "
-    "Online is monitored. For improved security, your organization allows access to Microsoft SharePoint "
-    "Online in monitor mode. Access is only available from a web browser.' We assume the OneDrive variant "
-    "substitutes the app name ('Microsoft OneDrive for Business'); not verified on Learn.",
+    "Exact default wording of the download-blocked message. Microsoft Learn documents only that a "
+    "'Download restricted' message appears and that the downloaded file is replaced by a text file whose "
+    "message you can configure (reverse proxy). Learn does not publish the full default text of that "
+    "message or of the replacement file, and does not quote the Edge for Business in-browser block text. "
+    "We therefore do not quote any default block wording; expect it to differ by delivery path and over time.",
+    "Options on the monitored-access notice beyond 'Continue'. Learn documents the notification on/off "
+    "switch, default versus custom message and a Preview link (Settings > Cloud apps > Conditional Access "
+    "App Control > User monitoring), and quotes only a 'Continue to …' link on the notice. Whether the "
+    "notice offers other options (for example suppressing it for a period) is not documented on Learn; "
+    "use Preview in your own tenant.",
+    "Exact notice text for OneDrive. Learn quotes only the SharePoint variant, and says the message "
+    "'resembles' that text. We assume the OneDrive variant substitutes the app name; the exact OneDrive "
+    "wording is not documented on Learn.",
     "Label names in the portals. Learn uses both 'Hybrid Azure AD joined' and 'Microsoft Entra hybrid "
     "joined' for the same Defender for Cloud Apps device tag, and 'Monitor only' / 'Block downloads' are "
     "shown as Preview in some tenants. App names in the session policy App filter (for example "
@@ -263,13 +265,31 @@ PROBLEM = {
           "Blocking all unmanaged access is safe but often unrealistic for consultants, partners and staff "
           "working from home. Allowing everything is easy and invisible. The middle ground is to allow "
           "browser access, make it visible, and stop the specific actions that move data out."]),
-        ("What the two screens are",
-         ["The interstitial 'Access to … is monitored … Access is only available from a web browser' is the "
-          "Defender for Cloud Apps user-monitoring notice. It appears when a Conditional Access policy routes "
-          "the session to Conditional Access App Control and the notify-users setting is on.",
-          "The 'Download blocked' message is a Defender for Cloud Apps session policy (or the built-in Block "
-          "downloads option in Conditional Access) stopping a download that matched its filters — in our "
-          "example a .zip on an unmanaged device."]),
+        ("What users see: the monitored-access notice and the download block",
+         ["The monitored-access notice is a page the user meets before the app opens. It tells them that "
+          "access to the app is monitored, that their organisation allows access in monitor mode for "
+          "improved security, and that access is only available from a web browser. It ends with a link to "
+          "continue to the app. Microsoft Learn quotes the SharePoint variant as a message that resembles: "
+          "'Access to Microsoft SharePoint Online is monitored. For improved security, your organization "
+          "allows access to Microsoft SharePoint Online in monitor mode. Access is only available from a web "
+          "browser.' followed by the link 'Continue to Microsoft SharePoint Online' (source: Microsoft Learn, "
+          "'Users are redirected when browsing to a SharePoint or OneDrive site', "
+          "https://learn.microsoft.com/en-us/troubleshoot/sharepoint/administration/access-to-sharepoint-online-is-monitored). "
+          "It comes from Defender for Cloud Apps user monitoring and appears when a Conditional Access policy "
+          "routes the session to Conditional Access App Control and 'Notify users that their activity is "
+          "being monitored' is on; you can use the default message or write your own.",
+          "The download-blocked message appears when the user tries to download a file that a Defender for "
+          "Cloud Apps session policy (or the built-in Block downloads option in Conditional Access) covers — "
+          "in our example a .zip on an unmanaged device. Microsoft Learn documents that 'a Download restricted "
+          "message appears for the user, and the downloaded file is replaced with a text file', and that you "
+          "configure the text file's message for your organisation (source: Microsoft Learn, 'Create session "
+          "policies', https://learn.microsoft.com/en-us/defender-cloud-apps/session-policy-aad). In other words "
+          "the user gets a notice in the browser and, in reverse-proxy sessions, a small text file in place of "
+          "the file they asked for. Learn does not publish the full default wording of either, so we do not "
+          "quote one; see 'What is not verified'.",
+          "You recognise both messages from this description and confirm them in the logs — the Microsoft "
+          "Entra sign-in log and the Defender for Cloud Apps activity log — not from pictures. This guide "
+          "contains no screenshots."]),
         ("Why we recommend this", BOX_WHY),
         ("When to choose something else", BOX_ALT),
         ("What is not verified", BOX_UNVERIFIED),
@@ -280,17 +300,17 @@ PROBLEM = {
 PHASES = [
     {
         "id": "decode",
-        "title": "Decode the two screens your users see",
+        "title": "Understand the two messages users see",
         "time": "30–60 minutes",
         "deep": True,
-        "goal": "You can tell from a screenshot and two log views exactly which policy produced the monitored notice and the blocked download.",
-        "lead": "Before you build anything, understand what produced the screens — in your own tenant or in someone else's.",
+        "goal": "From the description of the messages and two log views (Entra sign-in log and Defender for Cloud Apps activity log), you can tell exactly which policy produced the monitored-access notice and the blocked download.",
+        "lead": "Before you build anything, learn to recognise the two messages from their description and from the logs (activity log and audit) — not from attached images — and understand what produced them, in your own tenant or in someone else's.",
         "steps": [
             {
-                "t": "Recognise the monitored-session notice",
+                "t": "The monitored-access notice",
                 "check": "Team can explain that the notice comes from Defender for Cloud Apps user monitoring after a Conditional Access policy applied Conditional Access App Control",
                 "do": [
-                    "Learn documents the notice as: 'Access to Microsoft SharePoint Online is monitored. For improved security, your organization allows access to Microsoft SharePoint Online in monitor mode. Access is only available from a web browser.' followed by a 'Continue to …' link. For OneDrive the app name differs.",
+                    "Learn documents the notice as: 'Access to Microsoft SharePoint Online is monitored. For improved security, your organization allows access to Microsoft SharePoint Online in monitor mode. Access is only available from a web browser.' followed by a 'Continue to Microsoft SharePoint Online' link. Learn says the message 'resembles' this text; for OneDrive the app name differs.",
                     "Cause per Learn: a Defender for Cloud Apps policy applies to the user's session, so the session is routed to session control instead of directly to the app.",
                     "Two delivery paths: users in Microsoft Edge for Business (work profile) get in-browser protection with a lock icon (briefcase symbol in the lock pane) and no URL change; other browsers are reverse-proxied and the URL gains a suffix such as `*.mcas.ms`.",
                     "The notice is controlled in the Microsoft Defender portal: Settings > Cloud apps > Conditional Access App Control > User monitoring ('Notify users that their activity is being monitored', default or custom message, Preview).",
@@ -305,7 +325,7 @@ PHASES = [
                 "marker": "official",
             },
             {
-                "t": "Recognise the blocked-download message",
+                "t": "The download-blocked message",
                 "check": "Team can explain that the block comes from a session policy with Block action (or the built-in Block downloads) and where its message text is configured",
                 "do": [
                     "Session policy type 'Control file download (with inspection)' with action Block prevents downloads that match the file filters. In reverse-proxy sessions Learn says a 'Download restricted' message appears and the downloaded file is replaced by a text file whose message you can configure.",
@@ -488,7 +508,7 @@ PHASES = [
                     "Enable policy: Report-only first to check scope in the sign-in logs, then On for the pilot group (see pitfalls).",
                 ],
                 "pit": [
-                    "Report-only does not enforce session controls, so you will not see the monitored notice or blocked downloads until the policy is On.",
+                    "Report-only does not enforce session controls, so you will not see the monitored-access notice or blocked downloads until the policy is On.",
                     "Learn: report-only policies that require compliant devices can prompt macOS, iOS and Android users for a device certificate; exclude those platforms from report-only policies that check compliance if this is disruptive.",
                     "Device state and filter for devices cannot be combined in one policy; the device state condition is deprecated.",
                 ],
@@ -521,8 +541,8 @@ PHASES = [
         "title": "Block the .zip download and write the messages",
         "time": "1–3 hours",
         "deep": True,
-        "goal": "On unmanaged devices, .zip downloads (and optionally labelled files) from OneDrive and SharePoint are blocked with a clear, helpful message, and the monitored notice says what you want it to say.",
-        "lead": "This is where you reproduce the 'Download blocked' screen — and decide what it tells people.",
+        "goal": "On unmanaged devices, .zip downloads (and optionally labelled files) from OneDrive and SharePoint are blocked with a clear, helpful message, and the monitored-access notice says what you want it to say.",
+        "lead": "This is where you deliberately trigger the download-blocked message — and decide what it tells people.",
         "steps": [
             {
                 "t": "Create a session policy that blocks .zip downloads on unmanaged devices",
@@ -663,14 +683,14 @@ PHASES = [
         "title": "Pilot, test and communicate",
         "time": "1–2 weeks pilot",
         "deep": False,
-        "goal": "Both screens reproduce exactly where intended, managed users are unaffected, and users know what to expect before the scope widens.",
+        "goal": "The monitored-access notice and the download-blocked message appear exactly where intended, managed users are unaffected, and users know what to expect before the scope widens.",
         "steps": [
             {
                 "t": "Run the test matrix with a pilot account",
                 "check": "Matrix completed: unmanaged Edge (work profile), unmanaged Chrome, managed device, InPrivate, sync client, Office desktop app, mobile; results match expectations",
                 "do": [
                     "Sign out of all sessions first, then sign in with a user in scope.",
-                    "Unmanaged device, Edge work profile: monitored notice, lock icon with briefcase, .zip download blocked with your message, .docx download allowed (unless another policy blocks it).",
+                    "Unmanaged device, Edge work profile: monitored-access notice, lock icon with briefcase, .zip download blocked with your message, .docx download allowed (unless another policy blocks it).",
                     "Unmanaged device, Chrome/Firefox: same, but URL shows the `.mcas.ms` suffix (reverse proxy) and the downloaded file is replaced with your text file.",
                     "Managed device, signed-in browser: no notice, normal downloads.",
                     "Unmanaged device: OneDrive sync client and Office desktop apps blocked by the second policy.",
@@ -686,10 +706,10 @@ PHASES = [
             },
             {
                 "t": "Tell users before you widen the scope",
-                "check": "Short notice sent to affected users and service desk briefed with the screens, the reason and the self-service path",
+                "check": "Short notice sent to affected users and service desk briefed with a written description of both messages, the reason and the self-service path",
                 "do": [
-                    "Show users both screens in advance and explain the reason in one sentence: files stay on managed devices; the browser still works.",
-                    "Brief the service desk: how to recognise the screens, how to check a device's compliance, and when an exception is justified.",
+                    "Describe both messages to users in advance — the monitored-access notice and the download-blocked message, including the text you configured — and explain the reason in one sentence: files stay on managed devices; the browser still works.",
+                    "Brief the service desk: how to recognise the two messages from a user's description and confirm them in the activity log, how to check a device's compliance, and when an exception is justified.",
                     "Widen scope gradually (pilot group → department → all users), watching the activity log and ticket volume.",
                 ],
                 "pit": [
