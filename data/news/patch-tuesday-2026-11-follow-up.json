@@ -1,0 +1,94 @@
+{
+ "id": "patch-tuesday-2026-11-follow-up",
+ "status": "published",
+ "title": "November 2026 Patch Tuesday follow-up: known install and activation issues, no withdrawn updates",
+ "date": "2026-11-12",
+ "category": "Windows",
+ "summary": "Microsoft's 10 November 2026 security release listed 1,095 Microsoft CVEs, including one exploited Outlook spoofing flaw (CVE-2026-124194); the full round-up, priorities and fixed builds are on our Patch Tuesday November 2026 page. Two days later, Microsoft has not withdrawn or reissued those packages, and it has not published a new Known Issue Rollback for them. It has confirmed that some Windows 11 devices fail to install KB5132061 with errors 0x80070306, 0x800f0989 or 0x800f0993, and is rolling out an automatic repair, and that SLMGR activation commands can fail with 0x80041008 on Windows 10, Windows 11 23H2 and Windows Server 2019, 2022 and 2025, with a fix said to arrive in the coming days.",
+ "why": "The security content, including the exploited Outlook CVE, still needs to go out. The confirmed problems are about installation, licensing automation, and an October SQL Server linked-server leak that later cumulative updates have not yet fixed — not a reason to pause a fleet-wide security roll-out. The November CUs also close several October issues, including Exchange OWA sign-in and mail delivery failures on Windows Server, USB Audio Class 1.0 devices that would not start, and adding a printer published in Active Directory. Microsoft's SLMGR note names only slmgr.vbs /skms-domain and /ipk; community reports that /rearm (for example in Citrix MCS image prep) or third-party NTLM clients also break have not been confirmed in the official known-issue text.",
+ "todo": [
+  "Keep deploying the November cumulative updates, the Microsoft 365 Apps / Office LTSC Outlook builds, and Exchange Server SE security update KB5133453. Use the Patch Tuesday November 2026 page for CVE priorities and fixed builds.",
+  "If Windows 11 devices fail KB5132061 with 0x80070306, 0x800f0989 or 0x800f0993 and use Windows Update in Settings on the internet, wait for Microsoft's automatic repair (24–48 hours from 11 November 2026, 10:00 PT). After the repair arrives, the November update should download on its own. If a device is still failing after that window, use Windows support or Microsoft Support. The published repair is described for that Windows Update path.",
+  "If image-build or KMS automation runs `slmgr.vbs /skms-domain` or `slmgr.vbs /ipk`, test those pipelines before you patch them. Already-activated devices stay activated. Microsoft says a workaround is available through Support for business, and a fix is due in the coming days.",
+  "On servers that run SQL Server linked-server queries over OLE DB (Microsoft names Oracle and PostgreSQL), watch for connections that stay open after the October 2026 updates and later CUs. Microsoft Support for business has a mitigation. The promised out-of-band update was not listed as released on the Windows release health pages checked on 12 November.",
+  "Watch the CU KB articles and Windows release health for the SLMGR fix, the SQL out-of-band update, and any further known issues. The Register reported on 12 November a Microsoft notification (WI1549472) that documents containing images with a height or width of zero at the print resolution may fail to print after the November update; that text was not on the public Learn release-health or November CU KB pages checked the same day."
+ ],
+ "effective": "2026-11-10",
+ "effective_note": "Security updates released 10 November 2026. Install-failure repair window: 24–48 hours from 11 November 2026, 10:00 PT. SLMGR fix and SQL linked-server out-of-band update promised in the coming days, not listed as released as of 12 November.",
+ "primary": {
+  "title": "KB5132061: November 2026 Windows 11 24H2/25H2/26H2 security update",
+  "url": "https://support.microsoft.com/help/5132061"
+ },
+ "related": [
+  {
+   "title": "Patch Tuesday November 2026: CVE list, Outlook zero-day and fixed builds",
+   "url": "security/patch-tuesday-2026-11.html"
+  },
+  {
+   "title": "News: Windows clients now offer NTLM signing by default",
+   "url": "news/windows-ntlm-signing-default-phase1.html"
+  },
+  {
+   "title": "Windows 11, version 25H2 known issues and notifications",
+   "url": "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Support KB5132061 (Windows 11 24H2/25H2/26H2), known issue added 11 November 2026",
+   "url": "https://support.microsoft.com/help/5132061",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Support KB5131090 (Windows Server 2022): SLMGR 0x80041008 known issue",
+   "url": "https://support.microsoft.com/help/5131090",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Support KB5131096 (Windows 10 21H2/22H2 ESU): SLMGR 0x80041008 known issue",
+   "url": "https://support.microsoft.com/help/5131096",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Support KB5131087 (Windows 11 23H2): SLMGR 0x80041008 known issue",
+   "url": "https://support.microsoft.com/help/5131087",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Support KB5131080 (Windows Server 2025): SLMGR 0x80041008 known issue",
+   "url": "https://support.microsoft.com/help/5131080",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Support KB5131085 (Windows 10 1809 / Windows Server 2019): SLMGR 0x80041008 known issue",
+   "url": "https://support.microsoft.com/help/5131085",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Learn: Windows 11, version 25H2 known issues (SQL linked-server OOB promised, not listed as released)",
+   "url": "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Learn: Windows Server 2022 known issues (October Exchange/OWA issue resolved by KB5131090)",
+   "url": "https://learn.microsoft.com/en-us/windows/release-health/status-windows-server-2022",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Exchange Team: Released November 2026 Exchange Server Security Updates",
+   "url": "https://techcommunity.microsoft.com/blog/exchange/released-november-2026-exchange-server-security-updates/4570368",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "BleepingComputer: Microsoft confirms KB5132061 installation issues (0x80070306, 0x800f0989, 0x800f0993)",
+   "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-confirms-kb5132061-installation-issues-0x80070306-0x800f0989-0x800f0993-errors/",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "The Register, 12 November 2026: printing issue (WI1549472) and SLMGR (WI1549486)",
+   "url": "https://www.theregister.com/os-platforms/2026/11/12/microsoft-has-an-image-problem-with-novembers-windows-security-update/5309435",
+   "checked": "2026-11-12"
+  }
+ ],
+ "last_verified": "2026-11-12"
+}

@@ -1,6 +1,16 @@
 [
  {
   "date": "2026-11-12",
+  "time": "21:39",
+  "kind": "site",
+  "type": "News",
+  "title": "November 2026 Patch Tuesday follow-up",
+  "blurb": "Confirmed install and SLMGR issues two days on; no withdrawn updates. A SLMGR fix and a SQL linked-server out-of-band update are promised, not yet listed as released.",
+  "url": "news/patch-tuesday-2026-11-follow-up.html",
+  "text": "Two days after the 10 November release, Microsoft has not withdrawn any packages. KB5132061 can fail to install on some Windows 11 devices, with an automatic repair in progress, and SLMGR activation commands can fail with 0x80041008. A SLMGR fix and a SQL linked-server out-of-band update are promised in the coming days."
+ },
+ {
+  "date": "2026-11-12",
   "kind": "site",
   "type": "Policy",
   "title": "Password & MFA policy: legacy network authentication",
