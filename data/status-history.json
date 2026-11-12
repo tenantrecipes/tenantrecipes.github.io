@@ -1,5 +1,14 @@
 [
  {
+  "id": "mac-8e519b76-8cbd-4a36-8405-c0c9b2cf05eb",
+  "first_seen": "2026-11-12T23:13:58Z",
+  "title": "Users may be unable to connect to multiple Microsoft 365 services",
+  "source": "Microsoft 365 admin center",
+  "link": "https://status.cloud.microsoft/",
+  "start": "2026-11-12T23:06:31Z",
+  "last_seen": "2026-11-12T23:13:58Z"
+ },
+ {
   "id": "mac-216f419f-45d2-4d2f-b48e-7509d3ecd407",
   "first_seen": "2026-11-12T22:21:12Z",
   "title": "Users may be unable to connect to multiple Microsoft 365 services",
