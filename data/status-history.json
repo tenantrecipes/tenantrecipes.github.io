@@ -1,5 +1,14 @@
 [
  {
+  "id": "mac-be04f54b-599d-4585-8ab3-db95662cd476",
+  "first_seen": "2026-11-12T19:48:32Z",
+  "title": "Microsoft 365 admin center: Service degradation",
+  "source": "Microsoft 365 admin center",
+  "link": "https://status.cloud.microsoft/",
+  "start": "2026-11-12T19:30:36Z",
+  "last_seen": "2026-11-12T19:48:32Z"
+ },
+ {
   "id": "mac-c179260d-d8f0-405b-8f9b-1d8fb1008dec",
   "first_seen": "2026-11-12T18:45:34Z",
   "title": "Users may be unable to connect to multiple Microsoft 365 services",
