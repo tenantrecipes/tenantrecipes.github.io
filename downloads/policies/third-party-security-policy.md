@@ -31,6 +31,8 @@ It covers cloud and software providers, IT service providers, consultants, outso
 - Supplier access to systems uses named accounts, MFA, the least privilege needed and time limits.
 - High-risk suppliers are reassessed every year, others at renewal.
 - Supplier incidents that affect {{COMPANY}} are handled through the incident response policy.
+- When a certificate authority used by a supplier is distrusted by browser or operating-system vendors, the supplier replaces affected certificates within the vendor's deadline, and {{COMPANY}} does not re-trust removed roots locally to keep a supplier service working.
+- Suppliers that host services {{COMPANY}} signs in to keep those services compatible with current platform security defaults (for example signed authentication protocols and modern TLS) and announce incompatibilities before the vendor's enforcement date, not after.
 
 ## 5. Ending the relationship
 

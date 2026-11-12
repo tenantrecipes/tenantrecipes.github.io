@@ -1,0 +1,54 @@
+{
+ "id": "windows-ntlm-signing-default-phase1",
+ "status": "published",
+ "title": "Windows clients now offer NTLM signing by default; servers start rejecting unsigned NTLM in May 2027 (CVE-2026-118737)",
+ "date": "2026-11-12",
+ "category": "Windows",
+ "summary": "Per KB5135557 and MC1549242 (11 November 2026), Windows updates released on and after 10 November 2026 make clients offer real NTLM message signing (NTLMSSP_NEGOTIATE_SIGN with a session key) on all non-anonymous connections, instead of the zero-filled ALWAYS_SIGN placeholder some applications got before. Servers still accept unsigned clients in phase 1 and log them. In phase 2 (May 2027) Windows servers require NTLM signing by default and reject clients that do not offer it. Two new MSV1_0 registry values control the behaviour: ClientAllowUnsignedNtlm and ServerRequireNtlmSign.",
+ "why": "This is a relay-mitigation change at the NTLM layer itself, not per protocol like SMB or LDAP signing. Anything that cannot negotiate signing — old appliances, NAS, third-party SSPs, scanners, printers authenticating to Windows — will fail in May 2027 with SEC_E_UNSUPPORTED_FUNCTION. Event 4023 on the server side tells you who those clients are today, but only on Windows Server 2019 and later with NTLM enhanced auditing, and every event is logged at Warning level whether signing is present or not.",
+ "todo": [
+  "Deploy the November 2026 cumulative update to clients first; phase 1 changes only what clients offer.",
+  "Collect Microsoft-Windows-NTLM/Operational events 4022/4023 from servers and filter on the SIGN bit (0x10) in Negotiated Flags, not on event level.",
+  "Treat `ClientAllowUnsignedNtlm=1` as a time-boxed exception with an owner, never a fleet setting.",
+  "Once 4023 shows no unsigned clients for a server role, set `ServerRequireNtlmSign=1` (no restart) ahead of May 2027."
+ ],
+ "effective": "2026-11-10",
+ "effective_note": "Phase 1 with the 10 November 2026 updates; phase 2 (servers require signing by default) May 2027, exact date not yet published.",
+ "primary": {
+  "title": "KB5135557: NTLM signing security improvements in Windows",
+  "url": "https://support.microsoft.com/help/5135557"
+ },
+ "related": [
+  {
+   "title": "Recipe: find clients that will fail NTLM signing enforcement",
+   "url": "recipes/ntlm-signing-phase2-readiness.html"
+  },
+  {
+   "title": "Tool: LdapRelayScan (LDAP signing and channel binding check)",
+   "url": "tools/ldaprelayscan.html"
+  },
+  {
+   "title": "News: NTLMv1 SSO enforcement for MS-CHAPv2",
+   "url": "news/windows-ntlmv1-sso-enforce-mschapv2.html"
+  }
+ ],
+ "recipe": "ntlm-signing-phase2-readiness",
+ "sources": [
+  {
+   "title": "Microsoft Support KB5135557: NTLM signing security improvements in Windows",
+   "url": "https://support.microsoft.com/help/5135557",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "MC1549242: NTLM signing security improvements in Windows (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1549242",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "MSRC Security Update Guide: CVE-2026-118737",
+   "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118737",
+   "checked": "2026-11-12"
+  }
+ ],
+ "last_verified": "2026-11-12"
+}

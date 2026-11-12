@@ -44,19 +44,26 @@ It applies to every account that can access {{COMPANY}} systems, including user,
 - At least two emergency (break-glass) accounts exist, are excluded only from the policies needed to stay usable, use strong credentials stored securely, and are monitored for any sign-in.
 - Service accounts and app credentials have a named owner, the least privilege needed and a documented rotation plan.
 
-## 6. Lost devices and resets
+## 6. Legacy network authentication
+
+- Kerberos or modern authentication is the default for internal services. NTLM is allowed only where a system cannot use them, and every remaining NTLM dependency is recorded with an owner.
+- NTLM connections to {{COMPANY}} servers must use message signing. Servers are configured to reject unsigned NTLM once auditing shows that no legitimate client still depends on it, and no later than the date the platform vendor enforces it by default.
+- Settings that allow clients to skip NTLM signing, or that relax SMB/LDAP signing or LDAPS channel binding, are exceptions under this policy: written, time-limited and owned.
+- Systems that cannot meet these rules are isolated or scheduled for replacement; their limitation is not a reason to weaken the rule for everyone else.
+
+## 7. Lost devices and resets
 
 Report a lost phone or security key the same day. Identity checks for password and MFA resets are done through a verified channel, never only on the caller's word.
 
-## 7. Exceptions
+## 8. Exceptions
 
 Exceptions must be requested in writing, explain the business reason and the risk, include compensating measures, and have an end date. {{OWNER}} approves or rejects them and keeps a record.
 
-## 8. Compliance
+## 9. Compliance
 
 Breaches of this policy may lead to access being removed and to action under employment or contract terms. Report suspected breaches to {{SECURITY_CONTACT}}.
 
-## 9. Ownership and review
+## 10. Ownership and review
 
 Policy owner: {{OWNER}}. Approved by: {{APPROVER}}. Effective from: {{EFFECTIVE_DATE}}. Next review: {{REVIEW_DATE}}.
 

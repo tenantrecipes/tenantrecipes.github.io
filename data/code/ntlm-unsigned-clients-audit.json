@@ -1,0 +1,37 @@
+{
+ "id": "ntlm-unsigned-clients-audit",
+ "status": "published",
+ "title": "List NTLM clients that do not negotiate signing (events 4022/4023)",
+ "lang": "powershell",
+ "tags": [
+  "NTLM",
+  "Windows Server",
+  "CVE-2026-118737",
+  "KB5135557"
+ ],
+ "summary": "Read-only PowerShell that reads the NTLM operational log on one or more servers and lists unique client/process combinations whose Negotiated Flags lack NTLMSSP_NEGOTIATE_SIGN (0x10) — the clients that will be rejected when servers require NTLM signing.",
+ "code": "# Run elevated. Read-only. Requires Windows Server 2019+ with NTLM enhanced auditing.\n$servers = @($env:COMPUTERNAME)   # or: Get-Content .\\servers.txt\n$SIGN = 0x10; $KEYX = 0x40000000\n\n$rows = foreach ($s in $servers) {\n  Get-WinEvent -ComputerName $s -FilterHashtable @{ LogName='Microsoft-Windows-NTLM/Operational'; Id=4022,4023 } -ErrorAction SilentlyContinue |\n  ForEach-Object {\n    $m = $_.Message\n    $f = if ($m -match 'Negotiated Flags:\\s+(0x[0-9A-Fa-f]+)') { [Convert]::ToInt64($Matches[1],16) } else { $null }\n    if ($null -ne $f -and -not ($f -band $SIGN)) {\n      [pscustomobject]@{\n        Server     = $s\n        EventId    = $_.Id\n        LastSeen   = $_.TimeCreated\n        ClientIP   = if ($m -match 'Client IP:\\s+(\\S+)')        { $Matches[1] } else { '-' }\n        ClientHost = if ($m -match 'Client Machine:\\s+(\\S+)')   { $Matches[1] } else { '-' }\n        User       = if ($m -match 'Username:\\s+(\\S+)')         { $Matches[1] } else { '-' }\n        Process    = if ($m -match 'Process Name:\\s+(.+)')       { $Matches[1].Trim() } else { '-' }\n        KeyExch    = [bool]($f -band $KEYX)\n        Flags      = ('0x{0:X8}' -f $f)\n      }\n    }\n  }\n}\n\n$rows | Sort-Object LastSeen -Descending |\n  Sort-Object Server, ClientIP, Process -Unique |\n  Export-Csv .\\ntlm-unsigned-clients.csv -NoTypeInformation\n\"{0} unsigned client/process combinations written to ntlm-unsigned-clients.csv\" -f @($rows | Sort-Object Server, ClientIP, Process -Unique).Count",
+ "notes": [
+  "Read-only; changes nothing. Remote reads need the Event Log Readers right and remote event log access on each server.",
+  "Event level is not a filter: signed and unsigned connections both log as Warning.",
+  "An empty result on a server older than Windows Server 2019 means 'no data', not 'ready'.",
+  "Message field labels follow the English event text; adjust the regexes on localised systems."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "ntlm-signing-phase2-readiness",
+  "label": "Find clients that will fail NTLM signing enforcement"
+ },
+ "refs": [
+  {
+   "title": "Microsoft Support KB5135557: NTLM signing security improvements in Windows",
+   "url": "https://support.microsoft.com/help/5135557"
+  },
+  {
+   "title": "Microsoft Learn: Get-WinEvent",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent"
+  }
+ ],
+ "created": "2026-11-12",
+ "last_verified": "2026-11-12"
+}

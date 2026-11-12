@@ -1,0 +1,44 @@
+{
+ "id": "teams-events-recording-access-option-policy",
+ "status": "published",
+ "title": "Teams town halls and webinars: 'Who has access to the recording or transcript' now follows the Events policy, not AllowCloudRecording",
+ "date": "2026-11-12",
+ "category": "M365",
+ "summary": "MC1550542 (12 November 2026, rolling out early to mid-November across worldwide, GCC, GCC High and DoD) changes when the 'Who has access to the recording or transcript' option appears for town halls and webinars scheduled through the Teams Events app. Today it is hidden when the meeting policy has AllowCloudRecording set to false. After the change it appears only when RecordingForTownhall or RecordingForWebinar is enabled in CsTeamsEventsPolicy.",
+ "why": "Third Teams recording-control change this week (after MC1508234 and RM579860). Tenants that relied on AllowCloudRecording=false in the meeting policy to keep event organisers away from recording settings must now look at CsTeamsEventsPolicy as well. Recordings and transcripts from large events are exactly the content that ends up in Copilot, eDiscovery and retention.",
+ "todo": [
+  "Run `Get-CsTeamsEventsPolicy | Select-Object Identity, RecordingForTownhall, RecordingForWebinar` and compare with the meeting policies assigned to the same organisers.",
+  "Align the two: if events should not be recorded, disable recording in the Events policy, not only in the meeting policy.",
+  "Update internal documentation that names AllowCloudRecording as the control for event recordings."
+ ],
+ "effective": null,
+ "effective_note": "Rolling out early to mid-November 2026.",
+ "primary": {
+  "title": "MC1550542: Updated recording and transcript access setting behavior for town halls and webinars (Message center archive)",
+  "url": "https://mc.merill.net/message/MC1550542"
+ },
+ "related": [
+  {
+   "title": "News: Teams policy for who can record and transcribe (RM579860)",
+   "url": "news/teams-policy-who-can-record-transcribe.html"
+  },
+  {
+   "title": "News: Meeting options align with recording/transcription policy (MC1508234)",
+   "url": "news/teams-auto-recording-policy-alignment.html"
+  }
+ ],
+ "recipe": "copilot-teams-meeting-transcription",
+ "sources": [
+  {
+   "title": "MC1550542 (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1550542",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Learn: Set-CsTeamsEventsPolicy",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoftteams/set-csteamseventspolicy",
+   "checked": "2026-11-12"
+  }
+ ],
+ "last_verified": "2026-11-12"
+}

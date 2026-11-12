@@ -2182,6 +2182,88 @@
   "updated": "2026-11-11"
  },
  {
+  "id": "ntlm-signing-phase2-readiness",
+  "status": "published",
+  "tier": "recipe",
+  "order": 162,
+  "category": "Identity & threat protection",
+  "title": "Find the clients that will fail when Windows servers require NTLM signing (May 2027)",
+  "problem": "The November 2026 Windows updates (KB5135557, CVE-2026-118737) make clients offer real NTLM signing by default, and in May 2027 Windows servers start rejecting NTLM clients that do not. You need the list of non-signing clients per server now, and a controlled way to enforce early once that list is empty.",
+  "steps": [
+   "Install the Windows updates released on or after 10 November 2026 on clients and servers. Phase 1 changes what Windows clients offer; servers keep accepting unsigned clients and start auditing them.",
+   "On Windows Server 2019 and later, make sure NTLM enhanced auditing is on so the `Microsoft-Windows-NTLM/Operational` log records event 4023 (server side) and 4022 (client side). Microsoft's NTLM logging guidance is at `aka.ms/ntlmlogandblock`.",
+   "Collect 4023 from file servers, application servers and domain controllers into your SIEM, or run the read-only snippet below per server.",
+   "Classify each event by the Negotiated Flags value, not by level (signed and unsigned are both logged as Warning): a connection is phase-2 ready when bit `0x10` (NTLMSSP_NEGOTIATE_SIGN) and bit `0x40000000` (KEY_EXCH) are set and Session Key Status is Present. `ALWAYS_SIGN` (`0x8000`) without `0x10` is the placeholder and will be rejected.",
+   "Group unsigned connections by client IP, client machine, user and server process, and give each group an owner: typical candidates are non-Windows SMB/HTTP clients, appliances, scanners and third-party authentication packages.",
+   "Fix the client (update, reconfigure, move to Kerberos) rather than planning an exception. If phase 1 itself breaks a specific client, `ClientAllowUnsignedNtlm=1` (REG_DWORD under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\MSV1_0`) stops that client offering signing — time-box it, it is a temporary compatibility switch.",
+   "When a server shows no unsigned non-anonymous connections over a representative period (include month-end jobs), set `ServerRequireNtlmSign=1` under the same key. No restart is needed.",
+   "Verify enforcement: a non-signing client now fails with `SEC_E_UNSUPPORTED_FUNCTION (0x80090302)` and the server logs 4023 with that status. Anonymous (null session) and guest connections are exempt by design."
+  ],
+  "pitfalls": [
+   "Filtering on event level hides the problem: both good and bad connections are Warning.",
+   "The 4022/4023 events exist only on Windows Server 2019 and later with enhanced auditing; older servers give you no per-connection signing data, so prioritise them for upgrade or treat their clients as unknown.",
+   "This is NTLM-layer signing. It does not replace SMB signing, LDAP signing or LDAPS channel binding; check those separately.",
+   "Microsoft says the registry values may be removed in the future — do not build long-term exceptions on `ClientAllowUnsignedNtlm`."
+  ],
+  "done_when": [
+   "Every server role has a list of clients that do not negotiate NTLM signing, each with an owner and a fix date before May 2027.",
+   "`ServerRequireNtlmSign=1` is set on servers whose 4023 data is clean, through GPO preferences or Intune, with the change recorded.",
+   "No client in the estate has `ClientAllowUnsignedNtlm=1` without a dated exception."
+  ],
+  "troubleshooting": [
+   {
+    "symptom": "No 4022/4023 events at all",
+    "cause": "Server older than Windows Server 2019, or NTLM enhanced auditing not enabled",
+    "fix": "Check OS version and the NTLM auditing configuration from Microsoft's NTLM logging guidance; on older servers the events are not available."
+   },
+   {
+    "symptom": "A client fails after ServerRequireNtlmSign=1",
+    "cause": "The client does not offer NTLMSSP_NEGOTIATE_SIGN",
+    "fix": "Set `ServerRequireNtlmSign=0` on that server (immediate, no restart), confirm the client's 4023 entry shows the SIGN bit missing, fix the client, then re-enable."
+   },
+   {
+    "symptom": "Connection to an old non-Windows server stopped working after the November update",
+    "cause": "Server mishandles the signing offer",
+    "fix": "Per KB5135557 a server that does not echo SIGN should make the client fall back; if it still fails, use `ClientAllowUnsignedNtlm=1` on the affected client only, with an end date."
+   }
+  ],
+  "rollback": [
+   "Set `ServerRequireNtlmSign` back to `0` (the default) on the affected server; no restart is required.",
+   "Confirm with a fresh 4023 event that the previously rejected client authenticates again, then keep it on the remediation list."
+  ],
+  "markers": {
+   "steps": "official",
+   "pitfalls": "practical",
+   "troubleshooting": "practical",
+   "rollback": "official"
+  },
+  "related": [
+   "ca-block-legacy-auth",
+   "intune-compliance-baseline"
+  ],
+  "sources": [
+   {
+    "title": "Microsoft Support KB5135557: NTLM signing security improvements in Windows",
+    "url": "https://support.microsoft.com/help/5135557",
+    "checked": "2026-11-12"
+   },
+   {
+    "title": "MC1549242: NTLM signing security improvements in Windows (Message center archive)",
+    "url": "https://mc.merill.net/message/MC1549242",
+    "checked": "2026-11-12"
+   },
+   {
+    "title": "MSRC Security Update Guide: CVE-2026-118737",
+    "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118737",
+    "checked": "2026-11-12"
+   }
+  ],
+  "last_verified": "2026-11-12",
+  "verified_by": "Pascal",
+  "created": "2026-11-12",
+  "updated": "2026-11-12"
+ },
+ {
   "id": "entra-sms-voice-retirement-passkeys",
   "status": "published",
   "tier": "recipe",

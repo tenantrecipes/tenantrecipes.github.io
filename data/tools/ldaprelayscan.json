@@ -1,0 +1,62 @@
+{
+ "id": "ldaprelayscan",
+ "status": "published",
+ "kind": "tool",
+ "name": "LdapRelayScan – check domain controllers for LDAP signing and LDAPS channel binding enforcement",
+ "vendor": "Open source Python tool (zyn3rgy)",
+ "category": "Active Directory",
+ "what": "A small Python tool that tells you whether domain controllers enforce the two server-side protections against NTLM relay to LDAP: LDAPS channel binding (Never / When supported / Always, determined unauthenticated from the bind error) and LDAP server signing (requires a valid domain credential, detected from the strongerAuthRequired result). It works from error-based enumeration, so it reads the effective state of each DC rather than what a GPO report claims.",
+ "when": "As the verification step after you set 'Domain controller: LDAP server signing requirements' and LdapEnforceChannelBinding, as a per-DC drift check (one DC missing the GPO is enough for a relay path), and in purple-team engagements before you try any relay to LDAP. It complements the NTLM-layer signing rollout (KB5135557): NTLM signing, LDAP signing and LDAPS channel binding are separate controls.",
+ "license": "GPL-3.0",
+ "cost": "open source",
+ "cost_note": "Repository last updated November 2024; review the code and dependencies (msldap) before running it in production networks.",
+ "url": "https://github.com/zyn3rgy/LdapRelayScan",
+ "repo": "https://github.com/zyn3rgy/LdapRelayScan",
+ "example": [
+  "Install in an isolated venv or the provided Docker image: `python3 -m pip install -r requirements_exact.txt`, or `docker build -f docker/Dockerfile -t ldaprelayscan .`.",
+  "Channel binding only, unauthenticated: `python3 LdapRelayScan.py -method LDAPS -dc-ip <dc-ip>`.",
+  "Signing and channel binding with a low-privilege test account: `python3 LdapRelayScan.py -method BOTH -dc-ip <dc-ip> -u <testuser> -p <password>`.",
+  "Run it against every DC, not just the one DNS returns first, and keep the output as evidence next to the GPO change."
+ ],
+ "pitfalls": [
+  "DNS must resolve the domain properly from where you run it; on a non-domain-joined host or through SOCKS, fix resolution first or results are misleading.",
+  "The BOTH method performs real authenticated binds: use a dedicated test account, not a personal or admin credential, and expect the binds in DC logs.",
+  "'When supported' channel binding still lets clients that do not send a CBT through; only 'Always' closes LDAPS relay.",
+  "Error-based detection depends on DC behaviour the author observed; re-validate against the DC's actual configuration after major Windows Server upgrades."
+ ],
+ "sources": [
+  {
+   "title": "LdapRelayScan README (GitHub)",
+   "url": "https://github.com/zyn3rgy/LdapRelayScan",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Support: Use the LdapEnforceChannelBinding registry entry",
+   "url": "https://support.microsoft.com/en-us/topic/use-the-ldapenforcechannelbinding-registry-entry-to-make-ldap-authentication-over-ssl-tls-more-secure-e9ecfa27-5e57-8519-6ba3-d2c06b21812e",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Support KB5135557: NTLM signing security improvements in Windows",
+   "url": "https://support.microsoft.com/help/5135557",
+   "checked": "2026-11-12"
+  }
+ ],
+ "related": [
+  {
+   "title": "News: Windows clients offer NTLM signing by default; servers require it from May 2027",
+   "url": "news/windows-ntlm-signing-default-phase1.html"
+  },
+  {
+   "title": "Recipe: find clients that will fail NTLM signing enforcement",
+   "url": "recipes/ntlm-signing-phase2-readiness.html"
+  },
+  {
+   "title": "Guide: internal purple team – network to hybrid identity",
+   "url": "guides/purple-team-hybrid-identity.html"
+  }
+ ],
+ "last_verified": "2026-11-12",
+ "created": "2026-11-12",
+ "updated": "2026-11-12",
+ "order": 390
+}

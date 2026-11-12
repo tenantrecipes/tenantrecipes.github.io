@@ -21,6 +21,8 @@ DESC = ("An expert, authorization-first purple-team playbook that walks a single
         "It ends where it must: proving detection in Defender for Identity and Entra logs, then remediating the on-prem-to-cloud "
         "seams the path exploited. Defensive use only, on your own systems or with written permission.")
 VERIFIED = "2026-11-02"
+UPDATED = "2026-11-12"
+HISTORY = [("2026-11-12", "Remediation phase: added NTLM-layer signing enforcement (KB5135557, ServerRequireNtlmSign, event 4023) and per-DC LDAP signing/channel binding verification with LdapRelayScan.")]
 BADGE = "fact-checked against the tool projects and Microsoft Learn / Microsoft Support"
 SRC_LABEL = "Official sources"
 TIME_NOTE = ("Time estimates are our planning figures for one hybrid environment: an on-premises Active Directory forest synced to a single "
@@ -88,6 +90,7 @@ L = {
     "llmnr": ("Turn off multicast name resolution (ADMX_DnsClient Policy CSP)", "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient"),
     "ntlm_audit": ("Network security: Restrict NTLM: Audit NTLM authentication in this domain", "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/network-security-restrict-ntlm-audit-ntlm-authentication-in-this-domain"),
     "smb_sign": ("Control SMB signing behavior", "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing"),
+    "ntlm_sign": ("KB5135557: NTLM signing security improvements in Windows", "https://support.microsoft.com/help/5135557"),
     "smb_overview": ("Overview of Server Message Block signing in Windows", "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview"),
     "laps": ("Windows LAPS overview", "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview"),
     "laps_entra": ("Use Windows LAPS with Microsoft Entra ID", "https://learn.microsoft.com/en-us/entra/identity/devices/howto-manage-local-admin-passwords"),
@@ -379,10 +382,12 @@ PHASES = [
     "do": ["Disable LLMNR via GPO or Intune: 'Turn off multicast name resolution' (ADMX_DnsClient), which sets `EnableMulticast = 0`; disable NBT-NS via DHCP option 001/registry or scripted NIC settings, and disable mDNS where your OS versions allow.",
            "Require SMB signing on servers and clients (`Set-SmbServerConfiguration`/`Set-SmbClientConfiguration -RequireSecuritySignature $true`) so captured hashes cannot be relayed; modern Windows increasingly requires it by default.",
            "Enable 'Audit NTLM authentication in this domain' on DCs, review the traffic, and plan NTLM restriction where applications allow.",
+           "Close relay at the NTLM layer too: since the 10 November 2026 updates (KB5135557, CVE-2026-118737) Windows clients offer real NTLM signing and servers log non-signing clients as event 4023; set `ServerRequireNtlmSign=1` per server once 4023 is clean, ahead of the May 2027 default. Verify LDAP signing and LDAPS channel binding per DC with LdapRelayScan — they are separate controls.",
            "Roll these out in rings (pilot group, then wider) and keep the Responder analyze-mode baseline from phase 2 as the before/after proof."],
     "pit": ["Disabling NBT-NS can break legacy name resolution for old apps — pilot it and have the rollback (re-enable per interface) documented before the wide ring.",
-            "SMB signing 'required' can surface old or misconfigured clients; stage it so you fix clients rather than reverting the control."],
-    "rec": [], "tools": ["responder"], "src": S("llmnr", "smb_sign", "smb_overview", "ntlm_audit"),
+            "SMB signing 'required' can surface old or misconfigured clients; stage it so you fix clients rather than reverting the control.",
+            "Event 4023 logs signed and unsigned NTLM at the same Warning level and only exists on Windows Server 2019+ with enhanced auditing — filter on the SIGN bit (0x10), and treat older servers as 'no data', not 'clean'."],
+    "rec": ["ntlm-signing-phase2-readiness"], "tools": ["responder", "ldaprelayscan"], "src": S("llmnr", "smb_sign", "smb_overview", "ntlm_audit", "ntlm_sign"),
     "marker": "official"},
    {"t": "Harden the identity plane: local admin, tiering and the hybrid seam",
     "check": "Windows LAPS randomises local admin passwords, local-admin and lateral reuse are constrained by tiering, and the Entra Connect/sync identities are treated as Tier 0",

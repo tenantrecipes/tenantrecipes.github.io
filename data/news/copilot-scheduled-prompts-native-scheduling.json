@@ -1,0 +1,34 @@
+{
+ "id": "copilot-scheduled-prompts-native-scheduling",
+ "status": "published",
+ "title": "Copilot scheduled prompts leave Power Platform: native scheduling from 30 November, old flows retire 31 December",
+ "date": "2026-11-12",
+ "category": "Copilot/AI",
+ "summary": "MC1550533 (published 12 November 2026, major change, act by 31 December) moves scheduled prompts in Microsoft 365 Copilot and Copilot Chat to native Copilot scheduling. The new experience runs independently of Power Platform — including where Power Automate is disabled — and stores scheduled task data inside the Microsoft 365 compliance boundary. Limits are 10 active and 50 total schedules per user, managed under Tasks > Scheduled in the Microsoft 365 Copilot app. Frontier from 11 November, worldwide 30 November to 31 December; the Power Platform-based scheduled prompts retire on 31 December 2026.",
+ "why": "If your control for unattended Copilot runs was 'Power Automate is off for Copilot users', that control stops applying: the new scheduler does not depend on it. The message says the feature is 'subject to organizational controls' but does not name the setting, so do not assume your existing Power Platform DLP or environment policies cover it. Some schedules will not migrate automatically and users must recreate them.",
+ "todo": [
+  "Inventory users of Power Platform-based scheduled prompts (the flows live in their default environment) and tell them which schedules to recreate before 31 December.",
+  "Re-check your AI governance decision on unattended agent runs: record which admin control now governs native Copilot scheduling once Microsoft documents it.",
+  "Update helpdesk guidance: management moves to Tasks > Scheduled; the old (...) menu entry disappears 30 days after the tab appears."
+ ],
+ "effective": "2026-12-31",
+ "effective_note": "Worldwide rollout 30 Nov – 31 Dec 2026; Power Platform-based scheduled prompts retire 31 Dec 2026.",
+ "primary": {
+  "title": "MC1550533: Scheduled prompts in Microsoft 365 Copilot move to native Copilot scheduling (Message center archive)",
+  "url": "https://mc.merill.net/message/MC1550533"
+ },
+ "related": [
+  {
+   "title": "Enterprise AI governance pillar",
+   "url": "guides/enterprise-ai-governance.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1550533 (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1550533",
+   "checked": "2026-11-12"
+  }
+ ],
+ "last_verified": "2026-11-12"
+}

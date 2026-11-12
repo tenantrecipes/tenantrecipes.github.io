@@ -1,0 +1,27 @@
+{
+ "id": "m365-cross-tenant-orchestrated-migration",
+ "status": "published",
+ "title": "Microsoft 365 admin center gets Cross-Tenant Orchestrated Migration for users and shared data, GA targeted December 2026",
+ "date": "2026-11-12",
+ "category": "M365",
+ "summary": "Roadmap item RM576273 (In development, GA targeted December 2026, worldwide) adds Cross-Tenant Orchestrated Migration to the Microsoft 365 admin center. User Data Migration (UDM) covers mailboxes, OneDrive accounts, Teams chats and Teams meetings; Shared Data Migration (SDM) covers Microsoft 365 Groups, SharePoint sites, group mailboxes, and teams and channels. The entry lists 'More info: TBD'.",
+ "why": "Tenant-to-tenant moves (M&A, divestitures) have meant stitching together separate cross-tenant mailbox and OneDrive migrations, or third-party tools. A first-party orchestrator for Teams chats and shared data changes the build-vs-buy decision — and creates a new high-privilege, two-tenant trust that belongs in your Tier 0 change process.",
+ "todo": [
+  "If a tenant consolidation is planned for 2027, hold the tooling decision until Microsoft publishes prerequisites, licensing and required permissions.",
+  "Treat any cross-tenant migration trust as privileged: named owners, time-limited, removed after cutover."
+ ],
+ "effective": null,
+ "effective_note": "GA targeted December 2026 (RM576273); details 'TBD'.",
+ "primary": {
+  "title": "RM576273: Microsoft 365 admin center: Cross-Tenant Orchestrated Migration (roadmap archive)",
+  "url": "https://mc.merill.net/message/RM576273"
+ },
+ "sources": [
+  {
+   "title": "RM576273 roadmap entry (merill.net archive)",
+   "url": "https://mc.merill.net/message/RM576273",
+   "checked": "2026-11-12"
+  }
+ ],
+ "last_verified": "2026-11-12"
+}

@@ -1,0 +1,33 @@
+{
+ "id": "outlook-folder-sharing-org-restrictions",
+ "status": "published",
+ "title": "New Outlook will stop users changing Default and Anonymous folder permissions when your organisation restricts them",
+ "date": "2026-11-12",
+ "category": "M365",
+ "summary": "Roadmap item RM579185 (In development, GA targeted January 2027, worldwide, new Outlook for Windows and web) makes folder sharing in Outlook respect organisational restrictions on Default and Anonymous permissions: with the restriction enabled, users cannot change either setting. Permissions granted directly to named users are unaffected.",
+ "why": "Default and Anonymous folder permissions are a classic quiet over-share (and an internal recon gift: a Reviewer grant on Default exposes a mailbox folder to every user in the tenant). Client-side enforcement helps only if the org-level restriction is actually set, and the roadmap entry does not name the setting — so plan on auditing existing grants, which the change does not remove.",
+ "todo": [
+  "Audit existing grants now: `Get-EXOMailboxFolderPermission` per folder, filtering on User Default and Anonymous with an access right other than None/AvailabilityOnly.",
+  "Watch for the Exchange Online setting that backs the restriction before January 2027 and decide whether to enable it.",
+  "Remember calendar sharing with free/busy for Default is normal; target content-level rights on mail and calendar folders."
+ ],
+ "effective": null,
+ "effective_note": "GA targeted January 2027 (RM579185); controlling setting not named in the roadmap entry.",
+ "primary": {
+  "title": "RM579185: Outlook: Keep folder sharing within your organization's policies (roadmap archive)",
+  "url": "https://mc.merill.net/message/RM579185"
+ },
+ "sources": [
+  {
+   "title": "RM579185 roadmap entry (merill.net archive)",
+   "url": "https://mc.merill.net/message/RM579185",
+   "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Learn: Get-EXOMailboxFolderPermission",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/exchangepowershell/get-exomailboxfolderpermission",
+   "checked": "2026-11-12"
+  }
+ ],
+ "last_verified": "2026-11-12"
+}
