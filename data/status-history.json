@@ -6,7 +6,16 @@
   "source": "Microsoft 365 consumer services",
   "link": "https://status.cloud.microsoft/",
   "start": null,
-  "last_seen": "2026-11-13T08:39:37Z"
+  "last_seen": "2026-11-13T09:39:33Z"
+ },
+ {
+  "id": "mac-1dce833c-1bce-4ca1-9a1d-e441c474d292",
+  "first_seen": "2026-11-13T09:39:33Z",
+  "title": "Microsoft 365 admin center: Service degradation",
+  "source": "Microsoft 365 admin center",
+  "link": "https://status.cloud.microsoft/",
+  "start": "2026-11-13T09:14:20Z",
+  "last_seen": "2026-11-13T09:39:33Z"
  },
  {
   "id": "mac-fbe622ec-6e30-451e-a1ff-22a3e64711d2",
