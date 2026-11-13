@@ -33,6 +33,7 @@ The inventory includes self-hosted AI and developer platforms (for example AI ga
 - High: within {{PATCH_DAYS_HIGH}} days.
 - Medium and low: within {{PATCH_DAYS_OTHER}} days, or in the normal update cycle.
 - Monthly vendor updates, such as Microsoft's Patch Tuesday, are deployed through test, pilot and broad rings.
+- Temporary workarounds that switch off a security check (for example a registry value that disables a new domain controller verification) need an owner, an end date and a ticket, and are reviewed at every patch cycle until removed.
 
 ## 5. When you cannot patch
 

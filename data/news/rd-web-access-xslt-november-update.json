@@ -1,0 +1,39 @@
+{
+ "id": "rd-web-access-xslt-november-update",
+ "status": "published",
+ "title": "RD Web Access breaks when browsers disable XSLT; the November 2026 Windows Server update ships a new experience (KB5130994)",
+ "date": "2026-11-13",
+ "category": "Windows",
+ "summary": "The classic RD Web Access site in Windows Server renders through client-side XSLT. With Chromium-based browsers moving to disable XSLT (and admins already able to turn it off with the XSLTEnabled policy), the page fails with 'Unable to display RD Web Access'. MC1491832 was updated on 12 November 2026: the 10 November 2026 security update for Windows Server 2016–2025 provides an updated RD Web Access experience. Customised RD Web Access sites need extra steps.",
+ "why": "XSLT removal is browser attack-surface reduction, so the right move is patching the RDS servers, not re-enabling XSLT fleet-wide. If you set `XSLTEnabled=1` in Edge or Chrome as a workaround in October, it is now technical debt to remove.",
+ "todo": [
+  "Install the November 2026 (or later) update on RD Web Access servers and test with XSLT disabled in Edge.",
+  "Review customised RDWeb pages against Microsoft's RD Web Access customizations guidance.",
+  "Remove any `XSLTEnabled=1` Edge/Chrome policy deployed through Intune or GPO as a workaround.",
+  "Consider the HTML5 web client (/RDWeb/webclient/) as the default entry point."
+ ],
+ "effective": "2026-11-10",
+ "primary": {
+  "title": "KB5130994: RD Web Access fails to load when XSLT is disabled in Microsoft Edge or Google Chrome",
+  "url": "https://support.microsoft.com/help/5130994"
+ },
+ "related": [
+  {
+   "title": "News: November 2026 Patch Tuesday",
+   "url": "security/patch-tuesday-2026-11.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Support KB5130994: RD Web Access fails to load when XSLT is disabled",
+   "url": "https://support.microsoft.com/help/5130994",
+   "checked": "2026-11-13"
+  },
+  {
+   "title": "MC1491832 (updated 12 Nov 2026): Take action to prevent RD Web Access rendering failures (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1491832",
+   "checked": "2026-11-13"
+  }
+ ],
+ "last_verified": "2026-11-13"
+}

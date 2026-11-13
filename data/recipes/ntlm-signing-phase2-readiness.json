@@ -20,7 +20,8 @@
   "Filtering on event level hides the problem: both good and bad connections are Warning.",
   "The 4022/4023 events exist only on Windows Server 2019 and later with enhanced auditing; older servers give you no per-connection signing data, so prioritise them for upgrade or treat their clients as unknown.",
   "This is NTLM-layer signing. It does not replace SMB signing, LDAP signing or LDAPS channel binding; check those separately.",
-  "Microsoft says the registry values may be removed in the future — do not build long-term exceptions on `ClientAllowUnsignedNtlm`."
+  "Microsoft says the registry values may be removed in the future — do not build long-term exceptions on `ClientAllowUnsignedNtlm`.",
+  "Do not attribute every post-November LDAP/SMB failure to NTLM signing: the October 2026 LDAP SPN verification on DCs (KB5134907) fails Kerberos binds with the wrong service ticket and shows similar 'Invalid credentials' symptoms."
  ],
  "done_when": [
   "Every server role has a list of clients that do not negotiate NTLM signing, each with an owner and a fix date before May 2027.",
@@ -42,6 +43,11 @@
    "symptom": "Connection to an old non-Windows server stopped working after the November update",
    "cause": "Server mishandles the signing offer",
    "fix": "Per KB5135557 a server that does not echo SIGN should make the client fall back; if it still fails, use `ClientAllowUnsignedNtlm=1` on the affected client only, with an end date."
+  },
+  {
+   "symptom": "NetApp ONTAP / Azure NetApp Files LDAP binds fail with 'Invalid credentials' after DC updates",
+   "cause": "Not NTLM signing: the October 2026 DC hardening requires an ldap/ SPN service ticket for LDAP binds, and ONTAP with session security 'none' presents a cifs/ ticket (KB5134907)",
+   "fix": "Set session-security-for-ad-ldap to sign or seal on the SVM; only as a temporary exception set `LdapSPNVerificationLevel=0` under NTDS\\Parameters on the DCs involved, then restore 1."
   }
  ],
  "rollback": [
@@ -73,10 +79,15 @@
    "title": "MSRC Security Update Guide: CVE-2026-118737",
    "url": "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118737",
    "checked": "2026-11-12"
+  },
+  {
+   "title": "Microsoft Support KB5134907: Access to NetApp SMB shares might fail after the October 2026 Windows security update",
+   "url": "https://support.microsoft.com/help/5134907",
+   "checked": "2026-11-13"
   }
  ],
- "last_verified": "2026-11-12",
+ "last_verified": "2026-11-13",
  "verified_by": "Pascal",
  "created": "2026-11-12",
- "updated": "2026-11-12"
+ "updated": "2026-11-13"
 }

@@ -34,6 +34,7 @@ It applies to every account that can access {{COMPANY}} systems, including user,
 - Preferred methods, in order: phishing-resistant methods (passkeys, FIDO2 security keys, Windows Hello for Business), then an authenticator app with number matching. SMS and voice calls are only allowed as a temporary fallback approved by IT.
 - New users register a phishing-resistant or passwordless method as their first MFA method where the identity platform supports it, rather than starting with SMS, voice or an app code.
 - Where SMS or voice is still needed after the identity provider stops delivering it itself, it is only used through a contracted telephony provider approved by IT, for named users with a documented reason.
+- Network and proxy rules must not block the identity provider's own sign-in safeguards (for example anti-bot verification before SMS or voice codes); IT keeps the required endpoints allowed and excluded from TLS inspection.
 - Never approve a sign-in request you did not start; report it to {{SECURITY_CONTACT}} instead.
 - IT never asks for your password or MFA code by email, phone or chat.
 

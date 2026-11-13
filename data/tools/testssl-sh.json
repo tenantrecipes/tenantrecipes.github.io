@@ -1,0 +1,57 @@
+{
+ "id": "testssl-sh",
+ "status": "published",
+ "kind": "tool",
+ "name": "testssl.sh – TLS/SSL configuration check for any port and STARTTLS service",
+ "vendor": "Open source Bash tool (testssl project)",
+ "category": "External exposure",
+ "what": "A Bash script that tests a TLS endpoint on any port, including STARTTLS for SMTP, IMAP, POP3, FTP, LDAP, XMPP and others, for supported protocols, cipher suites, certificate chain issues, HSTS and known cryptographic flaws. It runs locally with no third-party service seeing the result, and writes CSV, JSON or HTML for evidence and diffing.",
+ "when": "For internal and non-HTTPS endpoints that online scanners like SSL Labs cannot reach: SMTP relays and connectors, LDAPS on domain controllers, RD Gateway, ADFS/WAP, appliances and management interfaces. Use it after CA distrust events, cipher hardening or certificate rotation to prove the effective state per host.",
+ "license": "GPL-2.0",
+ "cost": "open source",
+ "cost_note": "Stable release v3.2.5 (4 November 2026); 3.3dev is the development branch. Official container images exist on Docker Hub and GHCR.",
+ "url": "https://testssl.sh/",
+ "repo": "https://github.com/testssl/testssl.sh",
+ "example": [
+  "Pin the stable branch: `git clone --depth 1 --branch v3.2.5 https://github.com/testssl/testssl.sh.git`.",
+  "HTTPS with machine-readable evidence: `./testssl.sh --jsonfile-pretty out.json https://host.example.com`.",
+  "SMTP STARTTLS on a relay: `./testssl.sh --starttls smtp mail.example.com:25`.",
+  "LDAPS on each DC: `./testssl.sh --protocols --server-defaults dc01.example.local:636`.",
+  "Batch many hosts with `--file targets.txt --parallel` and diff the JSON between runs."
+ ],
+ "pitfalls": [
+  "A full run makes many handshakes and can trip IDS/IPS or rate limits; only test systems you own or have written permission to test.",
+  "Results reflect what that path sees: a load balancer or TLS-inspecting proxy in front changes the answer, so test from where clients actually connect.",
+  "Use the stable tag for reports; 3.3dev output and checks can change between snapshots."
+ ],
+ "sources": [
+  {
+   "title": "testssl.sh README and license (GitHub)",
+   "url": "https://github.com/testssl/testssl.sh",
+   "checked": "2026-11-13"
+  },
+  {
+   "title": "testssl.sh releases (v3.2.5, 4 November 2026)",
+   "url": "https://github.com/testssl/testssl.sh/releases",
+   "checked": "2026-11-13"
+  }
+ ],
+ "related": [
+  {
+   "title": "Tool: SSL Labs server test",
+   "url": "tools/ssl-labs.html"
+  },
+  {
+   "title": "News: eMudhra CA keys distrusted",
+   "url": "news/emudhra-ca-keys-distrusted.html"
+  },
+  {
+   "title": "Tool: ssh-audit",
+   "url": "tools/ssh-audit.html"
+  }
+ ],
+ "last_verified": "2026-11-13",
+ "created": "2026-11-13",
+ "updated": "2026-11-13",
+ "order": 391
+}

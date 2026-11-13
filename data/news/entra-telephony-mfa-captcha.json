@@ -1,0 +1,50 @@
+{
+ "id": "entra-telephony-mfa-captcha",
+ "status": "published",
+ "title": "Entra ID adds risk-based CAPTCHA before SMS and voice MFA codes (MC1551151)",
+ "date": "2026-11-13",
+ "category": "Entra",
+ "summary": "Per MC1551151 (13 November 2026), Microsoft Entra ID starts showing a risk-based anti-bot verification step (CAPTCHA, provided by Arkose Labs) before it sends an SMS code or places a voice call for MFA, rolling out worldwide from mid-November 2026. It extends the same safeguard that has applied to SMS/voice first-factor sign-in since mid-October (MC1518029). Microsoft does not publish the risk criteria. It is separate from, and does not change, the 1 February 2027 retirement of Microsoft-provided SMS and voice.",
+ "why": "This is anti-IRSF (toll fraud) hardening, not a phishing control. The operational risk is a hard failure: if a proxy, SWG, DNS filter or TLS inspection blocks Arkose Labs, the challenge does not load and the user cannot get a code at all. Expect help desk tickets that look like 'MFA SMS never arrives' from users behind restrictive egress.",
+ "todo": [
+  "Allow outbound HTTPS 443 to `arkoselabs.com` and `*.arkoselabs.com` on proxies/SWGs (add both; some products do not match the apex with a wildcard), above any category block.",
+  "Exclude both domains from TLS inspection, which Microsoft says can stop the challenge from validating.",
+  "Brief the service desk: the CAPTCHA is expected, and the fix for 'cannot complete' is network or another method, not resetting MFA.",
+  "Use it as another nudge for the passkey migration that the February 2027 retirement already requires."
+ ],
+ "effective": "2026-11-15",
+ "effective_note": "Microsoft says 'beginning in mid-November 2026'; 15 November is an approximation of that, not a published date.",
+ "primary": {
+  "title": "Risk-based anti-bot verification (CAPTCHA) for telephony-based sign-in",
+  "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-telephony-risk-based-captcha"
+ },
+ "related": [
+  {
+   "title": "News: Microsoft-provided SMS and voice MFA retires on 1 February 2027",
+   "url": "news/sms-voice-mfa-retirement-2027.html"
+  },
+  {
+   "title": "Recipe: retire SMS/voice and move users to passkeys",
+   "url": "recipes/entra-sms-voice-retirement-passkeys.html"
+  }
+ ],
+ "recipe": "entra-sms-voice-retirement-passkeys",
+ "sources": [
+  {
+   "title": "Microsoft Learn: Risk-based anti-bot verification (CAPTCHA) for telephony-based sign-in",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-telephony-risk-based-captcha",
+   "checked": "2026-11-13"
+  },
+  {
+   "title": "MC1551151: Risk-based anti-bot verification (CAPTCHA) for SMS and voice MFA (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1551151",
+   "checked": "2026-11-13"
+  },
+  {
+   "title": "MC1518029: Risk-based anti-bot verification for SMS and voice first-factor sign-in (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1518029",
+   "checked": "2026-11-13"
+  }
+ ],
+ "last_verified": "2026-11-13"
+}

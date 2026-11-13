@@ -1,0 +1,45 @@
+{
+ "id": "sharepoint-tempauth-urls-retirement-2027",
+ "status": "published",
+ "title": "SharePoint and OneDrive tempauth URLs retire on 1 April 2027; Power Apps and Power Automate custom code breaks too (MC1551122)",
+ "date": "2026-11-13",
+ "category": "Retirements",
+ "summary": "From 1 April 2027 SharePoint Online and OneDrive stop issuing pre-authenticated (tempauth) URLs. Affected Microsoft Graph file APIs (download, createUploadSession, copy/monitor, preview, thumbnails, convert) stop returning 302 redirects to tempauth URLs, and SharePoint URLs in response bodies no longer carry an embedded token, so callers must present an Entra ID access token for the SharePoint audience. MC1551122 (13 November 2026) adds the Power Platform impact: custom controls, actions and connectors that use tempauth URLs stop working, including thumbnails and Image controls, and Word Online (Business) CreateWordFileWithContent should no longer be used as an unauthenticated download link.",
+ "why": "Bearer-in-URL leaks into proxy logs, browser history, chat messages and SIEM. Removing it is a real security gain, but it is also a hidden dependency: anything that hands a tempauth link to a third party, an email or an unauthenticated downstream system will fail silently on the cutover date. MC1492958 gives admins a per-app opt-in tenant setting to test the new behaviour now.",
+ "todo": [
+  "Find apps and flows that pass Graph file URLs onwards: search custom connectors, PCF controls, scripts and integrations for `tempauth=` and for redirects followed without an Authorization header.",
+  "Opt a test app ID into the Graph-URL behaviour with the tenant control from MC1492958 and validate before April.",
+  "Make callers acquire a second token for `https://{tenant}.sharepoint.com` where no Graph alternative exists.",
+  "Replace any flow that mails or posts CreateWordFileWithContent links to external recipients."
+ ],
+ "effective": "2027-04-01",
+ "effective_note": "Opt-in tenant setting available now for testing.",
+ "primary": {
+  "title": "Microsoft 365 Developer Blog: Pre-authenticated (tempauth) URLs are retiring",
+  "url": "https://devblogs.microsoft.com/microsoft365dev/pre-authenticated-tempauth-urls-are-retiring-move-to-microsoft-entra-id-tokens-before-april-1-2027/"
+ },
+ "related": [
+  {
+   "title": "News: SharePoint OTP retirement",
+   "url": "news/sharepoint-otp-retirement.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Developer Blog: Pre-authenticated (tempauth) URLs are retiring: move to Microsoft Entra ID tokens before April 1, 2027",
+   "url": "https://devblogs.microsoft.com/microsoft365dev/pre-authenticated-tempauth-urls-are-retiring-move-to-microsoft-entra-id-tokens-before-april-1-2027/",
+   "checked": "2026-11-13"
+  },
+  {
+   "title": "MC1551122: Power Platform end of support for SharePoint temporary authentication URLs (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1551122",
+   "checked": "2026-11-13"
+  },
+  {
+   "title": "MC1492958: Microsoft Graph tenant controls for retirement of non-standard file API tokens (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1492958",
+   "checked": "2026-11-13"
+  }
+ ],
+ "last_verified": "2026-11-13"
+}

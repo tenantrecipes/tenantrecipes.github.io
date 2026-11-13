@@ -1,0 +1,48 @@
+{
+ "id": "ldap-spn-verification-netapp-smb",
+ "status": "published",
+ "title": "October DC hardening: LDAP binds now need an ldap/ SPN ticket, breaking NetApp ONTAP and Azure NetApp Files with session security 'none' (KB5134907)",
+ "date": "2026-11-13",
+ "category": "Windows",
+ "summary": "Since the 13 October 2026 Windows security updates, domain controllers only accept Kerberos authentication to LDAP with a service ticket that matches the DC's registered LDAP SPN. Azure NetApp Files and NetApp ONTAP with AD LDAP client session security set to none bind with a cifs/<dc-fqdn> ticket instead, so the DC rejects the bind: SMB share access can fail, new SMB volumes fail with 'Invalid credentials', and name mapping and user/group lookups break. Microsoft re-flagged it in MC1551001 on 12 November 2026.",
+ "why": "This is a Kerberos ticket-to-service binding check, the kind of hardening that closes SPN-swapping abuse against LDAP. The only DC-side workaround, `LdapSPNVerificationLevel=0`, switches the check off for every caller on that DC, so it is a temporary exception, not a fix. Any other appliance that binds to LDAP with a non-LDAP service ticket can fail the same way.",
+ "todo": [
+  "Self-managed ONTAP: set session-security-for-ad-ldap to sign or seal on each affected SVM (ONTAP then requests an ldap/ ticket), after checking NetApp's current guidance.",
+  "Azure NetApp Files: follow KB5134907 and NetApp's KB until NetApp ships its resolution.",
+  "If you must use `HKLM\\SYSTEM\\CurrentControlSet\\Services\\NTDS\\Parameters\\LdapSPNVerificationLevel = 0` (applies without restart), scope it to as few DCs as possible, record an owner and end date, and set it back to 1.",
+  "Use the same window to check that LDAP signing and channel binding are enforced on every DC."
+ ],
+ "effective": "2026-10-13",
+ "effective_note": "Enforced by the 13 October 2026 Windows Server updates and later; NetApp resolution for Azure NetApp Files not yet available on 13 November.",
+ "primary": {
+  "title": "KB5134907: Access to NetApp SMB shares might fail after installing the October 2026 Windows security update",
+  "url": "https://support.microsoft.com/help/5134907"
+ },
+ "related": [
+  {
+   "title": "Tool: LdapRelayScan (LDAP signing and channel binding check)",
+   "url": "tools/ldaprelayscan.html"
+  },
+  {
+   "title": "News: Windows clients offer NTLM signing by default",
+   "url": "news/windows-ntlm-signing-default-phase1.html"
+  },
+  {
+   "title": "Recipe: find clients that will fail NTLM signing enforcement",
+   "url": "recipes/ntlm-signing-phase2-readiness.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Support KB5134907: Access to NetApp SMB shares might fail after the October 2026 Windows security update",
+   "url": "https://support.microsoft.com/help/5134907",
+   "checked": "2026-11-13"
+  },
+  {
+   "title": "MC1551001: Prevent issues with NetApp SMB shares (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1551001",
+   "checked": "2026-11-13"
+  }
+ ],
+ "last_verified": "2026-11-13"
+}

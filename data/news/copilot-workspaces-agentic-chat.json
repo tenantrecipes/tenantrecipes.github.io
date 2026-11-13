@@ -1,0 +1,38 @@
+{
+ "id": "copilot-workspaces-agentic-chat",
+ "status": "published",
+ "title": "Copilot Workspaces drops standalone Researcher/Analyst/Designer selection for agentic chat (MC1550540)",
+ "date": "2026-11-13",
+ "category": "Copilot/AI",
+ "summary": "Per MC1550540 (12 November 2026), Microsoft 365 Copilot Workspaces (formerly Copilot Notebooks) moves to an agentic chat: Researcher, Analyst and Designer no longer appear as separate agent options inside a workspace, and Copilot picks the research, analysis or design skills from the request and workspace content. The agents stay available separately in the Microsoft 365 Copilot app. Frontier preview rollout is planned from December 2026; GA dates are not set. No admin action is required.",
+ "why": "Governance-wise this shifts from an explicit user choice to automatic skill routing inside a workspace. If your AI usage guidance, training or risk assessment names specific agents (for example 'Researcher may only be used for…'), that control point disappears in Workspaces. Check whether your Frontier preview ring is scoped to the right users before December.",
+ "todo": [
+  "Review who is in the Frontier preview programme and whether that matches your AI pilot group.",
+  "Update internal Copilot guidance and training that refers to choosing Researcher/Analyst/Designer in Notebooks/Workspaces.",
+  "Re-check what content users add to workspaces; the agentic chat works across the workspace content."
+ ],
+ "effective": "2026-12-01",
+ "effective_note": "Frontier preview 'planned to begin in December 2026'; GA not yet scheduled.",
+ "primary": {
+  "title": "MC1550540: Copilot Workspaces is replacing standalone agent selection with agentic chat",
+  "url": "https://mc.merill.net/message/MC1550540"
+ },
+ "related": [
+  {
+   "title": "Guide: Enterprise AI governance",
+   "url": "guides/enterprise-ai-governance.html"
+  },
+  {
+   "title": "Guide: Secure Copilot rollout",
+   "url": "guides/secure-copilot-rollout.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1550540: Microsoft 365 Copilot Workspaces agentic chat (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1550540",
+   "checked": "2026-11-13"
+  }
+ ],
+ "last_verified": "2026-11-13"
+}
