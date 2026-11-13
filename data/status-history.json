@@ -1,20 +1,29 @@
 [
  {
-  "id": "mac-a882f1cb-6bc3-43ef-a27d-09f835234424",
-  "first_seen": "2026-11-13T01:02:13Z",
-  "title": "Microsoft 365 admin center: Service degradation",
-  "source": "Microsoft 365 admin center",
-  "link": "https://status.cloud.microsoft/",
-  "start": "2026-11-13T00:56:09Z",
-  "last_seen": "2026-11-13T01:02:13Z"
- },
- {
   "id": "consumer-M365Consumer",
   "first_seen": "2026-11-13T01:02:13Z",
   "title": "Users may be unable to access or perform several actions in Microsoft 365 services",
   "source": "Microsoft 365 consumer services",
   "link": "https://status.cloud.microsoft/",
   "start": null,
+  "last_seen": "2026-11-13T02:13:41Z"
+ },
+ {
+  "id": "mac-fbfdc06b-04d3-4ecd-b634-32d09667302e",
+  "first_seen": "2026-11-13T02:13:41Z",
+  "title": "Users may be unable to connect to multiple Microsoft 365 services",
+  "source": "Microsoft 365 admin center",
+  "link": "https://status.cloud.microsoft/",
+  "start": "2026-11-13T01:50:27Z",
+  "last_seen": "2026-11-13T02:13:41Z"
+ },
+ {
+  "id": "mac-a882f1cb-6bc3-43ef-a27d-09f835234424",
+  "first_seen": "2026-11-13T01:02:13Z",
+  "title": "Microsoft 365 admin center: Service degradation",
+  "source": "Microsoft 365 admin center",
+  "link": "https://status.cloud.microsoft/",
+  "start": "2026-11-13T00:56:09Z",
   "last_seen": "2026-11-13T01:02:13Z"
  },
  {
