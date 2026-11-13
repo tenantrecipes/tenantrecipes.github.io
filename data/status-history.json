@@ -6,7 +6,16 @@
   "source": "Microsoft 365 consumer services",
   "link": "https://status.cloud.microsoft/",
   "start": null,
-  "last_seen": "2026-11-13T19:30:25Z"
+  "last_seen": "2026-11-13T20:35:05Z"
+ },
+ {
+  "id": "mac-8699075d-35c0-49b1-8949-b505b6efeaca",
+  "first_seen": "2026-11-13T20:35:05Z",
+  "title": "Users may be unable to connect to multiple Microsoft 365 services",
+  "source": "Microsoft 365 admin center",
+  "link": "https://status.cloud.microsoft/",
+  "start": "2026-11-13T20:02:18Z",
+  "last_seen": "2026-11-13T20:35:05Z"
  },
  {
   "id": "mac-389205a0-f8d9-4acb-9572-d501c1d8de97",
