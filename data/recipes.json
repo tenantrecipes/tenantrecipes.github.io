@@ -1649,6 +1649,106 @@
   ]
  },
  {
+  "id": "intune-win32-install-test-windows-sandbox",
+  "status": "published",
+  "tier": "recipe",
+  "order": 450,
+  "category": "Intune & devices for AI",
+  "title": "Test a Win32 app installer in a clean Windows Sandbox before you roll it out with Intune",
+  "problem": "A Win32 app that installs fine on the packager's PC can fail on a fresh device because of a missing runtime, a hidden dialog or a web bootstrapper, and its uninstaller may leave services, scheduled tasks or autoruns behind. Testing the source installer you wrap into the .intunewin file on a clean, offline Windows Sandbox first shows exactly what it adds and what uninstall leaves before a pilot group ever sees it.",
+  "steps": [
+   "On a Windows 11 24H2 (build 26100) or later Pro, Enterprise or Education packaging workstation, install sandbox-mcp from the v1.2.0 portable ZIP (verify the `.sha256` first), make sure Windows Sandbox is enabled, and run `.\\sbx.cmd doctor` until it reports ready. See the Tenant Recipes sandbox-mcp tool page (tools/sandbox-mcp.html) for setup and security notes.",
+   "Test the source installer, not the .intunewin file: `sbx install-test` accepts `.msi`, `.exe`, `.ps1`, `.cmd` and `.bat`. Use the same setup file and silent switches you will put in the Intune install command, from the source folder you pass to IntuneWinAppUtil.exe.",
+   "For an MSI, run `.\\sbx.cmd install-test .\\source\\app.msi --network off`. sandbox-mcp runs `msiexec /i /qn /norestart` with a verbose log and uninstalls with `msiexec /x {ProductCode}`.",
+   "For an EXE, pass the vendor's silent switch, for example `.\\sbx.cmd install-test .\\source\\setup.exe --args \"/S\" --network off` for NSIS or `/VERYSILENT` for Inno Setup. If only an UninstallString is registered, add `--uninstall-args \"/S\"`. Use `--timeout 120` when you probe an unknown installer.",
+   "Keep `--network off` on the first run. `install-test` defaults to network `on`, and an offline run is how you catch installers that silently download components, which would also fail on devices behind a proxy or during Autopilot.",
+   "Optionally add a smoke test that runs between install and uninstall: `--test .\\smoke.ps1`. The script gets `$env:SBX_INSTALL_DIR`, `$env:SBX_PROGRAM` and `$env:SBX_OUT`; throw or exit non-zero to fail.",
+   "Read `report.md` under `%LOCALAPPDATA%\\sandbox-mcp\\runs\\<timestamp>`: the 'added' section (files, registry keys, services, scheduled tasks, autoruns) tells you what to use as an Intune detection rule, and the 'left behind' section tells you whether your uninstall command is complete. A PASS can still have leftovers, so always read that section.",
+   "If the install hangs, the report includes a screenshot of the stuck window and its UI Automation tree. Fix the silent switch or the transform and run again on a new guest.",
+   "Only then package the same source folder with IntuneWinAppUtil.exe and create the Win32 app as described in the Tenant Recipes IntuneWinAppUtil snippet and the Admin By Request Win32 packaging guide, and assign it to a pilot group first."
+  ],
+  "pitfalls": [
+   "Windows Sandbox is not an Intune-managed device. The guest runs the install in its own interactive session (leftovers appear under C:\\Users\\WDAGUtilityAccount), while Intune runs Win32 apps through the Intune Management Extension, by default in system context. A clean sandbox run does not prove the Intune install, detection rule or return codes will behave the same; your pilot group is still the real test.",
+   "Testing the .intunewin file instead of the source: it is an encrypted container for Intune, not something you can install directly.",
+   "Leftovers do not fail the run unless you pass `--fail-on-leftovers`.",
+   "Exit codes 0, 1641 and 3010 count as success in sandbox-mcp; 1641 and 3010 mean a reboot is needed, so map them to the matching return codes in Intune.",
+   "sandbox-mcp is new (v1.2.0 with close to zero stars when checked on 10 November 2026) and is a community tool, not a Microsoft product. Treat its results as a useful pre-check, not as evidence for a change board on their own.",
+   "Network `on` gives the guest internet access. Use `off` unless the installer genuinely needs to download something, and never use `on` for an installer from a source you do not trust."
+  ],
+  "done_when": [
+   "The source installer installs and uninstalls silently on a fresh, offline Windows Sandbox with the same switches you will use in Intune.",
+   "The report's 'added' section has given you a concrete detection rule (file, registry key or MSI product code).",
+   "The 'left behind' section is empty, or each leftover is understood and either fixed in the uninstall command or accepted and documented.",
+   "The packaged app has been assigned to a pilot group before broad rollout."
+  ],
+  "troubleshooting": [
+   {
+    "symptom": "The install times out and the report shows a dialog",
+    "cause": "The installer is not actually silent with the switches you passed",
+    "fix": "Check the vendor's silent switches (NSIS `/S`, Inno `/VERYSILENT`, many others `/quiet`), set `--timeout 120` while probing and run again."
+   },
+   {
+    "symptom": "The install fails only with `--network off`",
+    "cause": "The setup is a web bootstrapper or downloads prerequisites",
+    "fix": "Get the vendor's full offline installer or bundle the prerequisites in the source folder, then retest offline."
+   },
+   {
+    "symptom": "`sbx doctor` says Windows Sandbox or wsb is missing",
+    "cause": "The feature is off or Windows Sandbox has not been opened once since it was enabled",
+    "fix": "Enable `Containers-DisposableClientVM` in an admin PowerShell, restart, open Windows Sandbox from the Start menu once and run doctor again."
+   }
+  ],
+  "markers": {
+   "steps": "practical",
+   "pitfalls": "practical"
+  },
+  "sources": [
+   {
+    "title": "Tenant Recipes: sandbox-mcp (sbx)",
+    "url": "https://tenantrecipes.com/tools/sandbox-mcp.html",
+    "checked": "2026-11-10"
+   },
+   {
+    "title": "sandbox-mcp on GitHub (README: installer testing, network modes, limits)",
+    "url": "https://github.com/shanselman/sandbox-mcp",
+    "checked": "2026-11-10"
+   },
+   {
+    "title": "sandbox-mcp installer-test skill (exit codes, uninstall, leftovers)",
+    "url": "https://github.com/shanselman/sandbox-mcp/blob/main/skills/windows-sandbox-installer-test/SKILL.md",
+    "checked": "2026-11-10"
+   },
+   {
+    "title": "Microsoft Learn: Prepare a Win32 app to be uploaded to Intune",
+    "url": "https://learn.microsoft.com/intune/intune-service/apps/apps-win32-prepare",
+    "checked": "2026-11-10"
+   },
+   {
+    "title": "Tenant Recipes: Package an MSI for Intune with IntuneWinAppUtil.exe",
+    "url": "https://tenantrecipes.com/code/intunewinapputil-package-msi.html",
+    "checked": "2026-11-10"
+   },
+   {
+    "title": "Tenant Recipes: Admin By Request Intune Win32 packaging guide",
+    "url": "https://tenantrecipes.com/guides/admin-by-request-intune-win32-packaging.html",
+    "checked": "2026-11-10"
+   },
+   {
+    "title": "Tenant Recipes: Admin By Request endpoint privilege guide",
+    "url": "https://tenantrecipes.com/guides/admin-by-request-endpoint-privilege.html",
+    "checked": "2026-11-10"
+   }
+  ],
+  "related": [
+   "intune-compliance-baseline",
+   "intune-deploy-m365-apps-channel"
+  ],
+  "last_verified": "2026-11-10",
+  "verified_by": "Pascal",
+  "created": "2026-11-10",
+  "updated": "2026-11-14"
+ },
+ {
   "id": "purview-oversharing-assessment",
   "status": "published",
   "tier": "recipe",

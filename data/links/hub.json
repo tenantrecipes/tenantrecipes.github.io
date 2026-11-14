@@ -828,6 +828,13 @@
           "internal": true
         },
         {
+          "label": "Tenant Recipes: Patch Azure DevOps Server 25H2",
+          "url": "guides/patch-azure-devops-server-25h2.html",
+          "note": "Install the latest documented cumulative security patch, with backup and rollback.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
           "label": "Tenant Recipes: Code Library",
           "url": "code/index.html",
           "note": "Copy-ready snippets tied to guides on this site.",
@@ -992,6 +999,20 @@
           "label": "Tenant Recipes: OneDrive on unmanaged devices",
           "url": "guides/mdca-session-control-unmanaged-devices.html",
           "note": "Monitored browser sessions and blocked downloads with Conditional Access App Control and Defender for Cloud Apps.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "Tenant Recipes: Test a Win32 installer in Windows Sandbox",
+          "url": "recipes/intune-win32-install-test-windows-sandbox.html",
+          "note": "Pre-check the source installer offline before you wrap it for Intune.",
+          "kind": "docs",
+          "internal": true
+        },
+        {
+          "label": "Tenant Recipes: sandbox-mcp (sbx)",
+          "url": "tools/sandbox-mcp.html",
+          "note": "Automate Windows Sandbox to test installers or look at an untrusted file.",
           "kind": "docs",
           "internal": true
         }

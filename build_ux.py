@@ -140,9 +140,11 @@ _GUIDE_TOPICS = {
     "pivot-lateral-movement-segmented": ("lateral-movement", "purple-team", "adcs"),
     "adcs-hardening-tier0": ("adcs", "tier0", "hardening"),
     "azure-devops-hardening-key-eater": ("azure-devops", "pipelines", "hardening"),
+    "patch-azure-devops-server-25h2": ("azure-devops", "patching", "on-premises"),
 }
 _GUIDE_RELATED = {
     "smtp-auth-basic-retirement": ("secure-your-website",),
+    "patch-azure-devops-server-25h2": ("azure-devops-hardening-key-eater",),
 }
 
 

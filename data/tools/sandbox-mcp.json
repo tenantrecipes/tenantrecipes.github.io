@@ -1,0 +1,64 @@
+{
+  "id": "sandbox-mcp",
+  "status": "published",
+  "kind": "tool",
+  "name": "sandbox-mcp (sbx)",
+  "vendor": "Scott Hanselman (open source)",
+  "category": "Client hardening",
+  "what": "A CLI (`sbx`) and an optional MCP server that automate Windows Sandbox: each run boots a fresh, throwaway Windows 11 guest, installs or runs something in it, collects evidence (screenshots, a Markdown/JSON report and an `audit.jsonl` log) and then deletes the guest. For admins the useful workflows are `sbx install-test`, which snapshots the guest before install, after install and after uninstall and lists what an installer added and what its uninstaller left behind, and `sbx detonate`, which runs a file you do not trust with no network adapter and reports the processes, name lookups, connection attempts and persistence it created. The CLI works on its own; the MCP adapter lets an AI agent drive the same engine.",
+  "when": "When you want a quick, local first look at an installer or a suspicious file on a clean Windows machine without touching your own desktop, for example before packaging an app for Intune or before opening an attachment someone forwarded. It needs Windows 11 24H2 (build 26100) or later, Pro, Enterprise or Education, with virtualization on; Windows Home and Windows Server cannot run Windows Sandbox.",
+  "license": "MIT",
+  "cost": "open source",
+  "cost_note": "Free. Windows Sandbox itself is included with Windows Pro, Enterprise and Education.",
+  "url": "https://github.com/shanselman/sandbox-mcp",
+  "repo": "https://github.com/shanselman/sandbox-mcp",
+  "example": [
+    "Download the Windows x64 portable ZIP from the v1.2.0 GitHub release (current when this page was checked on 10 November 2026) and verify it against the adjacent `.sha256` file before extracting. The ZIP bundles its own Node.js, so nothing else needs installing.",
+    "If Windows Sandbox is off, enable it in an administrator PowerShell with `Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM -All`, restart, and open Windows Sandbox from the Start menu once so the `wsb` command-line tool is installed.",
+    "Run the read-only readiness check: `.\\sbx.cmd doctor`. The README says it never enables features, elevates, changes PATH or restarts the PC.",
+    "Test an installer and its uninstaller on a clean, offline guest: `.\\sbx.cmd install-test .\\setup.msi --network off`. Add `--fail-on-leftovers` if you want leftovers to fail the run.",
+    "Take a first look at a file you do not trust: `.\\sbx.cmd detonate .\\invoice.js` (network `off` is the default for detonate). Read the findings as heuristics, not a verdict.",
+    "If an AI agent will drive it through MCP, set `SANDBOX_MCP_ALLOWED_ROOTS` to the few host folders it may copy into the guest, and keep the network mode at `off` for anything untrusted."
+  ],
+  "pitfalls": [
+    "This is a new project: v1.2.0 was the current release and the repository had close to zero stars when this page was checked on 10 November 2026. Treat it as unproven and test it on a non-production workstation before you rely on it.",
+    "The author says detonate is a quick first look on your own PC, not a malware lab: a sample that checks whether it is in a sandbox can simply behave nicely. For real malware analysis use a dedicated, disposable analysis machine.",
+    "Windows Sandbox is strong isolation but not a guarantee; the README notes that a hypervisor or Windows Sandbox escape would be a zero-day. Do not run genuinely hostile samples on a host that holds admin credentials or tokens.",
+    "Network mode matters. `on` is the default for `run`, `start` and `install-test` and gives the guest normal NAT internet access. `firewall` blocks outbound traffic with the guest firewall, which admin code in the guest could undo. Only `off` removes the network adapter, so use `off` for anything you do not trust.",
+    "What an agent can reach: the host shares three folders with the guest (the guest agent read-only, a staging folder for copied-in files read-only, and an output folder read-write). Through `exec`, `push`/`pull`, screenshots, clicks and UI Automation, an agent can do anything inside the guest, and it can copy in any host path unless you restrict it with `SANDBOX_MCP_ALLOWED_ROOTS`.",
+    "The output folder is writable from inside the guest, so treat everything that comes back (screenshots, pulled files, logs) as untrusted, especially after detonate. The README says sandbox-mcp reads from it but never runs anything from it.",
+    "Only one Windows Sandbox can run at a time, every boot is pristine, and Store apps, winget, Notepad, Calculator and Windows Terminal are not available inside the guest. `install-test` takes roughly two minutes plus the installer's own time."
+  ],
+  "sources": [
+    {
+      "title": "sandbox-mcp on GitHub (README: workflows, network modes, security notes, limits)",
+      "url": "https://github.com/shanselman/sandbox-mcp",
+      "checked": "2026-11-10"
+    },
+    {
+      "title": "sandbox-mcp v1.2.0 release",
+      "url": "https://github.com/shanselman/sandbox-mcp/releases/tag/v1.2.0",
+      "checked": "2026-11-10"
+    },
+    {
+      "title": "sandbox-mcp agent setup guide",
+      "url": "https://github.com/shanselman/sandbox-mcp/blob/main/docs/agent-setup.md",
+      "checked": "2026-11-10"
+    },
+    {
+      "title": "Microsoft Learn: Windows Sandbox overview",
+      "url": "https://learn.microsoft.com/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-overview",
+      "checked": "2026-11-10"
+    }
+  ],
+  "last_verified": "2026-11-10",
+  "created": "2026-11-10",
+  "updated": "2026-11-14",
+  "order": 370,
+  "related": [
+    {
+      "title": "Recipe: Test a Win32 installer in Windows Sandbox before Intune",
+      "url": "recipes/intune-win32-install-test-windows-sandbox.html"
+    }
+  ]
+}

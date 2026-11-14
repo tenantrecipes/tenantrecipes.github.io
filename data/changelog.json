@@ -2,6 +2,33 @@
  {
   "date": "2026-11-14",
   "kind": "site",
+  "type": "Guide",
+  "title": "Patch Azure DevOps Server 25H2 to the latest security patch",
+  "blurb": "Technical guide: check the current 25H2 build, take a consistent backup, install the latest documented cumulative security patch, verify and roll back. Documentation verified; not lab-tested.",
+  "url": "guides/patch-azure-devops-server-25h2.html",
+  "text": "Technical guide: check the current Azure DevOps Server 25H2 build, take a consistent backup, install the latest documented cumulative security patch (Patch 9 as of 12 November 2026), verify the result and roll back from backup if the update fails. Documentation verified against Microsoft Learn, the Azure DevOps Blog and the Security Update Guide; not lab-tested. Items that could not be confirmed officially are marked not verified."
+ },
+ {
+  "date": "2026-11-14",
+  "kind": "site",
+  "type": "Tool",
+  "title": "sandbox-mcp (sbx)",
+  "blurb": "Automate Windows Sandbox to test an installer or take a first look at a file you do not trust, then delete the guest.",
+  "url": "tools/sandbox-mcp.html",
+  "text": "A CLI (sbx) and an optional MCP server that automates Windows Sandbox: install-test snapshots a clean guest before install, after install and after uninstall; detonate runs a file you do not trust with no network adapter. Documentation checked; the project is new and unproven."
+ },
+ {
+  "date": "2026-11-14",
+  "kind": "site",
+  "type": "Recipe",
+  "title": "Test a Win32 app installer in a clean Windows Sandbox before you roll it out with Intune",
+  "blurb": "Run the source installer you will wrap into the .intunewin file in an offline Windows Sandbox first, then use the report for detection and uninstall.",
+  "url": "recipes/intune-win32-install-test-windows-sandbox.html",
+  "text": "Test the source Win32 installer, not the .intunewin file, in a clean offline Windows Sandbox with sandbox-mcp before you package it for Intune. The report's added and left-behind sections inform the detection rule and uninstall command. A clean sandbox run does not replace a pilot group."
+ },
+ {
+  "date": "2026-11-14",
+  "kind": "site",
   "type": "Tool",
   "title": "Enterprise AI readiness check",
   "blurb": "An in-browser, vendor-neutral checklist from your answers on tools, data, identity, DLP and approval. Nothing is sent to us.",
