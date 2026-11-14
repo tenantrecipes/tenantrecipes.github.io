@@ -17,6 +17,11 @@ MARKERS = {
     "tested": ("Tested configuration", "Configured and tested by the editor in a real test environment on the date shown."),
 }
 SECTIONS = ("steps", "done_when", "pitfalls", "troubleshooting", "rollback")
+EDITORIAL_BOXES = {
+    "why": ("why", "Why we recommend this", "co-info", "target"),
+    "when_to_choose_something_else": ("alternatives", "When to choose something else", "co-info", "layers"),
+    "what_is_not_verified": ("unverified", "What is not verified", "co-warn", "alert"),
+}
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
@@ -64,6 +69,20 @@ def validate(r):
     rb = r.get("rollback")
     if rb is not None and (not isinstance(rb, list) or not all(isinstance(x, str) and x.strip() for x in rb)):
         errs.append("'rollback' must be a list of non-empty strings")
+    n = r.get("notice")
+    if n is not None:
+        if not isinstance(n, dict) or not str(n.get("text", "")).strip():
+            errs.append("'notice' must be an object with a non-empty 'text' (optional 'title')")
+    ed = r.get("editorial")
+    if ed is not None:
+        if not isinstance(ed, dict):
+            errs.append("'editorial' must be an object")
+        else:
+            for k, v in ed.items():
+                if k not in EDITORIAL_BOXES:
+                    errs.append(f"editorial: unknown box '{k}' (allowed: {', '.join(EDITORIAL_BOXES)})")
+                elif not isinstance(v, list) or not all(isinstance(x, str) and x.strip() for x in v):
+                    errs.append(f"editorial.{k} must be a list of non-empty strings")
     return errs
 
 
@@ -129,3 +148,44 @@ def legend_html(rel):
             '<p>We only use <em>Tested configuration</em> when the configuration was actually run in a test environment, and the marker always shows that '
             'environment and the test date. Checking a step against documentation is verification, not testing, and is never labelled as tested. '
             'The build refuses a "tested" marker without an environment and date. Unmarked sections follow the normal verification process described above.</p>')
+
+
+def notice_html(r, step_html, icon):
+    """Optional warning callout near the top of a recipe (title + text)."""
+    n = r.get("notice") or {}
+    if not isinstance(n, dict) or not str(n.get("text", "")).strip():
+        return ""
+    title = n.get("title") or "Notice"
+    return (f'<section id="notice" class="co co-warn"><p class="co-h">{icon("alert")}{E(title)}</p>'
+            f'<p>{step_html(n["text"])}</p></section>')
+
+
+def editorial_html(r, step_html, icon, keys=None):
+    """Render optional editorial boxes (why / alternatives / what is not verified)."""
+    ed = r.get("editorial") or {}
+    if not isinstance(ed, dict):
+        return ""
+    out = ""
+    for key, (oid, title, cls, ic) in EDITORIAL_BOXES.items():
+        if keys is not None and key not in keys:
+            continue
+        items = ed.get(key) or []
+        if not items:
+            continue
+        lis = "".join(f'<li>{step_html(x)}</li>' for x in items)
+        out += f'<section id="{oid}" class="co {cls}"><p class="co-h">{icon(ic)}{E(title)}</p><ul>{lis}</ul></section>'
+    return out
+
+
+def editorial_toc(r):
+    """TOC entries for a notice and any editorial boxes that will render."""
+    items = []
+    n = r.get("notice") or {}
+    if isinstance(n, dict) and str(n.get("text", "")).strip():
+        items.append(("notice", n.get("title") or "Notice"))
+    ed = r.get("editorial") or {}
+    if isinstance(ed, dict):
+        for key, (oid, title, _cls, _ic) in EDITORIAL_BOXES.items():
+            if ed.get(key):
+                items.append((oid, title))
+    return items

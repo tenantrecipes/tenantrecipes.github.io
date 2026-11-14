@@ -2,6 +2,24 @@
  {
   "date": "2026-11-14",
   "kind": "site",
+  "type": "News",
+  "title": "Intune Windows remote lock: Insider preview only",
+  "blurb": "Intune can lock a lost Windows PC without wiping it, but only on Windows 11 Insider builds for now. No GA build or KB has been announced; do not roll it out to production.",
+  "url": "news/intune-windows-remote-lock-preview.html",
+  "text": "Microsoft has documented Remote lock for Windows as a Preview: Intune can lock a lost, stolen or compromised Windows device without wiping it, via a custom OMA-URI profile rather than the existing Remote lock device action. It is currently only available in Windows 11 Insider builds (Experimental / Future Platforms build 29708.1001, 13 November 2026). It is not yet on generally available Windows releases, and no GA build or KB has been announced. Do not roll this out to production; revisit when it reaches general availability. Documentation verified; not lab-tested."
+ },
+ {
+  "date": "2026-11-14",
+  "kind": "site",
+  "type": "Recipe",
+  "title": "Remote lock a lost Windows PC in Intune (Insider only)",
+  "blurb": "Prepare lock and unlock custom profiles for a lost Windows PC. Insider-only today; not for production; not lab-tested.",
+  "url": "recipes/intune-windows-remote-lock-preview.html",
+  "text": "Recipe for Windows Remote Device Lock from Intune without a wipe: two device groups, a LockState 1 custom profile and a LockState 0 unlock profile, plus pitfalls and what is not verified. The feature is currently only available in Windows 11 Insider builds (Experimental / Future Platforms build 29708.1001, 13 November 2026), not on generally available Windows releases, and no GA build or KB has been announced. Do not roll it out to production. Documentation verified against Microsoft Learn and Windows Insider release notes; not lab-tested."
+ },
+ {
+  "date": "2026-11-14",
+  "kind": "site",
   "type": "Guide",
   "title": "Patch Azure DevOps Server 25H2 to the latest security patch",
   "blurb": "Technical guide: check the current 25H2 build, take a consistent backup, install the latest documented cumulative security patch, verify and roll back. Documentation verified; not lab-tested.",

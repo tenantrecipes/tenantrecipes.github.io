@@ -1097,6 +1097,178 @@
   ]
  },
  {
+  "id": "intune-windows-remote-lock-preview",
+  "status": "published",
+  "tier": "recipe",
+  "order": 155,
+  "category": "Intune & devices for AI",
+  "title": "Remote lock a lost Windows PC in Intune (Insider only)",
+  "problem": "This recipe covers Intune remote lock for a lost Windows PC, but the feature is currently only available in Windows 11 Insider builds. The only named build is Experimental / Future Platforms 29708.1001 (13 November 2026); no GA build or KB has been announced, so do not roll this out to production. A lost, stolen or compromised Windows PC still has its data and an unlocked sign-in path. Microsoft's Remote lock (Preview) lets Intune sign out every session, hide sign-in options and show a lock screen without wiping the device, leaving enrollment, BitLocker and user data in place. This recipe restates the official configuration path. It has not been lab-tested.",
+  "prerequisites": [
+   "The device is Microsoft Entra joined, Microsoft Entra hybrid joined, or MDM-enrolled, and it runs Windows Enterprise, Education or Pro.",
+   "Treat the feature as Preview. As of 14 November 2026, Microsoft's Windows Insider release notes are the only source that names a build: Windows 11 Insider Experimental (Future Platforms) Preview Build 29708.1001, released 13 November 2026. Do not assume the CSP is present on current generally available Windows 10, Windows 11 or Windows Server just because the Intune template is named \"Windows 10 and later\" or because the Learn page's \"Applies to\" line lists those products.",
+   "Create two device groups that will be used only for this purpose (a lock group and an unlock group). Do not plan to assign the lock profile to All devices or to a user group.",
+   "BitLocker should already be enabled. Microsoft says boot and recovery paths are not blocked (Windows Recovery Environment, Safe Mode, and booting from USB or other media), and to keep BitLocker on to protect data if the drive is removed or the device is reimaged.",
+   "Prepare an unlock path before you ever lock a device: a second profile with LockState set to 0, assigned to the unlock group. Microsoft documents that there is no offline or local unlock."
+  ],
+  "steps": [
+   "Confirm the target device is Microsoft Entra joined, hybrid joined or MDM-enrolled, runs Windows Enterprise, Education or Pro, and is on a Windows build that actually includes Remote lock. Microsoft labels the feature Preview. The only build named in official release notes as of 14 November 2026 is Windows 11 Insider Experimental (Future Platforms) Preview Build 29708.1001 (released 13 November 2026).",
+   "Create two security groups of device type only, reserved for this purpose — for example Remote lock - ON and Remote lock - OFF. Restrict who can change membership. Do not use All devices, All users or an existing broad device group for the lock profile.",
+   "In the Intune admin center, go to Devices > Windows > Configuration > Create > New policy. Choose Windows 10 and later, then Templates > Custom. (\"Windows 10 and later\" is the Intune policy platform name Microsoft documents for this profile; it is not by itself a support statement for every Windows 10 build.)",
+   "Name the profile (Microsoft's example is Remote lock - ON). Add the required setting: OMA-URI `./Device/Vendor/MSFT/RemoteDeviceLock/LockState`, data type Integer, value `1` (lock). The documented URI is under `./Device/` (device context). A user-scoped URI is not documented.",
+   "Optionally add `./Device/Vendor/MSFT/RemoteDeviceLock/LockReason` as String (reason shown on the lock screen, up to 1,024 characters) and `./Device/Vendor/MSFT/RemoteDeviceLock/RecoveryHint` as String (help desk contact, up to 256 characters).",
+   "Assign the lock profile only to the lock device group. To lock a device, add that device to the group. Microsoft says the lock applies at the device's next check-in.",
+   "To unlock, create a second custom profile (Microsoft's pattern is a counterpart to the lock profile) with the same LockState OMA-URI, data type Integer, value `0` (unlock). Assign it to the unlock device group. Move the device from the lock group to the unlock group. Microsoft documents this group move with LockState 0; it does not document \"remove the lock assignment\" as the unlock method. Unlock arrives only through Intune: no PIN, password, local administrator or web sign-in works on a locked device, including while the device is offline."
+  ],
+  "pitfalls": [
+   "This is not the Intune device action named Remote lock (Devices > All devices > the device > Secure > Remote lock). That action's documented platforms are Android Enterprise, Android Open Source Project (AOSP), iOS/iPadOS, macOS and visionOS 2.0 and later. Windows is not on that list. In the preview, Windows Remote lock is a custom OMA-URI configuration profile, not a button on the device page.",
+   "The lock is delivered at the next check-in. A device that is already offline will not become locked until it can check in once. After the lock has been applied, Microsoft says it holds across restarts and while offline — and that there is then no local or offline unlock.",
+   "Do not assign LockState 1 to All devices or to a large group. A mistaken broad assignment would lock every targeted device, and recovery is only via Intune (LockState 0 after the next check-in).",
+   "Microsoft does not document that removing the lock profile assignment is enough to unlock the device. The documented unlock path is a second profile with LockState set to 0, assigned to an unlock group, and moving the device to that group.",
+   "The user's account is not touched. Credentials stay valid and the user can still sign in on other devices. Use Microsoft Entra ID to disable the account or revoke sessions if the identity is also at risk. Disabling the Entra device object is a separate control: it prevents that device from authenticating via Entra ID (and revokes the PRT and refresh tokens on the device); it is not the Remote lock screen.",
+   "Remote lock does not isolate the device from the network or erase data. It does not rotate BitLocker keys. Boot and recovery paths (WinRE, Safe Mode, USB or other media) stay available, so BitLocker is what protects the data if the drive is removed or the device is reimaged.",
+   "The Learn page's \"Applies to\" line lists Windows 11, Windows 10, and Windows Server 2022, 2019 and 2016. The article body does not give a minimum GA build or KB for those products. Treat Server and current GA client support as unverified. See \"What is not verified\".",
+   "Not lab-tested. Steps and limits are restated from the linked Microsoft documentation only."
+  ],
+  "done_when": [
+   "A LockState 1 custom profile exists and is assigned only to a dedicated lock device group, and a LockState 0 custom profile exists and is assigned only to a dedicated unlock device group.",
+   "After the test or target device is added to the lock group and has checked in with Intune, Windows has signed out active sessions, hidden sign-in options, and shown the lock screen (with LockReason and RecoveryHint if you configured them).",
+   "The locked device is still enrolled and managed, user data is still present, and BitLocker is still on.",
+   "After the device is moved from the lock group to the unlock group and has checked in, sign-in options are available again and the user can continue."
+  ],
+  "troubleshooting": [
+   {
+    "symptom": "The device does not lock after you add it to the lock group.",
+    "cause": "The lock applies only at the next Intune check-in, or the device does not meet the documented enrollment and edition requirements, or the Windows build does not include the preview CSP.",
+    "fix": "Confirm the profile assignment succeeded and is targeted at a device group that the device is in. Wait for, or request, a check-in (Intune has a Sync device action; the Remote lock article itself only says the lock applies at the next check-in). Confirm Entra join, hybrid join or MDM enrollment, Windows Enterprise, Education or Pro, and that the installed build actually includes Remote lock. As of 14 November 2026 the only officially named build is Windows 11 Insider Experimental (Future Platforms) 29708.1001."
+   },
+   {
+    "symptom": "The device is locked and nobody can sign in, including a local administrator, and the device is offline.",
+    "cause": "Microsoft documents that there is no offline or local unlock. No PIN, password, local admin or web sign-in works on a locked device. Unlock arrives only through Intune.",
+    "fix": "Move the device from the lock group to the unlock group that has the LockState 0 profile. The unlock cannot take effect until the device checks in. There is no documented recovery PIN, local override or BitLocker-based unlock for this feature. If the device never returns to the network, Remote lock will not be liftable; data protection then depends on BitLocker and on any Wipe or other action you issue if the device later comes online."
+   },
+   {
+    "symptom": "The user can still sign in to Microsoft 365 or other devices after the PC is locked.",
+    "cause": "Remote lock does not change the user's account. Credentials stay valid.",
+    "fix": "In Microsoft Entra ID, disable the user account and revoke sessions if the identity is at risk. If you also need to stop that device authenticating to Entra ID, disable the Entra device object (this revokes the PRT and refresh tokens on the device and blocks Entra authentication, including Windows Hello for Business credentials and device-based Conditional Access). These Entra steps are complementary; they are not a substitute for the Remote lock screen, and they do not provide a local unlock."
+   },
+   {
+    "symptom": "Someone reaches Windows Recovery Environment, Safe Mode, or a boot from USB on the locked device.",
+    "cause": "Microsoft documents that boot and recovery paths are not blocked.",
+    "fix": "This is expected. Keep BitLocker on so that data stays protected if the drive is removed or the device is reimaged. Remote lock is not a substitute for encryption or for a Wipe if you need the OS and data removed."
+   }
+  ],
+  "rollback": [
+   "Use the documented unlock path only: confirm a custom profile with `./Device/Vendor/MSFT/RemoteDeviceLock/LockState` set to Integer `0` is assigned to the unlock device group.",
+   "Remove the device from the lock group and add it to the unlock group (Microsoft: move the device from the lock group to the unlock group).",
+   "Wait until the device has checked in with Intune. There is no local unlock while you wait.",
+   "Confirm that sign-in options are visible again and that the user can sign in and continue. Microsoft says that after an admin lifts the lock remotely, the user picks up where they left off.",
+   "Do not rely on deleting or unassigning the lock profile alone; that method is not documented, and a device left in the locked state cannot be unlocked locally."
+  ],
+  "markers": {
+   "steps": "official",
+   "done_when": "official",
+   "pitfalls": "official",
+   "troubleshooting": "official",
+   "rollback": "official"
+  },
+  "editorial": {
+   "why": [
+    "Microsoft documents Remote lock as the way to block sign-in on a lost, stolen or compromised Windows device from Intune without wiping it. Enrollment, management, BitLocker and user data stay in place, and after an admin lifts the lock the user can continue.",
+    "Once the lock has been applied, Microsoft says it holds across restarts and while the device is offline, so a thief cannot simply reboot or take the PC offline to reach a sign-in prompt. (The first lock still requires a check-in to be delivered.)",
+    "Optional LockReason and RecoveryHint let you show a reason and a help-desk contact on the lock screen, which matters if a device is locked by mistake: the person looking at the PC is told to contact IT, and IT still needs the documented LockState 0 path because there is no local unlock."
+   ],
+   "when_to_choose_something_else": [
+    "Wipe — use the Intune Wipe action when the device should be factory-reset and data removed (lost or stolen devices where you do not want the OS and files left intact, or a device being repurposed). Wipe is destructive; Remote lock is not. See Microsoft Learn: Wipe devices with Microsoft Intune.",
+    "Retire — use Retire when the goal is to unenroll the device and remove company data while leaving personal data, typically when a personally owned device leaves management. It is not a lock of a missing PC. For a Microsoft Entra joined, BitLocker-protected device, Microsoft says retiring or deleting the Intune object triggers a sync that removes key protectors and suspends BitLocker on the OS volume; back up the recovery key first. See Microsoft Learn: Device Action: Retire.",
+    "Fresh Start — use Fresh Start when you still have the device and want to remove preinstalled OEM apps or reinstall Windows. It is a reset of a device you can reach, not a lock of a missing one. See Microsoft Learn: Device Action: Fresh Start.",
+    "BitLocker key rotation — use this when a BitLocker recovery key may have been used or exposed. It refreshes the OS-drive recovery key; it does not lock the sign-in screen. Keep BitLocker on as the data protection behind Remote lock, and rotate the key separately if it may have leaked. See Microsoft Learn: Device Action: BitLocker Key Rotation.",
+    "Microsoft Entra: disable the user and revoke sessions when the account itself is at risk. Remote lock does not disable the user, so the same person can still sign in on other devices. See Microsoft Learn: Revoke user access in an emergency in Microsoft Entra ID.",
+    "Microsoft Entra: disable the device object when you need to stop that device authenticating via Entra ID. Microsoft says this prevents access to Entra resources protected by device-based Conditional Access, prevents use of Windows Hello for Business credentials, and revokes the Primary Refresh Token and any refresh tokens on the device. That is not the same as the Remote lock screen, and it is not a local unlock. See Microsoft Learn: Manage devices in Microsoft Entra ID.",
+    "The existing Intune Remote lock device action — use that action on the platforms Microsoft lists for it (Android Enterprise, AOSP, iOS/iPadOS, macOS, visionOS 2.0+). It is not documented for Windows, and it is a different mechanism (lock the screen so the existing passcode or PIN is required)."
+   ],
+   "what_is_not_verified": [
+    "No standalone RemoteDeviceLock CSP reference page was found on Microsoft Learn on 14 November 2026 (common CSP URL patterns returned 404, and Learn search did not return a CSP article). LockState, LockReason, RecoveryHint and the read-only Status values are taken from the preview concept article only. The full Status OMA-URI, CSP access types, and a formal scope / edition / applicable-OS table are not published there.",
+    "Whether Remote lock works on current generally available Windows 10, Windows 11, or Windows Server 2016, 2019 or 2022. The Learn \"Applies to\" line lists those products, but the article body gives no minimum GA build or KB. The only build officially named in release notes is Windows 11 Insider Experimental (Future Platforms) Preview Build 29708.1001 (13 November 2026). Microsoft reminds Insiders that features in that channel are early, may be rolled out gradually, and might never be released more broadly.",
+    "Whether merely removing the lock profile assignment, without applying LockState 0, unlocks a device.",
+    "How an admin reads the Status node (0 Unlocked, 1 Locked, 2 Lock pending, 3 Error) from the Intune admin center, Microsoft Graph, or MDM diagnostic logs.",
+    "What happens if a device is in both the lock and unlock groups, or if both profiles are assigned at once.",
+    "How long lock or unlock takes after check-in, and whether the Intune Sync device action reliably shortens that time. The Remote lock article only says the lock applies at the next check-in.",
+    "How Wipe, Fresh Start, Retire or BitLocker key rotation behaves if it is issued while the device is already remotely locked.",
+    "Use from MDM providers other than Intune. The page meta description refers to \"your MDM provider\"; the configuration steps Microsoft publishes are for an Intune custom profile.",
+    "Home, IoT Enterprise, Windows 365 / Cloud PC, or Autopilot-specific behaviour. Those are not described on the Remote lock page.",
+    "The exact lock-screen wording and layout, beyond Microsoft's description of a default lock screen (Insider notes: a Device Locked screen) plus optional LockReason and RecoveryHint. No screenshots are used in this draft.",
+    "This recipe has not been lab-tested in a tenant or on a device."
+   ]
+  },
+  "sources": [
+   {
+    "title": "Microsoft Learn: Remote lock for Windows Devices (Preview)",
+    "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/remote-lock-for-windows",
+    "checked": "2026-11-14"
+   },
+   {
+    "title": "Windows 11 Insider Experimental (Future Platforms) Preview Build 29708.1001 (release notes)",
+    "url": "https://learn.microsoft.com/en-us/windows-insider/release-notes/experimental-future-platforms/preview-build-29708-1001",
+    "checked": "2026-11-14"
+   },
+   {
+    "title": "Microsoft Learn: Device Action: Remote Lock (Intune; Windows is not a listed platform)",
+    "url": "https://learn.microsoft.com/en-us/intune/device-management/actions/remote-lock",
+    "checked": "2026-11-14"
+   },
+   {
+    "title": "Microsoft Learn: Wipe devices with Microsoft Intune",
+    "url": "https://learn.microsoft.com/en-us/intune/device-management/actions/wipe",
+    "checked": "2026-11-14"
+   },
+   {
+    "title": "Microsoft Learn: Device Action: Retire",
+    "url": "https://learn.microsoft.com/en-us/intune/device-management/actions/retire",
+    "checked": "2026-11-14"
+   },
+   {
+    "title": "Microsoft Learn: Device Action: Fresh Start",
+    "url": "https://learn.microsoft.com/en-us/intune/device-management/actions/fresh-start",
+    "checked": "2026-11-14"
+   },
+   {
+    "title": "Microsoft Learn: Device Action: BitLocker Key Rotation",
+    "url": "https://learn.microsoft.com/en-us/intune/device-management/actions/rotate-bitlocker-keys",
+    "checked": "2026-11-14"
+   },
+   {
+    "title": "Microsoft Learn: Revoke user access in an emergency in Microsoft Entra ID",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access",
+    "checked": "2026-11-14"
+   },
+   {
+    "title": "Microsoft Learn: Manage devices in Microsoft Entra ID using the Microsoft Entra admin center",
+    "url": "https://learn.microsoft.com/en-us/entra/identity/devices/manage-device-identities",
+    "checked": "2026-11-14"
+   }
+  ],
+  "related": [
+   "intune-compliance-baseline",
+   "intune-devices-stay-noncompliant",
+   "autopilot-device-preparation-entra-join"
+  ],
+  "last_verified": "2026-11-14",
+  "verified_by": "Tenant Recipes editor",
+  "created": "2026-11-14",
+  "updated": "2026-11-14",
+  "history": [
+   {
+    "date": "2026-11-14",
+    "note": "Published. Documentation-verified against Microsoft Learn and Windows Insider release notes; not lab-tested. Windows Remote Device Lock is currently Insider-only (Experimental / Future Platforms build 29708.1001, 13 November 2026); no GA build or KB has been announced. Do not roll out to production."
+   }
+  ],
+  "notice": {
+   "title": "Insider only — not generally available",
+   "text": "Windows Remote Device Lock is currently only available in Windows 11 Insider builds (Experimental / Future Platforms build 29708.1001, released 13 November 2026). It is not yet on generally available Windows releases, and no GA build or KB has been announced. Do not roll this out to production. Revisit the feature when Microsoft ships it more broadly. This recipe has not been lab-tested."
+  }
+ },
+ {
   "id": "intune-app-protection-copilot",
   "status": "published",
   "tier": "recipe",

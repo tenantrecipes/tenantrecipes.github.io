@@ -639,9 +639,15 @@ def build():
             chips = (T.chip("list", f'{len(r["steps"])} steps') + (T.chip("alert", f'{len(r["pitfalls"])} pitfall{"s" if len(r["pitfalls"]) != 1 else ""}') if r["pitfalls"] else "")
                      + T.chip("link", f'{len(r["sources"])} Microsoft source{"s" if len(r["sources"]) != 1 else ""}')
                      + (T.chip("clock", f'First published {fmt_date(r["created"])}') if r.get("created") else ""))
-            toc = ([("problem", "The problem"), ("steps", "Steps")] + ([("done", "Done when")] if r.get("done_when") else [])
+            ed_toc = MK.editorial_toc(r)
+            notice_toc = [x for x in ed_toc if x[0] == "notice"]
+            unverified_toc = [x for x in ed_toc if x[0] == "unverified"]
+            mid_ed_toc = [x for x in ed_toc if x[0] not in {"notice", "unverified"}]
+            toc = (notice_toc + [("problem", "The problem"), ("steps", "Steps")] + ([("done", "Done when")] if r.get("done_when") else [])
+                   + mid_ed_toc
                    + ([("pitfalls", "Pitfalls")] if r["pitfalls"] else []) + ([("troubleshooting", "Troubleshooting")] if r.get("troubleshooting") else [])
-                   + ([("rollback", "Rollback")] if r.get("rollback") else []) + [("next", "Related & next steps"), ("history", "Version history"), ("verified", "Sources & corrections")])
+                   + ([("rollback", "Rollback")] if r.get("rollback") else []) + unverified_toc
+                   + [("next", "Related & next steps"), ("history", "Version history"), ("verified", "Sources & corrections")])
             pg = G2 if r["id"] in {x for p in G2.PHASES for st in p["steps"] for x in st["rec"]} else G1
             promo = (f'<a class="ps-promo" href="{rel}guides/{pg.SLUG}.html"><span class="ps-k">Pillar guide</span><strong>{esc(pg.SHORT)}</strong>'
                      f'<span>{len(pg.PHASES)} phases · printable checklist {T.icon("arrow")}</span></a>')
@@ -653,6 +659,7 @@ def build():
                     + HI.dates_bar(r.get("created"), r.get("updated"), r.get("last_verified"))
                     + T.verify_card(rel, r, "Microsoft sources")
                     + UX.back_to_guide(rel, r, refs, pg)
+                    + MK.notice_html(r, step_html, T.icon)
                     + f'<section id="problem" class="co co-info"><p class="co-h">{T.icon("target")}The problem</p><p>{esc(r["problem"])}</p></section>'
                     + HI.recipe_sources(r)
                     + UX.toolbar(rel, r) + ad_slot("recipe-after-intro")
@@ -660,8 +667,10 @@ def build():
                     + MK.notes_html(rel, r, step_html, fmt_date)
                     + UX.screenshots(r, rel)
                     + UX.done_when(r, step_html)
+                    + MK.editorial_html(r, step_html, T.icon, keys=("why", "when_to_choose_something_else"))
                     + (f'<section id="pitfalls" class="co co-warn"><p class="co-h">{T.icon("alert")}Pitfalls{MK.section_badge(rel, r, "pitfalls", fmt_date)}</p><ul>' + "".join(f'<li>{step_html(p)}</li>' for p in r["pitfalls"]) + '</ul></section>' if r["pitfalls"] else "")
                     + MK.troubleshooting_html(rel, r, step_html, T.icon, fmt_date) + MK.rollback_html(rel, r, step_html, T.icon, fmt_date)
+                    + MK.editorial_html(r, step_html, T.icon, keys=("what_is_not_verified",))
                     + UX.news_mid(rel, "recipe-" + r["id"]) + ad_slot("recipe-before-related")
                     + f'<section id="next" class="nx" aria-labelledby="nx-h"><h2 id="nx-h">Related recipes &amp; next steps</h2>'
                     + (f'<p class="tgs"><span class="fine">Topics:</span> {tags}</p>' if tags else "")

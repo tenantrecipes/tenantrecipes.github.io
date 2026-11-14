@@ -1,0 +1,46 @@
+{
+  "id": "intune-windows-remote-lock-preview",
+  "status": "published",
+  "title": "Intune Windows remote lock: Insider preview only",
+  "date": "2026-11-14",
+  "category": "Intune",
+  "summary": "Windows Remote Device Lock is currently only available in Windows 11 Insider builds, not yet on generally available Windows. The only build Microsoft has named is Insider Experimental (Future Platforms) Preview Build 29708.1001, released 13 November 2026, and no GA build or KB has been announced, so do not roll this out to production. In the Preview, Intune can lock a lost, stolen or compromised Windows device without wiping it: Windows signs out every session, hides sign-in options and leaves enrollment, BitLocker and user data in place, using a custom OMA-URI profile (./Device/Vendor/MSFT/RemoteDeviceLock/LockState, Integer 1 to lock and 0 to unlock) rather than the Intune Remote lock device action, which does not list Windows. The lock applies at the next check-in, Microsoft documents no local or offline unlock, and the feature should be revisited when a generally available release ships.",
+  "why": "This is still Insider-only, so it is not something to deploy in production today. Until now, Intune's Remote lock device action has not listed Windows, so a missing Windows PC often meant a Wipe, or hoping BitLocker and a passcode were enough. This preview fills that gap — but only after the next check-in, only on documented editions and enrollment types, and with no local or offline unlock. A mistaken assignment can lock devices that then need a network check-in to receive LockState 0. It also does not disable the user account, isolate the network, or block WinRE, Safe Mode or USB boot.",
+  "todo": [
+    "Do not roll this out to production. Windows Remote Device Lock is currently only available in Windows 11 Insider builds (Experimental / Future Platforms build 29708.1001, 13 November 2026). It is not yet on generally available Windows releases, and no GA build or KB has been announced. Revisit when Microsoft ships it more broadly. Do not assign a LockState 1 profile to All devices.",
+    "Prepare two device groups and two custom profiles in advance: LockState 1 assigned only to a lock group, LockState 0 assigned only to an unlock group. Microsoft's unlock path is to move the device from the lock group to the unlock group. There is no PIN, password, local-admin or web sign-in override.",
+    "Keep BitLocker on. Microsoft says boot and recovery paths are not blocked, so encryption is what protects the drive if it is removed or the device is reimaged.",
+    "If the identity is also at risk, disable the user and revoke sessions in Microsoft Entra ID. Remote lock does not touch the account. To stop that device authenticating to Entra ID, disable the Entra device object as a separate step.",
+    "Do not confuse this with Intune's existing Remote lock device action, which Microsoft documents for Android, iOS/iPadOS, macOS and visionOS, not for Windows."
+  ],
+  "effective_note": "Insider only — not generally available. The only named build is Windows 11 Insider Experimental (Future Platforms) Preview Build 29708.1001 (13 November 2026). Features in that channel may be rolled out gradually and might never ship more broadly. No GA Windows build or KB has been announced. Do not roll this out to production; revisit when it reaches general availability. Not a generally available Intune device action for Windows.",
+  "primary": {
+    "title": "Remote lock for Windows Devices (Preview) (Microsoft Learn)",
+    "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/remote-lock-for-windows"
+  },
+  "related": [
+    {
+      "title": "Recipe: Remote lock a lost Windows PC in Intune (Insider only)",
+      "url": "recipes/intune-windows-remote-lock-preview.html"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Microsoft Learn: Remote lock for Windows Devices (Preview)",
+      "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/remote-lock-for-windows",
+      "checked": "2026-11-14"
+    },
+    {
+      "title": "Windows 11 Insider Experimental (Future Platforms) Preview Build 29708.1001",
+      "url": "https://learn.microsoft.com/en-us/windows-insider/release-notes/experimental-future-platforms/preview-build-29708-1001",
+      "checked": "2026-11-14"
+    },
+    {
+      "title": "Microsoft Learn: Device Action: Remote Lock (Intune; Windows is not a listed platform)",
+      "url": "https://learn.microsoft.com/en-us/intune/device-management/actions/remote-lock",
+      "checked": "2026-11-14"
+    }
+  ],
+  "last_verified": "2026-11-14",
+  "recipe": "intune-windows-remote-lock-preview"
+}
