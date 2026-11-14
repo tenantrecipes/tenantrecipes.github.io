@@ -1,0 +1,63 @@
+{
+ "id": "defenderforidentity-powershell",
+ "status": "published",
+ "kind": "tool",
+ "name": "DefenderForIdentity PowerShell module – prove MDI auditing, SACLs and sensor connectivity",
+ "vendor": "Microsoft (PowerShell Gallery)",
+ "category": "Active Directory",
+ "what": "Microsoft's PowerShell module for Defender for Identity post-deployment configuration. `New-MDIConfigurationReport` writes an HTML + JSON report of the domain's MDI-relevant SACLs and audit GPOs; `Test-MDIConfiguration`/`Get-MDIConfiguration` check individual settings (AdvancedAuditPolicyDCs/CAs, NTLMAuditing, DomainObjectAuditing, ConfigurationContainerAuditing, AdfsAuditing, CAAuditing, EntraConnectAuditing, RemoteSAM, ProcessorPerformance, AdRecycleBin); `Set-MDIConfiguration` creates the GPOs; `Test-MDISensorApiConnection` checks the sensor-to-cloud path including proxy.",
+ "when": "Before trusting MDI detections as purple-team evidence, after DC builds or GPO clean-ups, and now that the classic remote-execution and pass-the-hash alerts retire (end of November 2026): the replacement custom detections run on IdentityDirectoryEvents, which only contains what the sensors can see. Run the read-only report in every domain and keep it with the detection-coverage record.",
+ "license": "Microsoft PowerShell Gallery package",
+ "cost": "free",
+ "cost_note": "Version 1.0.0.5 on the PowerShell Gallery (6 March 2026). Requires Windows PowerShell 5.1 or PowerShell 7.4+ (with `Import-Module GroupPolicy -SkipEditionCheck`). MDI itself needs its own licence.",
+ "url": "https://learn.microsoft.com/en-us/powershell/module/defenderforidentity/",
+ "repo": "https://www.powershellgallery.com/packages/DefenderForIdentity",
+ "example": [
+  "Install for the current user: `Install-Module DefenderForIdentity -Scope CurrentUser`.",
+  "Read-only domain report: `New-MDIConfigurationReport -Path C:\\Reports\\MDI -Mode Domain -OpenHtmlReport` (add `-GpoNamePrefix <prefix>` if your GPOs follow a naming convention).",
+  "Check one setting across the domain: `Test-MDIConfiguration -Mode Domain -Configuration NTLMAuditing,AdvancedAuditPolicyDCs`.",
+  "On a sensor server: `Test-MDISensorApiConnection` (or `-BypassConfiguration -SensorApiUrl <url> -SensorType Classic -ProxyUrl <proxy>` to test a planned proxy).",
+  "Only after change approval: `Set-MDIConfiguration -Mode Domain -Configuration All -Identity <gMSA> -CreateGpoDisabled -SkipGpoLink -WhatIf`, then link and enable deliberately."
+ ],
+ "pitfalls": [
+  "`Set-MDIConfiguration` creates and (by default) links GPOs and changes SACLs on the domain — run it with `-WhatIf`, `-CreateGpoDisabled` and `-SkipGpoLink` first, under change control.",
+  "A green report covers MDI prerequisites, not endpoint coverage: pass-the-hash detection after the classic alert retirement depends on Defender for Endpoint being onboarded on the relevant hosts.",
+  "The report reflects the GPOs it can find by name; custom-named audit GPOs show as missing unless you pass the right `-GpoNamePrefix`.",
+  "Run it only in domains you administer or have written authorisation to assess."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Learn: Defender for Identity PowerShell module overview",
+   "url": "https://learn.microsoft.com/en-us/powershell/defenderforidentity/overview-defenderforidentity",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Learn: DefenderForIdentity module reference (New-MDIConfigurationReport, Test-/Set-MDIConfiguration, Test-MDISensorApiConnection)",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/defenderforidentity/",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "PowerShell Gallery: DefenderForIdentity 1.0.0.5",
+   "url": "https://www.powershellgallery.com/packages/DefenderForIdentity",
+   "checked": "2026-11-14"
+  }
+ ],
+ "related": [
+  {
+   "title": "News: MDI classic RCE and pass-the-hash alerts retire",
+   "url": "news/mdi-classic-alerts-rce-pass-the-hash-retirement.html"
+  },
+  {
+   "title": "Recipe: Replace the retiring MDI remote-execution alert",
+   "url": "recipes/mdi-rce-custom-detection-replacement.html"
+  },
+  {
+   "title": "Tool: PingCastle",
+   "url": "tools/pingcastle.html"
+  }
+ ],
+ "last_verified": "2026-11-14",
+ "created": "2026-11-14",
+ "updated": "2026-11-14",
+ "order": 392
+}

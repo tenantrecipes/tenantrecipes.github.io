@@ -1,0 +1,87 @@
+{
+ "id": "mdi-rce-custom-detection-replacement",
+ "status": "published",
+ "tier": "recipe",
+ "order": 162,
+ "category": "Identity & threat protection",
+ "title": "Replace the retiring MDI remote-execution alert with a custom detection",
+ "problem": "Defender for Identity retires the classic 'Remote code execution attempt' (2025) and 'Suspected identity theft (pass-the-hash)' (2036) alerts at the end of November 2026 (MC1552387). Remote execution against DCs and tier-0 servers must move to an advanced hunting custom detection, and pass-the-hash coverage to Defender for Endpoint — without SIEM rules and runbooks silently going quiet.",
+ "steps": [
+  "Inventory dependencies: in Sentinel or your SIEM, find analytics, automation rules, SOAR playbooks and ticket mappings that match the two alert titles or external IDs 2025/2036, and list them with owners.",
+  "Open Microsoft's published RemoteCodeExecution query (Microsoft-Defender-for-Identity GitHub). It flags service creation, task scheduling and WMI Win32_Process Create in IdentityDirectoryEvents and suppresses accounts/source devices seen on 3+ of the previous 7 days.",
+  "Run it (or the condensed variant on the Code page) over 30 days in advanced hunting and tune: allow-list deployment accounts, monitoring agents and jump hosts by AccountSid or source device rather than by command line.",
+  "Make sure the query projects `Timestamp` and `ReportId` from the same event plus an entity column (`AccountSid`/`DeviceName`), and filters on `ingestion_time()` rather than `Timestamp`, as Microsoft recommends for custom detections.",
+  "Create the detection rule: unique title, severity, MITRE techniques T1047/T1053.005/T1543.003, frequency of 24 hours or less with a matching time filter, and impacted-entity mapping.",
+  "Pass-the-hash: confirm that domain controllers, AD CS, AD FS and Entra Connect servers are onboarded to Defender for Endpoint (Device inventory, onboarding status), since MDE is Microsoft's stated coverage after retirement.",
+  "Repoint the SIEM rules and runbooks from step 1 to the new custom detection title, then re-run your remote-execution purple-team test case and record the alert that fires."
+ ],
+ "pitfalls": [
+  "The custom detection only sees what the MDI sensors log; missing audit policy or SACLs on a DC means no IdentityDirectoryEvents rows — verify with the DefenderForIdentity module's configuration report.",
+  "Microsoft's baseline suppression hides an attacker who reuses an admin account that legitimately runs remote tasks every day; keep a separate, higher-severity rule for tier-0 targets without suppression if volume allows.",
+  "Filtering on `Timestamp` in a custom detection can miss late-arriving events; use `ingestion_time()`.",
+  "Retirement removes the alert, not historical incidents; closed incidents with the old titles stay searchable for their normal retention."
+ ],
+ "done_when": [
+  "A custom detection for remote execution against identity infrastructure is enabled, tuned against 30 days of data and mapped to entities.",
+  "Every SIEM rule, playbook and runbook that referenced the two classic alerts is repointed or retired, with an owner recorded.",
+  "Tier-0 servers show as onboarded to Defender for Endpoint, and the remote-execution test case produces the new alert."
+ ],
+ "troubleshooting": [
+  {
+   "symptom": "The query returns no rows at all",
+   "cause": "No sensor coverage or missing audit configuration on the DCs/servers in scope",
+   "fix": "Run `New-MDIConfigurationReport` and `Test-MDIConfiguration -Mode Domain -Configuration All`, fix the reported gaps, then re-run the hunt."
+  },
+  {
+   "symptom": "Alerts have no impacted asset or wrong scope",
+   "cause": "The query does not project ReportId/Timestamp from the same event or an entity identifier",
+   "fix": "Project `Timestamp, ReportId` and `AccountSid` or `DeviceName` directly from the matching row; avoid summarize without arg_max."
+  },
+  {
+   "symptom": "Too many alerts from software deployment",
+   "cause": "Deployment or monitoring accounts create services and tasks remotely",
+   "fix": "Allow-list by AccountSid or source device, or adopt Microsoft's 7-day baseline suppression from the published query."
+  }
+ ],
+ "rollback": [
+  "Set the custom detection rule to Off (do not delete it) if it floods the queue, and keep the SIEM rule pointing at it so the gap is visible.",
+  "Re-enable after tuning; confirm in the rule's run history that it executes at the chosen frequency."
+ ],
+ "markers": {
+  "steps": "official",
+  "pitfalls": "practical",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "sources": [
+  {
+   "title": "MC1552387: Retired: Microsoft Defender for Identity classic alerts (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1552387",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Defender for Identity GitHub: RemoteCodeExecution advanced hunting query",
+   "url": "https://github.com/microsoft/Microsoft-Defender-for-Identity/blob/main/AdvancedHunting/RemoteCodeExecution.md",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Learn: Create and manage custom detection rules (required columns, ingestion_time, frequency)",
+   "url": "https://learn.microsoft.com/en-us/defender-xdr/custom-detection-rules",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Learn: IdentityDirectoryEvents table",
+   "url": "https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-identitydirectoryevents-table",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Learn: Classic Defender for Identity security alerts",
+   "url": "https://learn.microsoft.com/en-us/defender-for-identity/alerts-mdi-classic",
+   "checked": "2026-11-14"
+  }
+ ],
+ "last_verified": "2026-11-14",
+ "verified_by": "Pascal",
+ "created": "2026-11-14",
+ "updated": "2026-11-14"
+}

@@ -1,0 +1,48 @@
+{
+ "id": "windows-oob-slmgr-activation-0x80041008",
+ "status": "published",
+ "title": "Out-of-band Windows update fixes slmgr/KMS activation failing with 0x80041008 after the November 2026 update",
+ "date": "2026-11-13",
+ "category": "Windows",
+ "summary": "After the 10 November 2026 security update, some enterprise devices fail slmgr.vbs operations (KMS host configuration, product key install, licensing management) with 0x80041008 (Invalid parameter). Microsoft released out-of-band cumulative updates on 13 November 2026 (MC1551898): KB5136489 (Server 2025, OS build 26100.33828), KB5136487 (Server 2022), KB5136490 (Server 2019 / Windows 10 Enterprise LTSC 2019), KB5136483 (Windows 11 23H2) and KB5136493 (Windows 10 22H2 ESU / Enterprise LTSC 2021). Already-activated devices stay activated.",
+ "why": "The break hits automation, not end users: imaging task sequences, KMS host rebuilds, Autopilot/OSD scripts that run `slmgr /ipk` or `/skms`, and ESU MAK key installs on Windows 10 22H2. For servers and Windows 10 the fix is Catalog-only, so WSUS/ConfigMgr/Update Manager rings will not pick it up unless you import it.",
+ "todo": [
+  "Search provisioning and build logs (task sequences, Arc/run-command scripts, golden-image pipelines) for 0x80041008 since 10 November.",
+  "Import the matching KB from the Microsoft Update Catalog into WSUS/ConfigMgr for KMS hosts and image build machines first; it includes the November security fixes, so it replaces rather than adds to the monthly CU.",
+  "On Windows 11 23H2 the OOB update is also offered as an optional update in Windows Update; decide whether Windows Update for Business rings should take it or wait for December.",
+  "Re-run the failed `slmgr` step and confirm with `slmgr /dlv` that the expected channel and KMS host are reported."
+ ],
+ "effective": "2026-11-13",
+ "primary": {
+  "title": "KB5136489: Windows Server 2025 out-of-band update (OS Build 26100.33828)",
+  "url": "https://support.microsoft.com/help/5136489"
+ },
+ "related": [
+  {
+   "title": "Security: November 2026 Patch Tuesday",
+   "url": "security/patch-tuesday-2026-11.html"
+  },
+  {
+   "title": "Guide: Arc + Update Manager weekend waves",
+   "url": "guides/arc-update-manager-weekend-waves.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1551898: Out-of-band update released to address Windows licensing and activation errors (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1551898",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Support KB5136489: Windows Server 2025 out-of-band update, 13 November 2026",
+   "url": "https://support.microsoft.com/help/5136489",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Support KB5136493: Windows 10 22H2 ESU / Enterprise LTSC 2021 out-of-band update",
+   "url": "https://support.microsoft.com/help/5136493",
+   "checked": "2026-11-14"
+  }
+ ],
+ "last_verified": "2026-11-14"
+}

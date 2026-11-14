@@ -21,8 +21,9 @@ DESC = ("An expert, authorization-first purple-team playbook that walks a single
         "It ends where it must: proving detection in Defender for Identity and Entra logs, then remediating the on-prem-to-cloud "
         "seams the path exploited. Defensive use only, on your own systems or with written permission.")
 VERIFIED = "2026-11-02"
-UPDATED = "2026-11-12"
-HISTORY = [("2026-11-12", "Remediation phase: added NTLM-layer signing enforcement (KB5135557, ServerRequireNtlmSign, event 4023) and per-DC LDAP signing/channel binding verification with LdapRelayScan.")]
+UPDATED = "2026-11-14"
+HISTORY = [("2026-11-14", "Detection phase: the classic MDI 'Remote code execution attempt' (2025) and pass-the-hash (2036) alerts retire end of November 2026 (MC1552387); pass-the-hash now verified via Defender for Endpoint and remote execution via a custom detection, with a configuration-report check of sensor auditing."),
+           ("2026-11-12", "Remediation phase: added NTLM-layer signing enforcement (KB5135557, ServerRequireNtlmSign, event 4023) and per-DC LDAP signing/channel binding verification with LdapRelayScan.")]
 BADGE = "fact-checked against the tool projects and Microsoft Learn / Microsoft Support"
 SRC_LABEL = "Official sources"
 TIME_NOTE = ("Time estimates are our planning figures for one hybrid environment: an on-premises Active Directory forest synced to a single "
@@ -101,6 +102,9 @@ L = {
     # Defender for Identity
     "mdi_events": ("Configure Windows event collection for Defender for Identity", "https://learn.microsoft.com/en-us/defender-for-identity/deploy/configure-windows-event-collection"),
     "mdi_xdr": ("Microsoft Defender for Identity security alerts (lateral movement, Pass-the-Hash, NTLM relay)", "https://learn.microsoft.com/en-us/defender-for-identity/alerts-xdr"),
+    "mdi_classic": ("Classic Defender for Identity security alerts (incl. 2025 Remote code execution attempt and 2036 pass-the-hash, retiring end of November 2026 per MC1552387)", "https://learn.microsoft.com/en-us/defender-for-identity/alerts-mdi-classic"),
+    "mdi_ps": ("Defender for Identity PowerShell module (configuration report and tests)", "https://learn.microsoft.com/en-us/powershell/defenderforidentity/overview-defenderforidentity"),
+    "xdr_custom": ("Create and manage custom detection rules in Microsoft Defender XDR", "https://learn.microsoft.com/en-us/defender-xdr/custom-detection-rules"),
     "mdi_investigate": ("Investigate Defender for Identity security alerts", "https://learn.microsoft.com/en-us/defender-for-identity/investigate-security-alerts"),
     # Entra hybrid / detection
     "choose_authn": ("Choose the right authentication method for Microsoft Entra hybrid identity", MLH + "choose-ad-authn"),
@@ -197,7 +201,7 @@ PHASES = [
            "Repeat over `winrm` and `ldap` protocols where those are in scope to understand remote-management and directory read access for the same identity.",
            "Feed targets from a scoped host list, never a broad corporate range; keep the authorized subnets authoritative.",
            "Record the credential/host/protocol matrix — it drives both the BloodHound 'owned' marking in phase 5 and the remediation in phase 9."],
-    "pit": ["Pass-the-hash validation (`-H`) is MITRE T1550.002 and will light up Defender for Identity if auditing is on — expected here, and a detection check for phase 8.",
+    "pit": ["Pass-the-hash validation (`-H`) is MITRE T1550.002 and should be detected — by the classic Defender for Identity pass-the-hash alert until it retires in late November 2026, and by Defender for Endpoint on onboarded hosts after that — expected here, and a detection check for phase 8.",
             "A `(Pwn3d!)` on one host does not authorize moving to the next subnet; stay inside the signed scope."],
     "rec": [], "tools": ["netexec"], "src": S("nxc_cred", "nxc_docs", "mitre_pth"),
     "marker": "official"},
@@ -356,10 +360,13 @@ PHASES = [
     "do": ["Check that Defender for Identity raised the lateral-movement family you exercised — suspected identity theft via Pass-the-Hash and suspected NTLM-relay alerts in particular — and that the alert evidence names your accounts and hosts.",
            "Confirm MDI sensors and the Windows event collection it requires are in place; a missing sensor or unforwarded event is itself a finding.",
            "Investigate one representative alert end to end (story, entity graph, evidence) and classify it so the engagement doubles as a SOC exercise.",
+           "From late November 2026 the classic MDI 'Remote code execution attempt' (2025) and 'Suspected identity theft (pass-the-hash)' (2036) alerts are retired: expect pass-the-hash to surface through Defender for Endpoint on onboarded hosts and remote execution through your advanced hunting custom detection — score the test against those, not the old titles.",
+           "Before blaming the SOC for a miss, run `New-MDIConfigurationReport` (read-only) in the domain and attach it to the finding, so instrumentation gaps and analyst gaps are separated.",
            "Record any detection gap as a ticket with the exact technique it missed."],
     "pit": ["Alert availability depends on licensing and sensors; absence of an alert can mean 'not licensed/instrumented', not 'attacker invisible' — verify which.",
-            "Exclusions added during a noisy pilot are easy to forget; review MDI exclusions as part of this phase."],
-    "rec": [], "tools": [], "src": S("mdi_xdr", "mdi_investigate", "mdi_events"),
+            "Exclusions added during a noisy pilot are easy to forget; review MDI exclusions as part of this phase.",
+            "Domain controllers that run only the MDI sensor and are not onboarded to Defender for Endpoint lose pass-the-hash alerting after the classic alert retires."],
+    "rec": ["mdi-rce-custom-detection-replacement"], "tools": ["defenderforidentity-powershell"], "src": S("mdi_xdr", "mdi_classic", "xdr_custom", "mdi_ps", "mdi_investigate", "mdi_events"),
     "marker": "official"},
    {"t": "Confirm Entra sign-in and audit visibility for the cloud enumeration",
     "check": "Sign-in logs show the ROADrecon/AADInternals authentications with their Conditional Access results, and audit logs show any directory reads in scope; gaps are ticketed",

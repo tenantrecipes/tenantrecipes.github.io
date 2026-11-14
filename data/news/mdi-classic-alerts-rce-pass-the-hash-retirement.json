@@ -1,0 +1,52 @@
+{
+ "id": "mdi-classic-alerts-rce-pass-the-hash-retirement",
+ "status": "published",
+ "title": "Defender for Identity retires the classic 'Remote code execution attempt' and pass-the-hash alerts at the end of November 2026",
+ "date": "2026-11-13",
+ "category": "Defender",
+ "summary": "MC1552387 (13 November 2026, act by 30 November): Microsoft Defender for Identity retires two classic alerts in late November 2026 across worldwide, GCC, GCC High and DoD — Remote code execution attempt (external ID 2025) and Suspected identity theft (pass-the-hash, external ID 2036). Microsoft's replacement is an advanced hunting custom detection rule for remote execution (published query on GitHub) and Defender for Endpoint coverage for pass-the-hash on onboarded devices.",
+ "why": "If your SOC playbooks, SIEM analytics or purple-team scorecards key on these two alert titles or IDs, they will silently stop firing. Pass-the-hash coverage moves to the endpoint, so domain controllers and tier-0 servers that run only the MDI sensor and are not onboarded to MDE become a blind spot.",
+ "todo": [
+  "Find every SIEM rule, automation and runbook that matches the alert titles or external IDs 2025/2036 (Sentinel analytics on SecurityAlert/AlertInfo, SOAR playbooks, ticket mappings).",
+  "Create the remote-execution custom detection in Defender XDR advanced hunting from Microsoft's published query, tuned to your admin tooling (recipe on this site).",
+  "Confirm that domain controllers, AD CS, AD FS and Entra Connect servers are onboarded to Defender for Endpoint, not only running the MDI sensor.",
+  "Re-run your pass-the-hash and remote-execution purple-team test cases after the rollout and record which alert now fires."
+ ],
+ "effective": "2026-11-30",
+ "primary": {
+  "title": "MC1552387: Retired: Microsoft Defender for Identity classic alerts (Remote code execution attempt and pass-the-hash)",
+  "url": "https://mc.merill.net/message/MC1552387"
+ },
+ "related": [
+  {
+   "title": "Recipe: Replace the retiring MDI remote-execution alert with a custom detection",
+   "url": "recipes/mdi-rce-custom-detection-replacement.html"
+  },
+  {
+   "title": "Guide: Internal purple team to compromised hybrid identity",
+   "url": "guides/purple-team-hybrid-identity.html"
+  },
+  {
+   "title": "Tool: DefenderForIdentity PowerShell module",
+   "url": "tools/defenderforidentity-powershell.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1552387: Retired: Microsoft Defender for Identity classic alerts (Remote code execution attempt and pass-the-hash) (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1552387",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Learn: Classic Defender for Identity security alerts (external IDs 2025 and 2036)",
+   "url": "https://learn.microsoft.com/en-us/defender-for-identity/alerts-mdi-classic",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Defender for Identity GitHub: RemoteCodeExecution advanced hunting query",
+   "url": "https://github.com/microsoft/Microsoft-Defender-for-Identity/blob/main/AdvancedHunting/RemoteCodeExecution.md",
+   "checked": "2026-11-14"
+  }
+ ],
+ "last_verified": "2026-11-14"
+}

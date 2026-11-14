@@ -40,6 +40,7 @@ The inventory includes self-hosted AI and developer platforms (for example AI ga
 - Apply the vendor's workaround or another mitigation, such as blocking access or turning off the vulnerable feature.
 - Record a time-limited exception with the risk owner's approval.
 - Plan to replace software and devices that no longer receive security updates.
+- End of vendor support is planned, not discovered: every system has its end-of-support date in the inventory, and at the latest 90 days before that date the owner records a decision to upgrade, replace or buy extended security updates (with activation tested before the date). Identity infrastructure such as domain controllers and federation servers is never left without security updates.
 - Products that embed another vendor's code (for example Chromium-based browsers, or appliances built on open-source components) are patched only when their own vendor ships a fixed build. An upstream fix does not close the risk; track the downstream vendor's release notes and record an exception with a mitigation until it ships.
 
 ## 6. Verification

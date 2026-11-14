@@ -35,7 +35,7 @@ It covers any event that threatens the confidentiality, integrity or availabilit
 
 ## 5. Response phases
 
-- Prepare: keep contact lists, playbooks, logging and out-of-band communication ready, and test them.
+- Prepare: keep contact lists, playbooks, logging and out-of-band communication ready, and test them. When a security vendor retires or renames a detection, alert or log source, the detection owner updates the dependent SIEM rules, automations and playbooks before the change takes effect and confirms that a replacement detection fires.
 - Detect and analyse: confirm the incident, set a severity level and record a timeline from the first report.
 - Contain: limit spread, for example by isolating devices, revoking sessions and resetting credentials.
 - Eradicate and recover: remove the cause, restore from clean backups, monitor closely and return to normal operation.

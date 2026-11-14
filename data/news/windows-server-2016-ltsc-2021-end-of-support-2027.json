@@ -1,0 +1,52 @@
+{
+ "id": "windows-server-2016-ltsc-2021-end-of-support-2027",
+ "status": "published",
+ "title": "60-day warning: Windows Server 2016 and Windows 10 Enterprise LTSC 2021 lose free updates on 13 January 2027",
+ "date": "2026-11-13",
+ "category": "Windows",
+ "summary": "Microsoft's 60-day reminders (MC1551896, MC1551897, 13 November 2026): all Windows Server 2016 editions reach end of extended support on 13 January 2027, including the Server 2016 Essentials features such as Remote Web Access; Windows 10 Enterprise LTSC 2021 reaches end of mainstream support the same day. The January 2027 security update is the last one for both outside Extended Security Updates (ESU); for LTSC 2021, Microsoft says ESU is available for up to three years.",
+ "why": "Server 2016 is still common on domain controllers, AD FS, RDS, file servers and line-of-business app hosts — exactly the tier-0/tier-1 systems where an unpatched month matters. LTSC 2021 often sits on kiosks, OT and medical devices that nobody re-images. Decide upgrade vs. ESU now; ESU procurement and key activation take longer than 60 days in most organisations.",
+ "todo": [
+  "Inventory Server 2016 and LTSC 2021 everywhere: Intune/ConfigMgr for clients, Azure Resource Graph for Arc and Azure VMs, and AD computer objects for anything unmanaged.",
+  "Prioritise domain controllers, AD CS, AD FS and internet-facing RDS on Server 2016 for in-place upgrade or replacement before January.",
+  "For systems that cannot move in time, buy and activate ESU before 13 January 2027 and test that the January update installs (ESU activation is a separate step).",
+  "Retire any Server 2016 Essentials Remote Web Access exposure; it becomes unsupported functionality."
+ ],
+ "effective": "2027-01-13",
+ "primary": {
+  "title": "MC1551896: 60-Day Reminder: Windows Server 2016 reaches the end of extended support on January 13, 2027",
+  "url": "https://mc.merill.net/message/MC1551896"
+ },
+ "related": [
+  {
+   "title": "News: Windows Update certificate rotation 2027",
+   "url": "news/windows-update-certificate-rotation-2027.html"
+  },
+  {
+   "title": "Guide: Azure Update Manager enterprise patching",
+   "url": "guides/azure-update-manager-enterprise-patching.html"
+  },
+  {
+   "title": "Policy: Patch management policy",
+   "url": "policies/patch-management-policy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1551896: 60-Day Reminder: Windows Server 2016 reaches the end of extended support on January 13, 2027 (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1551896",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "MC1551897: 60-Day Reminder: Windows 10 Enterprise LTSC 2021 will reach end of updates on January 13, 2027 (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1551897",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Learn: Windows Server 2016 lifecycle",
+   "url": "https://learn.microsoft.com/en-us/lifecycle/products/windows-server-2016",
+   "checked": "2026-11-14"
+  }
+ ],
+ "last_verified": "2026-11-14"
+}

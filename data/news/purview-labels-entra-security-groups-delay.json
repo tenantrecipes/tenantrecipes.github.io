@@ -1,0 +1,48 @@
+{
+ "id": "purview-labels-entra-security-groups-delay",
+ "status": "published",
+ "title": "Purview sensitivity labels for Entra cloud security groups slip to mid-January 2027 — and cannot be removed once applied",
+ "date": "2026-11-13",
+ "category": "Purview",
+ "summary": "MC1508238 was updated on 13 November 2026: general availability of sensitivity labels on Microsoft Entra cloud security groups (Roadmap 568217) moves from mid/late November 2026 to mid-January 2027. Labels published with the Groups & Sites scope can be applied at creation or later via the Entra admin center, Azure portal, PowerShell or Graph, and enforce membership and guest-access policy. It needs a separate tenant setting from Microsoft 365 group labels, and an applied label currently cannot be changed or removed.",
+ "why": "The irreversibility is the trap: a label pushed by script onto security groups used for Conditional Access, PIM or app assignment cannot be backed out until Microsoft ships label changes. Use the extra eight weeks to design which labels are allowed on security groups and who may apply them.",
+ "todo": [
+  "Decide which existing Groups & Sites labels (if any) make sense on security groups; consider dedicated labels whose guest/membership settings match how security groups are used.",
+  "Exclude role-assignable, CA-exclusion and break-glass groups from any bulk-labelling script.",
+  "Keep the tenant setting for security groups off until the design is approved; it is independent of the Microsoft 365 groups setting.",
+  "Test in a non-production tenant first, given labels cannot be removed once applied."
+ ],
+ "effective": null,
+ "primary": {
+  "title": "MC1508238: Microsoft Purview | Information Protection: Sensitivity labels for Microsoft Entra security groups",
+  "url": "https://mc.merill.net/message/MC1508238"
+ },
+ "related": [
+  {
+   "title": "Recipe: Sensitivity labels for Copilot",
+   "url": "recipes/purview-sensitivity-labels-copilot.html"
+  },
+  {
+   "title": "Policy: Information classification policy",
+   "url": "policies/information-classification-policy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1508238: Sensitivity labels for Microsoft Entra security groups (updated 13 Nov 2026) (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1508238",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Learn: Assign sensitivity labels to Microsoft Entra groups",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/users/groups-sensitivity-labels",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Learn: Use sensitivity labels to protect collaborative workspaces (groups and sites)",
+   "url": "https://learn.microsoft.com/en-us/purview/sensitivity-labels-teams-groups-sites",
+   "checked": "2026-11-14"
+  }
+ ],
+ "last_verified": "2026-11-14"
+}

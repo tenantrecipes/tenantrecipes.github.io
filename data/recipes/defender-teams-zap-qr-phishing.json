@@ -55,9 +55,44 @@
  "last_verified": "2026-10-30",
  "verified_by": "Pascal",
  "created": "2026-10-30",
- "updated": "2026-10-30",
+ "updated": "2026-11-14",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "`Get-TeamsProtectionPolicy` or the ZAP toggle is not available",
+   "cause": "The tenant has no Defender for Office 365 Plan 1 or higher",
+   "fix": "Check the licence (Microsoft 365 E3 includes Plan 1 since July 2026); advanced hunting on Teams messages additionally needs Plan 2 or E5."
+  },
+  {
+   "symptom": "A phishing message from an external chat was not removed",
+   "cause": "ZAP for Teams acts only on internal chats and channels, and only for malware and high-confidence phishing",
+   "fix": "Handle external-chat threats through Teams external access/federation settings and user reporting; do not expect ZAP to cover them."
+  },
+  {
+   "symptom": "Users ask where a removed message went and got no notice",
+   "cause": "Quarantined Teams messages are admin-only and users get no quarantine notification",
+   "fix": "Review and release from Quarantine in the Defender portal; tell the service desk this is expected behaviour."
+  },
+  {
+   "symptom": "'Report a security concern' is missing in Teams",
+   "cause": "Only one of the two settings is on, or the tenant is GCC/GCC High/DoD",
+   "fix": "Enable it in the Teams messaging policy and turn on 'Monitor reported items in Microsoft Teams' in Defender; user reporting is not supported in government clouds."
+  }
+ ],
+ "rollback": [
+  "If ZAP for Teams quarantines legitimate internal content, add a targeted recipient exclusion in the Teams protection policy rather than turning ZAP off.",
+  "Last resort: `Set-TeamsProtectionPolicy -Identity \"Teams Protection Policy\" -ZapEnabled $false`, then confirm with `Get-TeamsProtectionPolicy | Format-List Name,ZapEnabled`, and record an end date for re-enabling.",
+  "User reporting can be switched off again in the Teams messaging policy and on the Teams user reported settings page; existing submissions stay on the Submissions page."
+ ],
+ "history": [
+  {
+   "date": "2026-11-14",
+   "note": "Added troubleshooting (licensing, external chats, admin-only quarantine, missing report button) and rollback, derived from the documented limitations."
+  }
+ ]
 }

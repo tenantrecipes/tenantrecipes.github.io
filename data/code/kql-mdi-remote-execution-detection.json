@@ -1,0 +1,35 @@
+{
+ "id": "kql-mdi-remote-execution-detection",
+ "status": "published",
+ "title": "Custom detection for remote execution on identity servers (MDI classic alert replacement)",
+ "lang": "kql",
+ "tags": [
+  "Defender for Identity",
+  "Advanced hunting",
+  "Custom detection"
+ ],
+ "summary": "Condensed advanced hunting query for service creation, task scheduling and WMI process creation seen by MDI sensors, shaped for a Defender XDR custom detection rule.",
+ "code": "// Defender XDR > Hunting > Advanced hunting (then Create detection rule, frequency 24h or less)\nIdentityDirectoryEvents\n| where ingestion_time() > ago(1d)\n| where ActionType in (\"Service creation\", \"Task scheduling\", \"WMI execution\")\n| extend AF = parse_json(AdditionalFields)\n| extend ServiceCommand = tostring(AF.ServiceCommand), WmiMethod = tostring(AF.MethodName)\n| where ActionType == \"Task scheduling\"\n    or (ActionType == \"Service creation\" and ServiceCommand !contains @\"\\Windows\\System32\\svchost.exe -k\")\n    or (ActionType == \"WMI execution\" and WmiMethod has_cs \"win32_process\" and WmiMethod has_cs \"create\")\n// Allow-list known admin tooling (accounts or source hosts) before you enable the rule\n| where AccountSid !in (dynamic([\"<allowed-admin-sid>\"]))\n| project Timestamp, ReportId, ActionType, AccountSid, AccountUpn, DeviceName,\n          DestinationDeviceName, TargetDeviceName, ServiceCommand, WmiMethod, AdditionalFields",
+ "notes": [
+  "Without Microsoft's 7-day baseline suppression this is noisier; tune with 30 days of data before enabling, or use the full published query.",
+  "Replace the placeholder allow-list with your deployment and monitoring accounts.",
+  "Keep Timestamp and ReportId from the same row so alerts get entity scope and timeline enrichment."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "mdi-rce-custom-detection-replacement",
+  "label": "Replace the retiring MDI remote-execution alert with a custom detection"
+ },
+ "refs": [
+  {
+   "title": "Microsoft Defender for Identity GitHub: RemoteCodeExecution query",
+   "url": "https://github.com/microsoft/Microsoft-Defender-for-Identity/blob/main/AdvancedHunting/RemoteCodeExecution.md"
+  },
+  {
+   "title": "Create and manage custom detection rules",
+   "url": "https://learn.microsoft.com/en-us/defender-xdr/custom-detection-rules"
+  }
+ ],
+ "created": "2026-11-14",
+ "last_verified": "2026-11-14"
+}
