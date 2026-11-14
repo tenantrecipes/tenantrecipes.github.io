@@ -12,7 +12,8 @@ GUARD = ("Before any pilot: only approved tools, only data classes your policy a
 TRACKS = [
  ("start", "1. Start here: inventory, ownership and approval",
   "Know which AI tools are in use, who owns each one, and which are approved, conditional or denied — before you scale anything.",
-  [("Approve and deploy an AI service, any vendor", "guides/enterprise-ai-service-approval.html", "Guide", "Runbook per service: intake, data classes, contract checks, decision record, pilot, launch, revocation, reapproval."),
+  [("Enterprise AI readiness check", "ai/readiness-check/index.html", "Tool", "Interactive, in-browser checklist from your answers on tools, data, identity, DLP and approval. Nothing is sent to us."),
+   ("Approve and deploy an AI service, any vendor", "guides/enterprise-ai-service-approval.html", "Guide", "Runbook per service: intake, data classes, contract checks, decision record, pilot, launch, revocation, reapproval."),
    ("Enterprise AI governance (pillar)", "guides/enterprise-ai-governance.html", "Guide", "The end-to-end programme: inventory, shadow AI, SSO, retention, DLP and regulation hooks."),
    ("AI approved-tools inventory method", "tools/enterprise-ai-approved-inventory.html", "Method", "Build the Approved / Conditional / Denied register an auditor can check."),
    ("AI and Copilot use policy template", "policies/ai-copilot-use-policy.html", "Policy", "A starting policy covering Copilot and third-party enterprise LLMs."),
@@ -58,7 +59,7 @@ def _src_exists(p):
     if p.startswith("recipes/"): return any(r["id"] == p[8:-5] for r in json.loads((ROOT / "data/recipes.json").read_text()))
     if p.startswith("guides/"): return any(f'"{p[7:-5]}"' in f.read_text() for f in (ROOT / "data/guides").glob("*.py"))
     if p.startswith(("policies/", "tools/")): return (ROOT / "data" / p.split("/")[0] / (p.split("/")[1][:-5] + ".json")).exists()
-    return p in ("links/ai/index.html",)
+    return p in ("links/ai/index.html", "ai/readiness-check/index.html")
 
 def _card(rel, label, path, kind, why):
     return (f'<li><a class="ai-card" href="{rel}{path}"><span class="ai-kind">{E(kind)}</span>'

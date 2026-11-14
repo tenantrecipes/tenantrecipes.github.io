@@ -13,7 +13,7 @@ Defensive use only: your own systems or systems you hold written authorization t
 SLUG = "purple-team-hybrid-identity"
 TIER = "pillar"  # pillar | technical (see GUIDES.md)
 PUBLISHED = "2026-11-02"
-TITLE = "Internal purple team: from quiet network listening to compromised hybrid identity"
+TITLE = "Internal purple team: network listening to hybrid identity"
 SHORT = "Purple team: network to hybrid identity"
 DESC = ("An expert, authorization-first purple-team playbook that walks a single attack path end to end: quiet LLMNR/NBT-NS/mDNS "
         "listening with Responder, credential validation and lateral reconnaissance with NetExec, offline cracking with Hashcat, "

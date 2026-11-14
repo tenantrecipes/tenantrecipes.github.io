@@ -10,7 +10,7 @@ Security-first: private-app traffic is granted only from compliant devices under
 SLUG = "entra-private-access-vpn-replacement"
 TIER = "pillar"  # pillar | technical (see GUIDES.md)
 PUBLISHED = "2026-10-31"
-TITLE = "Replace VPN with Microsoft Entra Private Access: Zero Trust private apps on compliant devices"
+TITLE = "Replace VPN with Entra Private Access for Zero Trust apps"
 SHORT = "Entra Private Access: replace VPN"
 DESC = ("An expert, end-to-end playbook for replacing traditional VPN with Microsoft Entra Private Access: "
         "why VPN gateways and broad network access fail Zero Trust, licensing and roles, private network connectors, "

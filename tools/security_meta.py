@@ -9,12 +9,14 @@ Not possible via <meta> (browsers ignore it there): HSTS, X-Frame-Options, frame
 Permissions-Policy. See DEPLOY.md "Security checklist". Fails the build if a page has inline event handlers or
 style="" attributes, since the policy would silently break them.
 """
-import base64, hashlib, pathlib, re, sys
+import base64, hashlib, os, pathlib, re, sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 import site_config as C
 
-DIST = pathlib.Path(__file__).resolve().parent.parent / "dist"
+DIST = pathlib.Path(os.environ["TR_DIST"]).resolve() if os.environ.get("TR_DIST") else pathlib.Path(__file__).resolve().parent.parent / "dist"
 GC = (getattr(C, "GOATCOUNTER_CODE", "") or "").strip().lower()
+if os.environ.get("TR_PREVIEW"):
+    GC = ""
 NONEXEC = re.compile(r'type\s*=\s*"(application/ld\+json|application/json|text/plain)"', re.I)
 SCRIPT = re.compile(r"<script(\s[^>]*)?>(.*?)</script>", re.S | re.I)
 STYLE = re.compile(r"<style(\s[^>]*)?>(.*?)</style>", re.S | re.I)

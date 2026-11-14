@@ -8,7 +8,7 @@ TIER = "pillar"
 PUBLISHED = "2026-11-09"  # draft date; set real publish date on approval
 VERIFIED = "2026-11-09"
 UPDATED = "2026-11-09"
-TITLE = "Secure your website: accounts, DNS, hosting, pipeline and third parties"
+TITLE = "Secure your website: accounts, DNS, hosting, third parties"
 SHORT = "Secure your website"
 DESC = (
     "A vendor-neutral programme to harden a public website: phishing-resistant accounts, "

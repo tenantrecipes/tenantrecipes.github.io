@@ -13,7 +13,7 @@ Defensive use only: your own systems or systems you hold written authorization t
 SLUG = "external-attack-surface-osint"
 TIER = "pillar"  # pillar | technical (see GUIDES.md)
 PUBLISHED = "2026-11-03"
-TITLE = "Map your entire external attack surface: OSINT to verified exposure"
+TITLE = "External attack surface: OSINT to verified exposure"
 SHORT = "External attack surface: OSINT to verified exposure"
 DESC = ("An expert, authorization-first project that walks the external attack surface end to end: certificate "
         "transparency with crt.sh, subdomain and asset discovery with OWASP Amass, internet exposure with Shodan, "

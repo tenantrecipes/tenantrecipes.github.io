@@ -10,7 +10,7 @@ Patching is deliberately not covered here: it lives in the Azure Update Manager 
 SLUG = "azure-arc-onboarding-enterprise-scale"
 TIER = "pillar"  # pillar | technical (see GUIDES.md)
 PUBLISHED = "2026-10-31"
-TITLE = "Azure Arc Onboarding at Enterprise Scale: A Complete Deployment Guide"
+TITLE = "Azure Arc onboarding at enterprise scale: a complete guide"
 SHORT = "Azure Arc onboarding at scale"
 DESC = ("An expert deployment guide for connecting Windows Server and Linux machines to Azure Arc at scale: landing zone and RBAC, "
         "service principals versus managed identities, proxy, Private Link and Arc gateway, the Connected Machine agent and its local security controls, "

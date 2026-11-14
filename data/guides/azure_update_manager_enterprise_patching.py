@@ -8,7 +8,7 @@ Time estimates and the example ring calendar are Tenant Recipes' own planning fi
 SLUG = "azure-update-manager-enterprise-patching"
 TIER = "pillar"  # pillar | technical (see GUIDES.md)
 PUBLISHED = "2026-10-31"
-TITLE = "Azure Update Manager at enterprise scale: a patch framework for 10 to several hundred servers"
+TITLE = "Azure Update Manager at enterprise scale for server patching"
 SHORT = "Azure Update Manager at scale"
 DESC = ("An expert playbook for building a production patch framework with Azure Update Manager across Azure VMs and Azure Arc-enabled servers: "
         "ring design, maintenance configurations as code, reboot policy, dynamic scopes, pre/post events with snapshots and cancellation, "

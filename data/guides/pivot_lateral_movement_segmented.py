@@ -15,7 +15,7 @@ Defensive use only: your own systems or systems you hold written authorization t
 SLUG = "pivot-lateral-movement-segmented"
 TIER = "pillar"  # pillar | technical (see GUIDES.md)
 PUBLISHED = "2026-11-04"
-TITLE = "Pivot and lateral movement in a segmented network: post-exploitation end to end"
+TITLE = "Pivot and lateral movement in a segmented network"
 SHORT = "Pivot and lateral movement, post-exploitation end to end"
 DESC = ("An expert, authorization-first project that runs post-exploitation across a segmented network from a "
         "single foothold: route into the segment with Ligolo-ng, listen and relay with Responder, validate and "

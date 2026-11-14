@@ -5,7 +5,7 @@ Time estimates are Tenant Recipes' own planning estimates, not Microsoft figures
 SLUG = "secure-copilot-rollout"
 TIER = "pillar"  # pillar | technical (see GUIDES.md)
 PUBLISHED = "2026-10-30"
-TITLE = "How to roll out Microsoft Copilot without opening a hole in your tenant"
+TITLE = "Roll out Microsoft Copilot securely without opening a hole"
 SHORT = "The secure Copilot rollout guide"
 DESC = ("A phased, fact-checked checklist for Microsoft 365 admins: licensing, admin roles and Conditional Access, "
         "a deep oversharing clean-up (EEEU, sharing links, broken inheritance, ownerless sites, public teams, guests), "

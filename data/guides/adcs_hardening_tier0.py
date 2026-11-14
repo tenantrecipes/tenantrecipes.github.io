@@ -11,7 +11,7 @@ Attack tools are named for authorised assessment of your own environment only.""
 SLUG = "adcs-hardening-tier0"
 TIER = "pillar"  # pillar | technical (see GUIDES.md)
 PUBLISHED = "2026-10-31"
-TITLE = "Harden Active Directory Certificate Services as Tier 0: ESC1–ESC16, NTLM relay and strong mapping"
+TITLE = "Harden AD CS as Tier 0: ESC1–ESC16, NTLM relay and mapping"
 SHORT = "AD CS hardening (Tier 0)"
 DESC = ("An expert hardening programme for Active Directory Certificate Services: why the CA is Tier 0, inventory and assessment with Locksmith, "
         "Certipy and Defender for Identity, fixing vulnerable templates (ESC1–ESC4, ESC9, ESC13, ESC15), CA flags and permissions (ESC6, ESC7, ESC11, ESC16), "

@@ -2,6 +2,24 @@
  {
   "date": "2026-11-14",
   "kind": "site",
+  "type": "Tool",
+  "title": "Enterprise AI readiness check",
+  "blurb": "An in-browser, vendor-neutral checklist from your answers on tools, data, identity, DLP and approval. Nothing is sent to us.",
+  "url": "ai/readiness-check/index.html",
+  "text": "New interactive tool on the Enterprise AI hub: answer a few questions and get a tailored checklist. Everything runs in your browser; optional local save, export as Markdown. Nothing is sent to Tenant Recipes."
+ },
+ {
+  "date": "2026-11-14",
+  "kind": "site",
+  "type": "Site",
+  "title": "Shorter titles on 14 long guides",
+  "blurb": "Guide page titles over 65 characters were shortened so search snippets keep the key terms.",
+  "url": "guides/index.html",
+  "text": "Fourteen guide titles longer than 65 characters were shortened to 60 characters or fewer. Canonical URLs are unchanged."
+ },
+ {
+  "date": "2026-11-14",
+  "kind": "site",
   "type": "Site",
   "title": "Latest guides on the homepage, related guides on every guide",
   "blurb": "The homepage now lists the six most recently published guides, and each guide page links to two to four related guides.",

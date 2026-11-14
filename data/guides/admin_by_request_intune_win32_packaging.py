@@ -9,7 +9,7 @@ Not sponsored: Tenant Recipes has no commercial relationship with Admin By Reque
 SLUG = "admin-by-request-intune-win32-packaging"
 TIER = "technical"  # pillar | technical (see GUIDES.md)
 PUBLISHED = "2026-10-31"
-TITLE = "Package Admin By Request for Intune: IntuneWinAppUtil.exe to a production Win32 app"
+TITLE = "Admin By Request Intune packaging: Win32 app to production"
 SHORT = "Admin By Request: Intune Win32 packaging"
 DESC = ("Technical deep dive: wrap the Admin By Request Windows client with the Win32 Content Prep Tool (IntuneWinAppUtil.exe) and ship it as an Intune Win32 app. "
         "Folder layout, exact packaging command, install and version-independent uninstall commands, file-version detection, requirements, return codes, "

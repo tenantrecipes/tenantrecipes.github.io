@@ -9,7 +9,7 @@ VERIFIED = '2026-11-05'
 
 UPDATED = '2026-11-05'
 
-TITLE = 'Azure DevOps hardening after Key Eater: protect pipelines, workload identities and production trust'
+TITLE = 'Azure DevOps hardening after Key Eater: pipelines, identity'
 
 SHORT = 'Azure DevOps hardening / Key Eater'
 

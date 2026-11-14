@@ -1,7 +1,7 @@
 """Generate the static site into dist/ from data/recipes.json + site_config.py.
 All internal links and assets are relative, so dist/ works on a free subdomain or a sub-path
 (e.g. https://user.github.io/tenantrecipes/). Run via `python3 build.py`."""
-import json, re, shutil, pathlib, sys, datetime
+import json, os, re, shutil, pathlib, sys, datetime
 from html import escape as E
 ROOT = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
@@ -44,8 +44,10 @@ import build_code as CODE
 import build_linkhub as LH
 import build_aihub as AIH
 import build_apps as AP
+import build_ai_readiness as AIR
 
-DIST = ROOT / "dist"
+_preview = bool(os.environ.get("TR_PREVIEW"))
+DIST = pathlib.Path(os.environ["TR_DIST"]).resolve() if os.environ.get("TR_DIST") else (ROOT / "dist")
 R = json.load(open(ROOT / "data" / "recipes.json"))
 TODAY = datetime.date.today().isoformat()
 BD_PLACEHOLDER = C.BUTTONDOWN_USERNAME in ("", "BUTTONDOWN_USERNAME")
@@ -114,6 +116,8 @@ def page_dates(path):
     for g in GUIDES + [Q]:
         if path == f"guides/{g.SLUG}.html":
             return getattr(g, "PUBLISHED", None), getattr(g, "UPDATED", None) or g.VERIFIED
+    if path == AIR.PATH:
+        return AIR.PUBLISHED, AIR.VERIFIED
     return DATES.get(path, (None, None))
 
 
@@ -144,6 +148,8 @@ def json_ld(path, title, desc, og_type):
 
 
 GC = (getattr(C, "GOATCOUNTER_CODE", "") or "").strip().lower()
+if _preview:
+    GC = ""
 if GC and not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,49}", GC):
     sys.exit(f"site_config.GOATCOUNTER_CODE must be just the site code (e.g. 'abc' from abc.goatcounter.com), got {GC!r}")
 
@@ -176,6 +182,8 @@ def head(title, desc, rel, path, og_type="website", og_auto=True):
     ]
     if url:
         tags += [f'<meta property="og:url" content="{url}">', f'<link rel="canonical" href="{url}">']
+    if _preview:
+        tags.append('<meta name="robots" content="noindex, nofollow">')
     tags.append(json_ld(path, title, desc, og_type))
     tags.append(f'<link rel="alternate" type="application/atom+xml" title="{esc(C.SITE_NAME)}" href="{rel}feed.xml">')
     tags.append(f'<link rel="stylesheet" href="{rel}assets/style.css">')
@@ -617,6 +625,7 @@ def build():
     pages += CODE.build(page, esc, fmt_date, signup, C.SITE_NAME, set(RID), {g.SLUG for g in GUIDES + [Q]})
     pages += LH.build(page, esc, signup, C.SITE_NAME)
     pages += AIH.build(page, C.SITE_NAME)
+    pages += AIR.build(page, fmt_date, signup, C.SITE_NAME, preview=_preview)
     pages += AP.build(page, esc, fmt_date, signup, C.SITE_NAME)
 
     refs = UX.guide_refs(GUIDES)
@@ -695,7 +704,7 @@ def build():
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
     idx = BS.build_index(R, CY.load(), GUIDES, Q, CY.AREA, UX.tags_for, json.load(open(ROOT / "data" / "changelog.json")),
-                         TL.search_docs() + PL.search_docs() + NW.search_docs(CY.load()) + CODE.search_docs() + AP.search_docs() + LH.search_docs() + AIH.search_docs())
+                         TL.search_docs() + PL.search_docs() + NW.search_docs(CY.load()) + CODE.search_docs() + AP.search_docs() + LH.search_docs() + AIH.search_docs() + AIR.search_docs())
     (DIST / "search").mkdir(exist_ok=True)
     (DIST / "search" / "index.json").write_text(json.dumps(idx, ensure_ascii=False, separators=(",", ":")))
     print(f"Search index: {len(idx['docs'])} docs, {len(idx['sug'])} suggestions, {len(idx['syn'])} synonym groups, {len(idx['q'])} questions")
@@ -716,7 +725,11 @@ def build():
                        for p in dict.fromkeys(pages))
         (DIST / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>'
             f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
-    print(f"Built {len(pages)} pages into {DIST.relative_to(ROOT)}/"
+    try:
+        _dist_label = str(DIST.relative_to(ROOT))
+    except ValueError:
+        _dist_label = str(DIST)
+    print(f"Built {len(pages)} pages into {_dist_label}/"
           + ("" if SITE else "  (SITE_URL empty: share image uses a relative URL, no sitemap)")
           + ("  (Buttondown username not set: form not live)" if BD_PLACEHOLDER else ""))
 
