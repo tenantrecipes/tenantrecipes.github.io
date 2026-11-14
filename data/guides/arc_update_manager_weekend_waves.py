@@ -15,7 +15,7 @@ TIER = "technical"
 PUBLISHED = "2026-11-11"
 VERIFIED = "2026-11-11"
 UPDATED = "2026-11-11"
-TITLE = "Weekend patch waves with Azure Arc and Update Manager: one overview, four waves, no redundant pair down at once"
+TITLE = "Weekend patch waves with Azure Arc and Update Manager"
 SHORT = "Arc + Update Manager weekend waves"
 DESC = (
     "A practical design for Arc-enabling servers on any platform (on-premises Windows and Linux, VMware, AWS, GCP and "

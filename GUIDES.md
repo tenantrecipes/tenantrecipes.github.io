@@ -24,6 +24,10 @@ HISTORY = [("2026-11-10", "Added a rollback step for ring 3.")]   # optional per
 TITLE, SHORT, DESC, INTRO, NAMING, PHASES ...   # as in the existing modules
 ```
 
+Optional: `TAGS = ("azure-arc", "patching")` and `RELATED = ("other-slug",)` — used, together with a topic table in
+`build_ux.py`, to pick the Related guides section (2–4 links) on each guide page. The build also uses step-level
+`guides` links, `PILLAR`, shared tags and shared recipes, and falls back to recently published guides.
+
 Register the module in `build_site.py` (`GUIDES = [...]`). Version history on the page is assembled automatically from
 `PUBLISHED`, `UPDATED`/`VERIFIED`, `HISTORY` and every `data/changelog.json` entry whose `url` points to the page,
 so older guides need no manual history.

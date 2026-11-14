@@ -11,7 +11,7 @@ TIER = "technical"
 PUBLISHED = "2026-11-10"
 VERIFIED = "2026-11-10"
 UPDATED = "2026-11-12"
-TITLE = "Monitored sessions and blocked downloads: OneDrive on unmanaged devices with Defender for Cloud Apps"
+TITLE = "MDCA session control: OneDrive on unmanaged devices"
 SHORT = "OneDrive on unmanaged devices"
 DESC = (
     "How to deliberately produce the Defender for Cloud Apps monitored-access notice ('Access to … is "

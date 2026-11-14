@@ -624,6 +624,9 @@ html.nv-open .btt{opacity:0;visibility:hidden}
 .nw-mini{grid-template-columns:repeat(4,minmax(0,1fr))}.nw-mini .nw-card{height:100%}
 @media (max-width:980px){.nw-mini{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.nw-mini{grid-template-columns:1fr}}
+.lg-mini{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:980px){.lg-mini{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.lg-mini{grid-template-columns:1fr}}
 
 /* ---- Status ---- */
 .st-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#9aa6bf;flex:none}

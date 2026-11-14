@@ -382,6 +382,7 @@ def guide_page(g):
     nrec = len({r for p in g.PHASES for s in p["steps"] for r in s["rec"] + s.get("sec", []) + s.get("tools", [])})
 
     def body(rel):
+        related = UX.related_guides(g, GUIDES)
         toc, phases, strip = "", "", ""
         for i, ph in enumerate(g.PHASES, 1):
             pid = f'phase-{i}-{ph["id"]}'
@@ -445,7 +446,7 @@ def guide_page(g):
             f'<div><dt>Linked recipes</dt><dd>{nrec}</dd></div><div><dt>{SL}</dt><dd>{nsrc}</dd></div></dl>'
             f'<ol class="gd-strip">{strip}</ol></div></section>'
             f'<div class="wrap gd-grid"><aside class="gd-toc" aria-label="Table of contents"><p>On this page</p><ol>{toc}'
-            f'<li><a href="#checklist">Printable checklist</a></li></ol></aside>'
+            f'<li><a href="#checklist">Printable checklist</a></li><li><a href="#related">Related guides</a></li></ol></aside>'
             f'<div class="gd-body">{HI.dates_bar(g.PUBLISHED, getattr(g, "UPDATED", None) or g.VERIFIED, g.VERIFIED)}{T.guide_verify_card(rel, g)}{T.author_box(rel)}{notice}<div class="gd-intro">{intro}<p class="meta">{esc(g.NAMING)} {esc(getattr(g, "TIME_NOTE", "Time estimates are our planning figures for a mid-size tenant, not Microsoft numbers."))}</p></div>'
             f'{HI.guide_sources(g)}{problem}{phases}'
             f'<section class="gd-check" id="checklist" aria-labelledby="ck-h"><div class="gd-ph-h"><span class="gd-num">Checklist</span><h2 id="ck-h">The printable checklist</h2></div>'
@@ -455,6 +456,8 @@ def guide_page(g):
             f'<a class="btn" href="{rel}guides/checklists/{g.SLUG}.md" download="{g.SLUG}-checklist.md">Markdown (.md)</a> '
             f'<button class="btn" type="button" id="ck-reset">Clear ticks</button> <span id="ck-n" class="fine"></span></p>'
             f'<ol class="gd-ck">{check}</ol><p class="fine">{esc(g.TITLE)} · {C.SITE_NAME} · verified {g.VERIFIED} · {SITE}/guides/{g.SLUG}.html</p></section>'
+            + (f'<section class="nx" id="related" aria-labelledby="rel-h"><h2 id="rel-h">Related guides</h2>'
+               f'<div class="grid nx-g">{UX.related_guide_cards(rel, related)}</div></section>' if related else "")
             + HI.history_html(f"guides/{g.SLUG}.html", g.PUBLISHED, getattr(g, "UPDATED", None) or g.VERIFIED, g.VERIFIED, getattr(g, "HISTORY", ())) +
             f'<section class="vs" id="verified"><h2>Verification &amp; corrections</h2><p class="fine">Every step above lists the {SL.lower()} it was checked against '
             f'(open “{SL}” under each step). Guide last verified <strong>{fmt_date(g.VERIFIED)}</strong>. '
@@ -522,6 +525,7 @@ def build():
                     UX.search_bar(rel, R, len(CY.load())) + BST.pill(rel) + f'<script src="{rel}assets/status.js" defer></script>')
         + AIH.home_promo(rel)
         + UX.task_hubs(rel, R, GUIDES, Q, CY.load(), TL.load(), PL.load())
+        + UX.latest_guides(rel, GUIDES)
         + NW.latest_strip(rel, esc, fmt_date, CY.load())
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
         + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):]

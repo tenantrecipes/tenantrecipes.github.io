@@ -117,6 +117,130 @@ def related_cards(rel, items):
                    f'<h3>{esc(x["title"])}</h3><p class="clamp">{esc(x["problem"])}</p>{T.card_meta(x)}</a>' for x in items)
 
 
+# Topic tags and optional explicit related slugs for the Related guides section.
+# Guides may also set TAGS / RELATED themselves; those are merged with this table.
+_GUIDE_TOPICS = {
+    "arc-update-manager-weekend-waves": ("azure-arc", "update-manager", "patching"),
+    "azure-update-manager-enterprise-patching": ("azure-arc", "update-manager", "patching"),
+    "azure-arc-onboarding-enterprise-scale": ("azure-arc", "update-manager", "onboarding"),
+    "enterprise-ai-governance": ("ai", "copilot", "governance"),
+    "enterprise-ai-service-approval": ("ai", "copilot", "governance", "approval"),
+    "secure-copilot-rollout": ("ai", "copilot", "governance"),
+    "copilot-license-checks": ("ai", "copilot"),
+    "mdca-session-control-unmanaged-devices": ("conditional-access", "defender", "unmanaged-devices", "onedrive", "session-control"),
+    "entra-private-access-vpn-replacement": ("conditional-access", "unmanaged-devices", "ztna", "entra"),
+    "smtp-auth-basic-retirement": ("exchange", "email", "authentication"),
+    "secure-your-website": ("email", "dns", "website", "authentication"),
+    "admin-by-request-endpoint-privilege": ("admin-by-request", "privilege", "intune"),
+    "admin-by-request-intune-win32-packaging": ("admin-by-request", "privilege", "intune"),
+    "windows-11-cis-hardening": ("windows", "hardening", "cis", "intune"),
+    "cloud-hardening-adversary-emulation": ("hardening", "entra", "purple-team", "adversary"),
+    "purple-team-hybrid-identity": ("purple-team", "hybrid-identity", "adversary"),
+    "external-attack-surface-osint": ("osint", "attack-surface"),
+    "pivot-lateral-movement-segmented": ("lateral-movement", "purple-team", "adcs"),
+    "adcs-hardening-tier0": ("adcs", "tier0", "hardening"),
+    "azure-devops-hardening-key-eater": ("azure-devops", "pipelines", "hardening"),
+}
+_GUIDE_RELATED = {
+    "smtp-auth-basic-retirement": ("secure-your-website",),
+}
+
+
+def guide_tags(g):
+    tags = set(_GUIDE_TOPICS.get(g.SLUG, ()))
+    tags.update(getattr(g, "TAGS", ()) or ())
+    return tags
+
+
+def _linked_guide_slugs(g):
+    slugs = []
+    pillar = getattr(g, "PILLAR", None)
+    if pillar:
+        slugs.append(pillar)
+    for ph in getattr(g, "PHASES", []) or []:
+        for st in ph.get("steps", []):
+            slugs.extend(st.get("guides") or [])
+    return slugs
+
+
+def _recipe_ids(g):
+    ids = set()
+    for ph in getattr(g, "PHASES", []) or []:
+        for st in ph.get("steps", []):
+            ids.update(st.get("rec") or [])
+    return ids
+
+
+def related_guides(g, guides, n=4):
+    """2–4 related guides: explicit RELATED list first, then step/PILLAR links, then shared tags, recipes and tier."""
+    by = {x.SLUG: x for x in guides}
+    out, seen = [], set()
+
+    def add(slug):
+        x = by.get(slug)
+        if x and x.SLUG != g.SLUG and x.SLUG not in seen:
+            out.append(x)
+            seen.add(x.SLUG)
+
+    for slug in tuple(getattr(g, "RELATED", ()) or ()) + tuple(_GUIDE_RELATED.get(g.SLUG, ())):
+        add(slug)
+    for slug in _linked_guide_slugs(g):
+        add(slug)
+    for x in guides:
+        if g.SLUG in _linked_guide_slugs(x) or getattr(x, "PILLAR", None) == g.SLUG:
+            add(x.SLUG)
+
+    mine, myrecs = guide_tags(g), _recipe_ids(g)
+    scored = []
+    for x in guides:
+        if x.SLUG == g.SLUG or x.SLUG in seen:
+            continue
+        s = 3 * len(mine & guide_tags(x)) + 2 * len(myrecs & _recipe_ids(x))
+        if getattr(x, "TIER", None) == getattr(g, "TIER", None):
+            s += 1
+        if s >= 2:  # at least one shared tag or recipe; same tier alone is too weak
+            scored.append((s, x.PUBLISHED, x.SLUG, x))
+    scored.sort(key=lambda t: (-t[0], t[1], t[2]))
+    for _, _, _, x in scored:
+        if len(out) >= n:
+            break
+        add(x.SLUG)
+
+    if len(out) < 2:
+        for x in sorted((x for x in guides if x.SLUG not in seen and x.SLUG != g.SLUG),
+                        key=lambda x: (x.PUBLISHED, x.SLUG), reverse=True):
+            add(x.SLUG)
+            if len(out) >= 2:
+                break
+    return out[:n]
+
+
+def related_guide_cards(rel, items):
+    import build_tiers as TR
+    return "".join(
+        f'<a class="card" href="{rel}guides/{g.SLUG}.html"><div class="tag">{esc(TR.label(TR.guide_tier(g)))}</div>'
+        f'<h3>{esc(g.TITLE)}</h3><p class="clamp">{esc(g.SHORT)}</p></a>' for g in items)
+
+
+def latest_guides(rel, guides, n=6):
+    """Homepage box: the N most recently published guides, from GUIDES metadata (not hard-coded)."""
+    import build_tiers as TR
+    items = sorted(guides, key=lambda g: (g.PUBLISHED, g.SLUG), reverse=True)[:n]
+    cards = []
+    for g in items:
+        t = TR.guide_tier(g)
+        cards.append(
+            f'<li><article class="nw-card"><p class="nw-m"><span class="nw-c">{esc(TR.label(t))}</span>'
+            f'<time datetime="{g.PUBLISHED}">{T.fmt(g.PUBLISHED)}</time></p>'
+            f'<h3><a href="{rel}guides/{g.SLUG}.html">{esc(g.TITLE)}</a></h3>'
+            f'<p class="nw-s">{esc(g.SHORT)}</p></article></li>')
+    return (
+        f'<section class="wrap nw-strip" id="latest-guides" aria-labelledby="lg-sh">'
+        f'<div class="nw-sh-row"><h2 id="lg-sh">Latest guides</h2>'
+        f'<a href="{rel}guides/index.html">All guides →</a></div>'
+        f'<ol class="nw-list nw-mini lg-mini">{"".join(cards)}</ol></section>')
+
+
 # ---------------------------------------------------------------- plain-text / markdown checklists
 def plain(s):
     return s.replace("`", "")

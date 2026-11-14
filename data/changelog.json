@@ -1,5 +1,14 @@
 [
  {
+  "date": "2026-11-14",
+  "kind": "site",
+  "type": "Site",
+  "title": "Latest guides on the homepage, related guides on every guide",
+  "blurb": "The homepage now lists the six most recently published guides, and each guide page links to two to four related guides.",
+  "url": "index.html#latest-guides",
+  "text": "The homepage now lists the six most recently published guides after the topic shortcuts. Every guide page has a Related guides section with two to four links, chosen from an explicit list, shared topics, or guides already linked in the steps. The MDCA session-control and Arc weekend-waves titles were shortened for search snippets."
+ },
+ {
   "date": "2026-11-12",
   "time": "21:39",
   "kind": "site",
