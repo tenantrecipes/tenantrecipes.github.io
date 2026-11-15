@@ -27,8 +27,9 @@ import smtp_auth_basic_retirement as GSMTP
 import mdca_session_control_unmanaged_devices as GMDCA
 import arc_update_manager_weekend_waves as GWAVES
 import patch_azure_devops_server_25h2 as GADSP
+import cloud_native_ad_decommission as GADCN
 import quick_copilot_license_checks as Q
-GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS, GPTH, GEAS, GPLM, GADO, GAIG, GAIA, GWEB, GSMTP, GMDCA, GWAVES, GADSP]
+GUIDES = [G1, G2, G3, G4, G5, GABR, GABRP, GPA, GADCS, GPTH, GEAS, GPLM, GADO, GAIG, GAIA, GWEB, GSMTP, GMDCA, GWAVES, GADSP, GADCN]
 import build_cyber as CY
 import build_trust as T
 import build_ux as UX
