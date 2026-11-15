@@ -1,0 +1,49 @@
+{
+ "id": "windows-refs-removable-media-block-2027",
+ "status": "published",
+ "title": "ReFS volumes on USB and other removable media will be blocked from mounting by default from the January 2027 update",
+ "date": "2026-11-15",
+ "category": "Windows",
+ "summary": "Microsoft's 60-day reminder (MC1550797) for KB5130741: since the 13 October 2026 security update, Windows audits ReFS volumes mounted from removable or externally attached disks (System log, source ReFS, event ID 524, once per volume per boot). With the January 2027 security update, blocking becomes the default unless an admin sets an override. The control is RefsRemovableDeviceMountPolicy (0 = Off, 1 = Audit, 2 = Block) via Group Policy or registry; policy wins over the local value, and a restart is required. Applies to all supported Windows client and Server versions.",
+ "why": "ReFS on removable media was never a supported configuration, but it shows up in backup rotation disks, forensic and lab kits, and USB-attached storage on Hyper-V or file servers. After January those volumes simply will not mount, which looks like a broken disk at the worst possible time (restore day).",
+ "todo": [
+  "Query the System log for ReFS event 524 across servers and backup hosts now; the audit phase is already running on anything patched since 13 October.",
+  "Identify backup or archive workflows that rotate ReFS-formatted USB disks and move them to supported storage or reformat before January.",
+  "Pilot RefsRemovableDeviceMountPolicy = 2 (Block) on a test ring, then decide: enforce early, or set an explicit value so January does not decide for you.",
+  "Document the override and the restart requirement in your restore runbook."
+ ],
+ "effective": "2027-01-12",
+ "primary": {
+  "title": "Microsoft Support KB5130741: Hardening changes for ReFS volumes on removable media",
+  "url": "https://support.microsoft.com/servicing/os/windows/docs/2026/10/hardening-changes-for-refs-volumes-on-removable-media"
+ },
+ "related": [
+  {
+   "title": "Recipe: Audit and block ReFS on removable media",
+   "url": "recipes/windows-refs-removable-media-audit.html"
+  },
+  {
+   "title": "News: Server 2016 / LTSC 2021 end of updates 2027",
+   "url": "news/windows-server-2016-ltsc-2021-end-of-support-2027.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1550797: 60-day reminder: Hardening changes for ReFS volumes on removable media (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1550797",
+   "checked": "2026-11-15"
+  },
+  {
+   "title": "Microsoft Support KB5130741: Hardening changes for ReFS volumes on removable media",
+   "url": "https://support.microsoft.com/servicing/os/windows/docs/2026/10/hardening-changes-for-refs-volumes-on-removable-media",
+   "checked": "2026-11-15"
+  }
+ ],
+ "last_verified": "2026-11-15",
+ "hashtags": [
+  "Windows",
+  "WindowsServer",
+  "SysAdmin",
+  "CyberSecurity"
+ ]
+}

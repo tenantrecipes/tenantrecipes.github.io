@@ -1,0 +1,43 @@
+{
+ "id": "copilot-cowork-workforce-intelligence-plugin",
+ "status": "published",
+ "title": "Workforce Intelligence plugin for Copilot Cowork enters Frontier preview on 16 November",
+ "date": "2026-11-15",
+ "category": "Copilot/AI",
+ "summary": "MC1552389: from 16 November 2026, tenants enrolled in the Frontier programme can make the Workforce Intelligence plugin available in Copilot Cowork. Managers can ask natural-language questions about headcount, roles, reporting lines, management layers, locations and (with People Skills licensing) skills. Microsoft states the plugin does not grant extra access: answers follow existing permissions, connected sources and admin-configured governance labels, and it is not designed for monitoring, performance management or ranking employees. Admin setup of Workforce Insights is required.",
+ "why": "HR and org data in an AI surface is a GDPR and works-council topic, and in the EU an AI Act question if anyone tries to use it for evaluating staff. The guardrails are Microsoft's stated intent, not a technical block, so your own policy has to say what is allowed.",
+ "todo": [
+  "Check whether your tenant is enrolled in Frontier and who can enable plugins in Copilot Cowork.",
+  "Before enabling: review which workforce attributes are connected and how governance labels restrict them.",
+  "Involve HR, privacy/DPO and (where applicable) employee representatives; document permitted use cases.",
+  "Add an explicit 'no individual performance evaluation' line to your AI acceptable-use policy."
+ ],
+ "effective": "2026-11-16",
+ "primary": {
+  "title": "MC1552389: Workforce Intelligence plugin available in Copilot Cowork",
+  "url": "https://mc.merill.net/message/MC1552389"
+ },
+ "related": [
+  {
+   "title": "Policy template: AI and Copilot use",
+   "url": "policies/ai-copilot-use-policy.html"
+  },
+  {
+   "title": "Guide: Enterprise AI service approval",
+   "url": "guides/enterprise-ai-service-approval.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1552389: Microsoft 365 Copilot: Workforce Intelligence plugin available in Copilot Cowork (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1552389",
+   "checked": "2026-11-15"
+  },
+  {
+   "title": "Microsoft Learn: Workforce Insights agent",
+   "url": "https://learn.microsoft.com/copilot/manage/workforce-insights-agent",
+   "checked": "2026-11-15"
+  }
+ ],
+ "last_verified": "2026-11-15"
+}

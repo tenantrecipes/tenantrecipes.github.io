@@ -1,0 +1,109 @@
+{
+ "id": "zero-trust-assessment",
+ "status": "published",
+ "kind": "tool",
+ "name": "Zero Trust Assessment",
+ "vendor": "Microsoft employees (community project)",
+ "category": "M365 & Entra",
+ "what": "A PowerShell module (`ZeroTrustAssessment`) that runs a read-only review of Microsoft 365 tenant and selected Azure configuration, then writes a local HTML report with findings and recommended remediation. It does not apply changes. The current stable package, 3.1.0 (PowerShell Gallery, 20 October 2026), assesses seven default pillars: Identity, Devices, Network, Data, Infrastructure, SecOps and AI. Interactive sign-in uses the existing Microsoft Graph PowerShell app plus separate connections to Azure, Exchange, SharePoint, Purview and Azure Information Protection. Reports and exports stay on the machine that ran the assessment.",
+ "when": "When you want a configuration baseline against Microsoft's Zero Trust and Secure Future Initiative guidance, before a workshop or a 30-day hardening plan, or to see which checks are skipped because of missing licences, roles or service connections. Use it as an input to prioritisation, not as a complete Azure security assessment and not as official Microsoft support evidence.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": "Free MIT-licensed module. Current stable package is 3.1.0 on the PowerShell Gallery (published 20 October 2026). A 3.1.6-preview package was also listed when this page was checked on 14 November 2026. What the assessment can actually test still depends on the tenant's licences and services; skipped checks are not a pass.",
+ "url": "https://learn.microsoft.com/en-us/security/zero-trust/assessment/overview",
+ "repo": "https://github.com/microsoft/zerotrustassessment",
+ "example": [
+  "On a dedicated Windows admin workstation or clean VM, open a fresh PowerShell 7.6 or later session with `pwsh -NoProfile`. Windows PowerShell 5.1 is not the assessment host. Full SharePoint Online and Azure Information Protection coverage needs Windows, because those modules use Windows PowerShell compatibility sessions. On Windows, install the Microsoft Visual C++ Redistributable (x64) if it is missing; the assessment's DuckDB component depends on it. Microsoft Learn still says ARM64 Windows is not supported.",
+  "If an older Zero Trust Assessment package is installed, remove it first, then install the current stable module for your user. The 3.1.0 release uses `Install-PSResource -Name ZeroTrustAssessment -Version 3.1.0`. Microsoft Learn still shows `Install-Module ZeroTrustAssessment -Scope CurrentUser`. Prefer pinning 3.1.0 unless you have a reason to use a prerelease (`Install-PSResource -Name ZeroTrustAssessment -Prerelease`). Confirm with `Get-Module ZeroTrustAssessment -ListAvailable` and `Get-ZtGraphScope`.",
+  "For the first delegated Graph consent only, sign in with an account that can grant admin consent (GitHub documents Cloud Application Administrator, Application Administrator, Privileged Role Administrator or Global Administrator; Microsoft Learn currently mentions only Global Administrator). Subsequent interactive runs should use a least-privilege account. Activate eligible roles in Privileged Identity Management before connecting, and reconnect after changing access. The module expects an active Global Reader or Global Administrator role for the Graph assessment context; prefer Global Reader. Add Security Reader for Exchange and Defender protection-policy checks, SharePoint Administrator for SharePoint tenant cmdlets (`Get-SPOTenant`), Azure Reader (or equivalent) on each subscription you intend to assess, and the extra roles documented for custom security attributes, Purview and Azure Information Protection if those checks are in scope.",
+  "Connect in the same session: `Connect-ZtAssessment -Tenant yourtenant.onmicrosoft.com`. Review each service prompt. Interactive Graph consent is granted to the Microsoft Graph PowerShell app, not a new app created by this module; new scopes can require consent again. If you have no Azure subscription, Microsoft Learn says you can close the Azure sign-in window and those tests are skipped. GitHub's current guide says Azure is also used by Infrastructure, Network and SecOps checks, so skipping Azure reduces coverage beyond the audit and sign-in log export test.",
+  "Run the assessment into a new, protected folder: `Invoke-ZtAssessment -Path C:\\Assessments\\2026-11-14`. The command is read-only and does not take a tenant parameter; it uses the connected tenant. Default output without `-Path` is `.\\ZeroTrustReport\\ZeroTrustAssessmentReport.html`. Telemetry is on by default (tenant ID only, not assessment results); add `-DisableTelemetry` to opt out. For a large tenant Microsoft Learn says the run can take more than 24 hours; do not stop it because of warnings. The default overall timeout in the current guide is 24 hours. Use `-Pillar Identity` (or Devices, Network, Data, Infrastructure, SecOps, AI) only when you intend to limit the run. The `-Preview` switch is not required for these seven pillars.",
+  "When the report opens, start on Overview, then open each pillar and filter by risk and status. Inspect skipped tests and errors as well as fails: a missing licence, role or service connection can leave part of the tenant unassessed. Select a finding to read what was tested and the recommended remediation. A classic report is also written as `ZeroTrustAssessmentReport-classic.html`. Exports under `zt-export` include `ZeroTrustAssessmentReport.json`, a DuckDB database, logs and an experimental `ZeroTrustWorkshop.json`. Treat the whole folder as sensitive tenant data. For a suggested way to turn the highest-risk findings into a 30-day plan, see the companion recipe `zero-trust-assessment-readonly`.",
+  "When you have finished, disconnect with `Disconnect-ZtAssessment -IncludeCleanup`, copy the report to an approved secure store if you need to keep it, then delete the local output folder and any support packages you created. Also review the separate PSFramework logs under `%APPDATA%\\PowerShell\\PSFramework\\Logs`. Uninstall with `Uninstall-PSResource ZeroTrustAssessment -Version '*'` if you are retiring the module. Do not delete the shared Microsoft Graph PowerShell enterprise app or revoke its consent without checking the impact on other Graph PowerShell tools. Only retire a dedicated app registration if you used app-only authentication and you created that app for this purpose."
+ ],
+ "pitfalls": [
+  "This is a community project maintained by Microsoft employees, not an official Microsoft product. It is provided as-is and is not supported through any Microsoft support programme or service. Do not open a Microsoft support case for issues with the tool; use the GitHub repo after sanitising any logs.",
+  "Microsoft Learn's get-started page lags the 3.1.0 package in several places. Learn still says 'PowerShell 7', lists only 21 Graph permissions, describes report tabs for Identity, Devices, Network and Data, and says first-time consent requires Global Administrator. The 3.1.0 package and current GitHub guide require PowerShell 7.6 or later, request a longer read-oriented Graph scope list (confirm with `Get-ZtGraphScope`), document seven default pillars, and allow a consent-admin role for delegated consent. Always trust `Get-Help` and `Get-ZtGraphScope` on the installed version over an older Learn list.",
+  "Azure coverage is limited. Infrastructure findings use Microsoft Defender for Cloud recommendations and include only accessible subscriptions tagged `ZeroTrustAssessment:Infrastructure`. No tagged subscription is a skip, not a clean bill of health. Resource Graph only returns resources the caller can read. This is not a general Azure, AWS or GCP audit, even though 3.1.0's Infrastructure insights can show a weighted Cloud Secure Score overview across environments that Defender for Cloud already covers.",
+  "Read-only assessment does not mean every underlying permission is read-only. Interactive use requests delegated Graph permissions that are named as read scopes, but app-only SharePoint currently requires the SharePoint `Sites.FullControl.All` application permission, which is a broad grant. Review that with a tenant administrator before any unattended setup. Do not add content-decryption or write permissions just to silence an error.",
+  "Reports, `zt-export` data, support packages and PSFramework logs can contain tenant configuration and personal information. Share them only with authorised people, never attach them unreviewed to public GitHub issues, and delete local copies when you no longer need them. Deleting the output folder does not remove the PSFramework logs outside that folder.",
+  "A successful Graph connection does not grant access to Azure, Exchange, SharePoint or Purview. Missing licences or roles produce skipped checks, which must not be treated as passed tests. Coverage also depends on platform: non-Windows hosts skip SharePoint and AIP-related tests.",
+  "For app-only (certificate) authentication you must create and consent a dedicated app yourself. Graph application-permission consent needs Privileged Role Administrator, Global Administrator or a suitable custom consent role; Application Administrator alone is not sufficient. This page does not walk through that setup; use the project's PowerShell guide if you need unattended runs.",
+  "This tool page has not been lab-tested in a tenant. Commands and behaviour are taken from Microsoft Learn, the official GitHub documentation and the PowerShell Gallery 3.1.0 package, checked on 14 November 2026."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Learn: Zero Trust Assessment Overview",
+   "url": "https://learn.microsoft.com/en-us/security/zero-trust/assessment/overview",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Learn: Evaluate Tenant Security with the Zero Trust Assessment",
+   "url": "https://learn.microsoft.com/en-us/security/zero-trust/assessment/get-started",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "Microsoft Learn: Configure Microsoft Entra agent identities for increased security (AI pillar)",
+   "url": "https://learn.microsoft.com/en-us/security/zero-trust/assessment/ai-pillar",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "GitHub: microsoft/zerotrustassessment (README)",
+   "url": "https://github.com/microsoft/zerotrustassessment",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "GitHub: Zero Trust Assessment PowerShell guide (src/powershell/doc/readme.md)",
+   "url": "https://github.com/microsoft/zerotrustassessment/blob/main/src/powershell/doc/readme.md",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "GitHub release 3.1.0 (20 October 2026)",
+   "url": "https://github.com/microsoft/zerotrustassessment/releases/tag/3.1.0",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "PowerShell Gallery: ZeroTrustAssessment 3.1.0",
+   "url": "https://www.powershellgallery.com/packages/ZeroTrustAssessment/3.1.0",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "PowerShell Gallery: Get-ZtGraphScope.ps1 in ZeroTrustAssessment 3.1.0",
+   "url": "https://www.powershellgallery.com/packages/ZeroTrustAssessment/3.1.0/Content/public%5CGet-ZtGraphScope.ps1",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "GitHub: microsoft/zerotrustassessment SUPPORT.md",
+   "url": "https://github.com/microsoft/zerotrustassessment/blob/main/SUPPORT.md",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "PowerShell Gallery: License.txt (MIT) for ZeroTrustAssessment 3.1.0",
+   "url": "https://www.powershellgallery.com/packages/ZeroTrustAssessment/3.1.0/Content/License.txt",
+   "checked": "2026-11-14"
+  },
+  {
+   "title": "PowerShell Gallery: Disconnect-ZtAssessment.ps1 in ZeroTrustAssessment 3.1.0",
+   "url": "https://www.powershellgallery.com/packages/ZeroTrustAssessment/3.1.0/Content/public%5CDisconnect-ZtAssessment.ps1",
+   "checked": "2026-11-14"
+  }
+ ],
+ "related": [
+  {
+   "title": "Recipe: Run Zero Trust Assessment read-only and prioritise findings",
+   "url": "recipes/zero-trust-assessment-readonly.html"
+  },
+  {
+   "title": "Tool: Maester",
+   "url": "tools/maester.html"
+  },
+  {
+   "title": "Tool: CISA ScubaGear",
+   "url": "tools/scubagear.html"
+  }
+ ],
+ "last_verified": "2026-11-15",
+ "created": "2026-11-14",
+ "updated": "2026-11-15",
+ "order": 85
+}

@@ -28,15 +28,15 @@
    "checked": "2026-10-30"
   },
   {
-   "title": "MxToolbox products",
-   "url": "https://mxtoolbox.com/products.aspx",
-   "checked": "2026-10-30"
+   "title": "MxToolbox SuperTool",
+   "url": "https://mxtoolbox.com/SuperTool.aspx",
+   "checked": "2026-11-15"
   }
  ],
  "status": "published",
  "kind": "tool",
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-15",
  "created": "2026-10-30",
- "updated": "2026-10-30",
+ "updated": "2026-11-15",
  "order": 10
 }

@@ -1,0 +1,38 @@
+{
+ "id": "copilot-desktop-browser-tab-page-context",
+ "status": "published",
+ "title": "Copilot desktop app can read open tabs in its built-in browser as page context (rolling out now)",
+ "date": "2026-11-15",
+ "category": "Copilot/AI",
+ "summary": "MC1552386: from mid to late November 2026 (worldwide), the Microsoft 365 Copilot desktop app uses content from open webpage tabs in its built-in browser as context for questions and summaries, on one tab or across several. Microsoft says page context is scoped to the current conversation and is only active when the built-in browser is enabled; if it is disabled, nothing changes. Microsoft's compliance notes confirm this modifies AI capabilities that interact with customer data.",
+ "why": "Anything a user has open in that browser, including internal web apps, admin portals or third-party SaaS, can now become prompt context. That is a data-flow change for your AI governance record and DLP assumptions, even though Microsoft marks it 'no action required'.",
+ "todo": [
+  "Confirm whether the Copilot desktop app's built-in browser is enabled in your tenant and for which users.",
+  "Record the change in your AI service register and check that your Copilot acceptable-use guidance covers browsing context.",
+  "Pilot with a small group and check what Purview audit captures for these interactions before broad exposure.",
+  "Tell helpdesk that context is per conversation, so 'Copilot remembered my tab' questions have an answer."
+ ],
+ "effective": "2026-11-30",
+ "primary": {
+  "title": "MC1552386: Page context for open tabs in the Copilot desktop app built-in browser",
+  "url": "https://mc.merill.net/message/MC1552386"
+ },
+ "related": [
+  {
+   "title": "Recipe: Decide whether Copilot can use web content",
+   "url": "recipes/copilot-web-grounding-control.html"
+  },
+  {
+   "title": "Guide: Enterprise AI governance",
+   "url": "guides/enterprise-ai-governance.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1552386: Microsoft 365 Copilot: Page context for open tabs in the Copilot desktop app built-in browser (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1552386",
+   "checked": "2026-11-15"
+  }
+ ],
+ "last_verified": "2026-11-15"
+}

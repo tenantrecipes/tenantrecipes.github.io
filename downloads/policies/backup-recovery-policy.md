@@ -27,6 +27,7 @@ It covers servers, databases, business applications, endpoints holding unique da
 - At least one copy is immutable or offline, so ransomware and stolen admin accounts cannot change or delete it.
 - Backups are encrypted in transit and at rest, and the keys are stored separately from the backups.
 - Backups are kept for at least {{RETENTION_DAYS}} days, longer where law or contracts require.
+- Removable backup media use a file system that the operating system vendor supports on removable media, and restore procedures are re-tested after operating system hardening changes (for example, Windows blocks ReFS on removable media by default from January 2027).
 
 ## 4. Access and protection
 

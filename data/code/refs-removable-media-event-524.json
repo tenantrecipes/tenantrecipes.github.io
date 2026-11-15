@@ -1,0 +1,37 @@
+{
+ "id": "refs-removable-media-event-524",
+ "status": "published",
+ "title": "Find ReFS volumes on removable media (event 524) and the effective mount policy",
+ "lang": "powershell",
+ "tags": [
+  "Windows",
+  "ReFS",
+  "KB5130741",
+  "Windows Server"
+ ],
+ "summary": "Read-only PowerShell that reads ReFS warning event 524 from the System log on one or more machines and reports the effective RefsRemovableDeviceMountPolicy (Group Policy value first, then local registry), so you know who will lose a mounted disk when blocking becomes the default in January 2027.",
+ "code": "# Read-only. Run elevated. Needs the October 2026 (or later) Windows security update on targets.\n$servers = @($env:COMPUTERNAME)   # or: Get-Content .\\servers.txt\n$rows = foreach ($s in $servers) {\n  $pol = Invoke-Command -ComputerName $s -ScriptBlock {\n    $gp  = (Get-ItemProperty 'HKLM:\\SYSTEM\\CurrentControlSet\\Policies' -Name RefsRemovableDeviceMountPolicy -ErrorAction SilentlyContinue).RefsRemovableDeviceMountPolicy\n    $loc = (Get-ItemProperty 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem' -Name RefsRemovableDeviceMountPolicy -ErrorAction SilentlyContinue).RefsRemovableDeviceMountPolicy\n    if ($null -ne $gp) { \"GPO=$gp\" } elseif ($null -ne $loc) { \"Local=$loc\" } else { 'NotSet (default Audit until Jan 2027)' }\n  } -ErrorAction SilentlyContinue\n  $ev = Get-WinEvent -ComputerName $s -FilterHashtable @{ LogName='System'; ProviderName='ReFS'; Id=524 } -ErrorAction SilentlyContinue\n  if ($ev) {\n    $ev | ForEach-Object { [pscustomobject]@{ Server=$s; LastSeen=$_.TimeCreated; Policy=$pol; Message=($_.Message -replace '\\s+',' ') } }\n  } else {\n    [pscustomobject]@{ Server=$s; LastSeen=$null; Policy=$pol; Message='No ReFS 524 events' }\n  }\n}\n$rows | Sort-Object Server, Message -Unique | Export-Csv .\\refs-removable-audit.csv -NoTypeInformation\n$rows | Format-Table Server, LastSeen, Policy, Message -AutoSize",
+ "notes": [
+  "Read-only; changes nothing. Remote use needs WinRM for Invoke-Command and remote event log access.",
+  "Values: 0 = Off, 1 = Audit (default until the January 2027 update), 2 = Block. A value from Group Policy takes precedence over the local one.",
+  "The event is written once per affected volume per boot; a machine that has not rebooted since the disk was attached may show nothing.",
+  "Message text is localised; filtering is by provider and ID, so it works on non-English systems."
+ ],
+ "source": {
+  "kind": "recipe",
+  "id": "windows-refs-removable-media-audit",
+  "label": "Audit and block ReFS on removable media"
+ },
+ "refs": [
+  {
+   "title": "Microsoft Support KB5130741: Hardening changes for ReFS volumes on removable media",
+   "url": "https://support.microsoft.com/servicing/os/windows/docs/2026/10/hardening-changes-for-refs-volumes-on-removable-media"
+  },
+  {
+   "title": "Microsoft Learn: Get-WinEvent",
+   "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent"
+  }
+ ],
+ "created": "2026-11-15",
+ "last_verified": "2026-11-15"
+}

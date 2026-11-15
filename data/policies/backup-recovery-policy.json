@@ -43,7 +43,8 @@
     "Backups follow the 3-2-1 idea: at least three copies, on two different types of storage, with one copy offsite or in a separate cloud account.",
     "At least one copy is immutable or offline, so ransomware and stolen admin accounts cannot change or delete it.",
     "Backups are encrypted in transit and at rest, and the keys are stored separately from the backups.",
-    "Backups are kept for at least {{RETENTION_DAYS}} days, longer where law or contracts require."
+    "Backups are kept for at least {{RETENTION_DAYS}} days, longer where law or contracts require.",
+    "Removable backup media use a file system that the operating system vendor supports on removable media, and restore procedures are re-tested after operating system hardening changes (for example, Windows blocks ReFS on removable media by default from January 2027)."
    ]
   },
   {
@@ -90,8 +91,14 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-15",
  "created": "2026-10-30",
- "updated": "2026-10-30",
- "order": 70
+ "updated": "2026-11-15",
+ "order": 70,
+ "history": [
+  {
+   "date": "2026-11-15",
+   "note": "Added a requirement on supported file systems for removable backup media and re-testing restores after OS hardening changes (KB5130741)."
+  }
+ ]
 }

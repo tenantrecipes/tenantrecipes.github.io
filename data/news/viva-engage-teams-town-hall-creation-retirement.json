@@ -1,0 +1,38 @@
+{
+ "id": "viva-engage-teams-town-hall-creation-retirement",
+ "status": "published",
+ "title": "Viva Engage stops creating Teams town hall events on 7 December 2026",
+ "date": "2026-11-15",
+ "category": "Retirements",
+ "summary": "MC1552394 (roadmap 537280): from 7 December 2026, users can no longer create Microsoft Teams town hall events from Viva Engage. Events already scheduled run as planned. Organizers use the new Engage events experience (town hall, community town hall, AMA) or create town halls directly in Teams.",
+ "why": "Small change, but it breaks communications-team runbooks and any recording or attendee policies you scoped to the Engage-created path. If your town hall governance (who can record, who can view recordings) lives in Teams events policies, check that it still applies to whichever path organizers move to.",
+ "todo": [
+  "Tell event organizers and internal comms before 7 December.",
+  "Update runbooks and training that start in Viva Engage.",
+  "Check Teams events/town hall policies (recording, transcription, recording access) for the organizers who will now create directly in Teams."
+ ],
+ "effective": "2026-12-07",
+ "primary": {
+  "title": "MC1552394: Microsoft Viva Engage: Retirement of Teams town hall event creation",
+  "url": "https://mc.merill.net/message/MC1552394"
+ },
+ "related": [
+  {
+   "title": "News: Teams town hall recording-access policy",
+   "url": "news/teams-events-recording-access-option-policy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1552394: Microsoft Viva Engage: Retirement of Teams town hall event creation (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1552394",
+   "checked": "2026-11-15"
+  },
+  {
+   "title": "Microsoft Support: Organize an Engage event",
+   "url": "https://support.microsoft.com/viva/engage/organize-an-engage-event",
+   "checked": "2026-11-15"
+  }
+ ],
+ "last_verified": "2026-11-15"
+}

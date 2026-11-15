@@ -1,0 +1,86 @@
+{
+ "id": "windows-refs-removable-media-audit",
+ "status": "published",
+ "tier": "recipe",
+ "order": 451,
+ "category": "Intune & devices for AI",
+ "title": "Audit and block ReFS on removable media before January 2027",
+ "problem": "From the January 2027 Windows security update, ReFS volumes on removable or externally attached disks are blocked from mounting by default (KB5130741, MC1550797). The October 2026 update already logs them as ReFS event 524. Find who depends on them, then choose Block or an explicit override before January decides for you.",
+ "prerequisites": [
+  "Windows security update from 13 October 2026 or later on the devices in scope",
+  "Event Log Readers (or admin) on the servers you query",
+  "Group Policy or Intune (custom OMA-URI/registry via script) to set the policy value"
+ ],
+ "steps": [
+  "Confirm patch level: only devices with an update released on or after 13 October 2026 log the audit event or honour the setting.",
+  "Collect ReFS event 524 (System log, source ReFS, Warning) from servers, backup hosts and admin workstations with the read-only snippet. Each affected volume logs once per boot.",
+  "For every hit, record owner and purpose (backup rotation disk, lab/forensic kit, USB-attached storage on a hypervisor) and whether data must stay readable after January.",
+  "Migrate required data to supported storage, or reformat the external disk with a supported file system, and update the backup/restore runbook.",
+  "Pilot Block on a test ring: set RefsRemovableDeviceMountPolicy = 2 (Group Policy, which writes HKLM\\SYSTEM\\CurrentControlSet\\Policies, or the local value under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem), restart, and confirm the affected disk no longer mounts while normal workloads continue.",
+  "Roll out an explicit value: 2 (Block) broadly, and if a system truly needs an exception, a documented 1 (Audit) or 0 (Off) via Group Policy with an owner and end date."
+ ],
+ "pitfalls": [
+  "A local registry value does not override a value delivered by Group Policy; when both exist, policy wins.",
+  "Changes need a restart; a quick check right after setting the value proves nothing.",
+  "Auditing tracks at most 32 external volumes per boot. That limit only applies to audit, not to blocking, so do not treat a short event list as complete on hosts with many disks.",
+  "No event 524 on an unpatched device means no data, not no exposure."
+ ],
+ "done_when": [
+  "Every device that logged event 524 has an owner and a decision (migrated, reformatted or documented exception).",
+  "Block (2) is piloted and then set explicitly through policy before the January 2027 update.",
+  "Restore runbooks no longer assume a ReFS-formatted USB disk mounts."
+ ],
+ "troubleshooting": [
+  {
+   "symptom": "Setting changed but the volume still mounts",
+   "cause": "No restart, or a Group Policy value overrides your local registry value",
+   "fix": "Restart, then check HKLM\\SYSTEM\\CurrentControlSet\\Policies\\RefsRemovableDeviceMountPolicy and gpresult for the effective source."
+  },
+  {
+   "symptom": "No event 524 anywhere",
+   "cause": "Devices lack the October 2026 or later update, or no ReFS volume was mounted from removable media since the last boot",
+   "fix": "Verify the installed update first; re-run after the next maintenance reboot."
+  }
+ ],
+ "rollback": [
+  "Set RefsRemovableDeviceMountPolicy to 1 (Audit) through the same Group Policy object and restart to let a blocked volume mount again while data is moved off it.",
+  "Remove the exception once data is migrated; record the date."
+ ],
+ "markers": {
+  "steps": "official",
+  "pitfalls": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "sources": [
+  {
+   "title": "Microsoft Support KB5130741: Hardening changes for ReFS volumes on removable media",
+   "url": "https://support.microsoft.com/servicing/os/windows/docs/2026/10/hardening-changes-for-refs-volumes-on-removable-media",
+   "checked": "2026-11-15"
+  },
+  {
+   "title": "MC1550797: 60-day reminder: Hardening changes for ReFS volumes on removable media (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1550797",
+   "checked": "2026-11-15"
+  },
+  {
+   "title": "Microsoft Learn: Resilient File System (ReFS) overview",
+   "url": "https://learn.microsoft.com/windows-server/storage/refs/refs-overview",
+   "checked": "2026-11-15"
+  }
+ ],
+ "related": [
+  "ntlm-signing-phase2-readiness",
+  "intune-win32-install-test-windows-sandbox"
+ ],
+ "last_verified": "2026-11-15",
+ "verified_by": "Tenant Recipes editor",
+ "created": "2026-11-15",
+ "updated": "2026-11-15",
+ "hashtags": [
+  "Windows",
+  "WindowsServer",
+  "SysAdmin",
+  "CyberSecurity"
+ ]
+}

@@ -1,0 +1,64 @@
+{
+ "id": "entra-exporter",
+ "status": "published",
+ "kind": "tool",
+ "name": "EntraExporter – version-controlled JSON snapshots of your Entra configuration",
+ "vendor": "Microsoft (open source, GitHub)",
+ "category": "M365 & Entra",
+ "what": "A PowerShell module that exports Entra ID (and Azure AD B2C) configuration and objects through Microsoft Graph to local JSON files: Conditional Access, authentication and authorization policies, named locations, roles and PIM settings, entitlement management, domains, organisation settings and more. `Export-Entra` exports a default 'Config' set; `-Type` selects areas (for example ConditionalAccess, Policies, PIM, Applications) and `-All` adds users, groups, applications, service principals and B2B/B2C. It is the successor of the deprecated AzureADExporter module.",
+ "when": "When you want change history for tenant configuration: run it nightly from a pipeline, commit the output to Git and diff it, so 'who changed the CA policy last Tuesday' and 'what did the tenant look like before the incident' have an answer. Useful as evidence before and after hardening work and as a reference for manual rebuilds. It is a configuration export, not a restore tool or a replacement for Entra audit logs.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": "Version 3.0.1 on the PowerShell Gallery (16 November 2025). PowerShell 7+ recommended by the maintainers for consistent output. Some export types need Azure RBAC reader roles in addition to Graph scopes.",
+ "url": "https://github.com/microsoft/EntraExporter",
+ "repo": "https://www.powershellgallery.com/packages/EntraExporter",
+ "example": [
+  "Install: `Install-Module EntraExporter -Scope CurrentUser`.",
+  "Interactive default export: `Connect-EntraExporter` then `Export-Entra -Path 'C:\\EntraBackup\\'`.",
+  "Only Conditional Access and policies: `Export-Entra -Path .\\export -Type 'ConditionalAccess','Policies'`.",
+  "List valid export types: `(Get-Command Export-Entra | Select-Object -Expand Parameters)['Type'].Attributes.ValidValues`.",
+  "Pipeline pattern: run nightly with a dedicated app identity that has only the read scopes you need, write to a Git repository and review the diff."
+ ],
+ "pitfalls": [
+  "The README's Connect-MgGraph scope list includes `TeamworkAppSettings.ReadWrite.All`; if you build your own app registration, grant only the read scopes for the types you export and document any exception.",
+  "The export folder is a sensitive map of your tenant (CA exclusions, break-glass accounts, app credentials metadata). Store it in a private, access-controlled repository, never a public one.",
+  "`-All` pulls users, groups and memberships, which makes runs slow and the repo large and personal-data heavy; prefer targeted `-Type` values unless you need them.",
+  "Only settings exposed in Microsoft Graph are exported; anything not yet in Graph is missing, so an empty diff is not proof that nothing changed.",
+  "Run it only against tenants you administer or have written authorisation to assess."
+ ],
+ "sources": [
+  {
+   "title": "GitHub: microsoft/EntraExporter README",
+   "url": "https://github.com/microsoft/EntraExporter",
+   "checked": "2026-11-15"
+  },
+  {
+   "title": "PowerShell Gallery: EntraExporter",
+   "url": "https://www.powershellgallery.com/packages/EntraExporter",
+   "checked": "2026-11-15"
+  },
+  {
+   "title": "Microsoft Learn: Microsoft Graph permissions reference",
+   "url": "https://learn.microsoft.com/en-us/graph/permissions-reference",
+   "checked": "2026-11-15"
+  }
+ ],
+ "related": [
+  {
+   "title": "Tool: Zero Trust Assessment",
+   "url": "tools/zero-trust-assessment.html"
+  },
+  {
+   "title": "Tool: Maester",
+   "url": "tools/maester.html"
+  },
+  {
+   "title": "Tool: ScubaGear",
+   "url": "tools/scubagear.html"
+  }
+ ],
+ "last_verified": "2026-11-15",
+ "created": "2026-11-15",
+ "updated": "2026-11-15",
+ "order": 394
+}

@@ -1,5 +1,41 @@
 [
  {
+  "date": "2026-11-15",
+  "kind": "site",
+  "type": "Tool",
+  "title": "Zero Trust Assessment",
+  "blurb": "Microsoft's read-only ZeroTrustAssessment PowerShell module (3.1.0): seven pillars, local HTML report, which checks skip and why.",
+  "url": "tools/zero-trust-assessment.html",
+  "text": "Tool page for the ZeroTrustAssessment PowerShell module (3.1.0, PowerShell Gallery, 20 October 2026): read-only review of Microsoft 365 tenant and selected Azure configuration across Identity, Devices, Network, Data, Infrastructure, SecOps and AI, with a local HTML report. Documentation verified; not lab-tested."
+ },
+ {
+  "date": "2026-11-15",
+  "kind": "site",
+  "type": "Recipe",
+  "title": "Run Zero Trust Assessment read-only and prioritise findings",
+  "blurb": "Run the assessment with least privilege, keep the report private, and turn findings into a short, owned hardening backlog.",
+  "url": "recipes/zero-trust-assessment-readonly.html",
+  "text": "Recipe: run the Zero Trust Assessment module read-only, understand skipped checks (licences, roles, service connections), protect the local report and prioritise findings into owned changes. Documentation verified; not lab-tested."
+ },
+ {
+  "date": "2026-11-15",
+  "kind": "site",
+  "type": "Tool",
+  "title": "EntraExporter",
+  "blurb": "Export Entra configuration to JSON nightly and diff it in Git for change history.",
+  "url": "tools/entra-exporter.html",
+  "text": "Tool page for Microsoft's open-source EntraExporter module (3.0.1): export Conditional Access, policies, roles, PIM and more via Microsoft Graph to JSON for version control. Documentation checked; not lab-tested."
+ },
+ {
+  "date": "2026-11-15",
+  "kind": "site",
+  "type": "Recipe",
+  "title": "Audit and block ReFS on removable media before January 2027",
+  "blurb": "Find ReFS event 524, decide per disk, pilot RefsRemovableDeviceMountPolicy = 2 before Windows blocks by default.",
+  "url": "recipes/windows-refs-removable-media-audit.html",
+  "text": "Recipe and read-only PowerShell snippet for KB5130741: collect ReFS event 524, check the effective RefsRemovableDeviceMountPolicy, migrate dependent backup disks and set Block explicitly before the January 2027 update. Documentation verified; not lab-tested."
+ },
+ {
   "date": "2026-11-14",
   "kind": "site",
   "type": "News",

@@ -1,0 +1,33 @@
+{
+ "id": "word-legacy-compatibility-settings-retirement",
+ "status": "published",
+ "title": "Word retires legacy compatibility settings from December 2026: old documents may reflow",
+ "date": "2026-11-15",
+ "category": "Retirements",
+ "summary": "MC1551147: Word desktop retires a set of compatibility options for documents in Compatibility Mode, affecting files created or last saved in Word 2010 or earlier. Word for Windows rolls out early to late December 2026 (GCC, GCC High and DoD late December to early January 2027); Word for Mac follows in early 2027. Affected documents can show text reflow, different spacing or page count, or images and shapes moving to another page.",
+ "why": "Contracts, forms and regulated templates that depend on exact pagination are the risk. There is no admin opt-out mentioned in the message, so the mitigation is inventory and, where layout is evidence, PDF export.",
+ "todo": [
+  "Ask legal, finance and quality teams which pre-2013 Word templates and documents must keep exact layout.",
+  "Export critical documents to PDF (or PDF/A) before December, or convert them to the current format and re-check layout.",
+  "Brief helpdesk on 'my document page count changed' tickets in December."
+ ],
+ "effective": "2026-12-01",
+ "primary": {
+  "title": "MC1551147: Microsoft Word: Retirement of legacy compatibility settings",
+  "url": "https://mc.merill.net/message/MC1551147"
+ },
+ "related": [],
+ "sources": [
+  {
+   "title": "MC1551147: Microsoft Word: Retirement of legacy compatibility settings (Message center archive)",
+   "url": "https://mc.merill.net/message/MC1551147",
+   "checked": "2026-11-15"
+  }
+ ],
+ "last_verified": "2026-11-15",
+ "hashtags": [
+  "Microsoft365",
+  "MicrosoftWord",
+  "SysAdmin"
+ ]
+}

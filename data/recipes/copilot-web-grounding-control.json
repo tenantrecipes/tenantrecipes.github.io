@@ -10,12 +10,15 @@
   "Review how web search works: Copilot sends short generated search queries to Bing — not the full prompt, files or Entra identity (very short prompts can be sent as-is).",
   "Control it with the 'Allow web search in Copilot' policy in Cloud Policy service for Microsoft 365: enabled, disabled, or disabled in Work mode but enabled in Web mode and Copilot Chat.",
   "For finer control, a Purview DLP rule can block web search only when prompts contain sensitive information types.",
-  "Document the decision and communicate it to users."
+  "Document the decision and communicate it to users.",
+  "Verify: web search query logging lets you audit and eDiscover the exact queries Copilot derived from prompts. After the policy reaches clients, run a test prompt in Copilot Chat and confirm in Purview audit whether a web search query was (or was not) recorded for the test user."
  ],
  "pitfalls": [
   "Turning off web search reduces answer quality for public-information questions.",
   "Policies are applied via Cloud Policy and can take time to reach clients.",
-  "The DPA and EU Data Boundary don't apply to the generated Bing queries."
+  "The DPA and EU Data Boundary don't apply to the generated Bing queries.",
+  "Web search is not the only outside-content path. The Copilot desktop app can also use open tabs in its built-in browser as page context (MC1552386, rolling out November 2026); that is governed by whether the built-in browser is enabled, not by the web search policy.",
+  "Users also have a Web content toggle where the admin allows it, and Analyst and Cowork have no user toggle; test each Copilot surface you allow instead of assuming one behaviour."
  ],
  "done_when": [
   "The 'Allow web search in Copilot' policy is set to the value you chose, in the Cloud Policy service, and assigned to the right groups.",
@@ -33,12 +36,46 @@
    "checked": "2026-10-30"
   }
  ],
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-15",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-11-15",
  "screenshots": [],
  "markers": {
-  "steps": "official"
- }
+  "steps": "official",
+  "pitfalls": "official",
+  "troubleshooting": "practical",
+  "rollback": "practical"
+ },
+ "troubleshooting": [
+  {
+   "symptom": "Users still get web-grounded answers after you disabled the policy",
+   "cause": "Cloud Policy settings take time to reach clients, or the user is not in the group the policy is assigned to",
+   "fix": "Check the policy's group assignment in Cloud Policy, have the user restart the app, and re-test; confirm with audit whether a web search query was still logged."
+  },
+  {
+   "symptom": "Security asks what was sent to Bing for a specific prompt",
+   "cause": "The generated query, not the prompt, is what leaves the service boundary",
+   "fix": "Search Purview audit / eDiscovery for the user's Copilot interaction and its logged web search query, as described in Microsoft's web search documentation."
+  },
+  {
+   "symptom": "Copilot summarises an internal page even though web search is off",
+   "cause": "The page was open in the Copilot desktop app's built-in browser and used as page context",
+   "fix": "Decide separately whether the built-in browser should be enabled; see the related news item on open-tab page context."
+  }
+ ],
+ "rollback": [
+  "Set 'Allow web search in Copilot' back to the previous value in Cloud Policy (keep the policy object so the change is auditable), and record why.",
+  "If a DLP rule for sensitive prompts caused false positives, switch it to simulation/audit mode rather than deleting it."
+ ],
+ "related": [
+  "purview-audit-copilot",
+  "purview-dlp-copilot-location"
+ ],
+ "history": [
+  {
+   "date": "2026-11-15",
+   "note": "Added a verification step via web search query logging, pitfalls on other outside-content paths (desktop app open-tab context, user toggles), troubleshooting and rollback."
+  }
+ ]
 }
