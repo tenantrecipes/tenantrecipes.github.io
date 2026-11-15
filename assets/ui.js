@@ -14,8 +14,8 @@ if(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||(navigator.platform===
 var t=0,stop=function(){clearTimeout(t);document.removeEventListener("visibilitychange",vis);window.removeEventListener("pagehide",stop)},vis=function(){if(document.hidden)stop()};
 document.addEventListener("visibilitychange",vis);window.addEventListener("pagehide",stop);
 t=setTimeout(function(){stop();if(!document.hidden)location.href=a.href},1500);
-location.href="twitter://post?message="+encodeURIComponent(a.dataset.title+" "+a.dataset.url)})})}
-if(navigator.share){document.querySelectorAll("[data-share-native]").forEach(function(b){b.hidden=false;b.addEventListener("click",function(){navigator.share({title:b.dataset.title,url:b.dataset.url}).catch(function(){})})})}
+location.href="twitter://post?message="+encodeURIComponent(a.dataset.title+" "+a.dataset.url+(a.dataset.tags?" "+a.dataset.tags:""))})})}
+if(navigator.share){document.querySelectorAll("[data-share-native]").forEach(function(b){b.hidden=false;b.addEventListener("click",function(){navigator.share(b.dataset.tags?{title:b.dataset.title,text:b.dataset.title+" "+b.dataset.tags,url:b.dataset.url}:{title:b.dataset.title,url:b.dataset.url}).catch(function(){})})})}
 document.querySelectorAll("[data-print]").forEach(function(b){b.addEventListener("click",function(){window.print()})});
 });
 /* Patch Tuesday countdown: second Tuesday of the month, 10:00 America/Los_Angeles (DST-aware via Intl).

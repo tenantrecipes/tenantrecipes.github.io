@@ -597,25 +597,35 @@ def _sic(name):
     return f'<svg class="shr-i" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true" focusable="false" {attrs}>{body}</svg>'
 
 
-def share_bar(path, title, where="top"):
+def share_bar(path, title, where="top", tags=None):
+    """Share links. tags = 3-4 hashtags without '#' (build_hashtags.for_path): added to X (hashtags= param),
+    Bluesky and email text, the mobile X app / native share text, and shown as a small row in the end-of-page bar.
+    LinkedIn's share-offsite URL only accepts the page URL, so LinkedIn picks up title/description from the OG tags."""
     from urllib.parse import quote
+    import build_hashtags as HT
+    tags = tuple(HT.for_path(path) if tags is None else tags)
+    hs = " ".join("#" + x for x in tags)
     url = f"{SITE}/{path}"
     u, t = quote(url, safe=""), quote(title, safe="")
+    xh = f"&hashtags={quote(','.join(tags), safe=',')}" if tags else ""
     links = [
         ("linkedin", "LinkedIn", f"https://www.linkedin.com/sharing/share-offsite/?url={u}"),
-        ("x", "X", f"https://x.com/intent/post?text={t}&url={u}"),
+        ("x", "X", f"https://x.com/intent/post?text={t}&url={u}{xh}"),
         ("reddit", "Reddit", f"https://www.reddit.com/submit?url={u}&title={t}"),
-        ("bluesky", "Bluesky", f"https://bsky.app/intent/compose?text={quote(title + ' ' + url, safe='')}"),
-        ("mail", "Email", f"mailto:?subject={t}&body={quote(title + chr(10) + chr(10) + url, safe='')}"),
+        ("bluesky", "Bluesky", f"https://bsky.app/intent/compose?text={quote(title + ' ' + url + (chr(10) + hs if hs else ''), safe='')}"),
+        ("mail", "Email", f"mailto:?subject={t}&body={quote(title + chr(10) + chr(10) + url + (chr(10) + chr(10) + hs if hs else ''), safe='')}"),
     ]
+    dt = f' data-tags="{esc(hs)}"' if hs else ""
     a = "".join(f'<a class="shr-b shr-{k}" href="{E(h, quote=True)}"'
-                + (f' data-x-app data-title="{esc(title)}" data-url="{E(url, quote=True)}"' if k == "x" else "")
+                + (f' data-x-app data-title="{esc(title)}" data-url="{E(url, quote=True)}"{dt}' if k == "x" else "")
                 + ('' if k == "mail" else ' target="_blank" rel="noopener noreferrer"')
                 + f' aria-label="Share on {n}' + (' (opens in a new tab)' if k != "mail" else '') + f'" title="Share on {n}">{_sic(k)}<span>{n}</span></a>'
                 for k, n, h in links)
     a = a.replace('aria-label="Share on Email"', 'aria-label="Share by email"').replace('title="Share on Email"', 'title="Share by email"')
     a += (f'<button class="shr-b" type="button" data-share-copy="{E(url, quote=True)}" aria-label="Copy link to this page">{_sic("link")}<span>Copy link</span></button>'
-          f'<button class="shr-b shr-native" type="button" data-share-native data-title="{esc(title)}" data-url="{E(url, quote=True)}" aria-label="Share with an app on this device" hidden>{_sic("share")}<span>Share…</span></button>')
+          f'<button class="shr-b shr-native" type="button" data-share-native data-title="{esc(title)}" data-url="{E(url, quote=True)}"{dt} aria-label="Share with an app on this device" hidden>{_sic("share")}<span>Share…</span></button>')
+    if hs and where != "top":
+        a += f'<span class="shr-h" aria-label="Suggested hashtags">{esc(hs)}</span>'
     lab = "Share this page" if where == "top" else "Found this useful? Share it with a colleague"
     return f'<div class="shr shr-{where}" role="group" aria-label="{"Share this page" if where == "top" else "Share this page (end of page)"}"><span class="shr-l">{lab}</span>{a}</div>'
 
@@ -627,6 +637,10 @@ _SHARE_RULES = [  # (path regex, top-insert regex (insert AFTER match), bottom-i
     (r"^security/[a-z0-9-]+-[a-z0-9-]+\.html$", r'<article class="doc">', r'<section class="vs" id="verified"'),
     (r"^(code/(?!index)[^/]+|tools/mail-dns-checker)\.html$", r'<article class="doc[^"]*"><p class="pd">.*?</p>', r'</article>'),
     (r"^newsletter-sample\.html$", r'<article class="doc nl">', r'</article></main>'),
+    # news, security tools and policy templates: same layout as the security pages (verification card first, sources last)
+    (r"^(news|tools|policies)/(?!index)[^/]+\.html$", r'<article class="doc">', r'<section class="vs" id="verified"'),
+    (r"^ai/index\.html$", r'<article class="prose doc ai-hub">', r'</article></main>'),
+    (r"^ai/readiness-check/index\.html$", r'<p class="fine air-dates">.*?</p>', r'<script src="[^"]*ai-readiness\.js'),
 ]
 
 

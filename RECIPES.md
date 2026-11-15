@@ -152,6 +152,28 @@ Shown at `/news/` (newest first, category filter), on the homepage "Latest news"
 
 Exploited vulnerabilities (`data/cyber`, `type: vulnerability`, `exploited: true`) appear automatically as category "Security incidents" and link to their `/security/<id>.html` page; do not duplicate them in `data/news`.
 
+## Share section and hashtags (every content page)
+
+Every content page gets the same share component (`build_ux.share_bar`): LinkedIn, X, Reddit, Bluesky, Email, Copy link
+and the device share sheet, at the top and again at the end of the page. Placement is in `build_ux._SHARE_RULES`
+(recipes, guides, news, security, tools, policies, code, the AI hub and the AI readiness check). A new page type must get a
+rule there; the build fails if a rule's marker is missing.
+
+Hashtags are automatic. `build_hashtags.py` derives 3–4 established tags (e.g. `#MicrosoftIntune #EntraID #Microsoft365`,
+`#CVE #CyberSecurity`) from the item's existing metadata (category, tags, product/vendor, title) with a curated mapping
+(`RULES`, `SECTION`). They go into the X intent (`hashtags=`), the Bluesky and email text, the mobile X app / native share
+text, and a small hashtag row in the end-of-page share box. LinkedIn's share URL only takes the page URL.
+Run `python3 build_hashtags.py` to list the tags for every page.
+
+Optional override when the derived set is wrong (1–4 tags, letters/digits only, no `#`; the build fails on invalid tags):
+
+```json
+"hashtags": ["EntraID", "ConditionalAccess", "ZeroTrust"]
+```
+
+in any JSON item (recipes, news, tools, cyber, code, policies), or `HASHTAGS = ("AzureArc", "PatchManagement")` in a
+guide module. Use the same tags in the evening social drafts (X/LinkedIn) so the site and the posts match.
+
 ## OG image for every page
 
 Every new recipe, guide, tool, code snippet, security or news page must have its own Open Graph image. It is automatic:

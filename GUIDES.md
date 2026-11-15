@@ -24,6 +24,9 @@ HISTORY = [("2026-11-10", "Added a rollback step for ring 3.")]   # optional per
 TITLE, SHORT, DESC, INTRO, NAMING, PHASES ...   # as in the existing modules
 ```
 
+Optional: `HASHTAGS = ("AzureArc", "PatchManagement", "WindowsServer")` overrides the 3–4 share hashtags that
+`build_hashtags.py` otherwise derives from `TAGS` and `TITLE` (see "Share section and hashtags" in RECIPES.md).
+
 Optional: `TAGS = ("azure-arc", "patching")` and `RELATED = ("other-slug",)` — used, together with a topic table in
 `build_ux.py`, to pick the Related guides section (2–4 links) on each guide page. The build also uses step-level
 `guides` links, `PILLAR`, shared tags and shared recipes, and falls back to recently published guides.

@@ -361,6 +361,7 @@ a.sh-c:hover{transform:translateY(-2px);box-shadow:var(--sh-3)}
 .shr-i{width:15px;height:15px;flex:none}
 .shr-linkedin .shr-i{color:#0a66c2}.shr-reddit .shr-i{color:#ff4500}.shr-bluesky .shr-i{color:#1185fe}.shr-x .shr-i{color:#000}
 .shr-b[hidden]{display:none}
+.shr-h{flex-basis:100%;margin-top:2px;font-size:.8rem;font-weight:600;color:var(--ink-3);word-spacing:.3em}
 @media (max-width:560px){.shr-b span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.shr-b{padding:9px}.shr-i{width:18px;height:18px}.shr-top .shr-l{flex-basis:100%}}
 @media print{.shr{display:none!important}}
 /* homepage featured carousel */
