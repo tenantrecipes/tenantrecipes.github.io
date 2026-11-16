@@ -149,6 +149,8 @@ Shown at `/news/` (newest first, category filter), on the homepage "Latest news"
 | `related` | no | `[{title, url}]`; relative URLs are site pages, usually the recipe with the full how-to. |
 | `recipe` | no | Id of the related recipe. Recipes keep their own URLs; news items link to them. |
 | `sources` | yes | `[{title, url, checked}]` as for recipes; `last_verified` is required. |
+| `ignite` | no | `true` if this item belongs on the `/ignite/` hub and in the homepage Ignite banner. Omit or `false` otherwise. |
+| `ignite_area` | no | Optional grouping for the Ignite hub: `copilot`, `security`, `endpoint`, `collaboration`, or `azure`. If omitted, the area is inferred from `category` and the title. |
 
 Exploited vulnerabilities (`data/cyber`, `type: vulnerability`, `exploited: true`) appear automatically as category "Security incidents" and link to their `/security/<id>.html` page; do not duplicate them in `data/news`.
 

@@ -60,7 +60,7 @@
   {
    "h": "Response phases",
    "items": [
-    "Prepare: keep contact lists, playbooks, logging and out-of-band communication ready, and test them. When a security vendor retires or renames a detection, alert or log source, the detection owner updates the dependent SIEM rules, automations and playbooks before the change takes effect and confirms that a replacement detection fires.",
+    "Prepare: keep contact lists, playbooks, logging and out-of-band communication ready, and test them. When a security vendor retires or renames a detection, alert or log source, the detection owner updates the dependent SIEM rules, automations and playbooks before the change takes effect and confirms that a replacement detection fires. Playbooks include a prolonged outage of a core cloud service (for example email unavailable for a full day) with alternative communication channels, and the service owner keeps the provider's post-incident reports for the incident record.",
     "Detect and analyse: confirm the incident, set a severity level and record a timeline from the first report.",
     "Contain: limit spread, for example by isolating devices, revoking sessions and resetting credentials.",
     "Eradicate and recover: remove the cause, restore from clean backups, monitor closely and return to normal operation.",
@@ -102,9 +102,9 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-03",
+ "last_verified": "2026-11-16",
  "created": "2026-10-30",
- "updated": "2026-11-14",
+ "updated": "2026-11-16",
  "order": 60,
  "verified_by": "Pascal",
  "history": [
@@ -115,6 +115,10 @@
   {
    "date": "2026-11-14",
    "note": "Prepare phase: vendor detection retirements (for example the Defender for Identity classic remote-execution and pass-the-hash alerts, end of November 2026) must be mapped to replacement detections before they take effect."
+  },
+  {
+   "date": "2026-11-16",
+   "note": "Prepare phase: cloud-provider outage scenario and retention of provider post-incident reports (after the 12–13 November 2026 Microsoft 365 outage)."
   }
  ]
 }

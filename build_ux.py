@@ -640,6 +640,7 @@ _SHARE_RULES = [  # (path regex, top-insert regex (insert AFTER match), bottom-i
     # news, security tools and policy templates: same layout as the security pages (verification card first, sources last)
     (r"^(news|tools|policies)/(?!index)[^/]+\.html$", r'<article class="doc">', r'<section class="vs" id="verified"'),
     (r"^ai/index\.html$", r'<article class="prose doc ai-hub">', r'</article></main>'),
+    (r"^ignite/index\.html$", r'<article class="prose doc ignite-hub">', r'</article></main>'),
     (r"^ai/readiness-check/index\.html$", r'<p class="fine air-dates">.*?</p>', r'<script src="[^"]*ai-readiness\.js'),
 ]
 

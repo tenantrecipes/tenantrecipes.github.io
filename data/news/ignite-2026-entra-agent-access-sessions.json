@@ -1,0 +1,39 @@
+{
+ "id": "ignite-2026-entra-agent-access-sessions",
+ "status": "published",
+ "title": "Ignite 2026: Entra session list points to unified access policies for humans and agents",
+ "date": "2026-11-16",
+ "category": "Entra",
+ "ignite": true,
+ "ignite_area": "security",
+ "summary": "Microsoft's Entra Ignite guide lists the identity news session BRK343 on 18 November (10:15 PT, 19:15 CET). Other sessions cover Agent 365 governance with Entra, local-agent discovery, Entra/Defender SOC integration, and a 'unified policy engine' that combines identity, network, device and risk signals for users and AI agents. These are session descriptions only (announced/unverified). They are not released features.",
+ "why": "If a single policy engine for users and agents arrives, it will sit next to (or above) your Conditional Access estate. Agent identities could then fall under the same access logic as users. Policy sprawl and break-glass assumptions would need to be reviewed again.",
+ "todo": [
+  "Watch BRK343 (on demand afterwards) and record each feature's status: GA, preview or roadmap.",
+  "Export your current Conditional Access policies and the agent identity inventory before testing anything new, so you have a baseline.",
+  "Wait for Learn documentation before planning to migrate any CA policy."
+ ],
+ "effective": "2026-11-18",
+ "primary": {
+  "title": "AI is changing access: Catch Microsoft Entra at Ignite 2026 (Microsoft Entra Blog)",
+  "url": "https://techcommunity.microsoft.com/t5/microsoft-entra-blog/ai-is-changing-access-catch-microsoft-entra-at-ignite-2026/ba-p/4513159"
+ },
+ "related": [
+  {
+   "title": "Recipe: Restrict agent blueprint creation",
+   "url": "recipes/agents-restrict-blueprint-creation.html"
+  },
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Entra Blog: AI is changing access – Entra at Ignite 2026",
+   "url": "https://techcommunity.microsoft.com/t5/microsoft-entra-blog/ai-is-changing-access-catch-microsoft-entra-at-ignite-2026/ba-p/4513159",
+   "checked": "2026-11-16"
+  }
+ ],
+ "last_verified": "2026-11-16"
+}

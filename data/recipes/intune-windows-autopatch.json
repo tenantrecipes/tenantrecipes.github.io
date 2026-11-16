@@ -12,7 +12,9 @@
   "Monitor Intune update reports for devices falling behind."
  ],
  "pitfalls": [
-  "Autopatch features require Business Premium, A3+, E3+ or F3 licenses — check eligibility first."
+  "Autopatch features require Business Premium, A3+, E3+ or F3 licenses — check eligibility first.",
+  "A Windows Autopatch quality update policy with automatic approval replaces the deferral in the update ring or Autopatch group instead of adding to it (5-day ring + 2-day policy = 2 days, not 7). With manual approval there is no deferral at all. To keep staged timing, create one quality update policy per ring with the same deferral and assignment. Deadlines and grace periods still come from the ring.",
+  "Quick machine recovery (QMR) updates default to manual approval in the quality update policy. Decide who approves them before a boot-failure event, not during one."
  ],
  "done_when": [
   "Devices are registered in Windows Autopatch and appear in your Autopatch groups.",
@@ -24,12 +26,17 @@
    "title": "What is Windows Autopatch?",
    "url": "https://learn.microsoft.com/en-us/windows/deployment/windows-autopatch/overview/windows-autopatch-overview",
    "checked": "2026-10-30"
+  },
+  {
+   "title": "Windows IT Pro Blog: Granular controls for multiple updates in Windows Autopatch (12 Nov 2026)",
+   "url": "https://techcommunity.microsoft.com/t5/windows-it-pro-blog/granular-controls-for-multiple-updates-in-windows-autopatch/ba-p/4572668",
+   "checked": "2026-11-16"
   }
  ],
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-16",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-30",
+ "updated": "2026-11-16",
  "screenshots": [],
  "markers": {
   "steps": "official"

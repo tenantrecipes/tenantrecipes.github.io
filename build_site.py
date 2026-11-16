@@ -47,6 +47,7 @@ import build_linkhub as LH
 import build_aihub as AIH
 import build_apps as AP
 import build_ai_readiness as AIR
+import build_ignite as IGN
 
 _preview = bool(os.environ.get("TR_PREVIEW"))
 DIST = pathlib.Path(os.environ["TR_DIST"]).resolve() if os.environ.get("TR_DIST") else (ROOT / "dist")
@@ -120,6 +121,8 @@ def page_dates(path):
             return getattr(g, "PUBLISHED", None), getattr(g, "UPDATED", None) or g.VERIFIED
     if path == AIR.PATH:
         return AIR.PUBLISHED, AIR.VERIFIED
+    if path == IGN.PATH:
+        return IGN.BANNER_START.isoformat(), IGN.today_stockholm().isoformat()
     return DATES.get(path, (None, None))
 
 
@@ -530,7 +533,8 @@ def build():
 
     pages.append(page("index.html", f"{C.SITE_NAME}: Microsoft Cloud & Modern Workplace playbooks for admins",
                       "Fact-checked playbooks for Microsoft 365 admins: Conditional Access, PIM, Intune, Autopilot, Copilot and Purview, plus a Cybersecurity & Infrastructure track.", lambda rel: (
-        UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
+        IGN.home_banner(rel, fmt_date)
+        + UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
                     CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1),
                     UX.search_bar(rel, R, len(CY.load())) + BST.pill(rel) + f'<script src="{rel}assets/status.js" defer></script>')
         + AIH.home_promo(rel)
@@ -627,6 +631,10 @@ def build():
     pages += CODE.build(page, esc, fmt_date, signup, C.SITE_NAME, set(RID), {g.SLUG for g in GUIDES + [Q]})
     pages += LH.build(page, esc, signup, C.SITE_NAME)
     pages += AIH.build(page, C.SITE_NAME)
+    if IGN.should_emit(DIST):
+        _ignite_pages = IGN.build(page, C.SITE_NAME, fmt_date)
+        if IGN.PUBLISHED:
+            pages += _ignite_pages  # sitemap + search only when published
     pages += AIR.build(page, fmt_date, signup, C.SITE_NAME, preview=_preview)
     pages += AP.build(page, esc, fmt_date, signup, C.SITE_NAME)
 
@@ -715,7 +723,7 @@ def build():
     (DIST / "data").mkdir()
     shutil.copy(ROOT / "data" / "recipes.js", DIST / "data" / "recipes.js")
     idx = BS.build_index(R, CY.load(), GUIDES, Q, CY.AREA, UX.tags_for, json.load(open(ROOT / "data" / "changelog.json")),
-                         TL.search_docs() + PL.search_docs() + NW.search_docs(CY.load()) + CODE.search_docs() + AP.search_docs() + LH.search_docs() + AIH.search_docs() + AIR.search_docs())
+                         TL.search_docs() + PL.search_docs() + NW.search_docs(CY.load()) + CODE.search_docs() + AP.search_docs() + LH.search_docs() + AIH.search_docs() + AIR.search_docs() + IGN.search_docs())
     (DIST / "search").mkdir(exist_ok=True)
     (DIST / "search" / "index.json").write_text(json.dumps(idx, ensure_ascii=False, separators=(",", ":")))
     print(f"Search index: {len(idx['docs'])} docs, {len(idx['sug'])} suggestions, {len(idx['syn'])} synonym groups, {len(idx['q'])} questions")

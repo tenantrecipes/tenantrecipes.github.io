@@ -1,5 +1,32 @@
 [
  {
+  "date": "2026-11-16",
+  "kind": "site",
+  "type": "Page",
+  "title": "Microsoft Ignite 2026 hub",
+  "blurb": "Short, source-linked Ignite 2026 news for tenant admins, grouped by area; announced items marked unverified.",
+  "url": "ignite/index.html",
+  "text": "Ignite 2026 hub with short news items grouped by Copilot & agents, security, endpoint, collaboration and Azure, plus keynote time in Europe/Stockholm and links to the official event pages. Homepage banner during the event."
+ },
+ {
+  "date": "2026-11-16",
+  "kind": "site",
+  "type": "Security",
+  "title": "Zyxel GS1900 CVE-2026-7273 (KEV)",
+  "blurb": "Exploited LAN-side CGI overflow in GS1900 switches: fixed firmware per model and forensic triage.",
+  "url": "security/zyxel-gs1900-cgi-overflow-cve-2026-7273.html",
+  "text": "KEV backlog: Zyxel GS1900 series switches stack-based buffer overflow CVE-2026-7273, fixed 2.90(xxxx.2)C0 firmware per model."
+ },
+ {
+  "date": "2026-11-16",
+  "kind": "site",
+  "type": "Recipe",
+  "title": "Windows Autopatch: quality update policy deferral pitfalls",
+  "blurb": "Policy deferral replaces ring deferral; QMR updates default to manual approval.",
+  "url": "recipes/intune-windows-autopatch.html",
+  "text": "Windows Autopatch recipe updated with quality update policy approvals (Windows, .NET, quick machine recovery) and how policy deferrals interact with update rings."
+ },
+ {
   "date": "2026-11-15",
   "kind": "site",
   "type": "Tool",

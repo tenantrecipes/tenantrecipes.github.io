@@ -1,0 +1,37 @@
+{
+ "id": "fbi-flash-artex-agentic-attack-framework",
+ "status": "published",
+ "title": "FBI FLASH on ARTEX: agentic attack framework speeds up tenant intrusions",
+ "date": "2026-11-16",
+ "category": "Security incidents",
+ "summary": "An FBI FLASH advisory released on 13 November 2026 says several threat actors have been using the open-source agentic offensive framework ARTEX since at least August 2026, against finance, government, technology, defense and healthcare. Some intrusions went from first targeting to privileged access in under three hours. The advisory links ARTEX to the October ConnectWise Cloud Backup (formerly SkyKick) incident, in which compromised app identities were used against Microsoft 365 tenants. Microsoft has earlier tied ARTEX to OAuth secret harvesting on GitHub (Storm-0940) and to Storm-3358 targeting the financial sector.",
+ "why": "The speed puts pressure on your detection and response times, not on new techniques. Attackers still use exposed app secrets, over-privileged OAuth apps, forgotten portals and password spraying, but now at machine pace and against many targets at once.",
+ "todo": [
+  "Inventory app registrations and enterprise apps that hold high Graph or Exchange permissions. Rotate or remove any client secret that may have been in code repositories.",
+  "Alert on bursts of automated sign-ins and API calls, unexpected credential additions to service principals, and large data exports.",
+  "Restrict cloud admin interfaces and partner portals to known networks or put them behind Conditional Access."
+ ],
+ "effective": "2026-11-13",
+ "primary": {
+  "title": "BleepingComputer: FBI warns ARTEX AI hacking tool is powering global cyberattacks",
+  "url": "https://www.bleepingcomputer.com/news/security/fbi-warns-artex-ai-hacking-tool-is-powering-global-cyberattacks/"
+ },
+ "sources": [
+  {
+   "title": "BleepingComputer: FBI warns ARTEX AI hacking tool is powering global cyberattacks",
+   "url": "https://www.bleepingcomputer.com/news/security/fbi-warns-artex-ai-hacking-tool-is-powering-global-cyberattacks/",
+   "checked": "2026-11-16"
+  },
+  {
+   "title": "Microsoft Security Blog: ARTEX abuse expands as cybercriminals target financial sector",
+   "url": "https://www.microsoft.com/en-us/security/blog/2026/11/06/artex-abuse-expands-as-cybercriminals-target-financial-sector/",
+   "checked": "2026-11-16"
+  },
+  {
+   "title": "Microsoft Security Blog: Threat actors use agentic AI tooling to find and abuse exposed secrets",
+   "url": "https://www.microsoft.com/en-us/security/blog/2026/11/05/threat-actors-use-agentic-ai-tooling-to-find-and-abuse-exposed-secrets/",
+   "checked": "2026-11-16"
+  }
+ ],
+ "last_verified": "2026-11-16"
+}

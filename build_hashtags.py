@@ -19,6 +19,7 @@ MAX, MIN = 4, 3
 # (regex on the metadata text, hashtag without '#'). Matched case-insensitively; the tag that matches EARLIEST in the
 # signal text (category/tags first, title last) ranks first, so the item's own category wins over incidental words.
 RULES = [
+    (r"\bignite\b|msignite", "MSIgnite"),
     (r"copilot studio|\bagents?\b|agent 365", "CopilotStudio"),
     (r"copilot", "Copilot"),
     (r"conditional access", "ConditionalAccess"),
@@ -67,6 +68,7 @@ SECTION = {
 }
 FIXED = {  # pages that are not data items
     "ai/index.html": ("AI", "AIGovernance", "Copilot", "GenAI"),
+    "ignite/index.html": ("MSIgnite", "Microsoft365", "Copilot", "CyberSecurity"),
     "ai/readiness-check/index.html": ("AI", "AIGovernance", "Copilot", "CyberSecurity"),
     "newsletter-sample.html": ("Microsoft365", "CyberSecurity", "SysAdmin"),
     "tools/mail-dns-checker.html": ("EmailSecurity", "DMARC", "DNS", "CyberSecurity"),
@@ -157,7 +159,8 @@ def _index():
         cat = re.sub(r"\s+for (AI|Copilot)$", "", e.get("category", ""))  # "Intune & devices for AI" is about Intune, not AI
         put(f'recipes/{e["id"]}.html', e, f'{e.get("title", "")} | {cat}', "recipes")
     for e in _load("news"):
-        put(f'news/{e["id"]}.html', e, f'{e.get("category", "")} | {e.get("title", "")}', "news")
+        lead = ("MSIgnite",) if e.get("ignite") else ()
+        put(f'news/{e["id"]}.html', e, f'{e.get("category", "")} | {e.get("title", "")}', "news", lead=lead)
     for e in _load("tools"):
         put(f'tools/{e["id"]}.html', e, f'{e.get("category", "")} | {e.get("name", "")}', "tools")
     for e in _load("cyber"):

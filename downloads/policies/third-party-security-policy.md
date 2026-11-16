@@ -33,6 +33,8 @@ It covers cloud and software providers, IT service providers, consultants, outso
 - Supplier incidents that affect {{COMPANY}} are handled through the incident response policy.
 - When a certificate authority used by a supplier is distrusted by browser or operating-system vendors, the supplier replaces affected certificates within the vendor's deadline, and {{COMPANY}} does not re-trust removed roots locally to keep a supplier service working.
 - Suppliers that host services {{COMPANY}} signs in to keep those services compatible with current platform security defaults (for example signed authentication protocols and modern TLS) and announce incompatibilities before the vendor's enforcement date, not after.
+- Suppliers that manage {{COMPANY}} devices through remote-support or RMM tools keep technician clients and console extensions on vendor-supported versions, notify {{COMPANY}} of any compromise of those tools without delay, and support out-of-band investigation of managed devices.
+- Application identities that suppliers use to access {{COMPANY}} tenants (for example backup or migration apps) are inventoried with an owner, have only the permissions they need, and are reviewed at least yearly and after any supplier incident.
 
 ## 5. Ending the relationship
 

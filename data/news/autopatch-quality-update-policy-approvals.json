@@ -1,0 +1,37 @@
+{
+ "id": "autopatch-quality-update-policy-approvals",
+ "status": "published",
+ "title": "Autopatch quality update policies: per-type approvals override ring deferrals",
+ "date": "2026-11-16",
+ "category": "Intune",
+ "summary": "In Windows Autopatch, one Intune quality update policy can now manage Windows quality updates, .NET Framework updates and quick machine recovery (QMR) updates. Each type gets automatic approval (with a 0–30 day deferral) or manual approval. New reports show quality update status and QMR boot-failure remediation. QMR updates default to manual approval.",
+ "why": "The policy's deferral replaces the deferral in your update ring or Autopatch group instead of adding to it. A 5-day ring plus a 2-day policy means 2 days, not 7. With manual approval there is no deferral, and devices install as soon as you approve. Deadlines and grace periods still come from the ring.",
+ "todo": [
+  "Before you create a quality update policy, write down the effective deferral per ring. To keep your current timing, create one policy per ring with the same deferral and assignment.",
+  "Decide who approves optional and out-of-band updates (for example this month's slmgr OOB fix) and how quickly.",
+  "If you created a hotpatch quality update policy before approvals existed, open it, review the approval settings and save it."
+ ],
+ "effective": "2026-11-12",
+ "primary": {
+  "title": "Granular controls for multiple updates in Windows Autopatch (Windows IT Pro Blog)",
+  "url": "https://techcommunity.microsoft.com/t5/windows-it-pro-blog/granular-controls-for-multiple-updates-in-windows-autopatch/ba-p/4572668"
+ },
+ "related": [
+  {
+   "title": "Recipe: Windows Autopatch",
+   "url": "recipes/intune-windows-autopatch.html"
+  },
+  {
+   "title": "News: slmgr OOB update",
+   "url": "news/windows-oob-slmgr-activation-0x80041008.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Windows IT Pro Blog: Granular controls for multiple updates in Windows Autopatch",
+   "url": "https://techcommunity.microsoft.com/t5/windows-it-pro-blog/granular-controls-for-multiple-updates-in-windows-autopatch/ba-p/4572668",
+   "checked": "2026-11-16"
+  }
+ ],
+ "last_verified": "2026-11-16"
+}

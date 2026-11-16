@@ -1,0 +1,39 @@
+{
+ "id": "ignite-2026-copilot-plugin-catalog",
+ "status": "published",
+ "title": "Copilot plugins move into Copilot Home; public Plugin Catalog due at Ignite",
+ "date": "2026-11-16",
+ "category": "Copilot/AI",
+ "ignite": true,
+ "ignite_area": "copilot",
+ "summary": "Microsoft says plugins (skills, tools/connectors and agents) will start appearing in the navigation of the new Copilot Home, which combines Chat and Cowork. A public Plugin Catalog on microsoft.com is due to launch on 17 November at aka.ms/CopilotPluginCatalog (announced, not verified live). Microsoft says the admin experience in the plugin registry does not change and that no back-end changes are needed.",
+ "why": "Users will discover more plugins through navigation, so requests for unapproved plugins will rise even though the controls stay the same. Governance still happens in the plugin registry. If nobody owns approvals there, the queue builds up.",
+ "todo": [
+  "Check who approves plugins in the registry and how long approvals take, before users see the new navigation.",
+  "Read the public catalog once it is live and pre-classify the plugins your users are likely to ask for (connector data scope, publisher, DLP).",
+  "Track the session 'Govern Once, Use Everywhere' (BRK221, 19 November) for registry changes."
+ ],
+ "effective": "2026-11-17",
+ "primary": {
+  "title": "Plugins at Microsoft Ignite 2026 (Microsoft Copilot Blog)",
+  "url": "https://techcommunity.microsoft.com/t5/microsoft-copilot-blog/plugins-at-microsoft-ignite-2026/ba-p/4569951"
+ },
+ "related": [
+  {
+   "title": "Recipe: Integrated apps and agents",
+   "url": "recipes/agents-integrated-apps.html"
+  },
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Copilot Blog: Plugins at Microsoft Ignite 2026",
+   "url": "https://techcommunity.microsoft.com/t5/microsoft-copilot-blog/plugins-at-microsoft-ignite-2026/ba-p/4569951",
+   "checked": "2026-11-16"
+  }
+ ],
+ "last_verified": "2026-11-16"
+}

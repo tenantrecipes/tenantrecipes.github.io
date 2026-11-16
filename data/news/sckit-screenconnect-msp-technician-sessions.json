@@ -1,0 +1,34 @@
+{
+ "id": "sckit-screenconnect-msp-technician-sessions",
+ "status": "published",
+ "title": "SCKit: hijacked ScreenConnect instances used to hit MSP technician workstations",
+ "date": "2026-11-16",
+ "category": "Security incidents",
+ "summary": "Microsoft Threat Intelligence confirms ConnectWise's report (since 11 November 2026) of unauthorized access to cloud-hosted ScreenConnect instances run by MSPs. The attackers install a second, attacker-controlled ScreenConnect client and a toolkit called SCKit. Its RelayTrap component targets technicians who connect, and the attackers then use the technician's console to push payloads to other managed devices. ConnectWise says technician client 26.6.5 and later blocks the endpoint-to-technician transfer technique.",
+ "why": "If an MSP manages your devices through ScreenConnect, your technicians and your endpoints are both in scope. Removing the rogue client does not remove the persistence and does not invalidate stolen web sessions.",
+ "todo": [
+  "Ask your MSP to confirm whether its instance had the affected RMM+/Labtech Plus extensions, and whether those extensions are now disabled.",
+  "Check that every technician workstation runs ScreenConnect client 26.6.5 or later. Updating the cloud console does not update the clients.",
+  "Investigate out-of-band, for example with Defender for Endpoint live response, not through ScreenConnect. Look for unapproved ScreenConnect clients, new Run keys, scheduled tasks and Defender exclusions.",
+  "Revoke ScreenConnect and IdP sessions from a clean device and rotate exposed credentials."
+ ],
+ "effective": "2026-11-13",
+ "primary": {
+  "title": "Microsoft Security Blog: SCKit abuses ScreenConnect to deploy remote access and target technician sessions",
+  "url": "https://www.microsoft.com/en-us/security/blog/2026/11/13/sckit-abuses-screenconnect-deploy-remote-access-target-technician-sessions/"
+ },
+ "related": [
+  {
+   "title": "Security: ConnectWise ScreenConnect CVE-2026-84869",
+   "url": "security/connectwise-screenconnect-cve-2026-84869.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Security Blog: SCKit abuses ScreenConnect (13 Nov 2026)",
+   "url": "https://www.microsoft.com/en-us/security/blog/2026/11/13/sckit-abuses-screenconnect-deploy-remote-access-target-technician-sessions/",
+   "checked": "2026-11-16"
+  }
+ ],
+ "last_verified": "2026-11-16"
+}

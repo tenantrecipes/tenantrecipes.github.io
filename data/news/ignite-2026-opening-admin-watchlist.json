@@ -1,0 +1,39 @@
+{
+ "id": "ignite-2026-opening-admin-watchlist",
+ "status": "published",
+ "title": "Microsoft Ignite 2026 opens 17 November: keynote 19:00 CET and what admins should watch",
+ "date": "2026-11-16",
+ "category": "M365",
+ "ignite": true,
+ "summary": "Microsoft Ignite 2026 runs 17–20 November in San Francisco and online. The opening keynote is Tuesday 17 November, 10:00–12:00 PT (19:00–21:00 Europe/Stockholm), and Microsoft's live news page goes live at the same time. Security Pre-Day runs on 16 November. Microsoft's live page mentions a Book of News, but no 2026 Book of News URL has been published yet, so we treat it as unverified until it appears.",
+ "why": "Ignite announcements are mostly previews and roadmap items. Each one needs a Message Center post, a roadmap ID or documentation before you plan changes around it. Agents, plugins and identity for AI agents are the main themes in Microsoft's own session lists, so watch for changes to Entra, Copilot governance and the admin center.",
+ "todo": [
+  "Watch for Message Center posts from 17 November on. Treat anything without an MC/roadmap ID as announced only.",
+  "Make sure Copilot/agent owners and the identity team read the same summary of announcements, because many changes affect both.",
+  "Do not change policies based on keynote demos. Wait for documentation and rollout dates."
+ ],
+ "effective": "2026-11-17",
+ "primary": {
+  "title": "Microsoft Ignite 2026: live news (Microsoft Source)",
+  "url": "https://news.microsoft.com/events/ignite/2026/live-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 live news (Microsoft Source)",
+   "url": "https://news.microsoft.com/events/ignite/2026/live-news/",
+   "checked": "2026-11-16"
+  },
+  {
+   "title": "Microsoft Ignite 2026: official event site",
+   "url": "https://ignite.microsoft.com/en-US/home",
+   "checked": "2026-11-16"
+  }
+ ],
+ "last_verified": "2026-11-16"
+}
