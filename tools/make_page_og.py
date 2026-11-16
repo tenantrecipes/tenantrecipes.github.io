@@ -15,7 +15,92 @@ SITE = C.SITE_URL.rstrip("/").replace("https://", "")
 E = lambda s: html.escape(str(s), quote=True)
 
 
+# Original geometric atmosphere for Ignite cards. Not a Microsoft/Ignite logo or brand mark.
+_IGNITE_DECOR = """
+<svg class="decor" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<defs>
+<linearGradient id="ig-g1" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#ff2d8f"/><stop offset=".45" stop-color="#ff5a00"/><stop offset="1" stop-color="#ffd000"/>
+</linearGradient>
+<linearGradient id="ig-g2" x1="1" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#7a3dff"/><stop offset="1" stop-color="#00d0ff"/>
+</linearGradient>
+</defs>
+<polygon points="640,40 780,180 620,220" fill="url(#ig-g1)" opacity=".85"/>
+<polygon points="700,260 790,430 620,400" fill="url(#ig-g2)" opacity=".75"/>
+<circle cx="520" cy="80" r="54" fill="#ffd000" opacity=".9"/>
+<circle cx="760" cy="520" r="86" fill="#ff2d8f" opacity=".55"/>
+<rect x="500" y="560" width="180" height="180" rx="28" transform="rotate(-18 590 650)" fill="#00d0ff" opacity=".7"/>
+<g fill="#1b1024" opacity=".85">
+<path d="M90 70 l12 32 32 12-32 12-12 32-12-32-32-12 32-12 z"/>
+<path d="M430 700 l9 24 24 9-24 9-9 24-9-24-24-9 24-9 z"/>
+<path d="M740 80 l8 20 20 8-20 8-8 20-8-20-20-8 20-8 z"/>
+</g></svg>
+"""
+
+
+def ignite_card(s):
+    """1200x630 colourful Ignite share card. Safe 80px inset so LinkedIn/X crops keep title and wordmark."""
+    t = s["title"]
+    hub = s.get("variant") == "hub" or s.get("path") == "ignite/index.html"
+    size = 58 if len(t) < 40 else 50 if len(t) < 70 else 44
+    if hub:
+        inner = f'<p class="sub">{E(t)}</p>'
+        kind = "hub"
+    else:
+        inner = f'<div class="card"><h1>{E(t)}</h1></div>'
+        kind = "news"
+    return f"""<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{{margin:0;width:1200px;height:630px;overflow:hidden}}
+body{{font-family:system-ui,"Segoe UI",Inter,"Noto Sans",sans-serif;color:#1b1024;
+background:linear-gradient(125deg,#ff9ad8 0%,#ffb14a 30%,#ffe566 52%,#7eecff 76%,#c9b0ff 100%);
+position:relative;box-sizing:border-box}}
+.bg{{position:absolute;inset:0;overflow:hidden;pointer-events:none}}
+.blob{{position:absolute;border-radius:50%;filter:blur(4px);opacity:.72}}
+.blob-a{{width:420px;height:420px;background:#ff2d8f;top:-140px;right:-60px}}
+.blob-b{{width:340px;height:340px;background:#ff5a00;bottom:-120px;left:-80px;opacity:.7}}
+.blob-c{{width:260px;height:260px;background:#00d0ff;top:20%;left:38%;opacity:.55}}
+.blob-d{{width:200px;height:200px;background:#7a3dff;bottom:10%;right:18%;opacity:.6}}
+.blob-e{{width:160px;height:160px;background:#ffd000;top:8%;left:8%}}
+.decor{{position:absolute;right:-4%;top:-12%;width:58%;height:130%;opacity:.85}}
+.in{{position:relative;z-index:1;height:630px;box-sizing:border-box;padding:72px 80px 88px;
+display:flex;flex-direction:column;justify-content:center}}
+.wm{{margin:0;line-height:.82;letter-spacing:-.07em;font-weight:900;text-transform:uppercase;
+font-family:system-ui,"Segoe UI",sans-serif}}
+.wm-ignite{{display:block;font-size:124px;color:#c40068;
+background:linear-gradient(92deg,#e0107a 0%,#ff3b00 45%,#7a2bff 100%);
+-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+filter:drop-shadow(5px 5px 0 #1b1024) drop-shadow(10px 10px 0 #ffd000)}}
+.wm-year{{display:inline-block;margin-top:.1em;font-size:68px;letter-spacing:-.04em;color:#e0107a;
+background:linear-gradient(90deg,#ff3b00,#e0107a,#7a2bff);
+-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+filter:drop-shadow(4px 4px 0 #1b1024) drop-shadow(8px 8px 0 #ffd000)}}
+.news .wm{{display:flex;align-items:baseline;gap:18px;margin:0 0 26px;line-height:1}}
+.news .wm-ignite{{font-size:68px;filter:drop-shadow(3px 3px 0 #1b1024) drop-shadow(6px 6px 0 #ffd000)}}
+.news .wm-year{{font-size:48px;margin-top:0;filter:drop-shadow(3px 3px 0 #1b1024) drop-shadow(6px 6px 0 #ffd000)}}
+.sub{{margin:26px 0 0;font-size:36px;font-weight:750;letter-spacing:-.02em;line-height:1.25;
+text-transform:none;color:#1b1024;max-width:980px;text-shadow:0 1px 0 #fff8}}
+.card{{background:#fff;border:3px solid #1b1024;border-radius:24px;box-shadow:8px 8px 0 #7a3dff;
+padding:22px 28px;max-width:980px}}
+.card h1{{margin:0;font-size:{size}px;line-height:1.12;font-weight:800;letter-spacing:-.8px;color:#1b1024;
+display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}}
+.bar{{position:absolute;left:80px;right:80px;bottom:36px;display:flex;justify-content:space-between;
+align-items:center;font-size:22px;font-weight:800;color:#1b1024;z-index:1}}
+.strip{{position:absolute;left:0;right:0;bottom:0;height:10px;
+background:linear-gradient(90deg,#ff2d8f,#ff5a00,#ffd000,#00d0ff,#7a3dff)}}
+</style></head><body class="{kind}">
+<div class="bg"><span class="blob blob-a"></span><span class="blob blob-b"></span>
+<span class="blob blob-c"></span><span class="blob blob-d"></span><span class="blob blob-e"></span>
+{_IGNITE_DECOR}</div>
+<div class="in"><div class="wm"><span class="wm-ignite">IGNITE</span> <span class="wm-year">2026</span></div>
+{inner}</div>
+<div class="bar"><div>Tenant Recipes</div><div>{E(SITE)}</div></div>
+<div class="strip"></div></body></html>"""
+
+
 def card(s):
+    if s.get("theme") == "ignite":
+        return ignite_card(s)
     t = s["title"]
     size = 72 if len(t) < 32 else 64 if len(t) < 52 else 54 if len(t) < 80 else 46
     return f"""<!doctype html><html><head><meta charset="utf-8"><style>

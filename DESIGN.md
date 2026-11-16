@@ -46,6 +46,12 @@ card's accent colour in the top-right corner. The logo tile uses `#0b2a6b → #1
   3. Generic section image: used only when a card is missing or stale and the machine has no Chrome or Pillow (for example in CI).
 - Automatic card layout: brand gradient background; logo and wordmark top-left; a pill with the content type; the page title
   (72 → 46 px depending on length, at most 4 lines); a footer row with "Fact-checked · sources linked" on the left and the domain on the right.
+- Ignite cards (`/ignite/` and any news item with `"ignite": true`): same 1200×630 size, but the colourful Ignite gradient
+  (hot pink, orange, yellow, cyan, violet), original geometric shapes (no Microsoft logos or brand artwork), a large
+  **IGNITE 2026** wordmark, the hub subtitle or news title, and `tenantrecipes.com`. Title and wordmark sit in an 80 px
+  inset so LinkedIn and X crops stay readable. `tools/make_page_og.py` uses this layout when the auto-card spec has
+  `theme: ignite`. Do not bump `OG_AUTO_VERSION` for this theme; it is included only in those cards' hashes, so
+  non-Ignite pages are unchanged.
 - Content type label and accent per section:
 
 | Section | Label | Accent |

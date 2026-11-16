@@ -536,7 +536,7 @@ _OG_SECTIONS = {  # first path segment -> (label for a page, label for the secti
     "guides": ("Guide", "Guides", "#1f7bff"), "tools": ("Tool", "Tools", "#0f7a4f"), "code": ("Code", "Code Library", "#7a4dff"),
     "recipes": ("Recipe", "Recipes", "#1f7bff"), "security": ("Security", "Security", "#b3261e"), "policies": ("Policy", "Policies", "#0b6e99"),
     "news": ("News", "News", "#e39a1f"), "status": ("Status", "Status", "#0b6e99"), "author": ("About", "About", "#5b2c6f"),
-    "contact": ("Contact", "Contact", "#5b2c6f"), "changelog": ("What's new", "What's new", "#e39a1f"), "search": ("Search", "Search", "#1f7bff"), "links": ("Links", "Admin links", "#1f6feb"), "ai": ("Enterprise AI", "Enterprise AI", "#7a4dff"),
+    "contact": ("Contact", "Contact", "#5b2c6f"), "changelog": ("What's new", "What's new", "#e39a1f"), "search": ("Search", "Search", "#1f7bff"), "links": ("Links", "Admin links", "#1f6feb"), "ai": ("Enterprise AI", "Enterprise AI", "#7a4dff"), "ignite": ("Ignite 2026", "Ignite 2026", "#c40068"),
 }
 
 
@@ -545,7 +545,26 @@ def og_auto_slug(path):
 
 
 def og_auto_hash(spec):
-    return _hl.sha256(_json.dumps([OG_AUTO_VERSION, spec["kicker"], spec["title"], spec["accent"]]).encode()).hexdigest()[:16]
+    parts = [OG_AUTO_VERSION, spec["kicker"], spec["title"], spec["accent"]]
+    if spec.get("theme"):
+        parts.append(spec["theme"])
+    return _hl.sha256(_json.dumps(parts).encode()).hexdigest()[:16]
+
+
+def _ignite_news(path):
+    """Return the news dict if this page is a news item tagged ignite, else None."""
+    if not path.startswith("news/") or not path.endswith(".html") or path.count("/") != 1:
+        return None
+    f = _pl.Path(__file__).resolve().parent / "data" / "news" / f"{path[5:-5]}.json"
+    if not f.exists():
+        return None
+    try:
+        e = _json.loads(f.read_text())
+    except Exception:
+        return None
+    if e.get("ignite") is True or e.get("ignite") == "true":
+        return e
+    return None
 
 
 def _og_manifest():
@@ -566,10 +585,17 @@ def og_for(path, RID, title):
         cat = RID[path[8:-5]]["category"]
         kicker = f"Recipe · {cat}"
     spec = {"path": path, "slug": og_auto_slug(path), "kicker": kicker, "title": t, "accent": accent}
+    if path == "ignite/index.html":
+        spec.update(theme="ignite", variant="hub", kicker="Ignite 2026", accent="#c40068",
+                    title="Short, source-linked news for tenant admins")
+    elif _ignite_news(path):
+        spec.update(theme="ignite", variant="news", kicker="News · Ignite 2026", accent="#c40068")
     spec["hash"] = og_auto_hash(spec)
     OG_AUTO[path] = spec
+    alt_auto = (f"{C.SITE_NAME} Ignite 2026: {spec['title']}" if spec.get("theme") == "ignite"
+                else f"{C.SITE_NAME} {kicker.split(' · ')[0].lower()}: {t}")
     if _og_manifest().get(spec["slug"]) == spec["hash"] and (_OG_DIR / f'{spec["slug"]}.jpg').exists():
-        return f'og/p/{spec["slug"]}.jpg', f"{C.SITE_NAME} {kicker.split(' · ')[0].lower()}: {t}"
+        return f'og/p/{spec["slug"]}.jpg', alt_auto
     return f, alt   # card missing or stale (e.g. CI without Chrome): fall back to the generic image
 
 

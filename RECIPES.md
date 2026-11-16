@@ -182,6 +182,7 @@ Every new recipe, guide, tool, code snippet, security or news page must have its
 `python3 build.py` renders a branded card (title + content type, see `DESIGN.md`) for each page without a hand-made one,
 caches it by title, and wires it into `og:image` and `twitter:image`. Commit the new `assets/og/p/*.jpg` and
 `assets/og/p/manifest.json` with the page. `tools/check_meta.py` warns when a page still uses a generic image.
+Ignite-tagged news and `/ignite/` get the colourful Ignite card (see `DESIGN.md`) instead of the dark default.
 
 ## Changelog entry for every publish
 
