@@ -1,0 +1,46 @@
+{
+ "id": "ignite-2026-onprem-exchange-sharepoint-baseline-security",
+ "status": "published",
+ "title": "Ignite 2026: baseline security mode for on-prem Exchange",
+ "date": "2026-11-17",
+ "category": "M365",
+ "ignite": true,
+ "ignite_area": "collaboration",
+ "summary": "Microsoft announced an on-premises security initiative for supported Exchange Server, SharePoint Server and Skype for Business Server. It includes guidance that will appear in Secure Now, migration support and On-Premises Baseline Security Mode, intended to build more of Microsoft's recommended security settings into those server products. Microsoft lists three goals: get security updates to connected servers faster, make safer configurations easier to keep, and apply temporary protections against emerging threats until a permanent update ships. Security updates, hardening guidance, health tools and emergency mitigation exist today; the rest rolls out over time and varies by product.",
+ "why": "On-premises Exchange and SharePoint remain frequent entry points in real attacks. A baseline mode built into the product could reduce configuration drift, but there are no versions or dates yet, so nothing here replaces patching or hardening you should already be doing.",
+ "todo": [
+  "Do now: confirm every Exchange, SharePoint and Skype for Business server is on a supported release with the latest security update, and that Exchange Emergency Mitigation is enabled where supported.",
+  "Revisit which workloads can move to Microsoft 365; Microsoft explicitly continues to recommend it.",
+  "Wait: Baseline Security Mode for on-premises servers is announced without versions or dates — unverified. Track the linked Microsoft blog for specifics."
+ ],
+ "effective_note": "Announced; capabilities roll out over time, availability varies by product — per Microsoft. No dates given.",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Security → Defender: on-premises security)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: New investments to reduce on-premises security risk",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Security Blog (linked from the Book of News): New investments to reduce on-premises security risk",
+   "url": "https://techcommunity.microsoft.com/blog/microsoft-security-blog/new-investments-to-reduce-on-premises-security-risk/4570381",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17",
+ "hashtags": [
+  "MSIgnite",
+  "ExchangeServer",
+  "SharePoint",
+  "CyberSecurity"
+ ]
+}

@@ -1155,7 +1155,8 @@
    "Name the profile (Microsoft's example is Remote lock - ON). Add the required setting: OMA-URI `./Device/Vendor/MSFT/RemoteDeviceLock/LockState`, data type Integer, value `1` (lock). The documented URI is under `./Device/` (device context). A user-scoped URI is not documented.",
    "Optionally add `./Device/Vendor/MSFT/RemoteDeviceLock/LockReason` as String (reason shown on the lock screen, up to 1,024 characters) and `./Device/Vendor/MSFT/RemoteDeviceLock/RecoveryHint` as String (help desk contact, up to 256 characters).",
    "Assign the lock profile only to the lock device group. To lock a device, add that device to the group. Microsoft says the lock applies at the device's next check-in.",
-   "To unlock, create a second custom profile (Microsoft's pattern is a counterpart to the lock profile) with the same LockState OMA-URI, data type Integer, value `0` (unlock). Assign it to the unlock device group. Move the device from the lock group to the unlock group. Microsoft documents this group move with LockState 0; it does not document \"remove the lock assignment\" as the unlock method. Unlock arrives only through Intune: no PIN, password, local administrator or web sign-in works on a locked device, including while the device is offline."
+   "To unlock, create a second custom profile (Microsoft's pattern is a counterpart to the lock profile) with the same LockState OMA-URI, data type Integer, value `0` (unlock). Assign it to the unlock device group. Move the device from the lock group to the unlock group. Microsoft documents this group move with LockState 0; it does not document \"remove the lock assignment\" as the unlock method. Unlock arrives only through Intune: no PIN, password, local administrator or web sign-in works on a locked device, including while the device is offline.",
+   "Verify the result: the read-only Status node reports 0 Unlocked, 1 Locked, 2 Lock pending or 3 Error. Microsoft does not document an Intune report for it, so confirm the state (for example from the lock screen or by querying the node) before telling the user or the incident team that the device is locked."
   ],
   "pitfalls": [
    "This is not the Intune device action named Remote lock (Devices > All devices > the device > Secure > Remote lock). That action's documented platforms are Android Enterprise, Android Open Source Project (AOSP), iOS/iPadOS, macOS and visionOS 2.0 and later. Windows is not on that list. In the preview, Windows Remote lock is a custom OMA-URI configuration profile, not a button on the device page.",
@@ -1290,14 +1291,18 @@
    "intune-devices-stay-noncompliant",
    "autopilot-device-preparation-entra-join"
   ],
-  "last_verified": "2026-11-14",
+  "last_verified": "2026-11-17",
   "verified_by": "Tenant Recipes editor",
   "created": "2026-11-14",
-  "updated": "2026-11-14",
+  "updated": "2026-11-17",
   "history": [
    {
     "date": "2026-11-14",
     "note": "Published. Documentation-verified against Microsoft Learn and Windows Insider release notes; not lab-tested. Windows Remote Device Lock is currently Insider-only (Experimental / Future Platforms build 29708.1001, 13 November 2026); no GA build or KB has been announced. Do not roll out to production."
+   },
+   {
+    "date": "2026-11-17",
+    "note": "Re-checked against Microsoft Learn: still Preview, configuration path unchanged (LockState, LockReason, RecoveryHint, Status node). Not mentioned in the Ignite 2026 Book of News."
    }
   ],
   "notice": {

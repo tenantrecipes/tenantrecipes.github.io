@@ -1,0 +1,49 @@
+{
+ "id": "ignite-2026-edge-for-business-extension-safety-gsa",
+ "status": "published",
+ "title": "Ignite 2026: Edge for Business gets extension risk scores",
+ "date": "2026-11-17",
+ "category": "Windows",
+ "ignite": true,
+ "ignite_area": "endpoint",
+ "summary": "Microsoft announced Edge for Business updates. Generally available: extension safety, an organisation-wide extension inventory with Akamai and Spin.AI risk scores per extension and version to support allow/block decisions. In preview: extension leak control (stop selected organisation-installed extensions reading protected pages), a native Microsoft Sentinel connector for browser security events and audit logs, Entra Global Secure Access inside the Edge work profile so Windows users reach private web apps without a separate VPN client or agent, a managed agent-browsing mode where agents get their own window and Entra agent identity, and a skills recorder that turns recorded browser workflows into Copilot Cowork skills under IT control.",
+ "why": "Browser extensions are one of the least-governed parts of most estates, and an inventory with risk scores is a practical way to start an allowlist. The agent-browsing and skills recorder previews mean agents will increasingly act inside the browser, so browser policy becomes agent policy.",
+ "todo": [
+  "Do now: review the extension safety inventory and draft an allowlist or blocklist policy for high-risk extensions, starting with those that read all sites.",
+  "If you plan Global Secure Access Private Access, note the Edge integration as a possible agentless option for web apps — but test it only once it is in your tenant.",
+  "Wait: leak control, the Sentinel connector, GSA in Edge, agent browsing and skills recorder are preview — announced, not verified."
+ ],
+ "effective_note": "Extension safety GA; other items preview — per Microsoft.",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Microsoft Edge)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "Recipe: Intune Edge policies for AI",
+   "url": "recipes/intune-edge-policies-ai.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Edge for Business adds governed AI workflows, stronger security",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Edge Blog (linked from the Book of News): Edge for Business Ignite 2026 innovations",
+   "url": "https://blogs.windows.com/msedgedev/2026/11/17/edge-for-business-ignite-2026-innovations/",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17",
+ "hashtags": [
+  "MSIgnite",
+  "MicrosoftEdge",
+  "CyberSecurity"
+ ]
+}

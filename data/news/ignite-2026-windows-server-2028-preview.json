@@ -1,0 +1,49 @@
+{
+ "id": "ignite-2026-windows-server-2028-preview",
+ "status": "published",
+ "title": "Ignite 2026: Windows Server 2028 enters preview",
+ "date": "2026-11-17",
+ "category": "Windows",
+ "ignite": true,
+ "ignite_area": "azure",
+ "summary": "Microsoft announced Windows Server 2028 in preview through the Windows Server Insider Program, with a hardened Server Core configuration, a new security baseline, Trusted Launch for VMs, post-quantum cryptography and automated certificate management among the listed security changes. Other features include NVMe over Fabrics, native NVMe storage, booting from ReFS, and management across sites with Intune, Azure Arc, Windows Admin Center and vMode. 'Hybrid intelligence' features for local AI inference (Windows ML, Foundry Local, vLLM, Llama.cpp, Execution Containers, Agent 365 integration) are in a limited early access program, and hardware requirements apply. No GA date was given.",
+ "why": "This is the first look at the next server release your lifecycle plans will target, after Windows Server 2016 support ends. Hardened defaults and a new baseline can break legacy apps that assume today's settings, so early compatibility testing pays off. Intune and Autopatch support for Windows Server 2028 is a separate private preview.",
+ "todo": [
+  "Wait: do not deploy a preview in production. If you run a lab, test line-of-business apps against the hardened Server Core configuration and new baseline.",
+  "Keep your Windows Server 2016 migration plan on track; Windows Server 2028 has no announced GA date.",
+  "Announced, not verified: features and hardware requirements may change before release."
+ ],
+ "effective_note": "Preview (Windows Server Insider Program); hybrid AI features in limited early access. No GA date announced.",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Azure → Introducing Windows Server 2028)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Windows Server 2016 end of support",
+   "url": "news/windows-server-2016-ltsc-2021-end-of-support-2027.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Introducing Windows Server 2028",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Windows Server blog (linked from the Book of News): Windows Server 2028",
+   "url": "https://techcommunity.microsoft.com/blog/WindowsServerNewsandBestPractices/windows-server-2028-a-trusted-foundation-for-an-evolving-enterprise/4574112",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17",
+ "hashtags": [
+  "MSIgnite",
+  "WindowsServer",
+  "SysAdmin"
+ ]
+}

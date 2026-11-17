@@ -1,0 +1,44 @@
+{
+ "id": "ignite-2026-work-iq-people-org-context",
+ "status": "published",
+ "title": "Ignite 2026: Work IQ gives Copilot people and org context",
+ "date": "2026-11-17",
+ "category": "Copilot/AI",
+ "ignite": true,
+ "ignite_area": "copilot",
+ "summary": "Microsoft announced people and org context in Work IQ, so Copilot and Cowork can answer questions about headcount, reporting lines, spans and skills from your organisation's own people data and definitions, within existing Copilot permissions. Per Microsoft's table, analytical reasoning, skills insights and answers grounded in standard and custom people attributes are GA; organisational context (your terminology and definitions), context configuration in the Workforce Insights Agent and the Workforce Intelligence plugin for Cowork are Frontier, rolling out through December. The Book of News also lists broader Work IQ changes: new retrieval, memory and agent actions (GA), a 'listen' capability so agents react to events and more granular governance with human approval (both preview), and integrations with OpenAI and Anthropic platforms.",
+ "why": "Answer quality depends on your people data. If HR attributes in Microsoft 365 are wrong or incomplete, Copilot will give wrong org answers with confidence. It also widens who can ask org-analytics questions in plain language, so privacy, HR and works-council stakeholders should know before it lands, even though Microsoft says it respects existing permissions and is not for performance monitoring.",
+ "todo": [
+  "Do now: check which people data flows into Microsoft 365 (Organizational Data Service, HR connectors) and its quality before users start asking headcount questions.",
+  "Brief HR and privacy owners on what the GA capabilities can answer; decide who owns the context definitions in the Workforce Insights Agent.",
+  "Wait: Frontier parts (org context configuration, Cowork plugin) and the preview 'listen' and approval controls are announced, not verified in a tenant here. Re-check availability in Message Center before planning around them."
+ ],
+ "effective_note": "Mixed: some GA, some Frontier (rollout through December), some preview — per Microsoft's announcement, not verified in a tenant.",
+ "primary": {
+  "title": "Microsoft Copilot Blog: Introducing people and org context in Work IQ",
+  "url": "https://techcommunity.microsoft.com/t5/microsoft-copilot-blog/copilot-that-understands-your-organization-introducing-people/ba-p/4573356"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "Recipe: Copilot readiness checklist",
+   "url": "recipes/copilot-readiness-checklist.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Copilot Blog (16 Nov 2026): Copilot that understands your organization",
+   "url": "https://techcommunity.microsoft.com/t5/microsoft-copilot-blog/copilot-that-understands-your-organization-introducing-people/ba-p/4573356",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Work IQ expands context, actions and controls for Copilot and agents",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17"
+}

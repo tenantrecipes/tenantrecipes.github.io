@@ -1164,3 +1164,15 @@ article.ignite-hub{background:#fffdf6;border:3px solid #1b1024;border-radius:22p
   .ig-live,.ig-blob,.ig-decor,.ig-count[data-phase="live"] .ig-count-live,.btn.ig-btn,.btn.ig-btn-2,.ig-area-chip{animation:none;transition:none;filter:none}
   .btn.ig-btn:hover,.btn.ig-btn-2:hover{transform:none}
 }
+
+/* Ignite hub subscribe box (approved 2026-11-16) */
+.ig-sub-box{position:relative;margin:0 0 26px;padding:22px 24px;border:3px solid #1b1024;border-radius:22px;color:#1b1024;
+background:linear-gradient(120deg,#ffe3f1 0%,#fff1d6 45%,#dff8ff 100%);box-shadow:10px 10px 0 #ff2d8f;display:grid;grid-template-columns:1.3fr 1fr;gap:12px 24px;align-items:center}
+.ig-sub-box h2{margin:0 0 6px;color:#1b1024;font-size:clamp(1.25rem,2.6vw,1.6rem);letter-spacing:-.02em}
+.ig-sub-box p{margin:0;color:#1b1024}
+.ig-sub-kick{display:inline-block;margin:0 0 8px!important;padding:4px 12px;border-radius:999px;background:#1b1024;color:#fff!important;font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.ig-sub-form{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.ig-sub-form input[type=email]{flex:1 1 200px;min-width:0;padding:11px 14px;border:2px solid #1b1024;border-radius:12px;font:inherit;background:#fff;color:#1b1024}
+.ig-sub-fine{grid-column:1/-1;font-size:.82rem}
+.ig-sub-fine a{color:#1b1024;text-decoration:underline}
+@media (max-width:720px){.ig-sub-box{grid-template-columns:1fr;box-shadow:6px 6px 0 #ff2d8f}}

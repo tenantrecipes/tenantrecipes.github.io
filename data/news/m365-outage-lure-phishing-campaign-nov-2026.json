@@ -1,0 +1,44 @@
+{
+ "id": "m365-outage-lure-phishing-campaign-nov-2026",
+ "status": "published",
+ "title": "Phishing campaign uses last week's Microsoft 365 outage as bait",
+ "date": "2026-11-17",
+ "category": "Security incidents",
+ "summary": "Microsoft Threat Intelligence reports a coordinated, high-volume phishing campaign, observed on 13 November 2026 across multiple sectors, that poses as Microsoft 365 service-health notices and claims messages held during a purported Exchange Online incident on 12 November will be deleted within 24 hours unless the user clicks 'RESTORE MESSAGES'. Subjects follow the pattern 'Outage – ' plus a random six-character string, with display names such as 'MSF Outage Notification' or 'AMZ Service Health'. Microsoft assesses it as likely credential phishing but has not confirmed credential capture or follow-on compromise. Defender for Office 365 blocks and quarantines the messages.",
+ "why": "Real outages make fake outage notices believable, and this one followed a genuine Exchange Online incident. A user who entered credentials gives an attacker a path to mailbox access, inbox rules, internal phishing and business email compromise, so the clean-up is about accounts, not only mail.",
+ "todo": [
+  "Do now: search mail telemetry for the sender domains, subject pattern and destination listed in Microsoft's post (Microsoft also publishes advanced hunting queries there), and purge delivered copies.",
+  "Identify users who clicked through. For anyone who may have entered credentials: reset the password, revoke sessions and refresh tokens, check MFA registrations, and review sign-ins, OAuth consents, inbox and forwarding rules and delegates.",
+  "Tell users that real Microsoft 365 service-health information lives in the admin center and that Microsoft does not send them to non-Microsoft sites to recover held mail.",
+  "Hardening: make sure Safe Links, Safe Attachments and zero-hour auto purge are on, and keep moving admins and high-risk users to phishing-resistant MFA."
+ ],
+ "effective": "2026-11-13",
+ "primary": {
+  "title": "Microsoft Security Blog: High volume phishing campaign uses Microsoft 365 outage lures",
+  "url": "https://www.microsoft.com/en-us/security/blog/2026/11/16/high-volume-phishing-campaign-uses-microsoft-365-outage-lures-target-multiple-industry-sectors-2/"
+ },
+ "related": [
+  {
+   "title": "News: Microsoft 365 outage 12–13 November – preliminary PIR",
+   "url": "news/m365-outage-2026-11-12-preliminary-pir.html"
+  },
+  {
+   "title": "Recipe: Teams ZAP and QR-code phishing in Defender",
+   "url": "recipes/defender-teams-zap-qr-phishing.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Security Blog (16 Nov 2026): High volume phishing campaign uses Microsoft 365 outage lures",
+   "url": "https://www.microsoft.com/en-us/security/blog/2026/11/16/high-volume-phishing-campaign-uses-microsoft-365-outage-lures-target-multiple-industry-sectors-2/",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17",
+ "hashtags": [
+  "Phishing",
+  "CyberSecurity",
+  "Microsoft365",
+  "DefenderXDR"
+ ]
+}

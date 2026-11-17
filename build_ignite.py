@@ -46,7 +46,10 @@ KEYNOTE_PT = "10:00–12:00 PT"
 KEYNOTE_SE = "19:00–21:00 Europe/Stockholm"
 OFFICIAL_HOME = "https://ignite.microsoft.com/en-US/home"
 OFFICIAL_SESSIONS = "https://ignite.microsoft.com/en-US/sessions"
-# Book of News 2026 URL is not confirmed; do not present a 2026 Book of News as fact.
+# Book of News 2026 went live after the opening keynote on 17 Nov 2026 (checked 21:30 Europe/Stockholm).
+BOOK_OF_NEWS = "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+
+import site_config as C
 
 AREAS = [
     ("copilot", "Copilot & agents", "Copilot, agents, plugins and Copilot Studio."),
@@ -316,13 +319,36 @@ def home_banner(rel, fmt_date, today=None) -> str:
         f'<div class="ig-banner-copy">'
         f'<p class="ig-kicker"><span class="ig-live" aria-hidden="true"></span>{E(_phase_label(today))} · 17–20 Nov 2026</p>'
         + _wordmark("h2", "ig-banner-h", "As it matters to admins")
-        + f'<p class="ig-banner-lead">Opening keynote Tuesday 17 November, {E(KEYNOTE_SE)} '
-        f'({E(KEYNOTE_PT)}), from Chase Center in San Francisco and online. Independent coverage — not affiliated with Microsoft.</p>'
+        + (f'<p class="ig-banner-lead">The opening keynote is done and Microsoft has published its Book of News. '
+           'Below: our latest short, source-linked headlines for tenant admins, with previews clearly marked. Independent coverage — not affiliated with Microsoft.</p>'
+           if today_stockholm(today) >= EVENT_START else
+           f'<p class="ig-banner-lead">Opening keynote Tuesday 17 November, {E(KEYNOTE_SE)} '
+           f'({E(KEYNOTE_PT)}), from Chase Center in San Francisco and online. Independent coverage — not affiliated with Microsoft.</p>')
         + _countdown_html()
         + f'<p class="ig-cta">'
         f'<a class="btn ig-btn" href="{rel}ignite/index.html">Open the Ignite hub</a>'
-        f'<a class="btn ig-btn-2" href="{E(OFFICIAL_HOME)}" rel="noopener">Official event site</a>'
+        f'<a class="btn ig-btn-2" href="{E(BOOK_OF_NEWS)}" rel="noopener">Book of News</a>'
         f'</p></div>{news}</div>{_countdown_js()}</section>'
+    )
+
+
+def _subscribe_box(rel) -> str:
+    """Buttondown signup in Ignite style (approved by Krister 2026-11-16 21:24, "Ok på allt")."""
+    u = E(C.BUTTONDOWN_USERNAME)
+    return (
+        '<section class="ig-sub-box" id="ignite-subscribe" aria-labelledby="ig-sub-h">'
+        '<div class="ig-sub-txt"><p class="ig-sub-kick">Weekly Brief · Ignite special</p>'
+        '<h2 id="ig-sub-h">Get the Ignite 2026 summary in your inbox</h2>'
+        '<p>Our Ignite wrap-up for tenant admins goes out in the Tenant Recipes Weekly Brief on <strong>Friday 20 November 2026</strong>: '
+        'what was announced, what is actually available, and what to check in your tenant. Free, no fluff.</p></div>'
+        f'<form class="bd-form ig-sub-form" action="https://buttondown.com/api/emails/embed-subscribe/{u}" method="post" target="_blank">'
+        '<label class="sr" for="bd-email-ignite">Email address</label>'
+        '<input id="bd-email-ignite" type="email" name="email" required autocomplete="email" placeholder="you@company.com"> '
+        '<input type="hidden" name="embed" value="1">'
+        '<input type="hidden" name="metadata__source" value="ignite-hub">'
+        '<button class="btn ig-btn" type="submit">Subscribe</button></form>'
+        f'<p class="fine ig-sub-fine">Free. Unsubscribe anytime. See the <a href="{rel}privacy.html">privacy policy</a>.</p>'
+        '</section>'
     )
 
 
@@ -358,13 +384,15 @@ def body(rel, fmt_date):
         f'Scheduled speakers: Satya Nadella and Judson Althoff.</dd></div>'
         f'<div><dt>Security Pre-Day</dt><dd>Monday 16 November 2026, 22:00–02:00 Europe/Stockholm (13:00–17:00 PT). Optional add-on during registration.</dd></div>'
         f'<div><dt>Official site</dt><dd><a href="{E(OFFICIAL_HOME)}" rel="noopener">ignite.microsoft.com</a> · '
+        f'<a href="{E(BOOK_OF_NEWS)}" rel="noopener">Book of News</a> · '
         f'<a href="{E(OFFICIAL_SESSIONS)}" rel="noopener">Session catalog</a></dd></div>'
         f'</dl>'
         '<p class="fine">Times converted from Pacific Time with zoneinfo (PST UTC−8, CET UTC+1). '
         'Sources: the <a href="https://www.microsoft.com/en/events" rel="noopener">Microsoft Events</a> page, '
         'the official <a href="https://ignite.microsoft.com/en-US/home" rel="noopener">Ignite homepage</a>, and '
         '<a href="https://www.microsoft.com/en-us/security/blog/2026/09/30/secure-whats-next-your-guide-to-microsoft-security-at-microsoft-ignite-2026/" rel="noopener">Microsoft Security Blog, 30 September 2026</a>. '
-        "Microsoft's <a href=\"https://news.microsoft.com/events/ignite/2026/live-news/\" rel=\"noopener\">Ignite live news page</a> (16 November 2026) refers to a Book of News, but no 2026 Book of News URL was public at the time of writing; we link it once it is live.</p>"
+        "Microsoft's official summary of the announcements is the <a href=\"" + BOOK_OF_NEWS + "\" rel=\"noopener\">Microsoft Ignite 2026 Book of News</a> (published 17 November 2026, after the opening keynote). "
+        "Microsoft notes that its instant summaries are AI-generated; we work from the full Book of News items and linked blogs.</p>"
     )
     hero = (
         f'<section class="ig-page-hero" aria-labelledby="ig-hub-h">'
@@ -376,6 +404,7 @@ def body(rel, fmt_date):
         + f'<p class="ig-page-lead">{E(LEAD)} Opening keynote Tuesday 17 November, {E(KEYNOTE_SE)} ({E(KEYNOTE_PT)}).</p>'
         + _countdown_html()
         + f'<p class="ig-cta"><a class="btn ig-btn" href="{E(OFFICIAL_HOME)}" rel="noopener">Official event site</a>'
+        f'<a class="btn ig-btn-2" href="{E(BOOK_OF_NEWS)}" rel="noopener">Book of News</a>'
         f'<a class="btn ig-btn-2" href="{E(OFFICIAL_SESSIONS)}" rel="noopener">Session catalog</a></p>'
         + '<nav class="ig-area-nav" aria-label="Jump to an area">'
         + "".join(
@@ -396,6 +425,7 @@ def body(rel, fmt_date):
         hero
         + '<main class="wrap pg"><article class="prose doc ignite-hub">'
         + draft
+        + _subscribe_box(rel)
         + '<div class="ig-hero-panel"><h2>Event at a glance</h2>'
         + facts
         + "</div>"

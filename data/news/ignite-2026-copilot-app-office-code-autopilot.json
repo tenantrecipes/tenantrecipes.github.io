@@ -1,0 +1,59 @@
+{
+ "id": "ignite-2026-copilot-app-office-code-autopilot",
+ "status": "published",
+ "title": "Ignite 2026: Office in Copilot GA; Copilot Code GA in December",
+ "date": "2026-11-17",
+ "category": "Copilot/AI",
+ "ignite": true,
+ "ignite_area": "copilot",
+ "summary": "Microsoft's Copilot announcements: Home (Chat plus Cowork) is rolling out worldwide; Office in Copilot, which brings Word, Excel and PowerPoint into the Copilot app with files saved to OneDrive under existing permissions and sensitivity labels, is GA; Copilot Managed Runtime, which hosts apps built in Code, Cowork and Copilot Studio, is GA. Copilot Code (natural-language app building in a sandbox inside the tenant, managed in the Microsoft 365 admin center) is in the Frontier program, with GA planned for December. Autopilot, a long-running personal agent with its own agent identity that colleagues can @mention in Teams, is rolling out through Frontier. 'Today' (morning brief included with a Copilot licence; an all-day feed that uses Copilot credits) starts in private preview.",
+ "why": "Copilot is turning into an app platform: users will create documents, apps and long-running agents from one place. Each piece lands on controls you already own (OneDrive permissions, labels, admin center app management, agent identities), but usage-based parts such as Today Feed consume Copilot credits.",
+ "todo": [
+  "Do now: check that sensitivity labels and OneDrive sharing defaults are where you want them, because Office in Copilot saves into OneDrive with those controls.",
+  "Decide who may publish apps through Copilot Managed Runtime and how they will be reviewed before Copilot Code reaches GA.",
+  "Wait: Copilot Code GA (December), Autopilot and Today are Frontier or private preview — announced, not verified. Plan cost controls for credit-consuming features before enabling them."
+ ],
+ "effective_note": "Office in Copilot and Copilot Managed Runtime GA; Copilot Code GA planned for December; Autopilot and Today in Frontier/private preview — per Microsoft.",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Microsoft Copilot)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "Recipe: Sensitivity labels for Copilot",
+   "url": "recipes/purview-sensitivity-labels-copilot.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Home in the Microsoft Copilot app",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Easily build secure apps with Copilot Code",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Autopilot is rolling out to Frontier customers",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Today helps people prioritize and act on what matters",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Copilot Blog (17 Nov 2026, linked from the Book of News)",
+   "url": "https://www.microsoft.com/en-us/copilot/blog/2026/11/17/copilot-at-microsoft-ignite-expanding-whats-possible-with-intelligence-built-for-work/",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17"
+}

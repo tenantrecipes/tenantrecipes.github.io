@@ -1,5 +1,59 @@
 [
  {
+  "date": "2026-11-17",
+  "kind": "site",
+  "type": "Page",
+  "title": "Ignite hub: Book of News link and Weekly Brief signup",
+  "blurb": "The /ignite/ hub now links Microsoft's Ignite 2026 Book of News and has a signup box for the Ignite summary in the Weekly Brief on Friday 20 November.",
+  "url": "ignite/index.html",
+  "text": "Ignite hub update: official Book of News link, colorful Buttondown signup box for the Ignite special of the Weekly Brief (20 Nov), post-keynote homepage banner text."
+ },
+ {
+  "date": "2026-11-17",
+  "kind": "site",
+  "type": "News",
+  "title": "10 Ignite 2026 news items for admins",
+  "blurb": "Entra, Defender, Intune/Windows, Agent 365, Copilot, Purview, on-prem Exchange/SharePoint, Edge, Windows Server 2028 and Work IQ — previews marked as announced.",
+  "url": "ignite/index.html",
+  "text": "Ignite 2026 news from the Book of News: Entra CA policy plans and agent IDs, Defender runtime protection for local AI agents, Intune local agent compliance, Agent 365 insights and plugin governance, Office in Copilot and Copilot Code, Purview DLP for unlabeled files, on-premises baseline security mode, Edge extension safety, Windows Server 2028 preview, Work IQ people and org context."
+ },
+ {
+  "date": "2026-11-17",
+  "kind": "site",
+  "type": "News",
+  "title": "Reject Direct Send GA in Exchange Online",
+  "blurb": "Block unauthenticated Direct Send that uses your own domains; find legitimate senders with the Change Optics Report first.",
+  "url": "news/exchange-online-reject-direct-send-ga.html",
+  "text": "Exchange Online Reject Direct Send generally available, Set-OrganizationConfig -RejectDirectSend, Change Optics Report, partner inbound connectors."
+ },
+ {
+  "date": "2026-11-17",
+  "kind": "site",
+  "type": "News",
+  "title": "Phishing with Microsoft 365 outage lures",
+  "blurb": "Fake service-health notices about held mail after the 12 November incident; hunt, purge and check accounts.",
+  "url": "news/m365-outage-lure-phishing-campaign-nov-2026.html",
+  "text": "Microsoft Threat Intelligence: high-volume phishing campaign with Microsoft 365 outage lures, Outage subject pattern, credential phishing response."
+ },
+ {
+  "date": "2026-11-17",
+  "kind": "site",
+  "type": "Security",
+  "title": "Puppet Enterprise CVE-2026-115731 (KEV)",
+  "blurb": "Exploited report deserialization RCE on Puppet Server; upgrade and stop naive autosigning.",
+  "url": "security/puppet-enterprise-report-deserialization-cve-2026-115731.html",
+  "text": "KEV 17 Nov 2026: Perforce Puppet Enterprise deserialization CVE-2026-115731, fixed versions per NVD."
+ },
+ {
+  "date": "2026-11-17",
+  "kind": "site",
+  "type": "Security",
+  "title": "Adobe Commerce CVE-2026-71362 (KEV)",
+  "blurb": "Exploited unauthenticated authorization flaw fixed in APSB26-92 (2026-aug releases).",
+  "url": "security/adobe-commerce-apsb26-92-cve-2026-71362.html",
+  "text": "KEV backlog: Adobe Commerce and Magento incorrect authorization CVE-2026-71362, APSB26-92."
+ },
+ {
   "date": "2026-11-16",
   "kind": "site",
   "type": "Page",

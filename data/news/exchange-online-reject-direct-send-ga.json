@@ -1,0 +1,39 @@
+{
+ "id": "exchange-online-reject-direct-send-ga",
+ "status": "published",
+ "title": "Reject Direct Send is generally available in Exchange Online",
+ "date": "2026-11-17",
+ "category": "M365",
+ "summary": "Microsoft made Reject Direct Send generally available for Exchange Online worldwide tenants on 16 November 2026: when it is on, anonymous messages (not attributed to any connector) whose envelope sender (P1 MAIL FROM) uses one of your accepted domains are rejected with 550 5.7.68, wherever your MX points and including subdomains when the accepted domain matches them. The From header is not evaluated, and the Change Optics Report (Reports > Mail flow) that shows sample Direct Send traffic is now GA too. The setting stays opt-in for existing tenants, while Microsoft is rolling it out on by default, with no opt-out, for new tenants. It is not available in GCC High or DoD.",
+ "why": "Direct Send lets anyone hand mail to your tenant using your own domain without authenticating, which makes it a cheap internal-spoofing path. Most organisations do not need it, but printers, scanners, line-of-business apps and SaaS services often rely on it silently. Turning the setting on without first giving those senders a connector will bounce their mail.",
+ "todo": [
+  "Do now: open Reports > Mail flow > Change Optics Report in the Exchange admin center and review the Direct Send (DRS) scenario to find legitimate senders. Your SPF records are a second inventory source.",
+  "For each legitimate sender, create a partner inbound connector matched on its TLS certificate (Microsoft's recommendation) or its sending IPs, and confirm with message trace that its mail is attributed to the connector.",
+  "Then enable it with `Set-OrganizationConfig -RejectDirectSend $true` (Organization Configuration role) and check with `Get-OrganizationConfig | Format-List RejectDirectSend`. Changes take up to 30 minutes to propagate.",
+  "Watch for the documented known issue: mail you send to a third party that forwards it back without SRS will be rejected unless a connector covers it."
+ ],
+ "effective": "2026-11-16",
+ "primary": {
+  "title": "Exchange Team Blog: Reject Direct Send now Generally Available in Exchange Online",
+  "url": "https://techcommunity.microsoft.com/t5/exchange-team-blog/reject-direct-send-now-generally-available-in-exchange-online/ba-p/4573787"
+ },
+ "related": [
+  {
+   "title": "Recipe: MDO recipient conditions audit",
+   "url": "recipes/mdo-recipient-conditions-or-audit.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Exchange Team Blog: Reject Direct Send now Generally Available (16 Nov 2026)",
+   "url": "https://techcommunity.microsoft.com/t5/exchange-team-blog/reject-direct-send-now-generally-available-in-exchange-online/ba-p/4573787",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Learn: Configure mail flow using connectors in Exchange Online",
+   "url": "https://learn.microsoft.com/en-us/exchange/mail-flow-best-practices/use-connectors-to-configure-mail-flow/use-connectors-to-configure-mail-flow",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17"
+}

@@ -1,0 +1,59 @@
+{
+ "id": "ignite-2026-intune-local-agents-windows-baseline",
+ "status": "published",
+ "title": "Ignite 2026: Intune can mark devices with unapproved agents",
+ "date": "2026-11-17",
+ "category": "Intune",
+ "ignite": true,
+ "ignite_area": "endpoint",
+ "summary": "Microsoft announced, in preview, Intune controls for local AI agents: discover agents running on managed devices via Agent 365, mark devices with unapproved agents as noncompliant through software compliance policies, and let Conditional Access block them from company data. Approved agents can be bounded with Microsoft Execution Containers, and Global Secure Access adds network controls. Separately, the Book of News lists Windows baseline protection (private preview), a Windows Endpoint Security Platform for security vendors (GA), Intune and Autopatch support for Windows Server 2028 in client-like scenarios (private preview), Enterprise App Management updating all Windows apps, not just IT-deployed ones (private preview), declarative device management (preview), experience controls for new Windows features (private preview) and OS reliability reporting in Autopatch (private preview).",
+ "why": "Using compliance plus Conditional Access for agents means the control you already rely on for devices becomes the enforcement point for shadow AI tools. But most of this is preview or private preview, so it is a direction to plan for rather than something to deploy this week.",
+ "todo": [
+  "Do now: decide what 'approved local agent' means in your organisation and who signs off, so the compliance rule is ready when the preview reaches you.",
+  "Review your compliance-to-Conditional-Access chain: a new noncompliance reason can block users, so pilot it on a test group with report-only CA first.",
+  "Wait: all agent controls listed here are preview, and the Windows and Autopatch items are mostly private preview. Announced, not verified; watch Message Center and the Intune 'What's new' page."
+ ],
+ "effective_note": "Preview / private preview per Microsoft (Windows Endpoint Security Platform is GA).",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Security → Intune; Windows)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "Recipe: Intune compliance baseline",
+   "url": "recipes/intune-compliance-baseline.html"
+  },
+  {
+   "title": "Recipe: Windows Autopatch",
+   "url": "recipes/intune-windows-autopatch.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Microsoft Intune helps secure AI adoption and reduce endpoint risk",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News: New Windows and Microsoft Intune capabilities",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Windows Experience Blog (linked from the Book of News): Microsoft Ignite 2026",
+   "url": "https://blogs.windows.com/windowsexperience/2026/11/17/microsoft-ignite-2026-building-windows-for-the-next-era-of-work/",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17",
+ "hashtags": [
+  "MSIgnite",
+  "MicrosoftIntune",
+  "Windows",
+  "CyberSecurity"
+ ]
+}

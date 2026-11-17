@@ -1,0 +1,54 @@
+{
+ "id": "ignite-2026-defender-local-ai-agent-runtime-protection",
+ "status": "published",
+ "title": "Ignite 2026: Defender protects local AI agents at runtime",
+ "date": "2026-11-17",
+ "category": "Defender",
+ "ignite": true,
+ "ignite_area": "security",
+ "summary": "Microsoft says runtime protection for local AI agents on Windows is generally available for Defender for Endpoint P2 customers. Agent-native protection covers Claude Code, GitHub Copilot CLI, the GitHub Copilot app, Claude Desktop (Code) and the VS Code GitHub Copilot and Claude Code extensions; network-based protection covers Open Claw, Ollama Desktop, ChatGPT Classic and ChatGPT Desktop. Defender scans agent calls for malicious hidden instructions and can be set to Audit or Block in the Defender or Intune portal. Also announced: core Integrated Security Operations Center (ISOC) capabilities GA, with full SIEM breadth and 90 days of included Defender data retention in preview, and 'vulnerability shielding' in preview, which applies temporary controls to known-vulnerable systems during an active attack.",
+ "why": "Coding agents run with the user's access and read untrusted content (repos, issues, web pages), so prompt injection on the endpoint is a real path to data loss or unwanted commands. This gives you a policy control on endpoints you already manage, rather than relying on each tool's own guardrails. On 7 November Microsoft still listed this runtime protection as preview; the Book of News now calls it generally available.",
+ "todo": [
+  "Do now: if you have MDE P2, find the runtime protection setting for local AI agents and start in Audit mode on developer devices to see what it flags.",
+  "Inventory which of the listed agents are actually in use; anything not on Microsoft's list is not covered by this announcement.",
+  "Wait: vulnerability shielding and the extended ISOC/SIEM features are preview. Read them as announced, not verified, and do not count shielding as a substitute for patching."
+ ],
+ "effective_note": "Runtime protection for local AI agents: GA (MDE P2) per Microsoft. ISOC core GA; SIEM breadth, 90-day retention and vulnerability shielding in preview.",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Security → Defender)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Microsoft research on poisoned coding agents",
+   "url": "news/coding-agent-post-training-backdoors.html"
+  },
+  {
+   "title": "News (7 Nov): Defender discovers local AI agents; MXC GA",
+   "url": "news/defender-local-ai-agent-discovery-mxc-ga.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Microsoft Defender extends runtime protection for local AI agents",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Integrated Security Operations Center now generally available, vulnerability shielding in preview",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17",
+ "hashtags": [
+  "MSIgnite",
+  "DefenderXDR",
+  "AISecurity",
+  "CyberSecurity"
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "id": "ignite-2026-purview-dlp-copilot-unlabeled-files",
+ "status": "published",
+ "title": "Ignite 2026: Purview DLP to block Copilot on unlabeled files",
+ "date": "2026-11-17",
+ "category": "Purview",
+ "ignite": true,
+ "ignite_area": "security",
+ "summary": "Microsoft is previewing Purview changes aimed at Copilot rollouts: DLP for Copilot will be able to block Copilot from referencing files that contain sensitive information even when those files are not labeled, and prompt protection will extend to attachments, linked files and text. Purview will also improve automatic classification and labelling, and extend data security controls to AI agents running on Windows endpoints, applied per agent or per group of agents.",
+ "why": "Today, Copilot DLP that relies on labels only protects what you have managed to label. Content-based blocking for unlabeled files would close the biggest gap in most tenants, where labelling coverage is low. It is a preview announcement, so it does not change what you should configure today.",
+ "todo": [
+  "Do now: keep the label-based DLP policy for the Microsoft 365 Copilot location in place and measure how much sensitive content is still unlabeled.",
+  "Prepare sensitive information types and trainable classifiers you trust; content-based blocking will only be as good as those detections.",
+  "Wait: all items are preview per Microsoft — announced, not verified. Test in a pilot when it reaches your tenant before applying it broadly."
+ ],
+ "effective_note": "Preview — per Microsoft's Book of News. No GA date given.",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Security → Purview)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "Recipe: Purview DLP for the Copilot location",
+   "url": "recipes/purview-dlp-copilot-location.html"
+  },
+  {
+   "title": "Recipe: Purview oversharing assessment",
+   "url": "recipes/purview-oversharing-assessment.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Microsoft Purview helps accelerate Copilot deployment and secure agent interactions",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17"
+}

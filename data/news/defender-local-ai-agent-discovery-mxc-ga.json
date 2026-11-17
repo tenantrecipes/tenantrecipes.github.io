@@ -4,7 +4,7 @@
  "title": "Defender discovers local AI agents and their MCP servers (GA); Microsoft Execution Containers GA for agent containment",
  "date": "2026-11-07",
  "category": "Defender",
- "summary": "Microsoft Defender now generally discovers more than 50 local AI agents and their configured MCP servers on onboarded Windows and macOS devices, including coding CLIs (Claude Code, Codex CLI, Gemini CLI, GitHub Copilot CLI), desktop apps, agentic IDEs such as Cursor and VS Code extensions. Discovered agents appear under Assets with device, account, version and MCP context, feed the exposure graph and advanced hunting, and require Defender for Endpoint P2 or higher. Runtime prompt-injection protection for Windows agents (audit or block) remains in preview, while Microsoft Execution Containers (MXC), an OS-enforced least-privilege containment layer for AI agents on Windows, reached general availability in the November 2026 security update.",
+ "summary": "Microsoft Defender now generally discovers more than 50 local AI agents and their configured MCP servers on onboarded Windows and macOS devices, including coding CLIs (Claude Code, Codex CLI, Gemini CLI, GitHub Copilot CLI), desktop apps, agentic IDEs such as Cursor and VS Code extensions. Discovered agents appear under Assets with device, account, version and MCP context, feed the exposure graph and advanced hunting, and require Defender for Endpoint P2 or higher. Runtime prompt-injection protection for Windows agents (audit or block) was still in preview on 7 November (Microsoft announced it generally available for a named list of agents at Ignite on 17 November 2026), while Microsoft Execution Containers (MXC), an OS-enforced least-privilege containment layer for AI agents on Windows, reached general availability in the November 2026 security update.",
  "why": "Local agents run with the user's tokens, files and credentials and can reach arbitrary tools through MCP — the shadow-AI surface that CASB and SWG discovery never sees. For governance teams this is the first first-party inventory of endpoint agents that maps to your approved/conditional/denied list; for red and purple teams it is a new telemetry source to validate (and a reminder that unsupported or renamed agents fall outside the matrix).",
  "todo": [
   "In the Defender portal, open Assets and export discovered local agents and MCP server configurations; reconcile them against your approved enterprise AI inventory and flag personal-key or unknown MCP endpoints.",
@@ -19,6 +19,10 @@
   "url": "https://techcommunity.microsoft.com/blog/microsoftthreatprotectionblog/now-generally-available-discover-local-ai-agents-with-microsoft-defender/4568216"
  },
  "related": [
+  {
+   "title": "Update 17 Nov: Defender runtime protection for local AI agents GA (Ignite 2026)",
+   "url": "news/ignite-2026-defender-local-ai-agent-runtime-protection.html"
+  },
   {
    "title": "Enterprise AI governance for Copilot and every enterprise LLM",
    "url": "guides/enterprise-ai-governance.html"

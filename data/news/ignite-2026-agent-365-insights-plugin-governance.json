@@ -1,0 +1,59 @@
+{
+ "id": "ignite-2026-agent-365-insights-plugin-governance",
+ "status": "published",
+ "title": "Ignite 2026: Agent 365 usage insights no longer need a licence",
+ "date": "2026-11-17",
+ "category": "Copilot/AI",
+ "ignite": true,
+ "ignite_area": "copilot",
+ "summary": "Microsoft says Agent 365 usage and activity insights in the Microsoft 365 admin center (agent overview, active users, sessions, exception rate, run time) are now GA for Microsoft pre-built agents and agents built on Microsoft platforms regardless of Agent 365 licensing, and Viva Insights drops its Agent 365 requirement for agent insights while keeping the 50-Copilot-licence minimum. Plugins and skills governance for Copilot and Cowork is GA, so admins can control availability and assign plugins and skills to users and groups. Agent Map task classification, MCP server governance via Azure AI Gateway and LiteLLM, local/shadow agent observation and Agent 365 Cost Management (spend policies, limits, alerts) are in preview. An action center for inactive and ownerless agents is expected in private preview in December.",
+ "why": "Every tenant with Copilot agents now gets basic usage telemetry for free, which is enough to start finding unused and unowned agents. Plugin and skill assignment by group is the control you need before the new Copilot Home navigation drives more plugin requests.",
+ "todo": [
+  "Do now: open the agent insights in the Microsoft 365 admin center and list agents with no recent use or no clear owner.",
+  "Set up plugin and skill assignment by group rather than tenant-wide availability, starting with high-risk connectors.",
+  "Wait: the action center (December, private preview), MCP gateway governance and cost policies are announced, not verified. Third-party agent insights and Defender/Purview risk data still need an Agent 365 or ME7 licence."
+ ],
+ "effective_note": "Insights and plugin/skill governance GA; other items preview or expected in December — per Microsoft.",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Security → Agent 365)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "Recipe: Agent inventory in the admin center",
+   "url": "recipes/agents-inventory-admin-center.html"
+  },
+  {
+   "title": "News: Copilot plugins move into Copilot Home",
+   "url": "news/ignite-2026-copilot-plugin-catalog.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Management insights now default for Microsoft agents",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Microsoft Agent 365 expands governance for agents and their tools",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Agent 365 turns AI spend into business value with FinOps for AI",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17",
+ "hashtags": [
+  "MSIgnite",
+  "Copilot",
+  "Microsoft365",
+  "AI"
+ ]
+}

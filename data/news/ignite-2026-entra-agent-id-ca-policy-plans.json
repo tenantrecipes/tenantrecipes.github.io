@@ -1,0 +1,54 @@
+{
+ "id": "ignite-2026-entra-agent-id-ca-policy-plans",
+ "status": "published",
+ "title": "Ignite 2026: Entra adds CA policy plans, backup and agent IDs",
+ "date": "2026-11-17",
+ "category": "Entra",
+ "ignite": true,
+ "ignite_area": "security",
+ "summary": "The Ignite Book of News lists a long Entra update. Generally available: Microsoft MCP Server for Enterprise (agents and apps query Entra data through a permissions-based interface) and agentic traffic acquisition in Global Secure Access. In preview or announced as preview: Agent ID automatically assigned to discovered local agents (starting with GitHub Copilot CLI and Claude Code) and to Autopilot agents; Conditional Access policy plans (express access intent once, enforce consistently); high assurance credentials; Entra Backup and Recovery Premium with 30-day retention and Microsoft 365 Backup integration; cross-tenant configuration management; PIM and dynamic group additions (MemberOf, transitive 'reports to'); and Global Secure Access controls for local agents, an MCP Firewall and adaptive access.",
+ "why": "Two themes matter for tenant admins. First, local coding agents are being given their own identities, which separates agent activity from the user in logs and policy. Second, several long-requested admin features (longer directory backup, cross-tenant configuration drift control, CA at scale) arrive as previews, so they are not yet something to design production around.",
+ "todo": [
+  "Do now: if developers use GitHub Copilot CLI or Claude Code, decide who will own agent identities in Entra and how they fit your Conditional Access and access review model.",
+  "Evaluate Microsoft MCP Server for Enterprise (GA) carefully: scope its permissions like any other app with directory read access.",
+  "Wait: CA policy plans, Backup and Recovery Premium, cross-tenant configuration management and the GSA agent controls are preview per Microsoft; treat them as announced and unverified until they appear in your tenant and Message Center."
+ ],
+ "effective_note": "Mostly preview; MCP Server for Enterprise and agentic traffic acquisition GA — per Microsoft's Book of News.",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Security → Entra)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Entra session list shows humans and agents",
+   "url": "news/ignite-2026-entra-agent-access-sessions.html"
+  },
+  {
+   "title": "Recipe: PIM least privilege for daily operations",
+   "url": "recipes/pim-least-privilege-daily-ops.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Microsoft Entra expands secure identity and access for agentic AI era",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-17"
+  },
+  {
+   "title": "Microsoft Entra Blog (linked from the Book of News): AI is changing access",
+   "url": "https://techcommunity.microsoft.com/blog/microsoft-entra-blog/ai-is-changing-access-see-how-entra-helps-you-stay-ahead-/4556456",
+   "checked": "2026-11-17"
+  }
+ ],
+ "last_verified": "2026-11-17",
+ "hashtags": [
+  "MSIgnite",
+  "EntraID",
+  "ZeroTrust",
+  "CyberSecurity"
+ ]
+}

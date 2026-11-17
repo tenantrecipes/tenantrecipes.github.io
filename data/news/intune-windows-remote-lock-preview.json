@@ -11,7 +11,8 @@
     "Prepare two device groups and two custom profiles in advance: LockState 1 assigned only to a lock group, LockState 0 assigned only to an unlock group. Microsoft's unlock path is to move the device from the lock group to the unlock group. There is no PIN, password, local-admin or web sign-in override.",
     "Keep BitLocker on. Microsoft says boot and recovery paths are not blocked, so encryption is what protects the drive if it is removed or the device is reimaged.",
     "If the identity is also at risk, disable the user and revoke sessions in Microsoft Entra ID. Remote lock does not touch the account. To stop that device authenticating to Entra ID, disable the Entra device object as a separate step.",
-    "Do not confuse this with Intune's existing Remote lock device action, which Microsoft documents for Android, iOS/iPadOS, macOS and visionOS, not for Windows."
+    "Do not confuse this with Intune's existing Remote lock device action, which Microsoft documents for Android, iOS/iPadOS, macOS and visionOS, not for Windows.",
+    "Use the optional LockReason (up to 1,024 characters) and RecoveryHint (up to 256 characters) OMA-URI settings so the user sees why the device is locked and whom to call,. The read-only Status node reports the effective state (0 Unlocked, 1 Locked, 2 Lock pending, 3 Error); a pending lock is not yet a locked device."
   ],
   "effective_note": "Insider only — not generally available. The only named build is Windows 11 Insider Experimental (Future Platforms) Preview Build 29708.1001 (13 November 2026). Features in that channel may be rolled out gradually and might never ship more broadly. No GA Windows build or KB has been announced. Do not roll this out to production; revisit when it reaches general availability. Not a generally available Intune device action for Windows.",
   "primary": {
@@ -28,7 +29,7 @@
     {
       "title": "Microsoft Learn: Remote lock for Windows Devices (Preview)",
       "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/remote-lock-for-windows",
-      "checked": "2026-11-14"
+      "checked": "2026-11-17"
     },
     {
       "title": "Windows 11 Insider Experimental (Future Platforms) Preview Build 29708.1001",
@@ -41,6 +42,6 @@
       "checked": "2026-11-14"
     }
   ],
-  "last_verified": "2026-11-14",
+  "last_verified": "2026-11-17",
   "recipe": "intune-windows-remote-lock-preview"
 }
