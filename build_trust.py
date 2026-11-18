@@ -115,6 +115,23 @@ def ad_slot(name):
             '<span class="slot-label">Advertisement</span></aside>')
 
 
+def footer_cta(rel):
+    """Discreet footer box: Weekly Brief signup (existing Buttondown form) + 'Sponsor Tenant Recipes' -> contact page.
+    DRAFT 2026-11-18, not yet approved. No prices or numbers."""
+    u = esc(C.BUTTONDOWN_USERNAME)
+    return ('<div class="sf-cta" role="region" aria-label="Weekly Brief and sponsorship">'
+            '<div class="sf-cta-nl"><p><strong>Weekly Brief</strong> · Microsoft 365 changes, security updates and one tip to try in your tenant. '
+            f'Free, once a week. <a href="{rel}newsletter-sample.html">See a sample</a>.</p>'
+            f'<form class="bd-form sf-cta-f" action="https://buttondown.com/api/emails/embed-subscribe/{u}" method="post" target="_blank">'
+            '<label class="sr" for="bd-email-sf">Email address</label>'
+            '<input id="bd-email-sf" type="email" name="email" required autocomplete="email" placeholder="you@company.com">'
+            '<input type="hidden" name="embed" value="1"><input type="hidden" name="metadata__source" value="footer">'
+            '<button class="sf-cta-b" type="submit">Subscribe</button></form></div>'
+            '<div class="sf-cta-sp"><p><strong>Sponsor Tenant Recipes</strong> · Want to support independent, fact-checked content for Microsoft 365 admins? '
+            'Sponsorships are clearly labelled and never include subscriber data.</p>'
+            f'<a class="sf-cta-l" href="{rel}contact/index.html">Sponsor Tenant Recipes →</a></div></div>')
+
+
 def footer(rel, guide_slug, path="", title="", updated=None):
     col = lambda h, links: (f'<div><h4>{h}</h4><ul>' + "".join(f'<li><a href="{u}">{t}</a></li>' for t, u in links) + '</ul></div>')
     rep = report_url(path, title or C.SITE_NAME) if path else f"{REPO}/issues/new/choose"
@@ -136,7 +153,8 @@ def footer(rel, guide_slug, path="", title="", updated=None):
             + col("Stay updated", [("Newsletter", f"{rel}newsletter.html"), ("Sample issue", f"{rel}newsletter-sample.html"), (f"X (@{C.X_HANDLE})", f"https://x.com/{C.X_HANDLE}"), ("Atom / RSS feed", f"{rel}feed.xml"),
                                    ("Suggest a recipe", f"{REPO}/issues/new?template=suggest-recipe.yml")])
             + col("Legal", [("Privacy policy", f"{rel}privacy.html"), ("Disclaimer", f"{rel}about.html#disclaimer"), ("Terms of use", f"{rel}about.html#terms")])
-            + f'</div><p class="sf-ind">{icon("shield")}<strong>Independent, not affiliated with Microsoft.</strong> No sponsors, no affiliate links; every claim links to its source.</p>'
+            + '</div>' + footer_cta(rel)
+            + f'<p class="sf-ind">{icon("shield")}<strong>Independent, not affiliated with Microsoft.</strong> No sponsors, no affiliate links; every claim links to its source.</p>'
             f'<p class="sf-b">© {TODAY.year} Tenant Recipes · Microsoft, Microsoft 365, Copilot, Entra, Intune and Purview are trademarks of the Microsoft group of companies. '
             'Other product names belong to their owners.</p></footer>')
 

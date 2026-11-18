@@ -1,0 +1,49 @@
+{
+ "id": "ignite-2026-entra-guest-lifecycle-ga-pim-expansion",
+ "status": "published",
+ "title": "Ignite 2026: Entra guest lifecycle GA; PIM covers agents",
+ "date": "2026-11-18",
+ "category": "Entra",
+ "ignite": true,
+ "ignite_area": "security",
+ "summary": "Microsoft's Entra Ignite post adds items not in our earlier Ignite coverage. Generally available: Entra ID Governance guest lifecycle policies (evaluate sponsorship, inactivity and invitation status, with reporting before and during enforcement) and the Microsoft MCP Server for IT Admins, which connects AI tools to Entra, Purview and Intune data. In preview: Privileged Identity Management extended to application roles and AI agents, a PIM-only mode, bulk management, session monitoring and recordings for Azure and Azure Arc VMs reached through My Access, and least-privilege role suggestions; high-assurance credentials that combine passkeys with third-party identity verification at onboarding and recovery; Tenant Governance cross-tenant configuration management with drift detection; dynamic group operators MemberOf Next and Transitive Reports To; and hard deletion protection for objects such as Agent IDs.",
+ "why": "Guest lifecycle at GA means you can retire guest-cleanup scripts and access reviews built for that job. PIM for agents and PIM-only mode tackle standing privilege, the identity backlog that agents inherit.",
+ "todo": [
+  "Do now: if you piloted guest lifecycle policies, review the impact report and plan enforcement; check your Entra ID Governance licensing.",
+  "Plan which admin roles should move to PIM-only mode once it reaches your tenant.",
+  "Wait: the PIM, high-assurance credential and Tenant Governance items are preview. Announced, not verified in a tenant."
+ ],
+ "effective_note": "Guest lifecycle policies and MCP Server for IT Admins GA; the rest preview.",
+ "primary": {
+  "title": "Microsoft Entra Blog: AI is changing access. See how Microsoft Entra helps you stay ahead.",
+  "url": "https://techcommunity.microsoft.com/t5/microsoft-entra-blog/ai-is-changing-access-see-how-entra-helps-you-stay-ahead/ba-p/4556456"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Entra guest lifecycle policies (preview)",
+   "url": "news/entra-guest-lifecycle-policies-preview.html"
+  },
+  {
+   "title": "News: Entra adds CA policy plans, backup and agent IDs",
+   "url": "news/ignite-2026-entra-agent-id-ca-policy-plans.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Entra Blog: AI is changing access",
+   "url": "https://techcommunity.microsoft.com/t5/microsoft-entra-blog/ai-is-changing-access-see-how-entra-helps-you-stay-ahead/ba-p/4556456",
+   "checked": "2026-11-18"
+  }
+ ],
+ "last_verified": "2026-11-18",
+ "hashtags": [
+  "MSIgnite",
+  "MicrosoftEntra",
+  "IdentitySecurity",
+  "ZeroTrust"
+ ]
+}

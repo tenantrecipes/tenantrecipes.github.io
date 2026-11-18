@@ -1,0 +1,54 @@
+{
+ "id": "agent-framework-pypi-compromise-nov-2026",
+ "status": "published",
+ "title": "Microsoft agent-framework PyPI releases 1.26.1/1.26.2 stole secrets",
+ "date": "2026-11-18",
+ "category": "Security incidents",
+ "summary": "Two releases of Microsoft's agent-framework package on PyPI, 1.26.1 and 1.26.2, published on 17 November 2026 (20:35 and 21:08 UTC, 21:35 and 22:08 Stockholm time), contained a credential stealer and have been removed from PyPI. Per the GitHub advisory GHSA-764m-3ppc-5m73, the code ran at every Python interpreter start in an environment where the package was installed, without importing it, and collected secrets from environment variables, credential files (Azure CLI, git, Docker, npm and others), Azure managed-identity tokens, Azure DevOps OIDC tokens and, in 1.26.2, GitHub Actions OIDC tokens. Version 1.26.0 and earlier are not affected. Microsoft told The Register it had made some repositories private while it investigates; how the publishing credentials were obtained is not confirmed.",
+ "why": "Agent-framework is common in AI agent projects and CI pipelines. A build agent or developer machine that installed one of the two versions should be treated as exposed, and stolen OIDC or managed-identity tokens can reach Azure resources through federated credentials without any stored secret.",
+ "todo": [
+  "Do now: search lockfiles, CI logs, virtual environments and container images for agent-framework 1.26.1 or 1.26.2; pin to 1.26.0.",
+  "If found: rebuild the environment from clean, rotate every secret reachable from it (CI secrets, Azure DevOps service connections, PATs, registry tokens) and review sign-ins for managed identities and workload identity federation that trusted those pipelines.",
+  "Hardening: pin and hash-lock Python dependencies and limit id-token: write and managed-identity scope in pipelines."
+ ],
+ "effective": "2026-11-17",
+ "primary": {
+  "title": "GitHub Advisory Database: Malicious code in agent-framework (GHSA-764m-3ppc-5m73)",
+  "url": "https://github.com/advisories/GHSA-764m-3ppc-5m73"
+ },
+ "related": [
+  {
+   "title": "News: research on backdoors in coding agents",
+   "url": "news/coding-agent-post-training-backdoors.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "GitHub Advisory Database: GHSA-764m-3ppc-5m73",
+   "url": "https://github.com/advisories/GHSA-764m-3ppc-5m73",
+   "checked": "2026-11-18"
+  },
+  {
+   "title": "OSV: MAL-2026-20101",
+   "url": "https://osv.dev/vulnerability/MAL-2026-20101",
+   "checked": "2026-11-18"
+  },
+  {
+   "title": "Wiz: Microsoft agent-framework compromised",
+   "url": "https://www.wiz.io/blog/malicious-version-of-microsofts-agent-framework-published-to-pypi",
+   "checked": "2026-11-18"
+  },
+  {
+   "title": "The Register: Microsoft's official Python agent framework hijacked",
+   "url": "https://www.theregister.com/security/2026/11/18/microsofts-official-python-agent-framework-hijacked-to-distribute-malware/5310858",
+   "checked": "2026-11-18"
+  }
+ ],
+ "last_verified": "2026-11-18",
+ "hashtags": [
+  "SupplyChainSecurity",
+  "DevSecOps",
+  "Azure",
+  "CyberSecurity"
+ ]
+}

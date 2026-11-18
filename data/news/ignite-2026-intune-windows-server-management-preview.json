@@ -1,0 +1,45 @@
+{
+ "id": "ignite-2026-intune-windows-server-management-preview",
+ "status": "published",
+ "title": "Ignite 2026: Intune can manage Windows Server (preview)",
+ "date": "2026-11-18",
+ "category": "Intune",
+ "ignite": true,
+ "ignite_area": "endpoint",
+ "summary": "Microsoft opened a preview of Intune management for eligible Windows Servers through the Windows Server Insider program, covering configuration and compliance policies, Win32 apps, updates via Windows Autopatch rings and maintenance windows, Conditional Access with device compliance, and roles and scope tags. Target scenarios are servers used as workstations (jump boxes, privileged access workstations, RDSH), branch servers and persistent Azure Virtual Desktop Hybrid sessions, on Entra joined or hybrid joined servers. Server enrollment is off by default through a new Windows Server devices platform restriction set to Block, and Autopilot, MDM-only, bulk and co-managed auto-enrollment are not supported. Microsoft still recommends Azure Arc for infrastructure servers.",
+ "why": "Enrolled servers appear in All devices, and existing Intune roles and scope tags apply, so desktop admins could see and act on jump boxes and PAWs. That is the governance risk to plan for before anyone flips the restriction to Allow.",
+ "todo": [
+  "Do now: check which policies and apps are assigned to All devices and prepare assignment filters on operatingSystemSKU.",
+  "Plan scope tags and role assignments so server management stays with the right admins.",
+  "Wait: pilot only on non-production servers in a test tenant; Windows Server Insider builds only. Announced preview, not verified in production."
+ ],
+ "effective_note": "Preview via Windows Server Insider program.",
+ "primary": {
+  "title": "Intune Customer Success: Manage Windows Servers alongside PCs with Microsoft Intune",
+  "url": "https://techcommunity.microsoft.com/t5/intune-customer-success/manage-windows-servers-alongside-pcs-with-microsoft-intune/ba-p/4572643"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Windows Server 2028 enters preview",
+   "url": "news/ignite-2026-windows-server-2028-preview.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Intune Customer Success: Manage Windows Servers alongside PCs with Microsoft Intune",
+   "url": "https://techcommunity.microsoft.com/t5/intune-customer-success/manage-windows-servers-alongside-pcs-with-microsoft-intune/ba-p/4572643",
+   "checked": "2026-11-18"
+  }
+ ],
+ "last_verified": "2026-11-18",
+ "hashtags": [
+  "MSIgnite",
+  "Intune",
+  "WindowsServer",
+  "SysAdmin"
+ ]
+}

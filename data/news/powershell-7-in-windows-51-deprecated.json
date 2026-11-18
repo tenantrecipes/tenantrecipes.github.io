@@ -1,0 +1,44 @@
+{
+ "id": "powershell-7-in-windows-51-deprecated",
+ "status": "published",
+ "title": "PowerShell 7 ships with next Windows; 5.1 is deprecated",
+ "date": "2026-11-18",
+ "category": "Retirements",
+ "summary": "Microsoft deprecated Windows PowerShell 5.1 on 17 November 2026 (KB5137172): it stays supported with security updates for the life of each Windows version but gets no new features, and Windows Server 2025 and Windows 11, version 26H2 are the last versions with it enabled by default. In the next, still unnamed, Windows release PowerShell 7 is included and 5.1 becomes a Feature on Demand enabled by default on new installs; a later version removes it, with timing announced in advance. PowerShell 7 ships as MSIX, and Microsoft is still closing gaps for running as SYSTEM, DISM cmdlets such as Add-WindowsCapability, and machine-wide settings.",
+ "why": "Scheduled tasks, Intune and ConfigMgr scripts, installers and management agents that call powershell.exe or load Desktop-edition modules are what will break first, and many run as SYSTEM, one of the open MSIX gaps.",
+ "todo": [
+  "Do now: inventory what launches powershell.exe and which scripts use #Requires -PSEdition Desktop or Windows-only modules.",
+  "Write new automation for PowerShell 7 (pwsh.exe) and test existing scripts side by side.",
+  "Wait: do not move SYSTEM-context scripts (Intune remediations, scheduled tasks) until Microsoft closes the MSIX SYSTEM gap."
+ ],
+ "effective": "2026-11-17",
+ "primary": {
+  "title": "Microsoft Support KB5137172: Windows PowerShell 5.1 Deprecation",
+  "url": "https://support.microsoft.com/en-us/servicing/os/windows/docs/2026/11/kb5137172-windows-powershell-5-1-deprecation"
+ },
+ "related": [],
+ "sources": [
+  {
+   "title": "Microsoft Support KB5137172: Windows PowerShell 5.1 Deprecation",
+   "url": "https://support.microsoft.com/en-us/servicing/os/windows/docs/2026/11/kb5137172-windows-powershell-5-1-deprecation",
+   "checked": "2026-11-18"
+  },
+  {
+   "title": "PowerShell Team: PowerShell 7 is coming to Windows",
+   "url": "https://devblogs.microsoft.com/powershell/powershell-7-coming-to-windows/",
+   "checked": "2026-11-18"
+  },
+  {
+   "title": "The Register: PowerShell 7 heading into Windows as 5.1 hits the end of the road",
+   "url": "https://www.theregister.com/os-platforms/2026/11/18/powershell-7-heading-into-windows-as-51-hits-the-end-of-the-road/5310791",
+   "checked": "2026-11-18"
+  }
+ ],
+ "last_verified": "2026-11-18",
+ "hashtags": [
+  "PowerShell",
+  "Windows11",
+  "SysAdmin",
+  "Automation"
+ ]
+}

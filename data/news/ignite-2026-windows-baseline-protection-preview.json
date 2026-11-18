@@ -1,0 +1,50 @@
+{
+ "id": "ignite-2026-windows-baseline-protection-preview",
+ "status": "published",
+ "title": "Ignite 2026: Windows baseline protection gives one security yes/no",
+ "date": "2026-11-18",
+ "category": "Windows",
+ "ignite": true,
+ "ignite_area": "endpoint",
+ "summary": "Microsoft put Windows baseline protection into preview through the Windows Insider Program, with general availability planned for 2027; the Book of News calls it private preview, so treat availability as not verified. It combines eight existing protections into one versioned, hardware-attested true/false device state: security processor (TPM), Secure Boot, virtualization-based security, memory integrity, signed drivers only, Windows-certified drivers, kernel debugger protection and vulnerable driver protection. The state is checked at boot and exposed as a simple query, a report of missing criteria and an attestation token for relying parties. Admins report on and enforce it through Intune compliance and baseline security mode in the Microsoft 365 admin center.",
+ "why": "Today you check these settings one by one, often with different tools. A single attested signal is easier to use in compliance and Conditional Access, but it is all-or-nothing: one missing control, such as memory integrity blocked by an old driver or VBS conflicting with third-party hypervisors, makes the device fail.",
+ "todo": [
+  "Do now: report on the eight criteria across your fleet today (Secure Boot, TPM, VBS, HVCI/memory integrity, vulnerable driver blocklist) so you know how many devices would fail.",
+  "Find the blockers: legacy drivers that stop memory integrity, and devs or labs that rely on non-Hyper-V virtualization.",
+  "Wait: do not build Conditional Access on the new signal until it is GA and visible in your Intune tenant. Announced and in preview, not verified in production tenants."
+ ],
+ "effective_note": "Preview (Windows Insider Program); GA planned for 2027.",
+ "primary": {
+  "title": "Windows IT Pro Blog: A verifiable security state with Windows baseline protection",
+  "url": "https://techcommunity.microsoft.com/t5/windows-it-pro-blog/a-verifiable-security-state-with-windows-baseline-protection/ba-p/4572654"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Intune can mark devices with unapproved agents",
+   "url": "news/ignite-2026-intune-local-agents-windows-baseline.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Windows IT Pro Blog: A verifiable security state with Windows baseline protection",
+   "url": "https://techcommunity.microsoft.com/t5/windows-it-pro-blog/a-verifiable-security-state-with-windows-baseline-protection/ba-p/4572654",
+   "checked": "2026-11-18"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-18"
+  }
+ ],
+ "last_verified": "2026-11-18",
+ "hashtags": [
+  "MSIgnite",
+  "Windows11",
+  "Intune",
+  "CyberSecurity"
+ ]
+}

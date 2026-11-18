@@ -1,0 +1,46 @@
+{
+ "id": "ignite-2026-windows-endpoint-security-platform-ga",
+ "status": "published",
+ "title": "Ignite 2026: Windows endpoint security platform is GA",
+ "date": "2026-11-18",
+ "category": "Windows",
+ "ignite": true,
+ "ignite_area": "endpoint",
+ "summary": "Microsoft says the Windows endpoint security platform is generally available on Windows 11. It gives security vendors user-mode APIs for file system, process, registry and Object Manager monitoring and blocking, so products need less code in the Windows kernel, with recovery mechanisms if a client or rule fails at startup. Vendor adoption dates per Microsoft's table: Bitdefender Antivirus Free and Sophos Endpoint Q4 2026, CrowdStrike Falcon Q1 2027, ESET Endpoint Protection February 2027, Microsoft Defender Q1 2027 (in preview), SentinelOne Singularity, Trellix and TrendAI Vision One H1 2027. Microsoft also updated its Driver Quality Initiative (more user-mode drivers and class drivers).",
+ "why": "This is the platform-level answer to kernel-driver outages like July 2024. For you, the change arrives through your EDR vendor, not as a setting: the point is fewer boot failures from security updates.",
+ "todo": [
+  "Ask your EDR vendor when its product moves to the platform and what changes for deployment, exclusions and tamper protection.",
+  "Pilot the vendor's new agent on a test ring before broad rollout.",
+  "Wait: dates are vendor plans. Announced, not verified."
+ ],
+ "effective_note": "Platform GA on Windows 11; vendor adoption Q4 2026 to H1 2027.",
+ "primary": {
+  "title": "Windows IT Pro Blog: Windows endpoint security platform and driver quality",
+  "url": "https://techcommunity.microsoft.com/t5/windows-it-pro-blog/what-s-next-windows-endpoint-security-platform-and-driver/ba-p/4572663"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Windows IT Pro Blog: What's next: Windows endpoint security platform and driver quality",
+   "url": "https://techcommunity.microsoft.com/t5/windows-it-pro-blog/what-s-next-windows-endpoint-security-platform-and-driver/ba-p/4572663",
+   "checked": "2026-11-18"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-18"
+  }
+ ],
+ "last_verified": "2026-11-18",
+ "hashtags": [
+  "MSIgnite",
+  "Windows11",
+  "EDR",
+  "CyberSecurity"
+ ]
+}

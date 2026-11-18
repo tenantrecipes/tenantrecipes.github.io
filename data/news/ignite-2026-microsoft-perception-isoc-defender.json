@@ -1,0 +1,50 @@
+{
+ "id": "ignite-2026-microsoft-perception-isoc-defender",
+ "status": "published",
+ "title": "Ignite 2026: Microsoft Perception GA, ISOC in Defender",
+ "date": "2026-11-18",
+ "category": "Defender",
+ "ignite": true,
+ "ignite_area": "security",
+ "summary": "Microsoft Perception, which runs red, blue and green team security agents through playbooks, is generally available, including the Alert Triage, Attack Investigation, Detection Authoring, Threat Intelligence, Recon and Posture Prioritization agents (the Risk Reduction and Web App Pen Test agents are preview). The Integrated Security Operations Center (ISOC) in Defender is GA for core capabilities: eligible Defender Suite, Microsoft 365 E5 and E7 customers get Microsoft Sentinel SIEM features, 90-day default retention for Defender data and a built-in data lake, while the full SIEM breadth is in preview. Vulnerability shielding, which puts temporary targeted protection on vulnerable assets until a patch is installed, is in preview. AI Readiness Initiatives that turn Secure Now guidance into plans are due in preview in January 2027.",
+ "why": "ISOC changes the Sentinel licensing and retention picture for E5 tenants, which affects SIEM budgets and data architecture. Perception agents can take actions, so approval guardrails and cost tracking need an owner before you enable playbooks.",
+ "todo": [
+  "Do now: ask your Microsoft account team which ISOC entitlements apply to your licences and what it means for existing Sentinel workspaces and ingestion costs.",
+  "Before enabling Perception playbooks, define which actions need human sign-off and set cost alerts.",
+  "Wait: vulnerability shielding and the Risk Reduction and Web App Pen Test agents are preview. Announced, not verified in a tenant."
+ ],
+ "effective_note": "Perception GA; ISOC core GA; vulnerability shielding preview.",
+ "primary": {
+  "title": "Microsoft Security Blog: Security for the agentic era, powered by Microsoft Perception",
+  "url": "https://www.microsoft.com/en-us/security/blog/2026/11/17/security-for-the-agentic-era-powered-by-microsoft-perception/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Defender protects local AI agents at runtime",
+   "url": "news/ignite-2026-defender-local-ai-agent-runtime-protection.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Security Blog: Security for the agentic era, powered by Microsoft Perception",
+   "url": "https://www.microsoft.com/en-us/security/blog/2026/11/17/security-for-the-agentic-era-powered-by-microsoft-perception/",
+   "checked": "2026-11-18"
+  },
+  {
+   "title": "Microsoft Security on X (#MSIgnite): Perception GA",
+   "url": "https://x.com/msftsecurity/status/2122789374249037852",
+   "checked": "2026-11-18"
+  }
+ ],
+ "last_verified": "2026-11-18",
+ "hashtags": [
+  "MSIgnite",
+  "MicrosoftDefender",
+  "SecOps",
+  "CyberSecurity"
+ ]
+}
