@@ -1,0 +1,59 @@
+{
+ "id": "ignite-2026-agent-365-dynamic-agent-risk",
+ "status": "published",
+ "title": "Ignite 2026: Agent 365 adds Dynamic Agent Risk (preview)",
+ "date": "2026-11-19",
+ "category": "Copilot/AI",
+ "ignite": true,
+ "ignite_area": "security",
+ "summary": "Microsoft announced Dynamic Agent Risk in Agent 365, in preview: one low, medium or high risk level per agent that combines runtime signals (identity, access, data, endpoints, cloud and network), posture and blast radius, and updates as the agent acts, is targeted or gets code or model updates. The risk level is to appear alongside Agent Registry in the Microsoft 365 admin center, Defender, Entra, Intune and Purview. Partner signals from Check Point, Cyera, Darktrace and Zenity are planned to flow into Microsoft Sentinel through agent-risk connectors and feed the calculation. The same Book of News section confirms the pieces covered on 17 November (free usage insights for Microsoft-built agents and plugin/skill governance GA, an action center expected in private preview in December) and adds Agent 365 Business Analytics in Frontier preview.",
+ "why": "A single per-agent risk level is what you would key Conditional Access, review cadence or containment off. Until it is in your tenant, plan which owner, inventory and logging data it will depend on, because ownerless and unregistered agents will be the blind spot.",
+ "todo": [
+  "Do now: make sure every agent in the admin center inventory has a named owner and sponsor; that is the data the action center and risk views start from.",
+  "If you run Sentinel with Check Point, Cyera, Darktrace or Zenity, note the planned agent-risk connectors, but do not build on them yet.",
+  "Wait: Dynamic Agent Risk is announced as preview and not verified in a tenant here; the risk-based licensing split (Agent 365 or ME7 for Defender and Purview risk data) still applies."
+ ],
+ "effective_note": "Dynamic Agent Risk in preview; partner connectors planned — per Microsoft (announced, not verified).",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Security → Agent 365)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Agent 365 usage insights no longer need a licence",
+   "url": "news/ignite-2026-agent-365-insights-plugin-governance.html"
+  },
+  {
+   "title": "Recipe: Agent inventory in the admin center",
+   "url": "recipes/agents-inventory-admin-center.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Dynamic Agent Risk within Agent 365 in preview",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-19"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Microsoft Agent 365 expands governance for agents and their tools",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-19"
+  },
+  {
+   "title": "Microsoft Ignite 2026 Book of News: New Microsoft Agent 365 capabilities help maximize value of AI investments",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-19"
+  }
+ ],
+ "last_verified": "2026-11-19",
+ "hashtags": [
+  "MSIgnite",
+  "AI",
+  "CyberSecurity",
+  "Microsoft365"
+ ]
+}

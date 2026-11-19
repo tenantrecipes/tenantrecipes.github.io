@@ -26,6 +26,8 @@ IT keeps an up-to-date inventory of hardware and software with an owner for each
 
 The inventory includes self-hosted AI and developer platforms (for example AI gateways, model-serving clusters and MCP servers) and appliances built on Linux distributions, not only Windows servers and clients.
 
+The inventory records bundled components that carry their own security fixes, such as web servers (for example NGINX), language runtimes (PHP, Java) and libraries embedded in vendor products and container images, so a component advisory can be mapped to affected systems within one working day.
+
 ## 4. Timelines
 
 - Vulnerabilities known to be exploited (for example listed in the CISA Known Exploited Vulnerabilities catalog) on internet-facing systems: fix or mitigate as fast as possible, and within {{PATCH_DAYS_CRITICAL}} days at the most.
@@ -42,6 +44,7 @@ The inventory includes self-hosted AI and developer platforms (for example AI ga
 - Plan to replace software and devices that no longer receive security updates.
 - End of vendor support is planned, not discovered: every system has its end-of-support date in the inventory, and at the latest 90 days before that date the owner records a decision to upgrade, replace or buy extended security updates (with activation tested before the date). Identity infrastructure such as domain controllers and federation servers is never left without security updates.
 - Products that embed another vendor's code (for example Chromium-based browsers, or appliances built on open-source components) are patched only when their own vendor ships a fixed build. An upstream fix does not close the risk; track the downstream vendor's release notes and record an exception with a mitigation until it ships.
+- Components that are end of life upstream and will not get a fixed release (for example an unmaintained SOAP library listed in CISA's Known Exploited Vulnerabilities catalog) are replaced on a dated plan; until then they are kept off the internet and recorded as an exception.
 
 ## 6. Verification
 

@@ -14,7 +14,8 @@
  ],
  "pitfalls": [
   "Newly enrolled devices may appear noncompliant until first evaluation — use a grace period.",
-  "BitLocker and Secure Boot are measured via Device Health Attestation at boot — a reboot is needed after encryption before the device shows compliant."
+  "BitLocker and Secure Boot are measured via Device Health Attestation at boot — a reboot is needed after encryption before the device shows compliant.",
+  "Baseline security mode 2026 (GA, phased rollout) adds an Intune setting 'Require a device compliance policy'. Before applying it, run it in simulation mode and check which devices have no compliance policy assigned, and how the tenant-wide 'Mark devices with no compliance policy assigned as' setting is configured; compliance-based Conditional Access will treat those devices according to that result."
  ],
  "done_when": [
   "A Windows compliance policy requiring BitLocker, Secure Boot, a minimum OS version and Defender Antimalware is assigned.",
@@ -31,12 +32,17 @@
    "title": "Windows compliance settings in Intune",
    "url": "https://learn.microsoft.com/en-us/intune/device-security/compliance/ref-windows-settings",
    "checked": "2026-10-30"
+  },
+  {
+   "title": "Microsoft 365 Blog: Baseline security mode 2026 General Availability (Devices & Endpoints settings)",
+   "url": "https://techcommunity.microsoft.com/t5/microsoft-365-blog/ignite-26-spotlight-announcing-microsoft-baseline-security-mode/ba-p/4572694",
+   "checked": "2026-11-19"
   }
  ],
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-19",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-10-31",
+ "updated": "2026-11-19",
  "screenshots": [],
  "markers": {
   "steps": "official",
@@ -57,6 +63,11 @@
   {
    "symptom": "Devices fail on machine risk score.",
    "fix": "Check the device in Defender for Endpoint; resolve the risk rather than loosening the threshold."
+  },
+  {
+   "symptom": "Devices with no compliance policy suddenly show Not compliant after a baseline change.",
+   "cause": "The tenant-wide setting 'Mark devices with no compliance policy assigned as' is Not compliant (set manually or via a baseline), and those devices are not in any policy assignment.",
+   "fix": "Assign a compliance policy to the group (for example with an assignment filter), or revert the tenant setting while you fix assignments; check Devices > Compliance > Compliance settings."
   }
  ],
  "rollback": [

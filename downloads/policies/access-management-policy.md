@@ -49,6 +49,8 @@ It covers all user, guest, administrator, service and agent identities in compan
 - Guest accounts have a named sponsor and expire or are reviewed at least every {{ACCESS_REVIEW_MONTHS}} months. Sponsors periodically confirm that the guest still needs access; unused guests and unredeemed invitations are disabled or deleted on a documented schedule.
 - Agent identities, including AI agents registered in the company directory, have a named owner and sponsors. Identities that issue no sign-in tokens for a defined period, lack sponsors or are not reconfirmed are disabled or deleted under this process.
 - Privileged roles are granted just-in-time where possible, and are reviewed at least quarterly.
+- Guests and external users must complete multifactor authentication to reach company data, and guests are not assigned highly privileged search or export roles (for example eDiscovery) unless the role owner has approved and documented the need.
+- Sensitive device-management and tenant-wide administrative actions (for example device wipe or bulk policy changes) require approval by a second administrator where the platform supports it.
 
 ## 8. Access reviews
 

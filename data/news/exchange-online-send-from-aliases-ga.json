@@ -1,0 +1,39 @@
+{
+ "id": "exchange-online-send-from-aliases-ga",
+ "status": "published",
+ "title": "Exchange Online: sending from aliases is GA",
+ "date": "2026-11-19",
+ "category": "M365",
+ "ignite": true,
+ "ignite_area": "collaboration",
+ "summary": "The Exchange team says Sending from Aliases is generally available: users can send and reply from any proxy address on their mailbox in Outlook on the web, Outlook for Windows and Mac, and Outlook mobile, after a tenant-wide switch (Set-OrganizationConfig -SendFromAliasEnabled $True, or EAC → Settings → Mail flow) that can take up to 60 minutes to apply. To stop a whole domain from sending, such as the onmicrosoft.com domain, mark it receive-only with Set-AcceptedDomain -SendingFromDomainDisabled. Known gaps per Microsoft: address-based rules and journaling can miss alias traffic, message trace needs the alias in the query, shared mailboxes only work in OWA via Open another mailbox, and in hybrid, auto-replies can come from the mail.onmicrosoft.com routing address. The post was first published on 7 October and updated on 18 November.",
+ "why": "Users can now pick any domain on their mailbox as the visible sender. That means every accepted domain they hold an alias in must be ready to send: SPF, DKIM and DMARC alignment for that domain, and transport rules, DLP and journaling that match on the alias, not just the primary address. There is no per-mailbox control, so the decision is tenant-wide.",
+ "todo": [
+  "Do now: check Get-OrganizationConfig | fl SendFromAliasEnabled — commenters report it was already on in some tenants without an admin action.",
+  "For each accepted domain that appears in user aliases, confirm SPF includes Exchange Online, DKIM signing is enabled and DMARC is aligned; set domains that should never send to receive-only with Set-AcceptedDomain -SendingFromDomainDisabled $true.",
+  "Update mail flow rules, DLP, journaling and message-trace runbooks to match aliases. Wait if you are hybrid with centralized mail flow until you have tested auto-replies."
+ ],
+ "effective_note": "GA (tenant-wide setting) — per Microsoft.",
+ "primary": {
+  "title": "Exchange Team Blog: Sending From Email Aliases – General Availability",
+  "url": "https://techcommunity.microsoft.com/t5/exchange-team-blog/sending-from-email-aliases-general-availability/ba-p/4562543"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Reject Direct Send is GA",
+   "url": "news/exchange-online-reject-direct-send-ga.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Exchange Team Blog: Sending From Email Aliases – General Availability",
+   "url": "https://techcommunity.microsoft.com/t5/exchange-team-blog/sending-from-email-aliases-general-availability/ba-p/4562543",
+   "checked": "2026-11-19"
+  }
+ ],
+ "last_verified": "2026-11-19"
+}

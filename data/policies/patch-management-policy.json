@@ -42,7 +42,8 @@
    "h": "Inventory",
    "p": [
     "IT keeps an up-to-date inventory of hardware and software with an owner for each system. Systems that are not in the inventory cannot be patched reliably and must be added or removed.",
-    "The inventory includes self-hosted AI and developer platforms (for example AI gateways, model-serving clusters and MCP servers) and appliances built on Linux distributions, not only Windows servers and clients."
+    "The inventory includes self-hosted AI and developer platforms (for example AI gateways, model-serving clusters and MCP servers) and appliances built on Linux distributions, not only Windows servers and clients.",
+    "The inventory records bundled components that carry their own security fixes, such as web servers (for example NGINX), language runtimes (PHP, Java) and libraries embedded in vendor products and container images, so a component advisory can be mapped to affected systems within one working day."
    ]
   },
   {
@@ -63,7 +64,8 @@
     "Record a time-limited exception with the risk owner's approval.",
     "Plan to replace software and devices that no longer receive security updates.",
     "End of vendor support is planned, not discovered: every system has its end-of-support date in the inventory, and at the latest 90 days before that date the owner records a decision to upgrade, replace or buy extended security updates (with activation tested before the date). Identity infrastructure such as domain controllers and federation servers is never left without security updates.",
-    "Products that embed another vendor's code (for example Chromium-based browsers, or appliances built on open-source components) are patched only when their own vendor ships a fixed build. An upstream fix does not close the risk; track the downstream vendor's release notes and record an exception with a mitigation until it ships."
+    "Products that embed another vendor's code (for example Chromium-based browsers, or appliances built on open-source components) are patched only when their own vendor ships a fixed build. An upstream fix does not close the risk; track the downstream vendor's release notes and record an exception with a mitigation until it ships.",
+    "Components that are end of life upstream and will not get a fixed release (for example an unmaintained SOAP library listed in CISA's Known Exploited Vulnerabilities catalog) are replaced on a dated plan; until then they are kept off the internet and recorded as an exception."
    ]
   },
   {
@@ -95,9 +97,9 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-13",
+ "last_verified": "2026-11-19",
  "created": "2026-10-30",
- "updated": "2026-11-14",
+ "updated": "2026-11-19",
  "order": 90,
  "verified_by": "Pascal",
  "history": [
@@ -120,6 +122,10 @@
   {
    "date": "2026-11-14",
    "note": "Added end-of-support planning rule (90-day decision, tested ESU activation, no identity servers without updates), prompted by Microsoft's 60-day reminders for Windows Server 2016 and Windows 10 Enterprise LTSC 2021 (13 January 2027)."
+  },
+  {
+   "date": "2026-11-19",
+   "note": "Inventory now covers bundled components (web servers, runtimes, libraries in vendor products and images); EoL components with no upstream fix get a dated replacement plan (prompted by NGINX 1.31.9/1.30.7, PHP 19 Nov releases and Apache Axis 1.x CVE-2026-90436)."
   }
  ]
 }

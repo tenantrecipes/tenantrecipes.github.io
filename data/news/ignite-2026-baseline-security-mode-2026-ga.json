@@ -1,0 +1,49 @@
+{
+ "id": "ignite-2026-baseline-security-mode-2026-ga",
+ "status": "published",
+ "title": "Ignite 2026: Baseline security mode 2026 is GA",
+ "date": "2026-11-19",
+ "category": "M365",
+ "ignite": true,
+ "ignite_area": "security",
+ "summary": "Microsoft says Baseline security mode (BSM) 2026 is generally available with a phased rollout, adding 24 settings and extending the 2025 baseline (Office, SharePoint, Teams, Exchange, Entra) to Intune, Purview and Dynamics 365 plus a new Applications category. Examples include tenant assignment for new multi-tenant apps, blocking COM add-ins outside an allow list, no eDiscovery roles for guests, MFA for guests and external users, no Teams federation with M365 trial tenants and second-admin approval for sensitive Intune actions, each of which can be run in simulation mode first. Azure (Storage and Key Vault), Windows (VBS, Secure Boot, security processor), a dashboard, downloadable reports and regulatory mapping are in private preview. BSM 2025 is on the roadmap to become the default for new tenants.",
+ "why": "This is Microsoft's own secure-by-default benchmark, and several 2026 settings touch daily operations: guest MFA, external users in the Teams lobby, blocked classic SharePoint pages and COM add-ins, and multi-admin approval in Intune. Simulation mode is the way to find the business impact before you switch anything on.",
+ "todo": [
+  "Do now: as Global Administrator, open Microsoft 365 admin center → Org Settings → Security & Privacy → Baseline security mode and run the new 2026 settings in simulation mode.",
+  "Review the impact list with app owners first for COM add-ins, classic SharePoint pages, guest eDiscovery roles and apps without Exchange App RBAC permissions.",
+  "Wait: the Azure and Windows settings, the dashboard and the reports are private preview; rollout of the GA settings is phased, so the pane may not show everything in your tenant yet."
+ ],
+ "effective_note": "GA with phased rollout; Azure, Windows and dashboard/reports in private preview — per Microsoft.",
+ "primary": {
+  "title": "Microsoft 365 Blog: Baseline security mode 2026 General Availability",
+  "url": "https://techcommunity.microsoft.com/t5/microsoft-365-blog/ignite-26-spotlight-announcing-microsoft-baseline-security-mode/ba-p/4572694"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Windows baseline protection (preview)",
+   "url": "news/ignite-2026-windows-baseline-protection-preview.html"
+  },
+  {
+   "title": "News: Baseline security mode for on-prem Exchange and SharePoint",
+   "url": "news/ignite-2026-onprem-exchange-sharepoint-baseline-security.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Blog: Ignite'26 Spotlight — Microsoft Baseline security mode 2026 General Availability",
+   "url": "https://techcommunity.microsoft.com/t5/microsoft-365-blog/ignite-26-spotlight-announcing-microsoft-baseline-security-mode/ba-p/4572694",
+   "checked": "2026-11-19"
+  }
+ ],
+ "last_verified": "2026-11-19",
+ "hashtags": [
+  "MSIgnite",
+  "Microsoft365",
+  "CyberSecurity",
+  "ZeroTrust"
+ ]
+}

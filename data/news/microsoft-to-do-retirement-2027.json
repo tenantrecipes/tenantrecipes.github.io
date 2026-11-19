@@ -1,0 +1,51 @@
+{
+ "id": "microsoft-to-do-retirement-2027",
+ "status": "published",
+ "title": "Microsoft To Do apps retire on 30 June 2027",
+ "date": "2026-11-19",
+ "category": "Retirements",
+ "ignite": true,
+ "ignite_area": "collaboration",
+ "summary": "In its Ignite post on unified tasks and plans, Microsoft says the To Do apps (web, Windows, Mac, iOS and Android, for work, school and personal accounts) retire on 30 June 2027, with Planner as the home for private work tasks and a redesigned My tasks experience rolling out from December 2026. Existing To Do tasks and lists will not be migrated: they stay visible in Planner until 30 June 2027, app retirement does not by itself delete data, and the To Do service, APIs and sync retire on separate, later dates. Microsoft lists gaps including no native Planner desktop apps for Windows or Mac, no file attachments on private-plan tasks, no transfer of shared-list membership and no sync between Planner labels and Outlook categories. Personal Microsoft accounts get no Planner replacement and need another app.",
+ "why": "This is a user-visible change with no automatic migration, so it lands on the service desk. Integrations that create To Do tasks (flagged email, Power Automate, third-party apps) keep working for now but have their own later end date.",
+ "todo": [
+  "Do now: confirm Planner is available to the users who rely on To Do and tell them about the December My tasks rollout.",
+  "Inventory Power Automate flows, apps and scripts that use To Do tasks so they can move to Planner before the API retirement is announced.",
+  "Wait: export guidance and the API retirement dates are not published yet; do not plan bulk moves until Microsoft documents them."
+ ],
+ "effective": "2027-06-30",
+ "primary": {
+  "title": "Planner Blog: Introducing unified tasks and plans for Copilot and Microsoft 365",
+  "url": "https://techcommunity.microsoft.com/blog/plannerblog/introducing-unified-tasks-and-plans-for-copilot-and-microsoft-365/4573958"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Planner Blog: Introducing unified tasks and plans for Copilot and Microsoft 365",
+   "url": "https://techcommunity.microsoft.com/blog/plannerblog/introducing-unified-tasks-and-plans-for-copilot-and-microsoft-365/4573958",
+   "checked": "2026-11-19"
+  },
+  {
+   "title": "Microsoft Support: Moving from Microsoft To Do to Microsoft Planner",
+   "url": "https://support.microsoft.com/en-us/planner/to-do-to-planner",
+   "checked": "2026-11-19"
+  },
+  {
+   "title": "The Register: Microsoft To Do will soon become Microsoft Done",
+   "url": "https://www.theregister.com/personal-tech/2026/11/19/microsoft-to-do-will-soon-become-microsoft-done/5310973",
+   "checked": "2026-11-19"
+  }
+ ],
+ "last_verified": "2026-11-19",
+ "hashtags": [
+  "MSIgnite",
+  "Microsoft365",
+  "Planner",
+  "SysAdmin"
+ ]
+}

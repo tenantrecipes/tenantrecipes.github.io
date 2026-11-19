@@ -1,0 +1,39 @@
+{
+ "id": "ignite-2026-m365-multi-tenant-management",
+ "status": "published",
+ "title": "Ignite 2026: multi-tenant management in M365 admin center",
+ "date": "2026-11-19",
+ "category": "M365",
+ "ignite": true,
+ "ignite_area": "copilot",
+ "summary": "Microsoft added multi-tenant management under All tenants in the Microsoft 365 admin center, with tenant switching without signing out now generally available. In public preview are cross-tenant agent management (inventory, install, settings, permissions and blocking, with Agent 365 risk data), desired-state configuration (Microsoft-recommended or custom baselines of tenant-wide settings with drift monitoring and remediation) and AI cost management with reusable spending-policy templates. Access is bounded by GDAP relationships in Partner Center for partners and Microsoft Entra Tenant Governance relationships for enterprises, plus delegated roles, and availability varies by eligibility, licensing, role, geography and rollout.",
+ "why": "Desired-state baselines with drift detection are what many multi-tenant shops script today with third-party tools or Microsoft365DSC. The access model is GDAP and tenant governance, so the scope of those relationships becomes the blast radius of a single admin account.",
+ "todo": [
+  "Do now: review GDAP relationships (partners) or Entra Tenant Governance relationships (enterprises) and trim roles before anyone uses All tenants.",
+  "Pilot desired-state configuration on a test tenant and compare its drift results with your current tooling before relying on it.",
+  "Wait: agent management, desired-state configuration and AI cost management are public preview; announced, not verified here."
+ ],
+ "effective_note": "Tenant switching GA; agent management, desired-state configuration and AI cost management in public preview — per Microsoft.",
+ "primary": {
+  "title": "Microsoft 365 Blog: Multi-tenant management — tenants, agents and AI spend in one place",
+  "url": "https://techcommunity.microsoft.com/t5/microsoft-365-blog/multi-tenant-management-tenants-agents-and-ai-spend-in-one-place/ba-p/4573372"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Agent 365 adds Dynamic Agent Risk (preview)",
+   "url": "news/ignite-2026-agent-365-dynamic-agent-risk.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Blog: Multi-tenant management: Tenants, agents, and AI spend in one place",
+   "url": "https://techcommunity.microsoft.com/t5/microsoft-365-blog/multi-tenant-management-tenants-agents-and-ai-spend-in-one-place/ba-p/4573372",
+   "checked": "2026-11-19"
+  }
+ ],
+ "last_verified": "2026-11-19"
+}

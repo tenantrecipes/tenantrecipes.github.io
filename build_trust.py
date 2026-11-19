@@ -154,7 +154,7 @@ def footer(rel, guide_slug, path="", title="", updated=None):
                                    ("Suggest a recipe", f"{REPO}/issues/new?template=suggest-recipe.yml")])
             + col("Legal", [("Privacy policy", f"{rel}privacy.html"), ("Disclaimer", f"{rel}about.html#disclaimer"), ("Terms of use", f"{rel}about.html#terms")])
             + '</div>' + footer_cta(rel)
-            + f'<p class="sf-ind">{icon("shield")}<strong>Independent, not affiliated with Microsoft.</strong> No sponsors, no affiliate links; every claim links to its source.</p>'
+            + f'<p class="sf-ind">{icon("shield")}<strong>Independent, not affiliated with Microsoft.</strong> Sponsors are clearly labelled. No affiliate links. Every claim links to its source.</p>'
             f'<p class="sf-b">© {TODAY.year} Tenant Recipes · Microsoft, Microsoft 365, Copilot, Entra, Intune and Purview are trademarks of the Microsoft group of companies. '
             'Other product names belong to their owners.</p></footer>')
 
@@ -334,7 +334,7 @@ def author_body(rel):
         + li("Least privilege.", "Recipes use the narrowest role, scope and permission that gets the job done, and say which role is required.")
         + li("Production-safe changes.", "Pilot groups, report-only modes and rollback steps come before tenant-wide enforcement.")
         + li("Sources over opinion.", "Every claim links to its source and shows when it was last verified.")
-        + li("Independent.", "Not affiliated with, sponsored by or endorsed by Microsoft or any other vendor. No sponsors, no affiliate links.")
+        + li("Independent.", "Not affiliated with, sponsored by or endorsed by Microsoft or any other vendor. Sponsors are clearly labelled. No affiliate links.")
         + '</ul>'
         '<h2>Why there is no name</h2><p>Tenant Recipes is published under its own name on purpose. No employer is named and no personal byline is used: '
         'the content should stand on its sources, not on a person or a company. That is also why corrections happen in public, '

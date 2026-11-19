@@ -1,0 +1,48 @@
+{
+ "id": "php-security-releases-2026-11-19",
+ "status": "published",
+ "title": "PHP security releases fix critical bugs (19 Nov)",
+ "date": "2026-11-19",
+ "category": "Security incidents",
+ "summary": "The PHP project shipped security releases for every supported branch on 19 November 2026: PHP 8.5.13, 8.4.28, 8.3.37 and 8.2.36 (PHP 8.6.0 also reached GA the same day). The pre-announcement rated the highest severity CRITICAL and said the critical issues need a non-default configuration or an uncommon setup. The 8.5.13 changelog lists, among others, use-after-free bugs in magic-method backtraces (CVE-2026-129474) and the timezone cache (CVE-2026-129496) that can lead to remote code execution, a PHP-CGI out-of-bounds read and write during PATH_INFO correction (CVE-2026-129538), a double free during DOM XML serialization (CVE-2026-129501) and a use-after-free after shutdown (CVE-2026-129182). This follows the PHP2Shell releases earlier this autumn.",
+ "why": "PHP runs under a lot of admin tooling: WordPress and intranet sites, helpdesk and monitoring portals, and appliances that bundle it. The CGI bug matters most where PHP is still run as CGI rather than PHP-FPM or a module.",
+ "todo": [
+  "Do now: inventory PHP versions on servers and containers and upgrade to 8.5.13, 8.4.28, 8.3.37 or 8.2.36 (or your distribution's backport).",
+  "Prioritise internet-facing hosts and any that run PHP as CGI; rebuild container images rather than patching running ones.",
+  "Wait for vendor updates for appliances and products that bundle PHP, and track their advisories. CVSS scores were not published on php.net at the time of writing."
+ ],
+ "effective": "2026-11-19",
+ "primary": {
+  "title": "php.net: PHP 8.5.13, 8.4.28, 8.3.37 and 8.2.36 released",
+  "url": "https://www.php.net/"
+ },
+ "related": [
+  {
+   "title": "Security: PHP2Shell (CVE-2026-109618/109619)",
+   "url": "security/php2shell-cve-2026-109618-109619.html"
+  },
+  {
+   "title": "Security: known exploited vulnerabilities",
+   "url": "security/index.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "php.net news: security releases 8.5.13, 8.4.28, 8.3.37, 8.2.36 and the 18 Nov pre-announcement",
+   "url": "https://www.php.net/",
+   "checked": "2026-11-19"
+  },
+  {
+   "title": "PHP 8 ChangeLog (8.5.13)",
+   "url": "https://www.php.net/ChangeLog-8.php",
+   "checked": "2026-11-19"
+  }
+ ],
+ "last_verified": "2026-11-19",
+ "hashtags": [
+  "PHP",
+  "CVE",
+  "CyberSecurity",
+  "SysAdmin"
+ ]
+}

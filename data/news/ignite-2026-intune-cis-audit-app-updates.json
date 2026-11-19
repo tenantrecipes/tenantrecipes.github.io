@@ -1,0 +1,43 @@
+{
+ "id": "ignite-2026-intune-cis-audit-app-updates",
+ "status": "published",
+ "title": "Ignite 2026: Intune adds CIS audits and app update tools",
+ "date": "2026-11-19",
+ "category": "Intune",
+ "ignite": true,
+ "ignite_area": "endpoint",
+ "summary": "Beyond the local-agent controls already covered, Microsoft's Intune Ignite roundup adds CIS benchmark auditing in Intune Advanced Analytics (public preview from November) next to the existing DISA STIG audits, assessing device groups without changing settings. App tooling includes device-level app inventory (public preview), Enterprise App Management automatic updates for more verified Windows apps including ones IT did not deploy (private preview), and app in-use detection that reports or closes an app blocking an install (private preview). Also listed: an Intune Vulnerability Remediation Agent that builds patching playbooks from Defender data and a Perception investigation experience (both limited public preview), registry-key and file inventory, and a Company Portal status view after OOBE for Autopilot device preparation (limited public preview).",
+ "why": "CIS auditing in Advanced Analytics gives a read-only gap report against a known benchmark without touching device settings, which is useful before you change baselines. EAM auto-updating apps that IT did not deploy changes who owns patching for user-installed software.",
+ "todo": [
+  "Do now: if you have Advanced Analytics, watch for the CIS audit preview and plan one pilot device group to compare with your current baseline.",
+  "Decide who owns updates for apps that EAM would start updating automatically, and what the exception process is.",
+  "Wait: most items are private or limited public preview; announced, not verified here. Advanced Analytics and EAM need their Intune Suite or add-on licences."
+ ],
+ "effective_note": "Mostly preview (public, limited or private) — per Microsoft.",
+ "primary": {
+  "title": "Microsoft Intune Blog: What's new in Microsoft Intune at Microsoft Ignite",
+  "url": "https://techcommunity.microsoft.com/t5/microsoft-intune-blog/what-s-new-in-microsoft-intune-at-microsoft-ignite/ba-p/4570003"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Intune can mark devices with unapproved agents",
+   "url": "news/ignite-2026-intune-local-agents-windows-baseline.html"
+  },
+  {
+   "title": "Recipe: Intune compliance baseline",
+   "url": "recipes/intune-compliance-baseline.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Intune Blog: What's new in Microsoft Intune at Microsoft Ignite",
+   "url": "https://techcommunity.microsoft.com/t5/microsoft-intune-blog/what-s-new-in-microsoft-intune-at-microsoft-ignite/ba-p/4570003",
+   "checked": "2026-11-19"
+  }
+ ],
+ "last_verified": "2026-11-19"
+}

@@ -1,0 +1,45 @@
+{
+ "id": "ignite-2026-codename-mdash-code-security-preview",
+ "status": "published",
+ "title": "Ignite 2026: Codename MDASH code security in preview",
+ "date": "2026-11-19",
+ "category": "Defender",
+ "ignite": true,
+ "ignite_area": "security",
+ "summary": "Microsoft says Codename MDASH, its agentic code security system, is in preview for eligible organizations. According to the Book of News it runs more than 100 specialised AI agents in a four-stage pipeline: map the attack surface, scan code, validate findings through agent debate and remove duplicates, and where possible reproduce a finding with a triggering input. New in this release: fewer low-quality results and false positives, repository sharding for large codebases, scan progress visibility, and support for more of the MAI Cyber model family, with MAI-Cyber-2 planned after evaluation.",
+ "why": "This week's NGINX, PHP and Java fixes were largely found with AI-assisted research. Tools like MDASH point the same approach at your own code, which mostly affects teams that build internal apps, scripts and connectors.",
+ "todo": [
+  "Do now: nothing to configure; note who owns application security for in-house code and scripts in your tenant.",
+  "If you evaluate it, start with a non-sensitive repository and agree who triages validated findings.",
+  "Wait: preview for eligible organizations only; eligibility, pricing and data handling are not described in the Book of News. Announced, not verified."
+ ],
+ "effective_note": "Preview for eligible organizations — per Microsoft (announced, not verified).",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News (Security → Codename MDASH)",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Microsoft Perception GA and ISOC",
+   "url": "news/ignite-2026-microsoft-perception-isoc-defender.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News: Codename MDASH, a new agentic code security system, available in preview",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-19"
+  }
+ ],
+ "last_verified": "2026-11-19",
+ "hashtags": [
+  "MSIgnite",
+  "AppSec",
+  "CyberSecurity",
+  "AI"
+ ]
+}
