@@ -1,0 +1,48 @@
+{
+ "id": "windows-hotpatch-kb5132043-msi-app-failures",
+ "status": "published",
+ "title": "November hotpatch breaks some apps: 0xC0000099 workaround",
+ "date": "2026-11-20",
+ "category": "Windows",
+ "summary": "Microsoft has told admins that devices with the November 2026 Windows 11 hotpatch KB5132043 (24H2, 25H2 and 26H2, released 10 November) can see applications fail to install, launch or run with ERROR_ALLOTTED_SPACE_EXCEEDED (0xC0000099). Microsoft links it to apps that load the 32-bit Windows Installer DLL (msi.dll), so 32-bit apps are hit most (press reports include Office), while devices on the normal November cumulative update are not expected to be affected. The temporary workaround is to set the HotPatchTableSize value under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management to 2000 and restart. No permanent fix date has been given.",
+ "why": "Hotpatch is the default for eligible devices in Windows Autopatch, so this lands on managed fleets rather than home PCs. The workaround needs a restart, which is exactly what hotpatch was meant to avoid, and a registry change you will want to remove again once Microsoft ships the fix.",
+ "todo": [
+  "Do now: query devices for KB5132043 and correlate with app install or launch failures showing 0xC0000099 (Intune app install status, Office telemetry, help desk tickets).",
+  "If affected, deploy the HotPatchTableSize = 2000 value with an Intune remediation or a settings script scoped to affected devices, and tag it so you can remove it after the fix.",
+  "Wait: do not move devices off hotpatch in bulk for this alone. Watch the service alert in the Microsoft 365 admin center (press reports cite WI1559710; not verified here) and the Windows release health dashboard."
+ ],
+ "effective": "2026-11-10",
+ "effective_note": "Known issue per Microsoft service alert; workaround only, no fix date. The alert was not on the public release health pages when we checked on 20 Nov.",
+ "primary": {
+  "title": "Microsoft Support: November 10, 2026 — Hotpatch KB5132043",
+  "url": "https://support.microsoft.com/en-au/servicing/os/hotpatch/windows-11/2026/november-kb5132043-windows-11-24h2-25h2-26h2-security-update"
+ },
+ "related": [
+  {
+   "title": "Recipe: Windows Autopatch",
+   "url": "recipes/intune-windows-autopatch.html"
+  },
+  {
+   "title": "News: Autopatch quality update approvals",
+   "url": "news/autopatch-quality-update-policy-approvals.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Support: Hotpatch KB5132043",
+   "url": "https://support.microsoft.com/en-au/servicing/os/hotpatch/windows-11/2026/november-kb5132043-windows-11-24h2-25h2-26h2-security-update",
+   "checked": "2026-11-20"
+  },
+  {
+   "title": "BleepingComputer: Microsoft confirms app installation, launch issues after hotpatch (quotes the service alert)",
+   "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-confirms-app-installation-launch-issues-after-hotpatch/",
+   "checked": "2026-11-20"
+  },
+  {
+   "title": "The Register: Microsoft suggests Registry hack to work around hotpatch woes",
+   "url": "https://www.theregister.com/os-platforms/2026/11/20/microsoft-suggests-registry-hack-to-work-around-hotpatch-woes/5311279",
+   "checked": "2026-11-20"
+  }
+ ],
+ "last_verified": "2026-11-20"
+}

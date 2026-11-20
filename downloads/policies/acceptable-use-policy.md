@@ -40,6 +40,8 @@ It covers every device, account, application and network that {{COMPANY}} owns, 
 - Treat unexpected links, attachments and payment or bank-detail change requests with suspicion. Report suspected phishing with the report button or to {{IT_SERVICE_DESK}}.
 - Write messages as if they could be read by a customer or a court; they are company records.
 - Use only approved collaboration tools for company information; external sharing must follow the information classification policy.
+- Do not invite or allow third-party AI notetakers, recording or transcription bots into meetings unless IT has approved that service; they can send meeting content outside {{COMPANY}}. Use the approved tools instead.
+- Callers or chat contacts from outside {{COMPANY}} who claim to be IT support, a bank or a supplier are verified through a known channel before you share codes, install remote-support tools or change payment details, even when the contact arrives in Teams.
 
 ## 6. Monitoring and privacy
 

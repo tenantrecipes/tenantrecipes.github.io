@@ -1,0 +1,46 @@
+{
+ "id": "ignite-2026-wrap-ga-vs-preview",
+ "status": "published",
+ "title": "Ignite 2026 wrap: what is GA and what to do first",
+ "date": "2026-11-20",
+ "category": "M365",
+ "ignite": true,
+ "summary": "Ignite 2026 ended on 20 November. Of everything we covered, only a short list is generally available per Microsoft: Baseline security mode 2026 (phased rollout), sending from aliases in Exchange Online, Office in Copilot and Copilot Managed Runtime, Defender runtime protection for local AI agents (MDE P2), Microsoft Perception and the ISOC core in Defender, the Windows endpoint security platform, Entra guest lifecycle policies, the MCP Server for Enterprise and for IT admins, Edge for Business extension safety, Agent 365 usage insights and plugin/skill governance, and tenant switching in the Microsoft 365 admin center. Most other announcements, including Windows baseline protection, Intune for Windows Server, Purview DLP for unlabeled files in Copilot and Dynamic Agent Risk, are preview, private preview or 'coming later'.",
+ "why": "The GA items are the ones that can change your tenant or your users' experience now, and two of them (sending from aliases and Baseline security mode) can be switched on tenant-wide. Everything else is planning material and should not go into change requests until it shows up in Message Center with a date.",
+ "todo": [
+  "Do now: run Baseline security mode 2026 in simulation and check whether sending from aliases is already on in your tenant.",
+  "Do now: if you have MDE P2, check the local AI agent inventory and runtime protection settings before agents spread further.",
+  "Wait: for previews, pick one pilot each (Windows baseline protection, Intune CIS audits, Purview DLP for Copilot) and track Message Center. Statuses are as stated by Microsoft and not verified in a tenant."
+ ],
+ "effective_note": "Summary of Ignite 2026 coverage on this site; statuses per Microsoft.",
+ "primary": {
+  "title": "Microsoft Ignite 2026 Book of News",
+  "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Baseline security mode 2026 is GA",
+   "url": "news/ignite-2026-baseline-security-mode-2026-ga.html"
+  },
+  {
+   "title": "News: Exchange Online sending from aliases is GA",
+   "url": "news/exchange-online-send-from-aliases-ga.html"
+  },
+  {
+   "title": "News: Defender protects local AI agents at runtime",
+   "url": "news/ignite-2026-defender-local-ai-agent-runtime-protection.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Ignite 2026 Book of News",
+   "url": "https://news.microsoft.com/events/ignite/2026/book-of-news/",
+   "checked": "2026-11-20"
+  }
+ ],
+ "last_verified": "2026-11-20"
+}

@@ -1,0 +1,37 @@
+{
+ "id": "teams-voice-phishing-detection-external-calls",
+ "status": "published",
+ "title": "Teams to flag voice phishing in external 1:1 calls",
+ "date": "2026-11-20",
+ "category": "M365",
+ "summary": "A new Microsoft 365 Roadmap item (580443, in development, GA targeted for December 2026) says Teams will use AI to analyse one-to-one calls with people outside the organisation for signs of social engineering, and alert the recipient when something looks suspicious. The roadmap entry does not say which licences are needed, whether admins can turn it off, or where alerts are logged.",
+ "why": "Help-desk impersonation over external Teams chat and calls is a well-documented initial-access pattern, used by several ransomware crews. A user-side warning helps, but it does not replace locking down who can reach your users from outside. It also raises a privacy and works-council question, because call content is being analysed.",
+ "todo": [
+  "Do now: review external access and Teams federation (allow list rather than open federation where you can) and the policy for unmanaged Teams accounts; that is what stops these calls in the first place.",
+  "Brief your privacy officer or works council that AI analysis of external call content is coming, so the decision is not made when it appears in the client.",
+  "Wait: announced on the roadmap only; no Message Center post, licensing or admin control documented yet. Not verified."
+ ],
+ "effective_note": "Roadmap 580443, in development, GA December 2026 — per Microsoft. Not verified.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 580443: Teams voice phishing detection for external calls",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580443"
+ },
+ "related": [
+  {
+   "title": "Recipe: Defender ZAP and QR phishing in Teams",
+   "url": "recipes/defender-teams-zap-qr-phishing.html"
+  },
+  {
+   "title": "News: phishing using the M365 outage as a lure",
+   "url": "news/m365-outage-lure-phishing-campaign-nov-2026.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 580443",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580443",
+   "checked": "2026-11-20"
+  }
+ ],
+ "last_verified": "2026-11-20"
+}

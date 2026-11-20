@@ -1,0 +1,48 @@
+{
+ "id": "windows-11-kb5132057-nov-preview-web-sign-in-hybrid",
+ "status": "published",
+ "title": "Windows 11 November preview: web sign-in on hybrid join",
+ "date": "2026-11-20",
+ "category": "Windows",
+ "summary": "KB5132057, the optional non-security preview for Windows 11 25H2 and 26H2 (builds 26200.10075 and 26300.10075), shipped on 19 November 2026 and brings web sign-in to Microsoft Entra hybrid joined devices, not only Entra joined ones. Users can sign in at the lock screen with a FIDO2 key, a phone passkey or a Temporary Access Pass, and Windows still gets a Kerberos ticket for on-prem shares and sites; the same gradual rollout adds the face sign-in brightening option, an NFC tap indicator for security keys and the new Windows Search. Fixes include the misleading 'Something went wrong' error on Android during cross-device passkey sign-in and KMS/token-based activation failures on Windows IoT Enterprise LTSC. Microsoft says there will be no December non-security preview; the December security update is not affected.",
+ "why": "Web sign-in on hybrid joined devices removes the main blocker for TAP-based onboarding and passwordless shared PCs in estates that still run hybrid join. It is a gradual-rollout feature, so a pilot device may not show it straight away. The known issue that matters for server teams is SQL Server linked-server queries over OLE DB leaving connections open; Microsoft lists an out-of-band fix 'in the next few days' and a support-only mitigation.",
+ "todo": [
+  "Do now: put KB5132057 on a pilot ring of hybrid joined devices and test web sign-in with TAP and a FIDO2 key, including access to an on-prem file share after sign-in (Kerberos).",
+  "Check that your web sign-in policy (Authentication/EnableWebSignIn) is scoped to the pilot only before you widen it.",
+  "Wait: the feature arrives by gradual rollout; do not treat a missing tile on one device as a failure. Watch release health for the OLE DB out-of-band update before rolling the December cumulative to SQL hosts."
+ ],
+ "effective": "2026-11-19",
+ "effective_note": "Optional preview update; features in gradual rollout — per Microsoft.",
+ "primary": {
+  "title": "Microsoft Support: November 19, 2026 — KB5132057 (OS Builds 26300.10075 and 26200.10075) Preview",
+  "url": "https://support.microsoft.com/en-us/servicing/os/windows-11/2026/11/kb5132057-windows-11-25h2-26h2-update"
+ },
+ "related": [
+  {
+   "title": "News: Windows Hello event logs and passwordless updates (Ignite)",
+   "url": "news/ignite-2026-windows-hello-passwordless-updates.html"
+  },
+  {
+   "title": "Recipe: retire SMS/voice MFA with passkeys",
+   "url": "recipes/entra-sms-voice-retirement-passkeys.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Support: KB5132057 release notes",
+   "url": "https://support.microsoft.com/en-us/servicing/os/windows-11/2026/11/kb5132057-windows-11-25h2-26h2-update",
+   "checked": "2026-11-20"
+  },
+  {
+   "title": "Windows release health: Windows 11 25H2 known issues (SQL Server linked server / OLE DB)",
+   "url": "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2",
+   "checked": "2026-11-20"
+  },
+  {
+   "title": "Windows 11 release information",
+   "url": "https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information",
+   "checked": "2026-11-20"
+  }
+ ],
+ "last_verified": "2026-11-20"
+}

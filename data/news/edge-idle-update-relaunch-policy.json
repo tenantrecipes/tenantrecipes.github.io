@@ -1,0 +1,38 @@
+{
+ "id": "edge-idle-update-relaunch-policy",
+ "status": "published",
+ "title": "Edge will apply updates when the browser is idle",
+ "date": "2026-11-20",
+ "category": "Windows",
+ "summary": "Roadmap item 581801 (in development, GA targeted for January 2027) says Microsoft Edge can apply pending updates while the browser is idle, and that the RelaunchNotification policy has been updated so organisations can manage idle restarts. When we checked the RelaunchNotification policy page on 20 November it still listed only Recommended (1) and Required (2), with the default seven-day period set by RelaunchNotificationPeriod; the idle option was not yet documented.",
+ "why": "Idle restarts close the gap between an Edge security update being downloaded and actually running, which matters when Chromium zero-days land in KEV every few weeks. It also means a browser can restart with no user action, so kiosk, shared and VDI sessions need a decision.",
+ "todo": [
+  "Do now: check what you set today for RelaunchNotification and RelaunchNotificationPeriod in Intune or GPO, and whether your patch SLA for Edge relies on users restarting.",
+  "Identify kiosk, shared-device and VDI groups where an unattended browser restart would be a problem.",
+  "Wait: the new policy value is not documented yet; do not push guessed values. Re-check the policy page and the Edge release notes when it reaches Stable."
+ ],
+ "effective_note": "Roadmap 581801, in development, GA January 2027 — per Microsoft. Policy option not yet documented (checked 20 Nov).",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 581801: Edge smarter and faster update application",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=581801"
+ },
+ "related": [
+  {
+   "title": "Recipe: Edge policies for AI with Intune",
+   "url": "recipes/intune-edge-policies-ai.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 581801",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=581801",
+   "checked": "2026-11-20"
+  },
+  {
+   "title": "Microsoft Learn: Edge policy RelaunchNotification",
+   "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies/relaunchnotification",
+   "checked": "2026-11-20"
+  }
+ ],
+ "last_verified": "2026-11-20"
+}

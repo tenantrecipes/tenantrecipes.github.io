@@ -1,0 +1,33 @@
+{
+ "id": "teams-allowed-external-notetaker-bots",
+ "status": "published",
+ "title": "Teams: allow list for external meeting notetaker bots",
+ "date": "2026-11-20",
+ "category": "M365",
+ "summary": "Roadmap item 580451 (in development, GA targeted for January 2027) adds a tenant control for external meeting bots: admins will be able to list the external bots allowed to join meetings hosted in the organisation, and either block all others or send them to the existing high-friction lobby. Allowed bots are treated as ordinary external participants, so your meeting policies still apply to them.",
+ "why": "Third-party AI notetakers joining meetings and sending transcripts outside the tenant are a data-protection and DLP problem today, and the current lobby-based bot detection is all-or-nothing. An allow list lets you approve the one vendor that passed review and block the rest.",
+ "todo": [
+  "Do now: inventory which external notetakers actually join your meetings (meeting attendance reports, user reports) and decide which, if any, you would approve.",
+  "Write the approval criteria (data residency, retention, DPA) before the setting arrives, so the allow list reflects a decision rather than whatever users already use.",
+  "Wait: roadmap only; no PowerShell or admin centre setting is documented yet. Not verified."
+ ],
+ "effective_note": "Roadmap 580451, in development, GA January 2027 — per Microsoft. Not verified.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 580451: allowed external meeting notetaker bots",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580451"
+ },
+ "related": [
+  {
+   "title": "Recipe: Copilot in Teams meetings and transcription",
+   "url": "recipes/copilot-teams-meeting-transcription.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 580451",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580451",
+   "checked": "2026-11-20"
+  }
+ ],
+ "last_verified": "2026-11-20"
+}

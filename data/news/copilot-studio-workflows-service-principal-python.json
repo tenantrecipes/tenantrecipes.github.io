@@ -1,0 +1,52 @@
+{
+ "id": "copilot-studio-workflows-service-principal-python",
+ "status": "published",
+ "title": "Copilot Studio workflows: SP owners and Python code",
+ "date": "2026-11-20",
+ "category": "Copilot/AI",
+ "summary": "New Microsoft 365 Roadmap items change who owns and what runs in Copilot Studio workflows. A workflow can be owned by a service principal (an Entra app registration) instead of a named user (580863, GA December 2026), and a new Code node runs Python as a step for transforms, regex, parsing and file conversion such as PDF to text, written by hand or generated from natural language (580866, GA November 2026). Two more items let makers share workflows with co-owners after reviewing the connections they use (580864) and let the Agent node return generated PDF, Word, Excel or CSV files as workflow outputs (580865).",
+ "why": "Service-principal ownership fixes the classic 'flow died when the owner left' problem, but it also moves the workflow's access to an app identity that nobody signs in as. That needs the same controls as any other workload identity: an owner, credential hygiene and least privilege. A Python step means arbitrary code runs inside maker-built workflows, which your DLP and environment strategy has to account for.",
+ "todo": [
+  "Do now: decide who may create app registrations used as workflow owners, and require an accountable human owner and a review date on each.",
+  "Check your Copilot Studio and Power Platform DLP and environment strategy for where code steps and file-generating agents are allowed.",
+  "Wait: roadmap items, not yet documented in Learn when checked. Where the Python code runs and what network access it has is not stated. Not verified."
+ ],
+ "effective_note": "Roadmap 580863/580864/580865/580866, in development — per Microsoft. Not verified.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 580863: service principal owner for workflows",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580863"
+ },
+ "related": [
+  {
+   "title": "Recipe: Copilot Studio environment strategy",
+   "url": "recipes/copilot-studio-environment-strategy.html"
+  },
+  {
+   "title": "Recipe: Copilot Studio DLP",
+   "url": "recipes/copilot-studio-dlp.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 580863",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580863",
+   "checked": "2026-11-20"
+  },
+  {
+   "title": "Microsoft 365 Roadmap 580866",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580866",
+   "checked": "2026-11-20"
+  },
+  {
+   "title": "Microsoft 365 Roadmap 580864",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580864",
+   "checked": "2026-11-20"
+  },
+  {
+   "title": "Microsoft 365 Roadmap 580865",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580865",
+   "checked": "2026-11-20"
+  }
+ ],
+ "last_verified": "2026-11-20"
+}
