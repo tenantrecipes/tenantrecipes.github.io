@@ -1,7 +1,8 @@
 # Builds the site and deploys dist/ to GitHub Pages.
 # - push to main / manual run: always build and deploy.
 # - schedule (every 15 min): refresh the Microsoft cloud status mirror (tools/fetch_status.py, public sources only).
-#   Deploys only when the status changed or once an hour (keeps "last checked" fresh without a deploy every run).
+#   Deploys when the status fingerprint changed, or when the live "last checked" is 25+ minutes old.
+#   (Do not use wall-clock minute — GitHub's cron often starts late and a "minute < 15" gate skipped refreshes for hours.)
 #   Commits data/status-history.json when incidents appear or change (30-day history).
 name: Deploy to GitHub Pages
 on:
@@ -32,11 +33,11 @@ jobs:
           python-version: "3.11"
       - name: Fetch public Microsoft status sources
         id: st
-        run: python3 tools/fetch_status.py | tee status.out && grep -E '^(changed|history_changed)=' status.out >> "$GITHUB_OUTPUT"
+        run: python3 tools/fetch_status.py | tee status.out && grep -E '^(changed|history_changed|stale)=' status.out >> "$GITHUB_OUTPUT"
       - name: Decide whether to deploy
         id: gate
         run: |
-          if [ "${{ github.event_name }}" != "schedule" ] || [ "${{ steps.st.outputs.changed }}" = "true" ] || [ "$(date -u +%M)" -lt 15 ]; then
+          if [ "${{ github.event_name }}" != "schedule" ] || [ "${{ steps.st.outputs.changed }}" = "true" ] || [ "${{ steps.st.outputs.stale }}" = "true" ]; then
             echo "deploy=true" >> "$GITHUB_OUTPUT"
           else
             echo "deploy=false" >> "$GITHUB_OUTPUT"
@@ -46,8 +47,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           git add data/status-history.json
-          git commit -m "Status history update" && (git pull --rebase -q origin main && git push -q origin HEAD:main) || true
+          if git diff --cached --quiet; then
+            echo "No history changes to commit"
+            exit 0
+          fi
+          git commit -m "Status history update"
+          if ! git pull --rebase origin main || ! git push origin HEAD:main; then
+            echo "::warning::Could not push status history (will retry on a later run). Deploy continues."
+          fi
       - name: Build
         if: steps.gate.outputs.deploy == 'true'
         run: python3 build.py   # validates content + checks links; fails = no deploy

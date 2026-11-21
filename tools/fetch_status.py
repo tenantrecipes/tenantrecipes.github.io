@@ -3,7 +3,7 @@
 No authenticated APIs (no Microsoft Graph / Service Health). If a source cannot be reached, it is reported as
 unreachable on the page instead of guessing. Used by the Pages workflow before every build (push and the
 15-minute schedule). Prints `changed=true|false` (state fingerprint vs. the deployed copy) for the workflow."""
-import json, re, sys, html, hashlib, pathlib, datetime, urllib.request
+import json, re, sys, html, hashlib, pathlib, datetime, time, urllib.request
 import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -14,10 +14,18 @@ OK = {"available", "operational", "healthy", "ok", "none"}
 NOW = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)
 
 
-def get(url, timeout=20):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.status, r.read().decode("utf-8", "replace")
+def get(url, timeout=20, retries=3):
+    last = None
+    for attempt in range(retries):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.status, r.read().decode("utf-8", "replace")
+        except Exception as e:
+            last = e
+            if attempt + 1 < retries:
+                time.sleep(1.5 * (attempt + 1))
+    raise last
 
 
 def text(h):
@@ -135,13 +143,26 @@ def main():
     if hist_changed or not HIST.exists():
         HIST.write_text(json.dumps(hist[:100], indent=1, ensure_ascii=False) + "\n")
     deployed = None
+    deployed_generated = None
     try:
-        deployed = json.loads(get("https://tenantrecipes.com/status/status.json", 15)[1]).get("fingerprint")
+        live = json.loads(get("https://tenantrecipes.com/status/status.json", 15)[1])
+        deployed = live.get("fingerprint")
+        deployed_generated = live.get("generated")
     except Exception:
         pass
-    print(f"overall={overall} reachable={len(reach)}/{len(sources)} active={len(active)} fingerprint={fp} deployed={deployed}")
+    # Redeploy when the live "last checked" is 25+ minutes old. GitHub's cron often
+    # starts well after minute 00, so a "minute < 15" gate skipped the hourly refresh for hours.
+    stale = True
+    if deployed_generated:
+        try:
+            gen = datetime.datetime.fromisoformat(deployed_generated.replace("Z", "+00:00"))
+            stale = (NOW - gen) >= datetime.timedelta(minutes=25)
+        except ValueError:
+            stale = True
+    print(f"overall={overall} reachable={len(reach)}/{len(sources)} active={len(active)} fingerprint={fp} deployed={deployed} deployed_generated={deployed_generated or 'none'} stale={str(stale).lower()}")
     print(f"changed={'true' if fp != deployed else 'false'}")
     print(f"history_changed={'true' if hist_changed else 'false'}")
+    print(f"stale={'true' if stale else 'false'}")
 
 
 if __name__ == "__main__":

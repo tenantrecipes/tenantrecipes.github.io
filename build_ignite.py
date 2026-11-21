@@ -1,10 +1,10 @@
-"""Draft /ignite/ hub and a date-driven homepage banner for Microsoft Ignite 2026.
+"""Permanent /ignite/ archive for Microsoft Ignite 2026, plus a date-driven homepage banner.
 
-PUBLISHED is False until Krister approves going live. A normal `python3 build.py`
-does not write /ignite/ into dist/ or add the homepage banner, so an evening
-publish cannot ship this by accident. Preview:
+The 2026 event ran 17–20 November. The hub at /ignite/ stays at that stable URL
+as a permanent archive (past tense, no live countdown). The homepage banner only
+renders during 16–20 November (Europe/Stockholm) and stays off afterwards.
 
-  TR_PREVIEW=1 TR_IGNITE_DRAFT=1 TR_DIST=/workspace/m365ai-ignite/preview python3 build_site.py
+PUBLISHED is True (approved 2026-11-16). A normal `python3 build.py` writes /ignite/.
 
 News items appear here only when data/news/<id>.json has "ignite": true.
 Optional "ignite_area" (copilot|security|endpoint|collaboration|azure) overrides
@@ -25,10 +25,12 @@ import build_trust as T
 ROOT = pathlib.Path(__file__).resolve().parent
 PUBLISHED = True  # approved by Krister 2026-11-16 19:08 ("Ja, publicera i kväll")
 PATH = "ignite/index.html"
-TITLE = "Microsoft Ignite 2026: short news for Microsoft 365 admins"
+TITLE = "Ignite 2026 archive: short news for Microsoft 365 admins"
 LEAD = (
-    "Independent, source-linked coverage of Microsoft Ignite 2026 for tenant admins — "
-    "short news items, grouped by area, with what to watch. Not affiliated with Microsoft."
+    "An archive of independent, source-linked coverage of Microsoft Ignite 2026 "
+    "(17–20 November, San Francisco and online) for tenant admins — short news items, "
+    "grouped by area, with what to watch. The event is over; this page stays as a permanent archive. "
+    "Not affiliated with Microsoft."
 )
 
 STOCKHOLM = ZoneInfo("Europe/Stockholm")
@@ -337,10 +339,9 @@ def _subscribe_box(rel) -> str:
     u = E(C.BUTTONDOWN_USERNAME)
     return (
         '<section class="ig-sub-box" id="ignite-subscribe" aria-labelledby="ig-sub-h">'
-        '<div class="ig-sub-txt"><p class="ig-sub-kick">Weekly Brief · Ignite special</p>'
-        '<h2 id="ig-sub-h">Get the Ignite 2026 summary in your inbox</h2>'
-        '<p>Our Ignite wrap-up for tenant admins goes out in the Tenant Recipes Weekly Brief on <strong>Friday 20 November 2026</strong>: '
-        'what was announced, what is actually available, and what to check in your tenant. Free, no fluff.</p></div>'
+        '<div class="ig-sub-txt"><p class="ig-sub-kick">Weekly Brief</p>'
+        '<h2 id="ig-sub-h">Get the Weekly Brief in your inbox</h2>'
+        '<p>A short weekly email for people who run Microsoft 365 tenants: important changes, security updates, and one thing to review. Free, no fluff.</p></div>'
         f'<form class="bd-form ig-sub-form" action="https://buttondown.com/api/emails/embed-subscribe/{u}" method="post" target="_blank">'
         '<label class="sr" for="bd-email-ignite">Email address</label>'
         '<input id="bd-email-ignite" type="email" name="email" required autocomplete="email" placeholder="you@company.com"> '
@@ -359,7 +360,7 @@ def body(rel, fmt_date):
         by.setdefault(e["ignite_area"], []).append(e)
     toc = "".join(f'<li><a href="#{aid}">{E(title)}</a> <span>{len(by.get(aid, []))}</span></li>' for aid, title, _ in AREAS)
     sections = []
-    empty = "No items in this area yet. They appear here once a news entry is tagged ignite and published."
+    empty = "No items were published in this area."
     for aid, title, intro in AREAS:
         sections.append(
             f'<section class="ig-track ig-track-{aid}" id="{aid}" aria-labelledby="{aid}-h">'
@@ -373,7 +374,7 @@ def body(rel, fmt_date):
             "<p>This hub is a local preview for review. It is not on the live site and must not be treated as published.</p></aside>"
         )
     guard = (
-        "Announcements at Ignite are often previews or roadmaps. We mark anything announced but not generally "
+        "Announcements at Ignite were often previews or roadmaps. We mark anything announced but not generally "
         "available as unverified or preview, and we do not invent rollout dates. Always check the linked official source."
     )
     facts = (
@@ -398,11 +399,10 @@ def body(rel, fmt_date):
         f'<section class="ig-page-hero" aria-labelledby="ig-hub-h">'
         f'<div class="ig-banner-bg" aria-hidden="true">{_blobs()}{_decor()}</div>'
         f'<div class="wrap ig-page-hero-in">'
-        + T.crumbs(rel, PATH, [("Home", rel + "index.html"), ("Ignite 2026", None)])
-        + f'<p class="ig-kicker"><span class="ig-live" aria-hidden="true"></span>{E(_phase_label())} · San Francisco and online</p>'
-        + _wordmark("h1", "ig-hub-h", "Short, source-linked news for tenant admins")
-        + f'<p class="ig-page-lead">{E(LEAD)} Opening keynote Tuesday 17 November, {E(KEYNOTE_SE)} ({E(KEYNOTE_PT)}).</p>'
-        + _countdown_html()
+        + T.crumbs(rel, PATH, [("Home", rel + "index.html"), ("Ignite 2026 archive", None)])
+        + '<p class="ig-kicker">Ignite 2026 archive · 17–20 November</p>'
+        + _wordmark("h1", "ig-hub-h", "Collected news and summaries for tenant admins")
+        + f'<p class="ig-page-lead">{E(LEAD)}</p>'
         + f'<p class="ig-cta"><a class="btn ig-btn" href="{E(OFFICIAL_HOME)}" rel="noopener">Official event site</a>'
         f'<a class="btn ig-btn-2" href="{E(BOOK_OF_NEWS)}" rel="noopener">Book of News</a>'
         f'<a class="btn ig-btn-2" href="{E(OFFICIAL_SESSIONS)}" rel="noopener">Session catalog</a></p>'
@@ -419,8 +419,18 @@ def body(rel, fmt_date):
             }[aid],)
         )
         + "</nav>"
-        + "</div>" + _countdown_js() + "</section>"
+        + "</div></section>"
     )
+    wrap = next((e for e in items if e.get("id") == "ignite-2026-wrap-ga-vs-preview" or "wrap-ga-vs-preview" in (e.get("u") or "")), None)
+    featured = ""
+    if wrap:
+        featured = (
+            '<section class="ig-track" id="highlights" aria-labelledby="highlights-h">'
+            '<header class="ig-track-h"><h2 id="highlights-h">Start here</h2>'
+            "<p>A short wrap-up of what was generally available at the close of the event, and what stayed in preview.</p></header>"
+            + _news_cards(rel, fmt_date, [wrap], "")
+            + "</section>"
+        )
     return (
         hero
         + '<main class="wrap pg"><article class="prose doc ignite-hub">'
@@ -429,9 +439,10 @@ def body(rel, fmt_date):
         + '<div class="ig-hero-panel"><h2>Event at a glance</h2>'
         + facts
         + "</div>"
-        + f'<aside class="tl-perm pl-notice" role="note">{T.icon("info")}<span><strong>How we cover Ignite.</strong> {E(guard)}</span></aside>'
-        + '<p>This page only lists news items we have written and fact-checked, tagged <code>ignite: true</code> in the news data. '
+        + f'<aside class="tl-perm pl-notice" role="note">{T.icon("info")}<span><strong>How we covered Ignite.</strong> {E(guard)}</span></aside>'
+        + "<p>This page lists the news items we wrote and fact-checked during the event, tagged <code>ignite: true</code> in the news data. "
         "It is not a transcript of the keynote and it is not Microsoft's Book of News.</p>"
+        + featured
         + f'<div class="ai-toc ig-toc" role="navigation" aria-label="Areas"><p class="ps-h">{T.icon("list")}By area</p><ol>{toc}</ol></div>'
         + "".join(sections)
         + f'<p class="ig-cta"><a class="btn ig-btn" href="{E(OFFICIAL_HOME)}" rel="noopener">Official Microsoft Ignite site</a> '
@@ -449,5 +460,5 @@ def build(page, SITE_NAME, fmt_date):
 def search_docs():
     if not PUBLISHED:
         return []
-    return [{"t": "Microsoft Ignite 2026 hub", "k": "Page", "c": "Site", "u": PATH, "s": LEAD,
+    return [{"t": "Ignite 2026 archive", "k": "Page", "c": "Site", "u": PATH, "s": LEAD,
              "x": "Microsoft Ignite Copilot agents Entra Defender Purview Intune Windows Teams SharePoint Azure"}]
