@@ -44,6 +44,7 @@ It applies to every account that can access {{COMPANY}} systems, including user,
 - Privileged roles are granted just-in-time and time-limited where the platform supports it.
 - At least two emergency (break-glass) accounts exist, are excluded only from the policies needed to stay usable, use strong credentials stored securely, and are monitored for any sign-in.
 - Service accounts and app credentials have a named owner, the least privilege needed and a documented rotation plan.
+- Technical-contact and notification addresses registered with cloud providers point to monitored shared mailboxes or distribution lists, not to privileged sign-in accounts, so a leak of contact data does not hand attackers the admin account names.
 
 ## 6. Legacy network authentication
 

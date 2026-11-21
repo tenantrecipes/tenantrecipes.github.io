@@ -1,0 +1,55 @@
+{
+ "id": "entra-connect-health-api-tenant-metadata-exposure",
+ "status": "published",
+ "title": "Entra Connect Health API flaw exposed tenant admin metadata",
+ "date": "2026-11-21",
+ "category": "Entra",
+ "summary": "Microsoft is notifying affected tenants through Azure Service Health that a vulnerability in the Entra Connect Health API, introduced on 23 July 2026 and found on 9 November, was exploited to read tenant-level metadata. According to the notification as reported by BleepingComputer, exposed data includes tenant technical-contact and admin email addresses, tenant ID, display and initial domain names, country/region, Entra licence tier, directory sync status and last sync time, Connect Health onboarding status and an expired, decommissioned agent registration certificate. Microsoft says it found read-only access and no configuration changes, deployed a server-side fix on 19 November and finished its investigation on 20 November; passwords, hashes, tokens, valid keys and on-premises topology were not exposed. Microsoft confirmed the fix and the notifications to BleepingComputer but has not said how many tenants were affected.",
+ "why": "Admin and technical-contact addresses paired with tenant ID, licence tier and sync status are exactly what a targeted phishing or helpdesk social-engineering campaign against your privileged accounts needs. MSPs report notices for several customer tenants, arriving hours apart.",
+ "todo": [
+  "Do now: check Azure Service Health (Security advisories) in every tenant you run, including customer tenants, for the Connect Health notice; absence in one tenant says nothing about the others.",
+  "Warn your service desk and the named admins/technical contacts about targeted phishing and fake support calls that quote tenant details.",
+  "Confirm every privileged role uses phishing-resistant MFA, and review Entra audit and sign-in logs for the admin accounts listed as contacts since late July.",
+  "Review Connect Health configuration and agent registrations; Microsoft's script at aka.ms/ConnectHealth/scripts shows current values only, not what was accessed.",
+  "No patch or customer remediation is required per Microsoft. Scope and attacker are not disclosed (not verified)."
+ ],
+ "effective_note": "Fixed server-side 19 Nov 2026; notifications from 20 Nov via Azure Service Health — per Microsoft as reported by BleepingComputer. The notice itself is not public.",
+ "primary": {
+  "title": "BleepingComputer: Microsoft Entra Connect Health flaw exploited to steal tenant data",
+  "url": "https://www.bleepingcomputer.com/news/security/microsoft-entra-connect-health-flaw-exploited-to-steal-tenant-data/"
+ },
+ "related": [
+  {
+   "title": "Recipe: Break-glass accounts and Conditional Access",
+   "url": "recipes/ca-break-glass.html"
+  },
+  {
+   "title": "Recipe: PIM least privilege for daily operations",
+   "url": "recipes/pim-least-privilege-daily-ops.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "BleepingComputer: Microsoft Entra Connect Health flaw exploited to steal tenant data",
+   "url": "https://www.bleepingcomputer.com/news/security/microsoft-entra-connect-health-flaw-exploited-to-steal-tenant-data/",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "Microsoft (GitHub AzureAD/EntraIDGovernance): Connect Health scripts (aka.ms/ConnectHealth/scripts)",
+   "url": "https://github.com/AzureAD/EntraIDGovernance/tree/main/ConnectHealth",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "r/sysadmin: admins sharing the security notification",
+   "url": "https://www.reddit.com/r/sysadmin/comments/1y1of2u/important_security_notification_regarding/",
+   "checked": "2026-11-21"
+  }
+ ],
+ "hashtags": [
+  "EntraID",
+  "CyberSecurity",
+  "Microsoft365",
+  "IdentitySecurity"
+ ],
+ "last_verified": "2026-11-21"
+}

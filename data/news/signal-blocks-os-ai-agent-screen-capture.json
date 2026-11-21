@@ -1,0 +1,43 @@
+{
+ "id": "signal-blocks-os-ai-agent-screen-capture",
+ "status": "published",
+ "title": "Signal blocks OS AI agents from reading chats",
+ "date": "2026-11-21",
+ "category": "Copilot/AI",
+ "summary": "Signal says it now blocks screenshots by default in its app on iOS 27, and on Android where it can detect an AI assistant trying to capture the screen, to keep OS-level agents such as Siri's onscreen awareness and Gemini from reading messages. It compares this to the screenshot blocking it added against Windows Recall. Users can turn the protection off in Signal settings. Signal says the measure is incomplete because agents may reach app data in other ways, and that it cannot do the same on macOS for lack of OS controls.",
+ "why": "OS-level assistants read whatever is on screen, regardless of the app's own data protection. The same question applies to Teams, Outlook and line-of-business apps on managed devices: app protection policies and screen-capture controls are your levers, and agent features in the OS are a data-flow decision, not just a user feature.",
+ "todo": [
+  "Review whether your Intune app protection policies block screen capture for managed apps on iOS and Android, and whether that is still the right trade-off.",
+  "Inventory OS-level assistant features on managed devices (Windows Recall, Siri, Gemini) and decide which are allowed for work profiles.",
+  "Track Microsoft and Apple controls for limiting agent access to app data; Signal says current OS controls are insufficient (vendor claim)."
+ ],
+ "primary": {
+  "title": "Signal blog: Signal is Serious About Protecting Your Privacy (20 Nov 2026)",
+  "url": "https://signal.org/blog/protecting-your-privacy/"
+ },
+ "related": [
+  {
+   "title": "Recipe: Intune app protection for Copilot",
+   "url": "recipes/intune-app-protection-copilot.html"
+  }
+ ],
+ "recipe": "intune-app-protection-copilot",
+ "sources": [
+  {
+   "title": "Signal blog (Meredith Whittaker, 20 Nov 2026)",
+   "url": "https://signal.org/blog/protecting-your-privacy/",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "The Register: Signal slams door on prying AI agents",
+   "url": "https://www.theregister.com/security/2026/11/20/signal-slams-door-on-prying-ai-agents-to-protect-privacy/5311466",
+   "checked": "2026-11-21"
+  }
+ ],
+ "hashtags": [
+  "Privacy",
+  "AISecurity",
+  "MicrosoftIntune"
+ ],
+ "last_verified": "2026-11-21"
+}

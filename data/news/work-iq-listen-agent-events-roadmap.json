@@ -1,0 +1,43 @@
+{
+ "id": "work-iq-listen-agent-events-roadmap",
+ "status": "published",
+ "title": "Work IQ Listen: agents that react to Work IQ events",
+ "date": "2026-11-21",
+ "category": "Copilot/AI",
+ "ignite": true,
+ "ignite_area": "copilot",
+ "summary": "Roadmap item 570867, added after Ignite, lists Work IQ: Listen, which lets agents listen for supported Work IQ events and respond as relevant changes occur. Microsoft gives preview in November 2026 and GA in January 2027 but has not yet documented which events are supported, which permissions an agent needs or where admins control it. It builds on the Work IQ people and organisation context announced at Ignite.",
+ "why": "Event-driven agents act without a user prompt, which changes the governance model: an agent that wakes on organisational changes runs under whatever identity and permissions it was given, with nobody watching each run. That is the scenario owner, sponsor and Agent 365 risk controls are meant for.",
+ "todo": [
+  "Do now: decide who may publish agents that run on triggers rather than prompts, and require a named owner for them.",
+  "Make sure agent activity lands in Purview audit before you allow event-driven agents in production.",
+  "Wait: supported events and admin controls are not documented. Announced only, not verified."
+ ],
+ "effective_note": "Roadmap 570867: preview November 2026, GA January 2027 — per Microsoft. Announced, not verified.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 570867: Work IQ: Listen",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=570867"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Work IQ people and organisation context",
+   "url": "news/ignite-2026-work-iq-people-org-context.html"
+  },
+  {
+   "title": "Recipe: Agent inventory in the admin center",
+   "url": "recipes/agents-inventory-admin-center.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 570867",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=570867",
+   "checked": "2026-11-21"
+  }
+ ],
+ "last_verified": "2026-11-21"
+}

@@ -1,0 +1,42 @@
+{
+ "id": "n-able-mail-assure-spamexperts-incident",
+ "status": "published",
+ "title": "N-able Mail Assure and SpamExperts hit by breach",
+ "date": "2026-11-21",
+ "category": "Security incidents",
+ "summary": "N-able has confirmed unauthorised access to a server in its Mail Assure and SpamExperts Hosted Cloud environment, after first blaming a worldwide outage on platform configuration and service dependencies. It disabled UI and API access, the dashboard, quarantine, logging and mailbox sync services while it investigates; mail flow and filtering continued. N-able says it has no evidence so far that customer data or mailboxes were accessed, and that the incident is unrelated to the earlier hosted N-central incident.",
+ "why": "Many Microsoft 365 tenants, especially MSP-managed ones, route mail through Mail Assure or SpamExperts via connectors. While the console is down you cannot release quarantine or change domains, and a filtering vendor with server access sits in your mail path.",
+ "todo": [
+  "Do now: check whether any tenant you manage has inbound/outbound connectors or MX records pointing at Mail Assure/SpamExperts.",
+  "Make sure Exchange Online Protection or Defender for Office 365 policies are sane as a fallback, and that connector restrictions (certificate/IP) are in place.",
+  "Watch N-able's status page for the final incident report; findings are not verified here."
+ ],
+ "primary": {
+  "title": "N-able status: Mail Assure and SpamExperts Hosted Cloud security incident",
+  "url": "https://uptime.n-able.com/event/202672/"
+ },
+ "related": [
+  {
+   "title": "Security: N-able N-central",
+   "url": "security/n-able-ncentral-cve-2026-86218.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "N-able status page, event 202672",
+   "url": "https://uptime.n-able.com/event/202672/",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "BleepingComputer: N-able says recent security breach led to major service outage",
+   "url": "https://www.bleepingcomputer.com/news/microsoft/n-able-says-recent-security-breach-led-to-major-service-outage/",
+   "checked": "2026-11-21"
+  }
+ ],
+ "hashtags": [
+  "CyberSecurity",
+  "EmailSecurity",
+  "MSP"
+ ],
+ "last_verified": "2026-11-21"
+}

@@ -1,0 +1,47 @@
+{
+ "id": "exchange-hve-external-recipients-roadmap",
+ "status": "published",
+ "title": "Exchange Online HVE to send to external recipients",
+ "date": "2026-11-21",
+ "category": "M365",
+ "summary": "Microsoft 365 Roadmap item 581778 says High Volume Email (HVE), which today delivers only to recipients inside your own organisation, will be able to send to external recipients such as customers and partners, for transactional and operational mail (notifications, alerts, receipts) rather than marketing. Admins enable it per HVE account with a cmdlet, sending stays SMTP with HVE account authentication, and Microsoft lists throttling, quotas and suppression of problem recipients. Billing is to be usage-based per external recipient, with preview listed for December 2026 and GA for March 2027.",
+ "why": "Many tenants still keep a basic-auth SMTP relay, an on-prem Exchange box or a third-party relay only because apps must mail externally. External HVE could replace them, but it adds a metered cost and puts application mail on your own domain's reputation and SPF/DMARC.",
+ "todo": [
+  "Do now: inventory apps and devices that send to external recipients through SMTP AUTH, connectors or an on-prem relay; those are the candidates.",
+  "Plan authentication: the Learn page already recommends OAuth for HVE accounts over account credentials.",
+  "Wait: the enabling cmdlet, quotas and per-recipient price are not published yet. Roadmap only, not verified."
+ ],
+ "effective_note": "Roadmap 581778: preview December 2026, GA March 2027 — per Microsoft. Not verified.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 581778: HVE for external recipients",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=581778"
+ },
+ "related": [
+  {
+   "title": "News: Reject Direct Send is GA",
+   "url": "news/exchange-online-reject-direct-send-ga.html"
+  },
+  {
+   "title": "News: Sending from aliases is GA",
+   "url": "news/exchange-online-send-from-aliases-ga.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 581778",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=581778",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "Microsoft Learn: Manage High Volume Email for Microsoft 365",
+   "url": "https://learn.microsoft.com/en-us/exchange/mail-flow-best-practices/high-volume-mails-m365",
+   "checked": "2026-11-21"
+  }
+ ],
+ "hashtags": [
+  "ExchangeOnline",
+  "Microsoft365",
+  "EmailSecurity"
+ ],
+ "last_verified": "2026-11-21"
+}

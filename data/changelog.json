@@ -1,5 +1,23 @@
 [
  {
+  "date": "2026-11-21",
+  "kind": "site",
+  "type": "News",
+  "title": "Entra Connect Health exposure, 26H2 auto-upgrade, HVE external",
+  "blurb": "Entra Connect Health API flaw exposed tenant admin metadata; Windows 11 26H2 auto-installs on unmanaged PCs; HVE to external recipients (roadmap); macOS Platform SSO architecture; Work IQ Listen; Copilot Studio credits API; Cairn AI agents zero-day; Signal vs OS agents; N-able Mail Assure incident.",
+  "url": "news/index.html",
+  "text": "Microsoft Entra Connect Health API vulnerability tenant metadata exposure, Windows 11 26H2 automatic upgrade unmanaged devices, Exchange Online High Volume Email external recipients roadmap 581778, macOS Platform SSO architecture, Work IQ Listen roadmap 570867, Copilot Studio Copilot credits reporting API roadmap 579968, Amazon Cairn autonomous AI agents MONAI Label zero-day, Signal blocks OS AI agents, N-able Mail Assure SpamExperts security incident."
+ },
+ {
+  "date": "2026-11-21",
+  "kind": "site",
+  "type": "Security",
+  "title": "F5 BIG-IP critical TMM fixes; Chromium V8 KEV backlog",
+  "blurb": "Five critical BIG-IP data-plane flaws in iRules and APM (18 Nov) plus APM SAML DoS; September V8 zero-days CVE-2026-85046 and CVE-2026-87491 (KEV backlog).",
+  "url": "security/index.html",
+  "text": "F5 BIG-IP CVE-2026-121805, CVE-2026-120292, CVE-2026-120285, CVE-2026-116953, CVE-2026-123637, CVE-2026-126822; Chromium V8 CVE-2026-85046 and CVE-2026-87491 KEV."
+ },
+ {
   "date": "2026-11-19",
   "kind": "site",
   "type": "News",

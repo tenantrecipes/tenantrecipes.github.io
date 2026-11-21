@@ -1,0 +1,44 @@
+{
+ "id": "windows-11-26h2-auto-upgrade-unmanaged-devices",
+ "status": "published",
+ "title": "Windows 11 26H2 now installs automatically on unmanaged PCs",
+ "date": "2026-11-21",
+ "category": "Windows",
+ "summary": "Microsoft's release health page says that from 18 November 2026 it is gradually expanding automatic delivery of Windows 11, version 26H2 (the 2026 Update) to devices on 24H2 and 25H2 that are not managed by an IT department. Until now, 26H2 was offered since late October only to people who checked for updates manually. Delivery depends on Windows Update settings and covers personal devices and non-managed business devices; 26H2 ships as an enablement package on top of the shared servicing branch.",
+ "why": "Managed devices still follow your feature update policies, but BYOD, unenrolled small-office machines and devices that silently fell out of management will move to 26H2 on Microsoft's schedule. That shows up as unexpected OS versions in Conditional Access device filters, compliance minimum-version rules and app compatibility reports.",
+ "todo": [
+  "Do now: check that every corporate Windows device actually has a feature update policy or Autopatch group, so it is not treated as 'unmanaged'.",
+  "Review compliance policies that set a maximum OS version or device filters that pin builds; 26H2 devices must not fall out by accident.",
+  "Run your app compatibility smoke test against 26H2 now if you have not, since unmanaged and BYOD users will arrive on it first."
+ ],
+ "effective": "2026-11-18",
+ "effective_note": "Phased automatic rollout from 18 Nov 2026 for unmanaged 24H2/25H2 devices — per Microsoft.",
+ "primary": {
+  "title": "Windows release health: Windows 11, version 26H2 status",
+  "url": "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-26h2"
+ },
+ "related": [
+  {
+   "title": "Recipe: Windows Autopatch",
+   "url": "recipes/intune-windows-autopatch.html"
+  },
+  {
+   "title": "Recipe: Intune compliance baseline",
+   "url": "recipes/intune-compliance-baseline.html"
+  }
+ ],
+ "recipe": "intune-windows-autopatch",
+ "sources": [
+  {
+   "title": "Windows release health: Windows 11, version 26H2",
+   "url": "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-26h2",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "BleepingComputer: Microsoft now automatically installs Windows 11 26H2 on unmanaged devices",
+   "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-now-automatically-installs-windows-11-26h2-on-personal-and-unmanaged-pcs/",
+   "checked": "2026-11-21"
+  }
+ ],
+ "last_verified": "2026-11-21"
+}

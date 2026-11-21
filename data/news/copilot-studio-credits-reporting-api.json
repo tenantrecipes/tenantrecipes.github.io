@@ -1,0 +1,43 @@
+{
+ "id": "copilot-studio-credits-reporting-api",
+ "status": "published",
+ "title": "Copilot Studio credit usage via Power Platform API",
+ "date": "2026-11-21",
+ "category": "Copilot/AI",
+ "summary": "Roadmap item 579968 adds a Power Platform reporting API for Copilot Credits, exposing Copilot Studio credit consumption through the Power Platform API in addition to the reports already in the Power Platform admin center. Microsoft lists preview in November 2026 and GA in January 2027 and points to the Power Platform API reference for the methods.",
+ "why": "Copilot Studio agents bill per credit, and the admin center reports are manual. An API lets FinOps and platform teams pull credit use per environment or agent into their own dashboards, set alerts and charge back before a busy agent eats the capacity pack.",
+ "todo": [
+  "Do now: identify which environments and agents consume credits today in the Power Platform admin center so you have a baseline.",
+  "Plan an app registration with least privilege for the reporting call once the methods are documented.",
+  "Wait: preview per Microsoft; method names and permissions not verified here."
+ ],
+ "effective_note": "Roadmap 579968: preview November 2026, GA January 2027 — per Microsoft. Not verified.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 579968: Copilot Studio PPAC Reporting API",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=579968"
+ },
+ "related": [
+  {
+   "title": "Recipe: Copilot Studio environment strategy",
+   "url": "recipes/copilot-studio-environment-strategy.html"
+  },
+  {
+   "title": "Recipe: Copilot Chat pay-as-you-go",
+   "url": "recipes/copilot-chat-pay-as-you-go.html"
+  }
+ ],
+ "recipe": "copilot-studio-environment-strategy",
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 579968",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=579968",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "Microsoft Learn: Power Platform API reference",
+   "url": "https://learn.microsoft.com/en-us/rest/api/power-platform/",
+   "checked": "2026-11-21"
+  }
+ ],
+ "last_verified": "2026-11-21"
+}

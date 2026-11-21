@@ -15,7 +15,8 @@
   "Autopatch features require Business Premium, A3+, E3+ or F3 licenses — check eligibility first.",
   "A Windows Autopatch quality update policy with automatic approval replaces the deferral in the update ring or Autopatch group instead of adding to it (5-day ring + 2-day policy = 2 days, not 7). With manual approval there is no deferral at all. To keep staged timing, create one quality update policy per ring with the same deferral and assignment. Deadlines and grace periods still come from the ring.",
   "Quick machine recovery (QMR) updates default to manual approval in the quality update policy. Decide who approves them before a boot-failure event, not during one.",
-  "Hotpatch is not risk-free: the November 2026 hotpatch KB5132043 made some apps that load 32-bit msi.dll fail with 0xC0000099, while devices on the normal cumulative update were not affected. Keep a small hotpatch pilot ring with representative line-of-business apps ahead of the broad ring, and know how to push a registry workaround (Microsoft's was HotPatchTableSize = 2000, then restart) through an Intune remediation and remove it again after the fix. See the news item windows-hotpatch-kb5132043-msi-app-failures."
+  "Hotpatch is not risk-free: the November 2026 hotpatch KB5132043 made some apps that load 32-bit msi.dll fail with 0xC0000099, while devices on the normal cumulative update were not affected. Keep a small hotpatch pilot ring with representative line-of-business apps ahead of the broad ring, and know how to push a registry workaround (Microsoft's was HotPatchTableSize = 2000, then restart) through an Intune remediation and remove it again after the fix. See the news item windows-hotpatch-kb5132043-msi-app-failures.",
+  "Since 18 November 2026 Microsoft auto-delivers Windows 11 26H2 to 24H2/25H2 devices that are not managed by IT. A corporate PC that is not in any feature update policy or Autopatch group can be treated as unmanaged and jump to 26H2 on Microsoft's schedule; check that every device is targeted, and that compliance maximum-OS rules do not mark 26H2 devices noncompliant."
  ],
  "done_when": [
   "Devices are registered in Windows Autopatch and appear in your Autopatch groups.",
@@ -37,12 +38,17 @@
    "title": "Microsoft Support: Hotpatch KB5132043",
    "url": "https://support.microsoft.com/en-au/servicing/os/hotpatch/windows-11/2026/november-kb5132043-windows-11-24h2-25h2-26h2-security-update",
    "checked": "2026-11-20"
+  },
+  {
+   "title": "Windows release health: Windows 11, version 26H2",
+   "url": "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-26h2",
+   "checked": "2026-11-21"
   }
  ],
- "last_verified": "2026-11-16",
+ "last_verified": "2026-11-21",
  "verified_by": "Pascal",
  "created": "2026-10-12",
- "updated": "2026-11-20",
+ "updated": "2026-11-21",
  "screenshots": [],
  "markers": {
   "steps": "official"

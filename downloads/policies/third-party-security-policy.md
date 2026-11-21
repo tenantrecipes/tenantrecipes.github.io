@@ -35,6 +35,7 @@ It covers cloud and software providers, IT service providers, consultants, outso
 - Suppliers that host services {{COMPANY}} signs in to keep those services compatible with current platform security defaults (for example signed authentication protocols and modern TLS) and announce incompatibilities before the vendor's enforcement date, not after.
 - Suppliers that manage {{COMPANY}} devices through remote-support or RMM tools keep technician clients and console extensions on vendor-supported versions, notify {{COMPANY}} of any compromise of those tools without delay, and support out-of-band investigation of managed devices.
 - Application identities that suppliers use to access {{COMPANY}} tenants (for example backup or migration apps) are inventoried with an owner, have only the permissions they need, and are reviewed at least yearly and after any supplier incident.
+- {{OWNER}} makes sure security notices from cloud providers' official channels (for example Azure Service Health security advisories) are monitored for every tenant or subscription {{COMPANY}} owns, and that managed service providers forward such notices for {{COMPANY}} tenants without delay.
 
 ## 5. Ending the relationship
 

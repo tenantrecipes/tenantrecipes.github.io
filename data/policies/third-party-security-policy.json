@@ -47,7 +47,8 @@
     "When a certificate authority used by a supplier is distrusted by browser or operating-system vendors, the supplier replaces affected certificates within the vendor's deadline, and {{COMPANY}} does not re-trust removed roots locally to keep a supplier service working.",
     "Suppliers that host services {{COMPANY}} signs in to keep those services compatible with current platform security defaults (for example signed authentication protocols and modern TLS) and announce incompatibilities before the vendor's enforcement date, not after.",
     "Suppliers that manage {{COMPANY}} devices through remote-support or RMM tools keep technician clients and console extensions on vendor-supported versions, notify {{COMPANY}} of any compromise of those tools without delay, and support out-of-band investigation of managed devices.",
-    "Application identities that suppliers use to access {{COMPANY}} tenants (for example backup or migration apps) are inventoried with an owner, have only the permissions they need, and are reviewed at least yearly and after any supplier incident."
+    "Application identities that suppliers use to access {{COMPANY}} tenants (for example backup or migration apps) are inventoried with an owner, have only the permissions they need, and are reviewed at least yearly and after any supplier incident.",
+    "{{OWNER}} makes sure security notices from cloud providers' official channels (for example Azure Service Health security advisories) are monitored for every tenant or subscription {{COMPANY}} owns, and that managed service providers forward such notices for {{COMPANY}} tenants without delay."
    ]
   },
   {
@@ -83,14 +84,18 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-16",
+ "last_verified": "2026-11-21",
  "created": "2026-10-30",
- "updated": "2026-11-16",
+ "updated": "2026-11-21",
  "order": 100,
  "history": [
   {
    "date": "2026-11-16",
    "note": "During the contract: remote-support/RMM tooling obligations (after the SCKit/ScreenConnect MSP campaign) and supplier application-identity review (after the ConnectWise Cloud Backup app-identity incident)."
+  },
+  {
+   "date": "2026-11-21",
+   "note": "During the contract: monitor cloud providers' security notification channels per tenant and require MSPs to forward them (after the Entra Connect Health metadata exposure notices of 20 November 2026)."
   }
  ]
 }

@@ -1,0 +1,130 @@
+{
+ "id": "f5-bigip-tmm-irules-apm-nov-2026",
+ "status": "published",
+ "order": 132,
+ "type": "vulnerability",
+ "area": "network",
+ "category": "Network",
+ "title": "F5 BIG-IP: five critical TMM flaws in iRules and APM (Nov 2026)",
+ "summary": "F5 published fixes on 18 November 2026 for five critical BIG-IP data-plane vulnerabilities (CVE-2026-121805, CVE-2026-120292, CVE-2026-120285, CVE-2026-116953, CVE-2026-123637) plus a high-severity APM SAML denial of service (CVE-2026-126822). Each critical issue is only reachable in a specific configuration: iRules that use PEM::subscriber, MR::message route, PSC::ip_address or GENERICMESSAGE::route, or an APM per-request policy with the Client Information and Endpoint Security agents. In those configurations an unauthenticated remote request can crash the Traffic Management Microkernel and may lead to code execution; F5 says there is no control-plane exposure and lists no mitigations beyond the fixes. They are not in KEV and F5 has not reported exploitation.",
+ "vendor": "F5",
+ "product": "BIG-IP (LTM iRules, APM, PEM)",
+ "cves": [
+  {
+   "id": "CVE-2026-121805",
+   "cvss": 9.8,
+   "cvss_version": "3.1",
+   "cvss_source": "F5 via NVD",
+   "severity": "Critical",
+   "note": "Condition: iRule using PEM::subscriber on a virtual server. CVSS 4.0 9.3 (F5). F5 K000163946."
+  },
+  {
+   "id": "CVE-2026-120292",
+   "cvss": 9.8,
+   "cvss_version": "3.1",
+   "cvss_source": "F5 via NVD",
+   "severity": "Critical",
+   "note": "Condition: HTTP profile plus iRule using MR::message route. CVSS 4.0 9.3 (F5). F5 K000163940."
+  },
+  {
+   "id": "CVE-2026-120285",
+   "cvss": 9.8,
+   "cvss_version": "3.1",
+   "cvss_source": "F5 via NVD",
+   "severity": "Critical",
+   "note": "Condition: HTTP profile plus iRule using PSC::ip_address. CVSS 4.0 9.3 (F5). F5 K000163939."
+  },
+  {
+   "id": "CVE-2026-116953",
+   "cvss": 9.8,
+   "cvss_version": "3.1",
+   "cvss_source": "F5 via NVD",
+   "severity": "Critical",
+   "note": "Condition: iRule using GENERICMESSAGE::route. CVSS 4.0 9.3 (F5). F5 K000163941."
+  },
+  {
+   "id": "CVE-2026-123637",
+   "cvss": 9.8,
+   "cvss_version": "3.1",
+   "cvss_source": "F5 via NVD",
+   "severity": "Critical",
+   "note": "Condition: APM per-request policy with Client Information and Endpoint Security agents. CVSS 4.0 9.3 (F5). F5 K000163937."
+  },
+  {
+   "id": "CVE-2026-126822",
+   "cvss": 7.5,
+   "cvss_version": "3.1",
+   "cvss_source": "F5 via NVD",
+   "severity": "High",
+   "note": "APM access profile configured as SAML SP: TMM restart (DoS only). CVSS 4.0 8.7 (F5). F5 K000163942."
+  }
+ ],
+ "severity": "Critical",
+ "exploited": false,
+ "advisory_date": "2026-11-18",
+ "advisory_id": "F5 K000163937, K000163939–K000163942, K000163946",
+ "impact": "Unauthenticated denial of service of the data plane (TMM restart) and possible remote code execution on BIG-IP in the affected configurations.",
+ "action": "Check whether your virtual servers use the listed iRule commands or APM agents; if so, install the F5 fixes from the K articles now.",
+ "affected": [
+  "BIG-IP with the iRule commands or APM configurations named in each CVE; affected and fixed versions per the F5 K article for each CVE (not copied here)"
+ ],
+ "fixed": [
+  "Fixed releases and engineering hotfixes listed in F5 K000163937, K000163939, K000163940, K000163941, K000163942 and K000163946"
+ ],
+ "steps": [
+  "Export the iRules on every BIG-IP and search for PEM::subscriber, MR::message route, PSC::ip_address and GENERICMESSAGE::route.",
+  "List APM per-request policies that include Client Information and Endpoint Security agents, and access profiles acting as SAML SP.",
+  "Patch the exposed systems first, using the version matrix in each K article.",
+  "Watch CISA KEV and F5 for exploitation; F5 bugs have been exploited quickly before (for example CVE-2026-94127 in September)."
+ ],
+ "pitfalls": [
+  "Assuming the management interface lockdown helps: these are data-plane issues on the virtual servers.",
+  "Patching only APM: four of the five critical bugs are in iRules on any module that runs them."
+ ],
+ "sources": [
+  {
+   "title": "F5 K000163946: CVE-2026-121805",
+   "url": "https://my.f5.com/manage/s/article/K000163946",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "F5 K000163940: CVE-2026-120292",
+   "url": "https://my.f5.com/manage/s/article/K000163940",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "F5 K000163939: CVE-2026-120285",
+   "url": "https://my.f5.com/manage/s/article/K000163939",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "F5 K000163941: CVE-2026-116953",
+   "url": "https://my.f5.com/manage/s/article/K000163941",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "F5 K000163937: CVE-2026-123637",
+   "url": "https://my.f5.com/manage/s/article/K000163937",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "F5 K000163942: CVE-2026-126822",
+   "url": "https://my.f5.com/manage/s/article/K000163942",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "NIST NVD: CVE-2026-121805",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-121805",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "BleepingComputer: F5 releases emergency patches for critical BIG-IP RCE flaws",
+   "url": "https://www.bleepingcomputer.com/news/security/f5-releases-emergency-patches-for-critical-big-ip-rce-flaws/",
+   "checked": "2026-11-21"
+  }
+ ],
+ "last_verified": "2026-11-21",
+ "verified_by": "Pascal",
+ "created": "2026-11-21",
+ "updated": "2026-11-21"
+}

@@ -1,0 +1,43 @@
+{
+ "id": "macos-platform-sso-architecture-reference",
+ "status": "published",
+ "title": "Microsoft documents macOS Platform SSO architecture",
+ "date": "2026-11-21",
+ "category": "Entra",
+ "summary": "The Entra team published a Learn article on the architecture and authentication flow of macOS Platform SSO with Entra ID, with a blog post explaining the ownership boundaries. MDM delivers the policy, the Microsoft Enterprise SSO plug-in handles registration and SSO flows, macOS protects the Platform SSO PRT and keys, and Entra ID validates proofs and issues tokens. Apps never get the PRT; they get tokens for their own client and resource. The post also clarifies that UserSecureEnclaveKey does not remove the local password at first unlock after restart, that the registration certificate is a device key rather than a user credential, and how cloud and on-premises Kerberos TGTs are returned with the PRT.",
+ "why": "Most Platform SSO tickets are about which layer failed: MDM profile, plug-in registration, macOS credential handling or Entra token issuance. A Microsoft-maintained flow diagram helps you route those tickets and explain to security teams why the PRT is not exposed to every app.",
+ "todo": [
+  "Use the Learn architecture page as the reference when troubleshooting registration versus SSO failures on Macs.",
+  "If you rely on Kerberos SSO from Platform SSO, check that the Kerberos SSO extension is configured to use Platform SSO TGTs, as the post describes.",
+  "Set user expectations: Secure Enclave key is passwordless to Entra ID, but FileVault and first unlock after restart still use the local password."
+ ],
+ "primary": {
+  "title": "Microsoft Learn: Architecture and authentication flow for macOS Platform SSO with Microsoft Entra ID",
+  "url": "https://learn.microsoft.com/entra/identity/devices/macos-platform-sso-architecture"
+ },
+ "related": [
+  {
+   "title": "Recipe: Conditional Access with compliant devices for AI",
+   "url": "recipes/ca-compliant-device-ai.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Entra Blog: Demystifying macOS Platform SSO (20 Nov 2026)",
+   "url": "https://techcommunity.microsoft.com/t5/microsoft-entra-blog/demystifying-macos-platform-sso-how-apple-and-microsoft-entra-id/ba-p/4437423",
+   "checked": "2026-11-21"
+  },
+  {
+   "title": "Microsoft Learn: macOS Platform SSO architecture",
+   "url": "https://learn.microsoft.com/entra/identity/devices/macos-platform-sso-architecture",
+   "checked": "2026-11-21"
+  }
+ ],
+ "hashtags": [
+  "EntraID",
+  "macOS",
+  "MicrosoftIntune",
+  "ZeroTrust"
+ ],
+ "last_verified": "2026-11-21"
+}
