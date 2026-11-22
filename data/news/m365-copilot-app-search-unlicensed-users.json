@@ -1,0 +1,27 @@
+{
+ "id": "m365-copilot-app-search-unlicensed-users",
+ "status": "published",
+ "title": "Microsoft 365 Copilot app: new search for unlicensed users",
+ "date": "2026-11-22",
+ "category": "M365",
+ "summary": "Per Message Center MC1562275 (read via a third-party mirror), users with a Microsoft 365 licence but no Microsoft 365 Copilot licence get an updated search experience in the Microsoft 365 Copilot app, with modern filters and navigation and, where configured, results from connected third-party sources. It is on by default for Standard release tenants from late November to mid-December 2026 and for Deferred release from late December 2026; users can switch back to classic search with a toggle. Results still respect existing permissions.",
+ "why": "Better search surfaces whatever users can already open, including overshared SharePoint sites and connector content. It is the same oversharing problem as Copilot, just without a Copilot licence.",
+ "todo": [
+  "Do now: tell the service desk about the new interface and the toggle back to classic search.",
+  "Review connected sources (Copilot connectors / Graph connectors) and their permissions, since their content becomes easier to find.",
+  "Wait: no admin setting is mentioned to opt out tenant-wide. Not verified."
+ ],
+ "effective_note": "Standard release late Nov–mid Dec 2026; Deferred late Dec 2026–mid Jan 2027 — per MC1562275 (third-party mirror).",
+ "primary": {
+  "title": "Microsoft 365 Message Center MC1562275 (third-party mirror): new search experience for users without Copilot",
+  "url": "https://blog.tophhie.cloud/message-center/mc1562275"
+ },
+ "sources": [
+  {
+   "title": "Microsoft 365 Message Center MC1562275 (third-party mirror): Microsoft 365 Copilot app: New search experience for Microsoft 365 users without a Microsoft 365 Copilot license",
+   "url": "https://blog.tophhie.cloud/message-center/mc1562275",
+   "checked": "2026-11-22"
+  }
+ ],
+ "last_verified": "2026-11-22"
+}

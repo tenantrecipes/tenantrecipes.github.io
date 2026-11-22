@@ -1,0 +1,34 @@
+{
+ "id": "onedrive-node-modules-excluded-from-sync",
+ "status": "published",
+ "title": "OneDrive sync will skip new node_modules folders by default",
+ "date": "2026-11-22",
+ "category": "M365",
+ "summary": "From 14 December 2026, the OneDrive sync app for Windows and Mac will stop syncing newly created folders named node_modules (any capitalisation), according to Message Center MC1558030 (read via a third-party mirror). Existing node_modules folders keep syncing and nothing is deleted; users get no prompt, and the folders stay local only. It extends the default exclusion list that already covers .db-wal files, and admins can switch the default exclusions off with existing OneDrive sync policies. Rollout should finish by mid-January 2027.",
+ "why": "Developers with projects in Known Folder Move locations (Desktop, Documents) will suddenly find dependencies missing on a second device or in the web. If your backup or restore story relies on OneDrive for those folders, the restore will be incomplete by design.",
+ "todo": [
+  "Do now: tell developers and the service desk that node_modules will be local-only and should be rebuilt with the package manager, not restored from OneDrive.",
+  "If you need these folders synced, set the OneDrive policy that disables the default exclusion list before 14 December 2026.",
+  "Use the change to move code projects out of KFM folders into a Git-backed location instead.",
+  "Wait: no action needed if the new default suits you."
+ ],
+ "effective": "2026-12-14",
+ "effective_note": "Rollout 14 Dec 2026 to mid-January 2027 — per MC1558030 (third-party mirror).",
+ "primary": {
+  "title": "Microsoft 365 Message Center MC1558030 (third-party mirror): OneDrive excludes node_modules from sync by default",
+  "url": "https://blog.tophhie.cloud/message-center/mc1558030"
+ },
+ "sources": [
+  {
+   "title": "Microsoft 365 Message Center MC1558030 (third-party mirror): Microsoft OneDrive for Windows and Mac: node_modules folders will be excluded from sync by default",
+   "url": "https://blog.tophhie.cloud/message-center/mc1558030",
+   "checked": "2026-11-22"
+  },
+  {
+   "title": "Microsoft Learn: Use OneDrive policies to control sync settings",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/use-group-policy",
+   "checked": "2026-11-22"
+  }
+ ],
+ "last_verified": "2026-11-22"
+}

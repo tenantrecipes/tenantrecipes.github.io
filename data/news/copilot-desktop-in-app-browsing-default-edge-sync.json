@@ -1,0 +1,33 @@
+{
+ "id": "copilot-desktop-in-app-browsing-default-edge-sync",
+ "status": "published",
+ "title": "Copilot desktop app: in-app browsing on by default, Edge sync",
+ "date": "2026-11-22",
+ "category": "Copilot/AI",
+ "summary": "Two Message Center posts change the Microsoft Copilot desktop app for Windows and Mac. MC1560922 says in-app browsing, which opens links from Copilot chat inside the app next to the conversation, becomes enabled by default from early January 2027 and can be turned off with the BrowsingEnabled policy. MC1562269 adds optional, user opt-in sync of passwords, personal info, settings and browsing history between the Copilot desktop app and Microsoft Edge from mid-December 2026; payment info is not synced. Both were read via a third-party mirror of the Message Center.",
+ "why": "An embedded browser inside the Copilot app is a second browsing surface that may not inherit the controls you built for Edge (SmartScreen, DLP, download and extension policy). Password and history sync to another app also widens where credentials live.",
+ "todo": [
+  "Do now: decide whether in-app browsing should be allowed; if not, plan to deploy BrowsingEnabled = Off through Intune or Group Policy before early January 2027.",
+  "Review the new in-app browsing policies (downloads, permissions, authentication) once Microsoft documents them, and align them with your Edge baseline.",
+  "Decide whether Edge-to-Copilot sync fits your password policy; if you already block Edge password sync, check whether the same setting covers this.",
+  "Wait: Microsoft says documentation will follow; policy names beyond BrowsingEnabled are not published. Not verified."
+ ],
+ "effective_note": "Edge sync GA mid–end December 2026; in-app browsing default from early January 2027 — per MC1562269 and MC1560922 (third-party mirror).",
+ "primary": {
+  "title": "Microsoft 365 Message Center MC1560922 (third-party mirror): Microsoft Copilot: In-app browsing will be enabled by default in the desktop app",
+  "url": "https://blog.tophhie.cloud/message-center/mc1560922"
+ },
+ "sources": [
+  {
+   "title": "Microsoft 365 Message Center MC1560922 (third-party mirror): Microsoft Copilot: In-app browsing will be enabled by default in the desktop app",
+   "url": "https://blog.tophhie.cloud/message-center/mc1560922",
+   "checked": "2026-11-22"
+  },
+  {
+   "title": "Microsoft 365 Message Center MC1562269 (third-party mirror): Sync between Copilot desktop app and Microsoft Edge",
+   "url": "https://blog.tophhie.cloud/message-center/mc1562269",
+   "checked": "2026-11-22"
+  }
+ ],
+ "last_verified": "2026-11-22"
+}

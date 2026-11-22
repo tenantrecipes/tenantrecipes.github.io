@@ -1,0 +1,32 @@
+{
+ "id": "edge-lockdown-mode-canary",
+ "status": "published",
+ "title": "Edge Lockdown Mode in Canary blocks WebGL and WebGPU",
+ "date": "2026-11-22",
+ "category": "Windows",
+ "summary": "Microsoft's Edge browser vulnerability research team described Edge Lockdown Mode on 13 November 2026: an extension of Enhanced Security Mode (which already turns off the V8 JIT compiler) that blocks WebGL, WebGL2 and WebGPU so untrusted sites cannot reach the privileged GPU process. It is experimental in Edge Canary behind a flag and is aimed at high-risk users such as executives, journalists, researchers and administrators; sites with interactive graphics may need a bypass. Microsoft says it plans to extend the feature, but there is no stable release date.",
+ "why": "Many browser exploit chains escape the sandbox through the GPU stack. For admin workstations and privileged access devices, turning off graphics APIs you do not need is cheap attack-surface reduction, and Enhanced Security Mode in strict mode is something you can already enforce by policy today.",
+ "todo": [
+  "Do now: enforce Enhanced Security Mode (strict) on privileged access workstations through Edge policy, with a short allow list for admin portals that break.",
+  "Test Lockdown Mode in Canary on a lab PAW to see which admin consoles depend on WebGL.",
+  "Wait: Canary experiment only; no Edge policy for Lockdown Mode is documented yet. Not verified."
+ ],
+ "effective_note": "Announced 13 Nov 2026; Canary experiment, no stable date — per Microsoft.",
+ "primary": {
+  "title": "Microsoft Browser Vulnerability Research: Reducing the Opportunity for Exploitation with Edge Lockdown Mode",
+  "url": "https://microsoftedge.github.io/edgevr/posts/Lockdown-Mode/"
+ },
+ "sources": [
+  {
+   "title": "Microsoft Browser Vulnerability Research: Edge Lockdown Mode",
+   "url": "https://microsoftedge.github.io/edgevr/posts/Lockdown-Mode/",
+   "checked": "2026-11-22"
+  },
+  {
+   "title": "BleepingComputer: Microsoft tests new Edge Lockdown Mode that disables GPU APIs",
+   "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-tests-new-edge-lockdown-mode-that-disables-gpu-apis/",
+   "checked": "2026-11-22"
+  }
+ ],
+ "last_verified": "2026-11-22"
+}

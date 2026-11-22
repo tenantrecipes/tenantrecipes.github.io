@@ -4,15 +4,15 @@
  "title": "Teams meeting policy will decide who can start recording and transcription, and whether organisers can change it",
  "date": "2026-11-11",
  "category": "M365",
- "summary": "Roadmap item RM579860 (published 11 November 2026, In development, GA targeted December 2026 for worldwide, GCC, GCC High and DoD) lets Teams administrators use meeting policies to control who can start recording and transcription: organisers and co-organisers only, or also presenters. Admins can also decide whether organisers may change the setting per meeting or whether the policy enforces it.",
+ "summary": "Roadmap item RM579860 (published 11 November 2026, In development, GA targeted December 2026 for worldwide, GCC, GCC High and DoD) lets Teams administrators use meeting policies to control who can start recording and transcription: organisers and co-organisers only, or also presenters. Admins can also decide whether organisers may change the setting per meeting or whether the policy enforces it. Update 22 November: Message Center MC1560924 now gives the details: one 'Who can record and transcribe' dropdown under Recording & transcription in the meeting policy, four options, default 'Organizers, co-organizers, and presenters; organizers can change' (today's behaviour), Targeted Release mid-December and worldwide GA late December 2026.",
  "why": "It follows MC1508234 from yesterday, where Meeting options start showing only the automatic recording/transcription choices your policy allows. Together they move recording and transcript control (which feed Copilot in meetings, eDiscovery and retention) from organiser habit to admin policy. Decide the matrix before December rather than after a complaint.",
  "todo": [
   "Decide per policy group: who may start recording, who may start transcription, and whether organisers can override.",
   "Map that against groups where Copilot in meetings is or is not wanted, since transcripts are its input.",
-  "Watch the roadmap for the actual policy parameter names before scripting anything."
+  "Watch for the PowerShell parameter name; MC1560924 documents only the Teams admin center dropdown so far (not verified)."
  ],
  "effective": null,
- "effective_note": "GA targeted December 2026 (RM579860); parameter names not yet published.",
+ "effective_note": "Targeted Release mid-December 2026, GA worldwide late December 2026, GCC late Dec–late Jan, GCC High/DoD from mid-February 2027 — per MC1560924 (third-party mirror).",
  "primary": {
   "title": "RM579860: Microsoft Teams: Tenant policy controls who can record and transcribe (roadmap archive)",
   "url": "https://mc.merill.net/message/RM579860"
@@ -33,7 +33,17 @@
    "title": "RM579860 roadmap entry (merill.net archive)",
    "url": "https://mc.merill.net/message/RM579860",
    "checked": "2026-11-11"
+  },
+  {
+   "title": "Microsoft 365 Message Center MC1560924 (third-party mirror): Teams tenant policy controls who can record and transcribe",
+   "url": "https://blog.tophhie.cloud/message-center/mc1560924",
+   "checked": "2026-11-22"
+  },
+  {
+   "title": "Microsoft 365 Roadmap 579860",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=579860",
+   "checked": "2026-11-22"
   }
  ],
- "last_verified": "2026-11-11"
+ "last_verified": "2026-11-22"
 }

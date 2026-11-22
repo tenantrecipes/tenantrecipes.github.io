@@ -22,7 +22,8 @@
   "DNS must resolve the domain properly from where you run it; on a non-domain-joined host or through SOCKS, fix resolution first or results are misleading.",
   "The BOTH method performs real authenticated binds: use a dedicated test account, not a personal or admin credential, and expect the binds in DC logs.",
   "'When supported' channel binding still lets clients that do not send a CBT through; only 'Always' closes LDAPS relay.",
-  "Error-based detection depends on DC behaviour the author observed; re-validate against the DC's actual configuration after major Windows Server upgrades."
+  "Error-based detection depends on DC behaviour the author observed; re-validate against the DC's actual configuration after major Windows Server upgrades.",
+  "Maintenance: the GitHub repository's last commit was on 19 November 2024 (checked 22 November 2026). It still works as a read-only check, but confirm results against the DC registry settings and event IDs 2887/2889 rather than relying on it alone."
  ],
  "sources": [
   {
@@ -55,8 +56,8 @@
    "url": "guides/purple-team-hybrid-identity.html"
   }
  ],
- "last_verified": "2026-11-12",
+ "last_verified": "2026-11-22",
  "created": "2026-11-12",
- "updated": "2026-11-12",
+ "updated": "2026-11-22",
  "order": 390
 }

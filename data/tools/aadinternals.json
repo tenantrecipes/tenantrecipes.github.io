@@ -19,7 +19,8 @@
  "pitfalls": [
   "Several cmdlets can change federation, credentials or sync behaviour; treat write actions as production changes.",
   "EDR and cloud logs will show unusual Graph and AD-related traffic; notify the SOC.",
-  "Keep the module updated from the official gallery/GitHub; random mirrors are a supply-chain risk."
+  "Keep the module updated from the official gallery/GitHub; random mirrors are a supply-chain risk.",
+  "Maintenance: the GitHub repository's last push was on 30 September 2025 (checked 22 November 2026), and the author now works at Microsoft. Newer Entra endpoints and protections may not be reflected; treat failures as 'not tested', not as 'not vulnerable'."
  ],
  "sources": [
   {
@@ -36,7 +37,7 @@
  "order": 290,
  "status": "published",
  "kind": "tool",
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-22",
  "created": "2026-10-30",
- "updated": "2026-10-30"
+ "updated": "2026-11-22"
 }

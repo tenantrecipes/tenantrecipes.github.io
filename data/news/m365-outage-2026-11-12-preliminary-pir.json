@@ -4,7 +4,7 @@
  "title": "12 Nov Microsoft 365 outage: preliminary PIR blames July gateway bug",
  "date": "2026-11-16",
  "category": "M365",
- "summary": "Microsoft's preliminary post-incident report (in the Microsoft 365 admin center) ties the roughly 24-hour outage on 12–13 November, worst for Exchange Online, to a latent bug in a July update to its networking gateway servers, triggered by extra traffic after Teams failed over onto the same infrastructure while about 14% of gateway capacity was already offline. At the worst point more than 80% of gateway servers were unresponsive; Teams, OneDrive and SharePoint failed over and recovered earlier, Exchange Online could not. Microsoft says a final report is due later this week.",
+ "summary": "Microsoft's preliminary post-incident report (in the Microsoft 365 admin center) ties the roughly 24-hour outage on 12–13 November, worst for Exchange Online, to a latent bug in a July update to its networking gateway servers, triggered by extra traffic after Teams failed over onto the same infrastructure while about 14% of gateway capacity was already offline. At the worst point more than 80% of gateway servers were unresponsive; Teams, OneDrive and SharePoint failed over and recovered earlier, Exchange Online could not. Microsoft says a final report is due later this week. Update 22 November: the final report is out and revises the reason for the offline capacity; see our follow-up news item.",
  "why": "Your SLA claims, internal incident reviews and any 'mail continuity' business cases need Microsoft's own wording, not press summaries. The PIR also shows that region isolation did not contain the failure, which matters for resilience assumptions.",
  "todo": [
   "Download the preliminary PIR from Service health > History in the admin center now, and the final PIR when it is published.",
@@ -28,5 +28,11 @@
    "checked": "2026-11-16"
   }
  ],
- "last_verified": "2026-11-16"
+ "last_verified": "2026-11-16",
+ "related": [
+  {
+   "title": "News: final PIR and 13 fixes",
+   "url": "news/m365-outage-2026-11-12-final-pir.html"
+  }
+ ]
 }

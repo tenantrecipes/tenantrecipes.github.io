@@ -13,7 +13,7 @@
  "url": "https://github.com/jakehildreth/Locksmith",
  "repo": "https://github.com/jakehildreth/Locksmith",
  "example": [
-  "On a domain-joined host that already has the ActiveDirectory and ServerManager PowerShell modules, install from the PowerShell Gallery: `Install-Module -Name Locksmith -Scope CurrentUser` (Gallery release 2026.11.62109 was current when this page was checked on 8 November 2026).",
+  "On a domain-joined host that already has the ActiveDirectory and ServerManager PowerShell modules, install from the PowerShell Gallery: `Install-Module -Name Locksmith -Scope CurrentUser` (Gallery release 2026.11.141441, published 14 November 2026, was current when this page was checked on 22 November 2026).",
   "Run a read-only forest scan that prints findings as a table (Mode 0, the default): `Invoke-Locksmith`.",
   "For evidence you can attach to a change record, write issues to CSV with `Invoke-Locksmith -Mode 2` (creates ADCSIssues.CSV in the current directory) or issues plus example fixes with `Invoke-Locksmith -Mode 3` (ADCSRemediation.CSV).",
   "Narrow the run with `-Scans` when you are chasing a specific class, for example `Invoke-Locksmith -Scans ESC1,ESC8`. Documented scan names include All, Auditing, ESC1 through ESC9, ESC11, ESC13, ESC15, ESC16, EKEUwu and PromptMe.",
@@ -41,10 +41,15 @@
    "title": "Locksmith on the PowerShell Gallery",
    "url": "https://www.powershellgallery.com/packages/Locksmith",
    "checked": "2026-11-08"
+  },
+  {
+   "title": "PowerShell Gallery: Locksmith 2026.11.141441",
+   "url": "https://www.powershellgallery.com/packages/Locksmith/2026.11.141441",
+   "checked": "2026-11-22"
   }
  ],
- "last_verified": "2026-11-08",
+ "last_verified": "2026-11-22",
  "created": "2026-11-08",
- "updated": "2026-11-08",
+ "updated": "2026-11-22",
  "order": 350
 }

@@ -1,0 +1,28 @@
+{
+ "id": "defender-app-governance-unified-rbac",
+ "status": "published",
+ "title": "Defender App Governance gets unified RBAC custom roles",
+ "date": "2026-11-22",
+ "category": "Defender",
+ "summary": "Per Message Center MC1558114 (read via a third-party mirror), App Governance in Microsoft Defender for Cloud Apps will support Defender XDR unified RBAC custom roles, with separate permissions for read access, policy management and turning the service on or off. Public preview rolls out from late November to mid-December 2026 and GA from mid-December 2026 to mid-January 2027. Existing Defender for Cloud Apps unified RBAC roles may gain App Governance access automatically, while enabling or disabling Entra applications still requires the Application Administrator role.",
+ "why": "App Governance is where you watch OAuth apps and other non-human identities. Being able to give the SOC read-only App Governance access without Entra admin roles is a least-privilege win, but the note that existing unified RBAC roles may gain access means someone could quietly get more visibility or policy rights than intended.",
+ "todo": [
+  "Do now: export your Defender XDR unified RBAC custom roles and note which include Defender for Cloud Apps permissions and data sources.",
+  "After the preview lands, check who gained App Governance access and adjust roles under Setup & Configuration > Permissions > Microsoft Defender XDR > Roles in the Defender portal.",
+  "Plan a read-only App Governance role for SOC analysts and a separate policy-management role.",
+  "Wait: preview first; exact permission names are not documented yet. Not verified."
+ ],
+ "effective_note": "Preview late Nov–mid Dec 2026, GA mid Dec 2026–mid Jan 2027 — per MC1558114 (third-party mirror).",
+ "primary": {
+  "title": "Microsoft 365 Message Center MC1558114 (third-party mirror): Defender for Cloud Apps unified RBAC for App Governance",
+  "url": "https://blog.tophhie.cloud/message-center/mc1558114"
+ },
+ "sources": [
+  {
+   "title": "Microsoft 365 Message Center MC1558114 (third-party mirror): Microsoft Defender for Cloud Apps: Unified RBAC support for App Governance to manage NHIs",
+   "url": "https://blog.tophhie.cloud/message-center/mc1558114",
+   "checked": "2026-11-22"
+  }
+ ],
+ "last_verified": "2026-11-22"
+}

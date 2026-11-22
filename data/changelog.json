@@ -1,5 +1,23 @@
 [
  {
+  "date": "2026-11-22",
+  "kind": "site",
+  "type": "News",
+  "title": "GPT-6.2 in Copilot, final outage PIR, GL.iNet compromise",
+  "blurb": "GPT-6.2 Sol and Astra in Copilot; final PIR for the 12 Nov Microsoft 365 outage; GL.iNet cloud flaw used to plant malware; Copilot desktop in-app browsing and Edge sync; OneDrive skips node_modules; App Governance unified RBAC; Dataverse agent users GA; Edge Lockdown Mode; new Copilot app search.",
+  "url": "news/index.html",
+  "text": "GPT-6.2 Sol GPT-6.2 Astra Microsoft 365 Copilot OpenAI subprocessor MC1560916, Microsoft 365 outage final post-incident report, GL.iNet GoodCloud router KVM malware, Copilot desktop in-app browsing BrowsingEnabled MC1560922, Copilot Edge sync MC1562269, OneDrive node_modules MC1558030, Defender for Cloud Apps App Governance unified RBAC MC1558114, Copilot Studio Dataverse Entra agent users MC1560996, Edge Lockdown Mode WebGL WebGPU, Microsoft 365 Copilot app search MC1562275."
+ },
+ {
+  "date": "2026-11-22",
+  "kind": "site",
+  "type": "Security",
+  "title": "REDCap KEV RCE; Sangoma Switchvox KEV backlog",
+  "blurb": "REDCap unauthenticated RCE CVE-2026-90817 (KEV 18 Nov); Sangoma Switchvox SQL injection CVE-2026-9586 (KEV 2 Sep, backlog).",
+  "url": "security/index.html",
+  "text": "REDCap CVE-2026-90817 KEV; Sangoma Switchvox CVE-2026-9586 KEV."
+ },
+ {
   "date": "2026-11-21",
   "kind": "site",
   "type": "News",

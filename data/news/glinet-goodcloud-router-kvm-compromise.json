@@ -1,0 +1,39 @@
+{
+ "id": "glinet-goodcloud-router-kvm-compromise",
+ "status": "published",
+ "title": "GL.iNet cloud flaw used to plant malware on routers and KVMs",
+ "date": "2026-11-22",
+ "category": "Security incidents",
+ "summary": "GL.iNet says an attacker exploited a vulnerability in its GoodCloud remote management service, found on 20 November 2026, to install malware on some GL.iNet routers and KVM-over-IP devices. The cloud flaw is fixed, so devices cannot be newly infected that way, but existing infections are not removed; KVM beta firmware with fixes is out and stable router and KVM firmware was scheduled for 22 November. Researchers quoted by BleepingComputer report root reverse shells and a separate, older persistent backdoor on some devices, which GL.iNet's published check may not detect; GL.iNet has not confirmed how the attack worked or how many devices were hit.",
+ "why": "GL.iNet KVMs are often plugged into servers and admin workstations for out-of-band access, and travel routers carry admin traffic. A compromised KVM gives keyboard, video and power control of whatever it is attached to, and GL.iNet is still investigating whether connected computers were affected.",
+ "todo": [
+  "Do now: inventory GL.iNet routers and KVMs (including ones staff use for remote or travel work) and note which are bound to GoodCloud.",
+  "Run GL.iNet's published indicator check on each device; treat any hit as infected, factory-reset or install the security firmware, and rotate credentials used through it.",
+  "If a KVM was infected, check the attached computer for unknown accounts, startup items, scheduled tasks and remote-access tools.",
+  "Install the stable security firmware for every model when it is available, and unbind devices from GoodCloud if you do not need cloud management.",
+  "Wait for GL.iNet's final scope statement; the older backdoor reports are from researchers and users, not verified by GL.iNet."
+ ],
+ "effective_note": "Incident identified 20 Nov 2026; notice last updated 21 Nov (UTC) — per GL.iNet.",
+ "primary": {
+  "title": "GL.iNet: Security Notice 2026-11-20 (routers and KVM)",
+  "url": "https://www.gl-inet.com/blogs/blog/glinet-security-notice-2026-11-20"
+ },
+ "sources": [
+  {
+   "title": "GL.iNet: Security Notice 2026-11-20 (routers and KVM)",
+   "url": "https://www.gl-inet.com/blogs/blog/glinet-security-notice-2026-11-20",
+   "checked": "2026-11-22"
+  },
+  {
+   "title": "BleepingComputer: Hackers exploit GL.iNet cloud flaw to infect routers, KVM devices",
+   "url": "https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/",
+   "checked": "2026-11-22"
+  }
+ ],
+ "hashtags": [
+  "CyberSecurity",
+  "IncidentResponse",
+  "InfoSec"
+ ],
+ "last_verified": "2026-11-22"
+}

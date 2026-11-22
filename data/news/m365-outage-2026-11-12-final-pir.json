@@ -1,0 +1,39 @@
+{
+ "id": "m365-outage-2026-11-12-final-pir",
+ "status": "published",
+ "title": "12 Nov Microsoft 365 outage: final PIR and 13 fixes",
+ "date": "2026-11-22",
+ "category": "M365",
+ "summary": "Microsoft released its final post-incident report on the 12–13 November Microsoft 365 outage on Friday 20 November (US time). As reported by GeekWire, it says the July change to the network gateway servers caused connection-handling contention that only hit newer, higher-capacity servers, which testing on older hardware had missed. About 14% of gateway capacity was offline for routine updates (the preliminary report blamed an unrelated problem), and all worldwide Teams traffic had failed over onto the same gateway after a routing fault in US East. The report lists 13 follow-up actions, some due by end of 2026, some by end of March 2027, several without a date.",
+ "why": "The final report changes one root-cause detail from the preliminary version and confirms that cross-region traffic shifting spread the failure globally instead of containing it. That is the wording you need for SLA claims, board reporting and your own resilience assumptions about Exchange Online.",
+ "todo": [
+  "Do now: download the final PIR from Service health > History in the Microsoft 365 admin center and replace the preliminary version in your incident file.",
+  "If you filed or plan an SLA service-credit claim, cite the final report and the downtime it states for your tenant.",
+  "Track the dated commitments (regional isolation of failover, separating mail gateway capacity, faster first customer notice) at your next Microsoft service review.",
+  "Per the report as quoted by GeekWire: no business email was lost; some delayed mail to consumer mailboxes inactive for 30+ days bounced."
+ ],
+ "effective": "2026-11-12",
+ "effective_note": "Final PIR published 20 Nov 2026 (US time) in the admin center; summarised from GeekWire. The report itself requires admin sign-in.",
+ "primary": {
+  "title": "GeekWire: Microsoft's final Outlook outage report details testing gaps and safeguards that backfired",
+  "url": "https://www.geekwire.com/2026/microsofts-final-outlook-outage-report-details-testing-gaps-and-safeguards-that-backfired/"
+ },
+ "related": [
+  {
+   "title": "News: preliminary PIR for the 12 Nov outage",
+   "url": "news/m365-outage-2026-11-12-preliminary-pir.html"
+  },
+  {
+   "title": "Microsoft 365 and Azure status",
+   "url": "status/index.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "GeekWire: Microsoft's final Outlook outage report details testing gaps and safeguards that backfired",
+   "url": "https://www.geekwire.com/2026/microsofts-final-outlook-outage-report-details-testing-gaps-and-safeguards-that-backfired/",
+   "checked": "2026-11-22"
+  }
+ ],
+ "last_verified": "2026-11-22"
+}

@@ -291,7 +291,8 @@
   "pitfalls": [
    "'Only during the meeting' means no post-meeting recap — users think Copilot is broken.",
    "The Copilot default comes from the organizer's meeting policy; transcription can be started by any participant whose own policy allows it.",
-   "Copilot isn't available in end-to-end encrypted meetings."
+   "Copilot isn't available in end-to-end encrypted meetings.",
+   "The 'Who can record and transcribe' policy applies to meetings organised by users assigned the policy, not to the people joining; a locked policy on a board-meeting organiser also blocks Copilot recaps that depend on a presenter starting transcription."
   ],
   "done_when": [
    "The meeting policy for pilot users allows transcription and has the Copilot setting you chose.",
@@ -312,12 +313,22 @@
     "title": "Microsoft Learn: Set-CsTeamsMeetingPolicy",
     "url": "https://learn.microsoft.com/en-us/powershell/module/teams/set-csteamsmeetingpolicy",
     "checked": "2026-11-10"
+   },
+   {
+    "title": "Microsoft 365 Roadmap 579860: Teams tenant policy controls who can record and transcribe",
+    "url": "https://www.microsoft.com/microsoft-365/roadmap?id=579860",
+    "checked": "2026-11-22"
+   },
+   {
+    "title": "MC1560924: Teams tenant policy controls who can record and transcribe (Message center mirror)",
+    "url": "https://blog.tophhie.cloud/message-center/mc1560924",
+    "checked": "2026-11-22"
    }
   ],
   "last_verified": "2026-10-30",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-11-10",
+  "updated": "2026-11-22",
   "screenshots": [],
   "markers": {
    "steps": "official",
@@ -339,6 +350,11 @@
     "symptom": "Meetings recorded with 'Record only' have no Copilot recap",
     "cause": "'Record only' starts recording without a transcript, and Copilot after the meeting needs a transcript",
     "fix": "Use 'Record and transcribe' for meetings where Copilot after the meeting is wanted, or set the Copilot policy to require a saved transcript."
+   },
+   {
+    "symptom": "From mid-December 2026 presenters can no longer start recording or transcription (so Copilot after the meeting has no transcript)",
+    "cause": "The new 'Who can record and transcribe' setting in the organiser's Teams meeting policy (roadmap 579860, MC1560924) may be set to 'Organizers and co-organizers', optionally locked so the organiser cannot change it. The default keeps today's behaviour (presenters allowed, organiser can change).",
+    "fix": "Check the setting under Recording & transcription in the organiser's effective meeting policy in the Teams admin center. If the meeting needs a transcript started by a presenter, use the unlocked option or make that person a co-organizer. The PowerShell parameter name is not documented yet (not verified)."
    }
   ],
   "rollback": [
@@ -349,6 +365,10 @@
    {
     "date": "2026-11-10",
     "note": "Added troubleshooting for the policy-aligned automatic recording/transcription options and the new 'Record only' option (MC1508234), plus rollback."
+   },
+   {
+    "date": "2026-11-22",
+    "note": "Added troubleshooting and a pitfall for the new 'Who can record and transcribe' meeting-policy setting (roadmap 579860, MC1560924; Targeted Release mid-December 2026)."
    }
   ]
  },

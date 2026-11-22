@@ -1,0 +1,45 @@
+{
+ "id": "copilot-gpt-6-2-sol-astra-rollout",
+ "status": "published",
+ "title": "GPT-6.2 Sol and Astra rolling out in Microsoft 365 Copilot",
+ "date": "2026-11-22",
+ "category": "Copilot/AI",
+ "ignite": true,
+ "ignite_area": "copilot",
+ "summary": "Microsoft announced on 20 November 2026, at the end of Ignite week, that OpenAI's GPT-6.2 Sol and GPT-6.2 Astra are rolling out worldwide in Microsoft Copilot. Sol comes to Copilot Chat, Copilot Cowork, Copilot Studio and Copilot in Word, Excel and PowerPoint; Astra comes to Cowork and Copilot Studio, and to Chat and the Office apps only for Frontier users. According to Message Center MC1560916 (read via a third-party mirror), Sol in Chat and the Office apps is included in the Microsoft 365 Copilot licence with usage limits, while Cowork, Copilot Studio and all Astra use run on usage-based billing, and Astra needs the OpenAI subprocessor setting turned on.",
+ "why": "Both models are on by default for eligible users, so the controls that matter are billing and the OpenAI subprocessor switch: if usage-based billing is enabled, Astra and Cowork use can create cost, and the subprocessor setting decides whether OpenAI-operated models (with OpenAI processing data as a subprocessor) are available at all.",
+ "todo": [
+  "Do now: check the OpenAI subprocessor setting in the Microsoft 365 admin center and confirm it matches what your DPO and legal team approved.",
+  "Review who has usage-based billing (pay-as-you-go) enabled for Copilot and set budgets or alerts before Astra use grows.",
+  "Tell the service desk that users may see new models in the model selector and usage-limit notices.",
+  "Wait: per-model limits and regional availability are not published in detail; Microsoft says availability may vary. Not verified."
+ ],
+ "effective_note": "Rolling out from 20 Nov 2026 — per Microsoft. Licensing split per MC1560916 (third-party mirror), not verified in the admin center.",
+ "primary": {
+  "title": "Microsoft Copilot Blog: Available today: OpenAI's GPT-6.2 Sol and GPT-6.2 Astra in Microsoft Copilot",
+  "url": "https://techcommunity.microsoft.com/t5/microsoft-copilot-blog/available-today-openai-s-gpt-6-2-sol-and-gpt-6-2-astra-in/ba-p/4574229"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Copilot Studio credits reporting API",
+   "url": "news/copilot-studio-credits-reporting-api.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Copilot Blog: Available today: OpenAI's GPT-6.2 Sol and GPT-6.2 Astra in Microsoft Copilot",
+   "url": "https://techcommunity.microsoft.com/t5/microsoft-copilot-blog/available-today-openai-s-gpt-6-2-sol-and-gpt-6-2-astra-in/ba-p/4574229",
+   "checked": "2026-11-22"
+  },
+  {
+   "title": "Microsoft 365 Message Center MC1560916 (third-party mirror): Microsoft Copilot: GPT-6.2 Sol and Astra rolling out",
+   "url": "https://blog.tophhie.cloud/message-center/mc1560916",
+   "checked": "2026-11-22"
+  }
+ ],
+ "last_verified": "2026-11-22"
+}

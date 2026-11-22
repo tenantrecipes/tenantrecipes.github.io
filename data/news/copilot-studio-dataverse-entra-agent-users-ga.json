@@ -1,0 +1,46 @@
+{
+ "id": "copilot-studio-dataverse-entra-agent-users-ga",
+ "status": "published",
+ "title": "Copilot Studio: Dataverse agent users from Entra agent IDs GA",
+ "date": "2026-11-22",
+ "category": "Copilot/AI",
+ "ignite": true,
+ "ignite_area": "copilot",
+ "summary": "Microsoft says the ability to create Dataverse agent users backed by a Microsoft Entra agent's user account reaches general availability on 8 December 2026 (MC1560996, read via a third-party mirror; the related roadmap item 576843 already shows the Dataverse side as launched). Agents built in Copilot Studio can then be provisioned as their own Dataverse users with dedicated, least-privilege security roles, and their actions are audited as the agent rather than as a shared service account or the calling user. It follows the Entra Agent ID governance announced at Ignite.",
+ "why": "Agents that read and write business data under a maker's account or a shared app user are hard to scope and impossible to audit cleanly. A per-agent Entra identity with a dedicated Dataverse role gives you something you can review, restrict with Conditional Access for agents and switch off.",
+ "todo": [
+  "Do now: list Copilot Studio agents that touch Dataverse today and which identity they use (maker credentials, app user, end-user).",
+  "Design minimal Dataverse security roles per agent type before 8 December, instead of reusing System Customizer or similar broad roles.",
+  "Make sure Dataverse auditing is on in the environments where agents run.",
+  "Wait: GA date is Microsoft's; Learn still labels the docs preview. Not verified."
+ ],
+ "effective": "2026-12-08",
+ "effective_note": "GA 8 Dec 2026 — per MC1560996 (third-party mirror).",
+ "primary": {
+  "title": "Microsoft 365 Message Center MC1560996 (third-party mirror): Dataverse agent users with Entra agent user account",
+  "url": "https://blog.tophhie.cloud/message-center/mc1560996"
+ },
+ "related": [
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  },
+  {
+   "title": "News: Entra Agent ID and Conditional Access plans",
+   "url": "news/ignite-2026-entra-agent-id-ca-policy-plans.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Message Center MC1560996 (third-party mirror): Copilot Studio - Create Dataverse agent users with Microsoft Entra agent's user account",
+   "url": "https://blog.tophhie.cloud/message-center/mc1560996",
+   "checked": "2026-11-22"
+  },
+  {
+   "title": "Microsoft 365 Roadmap 576843",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=576843",
+   "checked": "2026-11-22"
+  }
+ ],
+ "last_verified": "2026-11-22"
+}

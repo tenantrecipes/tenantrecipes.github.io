@@ -32,6 +32,7 @@ Microsoft Learn: [Assign licenses to a group](https://learn.microsoft.com/en-us/
 - [ ] Remove the old role's groups, Teams, SharePoint sites, shared mailboxes and application roles.
 - [ ] Remove admin roles and PIM eligibilities that the new role does not need.
 - [ ] Transfer ownership of files, Teams, apps and automations that belong to the old team.
+- [ ] Transfer or retire the person's AI agents, Copilot Studio agents and agent identities that belong to the old role (owner, sponsor and any connections or Dataverse roles they use).
 
 Microsoft Learn: [What is Privileged Identity Management?](https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure)
 

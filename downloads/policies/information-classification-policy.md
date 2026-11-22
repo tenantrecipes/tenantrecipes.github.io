@@ -39,6 +39,8 @@ It covers information in any form: documents, email, chats, databases, recording
 - Use sharing links scoped to specific people for Confidential and Restricted content; do not use 'anyone' links.
 - Print Confidential or Restricted material only when needed, and collect it immediately.
 - Dispose of information securely when no longer needed and in line with retention rules.
+- Meeting recordings and transcripts carry the classification of the meeting. For Confidential and Restricted meetings, only the organizer or co-organizers start recording or transcription, and the recording is stored and shared like any other document at that level.
+- AI assistants and agents may only process information at a level they are approved for in the AI use policy; they inherit the user's access, so labels and permissions are the control, not the assistant.
 
 ## 6. Roles
 

@@ -62,7 +62,8 @@
    "items": [
     "Remove the old role's groups, Teams, SharePoint sites, shared mailboxes and application roles.",
     "Remove admin roles and PIM eligibilities that the new role does not need.",
-    "Transfer ownership of files, Teams, apps and automations that belong to the old team."
+    "Transfer ownership of files, Teams, apps and automations that belong to the old team.",
+    "Transfer or retire the person's AI agents, Copilot Studio agents and agent identities that belong to the old role (owner, sponsor and any connections or Dataverse roles they use)."
    ],
    "links": [
     {
@@ -101,7 +102,13 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-22",
  "created": "2026-10-30",
- "updated": "2026-10-30"
+ "updated": "2026-11-22",
+ "history": [
+  {
+   "date": "2026-11-22",
+   "note": "Reviewed. Added transfer of agent ownership/sponsorship (Copilot Studio agents with their own Entra agent identities, GA 8 Dec 2026 per MC1560996)."
+  }
+ ]
 }
