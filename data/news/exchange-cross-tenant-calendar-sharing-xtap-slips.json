@@ -13,12 +13,16 @@
   "Hybrid tenants are out of scope for XTAP: plan the move to the dedicated Exchange hybrid app instead."
  ],
  "effective": "2026-11-23",
- "effective_note": "Worldwide completion date for XTAP Calendar Sharing per the 9 November 2026 update of MC1446796; Gov clouds paused.",
+ "effective_note": "Was 23 Nov 2026 per the 9 Nov update of MC1446796; moved again to 4 Dec 2026 on 23 Nov (see the newer item). Gov clouds paused.",
  "primary": {
   "title": "Microsoft Learn: Migrate to Microsoft 365 Cross-Tenant Access Policy for Free/Busy, calendars and MailTips",
   "url": "https://learn.microsoft.com/exchange/sharing/migrate-to-m365-xtap"
  },
  "related": [
+  {
+   "title": "News: XTAP calendar sharing slips again to 4 December",
+   "url": "news/exchange-xtap-calendar-sharing-slips-december.html"
+  },
   {
    "title": "Recipe: find cross-tenant sharing that still depends on EWS",
    "url": "recipes/exchange-ews-cross-tenant-sharing-inventory.html"
@@ -50,5 +54,5 @@
    "checked": "2026-11-09"
   }
  ],
- "last_verified": "2026-11-09"
+ "last_verified": "2026-11-23"
 }

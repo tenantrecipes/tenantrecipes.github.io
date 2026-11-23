@@ -1,0 +1,53 @@
+{
+ "id": "windows-hotpatch-kb5132043-forcepoint-printing",
+ "status": "published",
+ "title": "November hotpatch stops Print Spooler with Forcepoint DLP",
+ "date": "2026-11-23",
+ "category": "Windows",
+ "hashtags": [
+  "Windows",
+  "PatchManagement",
+  "SysAdmin"
+ ],
+ "summary": "Microsoft confirmed in a service alert on Friday 20 November 2026 (reported by BleepingComputer) that Windows 11 24H2 and later devices with the November hotpatch KB5132043 and the Forcepoint DLP Endpoint Agent can lose printing: the print option is greyed out or printer selection fails because the Print Spooler service does not start. Devices on the regular November cumulative update are not expected to be affected. There is no Microsoft fix yet; Forcepoint has a temporary workaround behind its customer portal. This is the second known issue with KB5132043 after the 0xC0000099 app failures.",
+ "why": "Hotpatch is the Autopatch default for eligible devices, and endpoint DLP agents are common in exactly the regulated fleets that use it. Admins in the Tech Community thread report that moving affected devices to the standard November LCU (KB5132061) restored printing; that is a community report, not Microsoft guidance.",
+ "todo": [
+  "Do now: find devices with both KB5132043 and the Forcepoint DLP Endpoint Agent and check Spooler state (Get-Service Spooler) and printing tickets.",
+  "Get Forcepoint's workaround from its support portal and deploy it to the affected group only.",
+  "If you must move devices off hotpatch, use a separate Autopatch or quality update group with hotpatch disabled rather than changing the whole tenant.",
+  "Wait: watch the Microsoft 365 admin center service health and Windows release health for the fix before reverting changes."
+ ],
+ "effective_note": "Known issue per Microsoft service alert of 20 Nov 2026 (reported by BleepingComputer); no fix date.",
+ "primary": {
+  "title": "BleepingComputer: Microsoft confirms Windows printing issues affecting Forcepoint users",
+  "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-confirms-printing-issues-after-kb5132043-windows-hotpatch/"
+ },
+ "related": [
+  {
+   "title": "News: November hotpatch 0xC0000099 app failures",
+   "url": "news/windows-hotpatch-kb5132043-msi-app-failures.html"
+  },
+  {
+   "title": "Recipe: Windows Autopatch",
+   "url": "recipes/intune-windows-autopatch.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "BleepingComputer: Microsoft confirms Windows printing issues affecting Forcepoint users",
+   "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-confirms-printing-issues-after-kb5132043-windows-hotpatch/",
+   "checked": "2026-11-23"
+  },
+  {
+   "title": "Microsoft Support: November 10, 2026 — Hotpatch KB5132043",
+   "url": "https://support.microsoft.com/en-au/servicing/os/hotpatch/windows-11/2026/november-kb5132043-windows-11-24h2-25h2-26h2-security-update",
+   "checked": "2026-11-23"
+  },
+  {
+   "title": "Microsoft Tech Community: Hotpatch KB5132043 breaks print spooler (admin discussion)",
+   "url": "https://techcommunity.microsoft.com/discussions/windows-autopatch/hotpatch-kb5132043-breaks-print-spooler---how-do-i-disable-hotpatch-for-a-subset/4574952",
+   "checked": "2026-11-23"
+  }
+ ],
+ "last_verified": "2026-11-23"
+}

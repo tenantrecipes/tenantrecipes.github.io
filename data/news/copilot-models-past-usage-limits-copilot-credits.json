@@ -1,0 +1,39 @@
+{
+ "id": "copilot-models-past-usage-limits-copilot-credits",
+ "status": "published",
+ "title": "Copilot: keep premium models past limits with credits",
+ "date": "2026-11-23",
+ "category": "Copilot/AI",
+ "summary": "Microsoft updated MC1557754 on 20 November 2026: when a Microsoft 365 Copilot user hits the usage limit included in the licence for a model in Copilot Chat or Word, Excel and PowerPoint, they can continue with Auto at no extra cost or, if usage-based billing is enabled for them, keep the selected model and consume Copilot Credits. A new spending-policy service, 'Models with usage-based billing in Chat and Office', controls this; policies with 'Auto-apply new services' turned on pick it up automatically. Users get a credits icon and a /cost prompt, and models they cannot use show greyed out. Frontier rollout early December 2026, GA planned mid-December.",
+ "why": "Spending policies with auto-apply enabled will silently start allowing metered model use in Chat and Office. The control is per Entra security group, so the scope of your existing Copilot Credits policies now decides who can run up costs from inside Word.",
+ "todo": [
+  "Do now: in Microsoft 365 admin center > Copilot > Cost Management > Configuration, list policies with 'Auto-apply new services' enabled and decide whether that is still what you want.",
+  "Scope the new service to a pilot group with a spending limit and alerts before GA.",
+  "Brief the help desk on the credits icon and /cost so users can tell metered from included use.",
+  "Wait: Frontier early Dec, GA mid-Dec 2026 per Microsoft."
+ ],
+ "effective": "2026-12-15",
+ "effective_note": "Frontier early December, GA planned mid-December 2026 per MC1557754 (updated 20 Nov 2026).",
+ "primary": {
+  "title": "MC1557754: Continue using models after reaching usage limits with Copilot Credits (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1557754"
+ },
+ "related": [
+  {
+   "title": "News: GPT-6.2 Sol and Astra in Copilot",
+   "url": "news/copilot-gpt-6-2-sol-astra-rollout.html"
+  },
+  {
+   "title": "Recipe: Copilot Chat pay-as-you-go",
+   "url": "recipes/copilot-chat-pay-as-you-go.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1557754 (Message Center archive, updated 20 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1557754",
+   "checked": "2026-11-23"
+  }
+ ],
+ "last_verified": "2026-11-23"
+}

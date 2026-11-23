@@ -44,7 +44,9 @@ Microsoft Learn: [Convert a user mailbox to a shared mailbox](https://learn.micr
 - [ ] Remove admin roles and PIM eligibilities.
 - [ ] Remove access to business applications that do not use single sign-on (finance, CRM, line-of-business apps).
 - [ ] Revoke third-party SaaS accounts, API keys and personal access tokens the user created; transfer ownership of app registrations, automations and shared resources.
+- [ ] Revoke OAuth consents, device authorizations and tokens the user granted to developer and AI tools (for example GitHub OAuth apps, CLI and coding-agent sign-ins), not only the tokens they created.
 - [ ] Change shared passwords, service account secrets and door or alarm codes the user knew.
+- [ ] Rotate secrets the user could read, not only those they knew by heart: key vault secrets, API gateway named values and subscription keys, and CI/CD variables in scopes they had access to.
 - [ ] Transfer ownership of agent identities the leaver owns or sponsors, or disable agents that existed only for that person's work; do not leave agent identities without an accountable owner or sponsor.
 - [ ] Reassign guest sponsorships the leaver holds so external guests are not left unsponsored.
 

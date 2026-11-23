@@ -1,0 +1,46 @@
+{
+ "id": "device-code-phishing-ai-coding-agents",
+ "status": "published",
+ "title": "Device code phishing now reaches AI coding agents",
+ "date": "2026-11-23",
+ "category": "Defender",
+ "ignite": true,
+ "ignite_area": "security",
+ "hashtags": [
+  "MSIgnite",
+  "DefenderXDR",
+  "GitHubCopilot",
+  "CyberSecurity"
+ ],
+ "summary": "Microsoft Threat Intelligence published lab research on 17 November 2026 showing that one phished approval of an attacker-started OAuth device-code request for GitHub Copilot CLI could, depending on settings, let the attacker steer a remotely controllable agent session, plant misleading entries in agent memory, read cloud-synced sessions and access the user's private repositories. Microsoft stresses these are proof-of-concept outcomes, not attacks seen in the wild, and that any device-flow public client can be abused the same way. Defender XDR adds two high-severity detections (preview) for suspected GitHub Copilot device code phishing delivered by email and by Teams.",
+ "why": "Coding agents now run commands, keep memory and sync sessions, so a device-code approval is no longer just a token: it is a foothold on a developer workstation and the code base. Entra Conditional Access can block device code flow for Entra sign-ins, but GitHub's own device flow is outside Entra CA.",
+ "todo": [
+  "Block device code flow in Entra Conditional Access (Authentication flows condition) for everyone except documented exceptions.",
+  "In GitHub Enterprise, review Copilot CLI policies for remote session control, memory and cloud session storage and turn off what you do not need.",
+  "Tell developers that a GitHub verification code sent to them by anyone is a red flag, even though the page is genuinely github.com.",
+  "Turn on and tune the two Defender XDR detections where you have GitHub connected; they are preview per Microsoft Learn."
+ ],
+ "effective_note": "Research published 17 Nov 2026; Defender detections in preview — per Microsoft.",
+ "primary": {
+  "title": "Microsoft Security Blog: The risks of device code authentication for AI coding agents",
+  "url": "https://www.microsoft.com/en-us/security/blog/2026/11/17/the-risks-of-device-code-authentication-for-ai-coding-agents/"
+ },
+ "sources": [
+  {
+   "title": "Microsoft Security Blog: The risks of device code authentication for AI coding agents",
+   "url": "https://www.microsoft.com/en-us/security/blog/2026/11/17/the-risks-of-device-code-authentication-for-ai-coding-agents/",
+   "checked": "2026-11-23"
+  },
+  {
+   "title": "Microsoft Learn: Protect AI agents from trusted-identity attacks (preview)",
+   "url": "https://learn.microsoft.com/en-us/defender-xdr/security-for-ai/protect-ai-agents-from-trusted-identity-attacks",
+   "checked": "2026-11-23"
+  },
+  {
+   "title": "Microsoft Learn: Block authentication flows with Conditional Access",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-authentication-flows",
+   "checked": "2026-11-23"
+  }
+ ],
+ "last_verified": "2026-11-23"
+}

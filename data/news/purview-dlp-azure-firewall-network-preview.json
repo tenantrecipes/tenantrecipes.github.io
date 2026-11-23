@@ -1,0 +1,34 @@
+{
+ "id": "purview-dlp-azure-firewall-network-preview",
+ "status": "published",
+ "title": "Purview DLP for server traffic via Azure Firewall (preview)",
+ "date": "2026-11-23",
+ "category": "Purview",
+ "ignite": true,
+ "ignite_area": "security",
+ "summary": "Message Center MC1558038, published on 17 November 2026 during Ignite, says Microsoft Purview Data Loss Prevention is integrating with Azure Firewall so DLP policies can inspect text and files in supported network traffic from servers, virtual machines, background services and automated workloads, including AI interactions, with signals to Insider Risk Management and alerts in Purview and Defender. Public preview rolls out mid-November to mid-December 2026; GA late March to late April 2027. It appears automatically but needs configuration; existing Purview inline web-traffic policies keep working.",
+ "why": "Endpoint DLP stops at devices with an agent. Server and workload egress, such as scripts or agents posting data to SaaS or AI APIs from a VM, has been a blind spot that only a proxy could cover. This is announced and in preview; prerequisites and supported traffic were not verified here.",
+ "todo": [
+  "Identify server and VM egress that already passes through Azure Firewall (Premium TLS inspection is likely to matter; not verified).",
+  "Pilot a DLP policy in simulation mode on one non-production subnet once preview reaches your tenant.",
+  "Wait: preview; GA late March–April 2027 per Microsoft. Not verified."
+ ],
+ "effective_note": "Preview mid-Nov–mid-Dec 2026, GA late March–late April 2027 per MC1558038. Announced, not verified.",
+ "primary": {
+  "title": "MC1558038: Purview DLP network data security integration with Azure Firewall (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1558038"
+ },
+ "sources": [
+  {
+   "title": "MC1558038 (Message Center archive, published 17 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1558038",
+   "checked": "2026-11-23"
+  },
+  {
+   "title": "Microsoft Learn: Learn about Microsoft Purview Network Data Security",
+   "url": "https://learn.microsoft.com/en-us/purview/dlp-network-data-security-learn",
+   "checked": "2026-11-23"
+  }
+ ],
+ "last_verified": "2026-11-23"
+}

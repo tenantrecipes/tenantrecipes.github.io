@@ -1,0 +1,34 @@
+{
+ "id": "onedrive-cloud-microsoft-domain-transition",
+ "status": "published",
+ "title": "OneDrive moves to onedrive.cloud.microsoft through 2027",
+ "date": "2026-11-23",
+ "category": "M365",
+ "summary": "Microsoft updated MC1392563 on 17 November 2026: OneDrive's web experience is moving from tenant-my.sharepoint.com to onedrive.cloud.microsoft, rolling out gradually from early September 2026 and now expected to complete by end of September 2027 (previously early August 2026). Both domains work side by side indefinitely with no forced redirects; file storage URLs and APIs, including Microsoft Graph, stay on sharepoint.com, and consumer OneDrive stays on live.com. Microsoft asks admins to allow *.cloud.microsoft and review custom solutions that parse OneDrive browser URLs.",
+ "why": "Proxy, SSL-inspection, DLP and Tenant Restrictions rules written for -my.sharepoint.com will not match the new host, and user-awareness training that says 'OneDrive links are on sharepoint.com' becomes wrong. Phishing kits will follow the new domain too.",
+ "todo": [
+  "Check that firewalls, proxies, Defender for Cloud Apps session policies and browser DLP cover *.cloud.microsoft, not just *.sharepoint.com.",
+  "Search scripts, Power Automate flows and SIEM parsers for hard-coded -my.sharepoint.com browser URL patterns.",
+  "Update phishing training and help-desk notes with the new URL format.",
+  "Wait: tenant-by-tenant rollout until end of September 2027 per Microsoft."
+ ],
+ "effective": "2027-09-30",
+ "effective_note": "Gradual rollout from early Sept 2026 to end of Sept 2027 per MC1392563 (updated 17 Nov 2026).",
+ "primary": {
+  "title": "MC1392563: OneDrive transitions to the cloud.microsoft domain (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1392563"
+ },
+ "sources": [
+  {
+   "title": "MC1392563 (Message Center archive, updated 17 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1392563",
+   "checked": "2026-11-23"
+  },
+  {
+   "title": "Microsoft Learn: Microsoft 365 URLs and IP address ranges",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/enterprise/urls-and-ip-address-ranges",
+   "checked": "2026-11-23"
+  }
+ ],
+ "last_verified": "2026-11-23"
+}

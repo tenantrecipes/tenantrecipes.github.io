@@ -1,0 +1,27 @@
+{
+ "id": "new-outlook-attachment-failures-ex1561765",
+ "status": "published",
+ "title": "New Outlook attachment failures fixed after two attempts",
+ "date": "2026-11-23",
+ "category": "M365",
+ "summary": "Under incident EX1561765, Microsoft confirmed on 20 November 2026 that a new Outlook for Windows update broke opening and uploading attachments for some users, later also inline images, and paused the client rollout. Its first fix only restored Office attachments and inline images; a supplemental fix resolved the remaining attachment types on 21 November, and users had to close and reopen new Outlook. Microsoft gave the preliminary root cause as a code change in the component that supports embedded web content. Its interim advice was to use Outlook on the web or classic Outlook.",
+ "why": "The workaround was the classic client, which matters if you are pushing users to new Outlook or have already hidden the toggle. New Outlook updates arrive service-side, so you cannot hold back a bad build the way you can pin a Microsoft 365 Apps channel.",
+ "todo": [
+  "Keep a documented fallback (Outlook on the web, or classic Outlook where still deployed) in your help-desk runbook while migrating to new Outlook.",
+  "Subscribe the service desk to Exchange Online incidents in service health so EX alerts reach them before tickets do.",
+  "No action needed now: resolved 21 Nov 2026; tell affected users to restart new Outlook if attachments still fail."
+ ],
+ "effective_note": "Incident 20–21 Nov 2026, resolved per Microsoft (as reported by The Register; incident text not public).",
+ "primary": {
+  "title": "The Register: New Outlook's attachment issues sent users into the arms of its predecessor",
+  "url": "https://www.theregister.com/saas/2026/11/23/new-outlooks-attachment-issues-sent-users-into-the-arms-of-its-predecessor/5311576"
+ },
+ "sources": [
+  {
+   "title": "The Register: New Outlook's attachment issues (EX1561765)",
+   "url": "https://www.theregister.com/saas/2026/11/23/new-outlooks-attachment-issues-sent-users-into-the-arms-of-its-predecessor/5311576",
+   "checked": "2026-11-23"
+  }
+ ],
+ "last_verified": "2026-11-23"
+}

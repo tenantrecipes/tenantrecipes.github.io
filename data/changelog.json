@@ -1,5 +1,23 @@
 [
  {
+  "date": "2026-11-23",
+  "kind": "site",
+  "type": "News",
+  "title": "Azure APIM secrets theft, hotpatch printing, Copilot credits",
+  "blurb": "Azure API Management Classic flaw exploited to steal secrets; November hotpatch breaks printing with Forcepoint DLP; new Outlook attachment incident; Microsoft 365 Backup full-workload GA slips; XTAP calendar sharing slips to 4 Dec; device code phishing against AI coding agents; OneDrive moves to cloud.microsoft; Copilot models past limits with credits; Teams MeetingAI policies; Purview DLP with Azure Firewall.",
+  "url": "news/index.html",
+  "text": "Azure API Management Classic APIM named values NSM Equinor MZK9-GH0, KB5132043 hotpatch Forcepoint DLP Print Spooler, new Outlook attachments EX1561765, Microsoft 365 Backup Full Workload Backup MC1387526, XTAP calendar sharing MC1446796, device code phishing GitHub Copilot CLI, OneDrive onedrive.cloud.microsoft MC1392563, Copilot Credits usage-based billing MC1557754, Teams MeetingAI TranscriptionWithMeetingAI MC1532253, Purview DLP Azure Firewall MC1558038."
+ },
+ {
+  "date": "2026-11-23",
+  "kind": "site",
+  "type": "Security",
+  "title": "N-able Mail Assure and MONAI Label KEV; Pixel modem backlog",
+  "blurb": "N-able Mail Assure/SpamExperts SSRF CVE-2026-134624 and MONAI Label path traversal CVE-2026-133968 (both KEV 23 Nov); Pixel modem CVE-2026-58704 (KEV 16 Sep, backlog); Cisco Expressway CVE-2026-76466 now seen exploited.",
+  "url": "security/index.html",
+  "text": "N-able MailAssure SpamExperts CVE-2026-134624 KEV; MONAI Label CVE-2026-133968 KEV; Google Pixel CVE-2026-58704 KEV; Cisco Expressway CVE-2026-76466 F6 exploitation."
+ },
+ {
   "date": "2026-11-22",
   "kind": "site",
   "type": "News",

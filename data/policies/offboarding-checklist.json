@@ -95,7 +95,9 @@
     "Remove admin roles and PIM eligibilities.",
     "Remove access to business applications that do not use single sign-on (finance, CRM, line-of-business apps).",
     "Revoke third-party SaaS accounts, API keys and personal access tokens the user created; transfer ownership of app registrations, automations and shared resources.",
+    "Revoke OAuth consents, device authorizations and tokens the user granted to developer and AI tools (for example GitHub OAuth apps, CLI and coding-agent sign-ins), not only the tokens they created.",
     "Change shared passwords, service account secrets and door or alarm codes the user knew.",
+    "Rotate secrets the user could read, not only those they knew by heart: key vault secrets, API gateway named values and subscription keys, and CI/CD variables in scopes they had access to.",
     "Transfer ownership of agent identities the leaver owns or sponsors, or disable agents that existed only for that person's work; do not leave agent identities without an accountable owner or sponsor.",
     "Reassign guest sponsorships the leaver holds so external guests are not left unsponsored."
    ],
@@ -151,7 +153,13 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-08",
+ "last_verified": "2026-11-23",
  "created": "2026-10-30",
- "updated": "2026-11-08"
+ "updated": "2026-11-23",
+ "history": [
+  {
+   "date": "2026-11-23",
+   "note": "Reviewed against NIST SP 800-53 PS-4 and CIS Control 5/6. Added revocation of OAuth and device authorizations for developer and AI tools, and rotation of secrets the leaver could read (key vaults, API gateways, CI/CD)."
+  }
+ ]
 }

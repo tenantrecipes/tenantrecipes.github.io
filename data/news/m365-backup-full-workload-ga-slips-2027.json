@@ -1,0 +1,38 @@
+{
+ "id": "m365-backup-full-workload-ga-slips-2027",
+ "status": "published",
+ "title": "Microsoft 365 Backup full-workload policies slip to 2027",
+ "date": "2026-11-23",
+ "category": "M365",
+ "summary": "Microsoft updated MC1387526 on 18 November 2026: general availability of Full Workload Backup in Microsoft 365 Backup now starts in January 2027 and should complete by end of February 2027, previously mid-September to mid-October 2026 (roadmap 464990). The feature, in preview since July, protects every eligible SharePoint site, OneDrive account or Exchange mailbox not covered by a custom policy with one policy per workload, adds new items automatically (checked every 24 hours per Learn), lets custom policies take precedence and supports CSV exclusions.",
+ "why": "Without it, new mailboxes and sites stay unprotected until someone adds them to a policy, which is the gap most tenants script around. If you planned to retire a third-party backup or your own enrolment automation on the GA date, that plan now moves by four months.",
+ "todo": [
+  "Keep your existing enrolment automation or third-party backup until GA reaches your tenant.",
+  "If you use the preview, review how removal works: removing a unit from Full Workload Backup puts it on the exclusion list.",
+  "Wait: GA January–February 2027 per Microsoft; dates have moved once already."
+ ],
+ "effective": "2027-01-01",
+ "effective_note": "GA rollout January–end February 2027 per MC1387526 (updated 18 Nov 2026).",
+ "primary": {
+  "title": "Microsoft Learn: What's new in Microsoft 365 Backup",
+  "url": "https://learn.microsoft.com/en-us/microsoft-365/backup/backup-whats-new?view=o365-worldwide"
+ },
+ "sources": [
+  {
+   "title": "MC1387526 (Message Center archive, updated 18 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1387526",
+   "checked": "2026-11-23"
+  },
+  {
+   "title": "Microsoft Learn: What's new in Microsoft 365 Backup",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/backup/backup-whats-new?view=o365-worldwide",
+   "checked": "2026-11-23"
+  },
+  {
+   "title": "Microsoft 365 Roadmap 464990",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=464990",
+   "checked": "2026-11-23"
+  }
+ ],
+ "last_verified": "2026-11-23"
+}

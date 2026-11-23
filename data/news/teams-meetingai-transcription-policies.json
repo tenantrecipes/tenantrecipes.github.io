@@ -1,0 +1,40 @@
+{
+ "id": "teams-meetingai-transcription-policies",
+ "status": "published",
+ "title": "Teams splits Copilot meeting policy into MeetingAI controls",
+ "date": "2026-11-23",
+ "category": "M365",
+ "summary": "Microsoft updated MC1532253 on 19 November 2026: the Teams Copilot meeting policy is being replaced by two settings, MeetingAI (whether Copilot, Facilitator, intelligent recap and other AI features are available, including enforced off) and TranscriptionWithMeetingAI (whether transcription starts with AI). Microsoft will map existing Copilot values one-to-one, and after the switch the old Copilot setting can no longer be changed in PowerShell. Meeting options gain 'Who can manage AI', 'Who can use AI', 'Start transcription with AI' and intelligent recap controls. Targeted Release early to mid-December 2026; GA early to mid-January 2027 (both delayed).",
+ "why": "Scripts and DSC/IaC baselines that set the Copilot parameter on CsTeamsMeetingPolicy will start failing after the switch, and the new split makes 'Copilot without a saved transcript' an explicit choice that records-management and works-council agreements may care about.",
+ "todo": [
+  "Do now: export current meeting policies (Get-CsTeamsMeetingPolicy | select Identity,Copilot,AllowTranscription) so you can verify the automatic mapping afterwards.",
+  "Find automation that writes the Copilot setting and plan to move it to MeetingAI and TranscriptionWithMeetingAI.",
+  "Decide whether organisers may change AI and transcription; use the 'organizers cannot change' values where policy requires it.",
+  "Wait: Targeted Release Dec 2026, GA Jan 2027 per Microsoft."
+ ],
+ "effective": "2027-01-15",
+ "effective_note": "TR early–mid Dec 2026, GA early–mid Jan 2027 per MC1532253 (updated 19 Nov 2026).",
+ "primary": {
+  "title": "MC1532253: Enhanced Copilot and AI controls for meetings (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1532253"
+ },
+ "related": [
+  {
+   "title": "News: Teams who can record and transcribe",
+   "url": "news/teams-policy-who-can-record-transcribe.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1532253 (Message Center archive, updated 19 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1532253",
+   "checked": "2026-11-23"
+  },
+  {
+   "title": "Microsoft 365 Roadmap 577399",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=577399",
+   "checked": "2026-11-23"
+  }
+ ],
+ "last_verified": "2026-11-23"
+}

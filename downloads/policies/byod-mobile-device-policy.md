@@ -22,7 +22,7 @@ It covers company-owned devices and personal devices (BYOD) used to access compa
 
 ## 3. Minimum requirements for any device
 
-- A supported operating system that receives security updates, kept up to date.
+- A supported operating system that receives security updates, kept up to date. IT sets a minimum security patch level in the compliance policy; devices below it lose access to company data until they are updated.
 - A screen lock with a PIN, password or biometrics, and automatic locking after a short idle time.
 - Device encryption switched on.
 - No jailbroken or rooted devices.

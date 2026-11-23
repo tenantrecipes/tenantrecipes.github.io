@@ -42,7 +42,7 @@
   {
    "h": "Minimum requirements for any device",
    "items": [
-    "A supported operating system that receives security updates, kept up to date.",
+    "A supported operating system that receives security updates, kept up to date. IT sets a minimum security patch level in the compliance policy; devices below it lose access to company data until they are updated.",
     "A screen lock with a PIN, password or biometrics, and automatic locking after a short idle time.",
     "Device encryption switched on.",
     "No jailbroken or rooted devices.",
@@ -99,14 +99,18 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-10",
+ "last_verified": "2026-11-23",
  "created": "2026-10-30",
- "updated": "2026-11-10",
+ "updated": "2026-11-23",
  "order": 30,
  "history": [
   {
    "date": "2026-11-10",
    "note": "Added browser-only access with monitored sessions and blocked downloads for unmanaged personal computers."
+  },
+  {
+   "date": "2026-11-23",
+   "note": "Reviewed against CIS Control 7 and NCSC device guidance. Made the minimum security patch level explicit, with access blocked until the device is updated (prompted by actively exploited mobile modem flaws such as Pixel CVE-2026-58704)."
   }
  ]
 }

@@ -1,0 +1,43 @@
+{
+ "id": "exchange-xtap-calendar-sharing-slips-december",
+ "status": "published",
+ "title": "Cross-tenant calendar sharing via XTAP slips to 4 December",
+ "date": "2026-11-23",
+ "category": "M365",
+ "summary": "Microsoft updated MC1446796 on 23 November 2026: worldwide Calendar Sharing through Microsoft 365 Cross-Tenant Access Policy (XTAP) is now expected to complete by 4 December 2026, previously 23 November. The GCC, GCC High and DoD rollout remains paused. Free/Busy and MailTips via XTAP were already due by 15 September. The EWSEnabled extension still keeps EWS-based sharing alive until the final EWS shutdown on 1 April 2027.",
+ "why": "This is the second slip for the one piece of the EWS replacement that most partner-heavy tenants need. Anyone who planned to remove Sharing Policies this week has nothing to migrate to yet.",
+ "todo": [
+  "Do not remove EWS-based Sharing Policies until XTAP calendar sharing is visible in your tenant.",
+  "Keep EWSEnabled set for the tenant if partners still rely on shared calendars; the bridge ends 1 April 2027.",
+  "Wait: completion 4 Dec 2026 per Microsoft."
+ ],
+ "effective": "2026-12-04",
+ "effective_note": "Worldwide completion date per the 23 November 2026 update of MC1446796; Gov clouds paused.",
+ "primary": {
+  "title": "Microsoft Learn: Migrate to Microsoft 365 Cross-Tenant Access Policy",
+  "url": "https://learn.microsoft.com/exchange/sharing/migrate-to-m365-xtap"
+ },
+ "related": [
+  {
+   "title": "News: XTAP calendar sharing slipped to 23 November",
+   "url": "news/exchange-cross-tenant-calendar-sharing-xtap-slips.html"
+  },
+  {
+   "title": "Recipe: find cross-tenant sharing that still depends on EWS",
+   "url": "recipes/exchange-ews-cross-tenant-sharing-inventory.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1446796 as updated 23 November 2026 (reproduced by Modern Workspace Pro)",
+   "url": "https://mwpro.co.uk/blog/2026/11/23/mc1446796-exchange-online-pauses-gov-rollout-and-shifts-cross-tenant-sharing-from-ews-to-microsoft-365-cross-tenant-access-policy-2/",
+   "checked": "2026-11-23"
+  },
+  {
+   "title": "Microsoft Learn: Migrate to Microsoft 365 Cross-Tenant Access Policy",
+   "url": "https://learn.microsoft.com/exchange/sharing/migrate-to-m365-xtap",
+   "checked": "2026-11-23"
+  }
+ ],
+ "last_verified": "2026-11-23"
+}
