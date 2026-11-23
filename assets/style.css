@@ -1185,3 +1185,65 @@ background:linear-gradient(120deg,#ffe3f1 0%,#fff1d6 45%,#dff8ff 100%);box-shado
 .sf-cta-sp{border-left:1px solid #ffffff1a;padding-left:20px}footer.sf a.sf-cta-l{color:#5ee6c8;font-weight:600}
 @media (max-width:700px){.sf-cta{grid-template-columns:1fr}.sf-cta-sp{border-left:0;padding-left:0;border-top:1px solid #ffffff1a;padding-top:14px}.sf-cta-f input[type=email]{max-width:none}}
 @media print{.sf-cta{display:none}}
+
+/* ---- homepage front (2026-11-23): compact hero + fixed Latest news panel + section counts ---- */
+.hx.hm{padding:40px 0 32px}
+.hx.hm .hx-bg{overflow:hidden}
+.hm-in{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.95fr);gap:20px 36px;align-items:start;min-height:min-content}
+.hm-left{display:flex;flex-direction:column;gap:16px;min-width:0;min-height:min-content}
+.hm-copy{min-width:0}
+.hx.hm .hx-badge{margin:0 0 16px}
+.hx.hm h1{font-size:clamp(1.85rem,3.4vw,2.85rem);line-height:1.08;letter-spacing:-.025em;margin:0 0 16px;color:#fff}
+.hx.hm .hx-lead{font-size:1.05rem;max-width:38em;color:#c3cbe6;margin:0 0 18px}
+.hm-find{margin:0 0 12px;max-width:none}
+.hx.hm .st-pill{margin:0}
+.hm-news{background:#fff;color:var(--ink);border-radius:16px;padding:16px 18px 10px;box-shadow:0 22px 50px #0007;border:1px solid #ffffff2a;min-width:0}
+.hm-news .nw-sh-row{margin:0}
+.hm-news h2{margin:0;font-size:1.12rem;color:var(--ink);letter-spacing:-.02em}
+.hm-news .nw-sh-row a{color:var(--brand);font-weight:650;font-size:.88rem;text-decoration:none;white-space:nowrap}
+.hm-news .nw-sh-row a:hover{text-decoration:underline}
+.hm-nw{list-style:none;margin:8px 0 0;padding:0}
+.hm-nw>li{margin:0;padding:9px 0;border-top:1px solid var(--line)}
+.hm-nw>li:first-child{border-top:0;padding-top:6px}
+.hm-nw-m{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;margin:0 0 3px;font-size:.75rem;color:#5a6472}
+.hm-nw a{color:var(--ink);text-decoration:none;font-weight:750;font-size:.95rem;line-height:1.35;display:block}
+.hm-nw a:hover{color:var(--brand);text-decoration:underline}
+.hm-dest{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:auto;flex-shrink:0;height:auto;align-items:stretch;padding:0;justify-content:normal}
+.hm-tile{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:11px 12px;min-height:72px;border:1px solid #ffffff24;border-radius:14px;background:#ffffff10;color:#e8edff;text-decoration:none;box-sizing:border-box}
+.hm-tile:hover{background:#ffffff1c;border-color:#ffffff44}
+.hm-tile:focus-visible{outline:3px solid #5ee6c8;outline-offset:3px}
+.hm-tile strong{font-size:1.7rem;font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1.1}
+.hm-tile span{font-size:.8rem;color:#b9c6ff;font-weight:600;line-height:1.3}
+.hm-tile-st strong{font-size:1.15rem;letter-spacing:-.02em}
+@media (max-width:860px){
+  .hx.hm{padding:28px 0 22px}
+  .hm-in{grid-template-columns:1fr;gap:20px}
+  .hm-left{display:contents}
+  .hm-copy{order:1}
+  .hm-news{order:2}
+  .hm-dest{order:3;margin-top:0}
+  .hx.hm h1{font-size:clamp(1.55rem,7.4vw,2.1rem);margin:0 0 12px}
+  .hx.hm .hx-lead{font-size:1rem;margin:0 0 14px}
+  .hm-tile{min-height:74px;padding:12px 12px}
+  .hm-tile strong{font-size:1.4rem}
+}
+@media (max-width:560px){
+  .hm-dest{gap:8px}
+  .hm-tile{min-height:68px;padding:10px 10px}
+  .hm-tile strong{font-size:1.25rem}
+  .hm-tile span{font-size:.72rem}
+  .hm-news{padding:14px 14px 8px;border-radius:14px}
+  .hm-nw a{font-size:.92rem}
+}
+@media (prefers-reduced-motion:reduce){.hm-tile{transition:none}}
+
+/* Mid-page featured carousel (moved down from the hero) */
+.feat{margin:36px auto 8px}
+.feat .nw-sh-row{margin-bottom:12px}
+.feat .car-nav,.feat .car-play{border-color:#cfd5e3;background:#fff;color:#0f2f6b;box-shadow:var(--sh-1)}
+.feat .car-nav:hover,.feat .car-play:hover{background:#f5f7fb;color:#1366d6}
+.feat .car-dot{background:#c5cbe0}
+.feat .car-dot[aria-current]{background:#1f6feb}
+.feat .pt-cd{margin:0 0 16px}
+.feat .car-s{min-height:300px}
+@media (max-width:560px){.feat{margin-top:24px}.feat .car-s{min-height:0}}

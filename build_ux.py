@@ -388,6 +388,55 @@ def search_bar(rel, R, n_sec):
             f'<div class="fd-tags fd-topics" role="navigation" aria-label="Browse recipes by topic"><span class="fd-l">Topics:</span>{chips}</div></div>')
 
 
+# ---------------------------------------------------------------- homepage front (2026-11-23 redesign)
+def home_search(rel):
+    """Compact search in the homepage front: no topic-chip row (those stay on the recipe library)."""
+    return (f'<div class="hx-find hm-find"><form class="fd-s" action="{rel}search/index.html" method="get" role="search">{T.icon("search")}'
+            f'<label class="sr" for="fd-q">Search all recipes, guides and security entries</label>'
+            f'<input id="fd-q" name="q" type="search" placeholder="Search recipes, CVEs…" autocomplete="off" data-sx>'
+            f'<button class="btn p" type="submit">Search</button></form></div>')
+
+
+def home_front(rel, R, guides, quick, CYL, tools, pols, last_verified):
+    """Striking, information-dense homepage opening: counts from existing data, Latest news fixed on the right (stacked on small screens)."""
+    import pathlib
+    import build_news as NW
+    import build_status as BST
+    import build_aihub as AIH
+    n_recipes = len(R)
+    n_guides = len(guides) + (1 if quick is not None else 0)
+    n_news = len(NW.items(CYL))
+    n_expl = sum(1 for e in CYL if e["type"] == "vulnerability" and e.get("exploited"))
+    n_code = len(list((pathlib.Path(__file__).resolve().parent / "data" / "code").glob("*.json")))
+    n_ai = len(AIH.TRACKS)
+    tiles = [
+        (f"{rel}#library", n_recipes, "Recipes"),
+        (f"{rel}guides/index.html", n_guides, "Guides"),
+        (f"{rel}news/index.html", n_news, "News &amp; retirements"),
+        (f"{rel}security/index.html#watch", n_expl, "Vulnerability watch"),
+        (f"{rel}tools/index.html", len(tools), "Security tools"),
+        (f"{rel}policies/index.html", len(pols), "Policy templates"),
+        (f"{rel}code/index.html", n_code, "Code library"),
+        (f"{rel}ai/index.html", n_ai, "AI reading paths"),
+        (f"{rel}status/index.html", None, "Cloud status"),
+    ]
+    dest = "".join(
+        (f'<a class="hm-tile" href="{href}"><strong>{n}</strong><span>{label}</span></a>' if n is not None
+         else f'<a class="hm-tile hm-tile-st" href="{href}"><strong>Status</strong><span>{label}</span></a>')
+        for href, n, label in tiles)
+    return (
+        f'<section class="hx hm" aria-labelledby="hx-title"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>'
+        f'<div class="wrap hm-in"><div class="hm-left"><div class="hm-copy">'
+        f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>{n_recipes} recipes, every one checked against its sources · last verified {T.fmt(last_verified)}</p>'
+        f'<h1 id="hx-title">Playbooks for people<br><span class="grad">who already run the tenant.</span></h1>'
+        f'<p class="hx-lead">Independent, fact-checked recipes, guides, news, vulnerability watch, tools, policy templates and a code library. '
+        f'Exact settings, scripts, rollback, and a source for every claim.</p>'
+        f'{home_search(rel)}{BST.pill(rel)}'
+        f'</div><nav class="hm-dest" aria-label="Site sections">{dest}</nav></div>'
+        f'{NW.latest_panel(rel, esc, T.fmt, CYL, 6)}</div></section>'
+    )
+
+
 # ---------------------------------------------------------------- quick guide page
 def quick_body(rel, Q, RID, page_signup):
     import build_history as HI
@@ -727,7 +776,7 @@ def _webp(img):
     return big.exists() and small.exists()
 
 
-def carousel(rel, slides, n_recipes, last_verified, top="", lead=""):
+def carousel(rel, slides, n_recipes, last_verified, top="", lead="", band=False):
     n = len(slides)
     items, dots = "", ""
     for i, s in enumerate(slides):
@@ -743,16 +792,20 @@ def carousel(rel, slides, n_recipes, last_verified, top="", lead=""):
                   f'<img src="{rel}assets/{s["img"]}" alt="" width="1200" height="630" decoding="async" {load}></picture></a></div>')
         dots += f'<button type="button" class="car-dot" aria-controls="car-s{i}" aria-label="Show slide {i + 1}: {esc(s["t"])}"{" aria-current=true" if i == 0 else ""}></button>'
     arrow = lambda d: f'<svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path d="{"M15 5l-7 7 7 7" if d < 0 else "M9 5l7 7-7 7"}"/></svg>'
+    box = (f'<div class="car-box" aria-roledescription="carousel" aria-label="Featured articles" role="region">'
+           f'<div class="car-vp" id="car-vp" aria-live="off" tabindex="-1">{items}</div>'
+           f'<div class="car-ctl"><button type="button" class="car-nav car-prev" aria-label="Previous slide" aria-controls="car-vp">{arrow(-1)}</button>'
+           f'<div class="car-dots" role="group" aria-label="Choose slide">{dots}</div>'
+           f'<button type="button" class="car-nav car-next" aria-label="Next slide" aria-controls="car-vp">{arrow(1)}</button>'
+           f'<button type="button" class="car-play" aria-label="Pause automatic slide show" hidden>'
+           f'<svg class="car-pi" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path class="pp-pause" d="M8 5v14M16 5v14"/><path class="pp-play" d="M8 5l11 7-11 7z"/></svg></button></div></div>')
+    if band:
+        return (f'<section class="feat wrap" aria-labelledby="feat-h"><div class="nw-sh-row"><h2 id="feat-h">Featured</h2></div>'
+                f'{top}{box}</section>')
     return (f'<section class="hx car" aria-labelledby="hx-title"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>'
             f'<div class="wrap"><h1 id="hx-title" class="car-h1">Independent Microsoft Cloud &amp; Modern Workplace playbooks</h1><p class="car-sub">Identity, devices, Copilot and automation for people who run tenants: exact settings, scripts, rollback and a source for every claim. <a href="#tasks">Explore by task ↓</a> · <a href="#infra">Cybersecurity &amp; Infrastructure track</a></p>{lead}'
             f'<p class="hx-badge car-badge"><span class="dot" aria-hidden="true"></span>{n_recipes} recipes, every one checked against its sources · last verified {T.fmt(last_verified)}</p>{top}'
-            f'<div class="car-box" aria-roledescription="carousel" aria-label="Featured articles" role="region">'
-            f'<div class="car-vp" id="car-vp" aria-live="off" tabindex="-1">{items}</div>'
-            f'<div class="car-ctl"><button type="button" class="car-nav car-prev" aria-label="Previous slide" aria-controls="car-vp">{arrow(-1)}</button>'
-            f'<div class="car-dots" role="group" aria-label="Choose slide">{dots}</div>'
-            f'<button type="button" class="car-nav car-next" aria-label="Next slide" aria-controls="car-vp">{arrow(1)}</button>'
-            f'<button type="button" class="car-play" aria-label="Pause automatic slide show" hidden>'
-            f'<svg class="car-pi" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path class="pp-pause" d="M8 5v14M16 5v14"/><path class="pp-play" d="M8 5l11 7-11 7z"/></svg></button></div></div></div></section>')
+            f'{box}</div></section>')
 
 
 # ---------------------------------------------------------------- homepage task hubs (2026-10-31)

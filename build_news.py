@@ -88,6 +88,22 @@ def latest_strip(rel, esc, fmt_date, CY, n=4):
             f'<ol class="nw-list nw-mini">{"".join(card(rel, esc, fmt_date, e, True) for e in its)}</ol></section>')
 
 
+def latest_panel(rel, esc, fmt_date, CY, n=6):
+    """Compact 'Latest news' panel for the homepage front: same Microsoft-track selection as latest_strip."""
+    ms = {v["id"] for v in CY if "Microsoft" in (v.get("vendor") or "")}
+    its = [e for e in items(CY) if e["kind"] == "news" or e["id"] in ms][:n]
+    rows = []
+    for e in its:
+        lab = ("Added to CISA KEV " if e.get("kev") else "Published ") if e["kind"] == "vuln" else ""
+        rows.append(
+            f'<li><p class="hm-nw-m"><span class="nw-c nw-c-{cat_slug(e["category"])}">{esc(e["category"])}</span>'
+            f'<time datetime="{e["date"]}">{lab}{fmt_date(e["date"])}</time></p>'
+            f'<a href="{rel}{e["u"]}">{esc(e["title"])}</a></li>')
+    return (f'<aside class="hm-news" aria-labelledby="nw-sh"><div class="nw-sh-row"><h2 id="nw-sh">Latest news</h2>'
+            f'<a href="{rel}news/index.html">All news &amp; retirements →</a></div>'
+            f'<ol class="hm-nw">{"".join(rows)}</ol></aside>')
+
+
 def build(page, esc, step_html, signup, fmt_date, E, SITE_NAME, CY):
     import build_links as BL, build_data as BD
     RECIPES = BD.load()

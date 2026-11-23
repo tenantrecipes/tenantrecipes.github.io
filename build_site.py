@@ -533,14 +533,14 @@ def build():
 
     pages.append(page("index.html", f"{C.SITE_NAME}: Microsoft Cloud & Modern Workplace playbooks for admins",
                       "Fact-checked playbooks for Microsoft 365 admins: Conditional Access, PIM, Intune, Autopilot, Copilot and Purview, plus a Cybersecurity & Infrastructure track.", lambda rel: (
-        IGN.home_banner(rel, fmt_date)
+        UX.home_front(rel, R, GUIDES, Q, CY.load(), TL.load(), PL.load(),
+                      max(r["last_verified"] for r in R if r.get("last_verified")))
+        + IGN.home_banner(rel, fmt_date)
         + UX.carousel(rel, UX.featured(R, CY.load(), GUIDES, Q), len(R), max(r["last_verified"] for r in R if r.get("last_verified")),
-                    CY.patch_tuesday_widget(rel, CY.load()).replace('class="pt-cd"', 'class="pt-cd pt-hero"', 1),
-                    UX.search_bar(rel, R, len(CY.load())) + BST.pill(rel) + f'<script src="{rel}assets/status.js" defer></script>')
+                    CY.patch_tuesday_widget(rel, CY.load()), "", True)
         + AIH.home_promo(rel)
         + UX.task_hubs(rel, R, GUIDES, Q, CY.load(), TL.load(), PL.load())
         + UX.latest_guides(rel, GUIDES)
-        + NW.latest_strip(rel, esc, fmt_date, CY.load())
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
         + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):]
         + UX.infra_track(rel, CY.load(), TL.load(), PL.load()) +
@@ -548,7 +548,7 @@ def build():
         f'<p id="count" class="fine" aria-live="polite"></p><div class="grid" id="grid"></div>'
         f'<noscript><ul>' + "".join(f'<li><a href="recipes/{r["id"]}.html">{esc(r["title"])}</a></li>' for r in R) + '</ul></noscript>'
         f'{ad_slot("index-bottom")}{signup(rel, "index")}</main>'
-        f'<script src="data/recipes.js" defer></script><script src="assets/app.js" defer></script><script src="assets/carousel.js" defer></script>')))
+        f'<script src="data/recipes.js" defer></script><script src="assets/app.js" defer></script><script src="assets/carousel.js" defer></script><script src="assets/status.js" defer></script>')))
 
     stats = (len(R), len(CY.load()), len(GUIDES), len({s["url"] for r in R for s in r["sources"]} | {s["url"] for e in CY.load() for s in e["sources"]}))
     pages.append(page("about.html", f"About Tenant Recipes: independent, fact-checked and source-linked | {C.SITE_NAME}", "Who edits Tenant Recipes, why there is no personal byline, how every recipe is fact-checked against primary sources, and how to report an error.",
