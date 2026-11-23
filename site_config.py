@@ -68,3 +68,7 @@ REVERIFY_DAYS = 90
 
 # Social profiles (brand accounts only). Shown in the footer; X handle is also used for the twitter:site meta tag.
 X_HANDLE = "TenantRecipes"
+
+# Optional site chat (Cloudflare Worker). Public site key only; the secret stays in the Worker.
+CHAT_ENDPOINT = "https://tr-site-chat.tenantrecipes.workers.dev"
+CHAT_SITEKEY = "0x4AAAAAAGPTvyEf3AhZCeXC"

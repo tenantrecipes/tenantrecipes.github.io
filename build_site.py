@@ -194,6 +194,9 @@ def head(title, desc, rel, path, og_type="website", og_auto=True):
     tags.append(f'<link rel="stylesheet" href="{rel}assets/style.css">')
     tags.append(f'<script src="{rel}assets/ui.js" defer></script>')
     tags.append(f'<script src="{rel}assets/search.js" defer></script>')
+    if getattr(C, "CHAT_ENDPOINT", "") and getattr(C, "CHAT_SITEKEY", ""):
+        tags.append(f'<link rel="stylesheet" href="{rel}assets/tr-chat.css">')
+        tags.append(f'<script src="{rel}assets/tr-chat.js" data-endpoint="{esc(C.CHAT_ENDPOINT)}" data-sitekey="{esc(C.CHAT_SITEKEY)}" defer></script>')
     if GC:
         tags.append(f'<script data-goatcounter="https://{GC}.goatcounter.com/count" async src="{rel}assets/goatcounter.js"></script>')
     return "".join(tags)
@@ -613,6 +616,14 @@ def build():
         'aggregate to improve the newsletter. Links in the newsletter may carry “utm” tags that show a visit came from the newsletter; they '
         'do not identify you.</p><p>Every email has an unsubscribe link. When you unsubscribe, we stop sending to you and delete your address '
         'on request.</p>'
+        '<h2>Site chat</h2><p>If you open the optional “Ask the site” chat, your question is sent to a Cloudflare Worker, '
+        'which searches Tenant Recipes pages and, when a match is found, generates an answer with Cloudflare Workers AI. '
+        'Cloudflare Turnstile checks that the request comes from a person and helps limit abuse. For that, the question, '
+        'a daily-rotating technical identifier derived from your IP address, and the Turnstile result are processed. '
+        'Questions and answers are not stored. Only anonymous counters tied to that daily-rotating identifier are kept '
+        'until the end of the UTC day, so usage limits can be enforced. Cloudflare, Inc. processes this data on our '
+        'behalf as a processor. See Cloudflare’s <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a>. '
+        'The chat is optional; if you do not use it, this processing does not take place. You can always use the site search instead.</p>'
         '<h2>Sponsors</h2><p>Sponsors never receive subscriber lists or personal data.</p>'
         '<h2>Your rights</h2><p>Under the GDPR you can ask for access to, correction of, or deletion of your personal data, and you can '
         f'withdraw consent at any time. To do so, ' + (f'email <a href="mailto:{E(C.CONTACT_EMAIL)}">{E(C.CONTACT_EMAIL)}</a>, ' if C.CONTACT_EMAIL else '') + f'reply to any newsletter email (replies reach the editor privately), or open a <a href="{T.REPO}/issues/new/choose">GitHub issue</a> asking us to get in touch — please do not post personal data in the issue itself. You can also complain to the Swedish Authority for Privacy Protection '

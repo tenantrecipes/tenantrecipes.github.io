@@ -31,16 +31,20 @@ def h(s):
 
 def policy(scripts, styles, connect=""):
     gc_conn = f" https://{GC}.goatcounter.com" if GC else ""
+    chat = (getattr(C, "CHAT_ENDPOINT", "") or "").strip().rstrip("/")
+    chat_conn = f" {chat}" if chat else ""
+    # Turnstile is loaded only if the visitor opens the site chat (see assets/tr-chat.js).
+    turnstile = " https://challenges.cloudflare.com" if chat else ""
     return "; ".join([
         "default-src 'self'",
-        "script-src 'self'" + "".join(" " + x for x in scripts),  # GoatCounter count.js is self-hosted (assets/goatcounter.js)
+        "script-src 'self'" + turnstile + "".join(" " + x for x in scripts),  # GoatCounter count.js is self-hosted (assets/goatcounter.js)
         "style-src 'self'" + "".join(" " + x for x in styles),
         "img-src 'self' data:" + gc_conn,
-        "connect-src 'self'" + ((" " + connect) if connect else "") + gc_conn,
+        "connect-src 'self'" + ((" " + connect) if connect else "") + gc_conn + chat_conn,
         "font-src 'self'",
         "manifest-src 'self'",
         "object-src 'none'",
-        "frame-src 'none'",
+        "frame-src" + (turnstile if turnstile else " 'none'"),
         "worker-src 'none'",
         "base-uri 'self'",
         "form-action 'self' https://buttondown.com",
