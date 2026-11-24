@@ -1,0 +1,49 @@
+{
+ "id": "okta-inception-o-unc-053-vishing",
+ "status": "published",
+ "title": "Okta: ex-ShinyHunters vishing crew now leaks via Inception",
+ "date": "2026-11-24",
+ "category": "Security incidents",
+ "summary": "Okta Threat Intelligence reported on 23 November 2026 that the cluster it tracks as O-UNC-053, active since March 2026 and previously linked to the ShinyHunters leak site, very likely now publishes victims on a new data leak site branded INCEPTION, which appeared on 16 November. The operators call staff while posing as support, push them to reset passwords, and use a phishing kit that captures the password and then relays one-time codes and push approvals obtained during the call; Okta says the kit cannot get past phishing-resistant methods such as FIDO2/WebAuthn passkeys. Targets appeared on INCEPTION 6 to 19 days after Okta saw phishing infrastructure registered for them. Okta cannot verify whether the leaked data is authentic, and none of the listed companies had confirmed a breach when The Register reported it.",
+ "why": "This is the same help desk and MFA-fatigue play that hits Entra and Okta SSO tenants, and the brand change does not change the defence. If your SSO still accepts codes or push approvals from anyone who can be talked into it, the data behind it is exposed.",
+ "todo": [
+  "Do now: require a phishing-resistant authentication strength in Conditional Access for admins and the SaaS apps holding your most sensitive data.",
+  "Make the help desk verify callers (call back on a known number, manager approval) before any password reset or MFA re-registration, and tell staff IT will never ask for a code by phone.",
+  "Alert on new MFA method registrations and sign-ins from new devices right after a password reset.",
+  "Watch for newly registered lookalike domains that use your brand; Okta says this crew changes the theme of its phishing domains every four to six weeks."
+ ],
+ "effective_note": "Okta Threat Intelligence report, 23 Nov 2026. Leak-site claims are unverified.",
+ "primary": {
+  "title": "Okta Threat Intelligence: Former ShinyHunters-affiliated cluster O-UNC-053 moves to new INCEPTION leak site",
+  "url": "https://www.okta.com/blog/threat-intelligence/former-shinyhunters-cluster-moves-to-new-inception-site/"
+ },
+ "related": [
+  {
+   "title": "News: Teams voice phishing detection for external calls",
+   "url": "news/teams-voice-phishing-detection-external-calls.html"
+  },
+  {
+   "title": "Recipe: Move users off SMS and voice MFA",
+   "url": "recipes/entra-sms-voice-retirement-passkeys.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Okta Threat Intelligence blog (23 Nov 2026)",
+   "url": "https://www.okta.com/blog/threat-intelligence/former-shinyhunters-cluster-moves-to-new-inception-site/",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "The Register: Inception, possibly a ShinyHunters reboot, claims seven victims in a week",
+   "url": "https://www.theregister.com/security/2026/11/23/inception-possibly-a-shinyhunters-reboot-claims-seven-victims-in-a-week/5311768",
+   "checked": "2026-11-24"
+  }
+ ],
+ "last_verified": "2026-11-24",
+ "hashtags": [
+  "CyberSecurity",
+  "Vishing",
+  "EntraID",
+  "InfoSec"
+ ]
+}

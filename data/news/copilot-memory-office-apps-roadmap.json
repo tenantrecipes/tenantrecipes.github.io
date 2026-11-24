@@ -1,0 +1,43 @@
+{
+ "id": "copilot-memory-office-apps-roadmap",
+ "status": "published",
+ "title": "Copilot memory heads into Word, Excel and PowerPoint (roadmap)",
+ "date": "2026-11-24",
+ "category": "Copilot/AI",
+ "summary": "Microsoft 365 Roadmap item 580889, added on 24 November 2026, says Copilot in Word, Excel, PowerPoint and Workspaces (across the Copilot app and OneNote) will use memory to learn users' work patterns and personalise responses. The roadmap lists preview and GA as November 2026 with status 'In development'; there is no Message Center post yet, so this is announced, not verified. Per Microsoft Learn, Copilot memory is in preview, is stored in a hidden folder in the user's Exchange mailbox, is on by default through the Enhanced personalization control, is not covered by Purview retention policies, produces no audit log entries, and admins cannot restrict what goes into it; saved memories can be found with eDiscovery.",
+ "why": "Memory spreading from Copilot Chat into the Office apps means more of what users write ends up remembered. The control is tenant- or user-wide on or off, the retention and audit gaps stay the same, and data subject requests need an eDiscovery process for memory.",
+ "todo": [
+  "Decide whether Enhanced personalization stays on for everyone, for some users or for nobody (it can also be set through the enhancedPersonalizationSetting resource in Microsoft Graph).",
+  "Add a line to your AI use policy: no confidential data, credentials or personal data about others in saved memories or custom instructions.",
+  "Document how you find and delete memory for a data subject request (eDiscovery, item class IPM.Contact, CopilotMemory folder).",
+  "Wait: roadmap only; check Message Center before telling users."
+ ],
+ "effective_note": "Roadmap 580889: preview and GA November 2026, status In development. Announced, not verified.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 580889: The more you use Copilot in Office the better it gets",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580889"
+ },
+ "related": [
+  {
+   "title": "Recipe: Purview retention for Copilot",
+   "url": "recipes/purview-retention-copilot.html"
+  },
+  {
+   "title": "Policy: AI and Copilot use",
+   "url": "policies/ai-copilot-use-policy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 580889 (added 24 Nov 2026)",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580889",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "Microsoft Learn: Manage Copilot personalization and memory",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-personalization-memory",
+   "checked": "2026-11-24"
+  }
+ ],
+ "last_verified": "2026-11-24"
+}

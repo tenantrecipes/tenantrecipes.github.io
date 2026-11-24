@@ -37,6 +37,7 @@ It covers chat assistants, AI features in business apps, coding assistants and a
 - Personal data about customers or colleagues, passwords, keys, source code secrets or security details, in any tool that is not approved for that class.
 - Anything you are not allowed to share with the provider of the tool under the company DPA and data-residency rules.
 - Company information pasted into a consumer or personal AI account, even if you believe the text is anonymised.
+- Confidential information, credentials or personal data about other people in an AI tool's memory, saved memories or custom instructions. Memories are kept until you delete them and are not covered by the company's retention rules; IT may switch memory off for some or all users.
 
 ## 5. Using AI output
 

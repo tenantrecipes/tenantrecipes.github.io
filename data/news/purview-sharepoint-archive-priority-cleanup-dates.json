@@ -1,0 +1,48 @@
+{
+ "id": "purview-sharepoint-archive-priority-cleanup-dates",
+ "status": "published",
+ "title": "Purview: SharePoint archive and hard-delete cleanup dates slip",
+ "date": "2026-11-24",
+ "category": "Purview",
+ "summary": "Microsoft updated three Purview Data Lifecycle Management posts on 23 November 2026. The Archive option in retention policies, which moves inactive SharePoint files to Microsoft 365 Archive, keeps them discoverable for eDiscovery and excludes them from Copilot indexing, now reaches worldwide GA from early December 2026 to early January 2027 (MC1325441; previously mid-November to early December), and GCC, GCC High and DoD from mid-January to mid-February 2027 (MC1472601). Priority cleanup, which can permanently delete selected OneDrive and SharePoint content even under retention or holds after eDiscovery admin approval, finishes preview by early December and reaches worldwide GA from early December 2026 to mid-January 2027 (MC1261587). Neither is on by default.",
+ "why": "Both are levers against Copilot surfacing stale or over-retained content, and both change records management. Priority cleanup in particular can override a hold, so who may create and approve those policies is a governance decision, not just a settings task.",
+ "todo": [
+  "Do now: decide who may create priority cleanup policies and who, as eDiscovery admin, approves deletion of content under hold; write it into your records and backup policies.",
+  "Pick a set of inactive SharePoint sites to pilot the Archive option and agree with records management what 'inactive' means.",
+  "Tell eDiscovery and legal teams that archived files remain searchable, but permanently deleted ones do not.",
+  "Wait: worldwide GA starts early December 2026 for both; government clouds get Archive mid-January 2027."
+ ],
+ "effective_note": "Archive: worldwide GA early Dec 2026–early Jan 2027 (MC1325441), GCC/GCCH/DoD mid-Jan–mid-Feb 2027 (MC1472601). Priority cleanup GA early Dec 2026–mid-Jan 2027 (MC1261587).",
+ "primary": {
+  "title": "MC1325441: Purview Data Lifecycle Management – Archive SharePoint files under retention (Message Center archive, updated 23 Nov 2026)",
+  "url": "https://mc.merill.net/message/MC1325441"
+ },
+ "related": [
+  {
+   "title": "Recipe: Purview retention for Copilot",
+   "url": "recipes/purview-retention-copilot.html"
+  },
+  {
+   "title": "Recipe: SharePoint Restricted Content Discovery",
+   "url": "recipes/sharepoint-restricted-content-discovery.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1325441 (Message Center archive, updated 23 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1325441",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "MC1472601 (Message Center archive, updated 23 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1472601",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "MC1261587 (Message Center archive, updated 23 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1261587",
+   "checked": "2026-11-24"
+  }
+ ],
+ "last_verified": "2026-11-24"
+}

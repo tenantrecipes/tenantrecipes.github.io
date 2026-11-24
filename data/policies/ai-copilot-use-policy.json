@@ -56,7 +56,8 @@
     "Information classified as Confidential or Restricted, unless the specific approved tool is listed for that level in {{APPROVED_AI_TOOLS}}.",
     "Personal data about customers or colleagues, passwords, keys, source code secrets or security details, in any tool that is not approved for that class.",
     "Anything you are not allowed to share with the provider of the tool under the company DPA and data-residency rules.",
-    "Company information pasted into a consumer or personal AI account, even if you believe the text is anonymised."
+    "Company information pasted into a consumer or personal AI account, even if you believe the text is anonymised.",
+    "Confidential information, credentials or personal data about other people in an AI tool's memory, saved memories or custom instructions. Memories are kept until you delete them and are not covered by the company's retention rules; IT may switch memory off for some or all users."
    ]
   },
   {
@@ -104,9 +105,9 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-15",
+ "last_verified": "2026-11-24",
  "created": "2026-10-30",
- "updated": "2026-11-15",
+ "updated": "2026-11-24",
  "order": 40,
  "history": [
   {
@@ -120,6 +121,10 @@
   {
    "date": "2026-11-15",
    "note": "Added rules for AI features that read browsing or connector context and for AI over workforce/HR data (prompted by MC1552386 and MC1552389)."
+  },
+  {
+   "date": "2026-11-24",
+   "note": "Reviewed. Added a rule on AI memory and custom instructions, since Copilot memory is outside Purview retention policies and is expanding into Word, Excel and PowerPoint (roadmap 580889)."
   }
  ]
 }

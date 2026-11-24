@@ -1,0 +1,50 @@
+{
+ "id": "sharepoint-classic-publishing-blocked-march-2027",
+ "status": "published",
+ "title": "SharePoint blocks classic publishing sites from 1 March 2027",
+ "date": "2026-11-24",
+ "category": "Retirements",
+ "summary": "Message Center MC1565964 (23 November 2026) confirms the dates first announced in MC1464926: from 1 March 2027 SharePoint Online blocks creating classic publishing sites and activating publishing features on site collections and subsites in every tenant, and forces the tenant setting AllowClassicPublishingSiteCreation to False with no override. Tenants created on or after 1 March 2027 also cannot create or edit classic user-created pages (wiki, web part, blog, publishing and custom ASPX pages) or add custom scripts, with DenyAddAndCustomizePages enforced. Rollout runs from early March 2027 to early October 2028. Microsoft's modernization guidance adds that existing classic user-created pages become read-only in all tenants from 1 October 2028; content is not deleted.",
+ "why": "The first thing to break is automation, not pages: provisioning scripts, PnP or site templates and migration jobs that create publishing sites or switch on publishing features will start failing on 1 March 2027. The bigger job is the October 2028 read-only date, which needs a page inventory and owners long before then.",
+ "todo": [
+  "Do now: search provisioning code, site templates and migration plans for classic publishing site templates and publishing feature activation, and move them to modern sites before 28 February 2027.",
+  "Inventory classic pages with the Microsoft 365 Assessment tool (`--mode Classic --classicinclude Pages`) and give each site with classic pages a modernization owner.",
+  "Pilot page transformation on a few representative pages; customised and publishing pages may have to be rebuilt.",
+  "Wait: nothing to change in tenant settings; the override simply disappears on 1 March 2027."
+ ],
+ "effective": "2027-03-01",
+ "effective_note": "Publishing block from 1 Mar 2027 (rollout to early Oct 2028); existing classic pages read-only from 1 Oct 2028 per Microsoft Learn.",
+ "primary": {
+  "title": "MC1565964: SharePoint Online classic publishing restrictions begin March 1, 2027 (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1565964"
+ },
+ "related": [
+  {
+   "title": "Tool: Microsoft 365 Assessment tool",
+   "url": "tools/microsoft-365-assessment.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1565964 (Message Center archive, published 23 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1565964",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "Microsoft Learn: Assess and transform classic SharePoint pages",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/dev/transform/assess-sharepoint-modernization",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "Microsoft Learn: Run a classic pages assessment",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/dev/transform/assessment-tool-classic-pages-run",
+   "checked": "2026-11-24"
+  }
+ ],
+ "last_verified": "2026-11-24",
+ "hashtags": [
+  "SharePoint",
+  "Microsoft365",
+  "SysAdmin"
+ ]
+}

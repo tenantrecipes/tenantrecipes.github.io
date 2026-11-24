@@ -1,0 +1,35 @@
+{
+ "id": "intune-data-warehouse-policy-reporting-jan-2027",
+ "status": "published",
+ "title": "Intune Data Warehouse policy counts may shift from 4 Jan 2027",
+ "date": "2026-11-24",
+ "category": "Intune",
+ "summary": "Message Center MC1565960 (23 November 2026): from 4 January 2027, or soon after, Microsoft moves policy-related reporting in the Intune Data Warehouse onto the updated Intune reporting infrastructure. Seven collections are affected: policyDeviceActivities, policyTypeActivities, policyUserActivities, deviceConfigurationProfileDeviceActivities, deviceConfigurationProfileUserActivities, compliancePolicyStatusDeviceActivities and compliancePolicyStatusDevicePerPolicyActivities. Connections and schemas stay the same, but policy-status counts may change. Microsoft also notes that Data Warehouse counts can differ from the Intune admin center because of refresh timing and aggregation.",
+ "why": "Compliance dashboards in Power BI and audit evidence built on these collections may show a step change in early January that has nothing to do with your devices. Without a baseline, that looks like a compliance drop or gain and will cost someone a day to explain.",
+ "todo": [
+  "Do now: find Power BI reports and exports that use the seven collections and tell their owners about the January change.",
+  "In the last week of December, save a snapshot of current policy and compliance counts as a baseline.",
+  "After 4 January, compare against the baseline before reporting trends; don't reconcile Data Warehouse and admin center numbers one to one.",
+  "Wait: no configuration change is required."
+ ],
+ "effective": "2027-01-04",
+ "effective_note": "From 4 January 2027 or soon after, per MC1565960.",
+ "primary": {
+  "title": "MC1565960: Updates to policy-related reporting in Microsoft Intune Data Warehouse (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1565960"
+ },
+ "related": [
+  {
+   "title": "Recipe: Intune compliance baseline",
+   "url": "recipes/intune-compliance-baseline.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1565960 (Message Center archive, published 23 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1565960",
+   "checked": "2026-11-24"
+  }
+ ],
+ "last_verified": "2026-11-24"
+}

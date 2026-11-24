@@ -1,0 +1,32 @@
+{
+ "id": "profile-card-dotted-line-managers-cancelled",
+ "status": "published",
+ "title": "Profile card dotted-line managers postponed indefinitely",
+ "date": "2026-11-24",
+ "category": "M365",
+ "summary": "Microsoft updated MC1478957 on 24 November 2026: showing dotted-line managers in the organization panel of the Microsoft 365 profile card will not go ahead for now. The October 2026 timeline no longer applies and there is no new date; Microsoft says it is prioritising the profile experience in Microsoft 365 Copilot instead, and acknowledges that some customers spent time investigating why dotted-line information was not appearing.",
+ "why": "If you were troubleshooting missing dotted-line managers, stop: the feature never shipped. Plans and user communications that promised it need correcting.",
+ "todo": [
+  "Do now: close any open tickets about missing dotted-line managers on profile cards.",
+  "Remove the feature from rollout plans and user communications.",
+  "Wait: watch MC1478957 for a future date."
+ ],
+ "effective_note": "Postponed indefinitely on 24 Nov 2026; no new date.",
+ "primary": {
+  "title": "MC1478957: Microsoft 365 profile card dotted-line managers (Message Center archive, updated 24 Nov 2026)",
+  "url": "https://mc.merill.net/message/MC1478957"
+ },
+ "sources": [
+  {
+   "title": "MC1478957 (Message Center archive, updated 24 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1478957",
+   "checked": "2026-11-24"
+  }
+ ],
+ "last_verified": "2026-11-24",
+ "hashtags": [
+  "Microsoft365",
+  "SysAdmin",
+  "M365Admin"
+ ]
+}

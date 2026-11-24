@@ -1,0 +1,57 @@
+{
+ "id": "european-commission-eu-academy-data-breach",
+ "status": "published",
+ "title": "European Commission confirms EU Academy data leak",
+ "date": "2026-11-24",
+ "category": "Regulation",
+ "summary": "At its midday briefing on 23 November 2026 the European Commission confirmed that the EU Academy e-learning platform was hit by the cyber campaign against the Commission and that personal data of its users, who are external to the EU institutions, leaked; an EU official told POLITICO this includes names and email addresses, and the full scale is still under investigation. Public access to the platform has been disabled, users were told through a notice on the EU Academy website rather than individually, and the European Data Protection Supervisor has been informed. The Commission says the attack used an AI-assisted tool but has not attributed it or said whether it is contained. The Register reports that suspicious activity was first detected on 22 October.",
+ "why": "Two lessons for tenant owners. Anyone in your organisation who used EU Academy with a work address can expect targeted phishing that borrows EU branding. And the criticism of a website-only notice is a reminder to decide in advance how you would notify people: under GDPR Article 34, a public communication instead of individual notices is only an option when contacting people individually would involve disproportionate effort.",
+ "todo": [
+  "Do now: warn staff who may have registered with EU Academy and add EU Academy and Commission themes to phishing awareness and mail-flow detections.",
+  "Review your incident response plan: who decides on notifying data subjects, which channel you use and what you need to show if you choose a public notice.",
+  "Follow the Commission's updates; whether the attack is contained is not yet confirmed."
+ ],
+ "effective_note": "Confirmed by the Commission on 23 Nov 2026; investigation ongoing.",
+ "primary": {
+  "title": "European Commission Audiovisual Service: EC midday press briefing, 23 November 2026",
+  "url": "https://audiovisual.ec.europa.eu/en/media/video/I-298395"
+ },
+ "related": [
+  {
+   "title": "News: FBI FLASH on the ARTEX agentic attack framework",
+   "url": "news/fbi-flash-artex-agentic-attack-framework.html"
+  },
+  {
+   "title": "Policy: Incident response",
+   "url": "policies/incident-response-policy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "European Commission: midday press briefing, 23 Nov 2026 (video and transcript)",
+   "url": "https://audiovisual.ec.europa.eu/en/media/video/I-298395",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "POLITICO Europe: EU Commission confirms personal data leak after cyberattack",
+   "url": "https://www.politico.eu/article/european-commission-personal-data-leak-cyberattack-disruption/",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "The Register: European Commission confirms personal data stolen in AI-assisted cyberattack",
+   "url": "https://www.theregister.com/cyber-crime/2026/11/24/european-commission-confirms-personal-data-stolen-in-ai-assisted-cyberattack/5311834",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "EUR-Lex: GDPR Article 34 (communication of a personal data breach to the data subject)",
+   "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+   "checked": "2026-11-24"
+  }
+ ],
+ "last_verified": "2026-11-24",
+ "hashtags": [
+  "GDPR",
+  "DataProtection",
+  "CyberSecurity"
+ ]
+}

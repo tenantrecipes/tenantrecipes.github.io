@@ -1,0 +1,64 @@
+{
+ "id": "microsoft-365-assessment",
+ "name": "Microsoft 365 Assessment tool",
+ "vendor": "Microsoft 365 & Power Platform Community (PnP)",
+ "category": "Cloud assessment",
+ "what": "An open-source command-line tool from the Microsoft PnP community that scans a SharePoint Online tenant and produces CSV files and a Power BI report. Its modules cover classic pages, InfoPath Forms Services, SharePoint Add-ins and Azure ACS, and SharePoint Alerts, so you can see what legacy customisation still exists before Microsoft retires it.",
+ "when": "Before a SharePoint retirement deadline, for example the block on classic publishing sites from 1 March 2027 and classic user-created pages becoming read-only from 1 October 2028, to find which sites and pages are affected and who owns them.",
+ "license": "MIT",
+ "cost": "open source",
+ "cost_note": null,
+ "url": "https://learn.microsoft.com/en-us/sharepoint/dev/transform/assessment-tool-classic-pages",
+ "repo": "https://github.com/pnp/pnpassessment",
+ "example": [
+  "Download the latest release from GitHub (v1.17.0 at the time of checking; the classic pages module needs 1.15.0 or later, and the audit-based usage data 1.16.0 or later).",
+  "Register an Entra app with read-only Sites.Read.All (Microsoft Graph and SharePoint, application permissions) and a certificate, and grant admin consent.",
+  "Start a small scope first: `microsoft365-assessment.exe start --mode Classic --classicinclude Pages --authmode application --tenant <tenant>.sharepoint.com --applicationid <app-id> --certpath \"My|CurrentUser|<thumbprint>\" --siteslist \"https://<tenant>.sharepoint.com/sites/site1\"`.",
+  "Follow progress with `microsoft365-assessment.exe status`; when the run has finished, generate the Power BI report and CSV files with `microsoft365-assessment.exe report --id <assessment-id>` (find the id with the list command), start with classicpages.csv, then widen the scope to the whole tenant."
+ ],
+ "pitfalls": [
+  "Delegated (interactive or device) runs only see the sites the signed-in account can access; use application authentication for a full-tenant picture.",
+  "Audit-based page usage needs an extra Microsoft Graph audit permission and is not available in GCC High, DoD or 21Vianet; use --skipusageinformation there.",
+  "A high MappingPercentage only means each web part has a mapping; it does not guarantee the transformed page keeps all behaviour.",
+  "Large tenants get throttled: start with 4 to 8 threads and run at most a few assessments in parallel.",
+  "Run it only against tenants you administer or have written permission to assess."
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Learn: Assess classic SharePoint pages",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/dev/transform/assessment-tool-classic-pages",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "Microsoft Learn: Requirements for the classic pages assessment",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/dev/transform/assessment-tool-classic-pages-requirements",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "Microsoft Learn: Run a classic pages assessment",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/dev/transform/assessment-tool-classic-pages-run",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "Microsoft 365 Assessment tool on GitHub (pnp/pnpassessment)",
+   "url": "https://github.com/pnp/pnpassessment",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "Microsoft 365 Assessment tool docs: Run a classic pages assessment",
+   "url": "https://pnp.github.io/pnpassessment/classic/assess.html",
+   "checked": "2026-11-24"
+  }
+ ],
+ "status": "published",
+ "kind": "tool",
+ "last_verified": "2026-11-24",
+ "created": "2026-11-24",
+ "updated": "2026-11-24",
+ "order": 395,
+ "hashtags": [
+  "SharePoint",
+  "Microsoft365",
+  "SysAdmin"
+ ]
+}

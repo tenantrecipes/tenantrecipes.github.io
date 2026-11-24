@@ -51,7 +51,7 @@
    "h": "Access and protection",
    "items": [
     "Backup systems use separate admin accounts with phishing-resistant MFA, not everyday domain accounts.",
-    "Deleting backups or shortening retention needs approval by a second person.",
+    "Deleting backups, shortening retention, or using a feature that permanently deletes content under retention or legal hold (for example priority cleanup in Microsoft Purview) needs approval by a second person, and the approval is recorded.",
     "Backup failures raise alerts that are followed up the same working day."
    ]
   },
@@ -91,14 +91,18 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-15",
+ "last_verified": "2026-11-24",
  "created": "2026-10-30",
- "updated": "2026-11-15",
+ "updated": "2026-11-24",
  "order": 70,
  "history": [
   {
    "date": "2026-11-15",
    "note": "Added a requirement on supported file systems for removable backup media and re-testing restores after OS hardening changes (KB5130741)."
+  },
+  {
+   "date": "2026-11-24",
+   "note": "Reviewed. Extended the two-person rule to cloud features that permanently delete content under retention or hold, such as Purview priority cleanup (GA from December 2026, MC1261587)."
   }
  ]
 }

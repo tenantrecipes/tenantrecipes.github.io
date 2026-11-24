@@ -32,7 +32,7 @@ It covers servers, databases, business applications, endpoints holding unique da
 ## 4. Access and protection
 
 - Backup systems use separate admin accounts with phishing-resistant MFA, not everyday domain accounts.
-- Deleting backups or shortening retention needs approval by a second person.
+- Deleting backups, shortening retention, or using a feature that permanently deletes content under retention or legal hold (for example priority cleanup in Microsoft Purview) needs approval by a second person, and the approval is recorded.
 - Backup failures raise alerts that are followed up the same working day.
 
 ## 5. Testing

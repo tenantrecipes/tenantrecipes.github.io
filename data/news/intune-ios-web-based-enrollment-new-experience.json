@@ -1,0 +1,39 @@
+{
+ "id": "intune-ios-web-based-enrollment-new-experience",
+ "status": "published",
+ "title": "Intune updates iOS web-based enrollment for BYOD in Jan 2027",
+ "date": "2026-11-24",
+ "category": "Intune",
+ "summary": "Microsoft's Intune team recommends web-based device enrollment for personal iPhones and iPads, and in MC1565959 (23 November 2026) says an updated user experience arrives in late January 2027 for tenants that already use it. Per the Intune Customer Success blog, users can start enrollment from Teams or Outlook (or an enrollment URL in Safari) and complete enrollment and registration with one authentication prompt, using just-in-time (JIT) registration through Microsoft Authenticator and the Microsoft Entra ID SSO extension. Web-based enrollment becomes the default when admins create new iOS/iPadOS enrollment profiles, or have none, in early 2027 (MC1476216); existing profiles are not changed and Company Portal is not being deprecated. The Message Center archive has so far only seen MC1565959 in education tenants.",
+ "why": "The flow changes on users' screens while your enrollment profiles stay the same, so the first sign will be helpdesk calls about screenshots that no longer match. JIT registration also only gives the one-prompt experience if Authenticator and the SSO extension policy are in place.",
+ "todo": [
+  "Do now: if personal iOS devices still enroll through Company Portal, pilot web-based device enrollment with one BYOD group.",
+  "Deploy Microsoft Authenticator as a required app for enrolling users and configure the Microsoft Entra ID SSO extension policy for JIT registration.",
+  "Review Conditional Access prompts on the enrollment path so users are not asked to sign in repeatedly.",
+  "Before late January 2027, update user guides and helpdesk scripts; no profile changes are needed."
+ ],
+ "effective_note": "Updated experience late January 2027 (MC1565959); web-based enrollment default for new iOS/iPadOS profiles in early 2027 (MC1476216).",
+ "primary": {
+  "title": "Intune Customer Success: Use web-based device enrollment for BYOD enrollment on iOS/iPadOS",
+  "url": "https://techcommunity.microsoft.com/t5/intune-customer-success/use-web-based-device-enrollment-for-byod-enrollment-on-ios/ba-p/4576027"
+ },
+ "related": [
+  {
+   "title": "Recipe: App protection for Copilot on mobile",
+   "url": "recipes/intune-app-protection-copilot.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Intune Customer Success blog (23 Nov 2026)",
+   "url": "https://techcommunity.microsoft.com/t5/intune-customer-success/use-web-based-device-enrollment-for-byod-enrollment-on-ios/ba-p/4576027",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "MC1565959 (Message Center archive, published 23 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1565959",
+   "checked": "2026-11-24"
+  }
+ ],
+ "last_verified": "2026-11-24"
+}

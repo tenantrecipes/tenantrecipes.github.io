@@ -1,0 +1,44 @@
+{
+ "id": "entra-byot-telephony-provider-ga",
+ "status": "published",
+ "title": "Entra: bring your own telephony provider (BYOT) is GA",
+ "date": "2026-11-24",
+ "category": "Entra",
+ "summary": "Microsoft updated MC1519855 on 23 November 2026: Bring Your Own Telephony Provider (BYOT) is now generally available in Microsoft Entra ID, next to Choose Your Own Telephony Provider (CYOT), which went GA on 30 October. Both connect Entra to a telephony provider through an integration in your own Azure subscription; Entra still generates and validates the one-time passcodes, and the provider only delivers the SMS or voice call. CYOT uses providers Microsoft has evaluated for coverage and fraud protection, bought in Microsoft Security Store, while BYOT is for an existing provider contract or a requirement CYOT cannot meet: you get the provider's integration package, open the account yourself and configure it through APIs. Microsoft-provided SMS and voice authentication starts retiring on 1 February 2027.",
+ "why": "BYOT removes the last 'our telecom provider is not on the list' excuse for missing the February deadline. It also moves more onto you: with either option your organisation owns the Azure resources and the provider account, and with BYOT the coverage and fraud checks Microsoft does for CYOT providers are yours to do. Microsoft still recommends passkeys and telephony only for users with a real business, regulatory or technical need.",
+ "todo": [
+  "Do now: list the users who will still need SMS or voice after 1 February 2027; everyone else goes to passkeys, not to a new provider.",
+  "Pick CYOT when a supported provider meets your coverage, contract and compliance needs; use BYOT only when it does not.",
+  "Check prerequisites: an Azure subscription with a valid payment method and Owner, or Contributor plus Role Based Access Control Administrator, on it (CYOT also needs a subscription eligible for Security Store purchases).",
+  "Start in evaluation mode, move traffic in stages and finish before 1 February 2027."
+ ],
+ "effective": "2027-02-01",
+ "effective_note": "BYOT GA per MC1519855 update of 23 Nov 2026; CYOT GA since 30 Oct 2026. Microsoft-provided SMS/voice starts retiring 1 Feb 2027.",
+ "primary": {
+  "title": "MC1519855: Microsoft Entra choose your own telephony provider now generally available (Message Center archive, updated 23 Nov 2026)",
+  "url": "https://mc.merill.net/message/MC1519855"
+ },
+ "related": [
+  {
+   "title": "News: Microsoft-provided SMS and voice MFA retire in 2027",
+   "url": "news/sms-voice-mfa-retirement-2027.html"
+  },
+  {
+   "title": "Recipe: Move users off SMS and voice MFA",
+   "url": "recipes/entra-sms-voice-retirement-passkeys.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1519855 (Message Center archive, updated 23 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1519855",
+   "checked": "2026-11-24"
+  },
+  {
+   "title": "Microsoft Learn: Choose your own telephony provider for SMS and voice authentication",
+   "url": "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-telephony-providers",
+   "checked": "2026-11-24"
+  }
+ ],
+ "last_verified": "2026-11-24"
+}

@@ -1,5 +1,50 @@
 [
  {
+  "date": "2026-11-24",
+  "kind": "site",
+  "type": "News",
+  "title": "Entra BYOT GA, SharePoint classic publishing block, Copilot memory",
+  "blurb": "Entra bring your own telephony provider GA; SharePoint blocks classic publishing sites from 1 March 2027; Intune Data Warehouse policy counts shift from 4 January; new iOS web-based enrollment flow; Purview archive and priority cleanup dates; dotted-line managers shelved; Copilot memory in Office apps (roadmap); Okta on the Inception vishing crew; Commission confirms EU Academy data leak.",
+  "url": "news/index.html",
+  "text": "Entra BYOT CYOT MC1519855, SharePoint classic publishing AllowClassicPublishingSiteCreation DenyAddAndCustomizePages MC1565964, Intune Data Warehouse policy collections MC1565960, iOS web-based device enrollment JIT registration MC1565959 MC1476216, Purview Data Lifecycle Management archive priority cleanup MC1325441 MC1472601 MC1261587, profile card dotted-line managers MC1478957, Copilot memory roadmap 580889 enhanced personalization, Okta O-UNC-053 INCEPTION ShinyHunters vishing, European Commission EU Academy data leak EDPS GDPR Article 34."
+ },
+ {
+  "date": "2026-11-24",
+  "kind": "site",
+  "type": "Security",
+  "title": "Drupal, Idunno.AntiCsrf and Optimizely KEV; Linux backlog",
+  "blurb": "Drupal core installer RCE CVE-2026-132165, Idunno.AntiCsrf ASP.NET deserialization CVE-2026-131914 (no fix) and Optimizely Web Experimentation CVE-2026-132224 (all KEV 24 Nov); Linux kernel CVE-2025-39964 and CVE-2025-39682 (KEV 18 Sep, backlog).",
+  "url": "security/index.html",
+  "text": "Drupal SA-CORE-2026-017 CVE-2026-132165 KEV; Idunno.AntiCsrf MNDT-2026-0048 CVE-2026-131914 KEV; Optimizely Web Experimentation CVE-2026-132224 KEV; Linux kernel AF_ALG kTLS CVE-2025-39964 CVE-2025-39682 KEV."
+ },
+ {
+  "date": "2026-11-24",
+  "kind": "site",
+  "type": "Tool",
+  "title": "Microsoft 365 Assessment tool",
+  "blurb": "PnP's open-source scanner for classic pages, InfoPath, Add-ins/ACS and Alerts: read-only app permissions, small scope first, Power BI report.",
+  "url": "tools/microsoft-365-assessment.html",
+  "text": "Tool page for the Microsoft 365 Assessment tool (pnp/pnpassessment, v1.17.0): classic pages module with Sites.Read.All, start/status/report commands, ahead of the SharePoint classic publishing block on 1 March 2027. Documentation verified; not lab-tested."
+ },
+ {
+  "date": "2026-11-24",
+  "kind": "site",
+  "type": "Recipe",
+  "title": "SMS/voice retirement recipe: CYOT and BYOT",
+  "blurb": "Telephony-provider step now covers BYOT (GA 23 Nov) next to CYOT, plus ownership/cost and CAPTCHA egress pitfalls.",
+  "url": "recipes/entra-sms-voice-retirement-passkeys.html",
+  "text": "Entra SMS voice retirement recipe updated with BYOT GA MC1519855 and Arkose CAPTCHA MC1551151 pitfalls."
+ },
+ {
+  "date": "2026-11-24",
+  "kind": "site",
+  "type": "Policy",
+  "title": "AI use and backup policies reviewed",
+  "blurb": "AI use: no confidential data in AI memory or custom instructions. Backup: two-person rule extended to Purview priority cleanup.",
+  "url": "policies/index.html",
+  "text": "AI Copilot use policy memory custom instructions; backup recovery policy priority cleanup second-person approval."
+ },
+ {
   "date": "2026-11-23",
   "kind": "site",
   "type": "News",
