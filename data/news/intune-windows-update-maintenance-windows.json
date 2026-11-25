@@ -1,0 +1,39 @@
+{
+ "id": "intune-windows-update-maintenance-windows",
+ "status": "published",
+ "title": "Intune adds maintenance windows for Windows updates",
+ "date": "2026-11-25",
+ "category": "Intune",
+ "summary": "Microsoft announced on 23 November 2026 that Windows update maintenance windows can now be configured in Intune (Devices > Manage devices > Maintenance windows), not only through Group Policy; a policy limits when automatic download, install and restart actions start for quality and feature updates, hotpatch, .NET, drivers and firmware. Windows can be one-time, daily, weekly or monthly (day 1–28 or week-based, such as the second Tuesday), 2–24 hours long in device-local time, and devices need Windows 11 24H2 with KB5077181 (build 26100.7840) or later. Actions started in a window can run past its end, and expedited updates, expired deadlines and grace periods, provisioning and minor-impact updates can still act outside it.",
+ "why": "Kiosks and production or medical devices finally get Configuration Manager-style windows in cloud-only management. The catch is interaction: a deadline you set elsewhere can still force a restart outside the window, and a powered-off device that keeps missing its window stays unpatched.",
+ "todo": [
+  "Use it only for userless and critical-use devices; regular users are better served by the normal update experience with deadlines.",
+  "Filter assignments to Windows 11 24H2 build 26100.7840 or later; older builds will not apply the setting.",
+  "Review deadlines, grace periods and expedited-update policies on the same devices before relying on the window.",
+  "Validate with update reports (install and restart times versus the window), not just policy deployment status."
+ ],
+ "effective_note": "Available in Intune per Windows IT Pro Blog (23 Nov 2026) and Microsoft Learn.",
+ "primary": {
+  "title": "Windows IT Pro Blog: Maintenance windows for cloud-managed systems",
+  "url": "https://techcommunity.microsoft.com/t5/windows-it-pro-blog/maintenance-windows-for-cloud-managed-systems/ba-p/4508203"
+ },
+ "related": [
+  {
+   "title": "Policy: Patch and vulnerability management",
+   "url": "policies/patch-management-policy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Windows IT Pro Blog: Maintenance windows for cloud-managed systems (23 Nov 2026)",
+   "url": "https://techcommunity.microsoft.com/t5/windows-it-pro-blog/maintenance-windows-for-cloud-managed-systems/ba-p/4508203",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "Microsoft Learn: Configure maintenance windows for Windows updates in Microsoft Intune",
+   "url": "https://learn.microsoft.com/en-us/intune/device-updates/maintenance-windows",
+   "checked": "2026-11-25"
+  }
+ ],
+ "last_verified": "2026-11-25"
+}

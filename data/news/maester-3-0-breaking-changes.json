@@ -1,0 +1,45 @@
+{
+ "id": "maester-3-0-breaking-changes",
+ "status": "published",
+ "title": "Maester 3.0 due 1 December: check your pipelines now",
+ "date": "2026-11-25",
+ "category": "M365",
+ "summary": "Maester co-creator Merill Fernando said on 25 November 2026 that Maester 3.0 is coming out on 1 December; the project's releases page still shows 3.0 as a preview. Per the official upgrade guide, 3.0 gives Maester its own test engine: built-in tests ship inside the module instead of being copied into a tests folder, PowerShell 7.4 or later is required (Windows PowerShell 5.1 is no longer supported), and Pester becomes optional (needed, 5.7.1 or later, only for Pester-format custom tests or scripts that call New-PesterConfiguration). Disabling built-in tests moves to maester-config.json, built-in test Block and Tag values in results change, and CI test history for built-in tests restarts because test names change. The guide says to remove old Maester versions before installing 3.x.",
+ "why": "Many tenants run Maester unattended in GitHub Actions or Azure DevOps. A pipeline that installs the latest version will pick up 3.0 and can break on 5.1 runners, missing Pester or result parsers that read Tag/Block.",
+ "todo": [
+  "Do now: pin the Maester version in automation until you have tested 3.0.",
+  "Move runners to PowerShell 7.4 or later and install Pester 5.7.1+ yourself if you keep Pester-format custom tests.",
+  "Run your usual command with -DryRun -PassThru on the preview and compare results with 2.x.",
+  "Update dashboards or parsers that rely on Tag or Block of built-in tests."
+ ],
+ "effective": "2026-12-01",
+ "effective_note": "Release date 1 Dec 2026 per the maintainer's post on X (announced, not yet released). Changes per maester.dev upgrade guide (3.0 preview).",
+ "primary": {
+  "title": "Maester docs: Upgrading from 2.x",
+  "url": "https://maester.dev/docs/upgrading-from-2x"
+ },
+ "related": [
+  {
+   "title": "Tool: Maester",
+   "url": "tools/maester.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Maester docs: Upgrading from 2.x",
+   "url": "https://maester.dev/docs/upgrading-from-2x",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "Merill Fernando on X (25 Nov 2026): Maester 3.0 coming out on 1 Dec",
+   "url": "https://x.com/merill/status/2125675994254278909",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "GitHub: maester365/maester releases",
+   "url": "https://github.com/maester365/maester/releases",
+   "checked": "2026-11-25"
+  }
+ ],
+ "last_verified": "2026-11-25"
+}

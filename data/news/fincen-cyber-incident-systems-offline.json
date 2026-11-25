@@ -1,0 +1,38 @@
+{
+ "id": "fincen-cyber-incident-systems-offline",
+ "status": "published",
+ "title": "FinCEN takes systems offline after unauthorized access",
+ "date": "2026-11-25",
+ "category": "Security incidents",
+ "summary": "The US Treasury's Financial Crimes Enforcement Network (FinCEN) disclosed on 24 November 2026 that it is investigating a cybersecurity incident with unauthorized access to a limited subset of its systems and has taken some systems offline as a precaution; the BSA E-Filing website stays up but some services may be unavailable. Order FIN-2026-R002 gives filers that used Secure Data Transfer Mode (SDTM) as of 18 November, and beneficial ownership and FinCEN ID filers, until 30 December 2026 for submissions due 18 November to 29 December. FinCEN has not said what was accessed or who was responsible; press reports citing FinCEN say there is no evidence so far of access to BSA or beneficial ownership data, but the investigation is ongoing.",
+ "why": "For security teams at US-regulated financial institutions this is a supplier incident: your automated SDTM filing channel is affected and the counterpart system was breached. Expect phishing that uses the incident as a lure.",
+ "todo": [
+  "If you file through SDTM, confirm with compliance which filings fall in the relief window and that urgent suspicious activity goes through the Financial Institutions Hotline.",
+  "Do not change SDTM credentials or endpoints based on emails; verify any FinCEN instruction on fincen.gov.",
+  "Watch for FinCEN-themed phishing and alert finance and compliance staff."
+ ],
+ "effective": "2026-12-30",
+ "effective_note": "FinCEN Order FIN-2026-R002 issued 24 Nov 2026. Scope of the breach not disclosed.",
+ "primary": {
+  "title": "FinCEN: Temporary, limited exceptive relief for certain BSA and CTA submissions (24 Nov 2026)",
+  "url": "https://www.fincen.gov/news/news-releases/temporary-limited-exceptive-relief-certain-bank-secrecy-act-corporate-transparency-act-submissions"
+ },
+ "sources": [
+  {
+   "title": "FinCEN news release (24 Nov 2026)",
+   "url": "https://www.fincen.gov/news/news-releases/temporary-limited-exceptive-relief-certain-bank-secrecy-act-corporate-transparency-act-submissions",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "FinCEN Order FIN-2026-R002",
+   "url": "https://www.fincen.gov/sites/default/files/100/ORDER-FIN-2026-R002.pdf",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "The Register: US Treasury financial crimes unit becomes latest fed breach victim (25 Nov 2026)",
+   "url": "https://www.theregister.com/security/2026/11/25/us-treasury-financial-crimes-unit-becomes-latest-fed-breach-victim/5312165",
+   "checked": "2026-11-25"
+  }
+ ],
+ "last_verified": "2026-11-25"
+}

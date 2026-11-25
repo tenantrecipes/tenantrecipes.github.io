@@ -33,5 +33,11 @@
    "checked": "2026-11-16"
   }
  ],
- "last_verified": "2026-11-16"
+ "last_verified": "2026-11-16",
+ "related": [
+  {
+   "title": "News: Microsoft's ARTEX breakdown with Defender detections (25 Nov)",
+   "url": "news/microsoft-threat-intel-artex-defender-guidance.html"
+  }
+ ]
 }

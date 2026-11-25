@@ -1,0 +1,103 @@
+{
+ "status": "published",
+ "type": "vulnerability",
+ "last_verified": "2026-11-25",
+ "verified_by": "Pascal",
+ "created": "2026-11-25",
+ "updated": "2026-11-25",
+ "exploited": true,
+ "kev_added": "2026-11-25",
+ "id": "mitel-micollab-awv-misa-2026-0012-kev",
+ "order": 142,
+ "area": "services",
+ "category": "Network",
+ "title": "Mitel MiCollab AWV: five flaws exploited (MISA-2026-0012, KEV)",
+ "summary": "CISA added five Mitel MiCollab CVEs to KEV on 25 November 2026, all in the Audio, Web and Video Conferencing (AWV) component of MiCollab 10.3 (10.3.0.18) and earlier, published in Mitel advisory MISA-2026-0012 (first issued 16 November, CVE numbers added 24 November). Two are critical: unauthenticated blind OS command injection (CVE-2026-133323, Mitel CVSS 10.0) and XML injection leading to command execution using pre-staged content (CVE-2026-133303, Mitel 9.0, NVD 9.8). The other three are unauthenticated file upload (CVE-2026-133275), authentication bypass (CVE-2026-133324) and weak authentication exposing information (CVE-2026-133311). Mitel warns that chaining them amplifies impact. KEV due dates are 28 November (four CVEs) and 9 December (CVE-2026-133311).",
+ "vendor": "Mitel",
+ "product": "MiCollab (AWV component)",
+ "cves": [
+  {
+   "id": "CVE-2026-133323",
+   "cvss": 10.0,
+   "cvss_version": "3.1",
+   "cvss_source": "Mitel",
+   "severity": "Critical",
+   "note": "Unauthenticated blind OS command injection (CWE-78). NVD 9.8."
+  },
+  {
+   "id": "CVE-2026-133303",
+   "cvss": 9.0,
+   "cvss_version": "3.1",
+   "cvss_source": "Mitel",
+   "severity": "Critical",
+   "note": "XML injection to command execution with pre-staged content (CWE-91). NVD 9.8."
+  },
+  {
+   "id": "CVE-2026-133311",
+   "cvss": 5.9,
+   "cvss_version": "3.1",
+   "cvss_source": "Mitel",
+   "severity": "Medium",
+   "note": "Weak authentication, information disclosure (CWE-1390). KEV due 9 Dec."
+  },
+  {
+   "id": "CVE-2026-133275",
+   "cvss": 5.3,
+   "cvss_version": "3.1",
+   "cvss_source": "Mitel",
+   "severity": "Medium",
+   "note": "Unauthenticated arbitrary file upload (CWE-434)."
+  },
+  {
+   "id": "CVE-2026-133324",
+   "cvss": 5.3,
+   "cvss_version": "3.1",
+   "cvss_source": "Mitel",
+   "severity": "Medium",
+   "note": "Authentication bypass (CWE-636)."
+  }
+ ],
+ "severity": "Critical",
+ "advisory_date": "2026-11-16",
+ "advisory_id": "MISA-2026-0012",
+ "impact": "Internet-exposed MiCollab AWV (conferencing) lets an unauthenticated attacker run commands on the collaboration server; MiCollab often sits in a DMZ with links to the phone system and directory.",
+ "action": "Apply Mitel's patch for MiCollab 10.3 (10.3.0.18) per KB000129195, or upgrade to a later release. If you cannot patch now, block external access to the AWV component.",
+ "affected": [
+  "MiCollab 10.3 (10.3.0.18) and earlier, per Mitel"
+ ],
+ "fixed": [
+  "MiCollab 10.3 (10.3.0.18) with Mitel's security patch (KB000129195), or a later release"
+ ],
+ "steps": [
+  "Find every MiCollab server, including partner-managed ones, and check the version and patch status.",
+  "Patch, or restrict the AWV component to internal or VPN access until patched.",
+  "Because these are exploited, check for unexpected files in web-accessible paths, new accounts and outbound connections before closing the ticket; rotate service credentials stored on the server.",
+  "Ask your Mitel partner for KB000129195 if you have no portal access."
+ ],
+ "pitfalls": [
+  "Products past Mitel End of Support are not assessed in the advisory; treat them as affected and plan replacement.",
+  "MISA-2026-0012 first appeared on 16 November without CVE numbers, so scanners keyed on CVE IDs may have missed it."
+ ],
+ "sources": [
+  {
+   "title": "Mitel MISA-2026-0012: MiCollab Multiple Vulnerabilities",
+   "url": "https://www.mitel.com/support/security-advisories/mitel-product-security-advisory-misa-2026-0012",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "NIST NVD: CVE-2026-133323",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-133323",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "NIST NVD: CVE-2026-133303",
+   "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-133303",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "CISA Known Exploited Vulnerabilities Catalog",
+   "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+   "checked": "2026-11-25"
+  }
+ ]
+}

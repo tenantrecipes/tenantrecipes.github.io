@@ -1,0 +1,44 @@
+{
+ "id": "ntlm-signing-known-issue-proxies-sso",
+ "status": "published",
+ "title": "NTLM signing phase 1 breaks some proxies and SSO products",
+ "date": "2026-11-25",
+ "category": "Windows",
+ "summary": "Microsoft added a known issue to KB5135557: after the 10 November 2026 Windows updates, which make clients offer real NTLM message signing by default (CVE-2026-118737), authentication through some third-party authentication proxies, single sign-on products and application packaging tools can fail. The cause is products that set NTLMSSP_NEGOTIATE_TARGET_INFO in the CHALLENGE_MESSAGE but send an empty or incomplete TargetInfo; with NTLMv2 signing, Windows requires the MsvAvNbComputerName and MsvAvNbDomainName AV pairs and rejects the logon if either is missing. The temporary workaround is ClientAllowUnsignedNtlm = 1 (REG_DWORD, HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\MSV1_0) on affected clients only; Microsoft says it might remove these registry keys later and recommends a vendor fix or Kerberos.",
+ "why": "This is the first real breakage from the NTLM signing change, and it is the vendor's protocol bug, not Windows. The workaround switches signing off on the client, which reopens relay exposure and will stop working in phase 2 (May 2027), when servers require signing by default.",
+ "todo": [
+  "Do now: if users report NTLM failures through a proxy or SSO product since the November update, confirm with a network trace that the CHALLENGE_MESSAGE has an empty TargetInfo before changing anything.",
+  "Scope ClientAllowUnsignedNtlm = 1 to the affected clients only, with an owner and end date; never set it fleet-wide.",
+  "Open a case with the product vendor for a fixed release, or move the flow to Kerberos.",
+  "Keep collecting Event ID 4023 on servers to find unsigned clients before phase 2."
+ ],
+ "effective": "2027-05-01",
+ "effective_note": "Known issue in KB5135557 (updates from 10 Nov 2026). Phase 2 (servers require signing) is scheduled for May 2027; the exact day is not stated.",
+ "primary": {
+  "title": "KB5135557: NTLM signing security improvements in Windows",
+  "url": "https://support.microsoft.com/en-us/servicing/os/windows/docs/2026/11/kb5135557-ntlm-signing-security-improvements"
+ },
+ "related": [
+  {
+   "title": "News: Windows clients now offer NTLM signing by default",
+   "url": "news/windows-ntlm-signing-default-phase1.html"
+  },
+  {
+   "title": "Recipe: find clients that will fail NTLM signing enforcement",
+   "url": "recipes/ntlm-signing-phase2-readiness.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Support: KB5135557 NTLM signing security improvements in Windows",
+   "url": "https://support.microsoft.com/en-us/servicing/os/windows/docs/2026/11/kb5135557-ntlm-signing-security-improvements",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "The Register: Microsoft's NTLM security changes trip up third-party logins (25 Nov 2026)",
+   "url": "https://www.theregister.com/security/2026/11/25/microsofts-ntlm-security-changes-trip-up-third-party-logins/5312085",
+   "checked": "2026-11-25"
+  }
+ ],
+ "last_verified": "2026-11-25"
+}

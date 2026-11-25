@@ -1,0 +1,34 @@
+{
+ "id": "microsoft-threat-intel-artex-defender-guidance",
+ "status": "published",
+ "title": "Microsoft breaks down ARTEX: detections and hardening guidance",
+ "date": "2026-11-25",
+ "category": "Defender",
+ "summary": "Microsoft Threat Intelligence published a detailed report on 25 November 2026 on ARTEX, the publicly available AI-driven penetration testing framework released in July 2026, which state-sponsored and financially motivated actors (including Storm-0940, Storm-3358, Onyx Sleet, Pearl Sleet, Crystal Typhoon and Salt Typhoon) use for reconnaissance, credential attacks, secret hunting in public repositories and web application exploitation. ARTEX adds no new techniques but chains common pentest tools at machine speed; in several Storm-0940 intrusions privileged access came less than three hours after initial targeting. Microsoft calls the behavioural pattern (bursts of varied requests and rapid retries) the most durable signal, because operators rotate IPs and user agents, and lists Defender, Entra ID Protection, Defender for Cloud and Sentinel detections plus hunting queries.",
+ "why": "Following the FBI FLASH from 13 November, this is the vendor-side playbook: concrete detections to check in your tenant and a clear message that static IOC blocking will not hold. The time from exposure to compromise is now hours, so controls that need a human to click before containment are too slow for this class of attack.",
+ "todo": [
+  "Do now: turn on automatic attack disruption in Defender XDR and confirm Defender for Identity sensors cover every domain controller.",
+  "Cut internet-facing exposure: inventory admin portals, management ports and web apps; use just-in-time access for RDP/SSH.",
+  "Hunt for web server processes (w3wp, php-fpm, httpd, Java app servers) spawning shells, and for secrets committed to repositories; rotate anything found.",
+  "Treat user-agent IOCs from the report as short-lived; build detections on request volume and retry patterns instead."
+ ],
+ "effective_note": "Microsoft Threat Intelligence report, 25 Nov 2026. Actor attributions are Microsoft's.",
+ "primary": {
+  "title": "Microsoft Security Blog: What defenders need to know about ARTEX, the agentic AI framework threat actors abuse",
+  "url": "https://www.microsoft.com/en-us/security/blog/2026/11/25/what-defenders-need-to-know-artex-agentic-ai-framework-threat-actors-abuse/"
+ },
+ "related": [
+  {
+   "title": "News: FBI FLASH on ARTEX",
+   "url": "news/fbi-flash-artex-agentic-attack-framework.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Security Blog: What defenders need to know about ARTEX (25 Nov 2026)",
+   "url": "https://www.microsoft.com/en-us/security/blog/2026/11/25/what-defenders-need-to-know-artex-agentic-ai-framework-threat-actors-abuse/",
+   "checked": "2026-11-25"
+  }
+ ],
+ "last_verified": "2026-11-25"
+}

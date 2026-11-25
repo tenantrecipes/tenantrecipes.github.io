@@ -1,0 +1,32 @@
+{
+ "id": "office-blank-dialog-fixed-version-2611",
+ "status": "published",
+ "title": "Office blank-dialog bug fixed in Version 2611 build 20625.20142",
+ "date": "2026-11-25",
+ "category": "M365",
+ "summary": "Microsoft has marked as fixed a known issue in which Word, Excel, Outlook, PowerPoint, Access and OneNote for Microsoft 365 could show an empty dialog with no text or buttons at launch, leaving some users unable to work. The fix is in Version 2611 (Build 16.0.20625.20142). Because affected users may not be able to open an app to use Update Now, Microsoft's support article gives a forced update: close all Office apps and, from an elevated command prompt, run officec2rclient.exe /update user updatetoversion=16.0.20625.20142 from the Click-to-Run folder. Microsoft has not said which earlier builds were affected or what caused it.",
+ "why": "Staged devices and new hires are hit first, because the dialog appears before anyone can use the app. Microsoft only names Version 2611 build 16.0.20625.20142 as fixed, so devices on channels that have not received that build yet may stay affected, and the manual forced update needs local admin rights, which standard users should not have.",
+ "todo": [
+  "Check which update channel and build your affected devices run; the fix is only in Version 2611 build 16.0.20625.20142 or later.",
+  "For blocked users, push the forced update through Intune (remediation script running as SYSTEM) rather than handing out admin rights.",
+  "Update reference images and staged devices before handing them out."
+ ],
+ "effective_note": "Status Fixed per Microsoft Support article (updated 23 Nov 2026).",
+ "primary": {
+  "title": "Microsoft Support: A blank dialog window appears when you open an Office application",
+  "url": "https://support.microsoft.com/en-us/support/known-issues/blank-dialog-appears-open-office-app"
+ },
+ "sources": [
+  {
+   "title": "Microsoft Support: A blank dialog window appears when you open an Office application",
+   "url": "https://support.microsoft.com/en-us/support/known-issues/blank-dialog-appears-open-office-app",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "The Register: Microsoft fixes Office dialog that had nothing to say (25 Nov 2026)",
+   "url": "https://www.theregister.com/software/2026/11/25/microsoft-fixes-office-dialog-that-had-nothing-to-say-and-wouldnt-go-away/5312057",
+   "checked": "2026-11-25"
+  }
+ ],
+ "last_verified": "2026-11-25"
+}

@@ -37,7 +37,7 @@ It covers any event that threatens the confidentiality, integrity or availabilit
 
 - Prepare: keep contact lists, playbooks, logging and out-of-band communication ready, and test them. When a security vendor retires or renames a detection, alert or log source, the detection owner updates the dependent SIEM rules, automations and playbooks before the change takes effect and confirms that a replacement detection fires. Playbooks include a prolonged outage of a core cloud service (for example email unavailable for a full day) with alternative communication channels, and the service owner keeps the provider's post-incident reports for the incident record.
 - Detect and analyse: confirm the incident, set a severity level and record a timeline from the first report.
-- Contain: limit spread, for example by isolating devices, revoking sessions and resetting credentials.
+- Contain: limit spread, for example by isolating devices, revoking sessions and resetting credentials. Because automated intrusions can move from first access to privileged access within hours, {{IR_LEAD}} decides in advance which containment actions (for example automatic device isolation or account disablement by the security platform) may run without waiting for human approval, tests them on non-critical systems, and lists the systems where they are switched off.
 - Eradicate and recover: remove the cause, restore from clean backups, monitor closely and return to normal operation.
 - Learn: within two weeks of closing a significant incident, hold a blameless review and track every improvement to completion.
 

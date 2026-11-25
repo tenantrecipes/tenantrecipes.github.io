@@ -36,6 +36,7 @@ The inventory records bundled components that carry their own security fixes, su
 - Medium and low: within {{PATCH_DAYS_OTHER}} days, or in the normal update cycle.
 - Monthly vendor updates, such as Microsoft's Patch Tuesday, are deployed through test, pilot and broad rings.
 - Temporary workarounds that switch off a security check (for example a registry value that disables a new domain controller verification) need an owner, an end date and a ticket, and are reviewed at every patch cycle until removed.
+- Devices that may only update inside a maintenance window (for example kiosks, medical or production equipment) have a configured window long enough for the largest expected update and restart. The owner knows which settings can still force updates outside the window (for example expired installation deadlines or expedited updates) and uses them deliberately as a safety net, so a device that is switched off or keeps missing its window is still brought up to date.
 
 ## 5. When you cannot patch
 

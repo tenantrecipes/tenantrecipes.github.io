@@ -1,0 +1,51 @@
+{
+ "id": "agent-365-business-analytics-cost-forecast",
+ "status": "published",
+ "title": "Agent 365 Business Analytics: AI cost forecasts (Frontier)",
+ "date": "2026-11-25",
+ "category": "Copilot/AI",
+ "ignite": true,
+ "ignite_area": "copilot",
+ "hashtags": [
+  "MSIgnite",
+  "Copilot",
+  "Microsoft365",
+  "AI"
+ ],
+ "summary": "Agent 365 Business Analytics, a web app that puts AI spend, usage and value in one place for business leaders, started rolling out in Frontier public preview on 17 November 2026 (MC1557727), first to Frontier tenants with 50 or more Copilot licences and to all Frontier tenants by 7 December. Its Cost & forecast page shows usage-based AI cost in currency and Copilot Credits by service, model, group and job function, projects month-end cost (base and growth forecasts) against budget targets, and models what-ifs such as a per-person spend cap or a cheaper model mix; Copilot user licence costs are not included. Spend data from non-Microsoft AI platforms needs Agent 365 and/or Microsoft 365 E7, and Microsoft says preview capabilities may change.",
+ "why": "Usage-based billing (Cowork, agents, GitHub Copilot) makes AI cost an operational metric, and this puts it in front of managers, not just admins. Access and minimum group sizes decide who sees whose spend, so treat setting it up as a privacy decision.",
+ "todo": [
+  "Wait unless you are in Frontier; if you are, review who gets access to the app before rollout reaches your tenant (by 7 December).",
+  "Set spending policies and budget targets in the Microsoft 365 admin center first, so forecasts have something to compare against.",
+  "Check the minimum group size and HR attributes used, together with your works council or privacy officer where required."
+ ],
+ "effective": "2026-12-07",
+ "effective_note": "Frontier public preview, rollout from 17 Nov 2026 to all Frontier tenants by 7 Dec 2026 (MC1557727). Preview — announced, not verified in a tenant.",
+ "primary": {
+  "title": "MC1557727: Agent 365 Business Analytics app experience (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1557727"
+ },
+ "related": [
+  {
+   "title": "News: Copilot models past usage limits with Copilot Credits",
+   "url": "news/copilot-models-past-usage-limits-copilot-credits.html"
+  },
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1557727 (Message Center archive, published 17 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1557727",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "Microsoft Learn: Agent 365 Business Analytics Cost & forecast page (Frontier)",
+   "url": "https://learn.microsoft.com/en-us/a365-business-analytics/cost-forecast",
+   "checked": "2026-11-25"
+  }
+ ],
+ "last_verified": "2026-11-25"
+}

@@ -1,0 +1,32 @@
+{
+ "id": "teams-external-bot-detection-reports-roadmap",
+ "status": "published",
+ "title": "Teams admin center to report external bots in meetings (roadmap)",
+ "date": "2026-11-25",
+ "category": "M365",
+ "summary": "Microsoft 365 Roadmap item 582050, added on 25 November 2026, says the Teams admin center will let admins track detection and meeting-access activity of external bots in meetings and events hosted in their tenant. The roadmap lists general availability in January 2027 for Worldwide and GCC, status In development. No Message Center post or documentation was available when we checked, so scope, data fields and licensing are not known.",
+ "why": "Third-party AI note-takers joining meetings are a data-handling problem: they record and transcribe outside your Purview controls. Today you can restrict them, but reporting on which bots actually got in has been missing.",
+ "todo": [
+  "Wait: nothing to configure yet; watch for a Message Center post.",
+  "Meanwhile, review your meeting policies for external and anonymous participants and lobby settings, which decide whether a bot gets in at all."
+ ],
+ "effective_note": "Roadmap 582050: GA January 2027, In development. Announced, not verified.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 582050: External bot detection and activity reports in Admin Center",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=582050"
+ },
+ "related": [
+  {
+   "title": "News: Teams allowed external note-taker bots",
+   "url": "news/teams-allowed-external-notetaker-bots.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 582050",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=582050",
+   "checked": "2026-11-25"
+  }
+ ],
+ "last_verified": "2026-11-25"
+}

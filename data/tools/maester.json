@@ -19,7 +19,8 @@
  "pitfalls": [
   "Some test sets need extra PowerShell modules and roles, for example Exchange Online checks.",
   "A passed test only means that setting matches the test; it is not a full security review.",
-  "Keep the tests updated; new checks are added often."
+  "Keep the tests updated; new checks are added often.",
+  "Maester 3.0 (preview; maintainer says release on 1 December 2026) needs PowerShell 7.4+, drops Windows PowerShell 5.1, makes Pester optional and changes Tag/Block of built-in tests in results. Pin the version in CI and test with -DryRun -PassThru before upgrading."
  ],
  "sources": [
   {
@@ -31,12 +32,17 @@
    "title": "Maester on GitHub",
    "url": "https://github.com/maester365/maester",
    "checked": "2026-10-30"
+  },
+  {
+   "title": "Maester docs: Upgrading from 2.x",
+   "url": "https://maester.dev/docs/upgrading-from-2x",
+   "checked": "2026-11-25"
   }
  ],
  "status": "published",
  "kind": "tool",
- "last_verified": "2026-10-30",
+ "last_verified": "2026-11-25",
  "created": "2026-10-30",
- "updated": "2026-10-30",
+ "updated": "2026-11-25",
  "order": 70
 }

@@ -1,0 +1,43 @@
+{
+ "id": "m365-backup-recovery-window-10-years",
+ "status": "published",
+ "title": "Microsoft 365 Backup: OneDrive and SharePoint keep up to 10 years",
+ "date": "2026-11-25",
+ "category": "M365",
+ "summary": "Since 31 October 2026, Microsoft 365 Backup policies for SharePoint and OneDrive accept recovery windows of 3 months, 6 months or any whole number of years from 1 to 10, while Exchange stays at a maximum of 2 years and the one-year default for existing policies is unchanged. Full site and account restores keep 10-minute recovery points for the last two weeks and weekly points after that through the configured window, but granular file and folder restore still only reaches the most recent 14 days. A longer window does not create older recovery points or bring back expired ones, and shortening a window starts a 30-day grace period after which older points are deleted.",
+ "why": "Ten years of weekly site snapshots is a ransomware and insider-sabotage safety net, but it is billed per GB of protected content and is not a records or retention solution. The asymmetry matters: raising the window is immediate, lowering it is destructive after 30 days.",
+ "todo": [
+  "Decide per policy whether you need more than one year; record the reason (regulation, contract, risk).",
+  "Budget the extra storage before you raise the window; deleted data stays billable for longer.",
+  "Put window reductions under a second-person approval, since recovery points are deleted after the 30-day grace period.",
+  "Keep Purview retention for compliance; use Backup for recovery."
+ ],
+ "effective_note": "Live since 31 Oct 2026 per Microsoft Learn (What's new in Microsoft 365 Backup).",
+ "primary": {
+  "title": "Microsoft Learn: What's new in Microsoft 365 Backup",
+  "url": "https://learn.microsoft.com/en-us/microsoft-365/backup/backup-whats-new"
+ },
+ "related": [
+  {
+   "title": "News: Microsoft 365 Backup full-workload GA slips to 2027",
+   "url": "news/m365-backup-full-workload-ga-slips-2027.html"
+  },
+  {
+   "title": "Policy: Backup and recovery",
+   "url": "policies/backup-recovery-policy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Learn: What's new in Microsoft 365 Backup",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/backup/backup-whats-new",
+   "checked": "2026-11-25"
+  },
+  {
+   "title": "Microsoft Learn: Restore data in Microsoft 365 Backup",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/backup/backup-restore-data",
+   "checked": "2026-11-25"
+  }
+ ],
+ "last_verified": "2026-11-25"
+}

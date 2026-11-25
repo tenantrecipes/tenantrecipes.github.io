@@ -54,7 +54,8 @@
     "High: within {{PATCH_DAYS_HIGH}} days.",
     "Medium and low: within {{PATCH_DAYS_OTHER}} days, or in the normal update cycle.",
     "Monthly vendor updates, such as Microsoft's Patch Tuesday, are deployed through test, pilot and broad rings.",
-    "Temporary workarounds that switch off a security check (for example a registry value that disables a new domain controller verification) need an owner, an end date and a ticket, and are reviewed at every patch cycle until removed."
+    "Temporary workarounds that switch off a security check (for example a registry value that disables a new domain controller verification) need an owner, an end date and a ticket, and are reviewed at every patch cycle until removed.",
+    "Devices that may only update inside a maintenance window (for example kiosks, medical or production equipment) have a configured window long enough for the largest expected update and restart. The owner knows which settings can still force updates outside the window (for example expired installation deadlines or expedited updates) and uses them deliberately as a safety net, so a device that is switched off or keeps missing its window is still brought up to date."
    ]
   },
   {
@@ -97,9 +98,9 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-19",
+ "last_verified": "2026-11-25",
  "created": "2026-10-30",
- "updated": "2026-11-19",
+ "updated": "2026-11-25",
  "order": 90,
  "verified_by": "Pascal",
  "history": [
@@ -126,6 +127,10 @@
   {
    "date": "2026-11-19",
    "note": "Inventory now covers bundled components (web servers, runtimes, libraries in vendor products and images); EoL components with no upstream fix get a dated replacement plan (prompted by NGINX 1.31.9/1.30.7, PHP 19 Nov releases and Apache Axis 1.x CVE-2026-90436)."
+  },
+  {
+   "date": "2026-11-25",
+   "note": "Added maintenance-window rule for userless and critical-use devices (prompted by Windows maintenance windows in Intune, Windows IT Pro Blog 23 Nov 2026)."
   }
  ]
 }

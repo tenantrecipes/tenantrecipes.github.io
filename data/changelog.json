@@ -1,5 +1,41 @@
 [
  {
+  "date": "2026-11-25",
+  "kind": "site",
+  "type": "News",
+  "title": "ARTEX breakdown, NTLM known issue, 10-year M365 Backup",
+  "blurb": "Microsoft's ARTEX report with Defender detections; NTLM signing breaks some proxies and SSO (KB5135557); Microsoft 365 Backup keeps OneDrive/SharePoint up to 10 years; Office blank dialog fixed; Intune maintenance windows; Agent 365 Business Analytics cost forecasts (Frontier, Ignite); Teams external bot reports (roadmap); FinCEN incident; Maester 3.0 breaking changes.",
+  "url": "news/index.html",
+  "text": "ARTEX Microsoft Threat Intelligence Storm-0940 automatic attack disruption; KB5135557 ClientAllowUnsignedNtlm TargetInfo CVE-2026-118737; Microsoft 365 Backup recovery window 10 years; Office Version 2611 16.0.20625.20142 blank dialog; Intune maintenance windows KB5077181; MC1557727 Agent 365 Business Analytics; roadmap 582050 Teams external bots; FinCEN FIN-2026-R002 SDTM; Maester 3.0 PowerShell 7.4 Pester."
+ },
+ {
+  "date": "2026-11-25",
+  "kind": "site",
+  "type": "Security",
+  "title": "Mitel MiCollab, Juniper SSR, Xen Orchestra, Danfoss KEV",
+  "blurb": "Five Mitel MiCollab AWV flaws (MISA-2026-0012), Juniper Session Smart Conductor CVE-2026-103406, Xen Orchestra CVE-2026-133469 and three Danfoss AK-SM 800A flaws, all added to KEV on 25 Nov; plus unpatched Danfoss CVE-2026-129713.",
+  "url": "security/index.html",
+  "text": "Mitel MiCollab CVE-2026-133323 CVE-2026-133303 CVE-2026-133311 CVE-2026-133275 CVE-2026-133324 KEV; Juniper JSA112183 CVE-2026-103406 KEV; Vates VSA-2026-062 CVE-2026-133469 KEV; Danfoss CVE-2023-25914 CVE-2023-25915 CVE-2025-41450 KEV, CVE-2026-129713 ICSA-26-328-03."
+ },
+ {
+  "date": "2026-11-25",
+  "kind": "site",
+  "type": "Tool",
+  "title": "Maester: 3.0 upgrade pitfall",
+  "blurb": "Tool page now warns about Maester 3.0 changes (PowerShell 7.4+, optional Pester, changed result tags) and pinning in CI.",
+  "url": "tools/maester.html",
+  "text": "Maester 3.0 upgrade pitfall, upgrading from 2.x."
+ },
+ {
+  "date": "2026-11-25",
+  "kind": "site",
+  "type": "Policy",
+  "title": "Incident response and patch policies reviewed",
+  "blurb": "Incident response: pre-approved automatic containment for machine-speed intrusions. Patch management: maintenance-window rule for kiosks and critical-use devices.",
+  "url": "policies/index.html",
+  "text": "Incident response policy automatic containment ARTEX; patch management policy maintenance windows deadlines."
+ },
+ {
   "date": "2026-11-24",
   "kind": "site",
   "type": "News",
