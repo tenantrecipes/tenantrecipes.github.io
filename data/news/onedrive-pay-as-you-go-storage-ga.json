@@ -1,0 +1,38 @@
+{
+ "id": "onedrive-pay-as-you-go-storage-ga",
+ "status": "published",
+ "title": "OneDrive pay-as-you-go storage reaches GA (rollout to Dec)",
+ "date": "2026-11-26",
+ "category": "M365",
+ "hashtags": [
+  "OneDrive",
+  "Microsoft365",
+  "SysAdmin"
+ ],
+ "summary": "Microsoft 365 OneDrive Storage, a pay-as-you-go meter that lets selected OneDrive accounts grow beyond their licensed quota, is rolling out to general availability for commercial tenants from early November to early December 2026 (MC1477185; roadmap 562352 'Rolling out'). Only usage above the licensed quota is billed, through a pay-as-you-go billing policy that needs an Azure subscription and resource group; the per-account maximum stays 25,600 GB. Government clouds are excluded for now, and if you disconnect billing while accounts are over quota, quota enforcement resumes.",
+ "why": "It replaces 'buy Extra Storage for everyone' with per-account growth, but it is open-ended spend tied to an Azure subscription. Without budgets, a few large OneDrives can become a surprise bill.",
+ "todo": [
+  "Decide whether you want it at all; if not, no action is needed.",
+  "If you enable it, set an Azure budget alert on the billing policy and raise limits only for named accounts.",
+  "Plan for disconnect: quota enforcement resumes for accounts that are over their licensed quota, so reduce usage first."
+ ],
+ "effective": null,
+ "effective_note": "GA rollout early Nov to early Dec 2026 per MC1477185 (updated 6 Oct 2026). Not for GCC/education/21Vianet at this time.",
+ "primary": {
+  "title": "MC1477185: Microsoft OneDrive new pay-as-you-go storage billing option (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1477185"
+ },
+ "sources": [
+  {
+   "title": "MC1477185 (Message Center archive)",
+   "url": "https://mc.merill.net/message/MC1477185",
+   "checked": "2026-11-26"
+  },
+  {
+   "title": "Microsoft Learn: Buy more OneDrive and SharePoint storage capacity",
+   "url": "https://learn.microsoft.com/en-us/microsoft-365/commerce/add-storage-space",
+   "checked": "2026-11-26"
+  }
+ ],
+ "last_verified": "2026-11-26"
+}

@@ -1,0 +1,34 @@
+{
+ "id": "copilot-memory-researcher-cancelled",
+ "status": "published",
+ "title": "Copilot memory in Researcher removed from the roadmap",
+ "date": "2026-11-26",
+ "category": "Copilot/AI",
+ "summary": "Microsoft 365 Roadmap item 562996, Copilot memory in Researcher, was set to 'Cancelled' on 26 November 2026 with a note that it 'is no longer accurate and will be removed from the roadmap'. The item had promised that Researcher would bring forward context from a user's past interactions. Microsoft gives no reason and no replacement date; the separate item for memory in Word, Excel and PowerPoint (580889) is unaffected by this change.",
+ "why": "If your AI governance review or user guidance assumed Researcher would use memory, update it. It also shows that roadmap AI features can disappear without a Message Center post.",
+ "todo": [
+  "Remove Researcher memory from internal Copilot roadmaps and training material.",
+  "Keep your review of Copilot memory in Office apps (580889) on track; that item still stands.",
+  "Treat 'In development' AI roadmap items as plans, not commitments, in change planning."
+ ],
+ "effective": null,
+ "effective_note": "Roadmap 562996 status Cancelled (modified 26 Nov 2026). Reason not stated.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 562996: Copilot memory in Researcher (cancelled)",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=562996"
+ },
+ "related": [
+  {
+   "title": "News: Copilot memory heads into Word, Excel and PowerPoint",
+   "url": "news/copilot-memory-office-apps-roadmap.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 562996 (roadmap API)",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=562996",
+   "checked": "2026-11-26"
+  }
+ ],
+ "last_verified": "2026-11-26"
+}

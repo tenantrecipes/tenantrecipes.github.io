@@ -1,0 +1,48 @@
+{
+ "id": "windows-server-2025-hotpatch-kb5138318-ipv6-crash",
+ "status": "published",
+ "title": "KB5138318 hotpatch fixes Server 2025 IPv6 route crash",
+ "date": "2026-11-26",
+ "category": "Windows",
+ "hashtags": [
+  "WindowsServer",
+  "PatchManagement",
+  "SysAdmin"
+ ],
+ "summary": "Microsoft released out-of-band hotpatch KB5138318 (OS build 26100.33732) on 25 November 2026 for Windows Server 2025 Datacenter: Azure Edition. It fixes a regression from the November hotpatch KB5131077: servers with Router Advertisement enabled that receive time-bound IPv6 routes could stop with error 0x139 (KERNEL_SECURITY_CHECK_FAILURE) when a route timer expired. The fix applies without a restart, needs baseline KB5126646 and servicing stack 26100.33634 or later, and comes through Windows Update, WSUS and the Update Catalog.",
+ "why": "An unplanned bugcheck on a hotpatched server defeats the point of hotpatching. The trigger is a normal IPv6 feature, so servers on networks that send route information in Router Advertisements are exposed even if nobody configured IPv6 on purpose.",
+ "todo": [
+  "Find hotpatch-enrolled Windows Server 2025 machines that have KB5131077 and check System logs for unexpected 0x139 bugchecks since mid-November.",
+  "Deploy KB5138318; confirm baseline KB5126646 and SSU 26100.33634 or later first (`DISM /Online /Get-Packages | findstr /i ServicingStack`).",
+  "Microsoft's KB lists only Datacenter: Azure Edition; if you hotpatch Arc-connected Standard/Datacenter servers, confirm in Windows Update that the fix is offered to them too."
+ ],
+ "effective": "2026-11-25",
+ "effective_note": "Out-of-band hotpatch released 25 Nov 2026; no restart required. No known issues listed at publication.",
+ "primary": {
+  "title": "Microsoft Support: KB5138318 (OS Build 26100.33732) Out-of-band hotpatch",
+  "url": "https://support.microsoft.com/en-us/servicing/os/hotpatch/windows-server-2025/2026/kb5138318-windows-server-2025-security-update"
+ },
+ "related": [
+  {
+   "title": "News: November hotpatch stops Print Spooler with Forcepoint DLP",
+   "url": "news/windows-hotpatch-kb5132043-forcepoint-printing.html"
+  },
+  {
+   "title": "News: November hotpatch breaks some apps (0xC0000099)",
+   "url": "news/windows-hotpatch-kb5132043-msi-app-failures.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Support: KB5138318 out-of-band hotpatch for Windows Server 2025",
+   "url": "https://support.microsoft.com/en-us/servicing/os/hotpatch/windows-server-2025/2026/kb5138318-windows-server-2025-security-update",
+   "checked": "2026-11-26"
+  },
+  {
+   "title": "The Register: Microsoft hotpatches hotpatch that could crash Windows Server 2025 (26 Nov 2026)",
+   "url": "https://www.theregister.com/os-platforms/2026/11/26/microsoft-hotpatches-hotpatch-that-could-crash-windows-server-2025/5312301",
+   "checked": "2026-11-26"
+  }
+ ],
+ "last_verified": "2026-11-26"
+}

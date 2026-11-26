@@ -1,0 +1,28 @@
+{
+ "id": "teams-open-pages-in-teams-roadmap",
+ "status": "published",
+ "title": "Teams: open and co-edit shared pages inside Teams (Jan 2027)",
+ "date": "2026-11-26",
+ "category": "M365",
+ "summary": "Microsoft 365 Roadmap item 580886, added on 26 November 2026, says that when someone shares a page in a Teams chat or channel, recipients will be able to open it in Teams, edit it and discuss it, either in the main window or a separate window. Preview and GA are both listed for January 2027 with status 'In development', for desktop, Mac and web across worldwide and government clouds. The roadmap text does not say which page type (for example Copilot Pages or Loop pages) it covers.",
+ "why": "Editing in place makes shared pages a working surface in Teams, which means their storage, sharing links and retention follow the page type, not the chat. Know where those pages live before people start relying on them.",
+ "todo": [
+  "Wait: announced only, no Message Center post yet.",
+  "Check where Copilot and Loop pages are stored in your tenant and that retention and sensitivity labels cover them.",
+  "Watch for the Message Center post that names the page type and any admin control."
+ ],
+ "effective": null,
+ "effective_note": "Roadmap 580886, preview and GA January CY2027, status In development (added 26 Nov 2026). Announced, not verified; page type unspecified.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 580886: Open and collaborate on Pages in Teams",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580886"
+ },
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 580886 (roadmap API)",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=580886",
+   "checked": "2026-11-26"
+  }
+ ],
+ "last_verified": "2026-11-26"
+}

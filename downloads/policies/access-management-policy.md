@@ -51,6 +51,7 @@ It covers all user, guest, administrator, service and agent identities in compan
 - Privileged roles are granted just-in-time where possible, and are reviewed at least quarterly.
 - Guests and external users must complete multifactor authentication to reach company data, and guests are not assigned highly privileged search or export roles (for example eDiscovery) unless the role owner has approved and documented the need.
 - Sensitive device-management and tenant-wide administrative actions (for example device wipe or bulk policy changes) require approval by a second administrator where the platform supports it.
+- Full Access and folder permissions on shared and delegated mailboxes are reviewed at least every {{ACCESS_REVIEW_MONTHS}} months and removed when no longer needed, because AI assistants (for example Copilot Chat in Outlook) let anyone with that access summarise the whole mailbox.
 
 ## 8. Access reviews
 

@@ -1,5 +1,32 @@
 [
  {
+  "date": "2026-11-26",
+  "kind": "site",
+  "type": "News",
+  "title": "Hotpatch IPv6 crash fix, 1Password and Rackspace Spot breaches",
+  "blurb": "KB5138318 fixes Windows Server 2025 0x139 crashes; 1Password backend breach; Rackspace Spot shuts down 8 Dec; Intune Sync covers MDM and IME (Ignite); Copilot Chat in shared mailboxes; OneDrive pay-as-you-go storage GA; Copilot Analytics access policies, Pages in Teams (roadmap); Researcher memory cancelled; Endpoint DLP sync status in 30 min.",
+  "url": "news/index.html",
+  "text": "KB5138318 KB5131077 0x139 KERNEL_SECURITY_CHECK_FAILURE; 1Password GitHub CI/CD; Rackspace Spot Kubernetes Secrets; Intune Device sync status IME; roadmap 573698 578862 580886 562996 558682; MC1477185 OneDrive pay-as-you-go."
+ },
+ {
+  "date": "2026-11-26",
+  "kind": "site",
+  "type": "Security",
+  "title": "KEV backlog: WordPress CVE-2026-87902, Apple CVE-2026-86950",
+  "blurb": "Two exploited flaws from the September KEV backlog: WordPress Core page-template file inclusion (fixed in 7.1.2 and backports) and Apple CoreGraphics out-of-bounds write (iOS 26.7.1/18.7.11, macOS 26.7.1/15.8.1).",
+  "url": "security/index.html",
+  "text": "CVE-2026-87902 GHSA-7hp8-65ch-5whp WordPress 7.1.2; CVE-2026-86950 CoreGraphics iOS 26.7.1 macOS Sequoia 15.8.1 KEV."
+ },
+ {
+  "date": "2026-11-26",
+  "kind": "site",
+  "type": "Policy",
+  "title": "Third-party and access management policies reviewed",
+  "blurb": "Third-party security: rotate shared credentials after a supplier compromise and keep tested exit plans. Access management: review shared and delegated mailbox permissions now that Copilot Chat works in them.",
+  "url": "policies/index.html",
+  "text": "supplier compromise credential rotation exit plan; shared mailbox Full Access review Copilot Chat"
+ },
+ {
   "date": "2026-11-25",
   "kind": "site",
   "type": "News",

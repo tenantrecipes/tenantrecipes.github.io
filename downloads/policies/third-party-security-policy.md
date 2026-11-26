@@ -36,11 +36,13 @@ It covers cloud and software providers, IT service providers, consultants, outso
 - Suppliers that manage {{COMPANY}} devices through remote-support or RMM tools keep technician clients and console extensions on vendor-supported versions, notify {{COMPANY}} of any compromise of those tools without delay, and support out-of-band investigation of managed devices.
 - Application identities that suppliers use to access {{COMPANY}} tenants (for example backup or migration apps) are inventoried with an owner, have only the permissions they need, and are reviewed at least yearly and after any supplier incident.
 - {{OWNER}} makes sure security notices from cloud providers' official channels (for example Azure Service Health security advisories) are monitored for every tenant or subscription {{COMPANY}} owns, and that managed service providers forward such notices for {{COMPANY}} tenants without delay.
+- When a supplier reports that its systems, source code or build pipeline were compromised, {{OWNER}} rotates every credential {{COMPANY}} stored in or shared with that service (API tokens, keys, configuration files and secrets), reviews logs of the systems those credentials reach from the start date the supplier gives, and warns users about phishing that uses the incident as a pretext.
 
 ## 5. Ending the relationship
 
 - All supplier access is removed on the end date.
 - Data is returned or deleted, and the supplier confirms this in writing.
+- For each high-risk cloud service {{COMPANY}} keeps a documented, tested exit plan (data export and an alternative platform) so the service can be left within weeks if the supplier withdraws it, for example after a security incident.
 
 ## 6. Register
 

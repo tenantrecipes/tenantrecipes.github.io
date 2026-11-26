@@ -1,0 +1,34 @@
+{
+ "id": "viva-copilot-analytics-access-management-roadmap",
+ "status": "published",
+ "title": "Copilot Analytics gets in-product access policies (Jan 2027)",
+ "date": "2026-11-26",
+ "category": "Copilot/AI",
+ "summary": "Microsoft 365 Roadmap item 578862, added on 26 November 2026 with GA in January 2027 ('In development'), moves access to Viva Insights Copilot Analytics into one in-product Access Management experience for Global, AI and Viva Insights administrators, instead of Viva Feature Access Management in the admin center plus Manager Settings. Admins build access policies that pair a permission set (what someone can do) with a partition (which population and datasets they can see), assigned to users, Entra security groups or, for managers, organisational attributes. Existing role assignments keep working and users are moved automatically to system-defined policies.",
+ "why": "Copilot usage analytics is people data. Partitions decide which manager sees which group, so the migration to system-defined policies is the moment to check that nobody sees more than intended.",
+ "todo": [
+  "Wait: announced only, no Message Center post yet.",
+  "Before January, list who holds Viva Insights and Copilot Analytics roles today and which VFAM settings you rely on.",
+  "After rollout, review the automatically created system-defined policies and their partitions."
+ ],
+ "effective": null,
+ "effective_note": "Roadmap 578862, GA January CY2027, status In development (added 26 Nov 2026). Announced, not verified.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 578862: Viva Access Management for Copilot Analytics",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=578862"
+ },
+ "related": [
+  {
+   "title": "News: Agent 365 Business Analytics AI cost forecasts",
+   "url": "news/agent-365-business-analytics-cost-forecast.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 578862 (roadmap API)",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=578862",
+   "checked": "2026-11-26"
+  }
+ ],
+ "last_verified": "2026-11-26"
+}

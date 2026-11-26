@@ -1,0 +1,50 @@
+{
+ "id": "intune-sync-mdm-ime-report-freshness",
+ "status": "published",
+ "title": "Intune Sync now covers MDM and IME, with progress view",
+ "date": "2026-11-26",
+ "category": "Intune",
+ "ignite": true,
+ "ignite_area": "endpoint",
+ "summary": "In an Ignite-week post on 18 November 2026, Microsoft says the Windows Sync device action now starts check-ins for both the MDM client and the Intune Management Extension (Win32 apps, scripts, remediations), and that a Device sync status tab shows how far a sync got; per Microsoft Learn this applies to Windows and iOS/iPadOS and needs the 'Preview new device view' toggle. Push notifications now also cover IME workloads, so the 8-hour cycle is a maintenance cadence rather than the delivery time for every change. App inventory gains delta uploads several times a day, and report timestamps showing data freshness are still rolling out.",
+ "why": "The 'wait eight hours' advice is wrong for most changes and wastes troubleshooting time. Knowing which client was asked to check in, and how fresh a report is, tells you whether a problem is delivery, processing or reporting.",
+ "todo": [
+  "Turn on 'Preview new device view' in the Intune admin center and test Sync on a Windows pilot device; watch the Device sync status tab.",
+  "Update service-desk runbooks: one Sync now prompts IME too, so drop separate IME restart steps where they were only used to force a check-in.",
+  "Treat report timestamps as rolling out; until you see them, check 'Last checked' on app inventory before trusting a report."
+ ],
+ "effective": null,
+ "effective_note": "Mixed: improved Sync is documented on Learn (preview device view); report timestamps are 'rolling out' per Microsoft. Not verified in a tenant.",
+ "primary": {
+  "title": "Microsoft Intune blog: Intune's journey to faster device management (18 Nov 2026)",
+  "url": "https://techcommunity.microsoft.com/blog/microsoftintuneblog/intune%E2%80%99s-journey-to-faster-device-management/4574234"
+ },
+ "related": [
+  {
+   "title": "News: Intune adds maintenance windows for Windows updates",
+   "url": "news/intune-windows-update-maintenance-windows.html"
+  },
+  {
+   "title": "Ignite 2026 hub",
+   "url": "ignite/index.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "Microsoft Intune blog: Intune's journey to faster device management",
+   "url": "https://techcommunity.microsoft.com/blog/microsoftintuneblog/intune%E2%80%99s-journey-to-faster-device-management/4574234",
+   "checked": "2026-11-26"
+  },
+  {
+   "title": "Microsoft Learn: Device action: Sync",
+   "url": "https://learn.microsoft.com/en-us/intune/device-management/actions/sync",
+   "checked": "2026-11-26"
+  },
+  {
+   "title": "Microsoft Intune blog: What's new in Microsoft Intune at Microsoft Ignite (17 Nov 2026)",
+   "url": "https://techcommunity.microsoft.com/blog/microsoftintuneblog/what%E2%80%99s-new-in-microsoft-intune-at-microsoft-ignite/4570003",
+   "checked": "2026-11-26"
+  }
+ ],
+ "last_verified": "2026-11-26"
+}

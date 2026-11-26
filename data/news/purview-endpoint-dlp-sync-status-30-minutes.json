@@ -1,0 +1,27 @@
+{
+ "id": "purview-endpoint-dlp-sync-status-30-minutes",
+ "status": "published",
+ "title": "Purview: Endpoint DLP policy sync status within 30 minutes",
+ "date": "2026-11-26",
+ "category": "Purview",
+ "summary": "Microsoft 365 Roadmap item 558682 is 'Rolling out' (GA November 2026, updated 26 November): the Purview portal should show Endpoint DLP policy sync status within 30 minutes instead of the previous two-hour target. The change is about how quickly the portal reports sync status for onboarded devices; the roadmap does not say that policy enforcement itself gets faster.",
+ "why": "Shorter feedback makes it practical to confirm a new or changed endpoint DLP rule in the same change window instead of the next day.",
+ "todo": [
+  "After rollout, time a test policy change on a pilot device and record how long sync status takes to update.",
+  "Do not shorten change windows on the assumption that enforcement is faster; verify on the device."
+ ],
+ "effective": null,
+ "effective_note": "Roadmap 558682, Rolling out, GA November CY2026. Not verified in a tenant.",
+ "primary": {
+  "title": "Microsoft 365 Roadmap 558682: Endpoint DLP policy sync status SLA 2 hours to 30 minutes",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=558682"
+ },
+ "sources": [
+  {
+   "title": "Microsoft 365 Roadmap 558682 (roadmap API)",
+   "url": "https://www.microsoft.com/microsoft-365/roadmap?id=558682",
+   "checked": "2026-11-26"
+  }
+ ],
+ "last_verified": "2026-11-26"
+}

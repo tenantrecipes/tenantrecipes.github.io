@@ -1,0 +1,33 @@
+{
+ "id": "outlook-copilot-chat-shared-delegate-mailboxes",
+ "status": "published",
+ "title": "Outlook: Copilot Chat in shared and delegate mailboxes",
+ "date": "2026-11-26",
+ "category": "Copilot/AI",
+ "summary": "Microsoft 365 Roadmap item 573698 moved to 'Rolling out' on 26 November 2026: users with Full Access or folder-level permissions can use Copilot Chat directly from shared and delegated mailboxes in classic Outlook when the mailbox is added as a resource. Per Microsoft Support, Copilot can summarise and draft for those mailboxes and summarise delegate calendars, respects existing mailbox and folder permissions, and keeps chat history in the user's own account. Triage actions, sending on behalf and scheduling are not supported yet, and no admin configuration is needed to turn it on.",
+ "why": "Copilot does not widen access, but it makes existing access far more usable: anyone with Full Access to a shared mailbox can now ask Copilot to summarise all of it. Stale Full Access grants become a bigger exposure.",
+ "todo": [
+  "Review Full Access and folder permissions on shared mailboxes that hold HR, legal or finance mail before rollout reaches users.",
+  "Tell support and shared-mailbox teams what works now (summarise, draft) and what does not (triage, send, schedule).",
+  "There is no separate switch for this; control it through mailbox permissions and Copilot licensing."
+ ],
+ "effective": null,
+ "effective_note": "Rolling out, GA November 2026 per roadmap 573698 (status changed 26 Nov 2026). Classic Outlook.",
+ "primary": {
+  "title": "Microsoft Support: Shared and delegated mailboxes with Microsoft Copilot Chat in Outlook",
+  "url": "https://support.microsoft.com/en-us/outlook/sharing/shared-delegated-mailboxes-copilot-chat-outlook"
+ },
+ "sources": [
+  {
+   "title": "Microsoft Support: Shared and delegated mailboxes with Microsoft Copilot Chat in Outlook",
+   "url": "https://support.microsoft.com/en-us/outlook/sharing/shared-delegated-mailboxes-copilot-chat-outlook",
+   "checked": "2026-11-26"
+  },
+  {
+   "title": "Microsoft 365 Roadmap 573698 (Message Center archive mirror RM573698)",
+   "url": "https://mc.merill.net/message/RM573698",
+   "checked": "2026-11-26"
+  }
+ ],
+ "last_verified": "2026-11-26"
+}

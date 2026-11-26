@@ -1,0 +1,44 @@
+{
+ "id": "rackspace-spot-breach-shutdown-december-8",
+ "status": "published",
+ "title": "Rackspace shuts down Spot on 8 December after breach",
+ "date": "2026-11-26",
+ "category": "Security incidents",
+ "hashtags": [
+  "CyberSecurity",
+  "Kubernetes",
+  "CloudSecurity",
+  "DataBreach"
+ ],
+ "summary": "Rackspace is winding down its Rackspace Spot managed Kubernetes service at 17:00 US Central Time on 8 December 2026 (00:00 on 9 December, Europe/Stockholm), after which remaining workloads are terminated and data is no longer accessible. According to Rackspace's customer notice as reported by BleepingComputer, attackers used compromised credentials on 17 November to act as legitimate users, create pods in customer clusters, read Kubernetes Secrets and list nodes and volumes; Rackspace learned of it from a customer on 18 November. Customers are told to treat API and refresh tokens, kubeconfigs and Kubernetes Secrets as compromised.",
+ "why": "Secrets in a Kubernetes cluster are usually database passwords, cloud keys and third-party API tokens. Shutting Spot down does not revoke any of them where else they work, and the migration deadline competes with the clean-up.",
+ "todo": [
+  "Rotate every credential that was stored in Spot clusters (Secrets, registry, database, cloud and SaaS keys) and reissue Spot API tokens and kubeconfigs.",
+  "Review sign-ins and audit logs of the services those credentials reach, back to 16–17 November.",
+  "Move workloads and export data before the deadline in your own Rackspace notice; do not wait for an extension."
+ ],
+ "effective": "2026-12-08",
+ "effective_note": "Wind-down 8 Dec 2026 17:00 CT (23:00 UTC; 00:00 9 Dec Europe/Stockholm). Breach details are from Rackspace's customer notice as reported by BleepingComputer and The Register; the status page needs JavaScript and was not read directly.",
+ "primary": {
+  "title": "BleepingComputer: Rackspace shuts down Spot cloud platform after security breach (customer notice)",
+  "url": "https://www.bleepingcomputer.com/news/security/rackspace-shuts-down-spot-cloud-platform-after-security-breach/"
+ },
+ "sources": [
+  {
+   "title": "BleepingComputer: Rackspace shuts down Spot cloud platform after security breach (24 Nov 2026)",
+   "url": "https://www.bleepingcomputer.com/news/security/rackspace-shuts-down-spot-cloud-platform-after-security-breach/",
+   "checked": "2026-11-26"
+  },
+  {
+   "title": "The Register: Rackspace pulls plug on Spot cloud service after security breach (26 Nov 2026)",
+   "url": "https://www.theregister.com/cyber-crime/2026/11/26/rackspace-pulls-plug-on-spot-cloud-service-after-security-breach/5312352",
+   "checked": "2026-11-26"
+  },
+  {
+   "title": "Rackspace Spot status page (wind-down notice; requires JavaScript)",
+   "url": "https://status.spot.rackspace.com/",
+   "checked": "2026-11-26"
+  }
+ ],
+ "last_verified": "2026-11-26"
+}
