@@ -27,15 +27,36 @@
   "Run it only in tenants you administer."
  ],
  "sources": [
-  {"title": "PnP Script Samples: Identify OneDrive Users Over License-Based Storage Quota", "url": "https://pnp.github.io/script-samples/samples/onedrive-overquota-report/", "checked": "2026-11-27"},
-  {"title": "GitHub: pnp/script-samples onedrive-overquota-report (README and script)", "url": "https://github.com/pnp/script-samples/tree/main/scripts/onedrive-overquota-report", "checked": "2026-11-27"},
-  {"title": "Microsoft Learn: OneDrive for Business storage quota enforcement FAQ", "url": "https://learn.microsoft.com/en-us/sharepoint/site-storage-overquota-enforcement-faq", "checked": "2026-11-27"}
+  {
+   "title": "PnP Script Samples: Identify OneDrive Users Over License-Based Storage Quota",
+   "url": "https://pnp.github.io/script-samples/samples/onedrive-overquota-report/",
+   "checked": "2026-11-27"
+  },
+  {
+   "title": "GitHub: pnp/script-samples onedrive-overquota-report (README and script)",
+   "url": "https://github.com/pnp/script-samples/tree/main/scripts/onedrive-overquota-report",
+   "checked": "2026-11-27"
+  },
+  {
+   "title": "Microsoft Learn: OneDrive for Business storage quota enforcement FAQ",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/site-storage-overquota-enforcement-faq",
+   "checked": "2026-11-27"
+  }
  ],
  "related": [
-  {"title": "OneDrive quota fix may cut some users from 1 TB in Jan 2027", "url": "news/onedrive-quota-license-fix-jan-2027.html"}
+  {
+   "title": "OneDrive quota fix may cut some users from 1 TB in Jan 2027",
+   "url": "news/onedrive-quota-license-fix-jan-2027.html"
+  }
  ],
  "last_verified": "2026-11-27",
  "created": "2026-11-27",
  "updated": "2026-11-27",
- "order": 396
+ "order": 396,
+ "hashtags": [
+  "OneDrive",
+  "Microsoft365",
+  "PowerShell",
+  "SysAdmin"
+ ]
 }
