@@ -1,0 +1,48 @@
+{
+ "id": "onedrive-quota-license-fix-jan-2027",
+ "status": "published",
+ "title": "OneDrive quota fix may cut some users from 1 TB in Jan 2027",
+ "date": "2026-11-27",
+ "category": "M365",
+ "summary": "MC1567261 (24 November 2026) says Microsoft will fix a OneDrive for Business licence-evaluation bug from early to late January 2027. Today, users who hold a small storage plan (Deskless 2 GB, Basic or Basic P3 5 GB, Basic P2 or Plan 2A 10 GB, OneDrive Clipchamp 100 GB) together with certain plans that grant no OneDrive storage (for example Microsoft 365 Copilot, SharePoint, Stream, Syntex, Viva Amplify, Clipchamp, Viva Connections Premium) can wrongly get the standard 1 TB quota. After the fix their quota drops to the storage plan's allowance, and a OneDrive already above that becomes read-only: users can still download or delete, but cannot edit or add files. Microsoft's FAQ points to a PnP report to find affected users and says version history, recycle bins and Preservation Hold libraries count towards usage.",
+ "why": "This hits frontline and add-on-licensed users, often the ones who got a Copilot or Clipchamp licence on top of an F-SKU. A read-only OneDrive breaks Known Folder Move and saving from Office apps, so expect helpdesk tickets the day the fix lands.",
+ "todo": [
+  "Do now: run the read-only PnP over-quota report and filter for users whose current quota is 1 TB but whose storage plan is smaller.",
+  "For each affected user, decide: upgrade the licence, buy an Extra Storage pack, or have the user clean up (including version history and recycle bin) before January.",
+  "Brief the helpdesk on the read-only state and how to fix it.",
+  "Wait: users within their licensed quota need no action."
+ ],
+ "effective_note": "Early to late January 2027 per MC1567261 (act by 29 Jan 2027). Microsoft's FAQ says government clouds are out of scope at this time.",
+ "primary": {
+  "title": "MC1567261: OneDrive for Business: Bug fixes to ensure proper storage quota aligns with license limits (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1567261"
+ },
+ "related": [
+  {
+   "title": "Tool: PnP OneDrive over-quota report",
+   "url": "tools/pnp-onedrive-overquota-report.html"
+  },
+  {
+   "title": "News: OneDrive pay-as-you-go storage reaches GA",
+   "url": "news/onedrive-pay-as-you-go-storage-ga.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1567261 (Message Center archive, published 24 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1567261",
+   "checked": "2026-11-27"
+  },
+  {
+   "title": "Microsoft Learn: OneDrive for Business storage quota enforcement FAQ",
+   "url": "https://learn.microsoft.com/en-us/sharepoint/site-storage-overquota-enforcement-faq",
+   "checked": "2026-11-27"
+  },
+  {
+   "title": "PnP Script Samples: Identify OneDrive Users Over License-Based Storage Quota",
+   "url": "https://pnp.github.io/script-samples/samples/onedrive-overquota-report/",
+   "checked": "2026-11-27"
+  }
+ ],
+ "last_verified": "2026-11-27"
+}

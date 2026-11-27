@@ -1,0 +1,40 @@
+{
+ "id": "purview-legacy-teams-retention-copilot-jan-2027",
+ "status": "published",
+ "title": "Purview: legacy Teams retention stops covering Copilot (Jan)",
+ "date": "2026-11-27",
+ "category": "Purview",
+ "summary": "Microsoft re-sent MC1481313 on 25 November 2026 as a reminder: from mid-January 2027 (previously late October 2026), completing by end of January 2027, legacy Microsoft Teams retention policies that today also apply to Microsoft 365 Copilot interactions will be treated as Teams-only. Copilot prompts and responses will then no longer be retained or deleted through those policies; Teams retention itself does not change. Microsoft says action is required if you rely on a Teams retention policy to govern Copilot interactions, and that Copilot coverage needs a retention policy configured explicitly for the Copilot workload (roadmap 571306). Microsoft Learn already lists 'Microsoft Copilot experiences' as a separate retention location for newly created policies.",
+ "why": "If your only Copilot retention is an older 'Teams chats and Copilot interactions' policy, you will have no retention or deletion for Copilot interactions from late January. That is a records-management and eDiscovery gap, and also a deletion gap if your policy was meant to purge prompts after a set period.",
+ "todo": [
+  "Do now: list retention policies that use the Teams chats location and were created before the Copilot split, and note which ones compliance relies on for Copilot.",
+  "Create a retention policy for the 'Microsoft Copilot experiences' location with the same retain/delete period and scope, before mid-January 2027.",
+  "Update the records management plan and tell compliance and eDiscovery owners which policy now covers Copilot.",
+  "Wait: nothing changes for Teams chat retention, so Teams-only policies need no edit."
+ ],
+ "effective": "2027-01-15",
+ "effective_note": "Mid-January to end of January 2027 per MC1481313 (updated 25 Nov 2026; earlier late October to mid-November 2026). Exact day not published; date shown is mid-month.",
+ "primary": {
+  "title": "MC1481313: Microsoft Purview | DLM: Legacy Teams retention policies that cover Copilot will be treated as Teams-only (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1481313"
+ },
+ "related": [
+  {
+   "title": "Recipe: Set retention for Copilot interactions",
+   "url": "recipes/purview-retention-copilot.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1481313 (Message Center archive, updated 25 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1481313",
+   "checked": "2026-11-27"
+  },
+  {
+   "title": "Microsoft Learn: Learn about retention for Copilot & AI apps",
+   "url": "https://learn.microsoft.com/en-us/purview/retention-policies-copilot",
+   "checked": "2026-11-27"
+  }
+ ],
+ "last_verified": "2026-11-27"
+}

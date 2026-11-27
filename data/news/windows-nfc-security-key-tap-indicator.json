@@ -1,0 +1,38 @@
+{
+ "id": "windows-nfc-security-key-tap-indicator",
+ "status": "published",
+ "title": "Windows 11 shows where to tap NFC security keys at sign-in",
+ "date": "2026-11-27",
+ "category": "Windows",
+ "summary": "MC1568568 (25 November 2026) says Windows 11 devices with a display-based NFC reader, where the antenna sits on the front or edge of the screen, now show a lock-screen indicator marking where to tap a security key; it follows the screen orientation and is available from the November 2026 Windows non-security update. It is controlled by EnableNFCTapLocationIndicator, either as an Intune custom policy (./Device/Vendor/MSFT/Policy/Config/CredentialProviders/EnableNFCTapLocationIndicator, Windows 11 24H2 build 10.0.26100.8927 and later per Microsoft Learn) or through Group Policy under Computer Configuration\\Administrative Templates\\System\\Logon. The default (1, or not configured) shows the indicator when the device reports an antenna location; 0 hides it and does not affect NFC sign-in.",
+ "why": "A small fix for a real adoption blocker: on tablets and 2-in-1s with screen-mounted antennas, users who cannot find the reader fall back to weaker sign-in methods. If you are rolling out FIDO2 keys to frontline or field staff on such devices, this removes a support call.",
+ "todo": [
+  "Do now: if you deploy NFC security keys on Windows 11 tablets or 2-in-1s, pilot the November 2026 non-security update and check the indicator on your models.",
+  "No policy is needed to turn it on: it is shown by default. Only set EnableNFCTapLocationIndicator = 0 if the overlay conflicts with your lock-screen design or kiosk setup, and record the choice in your device baseline.",
+  "Wait: devices without a display-based NFC reader are not affected; no action needed."
+ ],
+ "effective_note": "Available from the November 2026 Windows non-security (optional) update per MC1568568. The CSP applies to Windows 11 24H2 build 10.0.26100.8927 and later per Microsoft Learn.",
+ "primary": {
+  "title": "MC1568568: Configure security key sign-in experience for display-based NFC readers (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1568568"
+ },
+ "related": [
+  {
+   "title": "Recipe: Move users off SMS and voice MFA",
+   "url": "recipes/entra-sms-voice-retirement-passkeys.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1568568 (Message Center archive, published 25 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1568568",
+   "checked": "2026-11-27"
+  },
+  {
+   "title": "Microsoft Learn: Policy CSP - CredentialProviders",
+   "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-credentialproviders",
+   "checked": "2026-11-27"
+  }
+ ],
+ "last_verified": "2026-11-27"
+}

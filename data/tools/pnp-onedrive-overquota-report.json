@@ -1,0 +1,41 @@
+{
+ "id": "pnp-onedrive-overquota-report",
+ "status": "published",
+ "kind": "tool",
+ "name": "PnP OneDrive over-quota report",
+ "vendor": "PnP Community (Microsoft 365 Community script samples, open source)",
+ "category": "M365 & Entra",
+ "what": "A read-only PowerShell script (Get-ODBOverQuotaUsers.ps1) from the PnP Community Script Samples that uses only Microsoft Graph to list OneDrive for Business sites storing more than their owner's licence tier allows. It derives the expected quota from the highest OneDrive service plan the user holds (Enterprise 5 TB, Standard 1 TB, Lite/A1 100 GB, Basic P2 10 GB, Basic 5 GB, Deskless 2 GB), compares it with the current quota and usage, and exports every evaluated site to CSV. Microsoft's OneDrive quota enforcement FAQ links to it as the way to check whether users are affected.",
+ "when": "Before OneDrive licence-quota corrections take effect (for example the January 2027 fix in MC1567261 that can cut some users from 1 TB), after licence changes for frontline or add-on SKUs, and when retained leaver OneDrives keep using storage.",
+ "license": "MIT",
+ "cost": "open source",
+ "url": "https://pnp.github.io/script-samples/samples/onedrive-overquota-report/",
+ "repo": "https://github.com/pnp/script-samples/tree/main/scripts/onedrive-overquota-report",
+ "example": [
+  "Download the script from the sample page and read it before running; samples are community contributions provided as-is.",
+  "First run with module installation: `.\\Get-ODBOverQuotaUsers.ps1 -InstallPrerequisites` (needs Microsoft.Graph.Authentication and Microsoft.Graph.Users 2.0.0 or later).",
+  "Default FastScan (Graph reports, daily snapshot) with export: `.\\Get-ODBOverQuotaUsers.ps1 -ExportPath .\\odb-quota.csv`, then filter OverQuota = True in Excel; over-quota rows are sorted first.",
+  "If tenant reports conceal user names, or you need live data, use `-LegacyScan` (per-user enumeration, slower on large tenants).",
+  "Spot-check named users in seconds: `.\\Get-ODBOverQuotaUsers.ps1 -UserPrincipalName alice@contoso.com,bob@contoso.com -ExportPath .\\spotcheck.csv`."
+ ],
+ "pitfalls": [
+  "The README lists delegated scopes User.Read.All, Directory.Read.All, Reports.Read.All and Sites.Read.All, but the script's Connect-MgGraph call also requests Files.Read.All. Review consent before approving; Global Reader is the recommended role.",
+  "FastScan uses the Graph usage reports (about 24–48 hours old) and fails if 'Display concealed user names in reports' is on; use -LegacyScan instead.",
+  "The script's tier table does not list the OneDrive Clipchamp 100 GB plan that MC1567261 names; check users with that plan by hand.",
+  "Enterprise-tier users are never flagged, and unlicensed users with a OneDrive are flagged whenever they store anything.",
+  "Usage includes version history, recycle bins and Preservation Hold libraries, so cleanup must include them.",
+  "Run it only in tenants you administer."
+ ],
+ "sources": [
+  {"title": "PnP Script Samples: Identify OneDrive Users Over License-Based Storage Quota", "url": "https://pnp.github.io/script-samples/samples/onedrive-overquota-report/", "checked": "2026-11-27"},
+  {"title": "GitHub: pnp/script-samples onedrive-overquota-report (README and script)", "url": "https://github.com/pnp/script-samples/tree/main/scripts/onedrive-overquota-report", "checked": "2026-11-27"},
+  {"title": "Microsoft Learn: OneDrive for Business storage quota enforcement FAQ", "url": "https://learn.microsoft.com/en-us/sharepoint/site-storage-overquota-enforcement-faq", "checked": "2026-11-27"}
+ ],
+ "related": [
+  {"title": "OneDrive quota fix may cut some users from 1 TB in Jan 2027", "url": "news/onedrive-quota-license-fix-jan-2027.html"}
+ ],
+ "last_verified": "2026-11-27",
+ "created": "2026-11-27",
+ "updated": "2026-11-27",
+ "order": 396
+}

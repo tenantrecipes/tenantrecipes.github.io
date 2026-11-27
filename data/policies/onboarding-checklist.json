@@ -68,6 +68,7 @@
     "Prepare a Temporary Access Pass (TAP) so the new starter can register MFA or passkeys on day one without a known password; share it through a verified channel.",
     "Register the laptop for Windows Autopilot (or prepare the device in your MDM) and assign it to the user.",
     "Prepare the phone or confirm the BYOD route and app protection policies.",
+    "Managed mobile apps (for example Teams and Outlook) are installed from the app store or MDM at or above the minimum versions IT has set; outdated Teams mobile versions lose access to files from 1 April 2027.",
     "For Entra hybrid joined or shared Windows devices, check whether web sign-in is enabled for the device group; with it, the TAP or a FIDO2 key can be used at the Windows lock screen on day one (Windows 11 25H2/26H2 with the November 2026 update or later, in gradual rollout)."
    ],
    "links": [
@@ -127,13 +128,17 @@
   }
  ],
  "status": "published",
- "last_verified": "2026-11-20",
+ "last_verified": "2026-11-27",
  "created": "2026-10-30",
- "updated": "2026-11-20",
+ "updated": "2026-11-27",
  "history": [
   {
    "date": "2026-11-20",
    "note": "Day-one sign-in on hybrid joined devices: web sign-in with TAP or FIDO2 key (KB5132057, 19 Nov 2026)."
+  },
+  {
+   "date": "2026-11-27",
+   "note": "Reviewed. Minimum mobile app versions at onboarding (Teams mobile file access needs Android 1416/1.0.0.2026151302 or iOS 8.19.0 or later from 1 April 2027, MC1567258)."
   }
  ]
 }

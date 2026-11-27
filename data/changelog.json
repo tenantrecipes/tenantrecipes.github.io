@@ -1,5 +1,50 @@
 [
  {
+  "date": "2026-11-27",
+  "kind": "site",
+  "type": "News",
+  "title": "Copilot retention split, OneDrive quota fix, DWP incident",
+  "blurb": "Legacy Teams retention stops covering Copilot from mid-January; OneDrive licence-quota fix may cut some users from 1 TB; Teams mobile file access needs new versions from 1 April; NFC security-key tap indicator; Insider Risk alert classification; auto-labeling for .doc/.xls/.ppt; Power Platform inventory export stops 1 Dec; GitHub Copilot metrics on by default in Viva Insights; Copilot 'Copy with sources'; UK DWP cyber incident.",
+  "url": "news/index.html",
+  "text": "MC1481313 MC1567261 MC1567258 MC1568568 EnableNFCTapLocationIndicator MC1568697 MC1530948 MC1567221 MC1523085 MC1568700 MC1568702 DWP NCSC GC3"
+ },
+ {
+  "date": "2026-11-27",
+  "kind": "site",
+  "type": "Security",
+  "title": "KEV: Drupal CVE-2026-136716, GeoServer WFS chain",
+  "blurb": "Drupal SA-CORE-2026-019 installer takeover still exploited after the first fix (10.6.23, 11.3.23, 11.4.14 + update.php); GeoServer CVE-2026-120705 and CVE-2026-129243 from an unauthenticated RCE chain (3.0.2, 2.28.6, 2.27.7).",
+  "url": "security/index.html",
+  "text": "CVE-2026-136716 SA-CORE-2026-019; CVE-2026-120705 CVE-2026-129243 GHSA-39mw-5chv-jh47 GHSA-rv5g-g2r9-58rj GeoServer KEV 27 Nov"
+ },
+ {
+  "date": "2026-11-27",
+  "kind": "site",
+  "type": "Tool",
+  "title": "New tool: PnP OneDrive over-quota report",
+  "blurb": "Read-only Graph script that lists OneDrive sites using more than their licence tier allows, ahead of the January 2027 quota fix.",
+  "url": "tools/pnp-onedrive-overquota-report.html",
+  "text": "Get-ODBOverQuotaUsers.ps1 FastScan LegacyScan Files.Read.All MC1567261"
+ },
+ {
+  "date": "2026-11-27",
+  "kind": "site",
+  "type": "Recipe",
+  "title": "Copilot retention recipe updated for the Teams split",
+  "blurb": "Inventory of legacy Teams policies, eDiscovery verification, troubleshooting and rollback added to 'Set retention for Copilot interactions'.",
+  "url": "recipes/purview-retention-copilot.html",
+  "text": "Microsoft Copilot experiences retention location MC1481313 SubstrateHolds"
+ },
+ {
+  "date": "2026-11-27",
+  "kind": "site",
+  "type": "Policy",
+  "title": "AI use policy and onboarding checklist reviewed",
+  "blurb": "AI use: Copilot retention set explicitly, copied AI output keeps its sources. Onboarding: minimum mobile app versions (Teams mobile file access from 1 April 2027).",
+  "url": "policies/index.html",
+  "text": "Copilot retention; Copy with sources; Teams mobile minimum version"
+ },
+ {
   "date": "2026-11-26",
   "kind": "site",
   "type": "News",

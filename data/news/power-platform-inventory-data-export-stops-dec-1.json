@@ -1,0 +1,35 @@
+{
+ "id": "power-platform-inventory-data-export-stops-dec-1",
+ "status": "published",
+ "title": "Power Platform inventory data export stops on 1 December",
+ "date": "2026-11-27",
+ "category": "Retirements",
+ "summary": "Power Platform admin center data export (preview) is deprecated and being retired in phases, and per MC1567221 (24 November 2026) inventory data export stops on 1 December 2026: no new inventory data is written to your Azure Data Lake Storage account, and reports or processes that depend on it stop updating. Usage and environment data exports keep working for now and will be retired later with advance notice. Data already exported stays in your data lake, and Microsoft's replacement for inventory is the Power Platform inventory API.",
+ "why": "Governance dashboards that track apps, flows and agents across environments often read this export. After Monday they will quietly show stale inventory instead of failing, which is the worst way to lose visibility of maker sprawl.",
+ "todo": [
+  "Do now: find Power BI reports, Fabric pipelines or scripts that read the inventory export from your data lake.",
+  "Move them to the Power Platform inventory API, comparing fields first using Microsoft's comparison guidance.",
+  "Add a 'last updated' check to inventory dashboards so stale data is visible.",
+  "Wait: usage and environment exports are not affected yet."
+ ],
+ "effective": "2026-12-01",
+ "effective_note": "Inventory export stops 1 December 2026 per MC1567221. Usage and environment exports: later date, not announced.",
+ "primary": {
+  "title": "MC1567221: Power Platform admin center - Inventory data export (preview) stops December 1, 2026 (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1567221"
+ },
+ "related": [
+  {
+   "title": "Recipe: Copilot Studio environment strategy",
+   "url": "recipes/copilot-studio-environment-strategy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1567221 (Message Center archive, published 24 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1567221",
+   "checked": "2026-11-27"
+  }
+ ],
+ "last_verified": "2026-11-27"
+}

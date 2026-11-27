@@ -2376,34 +2376,58 @@
   "title": "Set retention for Copilot interactions",
   "problem": "Compliance requires a defined retention period for AI prompts and responses.",
   "steps": [
-   "Purview > Data lifecycle management > Retention policies > New retention policy.",
-   "Select the 'Microsoft Copilot experiences' location (Microsoft 365 Copilot, Copilot Studio and other Microsoft Copilots).",
-   "Set retain/delete period and scope.",
-   "Document in your records management plan."
+   "Inventory first: Purview > Data lifecycle management > Retention policies. Note every policy that uses the Teams chats location and was created before the Copilot split; older ones may still cover Copilot interactions implicitly.",
+   "New retention policy > select the 'Microsoft Copilot experiences' location (Microsoft 365 Copilot, Security Copilot, Copilot in Fabric, Copilot Studio). Other AI app locations (Enterprise AI apps, Other AI apps) only hold content when a collection policy captures it.",
+   "Set retain/delete period and scope to match the Teams-based coverage you are replacing, so nothing changes for compliance when the legacy policy stops applying.",
+   "Document in your records management plan which policy now governs Copilot, and the date the legacy Teams policy stops covering it (mid- to end of January 2027 per MC1481313)."
   ],
   "pitfalls": [
-   "Retention for Copilot was separated from Teams chats — older 'Teams chats and Copilot interactions' policies need review.",
-   "Deletion runs via a timer job (typically 1–7 days) and is suspended by any hold on the mailbox."
+   "From mid-January 2027 (completing by end of January), legacy Teams retention policies are treated as Teams-only and stop retaining or deleting Copilot interactions (MC1481313). Create the Copilot policy before then.",
+   "Deletion runs via a timer job (typically 1–7 days) and is suspended by any hold on the mailbox: another retention policy for the same location, Litigation Hold, delay hold or eDiscovery hold.",
+   "Do not verify retention by looking at Copilot chat history: Microsoft says visible messages are not an accurate reflection of whether content is retained or permanently deleted. Use eDiscovery.",
+   "Copilot memory is outside Purview retention policies; handle it in your AI use policy, not here."
   ],
   "done_when": [
    "A retention policy for the 'Microsoft Copilot experiences' location exists with the period and scope compliance asked for.",
+   "No compliance requirement depends on a legacy Teams retention policy to cover Copilot interactions.",
+   "An eDiscovery search scoped to Copilot interactions for a pilot user returns the expected items.",
    "The policy is listed in your records management plan."
   ],
   "sources": [
    {
     "title": "Learn about retention for Copilot & AI apps",
     "url": "https://learn.microsoft.com/en-us/purview/retention-policies-copilot",
-    "checked": "2026-10-30"
+    "checked": "2026-11-27"
+   },
+   {
+    "title": "MC1481313: Legacy Teams retention policies that cover Copilot will be treated as Teams-only (Message Center archive)",
+    "url": "https://mc.merill.net/message/MC1481313",
+    "checked": "2026-11-27"
    }
   ],
-  "last_verified": "2026-10-30",
+  "last_verified": "2026-11-27",
   "verified_by": "Pascal",
   "created": "2026-10-12",
-  "updated": "2026-10-30",
+  "updated": "2026-11-27",
   "screenshots": [],
   "markers": {
    "steps": "official"
-  }
+  },
+  "troubleshooting": [
+   {
+    "symptom": "Copilot messages are still visible to the user after the retention period.",
+    "cause": "Expected: expired items are copied to SubstrateHolds by a timer job (typically 1–7 days), kept at least 1 day, and the delete is then relayed to the app; caching can delay it further.",
+    "fix": "Check for holds on the mailbox (other retention policy for the same location, Litigation Hold, delay hold, eDiscovery hold), and verify with eDiscovery rather than the app."
+   },
+   {
+    "symptom": "An eDiscovery search finds no Copilot interactions for a user in scope.",
+    "cause": "Copilot content is stored in a hidden folder of the user's Exchange Online mailbox; users without such a mailbox, or outside the policy scope, are not covered.",
+    "fix": "Confirm the user's mailbox and that the policy's scope includes them, then search again."
+   }
+  ],
+  "rollback": [
+   "To undo, set the new policy to Off or narrow its scope; the legacy Teams policy keeps covering Teams chats regardless. Deleting a retain policy can release content for deletion, so prefer disabling and agree changes with compliance."
+  ]
  },
  {
   "status": "published",

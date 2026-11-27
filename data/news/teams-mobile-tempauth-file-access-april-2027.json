@@ -1,0 +1,35 @@
+{
+ "id": "teams-mobile-tempauth-file-access-april-2027",
+ "status": "published",
+ "title": "Teams mobile: old versions lose file access on 1 April 2027",
+ "date": "2026-11-27",
+ "category": "Retirements",
+ "summary": "Microsoft is retiring pre-authenticated (tempauth) URLs for files that Teams mobile opens from SharePoint Online and OneDrive and moving to Microsoft Entra ID-based authentication, with enforcement from 1 April 2027 (MC1567258, 24 November 2026; rollout mid-March to early April 2027 in worldwide, GCC, GCC High and DoD). Users on Teams for Android older than 1416/1.0.0.2026151302 or Teams for iOS older than 8.19.0 may then fail to open, preview, download, upload or share files, play videos stored in OneDrive or SharePoint, use PowerPoint Live, or share files with bots and agents; other Teams features are not affected. Microsoft warns that disabling tempauth URLs through PowerShell before 1 April 2027 may disrupt file scenarios in Teams mobile regardless of app version.",
+ "why": "Unmanaged BYOD phones and shared frontline devices are where old Teams builds live, and they are the hardest to update in a hurry. Set a minimum app version now rather than discovering the gap through file-sharing tickets in April.",
+ "todo": [
+  "Do now: check Teams mobile versions in Intune (discovered apps or app protection status reports) and identify devices below the minimum versions.",
+  "Use app protection policy conditional launch (minimum app version) or managed app updates to move users to Android 1416/1.0.0.2026151302 / iOS 8.19.0 or later.",
+  "Do not disable tempauth URLs tenant-wide ahead of 1 April 2027; Microsoft warns it can break Teams mobile file scenarios early.",
+  "If you build apps or bots that rely on tempauth URLs, read Microsoft's developer guidance on moving to Entra ID tokens."
+ ],
+ "effective": "2027-04-01",
+ "effective_note": "Enforcement 1 April 2027; rollout mid-March to early April 2027 per MC1567258.",
+ "primary": {
+  "title": "MC1567258: Microsoft Teams for Android and iOS: Update to the latest app version to maintain file access (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1567258"
+ },
+ "related": [
+  {
+   "title": "Recipe: App protection for Copilot on mobile",
+   "url": "recipes/intune-app-protection-copilot.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1567258 (Message Center archive, published 24 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1567258",
+   "checked": "2026-11-27"
+  }
+ ],
+ "last_verified": "2026-11-27"
+}

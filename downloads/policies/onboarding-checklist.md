@@ -32,6 +32,7 @@ Microsoft Learn: [Create, invite and delete users in Microsoft Entra ID](https:/
 - [ ] Prepare a Temporary Access Pass (TAP) so the new starter can register MFA or passkeys on day one without a known password; share it through a verified channel.
 - [ ] Register the laptop for Windows Autopilot (or prepare the device in your MDM) and assign it to the user.
 - [ ] Prepare the phone or confirm the BYOD route and app protection policies.
+- [ ] Managed mobile apps (for example Teams and Outlook) are installed from the app store or MDM at or above the minimum versions IT has set; outdated Teams mobile versions lose access to files from 1 April 2027.
 - [ ] For Entra hybrid joined or shared Windows devices, check whether web sign-in is enabled for the device group; with it, the TAP or a FIDO2 key can be used at the Windows lock screen on day one (Windows 11 25H2/26H2 with the November 2026 update or later, in gradual rollout).
 
 Microsoft Learn: [Configure a Temporary Access Pass](https://learn.microsoft.com/en-us/entra/identity/authentication/howto-authentication-temporary-access-pass); [Overview of Windows Autopilot](https://learn.microsoft.com/en-us/autopilot/overview); [Web sign-in for Windows](https://learn.microsoft.com/en-us/windows/security/identity-protection/web-sign-in/)

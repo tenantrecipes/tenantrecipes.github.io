@@ -1,0 +1,43 @@
+{
+ "id": "dwp-cyber-incident-services-offline",
+ "status": "published",
+ "title": "UK DWP takes online services offline after cyber incident",
+ "date": "2026-11-27",
+ "category": "Security incidents",
+ "summary": "The UK Department for Work and Pensions said on 27 November 2026 that it had taken some online services offline as a precaution after identifying a cyber incident affecting its systems, and that it is working with the National Cyber Security Centre and the Government Cyber Coordination Centre. Regular benefit and pension payments are not affected. DWP told customers to call their usual benefit line, said people who cannot attend or update their circumstances will not be sanctioned, and reminded them it never asks for personal information by text or email. Computer Weekly reports Downing Street called it a live incident with no current evidence of data loss and no evidence that other departments were targeted; the cause and the affected systems have not been disclosed.",
+ "why": "Two things for tenant owners: staff with UK benefit or pension accounts are a likely phishing target this week, and DWP's update (help line, no sanctions, 'we never ask by text or email') is a compact template for customer-facing incident notices.",
+ "todo": [
+  "Do now: if you have UK staff, add DWP and Universal Credit lures to phishing awareness and mail-flow watchlists.",
+  "Review your own incident communication template: what customers should do, what is unaffected, and how you will never contact them.",
+  "Wait: there is no confirmed technical indicator or attribution yet; do not act on rumours."
+ ],
+ "effective_note": "Announced 27 Nov 2026; investigation ongoing. Cause, affected systems and data impact not disclosed.",
+ "primary": {
+  "title": "GOV.UK: Temporary disruption to some DWP online services (27 Nov 2026)",
+  "url": "https://www.gov.uk/government/news/temporary-disruption-to-some-dwp-online-services"
+ },
+ "related": [
+  {
+   "title": "Policy: Incident response",
+   "url": "policies/incident-response-policy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "GOV.UK: Temporary disruption to some DWP online services",
+   "url": "https://www.gov.uk/government/news/temporary-disruption-to-some-dwp-online-services",
+   "checked": "2026-11-27"
+  },
+  {
+   "title": "Computer Weekly: Investigation underway into DWP cyber incident as services taken offline",
+   "url": "https://www.computerweekly.com/news/366655538/Investigation-underway-into-DWP-cyber-security-incident-as-services-taken-offline",
+   "checked": "2026-11-27"
+  },
+  {
+   "title": "The Register: British social security system techies yank services offline following 'cyber incident'",
+   "url": "https://www.theregister.com/security/2026/11/27/british-social-security-system-techies-yank-services-offline-following-cyber-incident/5312522",
+   "checked": "2026-11-27"
+  }
+ ],
+ "last_verified": "2026-11-27"
+}

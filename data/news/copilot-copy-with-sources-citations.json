@@ -1,0 +1,33 @@
+{
+ "id": "copilot-copy-with-sources-citations",
+ "status": "published",
+ "title": "Copilot: choose whether copied answers keep citations",
+ "date": "2026-11-27",
+ "category": "Copilot/AI",
+ "summary": "Microsoft 365 Copilot is adding a 'Copy with sources' option that lets users decide whether citations are included when they copy a Copilot response (MC1568700, 25 November 2026). It is on by default; users can turn it off to copy text without citations. Rollout is from mid- to late December 2026, worldwide. Microsoft says no admin action is required and recommends telling users about the option.",
+ "why": "Citations are how a reader checks where an AI answer came from. Making 'copy without sources' one click away makes it easier to paste unattributed AI text into documents and mail, which is worth a line in your AI use guidance.",
+ "todo": [
+  "Do now: add a sentence to your AI use guidance that copied Copilot output keeps its sources when it is reused in documents others rely on.",
+  "Mention the option in user communications for December.",
+  "Wait: there is no admin setting to configure."
+ ],
+ "effective_note": "Mid- to late December 2026 per MC1568700.",
+ "primary": {
+  "title": "MC1568700: Microsoft 365 Copilot: Customize how citations are included when copying responses (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1568700"
+ },
+ "related": [
+  {
+   "title": "Policy: AI and Copilot use",
+   "url": "policies/ai-copilot-use-policy.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1568700 (Message Center archive, published 25 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1568700",
+   "checked": "2026-11-27"
+  }
+ ],
+ "last_verified": "2026-11-27"
+}

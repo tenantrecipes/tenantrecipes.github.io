@@ -1,0 +1,33 @@
+{
+ "id": "viva-insights-github-copilot-metrics-default",
+ "status": "published",
+ "title": "Viva Insights turns on GitHub Copilot metrics by default",
+ "date": "2026-11-27",
+ "category": "Copilot/AI",
+ "summary": "Microsoft is retiring the public preview opt-in setting for GitHub Copilot in Viva Insights app settings, so GitHub Copilot metrics appear by default in the Viva Insights Consumption dashboard for eligible tenants (MC1523085, updated 24 November 2026). Rollout now runs from mid-December 2026 to mid-January 2027 (previously mid-November to mid-December). Tenants that opted in keep their metrics; in tenants that did not, users who already have access to the relevant reports may start seeing GitHub Copilot data. Existing roles, report access and privacy settings still decide who sees it, and admins can no longer use the setting to withhold the metrics.",
+ "why": "Developer-level AI usage is sensitive in works-council and HR terms. If you deliberately left the opt-in off, that decision is being reversed for you, and the only remaining control is who can see consumption reports.",
+ "todo": [
+  "Do now: review who holds Insights Analyst, Insights Administrator and consumption-dashboard access, and remove broad manager access you would not want extended to developer data.",
+  "Tell works council or HR stakeholders if your organisation had decided not to show GitHub Copilot metrics.",
+  "Update internal documentation that refers to the opt-in setting."
+ ],
+ "effective_note": "Mid-December 2026 to mid-January 2027 per MC1523085 (updated 24 Nov 2026).",
+ "primary": {
+  "title": "MC1523085: Viva Insights: GitHub Copilot metrics will be on by default, and the public preview opt-in setting is being retired (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1523085"
+ },
+ "related": [
+  {
+   "title": "Recipe: Copilot usage report",
+   "url": "recipes/copilot-usage-report.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1523085 (Message Center archive, updated 24 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1523085",
+   "checked": "2026-11-27"
+  }
+ ],
+ "last_verified": "2026-11-27"
+}

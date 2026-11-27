@@ -1,0 +1,27 @@
+{
+ "id": "purview-irm-alert-classification",
+ "status": "published",
+ "title": "Purview Insider Risk adds alert classification (Dec–Jan)",
+ "date": "2026-11-27",
+ "category": "Purview",
+ "summary": "Microsoft Purview Insider Risk Management will let analysts classify every alert as True positive, Benign (operational) or False positive, with predefined reasons, replacing today's dismissal reason (MC1568697, 25 November 2026; roadmap 576710). Classification is separate from workflow status (Needs review, Confirmed, Dismissed, Resolved), so changing one does not change the other, which Microsoft says keeps classification consistent for alerts shared between Purview and Defender. Confirm and Dismiss move under a new Manage action, and a separate Classify action sets the classification. Public preview rolls out early to mid-December 2026 and general availability mid- to late January 2027; no configuration change is required.",
+ "why": "Reports and tuning that read dismissal reasons will change meaning, and analysts will need a shared definition of 'benign' versus 'false positive' or the new field will be noise.",
+ "todo": [
+  "Do now: write down when analysts should use each classification and add it to your IRM investigation procedure.",
+  "Check any reporting or exports that use the old dismissal reason and plan for the new Classification column.",
+  "Brief IRM analysts on the Manage and Classify actions before the January GA."
+ ],
+ "effective_note": "Public preview early to mid-December 2026; GA mid- to late January 2027 per MC1568697.",
+ "primary": {
+  "title": "MC1568697: Microsoft Purview: Insider Risk Management-Introducing IRM Alert classification (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1568697"
+ },
+ "sources": [
+  {
+   "title": "MC1568697 (Message Center archive, published 25 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1568697",
+   "checked": "2026-11-27"
+  }
+ ],
+ "last_verified": "2026-11-27"
+}

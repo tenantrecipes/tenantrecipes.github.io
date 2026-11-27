@@ -1,0 +1,38 @@
+{
+ "id": "purview-auto-labeling-legacy-office-formats",
+ "status": "published",
+ "title": "Purview auto-labeling adds .doc, .xls and .ppt (Dec)",
+ "date": "2026-11-27",
+ "category": "Purview",
+ "summary": "Service-side auto-labeling in Microsoft Purview will evaluate and label legacy Word (.doc), Excel (.xls) and PowerPoint (.ppt) files in SharePoint and OneDrive, in both simulation and enforcement (MC1530948, updated 24 November 2026; roadmap 574363). Public preview now runs from late November to early December 2026 and general availability from mid- to late December 2026 (both slipped from November). New policies pick up the formats automatically. Existing policies need a small edit, such as adding or removing a policy comment, and another run to restart the crawl before they evaluate legacy files.",
+ "why": "Old binary Office files are common in exactly the archive libraries that Copilot can surface. Until now they stayed unlabelled by service-side policies; once covered, label-based DLP and Copilot protections can apply to them too.",
+ "todo": [
+  "Do now: list auto-labeling policies that cover SharePoint and OneDrive and decide which should include legacy files.",
+  "After the preview reaches your tenant, edit and save each chosen policy, re-run it in simulation, and review matches before enforcing.",
+  "Wait: new auto-labeling policies need no extra step."
+ ],
+ "effective_note": "Public preview late Nov to early Dec 2026; GA mid- to late Dec 2026 per MC1530948 (updated 24 Nov 2026).",
+ "primary": {
+  "title": "MC1530948: Microsoft Purview | Information Protection: Auto-labeling support for legacy Microsoft Office file formats (Message Center archive)",
+  "url": "https://mc.merill.net/message/MC1530948"
+ },
+ "related": [
+  {
+   "title": "Recipe: Sensitivity labels for Copilot",
+   "url": "recipes/purview-sensitivity-labels-copilot.html"
+  }
+ ],
+ "sources": [
+  {
+   "title": "MC1530948 (Message Center archive, updated 24 Nov 2026)",
+   "url": "https://mc.merill.net/message/MC1530948",
+   "checked": "2026-11-27"
+  },
+  {
+   "title": "Microsoft Learn: Automatically apply a sensitivity label to Microsoft 365 data",
+   "url": "https://learn.microsoft.com/en-us/purview/apply-sensitivity-label-automatically",
+   "checked": "2026-11-27"
+  }
+ ],
+ "last_verified": "2026-11-27"
+}
