@@ -243,6 +243,22 @@ def latest_guides(rel, guides, n=6):
         f'<ol class="nw-list nw-mini lg-mini">{"".join(cards)}</ol></section>')
 
 
+def latest_guides_panel(rel, guides, n=6):
+    """Compact 'Latest guides' panel for the homepage front, matching the Latest news list."""
+    import build_tiers as TR
+    items = sorted(guides, key=lambda g: (g.PUBLISHED, g.SLUG), reverse=True)[:n]
+    rows = []
+    for g in items:
+        t = TR.guide_tier(g)
+        rows.append(
+            f'<li><p class="hm-nw-m"><span class="nw-c">{esc(TR.label(t))}</span>'
+            f'<time datetime="{g.PUBLISHED}">{T.fmt(g.PUBLISHED)}</time></p>'
+            f'<a href="{rel}guides/{g.SLUG}.html">{esc(g.TITLE)}</a></li>')
+    return (f'<aside class="hm-guides" id="latest-guides" aria-labelledby="lg-sh"><div class="nw-sh-row"><h2 id="lg-sh">Latest guides</h2>'
+            f'<a href="{rel}guides/index.html">All guides →</a></div>'
+            f'<ol class="hm-nw">{"".join(rows)}</ol></aside>')
+
+
 # ---------------------------------------------------------------- plain-text / markdown checklists
 def plain(s):
     return s.replace("`", "")
@@ -398,7 +414,9 @@ def home_search(rel):
 
 
 def home_front(rel, R, guides, quick, CYL, tools, pols, last_verified):
-    """Striking, information-dense homepage opening: counts from existing data, Latest news fixed on the right (stacked on small screens)."""
+    """Content-first homepage opening: slim cloud-status bar, then Latest news + Latest guides,
+    then section counts. No hero copy or hero search (search stays in the header).
+    last_verified is kept in the signature because build_site.py passes it; it is not shown here."""
     import pathlib
     import build_news as NW
     import build_status as BST
@@ -424,16 +442,15 @@ def home_front(rel, R, guides, quick, CYL, tools, pols, last_verified):
         (f'<a class="hm-tile" href="{href}"><strong>{n}</strong><span>{label}</span></a>' if n is not None
          else f'<a class="hm-tile hm-tile-st" href="{href}"><strong>Status</strong><span>{label}</span></a>')
         for href, n, label in tiles)
+    _ = last_verified
     return (
-        f'<section class="hx hm" aria-labelledby="hx-title"><div class="hx-bg" aria-hidden="true"><i class="o1"></i><i class="o2"></i><i class="o3"></i></div>'
-        f'<div class="wrap hm-in"><div class="hm-left"><div class="hm-copy">'
-        f'<p class="hx-badge"><span class="dot" aria-hidden="true"></span>{n_recipes} recipes, every one checked against its sources · last verified {T.fmt(last_verified)}</p>'
-        f'<h1 id="hx-title">Playbooks for people<br><span class="grad">who already run the tenant.</span></h1>'
-        f'<p class="hx-lead">Independent, fact-checked recipes, guides, news, vulnerability watch, tools, policy templates and a code library. '
-        f'Exact settings, scripts, rollback, and a source for every claim.</p>'
-        f'{home_search(rel)}{BST.pill(rel)}'
-        f'</div><nav class="hm-dest" aria-label="Site sections">{dest}</nav></div>'
-        f'{NW.latest_panel(rel, esc, T.fmt, CYL, 6)}</div></section>'
+        f'<section class="hm" aria-labelledby="hx-title">'
+        f'<h1 id="hx-title" class="sr">Tenant Recipes</h1>'
+        f'<div class="st-bar"><div class="st-bar-in">{BST.pill(rel)}</div></div>'
+        f'<div class="wrap hm-body"><div class="hm-in">'
+        f'{NW.latest_panel(rel, esc, T.fmt, CYL, 5)}'
+        f'{latest_guides_panel(rel, guides, 5)}'
+        f'</div><div class="hm-dest" role="navigation" aria-label="Site sections">{dest}</div></div></section>'
     )
 
 

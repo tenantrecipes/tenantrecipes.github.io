@@ -21,6 +21,11 @@
 .trc-fine{margin:0;font-size:.74rem;color:#666;display:flex;justify-content:space-between;gap:8px}
 .trc-fine a{color:#666}
 .trc-ts{min-height:0}
-@media (max-width:480px){.trc-fab span{display:none}.trc-fab{padding:0;width:46px;justify-content:center}}
+.trc-fab span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.trc-fab{padding:0;width:46px;justify-content:center}
+@media (hover:hover) and (pointer:fine){
+  .trc-fab:hover span,.trc-fab:focus-visible span{position:static;width:auto;height:auto;overflow:visible;clip:auto}
+  .trc-fab:hover,.trc-fab:focus-visible{width:auto;padding:0 16px 0 14px}
+}
 @media print{.trc-fab,.trc-panel{display:none}}
 @media (prefers-reduced-motion:no-preference){.trc-panel{animation:trcIn .16s ease-out}@keyframes trcIn{from{opacity:0;transform:translateY(8px)}}}

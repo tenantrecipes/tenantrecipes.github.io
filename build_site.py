@@ -544,7 +544,6 @@ def build():
                     CY.patch_tuesday_widget(rel, CY.load()), "", True)
         + AIH.home_promo(rel)
         + UX.task_hubs(rel, R, GUIDES, Q, CY.load(), TL.load(), PL.load())
-        + UX.latest_guides(rel, GUIDES)
         + UX.finder(rel, R, GUIDES, Q, len(CY.load()))
         + hero(rel)[hero(rel).index('<section class="sec wrap" aria-labelledby="sec-title">'):]
         + UX.infra_track(rel, CY.load(), TL.load(), PL.load()) +

@@ -1186,53 +1186,55 @@ background:linear-gradient(120deg,#ffe3f1 0%,#fff1d6 45%,#dff8ff 100%);box-shado
 @media (max-width:700px){.sf-cta{grid-template-columns:1fr}.sf-cta-sp{border-left:0;padding-left:0;border-top:1px solid #ffffff1a;padding-top:14px}.sf-cta-f input[type=email]{max-width:none}}
 @media print{.sf-cta{display:none}}
 
-/* ---- homepage front (2026-11-23): compact hero + fixed Latest news panel + section counts ---- */
-.hx.hm{padding:40px 0 32px}
-.hx.hm .hx-bg{overflow:hidden}
-.hm-in{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.95fr);gap:20px 36px;align-items:start;min-height:min-content}
-.hm-left{display:flex;flex-direction:column;gap:16px;min-width:0;min-height:min-content}
-.hm-copy{min-width:0}
-.hx.hm .hx-badge{margin:0 0 16px}
-.hx.hm h1{font-size:clamp(1.85rem,3.4vw,2.85rem);line-height:1.08;letter-spacing:-.025em;margin:0 0 16px;color:#fff}
-.hx.hm .hx-lead{font-size:1.05rem;max-width:38em;color:#c3cbe6;margin:0 0 18px}
-.hm-find{margin:0 0 12px;max-width:none}
-.hx.hm .st-pill{margin:0}
-.hm-news{background:#fff;color:var(--ink);border-radius:16px;padding:16px 18px 10px;box-shadow:0 22px 50px #0007;border:1px solid #ffffff2a;min-width:0}
-.hm-news .nw-sh-row{margin:0}
-.hm-news h2{margin:0;font-size:1.12rem;color:var(--ink);letter-spacing:-.02em}
-.hm-news .nw-sh-row a{color:var(--brand);font-weight:650;font-size:.88rem;text-decoration:none;white-space:nowrap}
-.hm-news .nw-sh-row a:hover{text-decoration:underline}
+/* ---- homepage front (2026-11-27): slim status bar, Latest news + Latest guides, then section counts. No hero copy. ---- */
+.st-bar{border-bottom:1px solid #e8ebf2;background:#f4f6fa}
+.st-bar:has(.st-issue){background:#fef2f2;border-bottom-color:#fecaca}
+.st-bar:has(.st-ok){background:#f3faf5}
+.st-bar-in{display:flex;align-items:center;max-width:1320px;margin:0 auto;padding:0 16px;min-height:28px}
+.st-bar .st-pill{margin:0;padding:5px 0;border:0;border-radius:0;background:transparent;color:#1b2433;font-size:.8rem;font-weight:600;gap:8px}
+.st-bar .st-pill:hover{background:transparent;color:#0f6cbd;text-decoration:underline}
+.st-bar .st-pill.st-issue{color:#b91c1c}
+.st-bar .st-pill.st-issue:hover{color:#991b1b}
+.st-bar .st-dot{width:8px;height:8px;box-shadow:none}
+.st-bar .st-ok .st-dot{box-shadow:0 0 0 3px #16a34a33}
+.st-bar .st-issue .st-dot{box-shadow:0 0 0 3px #dc262633}
+.hm{background:#fff;color:var(--ink);padding:0 0 28px}
+.hm-body{padding-top:22px}
+.hm-in{display:grid;grid-template-columns:1fr 1fr;gap:18px 28px;align-items:start;min-width:0}
+.hm-news,.hm-guides{min-width:0;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:16px 18px 10px;box-shadow:var(--sh-1)}
+.hm-news .nw-sh-row,.hm-guides .nw-sh-row{margin:0}
+.hm-news h2,.hm-guides h2{margin:0;font-size:1.12rem;color:var(--ink);letter-spacing:-.02em}
+.hm-news .nw-sh-row a,.hm-guides .nw-sh-row a{color:var(--brand);font-weight:650;font-size:.88rem;text-decoration:none;white-space:nowrap}
+.hm-news .nw-sh-row a:hover,.hm-guides .nw-sh-row a:hover{text-decoration:underline}
 .hm-nw{list-style:none;margin:8px 0 0;padding:0}
-.hm-nw>li{margin:0;padding:9px 0;border-top:1px solid var(--line)}
+.hm-nw>li{margin:0;padding:8px 0;border-top:1px solid var(--line)}
 .hm-nw>li:first-child{border-top:0;padding-top:6px}
 .hm-nw-m{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;margin:0 0 3px;font-size:.75rem;color:#5a6472}
-.hm-nw a{color:var(--ink);text-decoration:none;font-weight:750;font-size:.95rem;line-height:1.35;display:block}
+.hm-nw a{color:var(--ink);text-decoration:none;font-weight:750;font-size:.95rem;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .hm-nw a:hover{color:var(--brand);text-decoration:underline}
-.hm-dest{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:auto;flex-shrink:0;height:auto;align-items:stretch;padding:0;justify-content:normal}
-.hm-tile{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:11px 12px;min-height:72px;border:1px solid #ffffff24;border-radius:14px;background:#ffffff10;color:#e8edff;text-decoration:none;box-sizing:border-box}
-.hm-tile:hover{background:#ffffff1c;border-color:#ffffff44}
-.hm-tile:focus-visible{outline:3px solid #5ee6c8;outline-offset:3px}
-.hm-tile strong{font-size:1.7rem;font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1.1}
-.hm-tile span{font-size:.8rem;color:#b9c6ff;font-weight:600;line-height:1.3}
-.hm-tile-st strong{font-size:1.15rem;letter-spacing:-.02em}
+.hm-dest{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:18px 0 0;align-items:stretch;padding:0;height:auto;min-height:0;justify-content:normal}.hm-dest a{margin-left:0}
+.hm-tile{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:11px 12px;min-height:68px;border:1px solid #e3e5ec;border-radius:14px;background:#f6f8fc;color:#1b2433;text-decoration:none;box-sizing:border-box}
+.hm-tile:hover{background:#eef4ff;border-color:#c5d4f0}
+.hm-tile:focus-visible{outline:3px solid #1f7bff;outline-offset:3px}
+.hm-tile strong{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;color:#0f2f6b;line-height:1.1}
+.hm-tile span{font-size:.8rem;color:#5a6472;font-weight:600;line-height:1.3}
+.hm-tile-st strong{font-size:1.1rem;letter-spacing:-.02em}
 @media (max-width:860px){
-  .hx.hm{padding:28px 0 22px}
-  .hm-in{grid-template-columns:1fr;gap:20px}
-  .hm-left{display:contents}
-  .hm-copy{order:1}
-  .hm-news{order:2}
-  .hm-dest{order:3;margin-top:0}
-  .hx.hm h1{font-size:clamp(1.55rem,7.4vw,2.1rem);margin:0 0 12px}
-  .hx.hm .hx-lead{font-size:1rem;margin:0 0 14px}
-  .hm-tile{min-height:74px;padding:12px 12px}
-  .hm-tile strong{font-size:1.4rem}
+  .hm{padding:0 0 22px}
+  .hm-body{padding-top:16px}
+  .hm-in{grid-template-columns:1fr;gap:14px}
+  .hm-dest{margin-top:14px}
+  .hm-tile{min-height:64px;padding:10px 12px}
+  .hm-tile strong{font-size:1.35rem}
 }
 @media (max-width:560px){
+  .st-bar-in{padding:0 14px}
+  .hm-body{padding-top:14px}
+  .hm-news,.hm-guides{padding:14px 14px 8px;border-radius:14px}
   .hm-dest{gap:8px}
-  .hm-tile{min-height:68px;padding:10px 10px}
-  .hm-tile strong{font-size:1.25rem}
+  .hm-tile{min-height:60px;padding:10px 10px}
+  .hm-tile strong{font-size:1.2rem}
   .hm-tile span{font-size:.72rem}
-  .hm-news{padding:14px 14px 8px;border-radius:14px}
   .hm-nw a{font-size:.92rem}
 }
 @media (prefers-reduced-motion:reduce){.hm-tile{transition:none}}
